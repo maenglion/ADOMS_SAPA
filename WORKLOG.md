@@ -279,3 +279,14 @@
 - 후속 운영 원칙: 향후 데이터 갱신은 `데이터 판 확정 → 선택 파일 manifest 생성 → Preview artifact bundle → CSV golden → PostgreSQL 반영 → READ shadow → stable 승격 → Production cutover`를 하나의 릴리스 절차로 본다. 현재 73개는 고정 규칙이 아니라 이번 릴리스의 계산 결과다. WRITE 전환 전 데모 DB는 검증된 baseline으로 재생성할 수 있지만, WRITE 전환 후에는 법령·기준표·관리대상 같은 기준/정본층을 migration·upsert로 갱신하고 사용자 입력·업무 상태·실행 기록·증빙의 운영층은 persistent ledger/state로 보존하며 baseline으로 덮어쓰지 않는다. CSV baseline 복구와 릴리스 절차 확정은 완료했지만, PostgreSQL Production READ cutover는 별도 검증 실패로 계속 보류한다.
 - 관련 파일: `lib/data-root.ts`, `lib/data.ts`, `lib/forms.ts`, `lib/lawsync.ts`, `app/api/read-source/route.ts`, `next.config.ts`, `.env.example`, `READ_CUTOVER_VERIFY.md`, `db/read-shadow/remote_csv_pg_ab.csv`, `WORKLOG.md`
 - 관련 commit: `798e5fb`~`d367cea` (본 기록 정리 commit은 pending)
+
+### [26] PostgreSQL `/actions` 반복 조회 축소 및 전환 보류 유지
+- 상태: 완료
+- 배경: Netlify 원격 CSV baseline은 137/137 HTTP 200, 안정값 mismatch 0, metrics 159/159, calculation crosscheck 68/68로 복구됐다. 같은 환경의 PostgreSQL Preview에서는 `/actions` 4개 역할이 모두 504였고, 정적 호출 경로상 270회 READ 중 248회가 `checkFlagged()` 안에서 발생했다.
+- 결정: `checkFlagged()`의 판정 로직이나 반환값을 다시 쓰지 않고, 한 요청 안에서 동일한 relation·query tuple의 결과만 재사용한다. Production은 계속 `csv`로 유지하며, PostgreSQL stable mismatch가 0이 되기 전에는 대표 5경로 성능 측정과 Production cutover를 진행하지 않는다.
+- 이유: 실측 결과 `/actions`의 논리 READ 270회는 고유 tuple 16개와 중복 254회로 구성됐고, `checkFlagged()` 구간은 논리 248회, 고유 tuple 15개, 중복 233회였다. 서로 다른 key를 위한 248개 SELECT가 아니라 동일한 전체표 조회를 반복하던 패턴이므로 request-scoped memoization이 기존 의미를 보존하면서 왕복을 줄이는 최소 변경이다.
+- 영향 범위: PostgreSQL server-side READ의 요청 단위 실행과 `/actions` 진단 로그. DB schema·index·data, WRITE, role logic, UI, golden, CSV·overlay에는 영향이 없다.
+- 실제 변경: PostgreSQL READ에 요청 단위 exact-query cache와 route/scope 측정을 추가하고 `/actions` 및 `checkFlagged()` 범위에 적용했다. 결과 배열과 각 row의 최상위 객체는 호출마다 새로 만들어 기존 소비자의 변경 격리를 유지한다. 원격 CSV 누락의 직접 원인은 deploy artifact에 선택 seed CSV가 포함되지 않았던 것이며, 이 문제는 앞선 단계에서 선택 manifest를 server bundle에 포함해 복구 완료한 상태다.
+- 검증: Preview backend가 `postgres`임을 확인했다. `/actions`는 4역할 모두 HTTP 200으로 복구됐고 물리 SQL은 요청당 270회에서 16회로 감소했다. `checkFlagged()`는 248 logical calls 중 244 cache hits, 추가 물리 SQL 4회였다. 전체 재검증은 HTTP 137/137, golden 7,373/7,373, expected-only 0, extra 0, metrics 159/159, calculation crosscheck 68/68이다. 다만 raw mismatch 32 중 시각 의존 `/exec` 4건을 제외한 stable mismatch 28건이 남아 PostgreSQL compatibility issue로 분류했다. 따라서 5경로×10회 성능 검증과 Production 전환은 계속 보류하며 Production backend는 `csv`다.
+- 관련 파일: `lib/db.ts`, `lib/check_merge.ts`, `app/actions/page.tsx`, `READ_CUTOVER_VERIFY.md`, `db/read-shadow/remote_csv_pg_ab.csv`, `WORKLOG.md`
+- 관련 commit: `96d78bb` (본 기록 정리 commit은 pending)

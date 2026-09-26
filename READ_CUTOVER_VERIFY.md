@@ -140,3 +140,47 @@ The requested five-route, ten-request cold/warm performance suite was not run be
 - The branch override was restored to `csv` after the failed PostgreSQL A/B. The final CSV redeploy completed at `https://6ab803642c4a38410876e2e3--adoms-runtime.netlify.app/`; runtime diagnostics reported backend `csv`, bundled data root, and 73 selected tables. A final cold `/actions` smoke returned HTTP 200 for all four roles.
 - No database, schema, frozen CSV, overlay, WRITE path, golden file, or Production setting was changed.
 - Detailed counters are recorded in `db/read-shadow/remote_csv_pg_ab.csv`.
+
+## PostgreSQL `/actions` round-trip reduction — 2026-09-27
+
+Production remained `ADOMS_DATA_BACKEND=csv`. The optimization was deployed only to the `remote-csv-baseline` branch Preview at commit `96d78bb10675a8597f31acd5bf828781a069ea53`. Runtime diagnostics confirmed `ADOMS_DATA_BACKEND=postgres` before verification.
+
+### Measured call pattern
+
+One `/actions` render makes 270 logical PostgreSQL reads. They collapse to 16 distinct `(relation, query)` tuples; 254 calls repeat an identical tuple. The `checkFlagged(year, role)` portion accounts for 248 logical reads, 15 distinct tuples, and 233 duplicate calls. Each tuple is a full-row read with the existing `select=*&limit=100000` contract; filtering and shaping remain in the existing application code.
+
+The relations read during the route are `inspection_batch`, `duty_assignment`, `inspection`, `action`, `duty_class`, `org_dept`, `asset`, `compliance_task`, `usf_judge`, `usf_round`, `staff`, `evidence`, `notification`, `usc_record`, `usd_record`, and `use_record`. The returned value remains an array of row objects. Existing consumers continue to use the same fields for round/item/department keys, judgments, task and approval state, evidence, notification state, staff ownership, and obligation records.
+
+Because exact-tuple repetition dominates, the selected optimization is a request-scoped exact-query memo. It does not persist across requests. Each logical read receives a fresh array with fresh top-level row objects, so callers cannot mutate another consumer's result. SQL identifiers, query text, filter logic, ordering, role logic, and return semantics are unchanged.
+
+On the deployed Preview, 270 logical reads became 16 physical SQL calls with 254 cache hits. Within the measured `checkFlagged` scope, 248 logical reads produced 244 cache hits and only four additional physical SQL calls because eleven of its fifteen tuples had already been loaded earlier in the same request.
+
+### `/actions` four-role gate
+
+| Role | HTTP | Client total | Physical SQL | `checkFlagged` logical / distinct / duplicate | DB total | Server data render |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: |
+| `gm` | 200 | 17.090 s | 16 | 248 / 15 / 233 | 4.611 s | 12.518 s |
+| `road` | 200 | 12.382 s | 16 | 248 / 15 / 233 | 2.964 s | 11.062 s |
+| `road_head` | 200 | 12.274 s | 16 | 248 / 15 / 233 | 3.489 s | 11.105 s |
+| `ceo` | 200 | 12.650 s | 16 | 248 / 15 / 233 | 2.909 s | 11.086 s |
+
+The former four-role HTTP 504 blocker is removed. The route is still materially slower than the earlier CSV smoke of 3.60–3.82 seconds, so these one-shot gate requests are not recorded as an acceptable cold/warm performance result.
+
+### Full PostgreSQL regression after the route gate
+
+Only after `/actions` returned HTTP 200 for all four roles was the 137-request read-only regression rerun.
+
+| Check | Result |
+| --- | ---: |
+| HTTP 200 | 137 / 137 |
+| Extracted values | 7,373 / 7,373 |
+| Expected-only / extra | 0 / 0 |
+| Raw value mismatch | 32 |
+| Time-dependent `/exec` differences | 4 |
+| Stable value mismatch | 28 |
+| Key metrics | 159 / 159, mismatch 0 |
+| Calculation crosscheck | 68 / 68 |
+
+The 28 stable differences are now classified as PostgreSQL compatibility issues rather than timeout fallout: two `/actions` cell-text differences, six dashboard row-order differences, four `/duties/list` approval-count differences, and sixteen `/evidence` audit-log range/order differences. The four remaining raw-only differences are the expected current elapsed-hours cells on `/exec`.
+
+The representative five-route, ten-request cold/warm performance suite remains blocked because stable mismatch is not zero. Production was not switched. Database schema, data, indexes, WRITE paths, role logic, UI, golden files, frozen CSV, and overlay were not changed.

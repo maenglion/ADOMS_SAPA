@@ -35,3 +35,27 @@ postgres,route_actions,ceo_http_status,200,504,304,FAIL,"30.61 seconds"
 postgres,route_actions,static_db_query_calls,0,270,270,BLOCKER,"current call graph with 9 usf_round rows; repeated full-table reads"
 cutover,production,postgres_cutover,0,0,0,NOT_PERFORMED,"Production remains csv"
 performance,representative_5x10,completed,1,0,-1,BLOCKED,"not run because PostgreSQL golden and /actions gate failed"
+postgres_optimized,route_actions,gm_http_status,200,200,0,PASS,"17.090 seconds client total; 12.518 seconds server data render"
+postgres_optimized,route_actions,road_http_status,200,200,0,PASS,"12.382 seconds client total; 11.062 seconds server data render"
+postgres_optimized,route_actions,road_head_http_status,200,200,0,PASS,"12.274 seconds client total; 11.105 seconds server data render"
+postgres_optimized,route_actions,ceo_http_status,200,200,0,PASS,"12.650 seconds client total; 11.086 seconds server data render"
+postgres_optimized,route_actions,logical_query_calls,270,270,0,INFO,"existing application reads; return/filter semantics unchanged"
+postgres_optimized,route_actions,distinct_query_tuples,16,16,0,INFO,"exact relation plus query-string tuples"
+postgres_optimized,route_actions,physical_sql_calls,270,16,-254,PASS,"request-scoped memoization"
+postgres_optimized,route_actions,cache_hits,0,254,254,PASS,
+postgres_optimized,check_flagged,logical_calls,248,248,0,INFO,
+postgres_optimized,check_flagged,distinct_tuples,15,15,0,INFO,
+postgres_optimized,check_flagged,duplicate_calls,0,233,233,INFO,
+postgres_optimized,check_flagged,additional_physical_sql_calls,248,4,-244,PASS,"eleven tuples were already loaded earlier in the same request"
+postgres_optimized,http,http_200,137,137,0,PASS,
+postgres_optimized,http,http_504,0,0,0,PASS,
+postgres_optimized,golden,extracted_values,7373,7373,0,PASS,
+postgres_optimized,golden,raw_value_mismatch,0,32,32,FAIL,"includes four current-time elapsed-hours differences"
+postgres_optimized,golden,stable_value_mismatch,0,28,28,FAIL,"two actions; six dashboard ordering; four approval count; sixteen audit-log range/order"
+postgres_optimized,golden,expected_only,0,0,0,PASS,
+postgres_optimized,golden,preview_only,0,0,0,PASS,
+postgres_optimized,metrics,key_metric_cases,159,159,0,PASS,
+postgres_optimized,metrics,key_metric_mismatch,0,0,0,PASS,
+postgres_optimized,calculation,crosscheck_pass,68,68,0,PASS,
+cutover,production,postgres_cutover,0,0,0,NOT_PERFORMED,"Production remains csv"
+performance,representative_5x10,completed,1,0,-1,BLOCKED,"not run because stable PostgreSQL mismatch is 28"

@@ -124571,343 +124571,422 @@
         "notif_id"
       ],
       "keys": [
-        "\u001fRMT-2026H2\u001fSD02-1\u001fNTF-000470",
-        "\u001f\u001fSD01-1\u001fNTF-MUGZJ8TCLJR",
-        "\u001f\u001fSD01-1\u001fNTF-MUGZJ8TL50Q",
-        "\u001f\u001fSD01-1\u001fNTF-MUGZJU07DD5",
-        "\u001f\u001fSD01-1\u001fNTF-MUGZJU0PLQ7",
-        "\u001f\u001fSD01-1\u001fNTF-MUGZJU0YOXU",
-        "\u001f\u001fSD01-1\u001fNTF-MUGZJU1CH57",
-        "\u001f\u001fSD01-1\u001fNTF-MUGZKJC7CW5",
-        "\u001f\u001fSD01-1\u001fNTF-MUGZKJCN5L8",
-        "\u001f\u001fSD01-1\u001fNTF-MUGZKJCXTE1",
         "\u001f\u001fSD01-1\u001fNTF-MUGZKJD4GNO",
-        "\u001fRFC-2026H2\u001fSD02-1\u001fNTF-000471",
-        "\u001fRWS-2026H2-1\u001fSD01-1\u001fNTF-000455",
-        "\u001f\u001f\u001fNTF-MUERL48Q83Z",
-        "\u001f\u001f\u001fNTF-MUERL48SVQQ",
-        "\u001fRWS-2026H2\u001fSD02-1\u001fNTF-MUERL8M5NXY",
+        "\u001f\u001fSD01-1\u001fNTF-MUGZKJCXTE1",
+        "\u001f\u001fSD01-1\u001fNTF-MUGZKJCN5L8",
+        "\u001f\u001fSD01-1\u001fNTF-MUGZKJC7CW5",
+        "\u001f\u001fSD01-1\u001fNTF-MUGZJU1CH57",
+        "\u001f\u001fSD01-1\u001fNTF-MUGZJU0YOXU",
+        "\u001f\u001fSD01-1\u001fNTF-MUGZJU0PLQ7",
+        "\u001f\u001fSD01-1\u001fNTF-MUGZJU07DD5",
+        "\u001f\u001fSD01-1\u001fNTF-MUGZJ8TL50Q",
+        "\u001f\u001fSD01-1\u001fNTF-MUGZJ8TCLJR",
         "\u001f\u001f\u001fNTF-LS-20260924-203421-D01",
-        "\u001fRMT-2026H2\u001fSD02-1\u001fNTF-000469",
-        "\u001fRWS-2026H2\u001fSD01-1\u001fNTF-000467",
-        "\u001fRMT-2026H2\u001fSD02-1\u001fNTF-000468",
-        "\u001fRFC-2026H2-1\u001fSD02-1\u001fNTF-000463",
-        "\u001f\u001f\u001fNTF-000284",
-        "\u001f\u001f\u001fNTF-000071",
-        "\u001fRFC-2026H2-1\u001fSD02-1\u001fNTF-000464",
-        "\u001fRFC-2026H2-1\u001fSD02-1\u001fNTF-000462",
-        "\u001fRWS-2026H2-1\u001fSD01-1\u001fNTF-000453",
-        "\u001f\u001f\u001fNTF-000137",
-        "\u001f\u001f\u001fNTF-000111",
+        "\u001fRWS-2026H2\u001fSD02-1\u001fNTF-MUERL8M5NXY",
+        "\u001f\u001f\u001fNTF-MUERL48SVQQ",
+        "\u001f\u001f\u001fNTF-MUERL48Q83Z",
+        "\u001f\u001f\u001fNTF-000001",
+        "\u001f\u001f\u001fNTF-000002",
+        "\u001f\u001f\u001fNTF-000003",
+        "\u001f\u001f\u001fNTF-000004",
+        "\u001f\u001f\u001fNTF-000005",
+        "\u001f\u001f\u001fNTF-000006",
+        "\u001f\u001f\u001fNTF-000007",
+        "\u001f\u001f\u001fNTF-000008",
+        "\u001f\u001f\u001fNTF-000009",
+        "\u001f\u001f\u001fNTF-000010",
+        "\u001f\u001f\u001fNTF-000011",
+        "\u001f\u001f\u001fNTF-000012",
+        "\u001f\u001f\u001fNTF-000013",
+        "\u001f\u001f\u001fNTF-000014",
+        "\u001f\u001f\u001fNTF-000015",
+        "\u001f\u001f\u001fNTF-000016",
+        "\u001f\u001f\u001fNTF-000017",
+        "\u001f\u001f\u001fNTF-000018",
+        "\u001f\u001f\u001fNTF-000019",
+        "\u001f\u001f\u001fNTF-000020",
+        "\u001f\u001f\u001fNTF-000021",
+        "\u001f\u001f\u001fNTF-000022",
+        "\u001f\u001f\u001fNTF-000023",
+        "\u001f\u001f\u001fNTF-000024",
+        "\u001f\u001f\u001fNTF-000025",
+        "\u001f\u001f\u001fNTF-000026",
+        "\u001f\u001f\u001fNTF-000027",
+        "\u001f\u001f\u001fNTF-000028",
+        "\u001f\u001f\u001fNTF-000029",
+        "\u001f\u001f\u001fNTF-000030",
+        "\u001f\u001f\u001fNTF-000031",
+        "\u001f\u001f\u001fNTF-000032",
+        "\u001f\u001f\u001fNTF-000033",
+        "\u001f\u001f\u001fNTF-000034",
+        "\u001f\u001f\u001fNTF-000035",
+        "\u001f\u001f\u001fNTF-000036",
+        "\u001f\u001f\u001fNTF-000037",
+        "\u001f\u001f\u001fNTF-000038",
+        "\u001f\u001f\u001fNTF-000039",
+        "\u001f\u001f\u001fNTF-000040",
+        "\u001f\u001f\u001fNTF-000041",
+        "\u001f\u001f\u001fNTF-000042",
+        "\u001f\u001f\u001fNTF-000043",
+        "\u001f\u001f\u001fNTF-000044",
+        "\u001f\u001f\u001fNTF-000045",
+        "\u001f\u001f\u001fNTF-000046",
         "\u001f\u001f\u001fNTF-000047",
-        "\u001f\u001f\u001fNTF-000179",
-        "\u001f\u001f\u001fNTF-000157",
+        "\u001f\u001f\u001fNTF-000049",
+        "\u001f\u001f\u001fNTF-000050",
+        "\u001f\u001f\u001fNTF-000051",
+        "\u001f\u001f\u001fNTF-000052",
+        "\u001f\u001f\u001fNTF-000053",
+        "\u001f\u001f\u001fNTF-000054",
+        "\u001f\u001f\u001fNTF-000058",
+        "\u001f\u001f\u001fNTF-000061",
+        "\u001f\u001f\u001fNTF-000062",
+        "\u001f\u001f\u001fNTF-000063",
+        "\u001f\u001f\u001fNTF-000064",
+        "\u001f\u001f\u001fNTF-000065",
+        "\u001f\u001f\u001fNTF-000066",
+        "\u001f\u001f\u001fNTF-000067",
+        "\u001f\u001f\u001fNTF-000068",
+        "\u001f\u001f\u001fNTF-000069",
+        "\u001f\u001f\u001fNTF-000070",
+        "\u001f\u001f\u001fNTF-000071",
+        "\u001f\u001f\u001fNTF-000072",
+        "\u001f\u001f\u001fNTF-000073",
+        "\u001f\u001f\u001fNTF-000074",
+        "\u001f\u001f\u001fNTF-000075",
+        "\u001f\u001f\u001fNTF-000076",
+        "\u001f\u001f\u001fNTF-000077",
+        "\u001f\u001f\u001fNTF-000078",
+        "\u001f\u001f\u001fNTF-000079",
+        "\u001f\u001f\u001fNTF-000080",
+        "\u001f\u001f\u001fNTF-000081",
+        "\u001f\u001f\u001fNTF-000082",
+        "\u001f\u001f\u001fNTF-000083",
+        "\u001f\u001f\u001fNTF-000084",
+        "\u001f\u001f\u001fNTF-000085",
+        "\u001f\u001f\u001fNTF-000086",
+        "\u001f\u001f\u001fNTF-000087",
+        "\u001f\u001f\u001fNTF-000088",
+        "\u001f\u001f\u001fNTF-000089",
+        "\u001f\u001f\u001fNTF-000090",
+        "\u001f\u001f\u001fNTF-000091",
+        "\u001f\u001f\u001fNTF-000092",
+        "\u001f\u001f\u001fNTF-000093",
+        "\u001f\u001f\u001fNTF-000094",
+        "\u001f\u001f\u001fNTF-000095",
+        "\u001f\u001f\u001fNTF-000096",
+        "\u001f\u001f\u001fNTF-000097",
+        "\u001f\u001f\u001fNTF-000098",
+        "\u001f\u001f\u001fNTF-000099",
+        "\u001f\u001f\u001fNTF-000100",
+        "\u001f\u001f\u001fNTF-000101",
+        "\u001f\u001f\u001fNTF-000102",
+        "\u001f\u001f\u001fNTF-000103",
+        "\u001f\u001f\u001fNTF-000104",
+        "\u001f\u001f\u001fNTF-000105",
+        "\u001f\u001f\u001fNTF-000106",
+        "\u001f\u001f\u001fNTF-000107",
+        "\u001f\u001f\u001fNTF-000108",
+        "\u001f\u001f\u001fNTF-000109",
+        "\u001f\u001f\u001fNTF-000111",
+        "\u001f\u001f\u001fNTF-000116",
+        "\u001f\u001f\u001fNTF-000117",
+        "\u001f\u001f\u001fNTF-000118",
+        "\u001f\u001f\u001fNTF-000119",
+        "\u001f\u001f\u001fNTF-000120",
+        "\u001f\u001f\u001fNTF-000121",
+        "\u001f\u001f\u001fNTF-000122",
+        "\u001f\u001f\u001fNTF-000123",
+        "\u001f\u001f\u001fNTF-000124",
         "\u001f\u001f\u001fNTF-000125",
         "\u001f\u001f\u001fNTF-000130",
-        "\u001f\u001f\u001fNTF-000054",
-        "\u001f\u001f\u001fNTF-000268",
-        "\u001f\u001f\u001fNTF-000199",
-        "\u001f\u001f\u001fNTF-000035",
-        "\u001f\u001f\u001fNTF-000160",
-        "\u001f\u001f\u001fNTF-000156",
-        "\u001f\u001f\u001fNTF-000148",
-        "\u001f\u001f\u001fNTF-000138",
-        "\u001f\u001f\u001fNTF-000085",
-        "\u001f\u001f\u001fNTF-000043",
-        "\u001f\u001f\u001fNTF-000019",
-        "\u001f\u001f\u001fNTF-000012",
-        "\u001fRFC-2026H2\u001fSD02-1\u001fNTF-000473",
-        "\u001fRWS-2026H2\u001fSD02-1\u001fNTF-000472",
-        "\u001f\u001f\u001fNTF-000338",
-        "\u001f\u001f\u001fNTF-000317",
-        "\u001f\u001f\u001fNTF-000274",
-        "\u001f\u001f\u001fNTF-000250",
-        "\u001f\u001f\u001fNTF-000158",
-        "\u001f\u001f\u001fNTF-000008",
-        "\u001f\u001f\u001fNTF-000297",
-        "\u001f\u001f\u001fNTF-000184",
-        "\u001f\u001f\u001fNTF-000152",
-        "\u001f\u001f\u001fNTF-000117",
-        "\u001f\u001f\u001fNTF-000094",
-        "\u001f\u001f\u001fNTF-000308",
-        "\u001f\u001f\u001fNTF-000269",
-        "\u001f\u001f\u001fNTF-000251",
-        "\u001f\u001f\u001fNTF-000109",
-        "\u001f\u001f\u001fNTF-000089",
-        "\u001f\u001f\u001fNTF-000079",
-        "\u001f\u001f\u001fNTF-000321",
-        "\u001f\u001f\u001fNTF-000262",
-        "\u001f\u001f\u001fNTF-000139",
-        "\u001f\u001f\u001fNTF-000136",
-        "\u001f\u001f\u001fNTF-000106",
-        "\u001f\u001f\u001fNTF-000044",
-        "\u001f\u001f\u001fNTF-000020",
-        "\u001f\u001f\u001fNTF-000013",
-        "\u001f\u001f\u001fNTF-000318",
-        "\u001f\u001f\u001fNTF-000316",
-        "\u001f\u001f\u001fNTF-000275",
-        "\u001f\u001f\u001fNTF-000266",
-        "\u001f\u001f\u001fNTF-000255",
-        "\u001f\u001f\u001fNTF-000200",
-        "\u001f\u001f\u001fNTF-000159",
-        "\u001f\u001f\u001fNTF-000063",
-        "\u001f\u001f\u001fNTF-000009",
-        "\u001f\u001f\u001fNTF-000298",
-        "\u001f\u001f\u001fNTF-000265",
-        "\u001f\u001f\u001fNTF-000185",
-        "\u001f\u001f\u001fNTF-000153",
-        "\u001f\u001f\u001fNTF-000149",
-        "\u001f\u001f\u001fNTF-000118",
-        "\u001f\u001f\u001fNTF-000095",
-        "\u001f\u001f\u001fNTF-000061",
-        "\u001f\u001f\u001fNTF-000258",
-        "\u001f\u001f\u001fNTF-000180",
-        "\u001f\u001f\u001fNTF-000101",
-        "\u001f\u001f\u001fNTF-000080",
-        "\u001f\u001f\u001fNTF-000004",
-        "\u001f\u001f\u001fNTF-000326",
-        "\u001f\u001f\u001fNTF-000322",
-        "\u001f\u001f\u001fNTF-000263",
-        "\u001f\u001f\u001fNTF-000238",
-        "\u001f\u001f\u001fNTF-000186",
-        "\u001f\u001f\u001fNTF-000140",
-        "\u001f\u001f\u001fNTF-000096",
-        "\u001f\u001f\u001fNTF-000045",
-        "\u001f\u001f\u001fNTF-000021",
-        "\u001f\u001f\u001fNTF-000014",
-        "\u001f\u001f\u001fNTF-000319",
-        "\u001f\u001f\u001fNTF-000293",
-        "\u001f\u001f\u001fNTF-000276",
-        "\u001f\u001f\u001fNTF-000267",
-        "\u001f\u001f\u001fNTF-000196",
-        "\u001f\u001f\u001fNTF-000090",
-        "\u001f\u001f\u001fNTF-000075",
-        "\u001f\u001f\u001fNTF-000064",
-        "\u001f\u001f\u001fNTF-000010",
-        "\u001f\u001f\u001fNTF-000282",
-        "\u001f\u001f\u001fNTF-000154",
-        "\u001f\u001f\u001fNTF-000150",
-        "\u001f\u001f\u001fNTF-000119",
-        "\u001f\u001f\u001fNTF-000065",
-        "\u001f\u001f\u001fNTF-000022",
-        "\u001f\u001f\u001fNTF-000305",
-        "\u001f\u001f\u001fNTF-000241",
-        "\u001f\u001f\u001fNTF-000181",
-        "\u001f\u001f\u001fNTF-000155",
-        "\u001f\u001f\u001fNTF-000083",
-        "\u001f\u001f\u001fNTF-000081",
-        "\u001f\u001f\u001fNTF-000058",
-        "\u001f\u001f\u001fNTF-000005",
-        "\u001fRMT-2026H2-1\u001fSD02-1\u001fNTF-000465",
-        "\u001fRWS-2026H2-1\u001fSD01-1\u001fNTF-000452",
-        "\u001fRWS-2026H2-1\u001fSD01-1\u001fNTF-000444",
-        "\u001f\u001f\u001fNTF-000323",
-        "\u001f\u001f\u001fNTF-000285",
-        "\u001f\u001f\u001fNTF-000272",
-        "\u001f\u001f\u001fNTF-000264",
-        "\u001f\u001f\u001fNTF-000259",
-        "\u001f\u001f\u001fNTF-000234",
-        "\u001f\u001f\u001fNTF-000192",
-        "\u001f\u001f\u001fNTF-000187",
-        "\u001f\u001f\u001fNTF-000097",
-        "\u001f\u001f\u001fNTF-000046",
-        "\u001f\u001f\u001fNTF-000036",
-        "\u001f\u001f\u001fNTF-000015",
-        "\u001fRWS-2026H2-1\u001fSD01-1\u001fNTF-000449",
-        "\u001f\u001f\u001fNTF-000306",
-        "\u001f\u001f\u001fNTF-000294",
-        "\u001f\u001f\u001fNTF-000277",
-        "\u001f\u001f\u001fNTF-000247",
-        "\u001f\u001f\u001fNTF-000228",
-        "\u001f\u001f\u001fNTF-000091",
-        "\u001f\u001f\u001fNTF-000068",
-        "\u001f\u001f\u001fNTF-000042",
-        "\u001f\u001f\u001fNTF-000024",
-        "\u001f\u001f\u001fNTF-000011",
-        "\u001f\u001f\u001fNTF-000299",
-        "\u001f\u001f\u001fNTF-000151",
-        "\u001f\u001f\u001fNTF-000120",
-        "\u001f\u001f\u001fNTF-000107",
-        "\u001f\u001f\u001fNTF-000066",
-        "\u001fRWS-2026H2-1\u001fSD01-1\u001fNTF-000451",
-        "\u001fRWS-2026H2-1\u001fSD01-1\u001fNTF-000446",
-        "\u001f\u001f\u001fNTF-000271",
-        "\u001f\u001f\u001fNTF-000182",
-        "\u001f\u001f\u001fNTF-000084",
-        "\u001f\u001f\u001fNTF-000028",
-        "\u001f\u001f\u001fNTF-000006",
-        "\u001fRWS-2026H2-1\u001fSD01-1\u001fNTF-000443",
-        "\u001f\u001f\u001fNTF-000273",
-        "\u001f\u001f\u001fNTF-000260",
-        "\u001f\u001f\u001fNTF-000193",
-        "\u001f\u001f\u001fNTF-000177",
-        "\u001f\u001f\u001fNTF-000099",
-        "\u001f\u001f\u001fNTF-000037",
-        "\u001f\u001f\u001fNTF-000030",
-        "\u001fRWS-2026H2-1\u001fSD01-1\u001fNTF-000448",
-        "\u001f\u001f\u001fNTF-000295",
-        "\u001f\u001f\u001fNTF-000248",
-        "\u001f\u001f\u001fNTF-000243",
-        "\u001f\u001f\u001fNTF-000229",
-        "\u001f\u001f\u001fNTF-000092",
-        "\u001f\u001f\u001fNTF-000069",
-        "\u001f\u001f\u001fNTF-000052",
-        "\u001fRWS-2026H2-1\u001fSD01-1\u001fNTF-000442",
-        "\u001f\u001f\u001fNTF-000307",
-        "\u001f\u001f\u001fNTF-000289",
-        "\u001f\u001f\u001fNTF-000249",
-        "\u001f\u001f\u001fNTF-000235",
-        "\u001f\u001f\u001fNTF-000146",
-        "\u001f\u001f\u001fNTF-000108",
-        "\u001f\u001f\u001fNTF-000103",
-        "\u001f\u001f\u001fNTF-000076",
-        "\u001fRFC-2026H2-1\u001fSD02-1\u001fNTF-000459",
-        "\u001f\u001f\u001fNTF-000310",
-        "\u001f\u001f\u001fNTF-000290",
-        "\u001f\u001f\u001fNTF-000220",
-        "\u001f\u001f\u001fNTF-000029",
-        "\u001fRFC-2026H2-1\u001fSD02-1\u001fNTF-000458",
-        "\u001f\u001f\u001fNTF-000330",
-        "\u001f\u001f\u001fNTF-000314",
-        "\u001f\u001f\u001fNTF-000261",
-        "\u001f\u001f\u001fNTF-000194",
-        "\u001f\u001f\u001fNTF-000178",
-        "\u001f\u001f\u001fNTF-000100",
-        "\u001f\u001f\u001fNTF-000086",
-        "\u001f\u001f\u001fNTF-000038",
-        "\u001f\u001f\u001fNTF-000001",
-        "\u001fRMT-2026H2-1\u001fSD02-1\u001fNTF-000466",
-        "\u001fRWS-2026H2-1\u001fSD01-1\u001fNTF-000454",
-        "\u001fRWS-2026H2-1\u001fSD01-1\u001fNTF-000445",
-        "\u001f\u001f\u001fNTF-000334",
-        "\u001f\u001f\u001fNTF-000230",
         "\u001f\u001f\u001fNTF-000131",
-        "\u001f\u001f\u001fNTF-000070",
-        "\u001fRWS-2026H2-1\u001fSD01-1\u001fNTF-000441",
-        "\u001f\u001f\u001fNTF-000217",
-        "\u001f\u001f\u001fNTF-000205",
-        "\u001f\u001f\u001fNTF-000104",
-        "\u001f\u001f\u001fNTF-000077",
-        "\u001fRFC-2026H2-1\u001fSD02-1\u001fNTF-000461",
-        "\u001fRWS-2026H2-1\u001fSD01-1\u001fNTF-000440",
-        "\u001f\u001f\u001fNTF-000221",
-        "\u001f\u001f\u001fNTF-000213",
-        "\u001f\u001f\u001fNTF-000176",
-        "\u001f\u001f\u001fNTF-000144",
-        "\u001f\u001f\u001fNTF-000072",
-        "\u001f\u001f\u001fNTF-000053",
-        "\u001fRFC-2026H2-1\u001fSD02-1\u001fNTF-000460",
-        "\u001fRWS-2026H2-1\u001fSD01-1\u001fNTF-000447",
-        "\u001f\u001f\u001fNTF-000331",
-        "\u001f\u001f\u001fNTF-000311",
-        "\u001f\u001f\u001fNTF-000189",
-        "\u001f\u001f\u001fNTF-000170",
-        "\u001f\u001f\u001fNTF-000062",
-        "\u001fRFC-2026H2-1\u001fSD02-1\u001fNTF-000456",
-        "\u001f\u001f\u001fNTF-000287",
-        "\u001f\u001f\u001fNTF-000225",
-        "\u001f\u001f\u001fNTF-000171",
-        "\u001f\u001f\u001fNTF-000147",
         "\u001f\u001f\u001fNTF-000132",
-        "\u001fRFC-2026H2-1\u001fSD02-1\u001fNTF-000457",
-        "\u001fRWS-2026H2-1\u001fSD01-1\u001fNTF-000450",
-        "\u001f\u001f\u001fNTF-000279",
-        "\u001f\u001f\u001fNTF-000218",
-        "\u001f\u001f\u001fNTF-000212",
-        "\u001f\u001f\u001fNTF-000206",
-        "\u001f\u001f\u001fNTF-000105",
-        "\u001f\u001f\u001fNTF-000320",
-        "\u001f\u001f\u001fNTF-000303",
-        "\u001f\u001f\u001fNTF-000214",
-        "\u001f\u001f\u001fNTF-000073",
-        "\u001f\u001f\u001fNTF-000312",
-        "\u001f\u001f\u001fNTF-000237",
-        "\u001f\u001f\u001fNTF-000175",
-        "\u001f\u001f\u001fNTF-000033",
-        "\u001f\u001f\u001fNTF-000018",
-        "\u001f\u001f\u001fNTF-000007",
-        "\u001f\u001f\u001fNTF-000288",
-        "\u001f\u001f\u001fNTF-000280",
-        "\u001f\u001f\u001fNTF-000233",
-        "\u001f\u001f\u001fNTF-000226",
         "\u001f\u001f\u001fNTF-000133",
-        "\u001f\u001f\u001fNTF-000329",
-        "\u001f\u001f\u001fNTF-000209",
-        "\u001f\u001f\u001fNTF-000167",
-        "\u001f\u001f\u001fNTF-000166",
         "\u001f\u001f\u001fNTF-000134",
-        "\u001f\u001f\u001fNTF-000093",
-        "\u001f\u001f\u001fNTF-000313",
-        "\u001f\u001f\u001fNTF-000003",
-        "\u001f\u001f\u001fNTF-000327",
-        "\u001f\u001f\u001fNTF-000123",
-        "\u001f\u001f\u001fNTF-000296",
-        "\u001f\u001f\u001fNTF-000300",
-        "\u001f\u001f\u001fNTF-000121",
-        "\u001f\u001f\u001fNTF-000195",
+        "\u001f\u001f\u001fNTF-000135",
+        "\u001f\u001f\u001fNTF-000136",
+        "\u001f\u001f\u001fNTF-000137",
+        "\u001f\u001f\u001fNTF-000138",
+        "\u001f\u001f\u001fNTF-000139",
+        "\u001f\u001f\u001fNTF-000140",
+        "\u001f\u001f\u001fNTF-000141",
+        "\u001f\u001f\u001fNTF-000142",
+        "\u001f\u001f\u001fNTF-000143",
+        "\u001f\u001f\u001fNTF-000144",
         "\u001f\u001f\u001fNTF-000145",
-        "\u001f\u001f\u001fNTF-000328",
-        "\u001f\u001f\u001fNTF-000245",
-        "\u001f\u001f\u001fNTF-000232",
-        "\u001f\u001f\u001fNTF-000246",
+        "\u001f\u001f\u001fNTF-000146",
+        "\u001f\u001f\u001fNTF-000147",
+        "\u001f\u001f\u001fNTF-000148",
+        "\u001f\u001f\u001fNTF-000149",
+        "\u001f\u001f\u001fNTF-000150",
+        "\u001f\u001f\u001fNTF-000151",
+        "\u001f\u001f\u001fNTF-000152",
+        "\u001f\u001f\u001fNTF-000153",
+        "\u001f\u001f\u001fNTF-000154",
+        "\u001f\u001f\u001fNTF-000155",
+        "\u001f\u001f\u001fNTF-000156",
+        "\u001f\u001f\u001fNTF-000157",
+        "\u001f\u001f\u001fNTF-000158",
+        "\u001f\u001f\u001fNTF-000159",
+        "\u001f\u001f\u001fNTF-000160",
+        "\u001f\u001f\u001fNTF-000164",
         "\u001f\u001f\u001fNTF-000165",
-        "\u001f\u001f\u001fNTF-000315",
-        "\u001fBAT-003\u001fSD13-1\u001fNTF-000481",
-        "\u001f\u001f\u001fNTF-000309",
-        "\u001f\u001f\u001fNTF-000302",
+        "\u001f\u001f\u001fNTF-000166",
+        "\u001f\u001f\u001fNTF-000167",
         "\u001f\u001f\u001fNTF-000168",
-        "\u001f\u001f\u001fNTF-000116",
-        "\u001f\u001f\u001fNTF-000051",
-        "\u001f\u001f\u001fNTF-000304",
-        "\u001f\u001f\u001fNTF-000283",
-        "\u001f\u001f\u001fNTF-000188",
+        "\u001f\u001f\u001fNTF-000169",
+        "\u001f\u001f\u001fNTF-000170",
+        "\u001f\u001f\u001fNTF-000171",
+        "\u001f\u001f\u001fNTF-000172",
+        "\u001f\u001f\u001fNTF-000173",
         "\u001f\u001f\u001fNTF-000174",
+        "\u001f\u001f\u001fNTF-000175",
+        "\u001f\u001f\u001fNTF-000176",
+        "\u001f\u001f\u001fNTF-000177",
+        "\u001f\u001f\u001fNTF-000178",
+        "\u001f\u001f\u001fNTF-000179",
+        "\u001f\u001f\u001fNTF-000180",
+        "\u001f\u001f\u001fNTF-000181",
+        "\u001f\u001f\u001fNTF-000182",
+        "\u001f\u001f\u001fNTF-000183",
+        "\u001f\u001f\u001fNTF-000184",
+        "\u001f\u001f\u001fNTF-000185",
+        "\u001f\u001f\u001fNTF-000186",
+        "\u001f\u001f\u001fNTF-000187",
+        "\u001f\u001f\u001fNTF-000188",
+        "\u001f\u001f\u001fNTF-000189",
+        "\u001f\u001f\u001fNTF-000191",
+        "\u001f\u001f\u001fNTF-000192",
+        "\u001f\u001f\u001fNTF-000193",
+        "\u001f\u001f\u001fNTF-000194",
+        "\u001f\u001f\u001fNTF-000195",
+        "\u001f\u001f\u001fNTF-000196",
+        "\u001f\u001f\u001fNTF-000199",
+        "\u001f\u001f\u001fNTF-000200",
+        "\u001f\u001f\u001fNTF-000204",
+        "\u001f\u001f\u001fNTF-000205",
+        "\u001f\u001f\u001fNTF-000206",
+        "\u001f\u001f\u001fNTF-000207",
+        "\u001f\u001f\u001fNTF-000208",
+        "\u001f\u001f\u001fNTF-000209",
+        "\u001f\u001f\u001fNTF-000210",
+        "\u001f\u001f\u001fNTF-000211",
+        "\u001f\u001f\u001fNTF-000212",
+        "\u001f\u001f\u001fNTF-000213",
+        "\u001f\u001f\u001fNTF-000214",
+        "\u001f\u001f\u001fNTF-000215",
+        "\u001f\u001f\u001fNTF-000216",
+        "\u001f\u001f\u001fNTF-000217",
+        "\u001f\u001f\u001fNTF-000218",
+        "\u001f\u001f\u001fNTF-000219",
+        "\u001f\u001f\u001fNTF-000220",
+        "\u001f\u001f\u001fNTF-000221",
         "\u001f\u001f\u001fNTF-000222",
-        "\u001f\u001f\u001fNTF-000124",
-        "\u001f\u001f\u001fNTF-000292",
+        "\u001f\u001f\u001fNTF-000223",
+        "\u001f\u001f\u001fNTF-000224",
+        "\u001f\u001f\u001fNTF-000225",
+        "\u001f\u001f\u001fNTF-000226",
+        "\u001f\u001f\u001fNTF-000227",
+        "\u001f\u001f\u001fNTF-000228",
+        "\u001f\u001f\u001fNTF-000229",
+        "\u001f\u001f\u001fNTF-000230",
+        "\u001f\u001f\u001fNTF-000231",
+        "\u001f\u001f\u001fNTF-000232",
+        "\u001f\u001f\u001fNTF-000233",
+        "\u001f\u001f\u001fNTF-000234",
+        "\u001f\u001f\u001fNTF-000235",
+        "\u001f\u001f\u001fNTF-000236",
+        "\u001f\u001f\u001fNTF-000237",
+        "\u001f\u001f\u001fNTF-000238",
+        "\u001f\u001f\u001fNTF-000239",
+        "\u001f\u001f\u001fNTF-000240",
+        "\u001f\u001f\u001fNTF-000241",
+        "\u001f\u001f\u001fNTF-000242",
+        "\u001f\u001f\u001fNTF-000243",
+        "\u001f\u001f\u001fNTF-000244",
+        "\u001f\u001f\u001fNTF-000245",
+        "\u001f\u001f\u001fNTF-000246",
+        "\u001f\u001f\u001fNTF-000247",
+        "\u001f\u001f\u001fNTF-000248",
+        "\u001f\u001f\u001fNTF-000249",
+        "\u001f\u001f\u001fNTF-000250",
+        "\u001f\u001f\u001fNTF-000251",
+        "\u001f\u001f\u001fNTF-000252",
+        "\u001f\u001f\u001fNTF-000253",
+        "\u001f\u001f\u001fNTF-000255",
+        "\u001f\u001f\u001fNTF-000258",
+        "\u001f\u001f\u001fNTF-000259",
+        "\u001f\u001f\u001fNTF-000260",
+        "\u001f\u001f\u001fNTF-000261",
+        "\u001f\u001f\u001fNTF-000262",
+        "\u001f\u001f\u001fNTF-000263",
+        "\u001f\u001f\u001fNTF-000264",
+        "\u001f\u001f\u001fNTF-000265",
+        "\u001f\u001f\u001fNTF-000266",
+        "\u001f\u001f\u001fNTF-000267",
+        "\u001f\u001f\u001fNTF-000268",
+        "\u001f\u001f\u001fNTF-000269",
+        "\u001f\u001f\u001fNTF-000270",
+        "\u001f\u001f\u001fNTF-000271",
+        "\u001f\u001f\u001fNTF-000272",
+        "\u001f\u001f\u001fNTF-000273",
+        "\u001f\u001f\u001fNTF-000274",
+        "\u001f\u001f\u001fNTF-000275",
+        "\u001f\u001f\u001fNTF-000276",
+        "\u001f\u001f\u001fNTF-000277",
+        "\u001f\u001f\u001fNTF-000278",
+        "\u001f\u001f\u001fNTF-000279",
+        "\u001f\u001f\u001fNTF-000280",
+        "\u001f\u001f\u001fNTF-000281",
+        "\u001f\u001f\u001fNTF-000282",
+        "\u001f\u001f\u001fNTF-000283",
+        "\u001f\u001f\u001fNTF-000284",
+        "\u001f\u001f\u001fNTF-000285",
+        "\u001f\u001f\u001fNTF-000286",
+        "\u001f\u001f\u001fNTF-000287",
+        "\u001f\u001f\u001fNTF-000288",
+        "\u001f\u001f\u001fNTF-000289",
+        "\u001f\u001f\u001fNTF-000290",
         "\u001f\u001f\u001fNTF-000291",
-        "\u001fBAT-003\u001fSD05-1\u001fNTF-000479",
+        "\u001f\u001f\u001fNTF-000292",
+        "\u001f\u001f\u001fNTF-000293",
+        "\u001f\u001f\u001fNTF-000294",
+        "\u001f\u001f\u001fNTF-000295",
+        "\u001f\u001f\u001fNTF-000296",
+        "\u001f\u001f\u001fNTF-000297",
+        "\u001f\u001f\u001fNTF-000298",
+        "\u001f\u001f\u001fNTF-000299",
+        "\u001f\u001f\u001fNTF-000300",
+        "\u001f\u001f\u001fNTF-000301",
+        "\u001f\u001f\u001fNTF-000302",
+        "\u001f\u001f\u001fNTF-000303",
+        "\u001f\u001f\u001fNTF-000304",
+        "\u001f\u001f\u001fNTF-000305",
+        "\u001f\u001f\u001fNTF-000306",
+        "\u001f\u001f\u001fNTF-000307",
+        "\u001f\u001f\u001fNTF-000308",
+        "\u001f\u001f\u001fNTF-000309",
+        "\u001f\u001f\u001fNTF-000310",
+        "\u001f\u001f\u001fNTF-000311",
+        "\u001f\u001f\u001fNTF-000312",
+        "\u001f\u001f\u001fNTF-000313",
+        "\u001f\u001f\u001fNTF-000314",
+        "\u001f\u001f\u001fNTF-000315",
+        "\u001f\u001f\u001fNTF-000316",
+        "\u001f\u001f\u001fNTF-000317",
+        "\u001f\u001f\u001fNTF-000318",
+        "\u001f\u001f\u001fNTF-000319",
+        "\u001f\u001f\u001fNTF-000320",
+        "\u001f\u001f\u001fNTF-000321",
+        "\u001f\u001f\u001fNTF-000322",
+        "\u001f\u001f\u001fNTF-000323",
         "\u001f\u001f\u001fNTF-000324",
+        "\u001f\u001f\u001fNTF-000325",
+        "\u001f\u001f\u001fNTF-000326",
+        "\u001f\u001f\u001fNTF-000327",
+        "\u001f\u001f\u001fNTF-000328",
+        "\u001f\u001f\u001fNTF-000329",
+        "\u001f\u001f\u001fNTF-000330",
+        "\u001f\u001f\u001fNTF-000331",
+        "\u001f\u001f\u001fNTF-000332",
+        "\u001f\u001f\u001fNTF-000333",
+        "\u001f\u001f\u001fNTF-000334",
+        "\u001f\u001f\u001fNTF-000335",
+        "\u001f\u001f\u001fNTF-000336",
+        "\u001f\u001f\u001fNTF-000337",
+        "\u001f\u001f\u001fNTF-000338",
+        "\u001fRWS-2026H1\u001fSD01-1\u001fNTF-000401",
+        "\u001fRWS-2026H1\u001fSD01-1\u001fNTF-000402",
+        "\u001fRWS-2026H1\u001fSD01-1\u001fNTF-000403",
+        "\u001fRWS-2026H1\u001fSD01-1\u001fNTF-000404",
+        "\u001fRWS-2026H1\u001fSD01-1\u001fNTF-000405",
+        "\u001fRWS-2026H1\u001fSD01-1\u001fNTF-000406",
+        "\u001fRWS-2026H1\u001fSD01-1\u001fNTF-000407",
+        "\u001fRWS-2026H1\u001fSD01-1\u001fNTF-000408",
+        "\u001fRWS-2026H1\u001fSD01-1\u001fNTF-000409",
+        "\u001fRWS-2026H1\u001fSD01-1\u001fNTF-000410",
+        "\u001fRWS-2026H1\u001fSD01-1\u001fNTF-000411",
+        "\u001fRWS-2026H1\u001fSD01-1\u001fNTF-000412",
+        "\u001fRWS-2026H1\u001fSD01-1\u001fNTF-000413",
+        "\u001fRWS-2026H1\u001fSD01-1\u001fNTF-000414",
+        "\u001fRWS-2026H1\u001fSD01-1\u001fNTF-000415",
+        "\u001fRWS-2026H1\u001fSD01-1\u001fNTF-000416",
+        "\u001fRWS-2026H1\u001fSD01-1\u001fNTF-000417",
+        "\u001fRWS-2026H1\u001fSD01-1\u001fNTF-000418",
+        "\u001fRWS-2026H1\u001fSD01-1\u001fNTF-000419",
+        "\u001fRWS-2026H1\u001fSD01-1\u001fNTF-000420",
+        "\u001fRFC-2026H1\u001fSD02-1\u001fNTF-000421",
+        "\u001fRFC-2026H1\u001fSD02-1\u001fNTF-000422",
+        "\u001fRFC-2026H1\u001fSD02-1\u001fNTF-000423",
+        "\u001fRFC-2026H1\u001fSD02-1\u001fNTF-000424",
+        "\u001fRFC-2026H1\u001fSD02-1\u001fNTF-000425",
+        "\u001fRFC-2026H1\u001fSD02-1\u001fNTF-000426",
+        "\u001fRFC-2026H1\u001fSD02-1\u001fNTF-000427",
+        "\u001fRFC-2026H1\u001fSD02-1\u001fNTF-000428",
+        "\u001fRFC-2026H1\u001fSD02-1\u001fNTF-000429",
+        "\u001fRFC-2026H1\u001fSD02-1\u001fNTF-000430",
+        "\u001fRFC-2026H1\u001fSD02-1\u001fNTF-000431",
+        "\u001fRFC-2026H1\u001fSD02-1\u001fNTF-000432",
+        "\u001fRFC-2026H1\u001fSD02-1\u001fNTF-000433",
+        "\u001fRMT-2026H1\u001fSD02-1\u001fNTF-000434",
+        "\u001fRMT-2026H1\u001fSD02-1\u001fNTF-000435",
+        "\u001fRMT-2026H1\u001fSD02-1\u001fNTF-000436",
+        "\u001fRMT-2026H1\u001fSD02-1\u001fNTF-000437",
+        "\u001fRMT-2026H1\u001fSD02-1\u001fNTF-000438",
+        "\u001fRMT-2026H1\u001fSD02-1\u001fNTF-000439",
+        "\u001fRWS-2026H2-1\u001fSD01-1\u001fNTF-000440",
+        "\u001fRWS-2026H2-1\u001fSD01-1\u001fNTF-000441",
+        "\u001fRWS-2026H2-1\u001fSD01-1\u001fNTF-000442",
+        "\u001fRWS-2026H2-1\u001fSD01-1\u001fNTF-000443",
+        "\u001fRWS-2026H2-1\u001fSD01-1\u001fNTF-000444",
+        "\u001fRWS-2026H2-1\u001fSD01-1\u001fNTF-000445",
+        "\u001fRWS-2026H2-1\u001fSD01-1\u001fNTF-000446",
+        "\u001fRWS-2026H2-1\u001fSD01-1\u001fNTF-000447",
+        "\u001fRWS-2026H2-1\u001fSD01-1\u001fNTF-000448",
+        "\u001fRWS-2026H2-1\u001fSD01-1\u001fNTF-000449",
+        "\u001fRWS-2026H2-1\u001fSD01-1\u001fNTF-000450",
+        "\u001fRWS-2026H2-1\u001fSD01-1\u001fNTF-000451",
+        "\u001fRWS-2026H2-1\u001fSD01-1\u001fNTF-000452",
+        "\u001fRWS-2026H2-1\u001fSD01-1\u001fNTF-000453",
+        "\u001fRWS-2026H2-1\u001fSD01-1\u001fNTF-000454",
+        "\u001fRWS-2026H2-1\u001fSD01-1\u001fNTF-000455",
+        "\u001fRFC-2026H2-1\u001fSD02-1\u001fNTF-000456",
+        "\u001fRFC-2026H2-1\u001fSD02-1\u001fNTF-000457",
+        "\u001fRFC-2026H2-1\u001fSD02-1\u001fNTF-000458",
+        "\u001fRFC-2026H2-1\u001fSD02-1\u001fNTF-000459",
+        "\u001fRFC-2026H2-1\u001fSD02-1\u001fNTF-000460",
+        "\u001fRFC-2026H2-1\u001fSD02-1\u001fNTF-000461",
+        "\u001fRFC-2026H2-1\u001fSD02-1\u001fNTF-000462",
+        "\u001fRFC-2026H2-1\u001fSD02-1\u001fNTF-000463",
+        "\u001fRFC-2026H2-1\u001fSD02-1\u001fNTF-000464",
+        "\u001fRMT-2026H2-1\u001fSD02-1\u001fNTF-000465",
+        "\u001fRMT-2026H2-1\u001fSD02-1\u001fNTF-000466",
+        "\u001fRWS-2026H2\u001fSD01-1\u001fNTF-000467",
+        "\u001fRMT-2026H2\u001fSD02-1\u001fNTF-000468",
+        "\u001fRMT-2026H2\u001fSD02-1\u001fNTF-000469",
+        "\u001fRMT-2026H2\u001fSD02-1\u001fNTF-000470",
+        "\u001fRFC-2026H2\u001fSD02-1\u001fNTF-000471",
+        "\u001fRWS-2026H2\u001fSD02-1\u001fNTF-000472",
+        "\u001fRFC-2026H2\u001fSD02-1\u001fNTF-000473",
+        "ACT-000044\u001fBAT-003\u001fSD01-1\u001fNTF-000474",
+        "\u001fBAT-003\u001fSD02-1\u001fNTF-000475",
+        "ACT-000045\u001fBAT-003\u001fSD01-1\u001fNTF-000476",
         "\u001fBAT-003\u001fSD04-1\u001fNTF-000477",
-        "\u001f\u001f\u001fNTF-000102",
-        "\u001f\u001f\u001fNTF-000191"
+        "ACT-000046\u001fBAT-003\u001fSD01-1\u001fNTF-000478",
+        "\u001fBAT-003\u001fSD05-1\u001fNTF-000479",
+        "ACT-000047\u001fBAT-003\u001fSD01-1\u001fNTF-000480",
+        "\u001fBAT-003\u001fSD13-1\u001fNTF-000481",
+        "ACT-000048\u001fBAT-003\u001fSD01-1\u001fNTF-000482",
+        "\u001fBAT-003\u001fSD02-1\u001fNTF-000483",
+        "ACT-000049\u001fBAT-003\u001fSD01-1\u001fNTF-000484",
+        "\u001fBAT-003\u001fSD09-1\u001fNTF-000485",
+        "ACT-000050\u001fBAT-003\u001fSD01-1\u001fNTF-000486",
+        "\u001fBAT-003\u001fSD03-1\u001fNTF-000487"
       ],
       "types": {},
       "empty": {
-        "\u001fRMT-2026H2\u001fSD02-1\u001fNTF-000470": [
-          "task_id",
-          "read_at",
-          "action_id"
-        ],
-        "\u001f\u001fSD01-1\u001fNTF-MUGZJ8TCLJR": [
-          "task_id",
-          "read_at"
-        ],
-        "\u001f\u001fSD01-1\u001fNTF-MUGZJ8TL50Q": [
-          "task_id",
-          "read_at"
-        ],
-        "\u001f\u001fSD01-1\u001fNTF-MUGZJU07DD5": [
-          "task_id",
-          "read_at"
-        ],
-        "\u001f\u001fSD01-1\u001fNTF-MUGZJU0PLQ7": [
-          "task_id",
-          "read_at"
-        ],
-        "\u001f\u001fSD01-1\u001fNTF-MUGZJU0YOXU": [
-          "task_id",
-          "read_at"
-        ],
-        "\u001f\u001fSD01-1\u001fNTF-MUGZJU1CH57": [
-          "task_id",
-          "read_at"
-        ],
-        "\u001f\u001fSD01-1\u001fNTF-MUGZKJC7CW5": [
-          "task_id",
-          "read_at"
-        ],
-        "\u001f\u001fSD01-1\u001fNTF-MUGZKJCN5L8": [
+        "\u001f\u001fSD01-1\u001fNTF-MUGZKJD4GNO": [
           "task_id",
           "read_at"
         ],
@@ -124915,25 +124994,39 @@
           "task_id",
           "read_at"
         ],
-        "\u001f\u001fSD01-1\u001fNTF-MUGZKJD4GNO": [
+        "\u001f\u001fSD01-1\u001fNTF-MUGZKJCN5L8": [
           "task_id",
           "read_at"
         ],
-        "\u001fRFC-2026H2\u001fSD02-1\u001fNTF-000471": [
-          "task_id",
-          "read_at",
-          "action_id"
-        ],
-        "\u001fRWS-2026H2-1\u001fSD01-1\u001fNTF-000455": [
-          "task_id",
-          "read_at",
-          "action_id"
-        ],
-        "\u001f\u001f\u001fNTF-MUERL48Q83Z": [
+        "\u001f\u001fSD01-1\u001fNTF-MUGZKJC7CW5": [
           "task_id",
           "read_at"
         ],
-        "\u001f\u001f\u001fNTF-MUERL48SVQQ": [
+        "\u001f\u001fSD01-1\u001fNTF-MUGZJU1CH57": [
+          "task_id",
+          "read_at"
+        ],
+        "\u001f\u001fSD01-1\u001fNTF-MUGZJU0YOXU": [
+          "task_id",
+          "read_at"
+        ],
+        "\u001f\u001fSD01-1\u001fNTF-MUGZJU0PLQ7": [
+          "task_id",
+          "read_at"
+        ],
+        "\u001f\u001fSD01-1\u001fNTF-MUGZJU07DD5": [
+          "task_id",
+          "read_at"
+        ],
+        "\u001f\u001fSD01-1\u001fNTF-MUGZJ8TL50Q": [
+          "task_id",
+          "read_at"
+        ],
+        "\u001f\u001fSD01-1\u001fNTF-MUGZJ8TCLJR": [
+          "task_id",
+          "read_at"
+        ],
+        "\u001f\u001f\u001fNTF-LS-20260924-203421-D01": [
           "task_id",
           "read_at"
         ],
@@ -124942,67 +125035,330 @@
           "read_at",
           "action_id"
         ],
-        "\u001f\u001f\u001fNTF-LS-20260924-203421-D01": [
+        "\u001f\u001f\u001fNTF-MUERL48SVQQ": [
           "task_id",
           "read_at"
         ],
-        "\u001fRMT-2026H2\u001fSD02-1\u001fNTF-000469": [
+        "\u001f\u001f\u001fNTF-MUERL48Q83Z": [
           "task_id",
-          "read_at",
-          "action_id"
+          "read_at"
         ],
-        "\u001fRWS-2026H2\u001fSD01-1\u001fNTF-000467": [
-          "task_id",
-          "read_at",
-          "action_id"
-        ],
-        "\u001fRMT-2026H2\u001fSD02-1\u001fNTF-000468": [
-          "task_id",
-          "read_at",
-          "action_id"
-        ],
-        "\u001fRFC-2026H2-1\u001fSD02-1\u001fNTF-000463": [
-          "task_id",
-          "read_at",
-          "action_id"
-        ],
-        "\u001f\u001f\u001fNTF-000284": [
+        "\u001f\u001f\u001fNTF-000001": [
           "read_at",
           "note",
           "from_staff_id",
           "action_id",
           "batch_id"
         ],
-        "\u001f\u001f\u001fNTF-000071": [
+        "\u001f\u001f\u001fNTF-000002": [
           "read_at",
           "note",
           "from_staff_id",
           "action_id",
           "batch_id"
         ],
-        "\u001fRFC-2026H2-1\u001fSD02-1\u001fNTF-000464": [
-          "task_id",
-          "read_at",
-          "action_id"
-        ],
-        "\u001fRFC-2026H2-1\u001fSD02-1\u001fNTF-000462": [
-          "task_id",
-          "read_at",
-          "action_id"
-        ],
-        "\u001fRWS-2026H2-1\u001fSD01-1\u001fNTF-000453": [
-          "task_id",
-          "read_at",
-          "action_id"
-        ],
-        "\u001f\u001f\u001fNTF-000137": [
+        "\u001f\u001f\u001fNTF-000003": [
           "read_at",
           "note",
           "from_staff_id",
           "action_id",
           "batch_id"
         ],
-        "\u001f\u001f\u001fNTF-000111": [
+        "\u001f\u001f\u001fNTF-000004": [
+          "read_at",
+          "note",
+          "from_staff_id",
+          "action_id",
+          "batch_id"
+        ],
+        "\u001f\u001f\u001fNTF-000005": [
+          "read_at",
+          "note",
+          "from_staff_id",
+          "action_id",
+          "batch_id"
+        ],
+        "\u001f\u001f\u001fNTF-000006": [
+          "read_at",
+          "note",
+          "from_staff_id",
+          "action_id",
+          "batch_id"
+        ],
+        "\u001f\u001f\u001fNTF-000007": [
+          "read_at",
+          "note",
+          "from_staff_id",
+          "action_id",
+          "batch_id"
+        ],
+        "\u001f\u001f\u001fNTF-000008": [
+          "read_at",
+          "note",
+          "from_staff_id",
+          "action_id",
+          "batch_id"
+        ],
+        "\u001f\u001f\u001fNTF-000009": [
+          "read_at",
+          "note",
+          "from_staff_id",
+          "action_id",
+          "batch_id"
+        ],
+        "\u001f\u001f\u001fNTF-000010": [
+          "read_at",
+          "note",
+          "from_staff_id",
+          "action_id",
+          "batch_id"
+        ],
+        "\u001f\u001f\u001fNTF-000011": [
+          "read_at",
+          "note",
+          "from_staff_id",
+          "action_id",
+          "batch_id"
+        ],
+        "\u001f\u001f\u001fNTF-000012": [
+          "read_at",
+          "note",
+          "from_staff_id",
+          "action_id",
+          "batch_id"
+        ],
+        "\u001f\u001f\u001fNTF-000013": [
+          "read_at",
+          "note",
+          "from_staff_id",
+          "action_id",
+          "batch_id"
+        ],
+        "\u001f\u001f\u001fNTF-000014": [
+          "read_at",
+          "note",
+          "from_staff_id",
+          "action_id",
+          "batch_id"
+        ],
+        "\u001f\u001f\u001fNTF-000015": [
+          "read_at",
+          "note",
+          "from_staff_id",
+          "action_id",
+          "batch_id"
+        ],
+        "\u001f\u001f\u001fNTF-000016": [
+          "read_at",
+          "note",
+          "from_staff_id",
+          "action_id",
+          "batch_id"
+        ],
+        "\u001f\u001f\u001fNTF-000017": [
+          "read_at",
+          "note",
+          "from_staff_id",
+          "action_id",
+          "batch_id"
+        ],
+        "\u001f\u001f\u001fNTF-000018": [
+          "read_at",
+          "note",
+          "from_staff_id",
+          "action_id",
+          "batch_id"
+        ],
+        "\u001f\u001f\u001fNTF-000019": [
+          "read_at",
+          "note",
+          "from_staff_id",
+          "action_id",
+          "batch_id"
+        ],
+        "\u001f\u001f\u001fNTF-000020": [
+          "read_at",
+          "note",
+          "from_staff_id",
+          "action_id",
+          "batch_id"
+        ],
+        "\u001f\u001f\u001fNTF-000021": [
+          "read_at",
+          "note",
+          "from_staff_id",
+          "action_id",
+          "batch_id"
+        ],
+        "\u001f\u001f\u001fNTF-000022": [
+          "read_at",
+          "note",
+          "from_staff_id",
+          "action_id",
+          "batch_id"
+        ],
+        "\u001f\u001f\u001fNTF-000023": [
+          "read_at",
+          "note",
+          "from_staff_id",
+          "action_id",
+          "batch_id"
+        ],
+        "\u001f\u001f\u001fNTF-000024": [
+          "read_at",
+          "note",
+          "from_staff_id",
+          "action_id",
+          "batch_id"
+        ],
+        "\u001f\u001f\u001fNTF-000025": [
+          "read_at",
+          "note",
+          "from_staff_id",
+          "action_id",
+          "batch_id"
+        ],
+        "\u001f\u001f\u001fNTF-000026": [
+          "read_at",
+          "note",
+          "from_staff_id",
+          "action_id",
+          "batch_id"
+        ],
+        "\u001f\u001f\u001fNTF-000027": [
+          "read_at",
+          "note",
+          "from_staff_id",
+          "action_id",
+          "batch_id"
+        ],
+        "\u001f\u001f\u001fNTF-000028": [
+          "read_at",
+          "note",
+          "from_staff_id",
+          "action_id",
+          "batch_id"
+        ],
+        "\u001f\u001f\u001fNTF-000029": [
+          "read_at",
+          "note",
+          "from_staff_id",
+          "action_id",
+          "batch_id"
+        ],
+        "\u001f\u001f\u001fNTF-000030": [
+          "read_at",
+          "note",
+          "from_staff_id",
+          "action_id",
+          "batch_id"
+        ],
+        "\u001f\u001f\u001fNTF-000031": [
+          "read_at",
+          "note",
+          "from_staff_id",
+          "action_id",
+          "batch_id"
+        ],
+        "\u001f\u001f\u001fNTF-000032": [
+          "read_at",
+          "note",
+          "from_staff_id",
+          "action_id",
+          "batch_id"
+        ],
+        "\u001f\u001f\u001fNTF-000033": [
+          "read_at",
+          "note",
+          "from_staff_id",
+          "action_id",
+          "batch_id"
+        ],
+        "\u001f\u001f\u001fNTF-000034": [
+          "read_at",
+          "note",
+          "from_staff_id",
+          "action_id",
+          "batch_id"
+        ],
+        "\u001f\u001f\u001fNTF-000035": [
+          "read_at",
+          "note",
+          "from_staff_id",
+          "action_id",
+          "batch_id"
+        ],
+        "\u001f\u001f\u001fNTF-000036": [
+          "read_at",
+          "note",
+          "from_staff_id",
+          "action_id",
+          "batch_id"
+        ],
+        "\u001f\u001f\u001fNTF-000037": [
+          "read_at",
+          "note",
+          "from_staff_id",
+          "action_id",
+          "batch_id"
+        ],
+        "\u001f\u001f\u001fNTF-000038": [
+          "read_at",
+          "note",
+          "from_staff_id",
+          "action_id",
+          "batch_id"
+        ],
+        "\u001f\u001f\u001fNTF-000039": [
+          "read_at",
+          "note",
+          "from_staff_id",
+          "action_id",
+          "batch_id"
+        ],
+        "\u001f\u001f\u001fNTF-000040": [
+          "read_at",
+          "note",
+          "from_staff_id",
+          "action_id",
+          "batch_id"
+        ],
+        "\u001f\u001f\u001fNTF-000041": [
+          "read_at",
+          "note",
+          "from_staff_id",
+          "action_id",
+          "batch_id"
+        ],
+        "\u001f\u001f\u001fNTF-000042": [
+          "read_at",
+          "note",
+          "from_staff_id",
+          "action_id",
+          "batch_id"
+        ],
+        "\u001f\u001f\u001fNTF-000043": [
+          "read_at",
+          "note",
+          "from_staff_id",
+          "action_id",
+          "batch_id"
+        ],
+        "\u001f\u001f\u001fNTF-000044": [
+          "read_at",
+          "note",
+          "from_staff_id",
+          "action_id",
+          "batch_id"
+        ],
+        "\u001f\u001f\u001fNTF-000045": [
+          "read_at",
+          "note",
+          "from_staff_id",
+          "action_id",
+          "batch_id"
+        ],
+        "\u001f\u001f\u001fNTF-000046": [
           "read_at",
           "note",
           "from_staff_id",
@@ -125016,14 +125372,462 @@
           "action_id",
           "batch_id"
         ],
-        "\u001f\u001f\u001fNTF-000179": [
+        "\u001f\u001f\u001fNTF-000049": [
           "read_at",
           "note",
           "from_staff_id",
           "action_id",
           "batch_id"
         ],
-        "\u001f\u001f\u001fNTF-000157": [
+        "\u001f\u001f\u001fNTF-000050": [
+          "read_at",
+          "note",
+          "from_staff_id",
+          "action_id",
+          "batch_id"
+        ],
+        "\u001f\u001f\u001fNTF-000051": [
+          "read_at",
+          "note",
+          "from_staff_id",
+          "action_id",
+          "batch_id"
+        ],
+        "\u001f\u001f\u001fNTF-000052": [
+          "read_at",
+          "note",
+          "from_staff_id",
+          "action_id",
+          "batch_id"
+        ],
+        "\u001f\u001f\u001fNTF-000053": [
+          "read_at",
+          "note",
+          "from_staff_id",
+          "action_id",
+          "batch_id"
+        ],
+        "\u001f\u001f\u001fNTF-000054": [
+          "read_at",
+          "note",
+          "from_staff_id",
+          "action_id",
+          "batch_id"
+        ],
+        "\u001f\u001f\u001fNTF-000058": [
+          "read_at",
+          "note",
+          "from_staff_id",
+          "action_id",
+          "batch_id"
+        ],
+        "\u001f\u001f\u001fNTF-000061": [
+          "read_at",
+          "note",
+          "from_staff_id",
+          "action_id",
+          "batch_id"
+        ],
+        "\u001f\u001f\u001fNTF-000062": [
+          "read_at",
+          "note",
+          "from_staff_id",
+          "action_id",
+          "batch_id"
+        ],
+        "\u001f\u001f\u001fNTF-000063": [
+          "read_at",
+          "note",
+          "from_staff_id",
+          "action_id",
+          "batch_id"
+        ],
+        "\u001f\u001f\u001fNTF-000064": [
+          "read_at",
+          "note",
+          "from_staff_id",
+          "action_id",
+          "batch_id"
+        ],
+        "\u001f\u001f\u001fNTF-000065": [
+          "read_at",
+          "note",
+          "from_staff_id",
+          "action_id",
+          "batch_id"
+        ],
+        "\u001f\u001f\u001fNTF-000066": [
+          "read_at",
+          "note",
+          "from_staff_id",
+          "action_id",
+          "batch_id"
+        ],
+        "\u001f\u001f\u001fNTF-000067": [
+          "read_at",
+          "note",
+          "from_staff_id",
+          "action_id",
+          "batch_id"
+        ],
+        "\u001f\u001f\u001fNTF-000068": [
+          "read_at",
+          "note",
+          "from_staff_id",
+          "action_id",
+          "batch_id"
+        ],
+        "\u001f\u001f\u001fNTF-000069": [
+          "read_at",
+          "note",
+          "from_staff_id",
+          "action_id",
+          "batch_id"
+        ],
+        "\u001f\u001f\u001fNTF-000070": [
+          "read_at",
+          "note",
+          "from_staff_id",
+          "action_id",
+          "batch_id"
+        ],
+        "\u001f\u001f\u001fNTF-000071": [
+          "read_at",
+          "note",
+          "from_staff_id",
+          "action_id",
+          "batch_id"
+        ],
+        "\u001f\u001f\u001fNTF-000072": [
+          "read_at",
+          "note",
+          "from_staff_id",
+          "action_id",
+          "batch_id"
+        ],
+        "\u001f\u001f\u001fNTF-000073": [
+          "read_at",
+          "note",
+          "from_staff_id",
+          "action_id",
+          "batch_id"
+        ],
+        "\u001f\u001f\u001fNTF-000074": [
+          "read_at",
+          "note",
+          "from_staff_id",
+          "action_id",
+          "batch_id"
+        ],
+        "\u001f\u001f\u001fNTF-000075": [
+          "read_at",
+          "note",
+          "from_staff_id",
+          "action_id",
+          "batch_id"
+        ],
+        "\u001f\u001f\u001fNTF-000076": [
+          "read_at",
+          "note",
+          "from_staff_id",
+          "action_id",
+          "batch_id"
+        ],
+        "\u001f\u001f\u001fNTF-000077": [
+          "read_at",
+          "note",
+          "from_staff_id",
+          "action_id",
+          "batch_id"
+        ],
+        "\u001f\u001f\u001fNTF-000078": [
+          "read_at",
+          "note",
+          "from_staff_id",
+          "action_id",
+          "batch_id"
+        ],
+        "\u001f\u001f\u001fNTF-000079": [
+          "read_at",
+          "note",
+          "from_staff_id",
+          "action_id",
+          "batch_id"
+        ],
+        "\u001f\u001f\u001fNTF-000080": [
+          "read_at",
+          "note",
+          "from_staff_id",
+          "action_id",
+          "batch_id"
+        ],
+        "\u001f\u001f\u001fNTF-000081": [
+          "read_at",
+          "note",
+          "from_staff_id",
+          "action_id",
+          "batch_id"
+        ],
+        "\u001f\u001f\u001fNTF-000082": [
+          "read_at",
+          "note",
+          "from_staff_id",
+          "action_id",
+          "batch_id"
+        ],
+        "\u001f\u001f\u001fNTF-000083": [
+          "read_at",
+          "note",
+          "from_staff_id",
+          "action_id",
+          "batch_id"
+        ],
+        "\u001f\u001f\u001fNTF-000084": [
+          "read_at",
+          "note",
+          "from_staff_id",
+          "action_id",
+          "batch_id"
+        ],
+        "\u001f\u001f\u001fNTF-000085": [
+          "read_at",
+          "note",
+          "from_staff_id",
+          "action_id",
+          "batch_id"
+        ],
+        "\u001f\u001f\u001fNTF-000086": [
+          "read_at",
+          "note",
+          "from_staff_id",
+          "action_id",
+          "batch_id"
+        ],
+        "\u001f\u001f\u001fNTF-000087": [
+          "read_at",
+          "note",
+          "from_staff_id",
+          "action_id",
+          "batch_id"
+        ],
+        "\u001f\u001f\u001fNTF-000088": [
+          "read_at",
+          "note",
+          "from_staff_id",
+          "action_id",
+          "batch_id"
+        ],
+        "\u001f\u001f\u001fNTF-000089": [
+          "read_at",
+          "note",
+          "from_staff_id",
+          "action_id",
+          "batch_id"
+        ],
+        "\u001f\u001f\u001fNTF-000090": [
+          "read_at",
+          "note",
+          "from_staff_id",
+          "action_id",
+          "batch_id"
+        ],
+        "\u001f\u001f\u001fNTF-000091": [
+          "read_at",
+          "note",
+          "from_staff_id",
+          "action_id",
+          "batch_id"
+        ],
+        "\u001f\u001f\u001fNTF-000092": [
+          "read_at",
+          "note",
+          "from_staff_id",
+          "action_id",
+          "batch_id"
+        ],
+        "\u001f\u001f\u001fNTF-000093": [
+          "read_at",
+          "note",
+          "from_staff_id",
+          "action_id",
+          "batch_id"
+        ],
+        "\u001f\u001f\u001fNTF-000094": [
+          "read_at",
+          "note",
+          "from_staff_id",
+          "action_id",
+          "batch_id"
+        ],
+        "\u001f\u001f\u001fNTF-000095": [
+          "read_at",
+          "note",
+          "from_staff_id",
+          "action_id",
+          "batch_id"
+        ],
+        "\u001f\u001f\u001fNTF-000096": [
+          "read_at",
+          "note",
+          "from_staff_id",
+          "action_id",
+          "batch_id"
+        ],
+        "\u001f\u001f\u001fNTF-000097": [
+          "read_at",
+          "note",
+          "from_staff_id",
+          "action_id",
+          "batch_id"
+        ],
+        "\u001f\u001f\u001fNTF-000098": [
+          "read_at",
+          "note",
+          "from_staff_id",
+          "action_id",
+          "batch_id"
+        ],
+        "\u001f\u001f\u001fNTF-000099": [
+          "read_at",
+          "note",
+          "from_staff_id",
+          "action_id",
+          "batch_id"
+        ],
+        "\u001f\u001f\u001fNTF-000100": [
+          "read_at",
+          "note",
+          "from_staff_id",
+          "action_id",
+          "batch_id"
+        ],
+        "\u001f\u001f\u001fNTF-000101": [
+          "read_at",
+          "note",
+          "from_staff_id",
+          "action_id",
+          "batch_id"
+        ],
+        "\u001f\u001f\u001fNTF-000102": [
+          "read_at",
+          "note",
+          "from_staff_id",
+          "action_id",
+          "batch_id"
+        ],
+        "\u001f\u001f\u001fNTF-000103": [
+          "read_at",
+          "note",
+          "from_staff_id",
+          "action_id",
+          "batch_id"
+        ],
+        "\u001f\u001f\u001fNTF-000104": [
+          "read_at",
+          "note",
+          "from_staff_id",
+          "action_id",
+          "batch_id"
+        ],
+        "\u001f\u001f\u001fNTF-000105": [
+          "read_at",
+          "note",
+          "from_staff_id",
+          "action_id",
+          "batch_id"
+        ],
+        "\u001f\u001f\u001fNTF-000106": [
+          "read_at",
+          "note",
+          "from_staff_id",
+          "action_id",
+          "batch_id"
+        ],
+        "\u001f\u001f\u001fNTF-000107": [
+          "read_at",
+          "note",
+          "from_staff_id",
+          "action_id",
+          "batch_id"
+        ],
+        "\u001f\u001f\u001fNTF-000108": [
+          "read_at",
+          "note",
+          "from_staff_id",
+          "action_id",
+          "batch_id"
+        ],
+        "\u001f\u001f\u001fNTF-000109": [
+          "read_at",
+          "note",
+          "from_staff_id",
+          "action_id",
+          "batch_id"
+        ],
+        "\u001f\u001f\u001fNTF-000111": [
+          "read_at",
+          "note",
+          "from_staff_id",
+          "action_id",
+          "batch_id"
+        ],
+        "\u001f\u001f\u001fNTF-000116": [
+          "read_at",
+          "note",
+          "from_staff_id",
+          "action_id",
+          "batch_id"
+        ],
+        "\u001f\u001f\u001fNTF-000117": [
+          "read_at",
+          "note",
+          "from_staff_id",
+          "action_id",
+          "batch_id"
+        ],
+        "\u001f\u001f\u001fNTF-000118": [
+          "read_at",
+          "note",
+          "from_staff_id",
+          "action_id",
+          "batch_id"
+        ],
+        "\u001f\u001f\u001fNTF-000119": [
+          "read_at",
+          "note",
+          "from_staff_id",
+          "action_id",
+          "batch_id"
+        ],
+        "\u001f\u001f\u001fNTF-000120": [
+          "read_at",
+          "note",
+          "from_staff_id",
+          "action_id",
+          "batch_id"
+        ],
+        "\u001f\u001f\u001fNTF-000121": [
+          "read_at",
+          "note",
+          "from_staff_id",
+          "action_id",
+          "batch_id"
+        ],
+        "\u001f\u001f\u001fNTF-000122": [
+          "read_at",
+          "note",
+          "from_staff_id",
+          "action_id",
+          "batch_id"
+        ],
+        "\u001f\u001f\u001fNTF-000123": [
+          "read_at",
+          "note",
+          "from_staff_id",
+          "action_id",
+          "batch_id"
+        ],
+        "\u001f\u001f\u001fNTF-000124": [
           "read_at",
           "note",
           "from_staff_id",
@@ -125044,1362 +125848,7 @@
           "action_id",
           "batch_id"
         ],
-        "\u001f\u001f\u001fNTF-000054": [
-          "read_at",
-          "note",
-          "from_staff_id",
-          "action_id",
-          "batch_id"
-        ],
-        "\u001f\u001f\u001fNTF-000268": [
-          "read_at",
-          "note",
-          "from_staff_id",
-          "action_id",
-          "batch_id"
-        ],
-        "\u001f\u001f\u001fNTF-000199": [
-          "read_at",
-          "note",
-          "from_staff_id",
-          "action_id",
-          "batch_id"
-        ],
-        "\u001f\u001f\u001fNTF-000035": [
-          "read_at",
-          "note",
-          "from_staff_id",
-          "action_id",
-          "batch_id"
-        ],
-        "\u001f\u001f\u001fNTF-000160": [
-          "read_at",
-          "note",
-          "from_staff_id",
-          "action_id",
-          "batch_id"
-        ],
-        "\u001f\u001f\u001fNTF-000156": [
-          "read_at",
-          "note",
-          "from_staff_id",
-          "action_id",
-          "batch_id"
-        ],
-        "\u001f\u001f\u001fNTF-000148": [
-          "read_at",
-          "note",
-          "from_staff_id",
-          "action_id",
-          "batch_id"
-        ],
-        "\u001f\u001f\u001fNTF-000138": [
-          "read_at",
-          "note",
-          "from_staff_id",
-          "action_id",
-          "batch_id"
-        ],
-        "\u001f\u001f\u001fNTF-000085": [
-          "read_at",
-          "note",
-          "from_staff_id",
-          "action_id",
-          "batch_id"
-        ],
-        "\u001f\u001f\u001fNTF-000043": [
-          "read_at",
-          "note",
-          "from_staff_id",
-          "action_id",
-          "batch_id"
-        ],
-        "\u001f\u001f\u001fNTF-000019": [
-          "read_at",
-          "note",
-          "from_staff_id",
-          "action_id",
-          "batch_id"
-        ],
-        "\u001f\u001f\u001fNTF-000012": [
-          "read_at",
-          "note",
-          "from_staff_id",
-          "action_id",
-          "batch_id"
-        ],
-        "\u001fRFC-2026H2\u001fSD02-1\u001fNTF-000473": [
-          "task_id",
-          "action_id"
-        ],
-        "\u001fRWS-2026H2\u001fSD02-1\u001fNTF-000472": [
-          "task_id",
-          "action_id"
-        ],
-        "\u001f\u001f\u001fNTF-000338": [
-          "read_at",
-          "note",
-          "from_staff_id",
-          "action_id",
-          "batch_id"
-        ],
-        "\u001f\u001f\u001fNTF-000317": [
-          "read_at",
-          "note",
-          "from_staff_id",
-          "action_id",
-          "batch_id"
-        ],
-        "\u001f\u001f\u001fNTF-000274": [
-          "read_at",
-          "note",
-          "from_staff_id",
-          "action_id",
-          "batch_id"
-        ],
-        "\u001f\u001f\u001fNTF-000250": [
-          "read_at",
-          "note",
-          "from_staff_id",
-          "action_id",
-          "batch_id"
-        ],
-        "\u001f\u001f\u001fNTF-000158": [
-          "read_at",
-          "note",
-          "from_staff_id",
-          "action_id",
-          "batch_id"
-        ],
-        "\u001f\u001f\u001fNTF-000008": [
-          "read_at",
-          "note",
-          "from_staff_id",
-          "action_id",
-          "batch_id"
-        ],
-        "\u001f\u001f\u001fNTF-000297": [
-          "read_at",
-          "note",
-          "from_staff_id",
-          "action_id",
-          "batch_id"
-        ],
-        "\u001f\u001f\u001fNTF-000184": [
-          "read_at",
-          "note",
-          "from_staff_id",
-          "action_id",
-          "batch_id"
-        ],
-        "\u001f\u001f\u001fNTF-000152": [
-          "read_at",
-          "note",
-          "from_staff_id",
-          "action_id",
-          "batch_id"
-        ],
-        "\u001f\u001f\u001fNTF-000117": [
-          "read_at",
-          "note",
-          "from_staff_id",
-          "action_id",
-          "batch_id"
-        ],
-        "\u001f\u001f\u001fNTF-000094": [
-          "read_at",
-          "note",
-          "from_staff_id",
-          "action_id",
-          "batch_id"
-        ],
-        "\u001f\u001f\u001fNTF-000308": [
-          "read_at",
-          "note",
-          "from_staff_id",
-          "action_id",
-          "batch_id"
-        ],
-        "\u001f\u001f\u001fNTF-000269": [
-          "read_at",
-          "note",
-          "from_staff_id",
-          "action_id",
-          "batch_id"
-        ],
-        "\u001f\u001f\u001fNTF-000251": [
-          "read_at",
-          "note",
-          "from_staff_id",
-          "action_id",
-          "batch_id"
-        ],
-        "\u001f\u001f\u001fNTF-000109": [
-          "read_at",
-          "note",
-          "from_staff_id",
-          "action_id",
-          "batch_id"
-        ],
-        "\u001f\u001f\u001fNTF-000089": [
-          "read_at",
-          "note",
-          "from_staff_id",
-          "action_id",
-          "batch_id"
-        ],
-        "\u001f\u001f\u001fNTF-000079": [
-          "read_at",
-          "note",
-          "from_staff_id",
-          "action_id",
-          "batch_id"
-        ],
-        "\u001f\u001f\u001fNTF-000321": [
-          "read_at",
-          "note",
-          "from_staff_id",
-          "action_id",
-          "batch_id"
-        ],
-        "\u001f\u001f\u001fNTF-000262": [
-          "read_at",
-          "note",
-          "from_staff_id",
-          "action_id",
-          "batch_id"
-        ],
-        "\u001f\u001f\u001fNTF-000139": [
-          "read_at",
-          "note",
-          "from_staff_id",
-          "action_id",
-          "batch_id"
-        ],
-        "\u001f\u001f\u001fNTF-000136": [
-          "read_at",
-          "note",
-          "from_staff_id",
-          "action_id",
-          "batch_id"
-        ],
-        "\u001f\u001f\u001fNTF-000106": [
-          "read_at",
-          "note",
-          "from_staff_id",
-          "action_id",
-          "batch_id"
-        ],
-        "\u001f\u001f\u001fNTF-000044": [
-          "read_at",
-          "note",
-          "from_staff_id",
-          "action_id",
-          "batch_id"
-        ],
-        "\u001f\u001f\u001fNTF-000020": [
-          "read_at",
-          "note",
-          "from_staff_id",
-          "action_id",
-          "batch_id"
-        ],
-        "\u001f\u001f\u001fNTF-000013": [
-          "read_at",
-          "note",
-          "from_staff_id",
-          "action_id",
-          "batch_id"
-        ],
-        "\u001f\u001f\u001fNTF-000318": [
-          "read_at",
-          "note",
-          "from_staff_id",
-          "action_id",
-          "batch_id"
-        ],
-        "\u001f\u001f\u001fNTF-000316": [
-          "read_at",
-          "note",
-          "from_staff_id",
-          "action_id",
-          "batch_id"
-        ],
-        "\u001f\u001f\u001fNTF-000275": [
-          "read_at",
-          "note",
-          "from_staff_id",
-          "action_id",
-          "batch_id"
-        ],
-        "\u001f\u001f\u001fNTF-000266": [
-          "read_at",
-          "note",
-          "from_staff_id",
-          "action_id",
-          "batch_id"
-        ],
-        "\u001f\u001f\u001fNTF-000255": [
-          "read_at",
-          "note",
-          "from_staff_id",
-          "action_id",
-          "batch_id"
-        ],
-        "\u001f\u001f\u001fNTF-000200": [
-          "read_at",
-          "note",
-          "from_staff_id",
-          "action_id",
-          "batch_id"
-        ],
-        "\u001f\u001f\u001fNTF-000159": [
-          "read_at",
-          "note",
-          "from_staff_id",
-          "action_id",
-          "batch_id"
-        ],
-        "\u001f\u001f\u001fNTF-000063": [
-          "read_at",
-          "note",
-          "from_staff_id",
-          "action_id",
-          "batch_id"
-        ],
-        "\u001f\u001f\u001fNTF-000009": [
-          "read_at",
-          "note",
-          "from_staff_id",
-          "action_id",
-          "batch_id"
-        ],
-        "\u001f\u001f\u001fNTF-000298": [
-          "read_at",
-          "note",
-          "from_staff_id",
-          "action_id",
-          "batch_id"
-        ],
-        "\u001f\u001f\u001fNTF-000265": [
-          "read_at",
-          "note",
-          "from_staff_id",
-          "action_id",
-          "batch_id"
-        ],
-        "\u001f\u001f\u001fNTF-000185": [
-          "read_at",
-          "note",
-          "from_staff_id",
-          "action_id",
-          "batch_id"
-        ],
-        "\u001f\u001f\u001fNTF-000153": [
-          "read_at",
-          "note",
-          "from_staff_id",
-          "action_id",
-          "batch_id"
-        ],
-        "\u001f\u001f\u001fNTF-000149": [
-          "read_at",
-          "note",
-          "from_staff_id",
-          "action_id",
-          "batch_id"
-        ],
-        "\u001f\u001f\u001fNTF-000118": [
-          "read_at",
-          "note",
-          "from_staff_id",
-          "action_id",
-          "batch_id"
-        ],
-        "\u001f\u001f\u001fNTF-000095": [
-          "read_at",
-          "note",
-          "from_staff_id",
-          "action_id",
-          "batch_id"
-        ],
-        "\u001f\u001f\u001fNTF-000061": [
-          "read_at",
-          "note",
-          "from_staff_id",
-          "action_id",
-          "batch_id"
-        ],
-        "\u001f\u001f\u001fNTF-000258": [
-          "read_at",
-          "note",
-          "from_staff_id",
-          "action_id",
-          "batch_id"
-        ],
-        "\u001f\u001f\u001fNTF-000180": [
-          "read_at",
-          "note",
-          "from_staff_id",
-          "action_id",
-          "batch_id"
-        ],
-        "\u001f\u001f\u001fNTF-000101": [
-          "read_at",
-          "note",
-          "from_staff_id",
-          "action_id",
-          "batch_id"
-        ],
-        "\u001f\u001f\u001fNTF-000080": [
-          "read_at",
-          "note",
-          "from_staff_id",
-          "action_id",
-          "batch_id"
-        ],
-        "\u001f\u001f\u001fNTF-000004": [
-          "read_at",
-          "note",
-          "from_staff_id",
-          "action_id",
-          "batch_id"
-        ],
-        "\u001f\u001f\u001fNTF-000326": [
-          "read_at",
-          "note",
-          "from_staff_id",
-          "action_id",
-          "batch_id"
-        ],
-        "\u001f\u001f\u001fNTF-000322": [
-          "read_at",
-          "note",
-          "from_staff_id",
-          "action_id",
-          "batch_id"
-        ],
-        "\u001f\u001f\u001fNTF-000263": [
-          "read_at",
-          "note",
-          "from_staff_id",
-          "action_id",
-          "batch_id"
-        ],
-        "\u001f\u001f\u001fNTF-000238": [
-          "read_at",
-          "note",
-          "from_staff_id",
-          "action_id",
-          "batch_id"
-        ],
-        "\u001f\u001f\u001fNTF-000186": [
-          "read_at",
-          "note",
-          "from_staff_id",
-          "action_id",
-          "batch_id"
-        ],
-        "\u001f\u001f\u001fNTF-000140": [
-          "read_at",
-          "note",
-          "from_staff_id",
-          "action_id",
-          "batch_id"
-        ],
-        "\u001f\u001f\u001fNTF-000096": [
-          "read_at",
-          "note",
-          "from_staff_id",
-          "action_id",
-          "batch_id"
-        ],
-        "\u001f\u001f\u001fNTF-000045": [
-          "read_at",
-          "note",
-          "from_staff_id",
-          "action_id",
-          "batch_id"
-        ],
-        "\u001f\u001f\u001fNTF-000021": [
-          "read_at",
-          "note",
-          "from_staff_id",
-          "action_id",
-          "batch_id"
-        ],
-        "\u001f\u001f\u001fNTF-000014": [
-          "read_at",
-          "note",
-          "from_staff_id",
-          "action_id",
-          "batch_id"
-        ],
-        "\u001f\u001f\u001fNTF-000319": [
-          "read_at",
-          "note",
-          "from_staff_id",
-          "action_id",
-          "batch_id"
-        ],
-        "\u001f\u001f\u001fNTF-000293": [
-          "read_at",
-          "note",
-          "from_staff_id",
-          "action_id",
-          "batch_id"
-        ],
-        "\u001f\u001f\u001fNTF-000276": [
-          "read_at",
-          "note",
-          "from_staff_id",
-          "action_id",
-          "batch_id"
-        ],
-        "\u001f\u001f\u001fNTF-000267": [
-          "read_at",
-          "note",
-          "from_staff_id",
-          "action_id",
-          "batch_id"
-        ],
-        "\u001f\u001f\u001fNTF-000196": [
-          "read_at",
-          "note",
-          "from_staff_id",
-          "action_id",
-          "batch_id"
-        ],
-        "\u001f\u001f\u001fNTF-000090": [
-          "read_at",
-          "note",
-          "from_staff_id",
-          "action_id",
-          "batch_id"
-        ],
-        "\u001f\u001f\u001fNTF-000075": [
-          "read_at",
-          "note",
-          "from_staff_id",
-          "action_id",
-          "batch_id"
-        ],
-        "\u001f\u001f\u001fNTF-000064": [
-          "read_at",
-          "note",
-          "from_staff_id",
-          "action_id",
-          "batch_id"
-        ],
-        "\u001f\u001f\u001fNTF-000010": [
-          "read_at",
-          "note",
-          "from_staff_id",
-          "action_id",
-          "batch_id"
-        ],
-        "\u001f\u001f\u001fNTF-000282": [
-          "read_at",
-          "note",
-          "from_staff_id",
-          "action_id",
-          "batch_id"
-        ],
-        "\u001f\u001f\u001fNTF-000154": [
-          "read_at",
-          "note",
-          "from_staff_id",
-          "action_id",
-          "batch_id"
-        ],
-        "\u001f\u001f\u001fNTF-000150": [
-          "read_at",
-          "note",
-          "from_staff_id",
-          "action_id",
-          "batch_id"
-        ],
-        "\u001f\u001f\u001fNTF-000119": [
-          "read_at",
-          "note",
-          "from_staff_id",
-          "action_id",
-          "batch_id"
-        ],
-        "\u001f\u001f\u001fNTF-000065": [
-          "read_at",
-          "note",
-          "from_staff_id",
-          "action_id",
-          "batch_id"
-        ],
-        "\u001f\u001f\u001fNTF-000022": [
-          "read_at",
-          "note",
-          "from_staff_id",
-          "action_id",
-          "batch_id"
-        ],
-        "\u001f\u001f\u001fNTF-000305": [
-          "read_at",
-          "note",
-          "from_staff_id",
-          "action_id",
-          "batch_id"
-        ],
-        "\u001f\u001f\u001fNTF-000241": [
-          "read_at",
-          "note",
-          "from_staff_id",
-          "action_id",
-          "batch_id"
-        ],
-        "\u001f\u001f\u001fNTF-000181": [
-          "read_at",
-          "note",
-          "from_staff_id",
-          "action_id",
-          "batch_id"
-        ],
-        "\u001f\u001f\u001fNTF-000155": [
-          "read_at",
-          "note",
-          "from_staff_id",
-          "action_id",
-          "batch_id"
-        ],
-        "\u001f\u001f\u001fNTF-000083": [
-          "read_at",
-          "note",
-          "from_staff_id",
-          "action_id",
-          "batch_id"
-        ],
-        "\u001f\u001f\u001fNTF-000081": [
-          "read_at",
-          "note",
-          "from_staff_id",
-          "action_id",
-          "batch_id"
-        ],
-        "\u001f\u001f\u001fNTF-000058": [
-          "read_at",
-          "note",
-          "from_staff_id",
-          "action_id",
-          "batch_id"
-        ],
-        "\u001f\u001f\u001fNTF-000005": [
-          "read_at",
-          "note",
-          "from_staff_id",
-          "action_id",
-          "batch_id"
-        ],
-        "\u001fRMT-2026H2-1\u001fSD02-1\u001fNTF-000465": [
-          "task_id",
-          "action_id"
-        ],
-        "\u001fRWS-2026H2-1\u001fSD01-1\u001fNTF-000452": [
-          "task_id",
-          "action_id"
-        ],
-        "\u001fRWS-2026H2-1\u001fSD01-1\u001fNTF-000444": [
-          "task_id",
-          "action_id"
-        ],
-        "\u001f\u001f\u001fNTF-000323": [
-          "read_at",
-          "note",
-          "from_staff_id",
-          "action_id",
-          "batch_id"
-        ],
-        "\u001f\u001f\u001fNTF-000285": [
-          "read_at",
-          "note",
-          "from_staff_id",
-          "action_id",
-          "batch_id"
-        ],
-        "\u001f\u001f\u001fNTF-000272": [
-          "read_at",
-          "note",
-          "from_staff_id",
-          "action_id",
-          "batch_id"
-        ],
-        "\u001f\u001f\u001fNTF-000264": [
-          "read_at",
-          "note",
-          "from_staff_id",
-          "action_id",
-          "batch_id"
-        ],
-        "\u001f\u001f\u001fNTF-000259": [
-          "read_at",
-          "note",
-          "from_staff_id",
-          "action_id",
-          "batch_id"
-        ],
-        "\u001f\u001f\u001fNTF-000234": [
-          "read_at",
-          "note",
-          "from_staff_id",
-          "action_id",
-          "batch_id"
-        ],
-        "\u001f\u001f\u001fNTF-000192": [
-          "read_at",
-          "note",
-          "from_staff_id",
-          "action_id",
-          "batch_id"
-        ],
-        "\u001f\u001f\u001fNTF-000187": [
-          "read_at",
-          "note",
-          "from_staff_id",
-          "action_id",
-          "batch_id"
-        ],
-        "\u001f\u001f\u001fNTF-000097": [
-          "read_at",
-          "note",
-          "from_staff_id",
-          "action_id",
-          "batch_id"
-        ],
-        "\u001f\u001f\u001fNTF-000046": [
-          "read_at",
-          "note",
-          "from_staff_id",
-          "action_id",
-          "batch_id"
-        ],
-        "\u001f\u001f\u001fNTF-000036": [
-          "read_at",
-          "note",
-          "from_staff_id",
-          "action_id",
-          "batch_id"
-        ],
-        "\u001f\u001f\u001fNTF-000015": [
-          "read_at",
-          "note",
-          "from_staff_id",
-          "action_id",
-          "batch_id"
-        ],
-        "\u001fRWS-2026H2-1\u001fSD01-1\u001fNTF-000449": [
-          "task_id",
-          "action_id"
-        ],
-        "\u001f\u001f\u001fNTF-000306": [
-          "read_at",
-          "note",
-          "from_staff_id",
-          "action_id",
-          "batch_id"
-        ],
-        "\u001f\u001f\u001fNTF-000294": [
-          "read_at",
-          "note",
-          "from_staff_id",
-          "action_id",
-          "batch_id"
-        ],
-        "\u001f\u001f\u001fNTF-000277": [
-          "read_at",
-          "note",
-          "from_staff_id",
-          "action_id",
-          "batch_id"
-        ],
-        "\u001f\u001f\u001fNTF-000247": [
-          "read_at",
-          "note",
-          "from_staff_id",
-          "action_id",
-          "batch_id"
-        ],
-        "\u001f\u001f\u001fNTF-000228": [
-          "read_at",
-          "note",
-          "from_staff_id",
-          "action_id",
-          "batch_id"
-        ],
-        "\u001f\u001f\u001fNTF-000091": [
-          "read_at",
-          "note",
-          "from_staff_id",
-          "action_id",
-          "batch_id"
-        ],
-        "\u001f\u001f\u001fNTF-000068": [
-          "read_at",
-          "note",
-          "from_staff_id",
-          "action_id",
-          "batch_id"
-        ],
-        "\u001f\u001f\u001fNTF-000042": [
-          "read_at",
-          "note",
-          "from_staff_id",
-          "action_id",
-          "batch_id"
-        ],
-        "\u001f\u001f\u001fNTF-000024": [
-          "read_at",
-          "note",
-          "from_staff_id",
-          "action_id",
-          "batch_id"
-        ],
-        "\u001f\u001f\u001fNTF-000011": [
-          "read_at",
-          "note",
-          "from_staff_id",
-          "action_id",
-          "batch_id"
-        ],
-        "\u001f\u001f\u001fNTF-000299": [
-          "read_at",
-          "note",
-          "from_staff_id",
-          "action_id",
-          "batch_id"
-        ],
-        "\u001f\u001f\u001fNTF-000151": [
-          "read_at",
-          "note",
-          "from_staff_id",
-          "action_id",
-          "batch_id"
-        ],
-        "\u001f\u001f\u001fNTF-000120": [
-          "read_at",
-          "note",
-          "from_staff_id",
-          "action_id",
-          "batch_id"
-        ],
-        "\u001f\u001f\u001fNTF-000107": [
-          "read_at",
-          "note",
-          "from_staff_id",
-          "action_id",
-          "batch_id"
-        ],
-        "\u001f\u001f\u001fNTF-000066": [
-          "read_at",
-          "note",
-          "from_staff_id",
-          "action_id",
-          "batch_id"
-        ],
-        "\u001fRWS-2026H2-1\u001fSD01-1\u001fNTF-000451": [
-          "task_id",
-          "action_id"
-        ],
-        "\u001fRWS-2026H2-1\u001fSD01-1\u001fNTF-000446": [
-          "task_id",
-          "action_id"
-        ],
-        "\u001f\u001f\u001fNTF-000271": [
-          "read_at",
-          "note",
-          "from_staff_id",
-          "action_id",
-          "batch_id"
-        ],
-        "\u001f\u001f\u001fNTF-000182": [
-          "read_at",
-          "note",
-          "from_staff_id",
-          "action_id",
-          "batch_id"
-        ],
-        "\u001f\u001f\u001fNTF-000084": [
-          "read_at",
-          "note",
-          "from_staff_id",
-          "action_id",
-          "batch_id"
-        ],
-        "\u001f\u001f\u001fNTF-000028": [
-          "read_at",
-          "note",
-          "from_staff_id",
-          "action_id",
-          "batch_id"
-        ],
-        "\u001f\u001f\u001fNTF-000006": [
-          "read_at",
-          "note",
-          "from_staff_id",
-          "action_id",
-          "batch_id"
-        ],
-        "\u001fRWS-2026H2-1\u001fSD01-1\u001fNTF-000443": [
-          "task_id",
-          "action_id"
-        ],
-        "\u001f\u001f\u001fNTF-000273": [
-          "read_at",
-          "note",
-          "from_staff_id",
-          "action_id",
-          "batch_id"
-        ],
-        "\u001f\u001f\u001fNTF-000260": [
-          "read_at",
-          "note",
-          "from_staff_id",
-          "action_id",
-          "batch_id"
-        ],
-        "\u001f\u001f\u001fNTF-000193": [
-          "read_at",
-          "note",
-          "from_staff_id",
-          "action_id",
-          "batch_id"
-        ],
-        "\u001f\u001f\u001fNTF-000177": [
-          "read_at",
-          "note",
-          "from_staff_id",
-          "action_id",
-          "batch_id"
-        ],
-        "\u001f\u001f\u001fNTF-000099": [
-          "read_at",
-          "note",
-          "from_staff_id",
-          "action_id",
-          "batch_id"
-        ],
-        "\u001f\u001f\u001fNTF-000037": [
-          "read_at",
-          "note",
-          "from_staff_id",
-          "action_id",
-          "batch_id"
-        ],
-        "\u001f\u001f\u001fNTF-000030": [
-          "read_at",
-          "note",
-          "from_staff_id",
-          "action_id",
-          "batch_id"
-        ],
-        "\u001fRWS-2026H2-1\u001fSD01-1\u001fNTF-000448": [
-          "task_id",
-          "action_id"
-        ],
-        "\u001f\u001f\u001fNTF-000295": [
-          "read_at",
-          "note",
-          "from_staff_id",
-          "action_id",
-          "batch_id"
-        ],
-        "\u001f\u001f\u001fNTF-000248": [
-          "read_at",
-          "note",
-          "from_staff_id",
-          "action_id",
-          "batch_id"
-        ],
-        "\u001f\u001f\u001fNTF-000243": [
-          "read_at",
-          "note",
-          "from_staff_id",
-          "action_id",
-          "batch_id"
-        ],
-        "\u001f\u001f\u001fNTF-000229": [
-          "read_at",
-          "note",
-          "from_staff_id",
-          "action_id",
-          "batch_id"
-        ],
-        "\u001f\u001f\u001fNTF-000092": [
-          "read_at",
-          "note",
-          "from_staff_id",
-          "action_id",
-          "batch_id"
-        ],
-        "\u001f\u001f\u001fNTF-000069": [
-          "read_at",
-          "note",
-          "from_staff_id",
-          "action_id",
-          "batch_id"
-        ],
-        "\u001f\u001f\u001fNTF-000052": [
-          "read_at",
-          "note",
-          "from_staff_id",
-          "action_id",
-          "batch_id"
-        ],
-        "\u001fRWS-2026H2-1\u001fSD01-1\u001fNTF-000442": [
-          "task_id",
-          "action_id"
-        ],
-        "\u001f\u001f\u001fNTF-000307": [
-          "read_at",
-          "note",
-          "from_staff_id",
-          "action_id",
-          "batch_id"
-        ],
-        "\u001f\u001f\u001fNTF-000289": [
-          "read_at",
-          "note",
-          "from_staff_id",
-          "action_id",
-          "batch_id"
-        ],
-        "\u001f\u001f\u001fNTF-000249": [
-          "read_at",
-          "note",
-          "from_staff_id",
-          "action_id",
-          "batch_id"
-        ],
-        "\u001f\u001f\u001fNTF-000235": [
-          "read_at",
-          "note",
-          "from_staff_id",
-          "action_id",
-          "batch_id"
-        ],
-        "\u001f\u001f\u001fNTF-000146": [
-          "read_at",
-          "note",
-          "from_staff_id",
-          "action_id",
-          "batch_id"
-        ],
-        "\u001f\u001f\u001fNTF-000108": [
-          "read_at",
-          "note",
-          "from_staff_id",
-          "action_id",
-          "batch_id"
-        ],
-        "\u001f\u001f\u001fNTF-000103": [
-          "read_at",
-          "note",
-          "from_staff_id",
-          "action_id",
-          "batch_id"
-        ],
-        "\u001f\u001f\u001fNTF-000076": [
-          "read_at",
-          "note",
-          "from_staff_id",
-          "action_id",
-          "batch_id"
-        ],
-        "\u001fRFC-2026H2-1\u001fSD02-1\u001fNTF-000459": [
-          "task_id",
-          "action_id"
-        ],
-        "\u001f\u001f\u001fNTF-000310": [
-          "read_at",
-          "note",
-          "from_staff_id",
-          "action_id",
-          "batch_id"
-        ],
-        "\u001f\u001f\u001fNTF-000290": [
-          "read_at",
-          "note",
-          "from_staff_id",
-          "action_id",
-          "batch_id"
-        ],
-        "\u001f\u001f\u001fNTF-000220": [
-          "read_at",
-          "note",
-          "from_staff_id",
-          "action_id",
-          "batch_id"
-        ],
-        "\u001f\u001f\u001fNTF-000029": [
-          "read_at",
-          "note",
-          "from_staff_id",
-          "action_id",
-          "batch_id"
-        ],
-        "\u001fRFC-2026H2-1\u001fSD02-1\u001fNTF-000458": [
-          "task_id",
-          "action_id"
-        ],
-        "\u001f\u001f\u001fNTF-000330": [
-          "read_at",
-          "note",
-          "from_staff_id",
-          "action_id",
-          "batch_id"
-        ],
-        "\u001f\u001f\u001fNTF-000314": [
-          "read_at",
-          "note",
-          "from_staff_id",
-          "action_id",
-          "batch_id"
-        ],
-        "\u001f\u001f\u001fNTF-000261": [
-          "read_at",
-          "note",
-          "from_staff_id",
-          "action_id",
-          "batch_id"
-        ],
-        "\u001f\u001f\u001fNTF-000194": [
-          "read_at",
-          "note",
-          "from_staff_id",
-          "action_id",
-          "batch_id"
-        ],
-        "\u001f\u001f\u001fNTF-000178": [
-          "read_at",
-          "note",
-          "from_staff_id",
-          "action_id",
-          "batch_id"
-        ],
-        "\u001f\u001f\u001fNTF-000100": [
-          "read_at",
-          "note",
-          "from_staff_id",
-          "action_id",
-          "batch_id"
-        ],
-        "\u001f\u001f\u001fNTF-000086": [
-          "read_at",
-          "note",
-          "from_staff_id",
-          "action_id",
-          "batch_id"
-        ],
-        "\u001f\u001f\u001fNTF-000038": [
-          "read_at",
-          "note",
-          "from_staff_id",
-          "action_id",
-          "batch_id"
-        ],
-        "\u001f\u001f\u001fNTF-000001": [
-          "read_at",
-          "note",
-          "from_staff_id",
-          "action_id",
-          "batch_id"
-        ],
-        "\u001fRMT-2026H2-1\u001fSD02-1\u001fNTF-000466": [
-          "task_id",
-          "action_id"
-        ],
-        "\u001fRWS-2026H2-1\u001fSD01-1\u001fNTF-000454": [
-          "task_id",
-          "action_id"
-        ],
-        "\u001fRWS-2026H2-1\u001fSD01-1\u001fNTF-000445": [
-          "task_id",
-          "action_id"
-        ],
-        "\u001f\u001f\u001fNTF-000334": [
-          "read_at",
-          "note",
-          "from_staff_id",
-          "action_id",
-          "batch_id"
-        ],
-        "\u001f\u001f\u001fNTF-000230": [
-          "read_at",
-          "note",
-          "from_staff_id",
-          "action_id",
-          "batch_id"
-        ],
         "\u001f\u001f\u001fNTF-000131": [
-          "read_at",
-          "note",
-          "from_staff_id",
-          "action_id",
-          "batch_id"
-        ],
-        "\u001f\u001f\u001fNTF-000070": [
-          "read_at",
-          "note",
-          "from_staff_id",
-          "action_id",
-          "batch_id"
-        ],
-        "\u001fRWS-2026H2-1\u001fSD01-1\u001fNTF-000441": [
-          "task_id",
-          "action_id"
-        ],
-        "\u001f\u001f\u001fNTF-000217": [
-          "read_at",
-          "note",
-          "from_staff_id",
-          "action_id",
-          "batch_id"
-        ],
-        "\u001f\u001f\u001fNTF-000205": [
-          "read_at",
-          "note",
-          "from_staff_id",
-          "action_id",
-          "batch_id"
-        ],
-        "\u001f\u001f\u001fNTF-000104": [
-          "read_at",
-          "note",
-          "from_staff_id",
-          "action_id",
-          "batch_id"
-        ],
-        "\u001f\u001f\u001fNTF-000077": [
-          "read_at",
-          "note",
-          "from_staff_id",
-          "action_id",
-          "batch_id"
-        ],
-        "\u001fRFC-2026H2-1\u001fSD02-1\u001fNTF-000461": [
-          "task_id",
-          "action_id"
-        ],
-        "\u001fRWS-2026H2-1\u001fSD01-1\u001fNTF-000440": [
-          "task_id",
-          "action_id"
-        ],
-        "\u001f\u001f\u001fNTF-000221": [
-          "read_at",
-          "note",
-          "from_staff_id",
-          "action_id",
-          "batch_id"
-        ],
-        "\u001f\u001f\u001fNTF-000213": [
-          "read_at",
-          "note",
-          "from_staff_id",
-          "action_id",
-          "batch_id"
-        ],
-        "\u001f\u001f\u001fNTF-000176": [
-          "read_at",
-          "note",
-          "from_staff_id",
-          "action_id",
-          "batch_id"
-        ],
-        "\u001f\u001f\u001fNTF-000144": [
-          "read_at",
-          "note",
-          "from_staff_id",
-          "action_id",
-          "batch_id"
-        ],
-        "\u001f\u001f\u001fNTF-000072": [
-          "read_at",
-          "note",
-          "from_staff_id",
-          "action_id",
-          "batch_id"
-        ],
-        "\u001f\u001f\u001fNTF-000053": [
-          "read_at",
-          "note",
-          "from_staff_id",
-          "action_id",
-          "batch_id"
-        ],
-        "\u001fRFC-2026H2-1\u001fSD02-1\u001fNTF-000460": [
-          "task_id",
-          "action_id"
-        ],
-        "\u001fRWS-2026H2-1\u001fSD01-1\u001fNTF-000447": [
-          "task_id",
-          "action_id"
-        ],
-        "\u001f\u001f\u001fNTF-000331": [
-          "read_at",
-          "note",
-          "from_staff_id",
-          "action_id",
-          "batch_id"
-        ],
-        "\u001f\u001f\u001fNTF-000311": [
-          "read_at",
-          "note",
-          "from_staff_id",
-          "action_id",
-          "batch_id"
-        ],
-        "\u001f\u001f\u001fNTF-000189": [
-          "read_at",
-          "note",
-          "from_staff_id",
-          "action_id",
-          "batch_id"
-        ],
-        "\u001f\u001f\u001fNTF-000170": [
-          "read_at",
-          "note",
-          "from_staff_id",
-          "action_id",
-          "batch_id"
-        ],
-        "\u001f\u001f\u001fNTF-000062": [
-          "read_at",
-          "note",
-          "from_staff_id",
-          "action_id",
-          "batch_id"
-        ],
-        "\u001fRFC-2026H2-1\u001fSD02-1\u001fNTF-000456": [
-          "task_id",
-          "action_id"
-        ],
-        "\u001f\u001f\u001fNTF-000287": [
-          "read_at",
-          "note",
-          "from_staff_id",
-          "action_id",
-          "batch_id"
-        ],
-        "\u001f\u001f\u001fNTF-000225": [
-          "read_at",
-          "note",
-          "from_staff_id",
-          "action_id",
-          "batch_id"
-        ],
-        "\u001f\u001f\u001fNTF-000171": [
-          "read_at",
-          "note",
-          "from_staff_id",
-          "action_id",
-          "batch_id"
-        ],
-        "\u001f\u001f\u001fNTF-000147": [
           "read_at",
           "note",
           "from_staff_id",
@@ -126413,176 +125862,7 @@
           "action_id",
           "batch_id"
         ],
-        "\u001fRFC-2026H2-1\u001fSD02-1\u001fNTF-000457": [
-          "task_id",
-          "action_id"
-        ],
-        "\u001fRWS-2026H2-1\u001fSD01-1\u001fNTF-000450": [
-          "task_id",
-          "action_id"
-        ],
-        "\u001f\u001f\u001fNTF-000279": [
-          "read_at",
-          "note",
-          "from_staff_id",
-          "action_id",
-          "batch_id"
-        ],
-        "\u001f\u001f\u001fNTF-000218": [
-          "read_at",
-          "note",
-          "from_staff_id",
-          "action_id",
-          "batch_id"
-        ],
-        "\u001f\u001f\u001fNTF-000212": [
-          "read_at",
-          "note",
-          "from_staff_id",
-          "action_id",
-          "batch_id"
-        ],
-        "\u001f\u001f\u001fNTF-000206": [
-          "read_at",
-          "note",
-          "from_staff_id",
-          "action_id",
-          "batch_id"
-        ],
-        "\u001f\u001f\u001fNTF-000105": [
-          "read_at",
-          "note",
-          "from_staff_id",
-          "action_id",
-          "batch_id"
-        ],
-        "\u001f\u001f\u001fNTF-000320": [
-          "read_at",
-          "note",
-          "from_staff_id",
-          "action_id",
-          "batch_id"
-        ],
-        "\u001f\u001f\u001fNTF-000303": [
-          "read_at",
-          "note",
-          "from_staff_id",
-          "action_id",
-          "batch_id"
-        ],
-        "\u001f\u001f\u001fNTF-000214": [
-          "read_at",
-          "note",
-          "from_staff_id",
-          "action_id",
-          "batch_id"
-        ],
-        "\u001f\u001f\u001fNTF-000073": [
-          "read_at",
-          "note",
-          "from_staff_id",
-          "action_id",
-          "batch_id"
-        ],
-        "\u001f\u001f\u001fNTF-000312": [
-          "read_at",
-          "note",
-          "from_staff_id",
-          "action_id",
-          "batch_id"
-        ],
-        "\u001f\u001f\u001fNTF-000237": [
-          "read_at",
-          "note",
-          "from_staff_id",
-          "action_id",
-          "batch_id"
-        ],
-        "\u001f\u001f\u001fNTF-000175": [
-          "read_at",
-          "note",
-          "from_staff_id",
-          "action_id",
-          "batch_id"
-        ],
-        "\u001f\u001f\u001fNTF-000033": [
-          "read_at",
-          "note",
-          "from_staff_id",
-          "action_id",
-          "batch_id"
-        ],
-        "\u001f\u001f\u001fNTF-000018": [
-          "read_at",
-          "note",
-          "from_staff_id",
-          "action_id",
-          "batch_id"
-        ],
-        "\u001f\u001f\u001fNTF-000007": [
-          "read_at",
-          "note",
-          "from_staff_id",
-          "action_id",
-          "batch_id"
-        ],
-        "\u001f\u001f\u001fNTF-000288": [
-          "read_at",
-          "note",
-          "from_staff_id",
-          "action_id",
-          "batch_id"
-        ],
-        "\u001f\u001f\u001fNTF-000280": [
-          "read_at",
-          "note",
-          "from_staff_id",
-          "action_id",
-          "batch_id"
-        ],
-        "\u001f\u001f\u001fNTF-000233": [
-          "read_at",
-          "note",
-          "from_staff_id",
-          "action_id",
-          "batch_id"
-        ],
-        "\u001f\u001f\u001fNTF-000226": [
-          "read_at",
-          "note",
-          "from_staff_id",
-          "action_id",
-          "batch_id"
-        ],
         "\u001f\u001f\u001fNTF-000133": [
-          "read_at",
-          "note",
-          "from_staff_id",
-          "action_id",
-          "batch_id"
-        ],
-        "\u001f\u001f\u001fNTF-000329": [
-          "read_at",
-          "note",
-          "from_staff_id",
-          "action_id",
-          "batch_id"
-        ],
-        "\u001f\u001f\u001fNTF-000209": [
-          "read_at",
-          "note",
-          "from_staff_id",
-          "action_id",
-          "batch_id"
-        ],
-        "\u001f\u001f\u001fNTF-000167": [
-          "read_at",
-          "note",
-          "from_staff_id",
-          "action_id",
-          "batch_id"
-        ],
-        "\u001f\u001f\u001fNTF-000166": [
           "read_at",
           "note",
           "from_staff_id",
@@ -126596,63 +125876,70 @@
           "action_id",
           "batch_id"
         ],
-        "\u001f\u001f\u001fNTF-000093": [
+        "\u001f\u001f\u001fNTF-000135": [
           "read_at",
           "note",
           "from_staff_id",
           "action_id",
           "batch_id"
         ],
-        "\u001f\u001f\u001fNTF-000313": [
+        "\u001f\u001f\u001fNTF-000136": [
           "read_at",
           "note",
           "from_staff_id",
           "action_id",
           "batch_id"
         ],
-        "\u001f\u001f\u001fNTF-000003": [
+        "\u001f\u001f\u001fNTF-000137": [
           "read_at",
           "note",
           "from_staff_id",
           "action_id",
           "batch_id"
         ],
-        "\u001f\u001f\u001fNTF-000327": [
+        "\u001f\u001f\u001fNTF-000138": [
           "read_at",
           "note",
           "from_staff_id",
           "action_id",
           "batch_id"
         ],
-        "\u001f\u001f\u001fNTF-000123": [
+        "\u001f\u001f\u001fNTF-000139": [
           "read_at",
           "note",
           "from_staff_id",
           "action_id",
           "batch_id"
         ],
-        "\u001f\u001f\u001fNTF-000296": [
+        "\u001f\u001f\u001fNTF-000140": [
           "read_at",
           "note",
           "from_staff_id",
           "action_id",
           "batch_id"
         ],
-        "\u001f\u001f\u001fNTF-000300": [
+        "\u001f\u001f\u001fNTF-000141": [
           "read_at",
           "note",
           "from_staff_id",
           "action_id",
           "batch_id"
         ],
-        "\u001f\u001f\u001fNTF-000121": [
+        "\u001f\u001f\u001fNTF-000142": [
           "read_at",
           "note",
           "from_staff_id",
           "action_id",
           "batch_id"
         ],
-        "\u001f\u001f\u001fNTF-000195": [
+        "\u001f\u001f\u001fNTF-000143": [
+          "read_at",
+          "note",
+          "from_staff_id",
+          "action_id",
+          "batch_id"
+        ],
+        "\u001f\u001f\u001fNTF-000144": [
           "read_at",
           "note",
           "from_staff_id",
@@ -126666,28 +125953,112 @@
           "action_id",
           "batch_id"
         ],
-        "\u001f\u001f\u001fNTF-000328": [
+        "\u001f\u001f\u001fNTF-000146": [
           "read_at",
           "note",
           "from_staff_id",
           "action_id",
           "batch_id"
         ],
-        "\u001f\u001f\u001fNTF-000245": [
+        "\u001f\u001f\u001fNTF-000147": [
           "read_at",
           "note",
           "from_staff_id",
           "action_id",
           "batch_id"
         ],
-        "\u001f\u001f\u001fNTF-000232": [
+        "\u001f\u001f\u001fNTF-000148": [
           "read_at",
           "note",
           "from_staff_id",
           "action_id",
           "batch_id"
         ],
-        "\u001f\u001f\u001fNTF-000246": [
+        "\u001f\u001f\u001fNTF-000149": [
+          "read_at",
+          "note",
+          "from_staff_id",
+          "action_id",
+          "batch_id"
+        ],
+        "\u001f\u001f\u001fNTF-000150": [
+          "read_at",
+          "note",
+          "from_staff_id",
+          "action_id",
+          "batch_id"
+        ],
+        "\u001f\u001f\u001fNTF-000151": [
+          "read_at",
+          "note",
+          "from_staff_id",
+          "action_id",
+          "batch_id"
+        ],
+        "\u001f\u001f\u001fNTF-000152": [
+          "read_at",
+          "note",
+          "from_staff_id",
+          "action_id",
+          "batch_id"
+        ],
+        "\u001f\u001f\u001fNTF-000153": [
+          "read_at",
+          "note",
+          "from_staff_id",
+          "action_id",
+          "batch_id"
+        ],
+        "\u001f\u001f\u001fNTF-000154": [
+          "read_at",
+          "note",
+          "from_staff_id",
+          "action_id",
+          "batch_id"
+        ],
+        "\u001f\u001f\u001fNTF-000155": [
+          "read_at",
+          "note",
+          "from_staff_id",
+          "action_id",
+          "batch_id"
+        ],
+        "\u001f\u001f\u001fNTF-000156": [
+          "read_at",
+          "note",
+          "from_staff_id",
+          "action_id",
+          "batch_id"
+        ],
+        "\u001f\u001f\u001fNTF-000157": [
+          "read_at",
+          "note",
+          "from_staff_id",
+          "action_id",
+          "batch_id"
+        ],
+        "\u001f\u001f\u001fNTF-000158": [
+          "read_at",
+          "note",
+          "from_staff_id",
+          "action_id",
+          "batch_id"
+        ],
+        "\u001f\u001f\u001fNTF-000159": [
+          "read_at",
+          "note",
+          "from_staff_id",
+          "action_id",
+          "batch_id"
+        ],
+        "\u001f\u001f\u001fNTF-000160": [
+          "read_at",
+          "note",
+          "from_staff_id",
+          "action_id",
+          "batch_id"
+        ],
+        "\u001f\u001f\u001fNTF-000164": [
           "read_at",
           "note",
           "from_staff_id",
@@ -126701,26 +126072,14 @@
           "action_id",
           "batch_id"
         ],
-        "\u001f\u001f\u001fNTF-000315": [
+        "\u001f\u001f\u001fNTF-000166": [
           "read_at",
           "note",
           "from_staff_id",
           "action_id",
           "batch_id"
         ],
-        "\u001fBAT-003\u001fSD13-1\u001fNTF-000481": [
-          "read_at",
-          "note",
-          "action_id"
-        ],
-        "\u001f\u001f\u001fNTF-000309": [
-          "read_at",
-          "note",
-          "from_staff_id",
-          "action_id",
-          "batch_id"
-        ],
-        "\u001f\u001f\u001fNTF-000302": [
+        "\u001f\u001f\u001fNTF-000167": [
           "read_at",
           "note",
           "from_staff_id",
@@ -126734,35 +126093,35 @@
           "action_id",
           "batch_id"
         ],
-        "\u001f\u001f\u001fNTF-000116": [
+        "\u001f\u001f\u001fNTF-000169": [
           "read_at",
           "note",
           "from_staff_id",
           "action_id",
           "batch_id"
         ],
-        "\u001f\u001f\u001fNTF-000051": [
+        "\u001f\u001f\u001fNTF-000170": [
           "read_at",
           "note",
           "from_staff_id",
           "action_id",
           "batch_id"
         ],
-        "\u001f\u001f\u001fNTF-000304": [
+        "\u001f\u001f\u001fNTF-000171": [
           "read_at",
           "note",
           "from_staff_id",
           "action_id",
           "batch_id"
         ],
-        "\u001f\u001f\u001fNTF-000283": [
+        "\u001f\u001f\u001fNTF-000172": [
           "read_at",
           "note",
           "from_staff_id",
           "action_id",
           "batch_id"
         ],
-        "\u001f\u001f\u001fNTF-000188": [
+        "\u001f\u001f\u001fNTF-000173": [
           "read_at",
           "note",
           "from_staff_id",
@@ -126776,6 +126135,293 @@
           "action_id",
           "batch_id"
         ],
+        "\u001f\u001f\u001fNTF-000175": [
+          "read_at",
+          "note",
+          "from_staff_id",
+          "action_id",
+          "batch_id"
+        ],
+        "\u001f\u001f\u001fNTF-000176": [
+          "read_at",
+          "note",
+          "from_staff_id",
+          "action_id",
+          "batch_id"
+        ],
+        "\u001f\u001f\u001fNTF-000177": [
+          "read_at",
+          "note",
+          "from_staff_id",
+          "action_id",
+          "batch_id"
+        ],
+        "\u001f\u001f\u001fNTF-000178": [
+          "read_at",
+          "note",
+          "from_staff_id",
+          "action_id",
+          "batch_id"
+        ],
+        "\u001f\u001f\u001fNTF-000179": [
+          "read_at",
+          "note",
+          "from_staff_id",
+          "action_id",
+          "batch_id"
+        ],
+        "\u001f\u001f\u001fNTF-000180": [
+          "read_at",
+          "note",
+          "from_staff_id",
+          "action_id",
+          "batch_id"
+        ],
+        "\u001f\u001f\u001fNTF-000181": [
+          "read_at",
+          "note",
+          "from_staff_id",
+          "action_id",
+          "batch_id"
+        ],
+        "\u001f\u001f\u001fNTF-000182": [
+          "read_at",
+          "note",
+          "from_staff_id",
+          "action_id",
+          "batch_id"
+        ],
+        "\u001f\u001f\u001fNTF-000183": [
+          "read_at",
+          "note",
+          "from_staff_id",
+          "action_id",
+          "batch_id"
+        ],
+        "\u001f\u001f\u001fNTF-000184": [
+          "read_at",
+          "note",
+          "from_staff_id",
+          "action_id",
+          "batch_id"
+        ],
+        "\u001f\u001f\u001fNTF-000185": [
+          "read_at",
+          "note",
+          "from_staff_id",
+          "action_id",
+          "batch_id"
+        ],
+        "\u001f\u001f\u001fNTF-000186": [
+          "read_at",
+          "note",
+          "from_staff_id",
+          "action_id",
+          "batch_id"
+        ],
+        "\u001f\u001f\u001fNTF-000187": [
+          "read_at",
+          "note",
+          "from_staff_id",
+          "action_id",
+          "batch_id"
+        ],
+        "\u001f\u001f\u001fNTF-000188": [
+          "read_at",
+          "note",
+          "from_staff_id",
+          "action_id",
+          "batch_id"
+        ],
+        "\u001f\u001f\u001fNTF-000189": [
+          "read_at",
+          "note",
+          "from_staff_id",
+          "action_id",
+          "batch_id"
+        ],
+        "\u001f\u001f\u001fNTF-000191": [
+          "read_at",
+          "note",
+          "from_staff_id",
+          "action_id",
+          "batch_id"
+        ],
+        "\u001f\u001f\u001fNTF-000192": [
+          "read_at",
+          "note",
+          "from_staff_id",
+          "action_id",
+          "batch_id"
+        ],
+        "\u001f\u001f\u001fNTF-000193": [
+          "read_at",
+          "note",
+          "from_staff_id",
+          "action_id",
+          "batch_id"
+        ],
+        "\u001f\u001f\u001fNTF-000194": [
+          "read_at",
+          "note",
+          "from_staff_id",
+          "action_id",
+          "batch_id"
+        ],
+        "\u001f\u001f\u001fNTF-000195": [
+          "read_at",
+          "note",
+          "from_staff_id",
+          "action_id",
+          "batch_id"
+        ],
+        "\u001f\u001f\u001fNTF-000196": [
+          "read_at",
+          "note",
+          "from_staff_id",
+          "action_id",
+          "batch_id"
+        ],
+        "\u001f\u001f\u001fNTF-000199": [
+          "read_at",
+          "note",
+          "from_staff_id",
+          "action_id",
+          "batch_id"
+        ],
+        "\u001f\u001f\u001fNTF-000200": [
+          "read_at",
+          "note",
+          "from_staff_id",
+          "action_id",
+          "batch_id"
+        ],
+        "\u001f\u001f\u001fNTF-000204": [
+          "read_at",
+          "note",
+          "from_staff_id",
+          "action_id",
+          "batch_id"
+        ],
+        "\u001f\u001f\u001fNTF-000205": [
+          "read_at",
+          "note",
+          "from_staff_id",
+          "action_id",
+          "batch_id"
+        ],
+        "\u001f\u001f\u001fNTF-000206": [
+          "read_at",
+          "note",
+          "from_staff_id",
+          "action_id",
+          "batch_id"
+        ],
+        "\u001f\u001f\u001fNTF-000207": [
+          "read_at",
+          "note",
+          "from_staff_id",
+          "action_id",
+          "batch_id"
+        ],
+        "\u001f\u001f\u001fNTF-000208": [
+          "read_at",
+          "note",
+          "from_staff_id",
+          "action_id",
+          "batch_id"
+        ],
+        "\u001f\u001f\u001fNTF-000209": [
+          "read_at",
+          "note",
+          "from_staff_id",
+          "action_id",
+          "batch_id"
+        ],
+        "\u001f\u001f\u001fNTF-000210": [
+          "read_at",
+          "note",
+          "from_staff_id",
+          "action_id",
+          "batch_id"
+        ],
+        "\u001f\u001f\u001fNTF-000211": [
+          "read_at",
+          "note",
+          "from_staff_id",
+          "action_id",
+          "batch_id"
+        ],
+        "\u001f\u001f\u001fNTF-000212": [
+          "read_at",
+          "note",
+          "from_staff_id",
+          "action_id",
+          "batch_id"
+        ],
+        "\u001f\u001f\u001fNTF-000213": [
+          "read_at",
+          "note",
+          "from_staff_id",
+          "action_id",
+          "batch_id"
+        ],
+        "\u001f\u001f\u001fNTF-000214": [
+          "read_at",
+          "note",
+          "from_staff_id",
+          "action_id",
+          "batch_id"
+        ],
+        "\u001f\u001f\u001fNTF-000215": [
+          "read_at",
+          "note",
+          "from_staff_id",
+          "action_id",
+          "batch_id"
+        ],
+        "\u001f\u001f\u001fNTF-000216": [
+          "read_at",
+          "note",
+          "from_staff_id",
+          "action_id",
+          "batch_id"
+        ],
+        "\u001f\u001f\u001fNTF-000217": [
+          "read_at",
+          "note",
+          "from_staff_id",
+          "action_id",
+          "batch_id"
+        ],
+        "\u001f\u001f\u001fNTF-000218": [
+          "read_at",
+          "note",
+          "from_staff_id",
+          "action_id",
+          "batch_id"
+        ],
+        "\u001f\u001f\u001fNTF-000219": [
+          "read_at",
+          "note",
+          "from_staff_id",
+          "action_id",
+          "batch_id"
+        ],
+        "\u001f\u001f\u001fNTF-000220": [
+          "read_at",
+          "note",
+          "from_staff_id",
+          "action_id",
+          "batch_id"
+        ],
+        "\u001f\u001f\u001fNTF-000221": [
+          "read_at",
+          "note",
+          "from_staff_id",
+          "action_id",
+          "batch_id"
+        ],
         "\u001f\u001f\u001fNTF-000222": [
           "read_at",
           "note",
@@ -126783,14 +126429,455 @@
           "action_id",
           "batch_id"
         ],
-        "\u001f\u001f\u001fNTF-000124": [
+        "\u001f\u001f\u001fNTF-000223": [
           "read_at",
           "note",
           "from_staff_id",
           "action_id",
           "batch_id"
         ],
-        "\u001f\u001f\u001fNTF-000292": [
+        "\u001f\u001f\u001fNTF-000224": [
+          "read_at",
+          "note",
+          "from_staff_id",
+          "action_id",
+          "batch_id"
+        ],
+        "\u001f\u001f\u001fNTF-000225": [
+          "read_at",
+          "note",
+          "from_staff_id",
+          "action_id",
+          "batch_id"
+        ],
+        "\u001f\u001f\u001fNTF-000226": [
+          "read_at",
+          "note",
+          "from_staff_id",
+          "action_id",
+          "batch_id"
+        ],
+        "\u001f\u001f\u001fNTF-000227": [
+          "read_at",
+          "note",
+          "from_staff_id",
+          "action_id",
+          "batch_id"
+        ],
+        "\u001f\u001f\u001fNTF-000228": [
+          "read_at",
+          "note",
+          "from_staff_id",
+          "action_id",
+          "batch_id"
+        ],
+        "\u001f\u001f\u001fNTF-000229": [
+          "read_at",
+          "note",
+          "from_staff_id",
+          "action_id",
+          "batch_id"
+        ],
+        "\u001f\u001f\u001fNTF-000230": [
+          "read_at",
+          "note",
+          "from_staff_id",
+          "action_id",
+          "batch_id"
+        ],
+        "\u001f\u001f\u001fNTF-000231": [
+          "read_at",
+          "note",
+          "from_staff_id",
+          "action_id",
+          "batch_id"
+        ],
+        "\u001f\u001f\u001fNTF-000232": [
+          "read_at",
+          "note",
+          "from_staff_id",
+          "action_id",
+          "batch_id"
+        ],
+        "\u001f\u001f\u001fNTF-000233": [
+          "read_at",
+          "note",
+          "from_staff_id",
+          "action_id",
+          "batch_id"
+        ],
+        "\u001f\u001f\u001fNTF-000234": [
+          "read_at",
+          "note",
+          "from_staff_id",
+          "action_id",
+          "batch_id"
+        ],
+        "\u001f\u001f\u001fNTF-000235": [
+          "read_at",
+          "note",
+          "from_staff_id",
+          "action_id",
+          "batch_id"
+        ],
+        "\u001f\u001f\u001fNTF-000236": [
+          "read_at",
+          "note",
+          "from_staff_id",
+          "action_id",
+          "batch_id"
+        ],
+        "\u001f\u001f\u001fNTF-000237": [
+          "read_at",
+          "note",
+          "from_staff_id",
+          "action_id",
+          "batch_id"
+        ],
+        "\u001f\u001f\u001fNTF-000238": [
+          "read_at",
+          "note",
+          "from_staff_id",
+          "action_id",
+          "batch_id"
+        ],
+        "\u001f\u001f\u001fNTF-000239": [
+          "read_at",
+          "note",
+          "from_staff_id",
+          "action_id",
+          "batch_id"
+        ],
+        "\u001f\u001f\u001fNTF-000240": [
+          "read_at",
+          "note",
+          "from_staff_id",
+          "action_id",
+          "batch_id"
+        ],
+        "\u001f\u001f\u001fNTF-000241": [
+          "read_at",
+          "note",
+          "from_staff_id",
+          "action_id",
+          "batch_id"
+        ],
+        "\u001f\u001f\u001fNTF-000242": [
+          "read_at",
+          "note",
+          "from_staff_id",
+          "action_id",
+          "batch_id"
+        ],
+        "\u001f\u001f\u001fNTF-000243": [
+          "read_at",
+          "note",
+          "from_staff_id",
+          "action_id",
+          "batch_id"
+        ],
+        "\u001f\u001f\u001fNTF-000244": [
+          "read_at",
+          "note",
+          "from_staff_id",
+          "action_id",
+          "batch_id"
+        ],
+        "\u001f\u001f\u001fNTF-000245": [
+          "read_at",
+          "note",
+          "from_staff_id",
+          "action_id",
+          "batch_id"
+        ],
+        "\u001f\u001f\u001fNTF-000246": [
+          "read_at",
+          "note",
+          "from_staff_id",
+          "action_id",
+          "batch_id"
+        ],
+        "\u001f\u001f\u001fNTF-000247": [
+          "read_at",
+          "note",
+          "from_staff_id",
+          "action_id",
+          "batch_id"
+        ],
+        "\u001f\u001f\u001fNTF-000248": [
+          "read_at",
+          "note",
+          "from_staff_id",
+          "action_id",
+          "batch_id"
+        ],
+        "\u001f\u001f\u001fNTF-000249": [
+          "read_at",
+          "note",
+          "from_staff_id",
+          "action_id",
+          "batch_id"
+        ],
+        "\u001f\u001f\u001fNTF-000250": [
+          "read_at",
+          "note",
+          "from_staff_id",
+          "action_id",
+          "batch_id"
+        ],
+        "\u001f\u001f\u001fNTF-000251": [
+          "read_at",
+          "note",
+          "from_staff_id",
+          "action_id",
+          "batch_id"
+        ],
+        "\u001f\u001f\u001fNTF-000252": [
+          "read_at",
+          "note",
+          "from_staff_id",
+          "action_id",
+          "batch_id"
+        ],
+        "\u001f\u001f\u001fNTF-000253": [
+          "read_at",
+          "note",
+          "from_staff_id",
+          "action_id",
+          "batch_id"
+        ],
+        "\u001f\u001f\u001fNTF-000255": [
+          "read_at",
+          "note",
+          "from_staff_id",
+          "action_id",
+          "batch_id"
+        ],
+        "\u001f\u001f\u001fNTF-000258": [
+          "read_at",
+          "note",
+          "from_staff_id",
+          "action_id",
+          "batch_id"
+        ],
+        "\u001f\u001f\u001fNTF-000259": [
+          "read_at",
+          "note",
+          "from_staff_id",
+          "action_id",
+          "batch_id"
+        ],
+        "\u001f\u001f\u001fNTF-000260": [
+          "read_at",
+          "note",
+          "from_staff_id",
+          "action_id",
+          "batch_id"
+        ],
+        "\u001f\u001f\u001fNTF-000261": [
+          "read_at",
+          "note",
+          "from_staff_id",
+          "action_id",
+          "batch_id"
+        ],
+        "\u001f\u001f\u001fNTF-000262": [
+          "read_at",
+          "note",
+          "from_staff_id",
+          "action_id",
+          "batch_id"
+        ],
+        "\u001f\u001f\u001fNTF-000263": [
+          "read_at",
+          "note",
+          "from_staff_id",
+          "action_id",
+          "batch_id"
+        ],
+        "\u001f\u001f\u001fNTF-000264": [
+          "read_at",
+          "note",
+          "from_staff_id",
+          "action_id",
+          "batch_id"
+        ],
+        "\u001f\u001f\u001fNTF-000265": [
+          "read_at",
+          "note",
+          "from_staff_id",
+          "action_id",
+          "batch_id"
+        ],
+        "\u001f\u001f\u001fNTF-000266": [
+          "read_at",
+          "note",
+          "from_staff_id",
+          "action_id",
+          "batch_id"
+        ],
+        "\u001f\u001f\u001fNTF-000267": [
+          "read_at",
+          "note",
+          "from_staff_id",
+          "action_id",
+          "batch_id"
+        ],
+        "\u001f\u001f\u001fNTF-000268": [
+          "read_at",
+          "note",
+          "from_staff_id",
+          "action_id",
+          "batch_id"
+        ],
+        "\u001f\u001f\u001fNTF-000269": [
+          "read_at",
+          "note",
+          "from_staff_id",
+          "action_id",
+          "batch_id"
+        ],
+        "\u001f\u001f\u001fNTF-000270": [
+          "read_at",
+          "note",
+          "from_staff_id",
+          "action_id",
+          "batch_id"
+        ],
+        "\u001f\u001f\u001fNTF-000271": [
+          "read_at",
+          "note",
+          "from_staff_id",
+          "action_id",
+          "batch_id"
+        ],
+        "\u001f\u001f\u001fNTF-000272": [
+          "read_at",
+          "note",
+          "from_staff_id",
+          "action_id",
+          "batch_id"
+        ],
+        "\u001f\u001f\u001fNTF-000273": [
+          "read_at",
+          "note",
+          "from_staff_id",
+          "action_id",
+          "batch_id"
+        ],
+        "\u001f\u001f\u001fNTF-000274": [
+          "read_at",
+          "note",
+          "from_staff_id",
+          "action_id",
+          "batch_id"
+        ],
+        "\u001f\u001f\u001fNTF-000275": [
+          "read_at",
+          "note",
+          "from_staff_id",
+          "action_id",
+          "batch_id"
+        ],
+        "\u001f\u001f\u001fNTF-000276": [
+          "read_at",
+          "note",
+          "from_staff_id",
+          "action_id",
+          "batch_id"
+        ],
+        "\u001f\u001f\u001fNTF-000277": [
+          "read_at",
+          "note",
+          "from_staff_id",
+          "action_id",
+          "batch_id"
+        ],
+        "\u001f\u001f\u001fNTF-000278": [
+          "read_at",
+          "note",
+          "from_staff_id",
+          "action_id",
+          "batch_id"
+        ],
+        "\u001f\u001f\u001fNTF-000279": [
+          "read_at",
+          "note",
+          "from_staff_id",
+          "action_id",
+          "batch_id"
+        ],
+        "\u001f\u001f\u001fNTF-000280": [
+          "read_at",
+          "note",
+          "from_staff_id",
+          "action_id",
+          "batch_id"
+        ],
+        "\u001f\u001f\u001fNTF-000281": [
+          "read_at",
+          "note",
+          "from_staff_id",
+          "action_id",
+          "batch_id"
+        ],
+        "\u001f\u001f\u001fNTF-000282": [
+          "read_at",
+          "note",
+          "from_staff_id",
+          "action_id",
+          "batch_id"
+        ],
+        "\u001f\u001f\u001fNTF-000283": [
+          "read_at",
+          "note",
+          "from_staff_id",
+          "action_id",
+          "batch_id"
+        ],
+        "\u001f\u001f\u001fNTF-000284": [
+          "read_at",
+          "note",
+          "from_staff_id",
+          "action_id",
+          "batch_id"
+        ],
+        "\u001f\u001f\u001fNTF-000285": [
+          "read_at",
+          "note",
+          "from_staff_id",
+          "action_id",
+          "batch_id"
+        ],
+        "\u001f\u001f\u001fNTF-000286": [
+          "read_at",
+          "note",
+          "from_staff_id",
+          "action_id",
+          "batch_id"
+        ],
+        "\u001f\u001f\u001fNTF-000287": [
+          "read_at",
+          "note",
+          "from_staff_id",
+          "action_id",
+          "batch_id"
+        ],
+        "\u001f\u001f\u001fNTF-000288": [
+          "read_at",
+          "note",
+          "from_staff_id",
+          "action_id",
+          "batch_id"
+        ],
+        "\u001f\u001f\u001fNTF-000289": [
+          "read_at",
+          "note",
+          "from_staff_id",
+          "action_id",
+          "batch_id"
+        ],
+        "\u001f\u001f\u001fNTF-000290": [
           "read_at",
           "note",
           "from_staff_id",
@@ -126804,10 +126891,229 @@
           "action_id",
           "batch_id"
         ],
-        "\u001fBAT-003\u001fSD05-1\u001fNTF-000479": [
+        "\u001f\u001f\u001fNTF-000292": [
           "read_at",
           "note",
-          "action_id"
+          "from_staff_id",
+          "action_id",
+          "batch_id"
+        ],
+        "\u001f\u001f\u001fNTF-000293": [
+          "read_at",
+          "note",
+          "from_staff_id",
+          "action_id",
+          "batch_id"
+        ],
+        "\u001f\u001f\u001fNTF-000294": [
+          "read_at",
+          "note",
+          "from_staff_id",
+          "action_id",
+          "batch_id"
+        ],
+        "\u001f\u001f\u001fNTF-000295": [
+          "read_at",
+          "note",
+          "from_staff_id",
+          "action_id",
+          "batch_id"
+        ],
+        "\u001f\u001f\u001fNTF-000296": [
+          "read_at",
+          "note",
+          "from_staff_id",
+          "action_id",
+          "batch_id"
+        ],
+        "\u001f\u001f\u001fNTF-000297": [
+          "read_at",
+          "note",
+          "from_staff_id",
+          "action_id",
+          "batch_id"
+        ],
+        "\u001f\u001f\u001fNTF-000298": [
+          "read_at",
+          "note",
+          "from_staff_id",
+          "action_id",
+          "batch_id"
+        ],
+        "\u001f\u001f\u001fNTF-000299": [
+          "read_at",
+          "note",
+          "from_staff_id",
+          "action_id",
+          "batch_id"
+        ],
+        "\u001f\u001f\u001fNTF-000300": [
+          "read_at",
+          "note",
+          "from_staff_id",
+          "action_id",
+          "batch_id"
+        ],
+        "\u001f\u001f\u001fNTF-000301": [
+          "read_at",
+          "note",
+          "from_staff_id",
+          "action_id",
+          "batch_id"
+        ],
+        "\u001f\u001f\u001fNTF-000302": [
+          "read_at",
+          "note",
+          "from_staff_id",
+          "action_id",
+          "batch_id"
+        ],
+        "\u001f\u001f\u001fNTF-000303": [
+          "read_at",
+          "note",
+          "from_staff_id",
+          "action_id",
+          "batch_id"
+        ],
+        "\u001f\u001f\u001fNTF-000304": [
+          "read_at",
+          "note",
+          "from_staff_id",
+          "action_id",
+          "batch_id"
+        ],
+        "\u001f\u001f\u001fNTF-000305": [
+          "read_at",
+          "note",
+          "from_staff_id",
+          "action_id",
+          "batch_id"
+        ],
+        "\u001f\u001f\u001fNTF-000306": [
+          "read_at",
+          "note",
+          "from_staff_id",
+          "action_id",
+          "batch_id"
+        ],
+        "\u001f\u001f\u001fNTF-000307": [
+          "read_at",
+          "note",
+          "from_staff_id",
+          "action_id",
+          "batch_id"
+        ],
+        "\u001f\u001f\u001fNTF-000308": [
+          "read_at",
+          "note",
+          "from_staff_id",
+          "action_id",
+          "batch_id"
+        ],
+        "\u001f\u001f\u001fNTF-000309": [
+          "read_at",
+          "note",
+          "from_staff_id",
+          "action_id",
+          "batch_id"
+        ],
+        "\u001f\u001f\u001fNTF-000310": [
+          "read_at",
+          "note",
+          "from_staff_id",
+          "action_id",
+          "batch_id"
+        ],
+        "\u001f\u001f\u001fNTF-000311": [
+          "read_at",
+          "note",
+          "from_staff_id",
+          "action_id",
+          "batch_id"
+        ],
+        "\u001f\u001f\u001fNTF-000312": [
+          "read_at",
+          "note",
+          "from_staff_id",
+          "action_id",
+          "batch_id"
+        ],
+        "\u001f\u001f\u001fNTF-000313": [
+          "read_at",
+          "note",
+          "from_staff_id",
+          "action_id",
+          "batch_id"
+        ],
+        "\u001f\u001f\u001fNTF-000314": [
+          "read_at",
+          "note",
+          "from_staff_id",
+          "action_id",
+          "batch_id"
+        ],
+        "\u001f\u001f\u001fNTF-000315": [
+          "read_at",
+          "note",
+          "from_staff_id",
+          "action_id",
+          "batch_id"
+        ],
+        "\u001f\u001f\u001fNTF-000316": [
+          "read_at",
+          "note",
+          "from_staff_id",
+          "action_id",
+          "batch_id"
+        ],
+        "\u001f\u001f\u001fNTF-000317": [
+          "read_at",
+          "note",
+          "from_staff_id",
+          "action_id",
+          "batch_id"
+        ],
+        "\u001f\u001f\u001fNTF-000318": [
+          "read_at",
+          "note",
+          "from_staff_id",
+          "action_id",
+          "batch_id"
+        ],
+        "\u001f\u001f\u001fNTF-000319": [
+          "read_at",
+          "note",
+          "from_staff_id",
+          "action_id",
+          "batch_id"
+        ],
+        "\u001f\u001f\u001fNTF-000320": [
+          "read_at",
+          "note",
+          "from_staff_id",
+          "action_id",
+          "batch_id"
+        ],
+        "\u001f\u001f\u001fNTF-000321": [
+          "read_at",
+          "note",
+          "from_staff_id",
+          "action_id",
+          "batch_id"
+        ],
+        "\u001f\u001f\u001fNTF-000322": [
+          "read_at",
+          "note",
+          "from_staff_id",
+          "action_id",
+          "batch_id"
+        ],
+        "\u001f\u001f\u001fNTF-000323": [
+          "read_at",
+          "note",
+          "from_staff_id",
+          "action_id",
+          "batch_id"
         ],
         "\u001f\u001f\u001fNTF-000324": [
           "read_at",
@@ -126816,24 +127122,461 @@
           "action_id",
           "batch_id"
         ],
+        "\u001f\u001f\u001fNTF-000325": [
+          "read_at",
+          "note",
+          "from_staff_id",
+          "action_id",
+          "batch_id"
+        ],
+        "\u001f\u001f\u001fNTF-000326": [
+          "read_at",
+          "note",
+          "from_staff_id",
+          "action_id",
+          "batch_id"
+        ],
+        "\u001f\u001f\u001fNTF-000327": [
+          "read_at",
+          "note",
+          "from_staff_id",
+          "action_id",
+          "batch_id"
+        ],
+        "\u001f\u001f\u001fNTF-000328": [
+          "read_at",
+          "note",
+          "from_staff_id",
+          "action_id",
+          "batch_id"
+        ],
+        "\u001f\u001f\u001fNTF-000329": [
+          "read_at",
+          "note",
+          "from_staff_id",
+          "action_id",
+          "batch_id"
+        ],
+        "\u001f\u001f\u001fNTF-000330": [
+          "read_at",
+          "note",
+          "from_staff_id",
+          "action_id",
+          "batch_id"
+        ],
+        "\u001f\u001f\u001fNTF-000331": [
+          "read_at",
+          "note",
+          "from_staff_id",
+          "action_id",
+          "batch_id"
+        ],
+        "\u001f\u001f\u001fNTF-000332": [
+          "read_at",
+          "note",
+          "from_staff_id",
+          "action_id",
+          "batch_id"
+        ],
+        "\u001f\u001f\u001fNTF-000333": [
+          "read_at",
+          "note",
+          "from_staff_id",
+          "action_id",
+          "batch_id"
+        ],
+        "\u001f\u001f\u001fNTF-000334": [
+          "read_at",
+          "note",
+          "from_staff_id",
+          "action_id",
+          "batch_id"
+        ],
+        "\u001f\u001f\u001fNTF-000335": [
+          "read_at",
+          "note",
+          "from_staff_id",
+          "action_id",
+          "batch_id"
+        ],
+        "\u001f\u001f\u001fNTF-000336": [
+          "read_at",
+          "note",
+          "from_staff_id",
+          "action_id",
+          "batch_id"
+        ],
+        "\u001f\u001f\u001fNTF-000337": [
+          "read_at",
+          "note",
+          "from_staff_id",
+          "action_id",
+          "batch_id"
+        ],
+        "\u001f\u001f\u001fNTF-000338": [
+          "read_at",
+          "note",
+          "from_staff_id",
+          "action_id",
+          "batch_id"
+        ],
+        "\u001fRWS-2026H1\u001fSD01-1\u001fNTF-000401": [
+          "task_id",
+          "action_id"
+        ],
+        "\u001fRWS-2026H1\u001fSD01-1\u001fNTF-000402": [
+          "task_id",
+          "action_id"
+        ],
+        "\u001fRWS-2026H1\u001fSD01-1\u001fNTF-000403": [
+          "task_id",
+          "action_id"
+        ],
+        "\u001fRWS-2026H1\u001fSD01-1\u001fNTF-000404": [
+          "task_id",
+          "action_id"
+        ],
+        "\u001fRWS-2026H1\u001fSD01-1\u001fNTF-000405": [
+          "task_id",
+          "action_id"
+        ],
+        "\u001fRWS-2026H1\u001fSD01-1\u001fNTF-000406": [
+          "task_id",
+          "action_id"
+        ],
+        "\u001fRWS-2026H1\u001fSD01-1\u001fNTF-000407": [
+          "task_id",
+          "action_id"
+        ],
+        "\u001fRWS-2026H1\u001fSD01-1\u001fNTF-000408": [
+          "task_id",
+          "action_id"
+        ],
+        "\u001fRWS-2026H1\u001fSD01-1\u001fNTF-000409": [
+          "task_id",
+          "action_id"
+        ],
+        "\u001fRWS-2026H1\u001fSD01-1\u001fNTF-000410": [
+          "task_id",
+          "action_id"
+        ],
+        "\u001fRWS-2026H1\u001fSD01-1\u001fNTF-000411": [
+          "task_id",
+          "action_id"
+        ],
+        "\u001fRWS-2026H1\u001fSD01-1\u001fNTF-000412": [
+          "task_id",
+          "action_id"
+        ],
+        "\u001fRWS-2026H1\u001fSD01-1\u001fNTF-000413": [
+          "task_id",
+          "action_id"
+        ],
+        "\u001fRWS-2026H1\u001fSD01-1\u001fNTF-000414": [
+          "task_id",
+          "action_id"
+        ],
+        "\u001fRWS-2026H1\u001fSD01-1\u001fNTF-000415": [
+          "task_id",
+          "action_id"
+        ],
+        "\u001fRWS-2026H1\u001fSD01-1\u001fNTF-000416": [
+          "task_id",
+          "action_id"
+        ],
+        "\u001fRWS-2026H1\u001fSD01-1\u001fNTF-000417": [
+          "task_id",
+          "action_id"
+        ],
+        "\u001fRWS-2026H1\u001fSD01-1\u001fNTF-000418": [
+          "task_id",
+          "action_id"
+        ],
+        "\u001fRWS-2026H1\u001fSD01-1\u001fNTF-000419": [
+          "task_id",
+          "action_id"
+        ],
+        "\u001fRWS-2026H1\u001fSD01-1\u001fNTF-000420": [
+          "task_id",
+          "action_id"
+        ],
+        "\u001fRFC-2026H1\u001fSD02-1\u001fNTF-000421": [
+          "task_id",
+          "action_id"
+        ],
+        "\u001fRFC-2026H1\u001fSD02-1\u001fNTF-000422": [
+          "task_id",
+          "action_id"
+        ],
+        "\u001fRFC-2026H1\u001fSD02-1\u001fNTF-000423": [
+          "task_id",
+          "action_id"
+        ],
+        "\u001fRFC-2026H1\u001fSD02-1\u001fNTF-000424": [
+          "task_id",
+          "action_id"
+        ],
+        "\u001fRFC-2026H1\u001fSD02-1\u001fNTF-000425": [
+          "task_id",
+          "action_id"
+        ],
+        "\u001fRFC-2026H1\u001fSD02-1\u001fNTF-000426": [
+          "task_id",
+          "action_id"
+        ],
+        "\u001fRFC-2026H1\u001fSD02-1\u001fNTF-000427": [
+          "task_id",
+          "action_id"
+        ],
+        "\u001fRFC-2026H1\u001fSD02-1\u001fNTF-000428": [
+          "task_id",
+          "action_id"
+        ],
+        "\u001fRFC-2026H1\u001fSD02-1\u001fNTF-000429": [
+          "task_id",
+          "action_id"
+        ],
+        "\u001fRFC-2026H1\u001fSD02-1\u001fNTF-000430": [
+          "task_id",
+          "action_id"
+        ],
+        "\u001fRFC-2026H1\u001fSD02-1\u001fNTF-000431": [
+          "task_id",
+          "action_id"
+        ],
+        "\u001fRFC-2026H1\u001fSD02-1\u001fNTF-000432": [
+          "task_id",
+          "action_id"
+        ],
+        "\u001fRFC-2026H1\u001fSD02-1\u001fNTF-000433": [
+          "task_id",
+          "action_id"
+        ],
+        "\u001fRMT-2026H1\u001fSD02-1\u001fNTF-000434": [
+          "task_id",
+          "action_id"
+        ],
+        "\u001fRMT-2026H1\u001fSD02-1\u001fNTF-000435": [
+          "task_id",
+          "action_id"
+        ],
+        "\u001fRMT-2026H1\u001fSD02-1\u001fNTF-000436": [
+          "task_id",
+          "action_id"
+        ],
+        "\u001fRMT-2026H1\u001fSD02-1\u001fNTF-000437": [
+          "task_id",
+          "action_id"
+        ],
+        "\u001fRMT-2026H1\u001fSD02-1\u001fNTF-000438": [
+          "task_id",
+          "action_id"
+        ],
+        "\u001fRMT-2026H1\u001fSD02-1\u001fNTF-000439": [
+          "task_id",
+          "action_id"
+        ],
+        "\u001fRWS-2026H2-1\u001fSD01-1\u001fNTF-000440": [
+          "task_id",
+          "action_id"
+        ],
+        "\u001fRWS-2026H2-1\u001fSD01-1\u001fNTF-000441": [
+          "task_id",
+          "action_id"
+        ],
+        "\u001fRWS-2026H2-1\u001fSD01-1\u001fNTF-000442": [
+          "task_id",
+          "action_id"
+        ],
+        "\u001fRWS-2026H2-1\u001fSD01-1\u001fNTF-000443": [
+          "task_id",
+          "action_id"
+        ],
+        "\u001fRWS-2026H2-1\u001fSD01-1\u001fNTF-000444": [
+          "task_id",
+          "action_id"
+        ],
+        "\u001fRWS-2026H2-1\u001fSD01-1\u001fNTF-000445": [
+          "task_id",
+          "action_id"
+        ],
+        "\u001fRWS-2026H2-1\u001fSD01-1\u001fNTF-000446": [
+          "task_id",
+          "action_id"
+        ],
+        "\u001fRWS-2026H2-1\u001fSD01-1\u001fNTF-000447": [
+          "task_id",
+          "action_id"
+        ],
+        "\u001fRWS-2026H2-1\u001fSD01-1\u001fNTF-000448": [
+          "task_id",
+          "action_id"
+        ],
+        "\u001fRWS-2026H2-1\u001fSD01-1\u001fNTF-000449": [
+          "task_id",
+          "action_id"
+        ],
+        "\u001fRWS-2026H2-1\u001fSD01-1\u001fNTF-000450": [
+          "task_id",
+          "action_id"
+        ],
+        "\u001fRWS-2026H2-1\u001fSD01-1\u001fNTF-000451": [
+          "task_id",
+          "action_id"
+        ],
+        "\u001fRWS-2026H2-1\u001fSD01-1\u001fNTF-000452": [
+          "task_id",
+          "action_id"
+        ],
+        "\u001fRWS-2026H2-1\u001fSD01-1\u001fNTF-000453": [
+          "task_id",
+          "read_at",
+          "action_id"
+        ],
+        "\u001fRWS-2026H2-1\u001fSD01-1\u001fNTF-000454": [
+          "task_id",
+          "action_id"
+        ],
+        "\u001fRWS-2026H2-1\u001fSD01-1\u001fNTF-000455": [
+          "task_id",
+          "read_at",
+          "action_id"
+        ],
+        "\u001fRFC-2026H2-1\u001fSD02-1\u001fNTF-000456": [
+          "task_id",
+          "action_id"
+        ],
+        "\u001fRFC-2026H2-1\u001fSD02-1\u001fNTF-000457": [
+          "task_id",
+          "action_id"
+        ],
+        "\u001fRFC-2026H2-1\u001fSD02-1\u001fNTF-000458": [
+          "task_id",
+          "action_id"
+        ],
+        "\u001fRFC-2026H2-1\u001fSD02-1\u001fNTF-000459": [
+          "task_id",
+          "action_id"
+        ],
+        "\u001fRFC-2026H2-1\u001fSD02-1\u001fNTF-000460": [
+          "task_id",
+          "action_id"
+        ],
+        "\u001fRFC-2026H2-1\u001fSD02-1\u001fNTF-000461": [
+          "task_id",
+          "action_id"
+        ],
+        "\u001fRFC-2026H2-1\u001fSD02-1\u001fNTF-000462": [
+          "task_id",
+          "read_at",
+          "action_id"
+        ],
+        "\u001fRFC-2026H2-1\u001fSD02-1\u001fNTF-000463": [
+          "task_id",
+          "read_at",
+          "action_id"
+        ],
+        "\u001fRFC-2026H2-1\u001fSD02-1\u001fNTF-000464": [
+          "task_id",
+          "read_at",
+          "action_id"
+        ],
+        "\u001fRMT-2026H2-1\u001fSD02-1\u001fNTF-000465": [
+          "task_id",
+          "action_id"
+        ],
+        "\u001fRMT-2026H2-1\u001fSD02-1\u001fNTF-000466": [
+          "task_id",
+          "action_id"
+        ],
+        "\u001fRWS-2026H2\u001fSD01-1\u001fNTF-000467": [
+          "task_id",
+          "read_at",
+          "action_id"
+        ],
+        "\u001fRMT-2026H2\u001fSD02-1\u001fNTF-000468": [
+          "task_id",
+          "read_at",
+          "action_id"
+        ],
+        "\u001fRMT-2026H2\u001fSD02-1\u001fNTF-000469": [
+          "task_id",
+          "read_at",
+          "action_id"
+        ],
+        "\u001fRMT-2026H2\u001fSD02-1\u001fNTF-000470": [
+          "task_id",
+          "read_at",
+          "action_id"
+        ],
+        "\u001fRFC-2026H2\u001fSD02-1\u001fNTF-000471": [
+          "task_id",
+          "read_at",
+          "action_id"
+        ],
+        "\u001fRWS-2026H2\u001fSD02-1\u001fNTF-000472": [
+          "task_id",
+          "action_id"
+        ],
+        "\u001fRFC-2026H2\u001fSD02-1\u001fNTF-000473": [
+          "task_id",
+          "action_id"
+        ],
+        "ACT-000044\u001fBAT-003\u001fSD01-1\u001fNTF-000474": [
+          "note"
+        ],
+        "\u001fBAT-003\u001fSD02-1\u001fNTF-000475": [
+          "read_at",
+          "note",
+          "action_id"
+        ],
+        "ACT-000045\u001fBAT-003\u001fSD01-1\u001fNTF-000476": [
+          "note"
+        ],
         "\u001fBAT-003\u001fSD04-1\u001fNTF-000477": [
           "read_at",
           "note",
           "action_id"
         ],
-        "\u001f\u001f\u001fNTF-000102": [
-          "read_at",
-          "note",
-          "from_staff_id",
-          "action_id",
-          "batch_id"
+        "ACT-000046\u001fBAT-003\u001fSD01-1\u001fNTF-000478": [
+          "note"
         ],
-        "\u001f\u001f\u001fNTF-000191": [
+        "\u001fBAT-003\u001fSD05-1\u001fNTF-000479": [
           "read_at",
           "note",
-          "from_staff_id",
-          "action_id",
-          "batch_id"
+          "action_id"
+        ],
+        "ACT-000047\u001fBAT-003\u001fSD01-1\u001fNTF-000480": [
+          "note"
+        ],
+        "\u001fBAT-003\u001fSD13-1\u001fNTF-000481": [
+          "read_at",
+          "note",
+          "action_id"
+        ],
+        "ACT-000048\u001fBAT-003\u001fSD01-1\u001fNTF-000482": [
+          "note"
+        ],
+        "\u001fBAT-003\u001fSD02-1\u001fNTF-000483": [
+          "read_at",
+          "note",
+          "action_id"
+        ],
+        "ACT-000049\u001fBAT-003\u001fSD01-1\u001fNTF-000484": [
+          "note"
+        ],
+        "\u001fBAT-003\u001fSD09-1\u001fNTF-000485": [
+          "read_at",
+          "note",
+          "action_id"
+        ],
+        "ACT-000050\u001fBAT-003\u001fSD01-1\u001fNTF-000486": [
+          "note"
+        ],
+        "\u001fBAT-003\u001fSD03-1\u001fNTF-000487": [
+          "read_at",
+          "note",
+          "action_id"
         ]
       },
       "nulls": {}
@@ -129849,6 +130592,7 @@
         "D21\u001fH21",
         "D22\u001fH22",
         "D01\u001fG01",
+        "\u001fCEO-1",
         "D23\u001fSD23-1",
         "D23\u001fSD23-2",
         "D23\u001fH23"
@@ -130094,6 +130838,11 @@
           "phone"
         ],
         "D01\u001fG01": [
+          "phone"
+        ],
+        "\u001fCEO-1": [
+          "dept_id",
+          "email",
           "phone"
         ],
         "D23\u001fSD23-1": [

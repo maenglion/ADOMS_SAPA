@@ -13,7 +13,7 @@ const sources = {
   inspection_batch: "inspectionBatches", contract_duty: "contractDuties", safety_budget: "budgets",
   training_record: "trainings", worker_voice: "voices", incident: "incidents",
   order_received: "orders", evidence: "evidences", inspection: "inspections", action: "actions_",
-  notification: "notifications", risk_assessment: "riskAssessments",
+  notification: "readTable.notification", risk_assessment: "riskAssessments",
   risk_assessment_item: "riskItems", duty_assignment: "assignments", compliance_task: "readTable.compliance_task",
 };
 
@@ -53,7 +53,6 @@ const tables = {};
 for (const [table, caseName] of Object.entries(sources).sort(([a], [b]) => a.localeCompare(b))) {
   let rows = cases.get(caseName);
   if (!Array.isArray(rows) || !rows.length) continue;
-  if (table === "staff") rows = rows.filter((row) => row.staff_id !== "CEO-1");
   tables[table] = makeEntry(rows);
 }
 

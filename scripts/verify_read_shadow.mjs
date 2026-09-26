@@ -70,21 +70,28 @@ function classify(csvValue, dbValue, name, summary, details) {
     details.push({ case: name, kind: "type", csv: "array", postgres: typeof dbValue });
     return;
   }
-  summary.missing_rows += Math.max(0, csvValue.length - dbValue.length);
-  summary.extra_rows += Math.max(0, dbValue.length - csvValue.length);
   const aKeys = csvValue.map(identityKey), bKeys = dbValue.map(identityKey);
   const unique = new Set(aKeys).size === aKeys.length && new Set(bKeys).size === bKeys.length;
   const aSorted = [...aKeys].sort(), bSorted = [...bKeys].sort();
   const sameMembers = unique && aKeys.length === bKeys.length && aSorted.every((key, index) => key === bSorted[index]);
+  const aSet = new Set(aKeys), bSet = new Set(bKeys);
+  const missing = unique ? aKeys.filter((key) => !bSet.has(key)).length : Math.max(0, csvValue.length - dbValue.length);
+  const extra = unique ? bKeys.filter((key) => !aSet.has(key)).length : Math.max(0, dbValue.length - csvValue.length);
+  summary.missing_rows += missing;
+  summary.extra_rows += extra;
+  if (missing) details.push({ case: name, kind: "missing_rows", count: missing });
+  if (extra) details.push({ case: name, kind: "extra_rows", count: extra });
   if (sameMembers && aKeys.some((key, index) => key !== bKeys[index])) {
     summary.ordering_mismatch++;
     details.push({ case: name, kind: "ordering" });
   }
+  const dbByKey = unique ? new Map(dbValue.map((row) => [identityKey(row), row])) : null;
   const length = Math.min(csvValue.length, dbValue.length);
   for (let index = 0; index < length; index++) {
     const csvRow = csvValue[index];
     const key = identityKey(csvRow);
-    const dbRow = dbValue[index];
+    const dbRow = dbByKey?.get(key) ?? dbValue[index];
+    if (dbRow === undefined) continue;
     if (!csvRow || typeof csvRow !== "object" || Array.isArray(csvRow)) {
       if (typeof csvRow !== typeof dbRow) summary.type_mismatch++;
       else if (csvRow !== dbRow) summary.value_mismatch++;

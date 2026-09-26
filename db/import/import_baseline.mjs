@@ -776,7 +776,7 @@ async function verifyDatabase(client) {
   const errors = [];
   const structure = await readStructure(client);
   const expectedTables = [...schema.keys()].sort();
-  const expectedViews = [...fs.readFileSync(viewsSqlPath, "utf8").matchAll(/CREATE VIEW adoms2\."([^"]+)"/g)]
+  const expectedViews = [...fs.readFileSync(viewsSqlPath, "utf8").matchAll(/CREATE\s+(?:OR\s+REPLACE\s+)?VIEW\s+adoms2\."?([A-Za-z_][A-Za-z0-9_]*)"?/gi)]
     .map((match) => match[1])
     .sort();
   if (!structure.schemaExists) errors.push("schema adoms2 is missing");
@@ -811,12 +811,15 @@ async function verifyDatabase(client) {
     let tableInsertVerified = 0;
     if (insertSource.length) {
       const metaByName = new Map(columnMeta.map((column) => [column.name, column]));
-      const insertColumns = [...sourceColumns(insertSource)].sort();
+      const usablePk = pk.filter((column) => !generated.has(column));
+      const canVerifyByPk = usablePk.length > 0
+        && insertSource.every((sourceRow) => usablePk.every((column) => String(sourceRow[column] ?? "") !== ""));
+      const insertColumns = canVerifyByPk ? usablePk : [...sourceColumns(insertSource)].sort();
       const needed = countSignatures(insertSource, insertColumns, metaByName);
       const available = countSignatures(actualRows, insertColumns, metaByName);
       const allPresent = [...needed].every(([signature, count]) => (available.get(signature) || 0) >= count);
       if (allPresent) tableInsertVerified = insertSource.length;
-      else errors.push(table + ": one or more overlay INSERT rows are not present with all mapped values");
+      else errors.push(table + ": one or more overlay INSERT target rows are not present " + (canVerifyByPk ? "by primary key" : "with all mapped values"));
     }
     const expectedCount = Number(row.final_expected_rows);
     const difference = actualCount - expectedCount;

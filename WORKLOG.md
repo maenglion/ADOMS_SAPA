@@ -111,3 +111,14 @@
 - 검증: 배포 완료 상태와 환경변수 설정 상태를 확인했다. 데이터베이스 접속 및 schema/data 생성·적재 검증은 수행하지 않았다.
 - 관련 파일: `WORKLOG.md`
 - 관련 commit: pending
+
+### [11] PostgreSQL 호환 migration 초안 작성
+- 상태: 완료
+- 배경: schema audit에서 확정한 95개 물리 객체를 현재 CSV/overlay 의미와 출력값을 유지한 채 PostgreSQL로 옮길 초안이 필요하다.
+- 결정: 91개 표와 필수 뷰 4개의 migration 초안을 작성한다. 사용자 데이터 칼럼은 빈 문자열과 문자열 출력 계약을 보존하도록 1차에서 nullable `TEXT` 중심으로 두며, 실행 DDL 근거가 있는 기존 PK만 활성화한다. 확인된 FK 51개는 빈 문자열·orphan 정책이 정해질 때까지 비활성 후보로 남긴다.
+- 이유: 타입·NULL·default·FK 강제로 현재 화면 결과나 쓰기 동작이 달라지는 것을 막고, 실행 전에 미결 사항을 명시적으로 검증하기 위해서다.
+- 영향 범위: 향후 Railway PostgreSQL schema, 데이터 적재 순서, PK/FK 활성화, CSV/DB 결과 동등성
+- 실제 변경: `db/migrations/0001_tables.sql`, `0002_constraints.sql`, `0003_views.sql`과 결정 기록 `db/MIGRATION_DECISIONS.md`를 추가했다. DB 접속과 SQL 실행 및 데이터 적재는 하지 않았다.
+- 검증: CREATE TABLE/VIEW 수, PK 및 FK 후보 수, UNKNOWN→TEXT 반영 수, 참조 칼럼 존재 여부와 SQL 구문 구조를 정적으로 검사한다.
+- 관련 파일: `db/migrations/0001_tables.sql`, `db/migrations/0002_constraints.sql`, `db/migrations/0003_views.sql`, `db/MIGRATION_DECISIONS.md`, `WORKLOG.md`
+- 관련 commit: pending

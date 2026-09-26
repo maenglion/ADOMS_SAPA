@@ -1,0 +1,24 @@
+{
+  "format": "adoms-sapa-migration-provenance-v1",
+  "records": [
+    {
+      "record_type": "excluded_orphan_task_patch",
+      "source_path": ".data/overlay.json",
+      "source_section": "taskPatch",
+      "original_task_id": "TSK-000782",
+      "overlay_recorded_at": "2026-09-22T00:14:48.189Z",
+      "overlay_recorded_at_basis": "taskPatch.rejected_at",
+      "last_present_version": "ops_v0.3_20260921",
+      "last_effective_version": "ops_v1.8_20260924",
+      "removal_confirmed_version": "ops_v1.9_20260924",
+      "exclusion_reason": "실제 삭제된 과거 업무에 대한 오래된 overlay patch이므로 현재 운영 compliance_task에는 적용하지 않는다.",
+      "raw_patch": {
+        "status": "조치필요",
+        "approval_status": "반려",
+        "check_result": "보완필요",
+        "reject_reason": "보완필요",
+        "rejected_at": "2026-09-22T00:14:48.189Z"
+      }
+    }
+  ]
+}

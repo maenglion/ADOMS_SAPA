@@ -1,0 +1,92 @@
+table,selected_source_csv,source_version,source_csv_rows,seed_rows_used,overlay_insert_rows,overlay_patch_rows,final_expected_rows,pk_columns,pk_duplicate_rows,source_columns_missing_in_target,status,notes
+action,data/_데모_용인시_20260920/us_v1.9_20260926/seed/action.csv,us_v1.9_20260926,50,50,0,1,50,action_id,0,,READY,
+annual_schedule,data/_데모_용인시_20260920/ops_v0.6_20260921/seed/annual_schedule.csv,ops_v0.6_20260921,12,12,0,0,12,sched_id,0,,READY,
+asset,data/_데모_용인시_20260920/us_v1.7_20260925/seed/asset.csv,us_v1.7_20260925,416,416,0,0,416,asset_id,0,,READY,
+asset_target_map,data/_데모_용인시_20260920/us_v1.7_20260925/seed/asset_target_map.csv,us_v1.7_20260925,631,631,0,0,631,asset_id+target_code,0,,READY,
+audit_log,,,0,0,241,0,241,log_id,0,,READY,no seed CSV; expected empty unless overlay adds rows | overlay.log mapped losslessly=241/241; changed_at/changed_by canonical; target/what from 0004
+budget_exec,,,0,0,0,0,0,,0,,READY,no seed CSV; expected empty unless overlay adds rows
+ceo_activity,data/_데모_용인시_20260920/ops_v1.5_20260924/seed/ceo_activity.csv,ops_v1.5_20260924,12,12,0,0,12,activity_id,0,,READY,
+civil_manual,data/_데모_용인시_20260920/ops_v1.9_20260924/seed/civil_manual.csv,ops_v1.9_20260924,57,57,0,0,57,manual_id,0,,READY,
+civil_record,,,0,0,0,0,0,,0,,READY,no seed CSV; expected empty unless overlay adds rows
+civil_safety_plan,data/_데모_용인시_20260920/ops_v1.9_20260924/seed/civil_safety_plan.csv,ops_v1.9_20260924,342,342,0,0,342,plan_id,0,,READY,
+compliance_task,data/_데모_용인시_20260920/ops_v2.2_20260924/seed/compliance_task.csv,ops_v2.2_20260924,2465,2465,0,12,2465,task_id,0,,READY,task_approval_patch source=2465; merged=2465; unmatched=0; taskPatch applied=12; confirmed orphan excluded=1; taskPatch unmatched=0
+contract,data/_데모_용인시_20260920/ops_v1.9_20260924/seed/contract.csv,ops_v1.9_20260924,63,63,0,0,63,contract_id,0,,READY,
+contract_compliance,data/_데모_용인시_20260920/ops_v0.5_20260921/seed/contract_compliance.csv,ops_v0.5_20260921,284,284,0,0,284,cc_id,0,,READY,
+contract_duty,data/_데모_용인시_20260920/ops_v0.4_20260921/seed/contract_duty.csv,ops_v0.4_20260921,251,251,0,0,251,cduty_id,0,,READY,
+contract_eval_item,data/_데모_용인시_20260920/ops_v0.7_20260921/seed/contract_eval_item.csv,ops_v0.7_20260921,10,10,0,0,10,item_no,0,,READY,
+contract_eval_score,,,0,0,0,0,0,score_id,0,,READY,no seed CSV; expected empty unless overlay adds rows
+contract_eval_setting,,,0,0,0,0,0,setting_id,0,,READY,no seed CSV; expected empty unless overlay adds rows
+contract_hazard,data/_데모_용인시_20260920/ops_v0.4_20260921/seed/contract_hazard.csv,ops_v0.4_20260921,206,206,0,0,206,hazard_id,0,,READY,
+contract_hazard_map,data/_데모_용인시_20260920/ops_v0.5_20260921/seed/contract_hazard_map.csv,ops_v0.5_20260921,305,305,0,0,305,hazard_id+hazard_code,0,,READY,
+contract_mgmt_item,data/_데모_용인시_20260920/ops_v0.5_20260921/seed/contract_mgmt_item.csv,ops_v0.5_20260921,4,4,0,0,4,item_no,0,,READY,
+drill_eval,data/_데모_용인시_20260920/ops_v0.6_20260921/seed/drill_eval.csv,ops_v0.6_20260921,11,11,0,0,11,eval_id,0,,READY,
+drill_plan,data/_데모_용인시_20260920/ops_v1.5_20260924/seed/drill_plan.csv,ops_v1.5_20260924,15,15,0,0,15,drill_id,0,,READY,
+duty_assignment,data/_데모_용인시_20260920/ops_v2.0_20260924/seed/duty_assignment.csv,ops_v2.0_20260924,4400,4400,0,0,4400,assign_id,0,,READY,
+duty_class,data/_데모_용인시_20260920/ops_v1.3_20260924/seed/duty_class.csv,ops_v1.3_20260924,11075,11075,0,0,11075,duty_key,0,,READY,
+eval_criteria,data/_데모_용인시_20260920/ops_v0.7_20260921/seed/eval_criteria.csv,ops_v0.7_20260921,21,21,0,0,21,criteria_id,0,,READY,
+evidence,data/_데모_용인시_20260920/ops_v2.2_20260924/seed/evidence.csv,ops_v2.2_20260924,1128,1128,7,0,1135,evidence_id,0,,READY,
+evidence_split,,,0,0,0,0,0,,0,,READY,no seed CSV; expected empty unless overlay adds rows
+form_template,data/_데모_용인시_20260920/ops_v0.1_20260920/seed/form_template.csv,ops_v0.1_20260920,131,131,0,0,131,form_id,0,,READY,
+hazard_code,data/_데모_용인시_20260920/ops_v0.5_20260921/seed/hazard_code.csv,ops_v0.5_20260921,18,18,0,0,18,hazard_code,0,,READY,
+hazard_report,data/_데모_용인시_20260920/us_v1.9_20260926/seed/hazard_report.csv,us_v1.9_20260926,34,34,0,0,34,hz_id,0,,READY,
+hazard_step,data/_데모_용인시_20260920/us_v1.9_20260926/seed/hazard_step.csv,us_v1.9_20260926,224,224,0,0,224,step_id,0,,READY,
+incident,data/_데모_용인시_20260920/us_v1.9_20260926/seed/incident.csv,us_v1.9_20260926,14,14,0,0,14,incident_id,0,,READY,
+incident_nil_check,data/_데모_용인시_20260920/us_v1.9_20260926/seed/incident_nil_check.csv,us_v1.9_20260926,28,28,0,0,28,nil_id,0,,READY,
+incident_report,data/_데모_용인시_20260920/us_v1.9_20260926/seed/incident_report.csv,us_v1.9_20260926,16,16,0,0,16,report_id,0,,READY,
+incident_response,data/_데모_용인시_20260920/us_v1.9_20260926/seed/incident_response.csv,us_v1.9_20260926,57,57,0,0,57,resp_id,0,,READY,
+incident_response_setting,,,0,0,0,0,0,set_id,0,,READY,no seed CSV; expected empty unless overlay adds rows
+inspection,data/_데모_용인시_20260920/us_v1.9_20260926/seed/inspection.csv,us_v1.9_20260926,199,199,10,10,209,insp_id,0,,READY,
+inspection_batch,data/_데모_용인시_20260920/ops_v0.3_20260921/seed/inspection_batch.csv,ops_v0.3_20260921,3,3,0,0,3,batch_id,0,,READY,
+law_change,data/_데모_용인시_20260920/ops_v0.2_20260920/seed/law_change.csv,ops_v0.2_20260920,3,3,31,0,34,change_id,0,,READY,
+law_sync_applied,,,0,0,3,0,3,,0,,READY,no seed CSV; expected empty unless overlay adds rows
+law_sync_decision,,,0,0,0,0,0,,0,,READY,no seed CSV; expected empty unless overlay adds rows
+material_item,data/_데모_용인시_20260920/ops_v0.8_20260922/seed/material_item.csv,ops_v0.8_20260922,6,6,0,0,6,item_id,0,,READY,
+notification,data/_데모_용인시_20260920/us_v1.9_20260926/seed/notification.csv,us_v1.9_20260926,398,398,14,0,412,notif_id,0,,READY,
+order_received,data/_데모_용인시_20260920/us_v1.9_20260926/seed/order_received.csv,us_v1.9_20260926,25,25,0,0,25,order_id,0,,READY,
+org_dept,data/_데모_용인시_20260920/ops_v1.9_20260924/seed/org_dept.csv,ops_v1.9_20260924,24,24,0,0,24,dept_id,0,,READY,
+org_profile,,,0,0,0,0,0,,0,,READY,no seed CSV; expected empty unless overlay adds rows
+risk_assessment,data/_데모_용인시_20260920/us_v1.8_20260926/seed/risk_assessment.csv,us_v1.8_20260926,98,98,0,0,98,risk_id,0,,READY,
+risk_assessment_item,data/_데모_용인시_20260920/us_v1.8_20260926/seed/risk_assessment_item.csv,us_v1.8_20260926,296,296,0,0,296,risk_item_id,0,,READY,
+safety_budget,data/_데모_용인시_20260920/ops_v1.5_20260924/seed/safety_budget.csv,ops_v1.5_20260924,62,62,0,0,62,budget_id,0,,READY,
+safety_manual,data/_데모_용인시_20260920/ops_v0.5_20260921/seed/safety_manual.csv,ops_v0.5_20260921,6,6,0,0,6,manual_id,0,,READY,
+safety_org_role,data/_데모_용인시_20260920/ops_v0.5_20260921/seed/safety_org_role.csv,ops_v0.5_20260921,46,46,0,0,46,role_id,0,,READY,
+safety_policy,data/_데모_용인시_20260920/ops_v0.5_20260921/seed/safety_policy.csv,ops_v0.5_20260921,3,3,0,0,3,policy_id,0,,READY,
+staff,data/_데모_용인시_20260920/ops_v1.9_20260924/seed/staff.csv,ops_v1.9_20260924,75,75,0,0,75,staff_id,0,,READY,
+sys_code,,,0,0,0,0,0,,0,,READY,no seed CSV; expected empty unless overlay adds rows
+sys_mail_log,,,0,0,0,0,0,,0,,READY,no seed CSV; expected empty unless overlay adds rows
+sys_menu,,,0,0,0,0,0,,0,,READY,no seed CSV; expected empty unless overlay adds rows
+system_record,data/_데모_용인시_20260920/ops_v0.7_20260921/seed/system_record.csv,ops_v0.7_20260921,17,17,0,0,17,record_id,0,,READY,
+training_check,,,0,0,0,0,0,check_id,0,,READY,no seed CSV; expected empty unless overlay adds rows
+training_course,data/_데모_용인시_20260920/ops_v1.5_20260924/seed/training_course.csv,ops_v1.5_20260924,13,13,0,0,13,course_id,0,,READY,
+training_record,data/_데모_용인시_20260920/ops_v0.6_20260921/seed/training_record.csv,ops_v0.6_20260921,87,87,0,0,87,training_id,0,,READY,
+usa_order,,,0,0,4,0,4,,0,,READY,no seed CSV; expected empty unless overlay adds rows
+usb1_basic,data/_데모_용인시_20260920/us_v1.2_20260924/seed/usb1_basic.csv,us_v1.2_20260924,7,7,0,1,7,,0,,READY,
+usb1_contract,,,0,0,1,0,1,,0,,READY,no seed CSV; expected empty unless overlay adds rows
+usb1_contract_duty,,,0,0,4,0,4,,0,,READY,no seed CSV; expected empty unless overlay adds rows
+usb1_hazard_place,data/_데모_용인시_20260920/us_v1.0_20260924/seed/usb1_hazard_place.csv,us_v1.0_20260924,21,21,0,0,21,,0,,READY,
+usb1_transport,data/_데모_용인시_20260920/us_v1.1_20260924/seed/usb1_transport.csv,us_v1.1_20260924,1,1,0,0,1,,0,,READY,
+usb1_work_site,data/_데모_용인시_20260920/us_v1.5_20260924/seed/usb1_work_site.csv,us_v1.5_20260924,76,76,0,0,76,,0,,READY,
+usb1_workplace,data/_데모_용인시_20260920/us_v1.5_20260924/seed/usb1_workplace.csv,us_v1.5_20260924,20,20,0,0,20,,0,,READY,
+usb1_ws_mgmt,,,0,0,0,0,0,,0,,READY,no seed CSV; expected empty unless overlay adds rows
+usb2_assign,,,0,0,3,0,3,,0,,READY,no seed CSV; expected empty unless overlay adds rows
+usb2_basic,data/_데모_용인시_20260920/us_v1.0_20260924/seed/usb2_basic.csv,us_v1.0_20260924,3,3,2,0,5,,0,,READY,
+usb2_law,,,0,0,2,0,2,,0,,READY,no seed CSV; expected empty unless overlay adds rows
+usb2_role,data/_데모_용인시_20260920/us_v1.0_20260924/seed/usb2_role.csv,us_v1.0_20260924,13,13,2,0,15,,0,,READY,
+usb2_timing,data/_데모_용인시_20260920/us_v1.4_20260924/seed/usb2_timing.csv,us_v1.4_20260924,8,8,5,0,13,,0,,READY,
+usc_record,data/_데모_용인시_20260920/us_v1.2_20260924/seed/usc_record.csv,us_v1.2_20260924,112,112,14,13,126,,0,,READY,
+usd_record,data/_데모_용인시_20260920/us_v1.2_20260924/seed/usd_record.csv,us_v1.2_20260924,48,48,8,10,56,,0,,READY,
+use_plan,data/_데모_용인시_20260920/us_v1.2_20260924/seed/use_plan.csv,us_v1.2_20260924,19,19,0,0,19,,0,,READY,
+use_record,data/_데모_용인시_20260920/us_v1.2_20260924/seed/use_record.csv,us_v1.2_20260924,40,40,0,0,40,,0,,READY,
+use_site,data/_데모_용인시_20260920/us_v1.0_20260924/seed/use_site.csv,us_v1.0_20260924,3,3,0,0,3,,0,,READY,
+usf_ceo_activity,,,0,0,0,0,0,,0,,READY,no seed CSV; expected empty unless overlay adds rows
+usf_ceo_log,data/_데모_용인시_20260920/us_v1.2_20260924/seed/usf_ceo_log.csv,us_v1.2_20260924,10,10,1,0,11,,0,,READY,
+usf_file,data/_데모_용인시_20260920/us_v1.0_20260924/seed/usf_file.csv,us_v1.0_20260924,6,6,0,0,6,,0,,READY,
+usf_judge,data/_데모_용인시_20260920/us_v1.9_20260926/seed/usf_judge.csv,us_v1.9_20260926,393,393,1,0,394,,0,,READY,
+usf_letter,data/_데모_용인시_20260920/us_v1.0_20260924/seed/usf_letter.csv,us_v1.0_20260924,3,3,0,0,3,,0,,READY,
+usf_letter_read,data/_데모_용인시_20260920/us_v1.0_20260924/seed/usf_letter_read.csv,us_v1.0_20260924,9,9,1,0,10,,0,,READY,
+usf_notice,data/_데모_용인시_20260920/us_v1.2_20260924/seed/usf_notice.csv,us_v1.2_20260924,5,5,0,0,5,,0,,READY,
+usf_round,data/_데모_용인시_20260920/us_v1.9_20260926/seed/usf_round.csv,us_v1.9_20260926,9,9,0,0,9,,0,,READY,
+usg_case,data/_데모_용인시_20260920/us_v1.0_20260924/seed/usg_case.csv,us_v1.0_20260924,32,32,0,2,32,,0,,READY,
+usg_stat_occur,data/_데모_용인시_20260920/us_v1.0_20260924/seed/usg_stat_occur.csv,us_v1.0_20260924,166,166,0,0,166,,0,,READY,
+usg_ws_industry,data/_데모_용인시_20260920/us_v1.0_20260924/seed/usg_ws_industry.csv,us_v1.0_20260924,14,14,0,0,14,,0,,READY,
+worker_voice,data/_데모_용인시_20260920/ops_v0.7_20260921/seed/worker_voice.csv,ops_v0.7_20260921,9,9,0,0,9,voice_id,0,,READY,

@@ -155,3 +155,25 @@
 - 검증: TABLE 91, VIEW 4, PK 52, 활성 FK 0, 중복 이름 0을 DB catalog에서 확인했다. view 4개는 모두 참조 검증을 통과했고, table 91개의 실제 row count와 전체 합계가 모두 0이었다.
 - 관련 파일: `db/migrations/0001_tables.sql`, `db/migrations/0002_constraints.sql`, `db/migrations/0003_views.sql`, `db/SCHEMA_DEPLOY_VERIFY.md`, `WORKLOG.md`
 - 관련 commit: pending
+
+### [15] PostgreSQL baseline data import dry-run
+- 상태: 보류
+- 배경: Railway PostgreSQL의 빈 `adoms2` schema에 현재 CSV 및 overlay 기반 화면 결과를 같은 의미로 옮기기 전에, 실제 앱의 판 선택과 병합 규칙을 재현한 적재 계획을 검증해야 했다.
+- 결정: `us_*` 내림차순 후 `ops_*` 내림차순에서 table별 최초 CSV 한 개만 사용하고, 91개 물리 table만 대상으로 한다. `task_approval_patch`는 `compliance_task`에 병합하며 overlay는 현재 읽기 순서대로 반영한다. 빈 문자열과 TEXT 값은 그대로 보존하고 충돌이나 근거 없는 column 변환이 있으면 실제 적재를 중단한다.
+- 이유: 과거 판 누적, 빈 문자열 변환, 고아 patch 또는 감사 로그의 임의 column 대응으로 현재 화면 의미가 달라지는 것을 방지하기 위해서다.
+- 영향 범위: 향후 Railway PostgreSQL baseline data 적재, CSV/overlay와 DB 결과 동등성, 감사 로그 mapping 결정
+- 실제 변경: dry-run 전용 `db/import/import_baseline.mjs`, 계획서와 91개 table manifest를 추가했다. Railway 접속과 INSERT는 수행하지 않았고 앱 코드, migration SQL, 원본 CSV 및 `.data`는 수정하지 않았다.
+- 검증: 선택 seed 24,668행, overlay INSERT 후보 354행, 적용 가능한 overlay PATCH 49건, 최종 예상 25,022행, 활성 PK 중복 0건, DB/source table mapping 누락 0건을 확인했다. 최신 `compliance_task`에 없는 `TSK-000782` overlay patch와 `audit_log` column 대응이 미결이라 실제 적재는 보류한다.
+- 관련 파일: `db/import/import_baseline.mjs`, `db/import/IMPORT_PLAN.md`, `db/import/import_manifest.csv`, `WORKLOG.md`
+- 관련 commit: pending
+
+### [16] Baseline import 차단 원인 해소 결정 및 재검증
+- 상태: 완료
+- 배경: 최초 dry-run에서 삭제된 과제 `TSK-000782`의 오래된 overlay patch 1건과 `audit_log`의 `target`, `what` 보존 위치가 확정되지 않아 실제 적재가 차단됐다.
+- 결정: `TSK-000782` patch는 현재 운영 데이터에 적용하거나 다른 ID로 연결하지 않고 원문과 출처를 migration provenance에 보존한다. 감사 로그는 `changed_at`, `changed_by`를 canonical로 유지하고 `target TEXT`, `what TEXT`만 추가한다. overlay 감사로그 241행은 truncate하지 않고 전부 적재 대상으로 유지하며 화면 정렬과 100행 제한은 향후 DB adapter에서 재현한다.
+- 이유: 삭제된 업무를 되살리거나 과거 patch를 다른 업무에 오적용하지 않으면서 이력 원문은 보존하고, 감사로그 field를 합치거나 버리지 않고 현재 의미를 그대로 유지하기 위해서다.
+- 영향 범위: Railway PostgreSQL의 후속 schema migration, baseline import, migration provenance, 향후 DB adapter의 감사로그 alias·정렬·limit
+- 실제 변경: `db/migrations/0004_import_compat.sql` 초안을 추가하고 dry-run import가 확정 orphan을 운영 UPDATE에서 제외해 `db/import/migration_provenance.json`에 보존하도록 변경했다. 감사로그는 6개 overlay field를 확정 mapping으로 변환한다. Railway migration 실행과 data INSERT, 앱 코드 변경은 수행하지 않았다.
+- 검증: dry-run은 `READY`다. seed 24,668행, overlay INSERT 354행, overlay PATCH 49건, orphan 제외 1건, provenance 보존 1건, 최종 예상 25,022행이다. 감사로그 241/241행을 무손실 mapping했고 PK 중복 0건, 미해결 patch 0건, DB/source table mapping 누락 0건, source column 누락 table 0개를 확인했다.
+- 관련 파일: `db/migrations/0004_import_compat.sql`, `db/import/import_baseline.mjs`, `db/import/IMPORT_PLAN.md`, `db/import/import_manifest.csv`, `db/import/migration_provenance.json`, `db/import/BLOCKER_RESOLUTION.md`, `WORKLOG.md`
+- 관련 commit: pending

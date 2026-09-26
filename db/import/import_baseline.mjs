@@ -812,14 +812,16 @@ async function verifyDatabase(client) {
     if (insertSource.length) {
       const metaByName = new Map(columnMeta.map((column) => [column.name, column]));
       const usablePk = pk.filter((column) => !generated.has(column));
-      const canVerifyByPk = usablePk.length > 0
-        && insertSource.every((sourceRow) => usablePk.every((column) => String(sourceRow[column] ?? "") !== ""));
-      const insertColumns = canVerifyByPk ? usablePk : [...sourceColumns(insertSource)].sort();
+      const applicationKey = (APPLICATION_KEYS.get(table) || []).filter((column) => !generated.has(column));
+      const verificationKey = usablePk.length > 0 ? usablePk : applicationKey;
+      const canVerifyByKey = verificationKey.length > 0
+        && insertSource.every((sourceRow) => verificationKey.every((column) => String(sourceRow[column] ?? "") !== ""));
+      const insertColumns = canVerifyByKey ? verificationKey : [...sourceColumns(insertSource)].sort();
       const needed = countSignatures(insertSource, insertColumns, metaByName);
       const available = countSignatures(actualRows, insertColumns, metaByName);
       const allPresent = [...needed].every(([signature, count]) => (available.get(signature) || 0) >= count);
       if (allPresent) tableInsertVerified = insertSource.length;
-      else errors.push(table + ": one or more overlay INSERT target rows are not present " + (canVerifyByPk ? "by primary key" : "with all mapped values"));
+      else errors.push(table + ": one or more overlay INSERT target rows are not present " + (canVerifyByKey ? "by stable key" : "with all mapped values"));
     }
     const expectedCount = Number(row.final_expected_rows);
     const difference = actualCount - expectedCount;

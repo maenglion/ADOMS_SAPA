@@ -210,3 +210,25 @@
 - 검증: 변경 후 dry-run은 seed 24,668행, overlay INSERT 354행, overlay PATCH 49건, 최종 25,022행, PK 중복 0, source mapping 누락 0으로 `READY`다. 실제 내부 적재와 최종 소요시간 기록은 아직 진행 전이다.
 - 관련 파일: `db/import/import_baseline.mjs`, `db/import/migration_provenance.json`, `package.json`, `package-lock.json`, `WORKLOG.md`
 - 관련 commit: pending
+
+### [20] 23:00 데모 PostgreSQL baseline 기준점 및 정본·GraphDB 동기화 범위 확정
+- 상태: 결정
+- 배경: PostgreSQL 적재 기준을 정하기 위해 현재 앱 CSV가 GraphDB/N-Quads에서 생성됐는지, 최신 정본과 같은 시점의 데이터인지 확인했다. 현재 3400 데모 앱은 특정 시점의 CSV + overlay snapshot으로 실행되며, 원본 정본 DB와 GraphDB가 서로 진행상황을 확인하며 관리되는 별도 작업 흐름과 동일한 최신판을 만드는 목적이 아니다.
+- 결정: PostgreSQL `adoms2` baseline의 직접 source of truth를 현재 3400 데모 앱이 실제 선택하는 frozen CSV + overlay로 고정한다. 최신 정본을 PostgreSQL에 재투영하거나 GraphDB A-Box를 관계형으로 변환하지 않으며, N-Quads를 CSV로 역변환하지 않는다. 앱 snapshot과 최신 GraphDB 사이의 release 차이는 이번 migration에서 해소하지 않고, 정본 DB와 GraphDB의 release·그래프 관리는 기존 원본 작업 흐름의 책임으로 둔다. 향후 동기화가 필요하면 현재 baseline migration과 분리된 별도 작업으로 설계한다.
+- 이유: 이번 migration의 목적은 현재 데모 실행환경의 재현성과 배포 가능성을 확보하는 것이다. 최신 정본·GraphDB 동기화까지 포함하면 현재 앱이 사용하지 않는 데이터와 구조를 다루는 별도의 데이터 통합 프로젝트가 되며, 확인된 release 차이는 migration 오류가 아니라 데모 snapshot의 설계상 상태다.
+- 영향 범위: PostgreSQL baseline 데이터 범위, GraphDB와의 정합성 판정, 향후 adapter 전환, 데이터 통합 작업의 경계. GraphDB에는 있으나 PostgreSQL에는 없는 최신 법령·조항·관계, 최신 정본에는 있으나 현재 데모 화면에는 없는 데이터, 서로 다른 release timestamp는 이번 baseline의 정상 상태로 본다.
+- 실제 변경: 작업 우선순위를 ① 현재 앱 CSV + overlay의 PostgreSQL 적재 완료, ② 기존 앱 출력과 PostgreSQL 출력의 동등성 검증, ③ PostgreSQL adapter 연결, ④ 데모 화면 정상 동작 확인, ⑤ UI 수정사항을 모아 순차 반영하는 순서로 고정했다. 정본·GraphDB 구조 분석은 현재 migration의 실제 blocker가 발생할 때만 다시 수행한다. 데이터나 앱 코드는 변경하지 않았다.
+- 검증: 앱 base는 `R-20260917-02`, 앱 lawtext는 `R-20260920-10`, GraphDB A-Box는 `R-20260926-06`이다. `ops_*`와 `us_*` 데이터는 base·mgmt 키 및 데모용 조사·예시 자료에서 별도 build script로 생성된다. 3400 앱 코드에는 GraphDB/SPARQL 호출이 없고 앱 데이터 생성 경로에는 N-Quads → CSV 변환이 없다. GraphDB A-Box와 앱 데이터는 공통 정본 계열에서 서로 다른 경로와 release 시점으로 생성됐으며, 현재 앱은 CSV + overlay mode로 정상 동작한다.
+- 관련 파일: `data/_데모_용인시_20260920/_CURRENT.json`, `data/_데모_용인시_20260920/_build/build_demo_db.py`, `data/_데모_용인시_20260920/_build/build_ops_tables.py`, `data/_데모_용인시_20260920/_build/build_us_*.py`, `db/import/migration_provenance.json`, `db/import/import_baseline.mjs`, `WORKLOG.md`
+- 관련 commit: pending
+
+### [21] Railway 내부 PostgreSQL baseline 적재 완료
+- 상태: 완료
+- 배경: 로컬에서 Railway public connection으로 수행한 두 번의 실제 적재는 `audit_log.log_id` identity 처리 누락과 외부 연결 종료로 각각 전체 rollback됐다. 이후 Railway 내부 private 연결을 사용하는 1회성 실행으로 전환했으며, commit 전 검증 과정에서 PK metadata 반환형과 patch 후 overlay INSERT 존재 판정 문제도 발견되어 모두 rollback 상태에서 검증 로직만 보정했다.
+- 결정: 현재 frozen 앱 CSV + overlay 25,022행을 `adoms2`의 관계형 baseline으로 확정한다. INSERT는 batch로 전송하되 전체 적재와 commit 전 검증은 단일 transaction으로 유지한다. `usc_record`, `usd_record`처럼 물리 PK가 없는 table의 overlay INSERT 존재는 앱 patch가 사용하는 안정 키 `rec_id`로 확인한다. 성공 후에는 새 연결에서 독립 재검증하고, 1회성 서비스의 GitHub 자동 배포를 비활성화한다. 앱의 PostgreSQL adapter 전환은 별도 후속 작업으로 둔다.
+- 이유: public proxy의 장시간 연결 불안정을 피하고 부분 적재를 방지하면서, overlay INSERT 후 PATCH로 값이 변경되는 행을 원본 전체값이 아니라 현재 앱의 식별 계약으로 정확히 검증하기 위해서다.
+- 영향 범위: Railway PostgreSQL `adoms2` baseline data, baseline importer 검증, 임시 import service 운영, 향후 PostgreSQL adapter 전환
+- 실제 변경: Railway GitHub 연동 저장소 접근 범위를 `maenglion/ADOMS_SAPA` 하나로 제한했다. 비어 있고 서비스·환경변수 참조가 없던 `enclosed-stashbox`, `lightweight-chest`를 삭제했다. 임시 서비스 `sapa-baseline-import-once`에서 private `DATABASE_URL`로 baseline을 적재했고, 완료 후 branch 자동 배포를 비활성화했으며 restart policy는 `Never`를 유지했다. PostgreSQL에는 seed 24,668행과 overlay INSERT 354행이 반영되어 총 25,022행이 됐고 overlay PATCH 49건도 최종값에 반영됐다. `TSK-000782`는 운영 데이터에서 제외하고 provenance 1건으로 보존했다. 앱은 아직 CSV + overlay mode이며 PostgreSQL adapter나 Netlify DB mode 전환은 수행하지 않았다.
+- 검증: 실행 직전 TABLE 91, 총 0행, 활성 FK 0, `audit_log.target`·`what` 존재를 확인했다. commit 전 전체 검증과 commit 후 새 연결 독립 검증이 모두 통과했다. 최종 실측은 총 25,022행, table별 expected=actual 91/91, canonical checksum 91/91, PK 중복 0, overlay INSERT 354/354, overlay PATCH 49/49, orphan 제외·provenance 보존 1/1, audit log 무손실 241/241, view SELECT 4/4, 활성 FK 0, source mapping 누락 0이다. 실제 import transaction과 commit 전 검증은 1.864초, 새 연결 독립 검증까지 포함한 총 소요시간은 3.078초였다.
+- 관련 파일: `db/import/import_baseline.mjs`, `db/import/IMPORT_VERIFY.md`, `db/import/import_verify.csv`, `db/import/migration_provenance.json`, `WORKLOG.md`
+- 관련 commit: `439d0e5`, `3a6dbc3`, `66e2feb`, `6ee5338`, `2af798d` (최종 기록 commit은 pending)

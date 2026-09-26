@@ -105,7 +105,17 @@ const csv = JSON.parse(fs.readFileSync(csvFile, "utf8"));
 const postgres = JSON.parse(fs.readFileSync(postgresFile, "utf8"));
 const dbCases = new Map(postgres.cases.map((item) => [item.name, item.value]));
 const summary = { missing_rows: 0, extra_rows: 0, value_mismatch: 0, type_mismatch: 0, ordering_mismatch: 0, null_empty_mismatch: 0 };
-const details = [];
+const samples = [];
+let detailCount = 0;
+const caseCounts = {};
+const details = {
+  push(item) {
+    detailCount++;
+    const key = `${item.case}:${item.kind}`;
+    caseCounts[key] = (caseCounts[key] || 0) + 1;
+    if (samples.length < 1000) samples.push(item);
+  },
+};
 for (const item of csv.cases) classify(item.value, dbCases.get(item.name), item.name, summary, details);
 const total = Object.values(summary).reduce((sum, value) => sum + value, 0);
 const report = {
@@ -115,15 +125,12 @@ const report = {
   exported_read_functions: csv.exported_read_functions,
   ...summary,
   total_mismatch: total,
-  details,
+  detail_count: detailCount,
+  details: samples,
 };
 fs.writeFileSync(path.join(outputDir, "read_adapter_compare.json"), JSON.stringify(report, null, 2) + "\n", "utf8");
-const lines = ["case,kind,key,column,csv,postgres", ...details.map((d) => [d.case, d.kind, d.key || "", d.column || "", JSON.stringify(d.csv ?? ""), JSON.stringify(d.postgres ?? "")].map((v) => `"${String(v).replaceAll('"', '""')}"`).join(","))];
+const lines = ["case,kind,key,column,csv,postgres", ...samples.map((d) => [d.case, d.kind, d.key || "", d.column || "", JSON.stringify(d.csv ?? ""), JSON.stringify(d.postgres ?? "")].map((v) => `"${String(v).replaceAll('"', '""')}"`).join(","))];
 fs.writeFileSync(path.join(outputDir, "read_adapter_compare.csv"), lines.join("\n") + "\n", "utf8");
-const cases = Object.entries(details.reduce((acc, item) => {
-  const key = `${item.case}:${item.kind}`;
-  acc[key] = (acc[key] || 0) + 1;
-  return acc;
-}, {})).map(([case_kind, count]) => ({ case_kind, count }));
-console.log(JSON.stringify({ ...report, details: details.slice(0, 25), detail_count: details.length, cases }));
+const cases = Object.entries(caseCounts).map(([case_kind, count]) => ({ case_kind, count }));
+console.log(JSON.stringify({ ...report, details: samples.slice(0, 25), cases }));
 process.exit(total === 0 ? 0 : 1);

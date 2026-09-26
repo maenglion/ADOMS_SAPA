@@ -243,3 +243,14 @@
 - 검증: exported READ 함수 30개와 필터 변형을 포함한 77개 case를 기준시점 `2026-09-26`, `Asia/Seoul`로 비교했다. missing rows, extra rows, value, type, ordering, NULL/빈 문자열 mismatch가 모두 0이었다. 기존 golden은 35주소×4역할, HTML 137개, `golden_values.csv` 7,373줄, key metric 159개, calculation crosscheck 68/68을 유지했다. 계산 JSON 5개는 기준본과 byte-identical이었다. TypeScript 정적 검사와 Next.js production build도 통과했다.
 - 관련 파일: `.env.example`, `lib/data-backend.ts`, `lib/db.ts`, `lib/data.ts`, `lib/read-order.ts`, `scripts/read_contract_snapshot.mjs`, `scripts/verify_read_shadow.mjs`, `db/read-shadow/read_comparison_contract.json`, `db/read-shadow/read_order_contract.json`, `db/read-shadow/read_adapter_compare.json`, `db/read-shadow/read_adapter_compare.csv`, `READ_ADAPTER_VERIFY.md`, `WORKLOG.md`
 - 관련 commit: `84465c3`~`bc19fe8`, `8c3b206`
+
+### [23] Netlify PostgreSQL READ Preview 검증 및 Production 전환 보류
+- 상태: 보류
+- 배경: PostgreSQL baseline 25,022행과 READ shadow mismatch 0 검증을 완료한 뒤, 실제 Netlify 실행환경에서 PostgreSQL READ 경로를 먼저 검증하고 모든 회귀 수치가 0일 때만 Production을 전환하기로 했다. 기준 READ adapter commit은 `749c298c33fc6e58faa727abe5f7dd130f968be9`이다.
+- 결정: Preview/branch deploy에만 `ADOMS_DATA_BACKEND=postgres`를 적용하고 Production은 `csv`로 유지한다. Preview에서 회귀 mismatch와 서버 timeout이 확인되어 Production READ cutover를 수행하지 않는다. 재시도 전에는 Preview의 데이터 계약 차이와 `/actions` timeout, 기존 Production CSV 배포의 seed 접근 상태를 해소하고 같은 검증을 다시 통과해야 한다.
+- 이유: 수정된 Preview는 PostgreSQL READ로 연결되고 페이지를 렌더링했으나, 137개 read-only 요청 중 4개 `/actions` 역할별 요청이 HTTP 504였고 extracted value mismatch 178건, expected-only 280건, key metric mismatch 16건이 발생했다. zero-mismatch 성공 조건을 충족하지 못했다.
+- 영향 범위: Netlify Preview/branch deploy 환경변수와 배포 검증, 향후 Production READ 전환 조건. PostgreSQL schema/data, WRITE 경로, upload/storage, CSV/overlay에는 영향이 없다.
+- 실제 변경: Netlify Preview/branch deploy의 backend를 `postgres`, Production backend를 `csv`로 명시했다. Netlify에서 해석할 수 없던 Railway private DB hostname 설정을 기존 외부 접속 URI로 교정해 Preview를 재배포했다. secret 값은 기록하지 않았다. Production은 PostgreSQL로 전환하지 않았고 cutover 시각도 없다. 기존 Production CSV smoke도 golden과 일치하지 않아 별도 배포 seed 경로 문제로 기록했다.
+- 검증: Preview deploy/build는 성공했고 runtime backend가 `postgres`임을 확인했다. read-only golden 요청은 133/137 HTTP 200, 4/137 HTTP 504였으며 value mismatch 178, expected-only 280, key metric mismatch 16이었다. audit log는 PostgreSQL 계약인 최신 100행을 반환했다. 검증 뒤 Railway `adoms2`의 전체 row count를 직접 재실측해 25,022행, 변경 0행을 확인했다. Production은 계속 `csv`이며 WRITE는 전환되지 않았다. rollback 방법은 Production `ADOMS_DATA_BACKEND=csv` 설정 후 재배포이고 현재는 이미 해당 상태라 rollback이 필요 없다.
+- 관련 파일: `READ_CUTOVER_VERIFY.md`, `db/read-shadow/read_cutover_compare.csv`, `WORKLOG.md`
+- 관련 commit: pending

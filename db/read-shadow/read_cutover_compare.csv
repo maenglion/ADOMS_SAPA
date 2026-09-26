@@ -1,0 +1,16 @@
+category,metric,expected,actual,difference,result
+preview_http,attempted_read_only_requests,137,137,0,INFO
+preview_http,http_200,137,133,-4,FAIL
+preview_http,http_504,0,4,4,FAIL
+preview_golden,extracted_values,7373,7093,-280,FAIL
+preview_golden,value_mismatch,0,178,178,FAIL
+preview_golden,expected_only,0,280,280,FAIL
+preview_golden,preview_only,0,0,0,PASS
+preview_metrics,cases,159,159,0,PASS
+preview_metrics,value_mismatch,0,16,16,FAIL
+preview_metrics,missing,0,0,0,PASS
+preview_metrics,extra,0,0,0,PASS
+database,total_rows,25022,25022,0,PASS
+database,row_count_change,0,0,0,PASS
+production,postgres_cutover,0,0,0,NOT_PERFORMED
+

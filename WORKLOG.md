@@ -232,3 +232,14 @@
 - 검증: 실행 직전 TABLE 91, 총 0행, 활성 FK 0, `audit_log.target`·`what` 존재를 확인했다. commit 전 전체 검증과 commit 후 새 연결 독립 검증이 모두 통과했다. 최종 실측은 총 25,022행, table별 expected=actual 91/91, canonical checksum 91/91, PK 중복 0, overlay INSERT 354/354, overlay PATCH 49/49, orphan 제외·provenance 보존 1/1, audit log 무손실 241/241, view SELECT 4/4, 활성 FK 0, source mapping 누락 0이다. 실제 import transaction과 commit 전 검증은 1.864초, 새 연결 독립 검증까지 포함한 총 소요시간은 3.078초였다.
 - 관련 파일: `db/import/import_baseline.mjs`, `db/import/IMPORT_VERIFY.md`, `db/import/import_verify.csv`, `db/import/migration_provenance.json`, `WORKLOG.md`
 - 관련 commit: `439d0e5`, `3a6dbc3`, `66e2feb`, `6ee5338`, `2af798d` (최종 기록 commit은 pending)
+
+### [22] PostgreSQL READ shadow adapter 구현 및 동등성 검증
+- 상태: 완료
+- 배경: Railway PostgreSQL `adoms2`에 91개 table, 25,022행의 baseline 적재와 table별 count·checksum 검증을 완료했지만 실제 화면은 계속 CSV + overlay를 사용하고 있었다. live source 전환 전에 같은 입력에서 PostgreSQL READ가 현재 화면 계약과 완전히 같은 결과를 내는지 독립적으로 확인할 경로가 필요했다.
+- 결정: server-only PostgreSQL READ adapter와 명시적 `ADOMS_DATA_BACKEND` switch를 추가한다. 허용값은 `csv`, `postgres`이고 기본값은 `csv`다. `DATABASE_URL` 존재만으로 전환하지 않는다. 현재 CSV 반환 shape와 값·타입·NULL/빈 문자열·정렬·필터·limit을 정본 계약으로 두고, PostgreSQL은 shadow 비교 대상으로만 사용한다. live 전환 조건은 frozen golden 및 shadow mismatch 0으로 유지한다.
+- 이유: Netlify에 이미 `DATABASE_URL`이 있어도 의도하지 않은 source 전환을 막고, schema 정규화나 PostgreSQL type coercion 때문에 기존 화면 결과가 달라지는 회귀를 사전에 차단하기 위해서다. 물리 DB에 없는 CSV 행 순서는 frozen READ order contract로 보존하고, DB schema에만 존재하는 nullable field는 기존 UI 반환 계약에 노출하지 않는다.
+- 영향 범위: server-side READ 경로, 환경변수 계약, PostgreSQL connection reuse, audit log alias·정렬·limit, golden 및 shadow 검증. WRITE, upload/storage, schema, FK, UI와 Netlify live backend에는 영향이 없다.
+- 실제 변경: `pg` pool 기반 canonical DB access layer, 91개 table·4개 view allowlist, CSV/PostgreSQL backend switch, frozen READ order·comparison contract와 1회성 shadow 검증 경로를 추가했다. `audit_log.changed_at`, `changed_by`는 adapter에서만 `at`, `by`로 alias하고 최신순 100행을 반환한다. 임시 내부 검증 실행이 끝난 뒤 production branch 연결을 해제했고 restart policy `Never`를 유지했다. 앱의 실제 backend는 계속 CSV + overlay다.
+- 검증: exported READ 함수 30개와 필터 변형을 포함한 77개 case를 기준시점 `2026-09-26`, `Asia/Seoul`로 비교했다. missing rows, extra rows, value, type, ordering, NULL/빈 문자열 mismatch가 모두 0이었다. 기존 golden은 35주소×4역할, HTML 137개, `golden_values.csv` 7,373줄, key metric 159개, calculation crosscheck 68/68을 유지했다. 계산 JSON 5개는 기준본과 byte-identical이었다. TypeScript 정적 검사와 Next.js production build도 통과했다.
+- 관련 파일: `.env.example`, `lib/data-backend.ts`, `lib/db.ts`, `lib/data.ts`, `lib/read-order.ts`, `scripts/read_contract_snapshot.mjs`, `scripts/verify_read_shadow.mjs`, `db/read-shadow/read_comparison_contract.json`, `db/read-shadow/read_order_contract.json`, `db/read-shadow/read_adapter_compare.json`, `db/read-shadow/read_adapter_compare.csv`, `READ_ADAPTER_VERIFY.md`, `WORKLOG.md`
+- 관련 commit: `84465c3`, `bc19fe8` 및 후속 검증 보정 commit (최종 기록 commit은 pending)

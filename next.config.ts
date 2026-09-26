@@ -1,4 +1,35 @@
 import type { NextConfig } from "next";
+import fs from "node:fs";
+import path from "node:path";
+
+function frozenSeedTracePlan(): { selected: string[]; historical: string[] } {
+  const root = path.join(process.cwd(), "data", "_데모_용인시_20260920");
+  const directories = fs.readdirSync(root, { withFileTypes: true })
+    .filter((entry) => entry.isDirectory() && (entry.name.startsWith("us_") || entry.name.startsWith("ops_")))
+    .map((entry) => entry.name);
+  const ordered = [
+    ...directories.filter((name) => name.startsWith("us_")).sort().reverse(),
+    ...directories.filter((name) => name.startsWith("ops_")).sort().reverse(),
+  ];
+  const selected = new Map<string, string>();
+  const all: string[] = [];
+  for (const directory of ordered) {
+    const seed = path.join(root, directory, "seed");
+    if (!fs.existsSync(seed)) continue;
+    for (const file of fs.readdirSync(seed).filter((name) => name.endsWith(".csv")).sort()) {
+      const table = file.slice(0, -4);
+      const relative = `./data/_데모_용인시_20260920/${directory}/seed/${file}`;
+      all.push(relative);
+      if (!selected.has(table)) {
+        selected.set(table, relative);
+      }
+    }
+  }
+  const current = new Set(selected.values());
+  return { selected: [...current], historical: all.filter((file) => !current.has(file)) };
+}
+
+const seedTrace = frozenSeedTracePlan();
 
 const nextConfig: NextConfig = {
   reactStrictMode: true,
@@ -10,10 +41,12 @@ const nextConfig: NextConfig = {
   // Keep the frozen seed and generated statutory forms in every server route trace.
   outputFileTracingIncludes: {
     "/*": [
-      "./data/_데모_용인시_20260920/us_*/seed/*.csv",
-      "./data/_데모_용인시_20260920/ops_*/seed/*.csv",
+      ...seedTrace.selected,
       "./data/_데모_용인시_20260920/ops_*/forms/**/*",
     ],
+  },
+  outputFileTracingExcludes: {
+    "/*": seedTrace.historical,
   },
 
   // 화면 왼쪽 아래에 뜨는 개발 표시(동그란 N 아이콘)를 끈다.

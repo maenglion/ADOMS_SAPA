@@ -314,7 +314,7 @@ export async function evidences() {
 /** 시연 중 일어난 일(덮개 기록) — 감사로그 자리. */
 export async function activityLog() {
   if (useDb) return queryAuditLog();
-  return [...readOverlay().log].sort((a, b) => (String(a.at) < String(b.at) ? 1 : -1)).slice(0, 100);
+  return readOverlay().log;
 }
 export async function inspections() {
   if (useDb) return liveTable("inspection");

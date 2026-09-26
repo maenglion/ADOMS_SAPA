@@ -39,6 +39,24 @@ function identityKey(row) {
   return found.length ? found.map((key) => `${key}=${String(row[key])}`).join("|") : JSON.stringify(row);
 }
 
+function sharedIdentityColumns(rows) {
+  if (!rows.every((row) => row && typeof row === "object" && !Array.isArray(row))) return null;
+  let candidates = [...new Set(rows.flatMap((row) => Object.keys(row)))]
+    .filter((key) => /(?:^id$|_id$|_key$|_code$|_no$|^code$)/.test(key)).sort();
+  if (!candidates.length && rows.some((row) => Object.hasOwn(row, "at"))) candidates = ["at", "by", "action", "target"];
+  for (let size = 1; size <= candidates.length; size++) {
+    const columns = candidates.slice(0, size);
+    const keys = rows.map((row) => columns.map((column) => String(row[column] ?? "")).join("\u001f"));
+    if (new Set(keys).size === keys.length) return columns;
+  }
+  return candidates.length ? candidates : null;
+}
+
+function identityWith(row, columns) {
+  if (!columns) return identityKey(row);
+  return columns.map((column) => `${column}=${String(row?.[column] ?? "")}`).join("|");
+}
+
 function compareObject(a, b, name, key, summary, details) {
   for (const column of Object.keys(a)) {
     const csv = a[column];
@@ -70,7 +88,9 @@ function classify(csvValue, dbValue, name, summary, details) {
     details.push({ case: name, kind: "type", csv: "array", postgres: typeof dbValue });
     return;
   }
-  const aKeys = csvValue.map(identityKey), bKeys = dbValue.map(identityKey);
+  const identityColumns = sharedIdentityColumns(csvValue);
+  const aKeys = csvValue.map((row) => identityWith(row, identityColumns));
+  const bKeys = dbValue.map((row) => identityWith(row, identityColumns));
   const unique = new Set(aKeys).size === aKeys.length && new Set(bKeys).size === bKeys.length;
   const aSorted = [...aKeys].sort(), bSorted = [...bKeys].sort();
   const sameMembers = unique && aKeys.length === bKeys.length && aSorted.every((key, index) => key === bSorted[index]);
@@ -85,13 +105,13 @@ function classify(csvValue, dbValue, name, summary, details) {
   if (unique && extra) details.push({ case: name, kind: "extra_keys", keys: bKeys.filter((key) => !aSet.has(key)).slice(0, 10) });
   if (sameMembers && aKeys.some((key, index) => key !== bKeys[index])) {
     summary.ordering_mismatch++;
-    details.push({ case: name, kind: "ordering" });
+    details.push({ case: name, kind: "ordering", csv_keys: aKeys.slice(0, 10), postgres_keys: bKeys.slice(0, 10) });
   }
-  const dbByKey = unique ? new Map(dbValue.map((row) => [identityKey(row), row])) : null;
+  const dbByKey = unique ? new Map(dbValue.map((row) => [identityWith(row, identityColumns), row])) : null;
   const length = Math.min(csvValue.length, dbValue.length);
   for (let index = 0; index < length; index++) {
     const csvRow = csvValue[index];
-    const key = identityKey(csvRow);
+    const key = identityWith(csvRow, identityColumns);
     const dbRow = dbByKey?.get(key) ?? dbValue[index];
     if (dbRow === undefined) continue;
     if (!csvRow || typeof csvRow !== "object" || Array.isArray(csvRow)) {

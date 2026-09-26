@@ -8,6 +8,7 @@ if (!snapshotFile) throw new Error("CSV snapshot path is required");
 const snapshot = JSON.parse(fs.readFileSync(snapshotFile, "utf8"));
 const cases = new Map(snapshot.cases.map((item) => [item.name, item.value]));
 const sources = {
+  duty_class: "duties.default", asset: "assets.default",
   org_dept: "depts", staff: "staff", form_template: "forms", contract: "contracts",
   inspection_batch: "inspectionBatches", contract_duty: "contractDuties", safety_budget: "budgets",
   training_record: "trainings", worker_voice: "voices", incident: "incidents",

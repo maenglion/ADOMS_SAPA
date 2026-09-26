@@ -14,6 +14,7 @@
  */
 import "server-only";
 import { readTable, staff, tasks, approvals, type Row } from "@/lib/data";   // 09-26 사용자: 옛 점검 화면 합치기 2차 — tasks(항목 판정으로 승인)
+import { withDbReadScope } from "@/lib/db";
 import type { TrackKey } from "@/lib/us/tracks";
 import { batchList } from "@/lib/cycle";
 import {
@@ -69,6 +70,10 @@ export type CheckFlag = {
  * 과제 판정(②)이 이긴 칸은 옛 목록에 과제 줄로 이미 있으므로 넣지 않는다(두 번 세지 않게).
  */
 export async function checkFlagged(year: string, role: string): Promise<CheckFlag[]> {
+  return withDbReadScope("checkFlagged", () => checkFlaggedInner(year, role));
+}
+
+async function checkFlaggedInner(year: string, role: string): Promise<CheckFlag[]> {
   const notif = (await readTable("notification", "notif_id")).filter((n) => n.note === "이행점검" && n.notif_type === "조치요구");
   const st = await staff();
   const owner = (d: string) => (st.find((s: Row) => s.dept_id === d && s.duty_role === "정담당") || st.find((s: Row) => s.dept_id === d))?.staff_id || "";

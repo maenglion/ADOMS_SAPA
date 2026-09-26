@@ -15,6 +15,7 @@ import { ymd } from "@/lib/day";
 // 09-26 사용자: 옛 점검 화면 합치기 — 이행점검 판정(항목 단위)의 보완필요·미이행을 이 목록에 함께(읽을 때 합친다)
 import { OLD_CHECK_MERGED, checkFlagged, laterJudgeIndex, reviewHrefOfCode, trackOfBatch, type CheckFlag } from "@/lib/check_merge";
 import { NAME, fmtAt } from "@/app/check/_lib";
+import { withDbReadTrace } from "@/lib/db";
 
 export const dynamic = "force-dynamic";
 
@@ -40,7 +41,11 @@ function TypeSelect({ v }: { v: string }) {
   );
 }
 
-export default async function Actions({ searchParams }: { searchParams: Promise<Record<string, string>> }) {
+export default async function Actions(props: { searchParams: Promise<Record<string, string>> }) {
+  return withDbReadTrace("/actions", () => renderActions(props));
+}
+
+async function renderActions({ searchParams }: { searchParams: Promise<Record<string, string>> }) {
   const sp = await searchParams;
   const role = sp.role || "gm";
   const myDept = deptOf(role);

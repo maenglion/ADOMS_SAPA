@@ -1,7 +1,88 @@
 import "server-only";
+import { AsyncLocalStorage } from "node:async_hooks";
 import { Pool, types, type PoolConfig } from "pg";
 
 export type DbRow = Record<string, any>;
+
+type QueryTupleMetric = {
+  relation: string;
+  query: string;
+  logicalCalls: number;
+  sqlCalls: number;
+  dbMs: number;
+};
+
+type DbReadTrace = {
+  label: string;
+  startedAt: number;
+  logicalCalls: number;
+  sqlCalls: number;
+  cacheHits: number;
+  dbMs: number;
+  cache: Map<string, Promise<DbRow[]>>;
+  tuples: Map<string, QueryTupleMetric>;
+  scopes: Map<string, { logicalCalls: number; sqlCalls: number; cacheHits: number; dbMs: number; tuples: Set<string> }>;
+};
+
+const dbReadTrace = new AsyncLocalStorage<DbReadTrace>();
+const dbReadScope = new AsyncLocalStorage<string>();
+
+const roundMs = (value: number) => Math.round(value * 100) / 100;
+const cloneRows = (rows: DbRow[]) => rows.map((row) => ({ ...row }));
+
+/**
+ * Request-local PostgreSQL read cache and measurement boundary. Only callers
+ * explicitly wrapped with this function are memoized; no data survives the
+ * current server render.
+ */
+export async function withDbReadTrace<T>(label: string, run: () => Promise<T>): Promise<T> {
+  const trace: DbReadTrace = {
+    label,
+    startedAt: performance.now(),
+    logicalCalls: 0,
+    sqlCalls: 0,
+    cacheHits: 0,
+    dbMs: 0,
+    cache: new Map(),
+    tuples: new Map(),
+    scopes: new Map(),
+  };
+  return dbReadTrace.run(trace, async () => {
+    try {
+      return await run();
+    } finally {
+      const tuples = [...trace.tuples.values()].map((item) => ({
+        ...item,
+        dbMs: roundMs(item.dbMs),
+      }));
+      const scopes = Object.fromEntries([...trace.scopes].map(([scope, item]) => [scope, {
+        logicalCalls: item.logicalCalls,
+        distinctTuples: item.tuples.size,
+        duplicateCalls: item.logicalCalls - item.tuples.size,
+        sqlCalls: item.sqlCalls,
+        cacheHits: item.cacheHits,
+        dbMs: roundMs(item.dbMs),
+      }]));
+      console.info("[adoms-read-metrics]", JSON.stringify({
+        label: trace.label,
+        logicalCalls: trace.logicalCalls,
+        distinctTuples: trace.tuples.size,
+        duplicateCalls: trace.logicalCalls - trace.tuples.size,
+        sqlCalls: trace.sqlCalls,
+        cacheHits: trace.cacheHits,
+        dbMs: roundMs(trace.dbMs),
+        dataRenderMs: roundMs(performance.now() - trace.startedAt),
+        scopes,
+        tuples,
+      }));
+    }
+  });
+}
+
+/** Attach a logical sub-operation such as checkFlagged to the current trace. */
+export async function withDbReadScope<T>(scope: string, run: () => Promise<T>): Promise<T> {
+  return dbReadScope.run(scope, run);
+}
 
 const RELATIONS = new Set([
   "action", "annual_schedule", "asset", "asset_target_map", "audit_log", "budget_exec",
@@ -75,6 +156,41 @@ export function postgresPool(): Pool {
  * column identifiers must pass the strict identifier grammar above.
  */
 export async function queryRows(relation: string, queryString: string): Promise<DbRow[]> {
+  const trace = dbReadTrace.getStore();
+  const scopeName = dbReadScope.getStore();
+  const tupleKey = `${relation}\u0000${queryString}`;
+  if (trace) {
+    trace.logicalCalls++;
+    const tuple = trace.tuples.get(tupleKey) || {
+      relation,
+      query: queryString,
+      logicalCalls: 0,
+      sqlCalls: 0,
+      dbMs: 0,
+    };
+    tuple.logicalCalls++;
+    trace.tuples.set(tupleKey, tuple);
+    if (scopeName) {
+      const scope = trace.scopes.get(scopeName) || {
+        logicalCalls: 0,
+        sqlCalls: 0,
+        cacheHits: 0,
+        dbMs: 0,
+        tuples: new Set<string>(),
+      };
+      scope.logicalCalls++;
+      scope.tuples.add(tupleKey);
+      trace.scopes.set(scopeName, scope);
+    }
+    const cached = trace.cache.get(tupleKey);
+    if (cached) {
+      trace.cacheHits++;
+      if (scopeName) trace.scopes.get(scopeName)!.cacheHits++;
+      return cloneRows(await cached);
+    }
+  }
+
+  const execute = async (): Promise<DbRow[]> => {
   const params = new URLSearchParams(queryString);
   const values: any[] = [];
   const where: string[] = [];
@@ -131,8 +247,33 @@ export async function queryRows(relation: string, queryString: string): Promise<
   // immutable baseline tables. Views must always provide an explicit order.
   if (!order && !VIEWS.has(relation)) order = " ORDER BY ctid";
   const sql = `SELECT ${select} FROM ${relationName(relation)}${where.length ? ` WHERE ${where.join(" AND ")}` : ""}${order}${limit}`;
-  const result = await postgresPool().query(sql, values);
-  return result.rows;
+    const startedAt = performance.now();
+    const result = await postgresPool().query(sql, values);
+    const elapsed = performance.now() - startedAt;
+    if (trace) {
+      trace.sqlCalls++;
+      trace.dbMs += elapsed;
+      const tuple = trace.tuples.get(tupleKey)!;
+      tuple.sqlCalls++;
+      tuple.dbMs += elapsed;
+      if (scopeName) {
+        const scope = trace.scopes.get(scopeName)!;
+        scope.sqlCalls++;
+        scope.dbMs += elapsed;
+      }
+    }
+    return result.rows;
+  };
+
+  if (!trace) return execute();
+  const pending = execute();
+  trace.cache.set(tupleKey, pending);
+  try {
+    return cloneRows(await pending);
+  } catch (error) {
+    trace.cache.delete(tupleKey);
+    throw error;
+  }
 }
 
 /** Existing audit-log contract: physical changed_* names are aliased only here. */

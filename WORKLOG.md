@@ -177,3 +177,25 @@
 - 검증: dry-run은 `READY`다. seed 24,668행, overlay INSERT 354행, overlay PATCH 49건, orphan 제외 1건, provenance 보존 1건, 최종 예상 25,022행이다. 감사로그 241/241행을 무손실 mapping했고 PK 중복 0건, 미해결 patch 0건, DB/source table mapping 누락 0건, source column 누락 table 0개를 확인했다.
 - 관련 파일: `db/migrations/0004_import_compat.sql`, `db/import/import_baseline.mjs`, `db/import/IMPORT_PLAN.md`, `db/import/import_manifest.csv`, `db/import/migration_provenance.json`, `db/import/BLOCKER_RESOLUTION.md`, `WORKLOG.md`
 - 관련 commit: pending
+
+### [17] Railway import 호환 migration 적용 및 baseline import rollback
+- 상태: 보류
+- 배경: dry-run이 `READY`인 baseline을 Railway PostgreSQL에 적재하기 전에 `audit_log.target`, `audit_log.what`을 추가하고, 전체 적재와 내용 검증을 하나의 transaction으로 수행하려 했다.
+- 결정: `0004_import_compat.sql` 적용 결과는 유지한다. baseline import 실패에 대해 스키마나 데이터를 임의 보정하지 않고 transaction rollback 상태를 보존하며, importer가 identity column을 INSERT 대상에서 제외하도록 수정·재검증되기 전에는 재적재와 앱 전환을 수행하지 않는다.
+- 이유: PostgreSQL catalog에서 `audit_log.log_id`는 `is_identity = YES`, `is_generated = NEVER`인 `NOT NULL` column인데 importer가 `is_generated`만 확인해 `log_id`에 `NULL`을 전달하면서 SQLSTATE `23502`가 발생했다. migration SQL이나 원본 데이터의 문제가 아니라 importer의 server-generated column 판별 누락이다.
+- 영향 범위: Railway PostgreSQL `adoms2.audit_log`, baseline import script, import 검증, 향후 PostgreSQL adapter 전환
+- 실제 변경: `0004_import_compat.sql`을 별도 transaction으로 적용해 `audit_log.target TEXT`, `audit_log.what TEXT`를 추가했다. 이어진 baseline import는 첫 `audit_log` INSERT 오류로 중단하고 전체 transaction을 rollback했다. seed/data는 커밋되지 않았고 앱은 계속 CSV + overlay mode다.
+- 검증: 0004 적용 후 TABLE 91, VIEW 4, PK 52, 활성 FK 0, 전체 0행을 확인했다. import 실패 후 다시 직접 실측하여 TABLE 91, VIEW 4, PK 52, 활성 FK 0, 전체 0행, 비어 있지 않은 table 0개를 확인했다. `TSK-000782`를 포함한 어떠한 baseline 행도 DB에 남지 않았다.
+- 관련 파일: `db/migrations/0004_import_compat.sql`, `db/import/import_baseline.mjs`, `db/import/IMPORT_VERIFY.md`, `db/import/import_verify.csv`, `WORKLOG.md`
+- 관련 commit: pending
+
+### [18] Identity column 처리 수정 및 baseline import 재시도 rollback
+- 상태: 보류
+- 배경: 첫 baseline import가 `audit_log.log_id` identity column에 명시적 `NULL`을 전달해 실패했으므로, Railway catalog의 identity column 전수와 source 식별값 보존 필요성을 먼저 확인했다.
+- 결정: importer는 `information_schema.columns.is_identity`와 `identity_generation`을 읽어 INSERT column을 결정한다. source row에 identity 값이 전혀 없으면 DB 생성용 surrogate로서 제외한다. source 값이 일부만 있거나 `ALWAYS` identity에 값이 있으면 임의 생성·제외하지 않고 차단한다. `BY DEFAULT` identity에 모든 source 값이 있으면 기존 식별값을 보존한다.
+- 이유: 명시적 `NULL`로 identity 생성을 막지 않으면서도 기존 식별값과 참조관계를 임의 재발번으로 훼손하지 않기 위해서다. 실측된 유일한 identity는 `adoms2.audit_log.log_id`이고, 241개 `overlay.log` source row에 값이 없으며 다른 source가 이를 참조하지 않는 단순 surrogate key다. `usf_ceo_log.log_id`는 별도 table의 text 업무 식별자이므로 이 결정 대상이 아니다.
+- 영향 범위: baseline import column 선택, identity 식별값 보존, audit log 적재, Railway PostgreSQL data import
+- 실제 변경: importer가 live catalog의 identity 속성과 source 값 존재 수를 비교하도록 수정했다. `audit_log.log_id`는 INSERT 목록에서 제외하고 PostgreSQL이 생성하도록 했다. 첫 실패 보고서는 별도 파일로 보존했다. 수정 후 실제 import를 단일 transaction으로 재시도했으나 장시간 처리 중 외부 DB 연결이 종료되어 commit되지 않았다.
+- 검증: 수정 후 dry-run은 `READY`이며 final 25,022행, PK 중복 0, source mapping 누락 0, source column 누락 table 0을 유지했다. live preflight도 `audit_log.log_id`, `BY DEFAULT`, source 값 0/241, `EXCLUDE_FROM_INSERT`로 판정했다. 연결 종료 후 새 연결로 TABLE 91, 전체 0행, 비어 있지 않은 table 0개를 직접 확인해 transaction rollback을 검증했다. 앱은 계속 CSV + overlay mode다.
+- 관련 파일: `db/import/import_baseline.mjs`, `db/import/IDENTITY_AUDIT.md`, `db/import/IMPORT_VERIFY.md`, `db/import/IMPORT_VERIFY_FAILED_20260926.md`, `db/import/import_verify.csv`, `WORKLOG.md`
+- 관련 commit: pending

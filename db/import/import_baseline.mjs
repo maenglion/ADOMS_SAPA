@@ -14,8 +14,16 @@ function argValue(name) {
   return i >= 0 ? process.argv[i + 1] : "";
 }
 
-if (!process.argv.includes("--dry-run")) {
-  console.error("This draft is dry-run only. Pass --dry-run; database writes are not implemented.");
+const mode = process.argv.includes("--apply-compat")
+  ? "apply-compat"
+  : process.argv.includes("--apply")
+    ? "apply"
+    : process.argv.includes("--dry-run")
+      ? "dry-run"
+      : "";
+
+if (!mode) {
+  console.error("Pass exactly one mode: --dry-run, --apply-compat, or --apply.");
   process.exit(64);
 }
 
@@ -26,8 +34,11 @@ const dataRoot = path.resolve(
 const overlayPath = path.resolve(repoRoot, argValue("--overlay") || ".data/overlay.json");
 const manifestPath = path.resolve(repoRoot, argValue("--manifest") || "db/import/import_manifest.csv");
 const provenancePath = path.resolve(repoRoot, argValue("--provenance") || "db/import/migration_provenance.json");
+const verifyCsvPath = path.resolve(repoRoot, argValue("--verify-csv") || "db/import/import_verify.csv");
+const verifyMdPath = path.resolve(repoRoot, argValue("--verify-md") || "db/import/IMPORT_VERIFY.md");
 const tablesSqlPath = path.join(repoRoot, "db/migrations/0001_tables.sql");
 const constraintsSqlPath = path.join(repoRoot, "db/migrations/0002_constraints.sql");
+const viewsSqlPath = path.join(repoRoot, "db/migrations/0003_views.sql");
 const compatibilitySqlPath = path.join(repoRoot, "db/migrations/0004_import_compat.sql");
 
 const EXCLUDED_SOURCE_TABLES = new Set(["accident_case", "accident_stat"]);
@@ -128,13 +139,16 @@ function parseSchema(sql) {
   for (const match of sql.matchAll(re)) {
     const columns = [];
     const generated = new Set();
+    const identity = new Map();
     for (const line of match[2].split(/\r?\n/)) {
       const col = line.match(/^\s*"([^"]+)"\s+(.+?)(?:,)?\s*$/);
       if (!col) continue;
       columns.push(col[1]);
       if (/\bGENERATED\b/i.test(col[2])) generated.add(col[1]);
+      const identityMatch = col[2].match(/\bGENERATED\s+(ALWAYS|BY DEFAULT)\s+AS IDENTITY\b/i);
+      if (identityMatch) identity.set(col[1], identityMatch[1].toUpperCase());
     }
-    tables.set(match[1], { columns, generated });
+    tables.set(match[1], { columns, generated, identity });
   }
   return tables;
 }
@@ -284,6 +298,12 @@ function applyPatchSet(table, rows, patchSet, keyColumns, counters, confirmedExc
     }
     rows[index] = { ...rows[index], ...patch };
     counters.overlayPatchesByTable.set(table, (counters.overlayPatchesByTable.get(table) || 0) + 1);
+    counters.appliedPatchRecords.push({
+      table,
+      keyColumns: [...keyColumns],
+      rawKey: String(rawKey),
+      patch: { ...patch },
+    });
   }
   return rows;
 }
@@ -309,6 +329,7 @@ const counters = {
   mappingIssues: [],
   orphanExcluded: 0,
   orphanExcludedDetails: [],
+  appliedPatchRecords: [],
 };
 
 const selected = new Map();
@@ -316,6 +337,7 @@ for (const table of schema.keys()) selected.set(table, readSeed(table, dirs));
 const taskApproval = readSeed("task_approval_patch", dirs);
 
 const tables = new Map();
+const overlayInsertRowsByTable = new Map();
 const sourceHeaders = new Map();
 for (const [table, seedInfo] of selected) {
   tables.set(table, seedInfo.rows.map((row) => ({ ...row })));
@@ -327,10 +349,12 @@ for (const [table, seedInfo] of selected) {
 const auditSourceRows = overlay.log || [];
 const auditMapping = mapAuditRows(auditSourceRows);
 tables.set("audit_log", auditMapping.rows);
+overlayInsertRowsByTable.set("audit_log", auditMapping.rows);
 counters.overlayInsertsByTable.set("audit_log", auditMapping.rows.length);
 
 for (const [table, rows] of [["evidence", overlay.evidence || []], ["inspection", overlay.inspection || []]]) {
   tables.set(table, [...rows.map((row) => ({ ...row })), ...(tables.get(table) || [])]);
+  overlayInsertRowsByTable.set(table, rows.map((row) => ({ ...row })));
   counters.overlayInsertsByTable.set(table, rows.length);
 }
 
@@ -340,6 +364,10 @@ for (const [table, added] of Object.entries(overlay.tables || {})) {
     continue;
   }
   tables.set(table, [...added.map((row) => ({ ...row })), ...(tables.get(table) || [])]);
+  overlayInsertRowsByTable.set(table, [
+    ...(overlayInsertRowsByTable.get(table) || []),
+    ...added.map((row) => ({ ...row })),
+  ]);
   counters.overlayInsertsByTable.set(table, (counters.overlayInsertsByTable.get(table) || 0) + added.length);
 }
 
@@ -487,8 +515,550 @@ const provenancePreserved = provenanceRoundTrip.records.filter((record) => {
 }).length;
 const manifestHash = crypto.createHash("sha256").update(fs.readFileSync(manifestPath)).digest("hex");
 const provenanceHash = crypto.createHash("sha256").update(fs.readFileSync(provenancePath)).digest("hex");
+const dryRunIdentityDecisions = [];
+for (const [table, target] of schema) {
+  for (const [column, identityGeneration] of target.identity) {
+    const rows = tables.get(table) || [];
+    const sourceRowsWithValue = rows.filter((row) => Object.hasOwn(row, column)).length;
+    dryRunIdentityDecisions.push({
+      table,
+      column,
+      identityGeneration,
+      sourceRows: rows.length,
+      sourceRowsWithValue,
+      action: sourceRowsWithValue === 0 ? "EXCLUDE_FROM_INSERT" : "PRESERVE_SOURCE_IDENTITY",
+    });
+  }
+}
 
-console.log("ADOMS baseline import dry-run");
+function quoteIdent(value) {
+  return '"' + String(value).replaceAll('"', '""') + '"';
+}
+
+function requireDatabaseUrl() {
+  const value = process.env.DATABASE_PUBLIC_URL || "";
+  if (!/^postgres(?:ql)?:\/\//.test(value)) {
+    fail("DATABASE_PUBLIC_URL must be a complete PostgreSQL URI.");
+  }
+  return value;
+}
+
+async function openDatabase() {
+  const { Client } = await import("pg");
+  const client = new Client({
+    connectionString: requireDatabaseUrl(),
+    connectionTimeoutMillis: 15000,
+  });
+  await client.connect();
+  return client;
+}
+
+async function readStructure(client) {
+  const [schemas, tablesResult, viewsResult, columnsResult, pkResult, fkResult, objectsResult] = await Promise.all([
+    client.query("SELECT schema_name FROM information_schema.schemata WHERE schema_name = 'adoms2'"),
+    client.query("SELECT table_name FROM information_schema.tables WHERE table_schema = 'adoms2' AND table_type = 'BASE TABLE' ORDER BY table_name"),
+    client.query("SELECT table_name FROM information_schema.views WHERE table_schema = 'adoms2' ORDER BY table_name"),
+    client.query("SELECT table_name, column_name, ordinal_position, data_type, udt_name, is_generated, is_identity, identity_generation FROM information_schema.columns WHERE table_schema = 'adoms2' ORDER BY table_name, ordinal_position"),
+    client.query("SELECT c.relname AS table_name, array_agg(a.attname ORDER BY k.ordinality) AS columns FROM pg_catalog.pg_class c JOIN pg_catalog.pg_namespace n ON n.oid = c.relnamespace JOIN pg_catalog.pg_index i ON i.indrelid = c.oid AND i.indisprimary CROSS JOIN LATERAL unnest(i.indkey) WITH ORDINALITY AS k(attnum, ordinality) JOIN pg_catalog.pg_attribute a ON a.attrelid = c.oid AND a.attnum = k.attnum WHERE n.nspname = 'adoms2' GROUP BY c.relname ORDER BY c.relname"),
+    client.query("SELECT count(*)::int AS count FROM pg_catalog.pg_constraint c JOIN pg_catalog.pg_namespace n ON n.oid = c.connamespace WHERE n.nspname = 'adoms2' AND c.contype = 'f'"),
+    client.query("SELECT relkind, count(*)::int AS count FROM pg_catalog.pg_class c JOIN pg_catalog.pg_namespace n ON n.oid = c.relnamespace WHERE n.nspname = 'adoms2' GROUP BY relkind ORDER BY relkind"),
+  ]);
+  const columns = new Map();
+  for (const row of columnsResult.rows) {
+    if (!columns.has(row.table_name)) columns.set(row.table_name, []);
+    columns.get(row.table_name).push({
+      name: row.column_name,
+      dataType: row.data_type,
+      udtName: row.udt_name,
+      generated: row.is_generated === "ALWAYS",
+      identity: row.is_identity === "YES",
+      identityGeneration: row.identity_generation || "",
+    });
+  }
+  return {
+    schemaExists: schemas.rowCount === 1,
+    tables: tablesResult.rows.map((row) => row.table_name),
+    views: viewsResult.rows.map((row) => row.table_name),
+    columns,
+    primaryKeys: new Map(pkResult.rows.map((row) => [row.table_name, row.columns])),
+    pkCount: pkResult.rowCount,
+    fkCount: fkResult.rows[0].count,
+    objects: Object.fromEntries(objectsResult.rows.map((row) => [row.relkind, row.count])),
+    columnCount: columnsResult.rowCount,
+  };
+}
+
+async function readCounts(client, tableNames) {
+  const counts = new Map();
+  for (const table of tableNames) {
+    const result = await client.query("SELECT count(*)::int AS count FROM adoms2." + quoteIdent(table));
+    counts.set(table, result.rows[0].count);
+  }
+  return counts;
+}
+
+function sumCounts(counts) {
+  return [...counts.values()].reduce((sum, value) => sum + Number(value), 0);
+}
+
+function sameStringSet(actual, expected) {
+  return actual.length === expected.length && [...actual].sort().every((value, index) => value === [...expected].sort()[index]);
+}
+
+function canonicalValue(value, meta) {
+  if (value === null || value === undefined) return null;
+  if (meta.dataType === "json" || meta.dataType === "jsonb") {
+    if (typeof value === "string") {
+      try { return JSON.parse(value); } catch { return value; }
+    }
+    return value;
+  }
+  if (meta.dataType === "boolean") {
+    if (typeof value === "boolean") return value;
+    const lowered = String(value).toLowerCase();
+    if (["true", "t", "1", "yes", "y", "on"].includes(lowered)) return true;
+    if (["false", "f", "0", "no", "n", "off"].includes(lowered)) return false;
+  }
+  if (meta.dataType.includes("timestamp")) {
+    if (value instanceof Date) return value.toISOString();
+    const parsed = new Date(String(value));
+    if (!Number.isNaN(parsed.getTime())) return parsed.toISOString();
+  }
+  if (value instanceof Date) return value.toISOString();
+  if (Array.isArray(value)) return value.map((item) => item === null ? null : String(item));
+  if (typeof value === "object") return value;
+  return String(value);
+}
+
+function canonicalRows(rows, columnMeta, keyColumns = [], excludedColumns = new Set()) {
+  const included = columnMeta.filter((column) => !column.generated && !excludedColumns.has(column.name));
+  const metaByName = new Map(columnMeta.map((column) => [column.name, column]));
+  const serialized = rows.map((row) => {
+    const values = included.map((column) => canonicalValue(row[column.name], column));
+    const payload = JSON.stringify(values);
+    const usableKeys = keyColumns.filter((column) => !metaByName.get(column)?.generated && !excludedColumns.has(column));
+    const key = usableKeys.length
+      ? JSON.stringify(usableKeys.map((column) => canonicalValue(row[column], metaByName.get(column))))
+      : payload;
+    return { key, payload };
+  });
+  serialized.sort((a, b) => a.key.localeCompare(b.key) || a.payload.localeCompare(b.payload));
+  const text = serialized.map((item) => item.payload).join("\n");
+  return {
+    hash: crypto.createHash("sha256").update(text, "utf8").digest("hex"),
+    text,
+  };
+}
+
+function normalizedSubset(row, columns, metaByName) {
+  return JSON.stringify(columns.map((column) => canonicalValue(row[column], metaByName.get(column))));
+}
+
+function countSignatures(rows, columns, metaByName) {
+  const counts = new Map();
+  for (const row of rows) {
+    const signature = normalizedSubset(row, columns, metaByName);
+    counts.set(signature, (counts.get(signature) || 0) + 1);
+  }
+  return counts;
+}
+
+async function fetchAllRows(client, structure) {
+  const rowsByTable = new Map();
+  for (const table of structure.tables) {
+    const columns = structure.columns.get(table) || [];
+    const selectList = columns.map((column) => quoteIdent(column.name)).join(", ");
+    const result = await client.query("SELECT " + selectList + " FROM adoms2." + quoteIdent(table));
+    rowsByTable.set(table, result.rows);
+  }
+  return rowsByTable;
+}
+
+function prepareDbValue(value) {
+  if (value === undefined || value === null) return null;
+  if (typeof value === "object") return JSON.stringify(value);
+  return value;
+}
+
+function analyzeIdentityColumns(structure) {
+  const decisions = [];
+  for (const table of structure.tables) {
+    const rows = tables.get(table) || [];
+    for (const column of structure.columns.get(table) || []) {
+      if (!column.identity) continue;
+      const sourceRowsWithValue = rows.filter((row) => Object.hasOwn(row, column.name)).length;
+      let action = "EXCLUDE_FROM_INSERT";
+      let reason = "source rows do not contain this identity column; database generates the surrogate key";
+      if (sourceRowsWithValue > 0 && sourceRowsWithValue < rows.length) {
+        action = "BLOCK_PARTIAL_SOURCE_IDENTITY";
+        reason = "only some source rows contain an identity value; NULL or arbitrary regeneration is prohibited";
+      } else if (sourceRowsWithValue === rows.length && rows.length > 0) {
+        action = column.identityGeneration === "BY DEFAULT"
+          ? "INSERT_SOURCE_IDENTITY"
+          : "BLOCK_ALWAYS_IDENTITY";
+        reason = column.identityGeneration === "BY DEFAULT"
+          ? "every source row contains an identity value, so existing identifiers must be preserved"
+          : "source identifiers exist but the database identity is ALWAYS; explicit override requires a separate decision";
+      }
+      decisions.push({
+        schema: "adoms2",
+        table,
+        column: column.name,
+        identityGeneration: column.identityGeneration,
+        sourceRows: rows.length,
+        sourceRowsWithValue,
+        action,
+        reason,
+      });
+    }
+  }
+  return decisions;
+}
+
+function identityExclusionsForTable(decisions, table) {
+  return new Set(decisions
+    .filter((decision) => decision.table === table && decision.action === "EXCLUDE_FROM_INSERT")
+    .map((decision) => decision.column));
+}
+
+async function insertAllTables(client, structure) {
+  const identityDecisions = analyzeIdentityColumns(structure);
+  const blocked = identityDecisions.filter((decision) => decision.action.startsWith("BLOCK_"));
+  if (blocked.length) {
+    fail("Identity handling is unresolved: " + blocked.map((item) => item.table + "." + item.column + "=" + item.action).join(", "));
+  }
+  for (const table of structure.tables) {
+    const target = schema.get(table);
+    const rows = tables.get(table) || [];
+    if (!target || rows.length === 0) continue;
+    const excludedIdentity = identityExclusionsForTable(identityDecisions, table);
+    const columns = (structure.columns.get(table) || [])
+      .filter((column) => !column.generated && !excludedIdentity.has(column.name));
+    const names = columns.map((column) => column.name);
+    const chunkSize = Math.max(1, Math.min(100, Math.floor(60000 / Math.max(1, names.length))));
+    for (let start = 0; start < rows.length; start += chunkSize) {
+      const chunk = rows.slice(start, start + chunkSize);
+      const values = [];
+      const groups = chunk.map((row) => {
+        const slots = names.map((name) => {
+          values.push(prepareDbValue(row[name]));
+          return "$" + values.length;
+        });
+        return "(" + slots.join(", ") + ")";
+      });
+      const sql = "INSERT INTO adoms2." + quoteIdent(table)
+        + " (" + names.map(quoteIdent).join(", ") + ") VALUES " + groups.join(", ");
+      await client.query(sql, values);
+    }
+  }
+}
+
+async function verifyDatabase(client) {
+  const errors = [];
+  const structure = await readStructure(client);
+  const expectedTables = [...schema.keys()].sort();
+  const expectedViews = [...fs.readFileSync(viewsSqlPath, "utf8").matchAll(/CREATE VIEW adoms2\."([^"]+)"/g)]
+    .map((match) => match[1])
+    .sort();
+  if (!structure.schemaExists) errors.push("schema adoms2 is missing");
+  if (!sameStringSet(structure.tables, expectedTables)) errors.push("physical table set differs from the 91-table migration target");
+  if (!sameStringSet(structure.views, expectedViews)) errors.push("view set differs from the 4-view migration target");
+  if (structure.pkCount !== 52) errors.push("primary key count is " + structure.pkCount + ", expected 52");
+  if (structure.fkCount !== 0) errors.push("active foreign key count is " + structure.fkCount + ", expected 0");
+
+  const counts = await readCounts(client, structure.tables);
+  const rowsByTable = await fetchAllRows(client, structure);
+  const identityDecisions = analyzeIdentityColumns(structure);
+  const verifyRows = [];
+  let pkDuplicateTotalActual = 0;
+  let overlayInsertVerified = 0;
+  let overlayPatchVerified = 0;
+
+  for (const row of manifest) {
+    const table = row.table;
+    const actualRows = rowsByTable.get(table) || [];
+    const actualCount = counts.get(table) || 0;
+    const expectedRows = tables.get(table) || [];
+    const columnMeta = structure.columns.get(table) || [];
+    const excludedIdentity = identityExclusionsForTable(identityDecisions, table);
+    const generated = new Set(columnMeta
+      .filter((column) => column.generated || excludedIdentity.has(column.name))
+      .map((column) => column.name));
+    const pk = structure.primaryKeys.get(table) || [];
+    const actualDuplicate = duplicates(actualRows, pk, generated);
+    const expectedCanonical = canonicalRows(expectedRows, columnMeta, pk, excludedIdentity);
+    const actualCanonical = canonicalRows(actualRows, columnMeta, pk, excludedIdentity);
+    const insertSource = overlayInsertRowsByTable.get(table) || [];
+    let tableInsertVerified = 0;
+    if (insertSource.length) {
+      const metaByName = new Map(columnMeta.map((column) => [column.name, column]));
+      const insertColumns = [...sourceColumns(insertSource)].sort();
+      const needed = countSignatures(insertSource, insertColumns, metaByName);
+      const available = countSignatures(actualRows, insertColumns, metaByName);
+      const allPresent = [...needed].every(([signature, count]) => (available.get(signature) || 0) >= count);
+      if (allPresent) tableInsertVerified = insertSource.length;
+      else errors.push(table + ": one or more overlay INSERT rows are not present with all mapped values");
+    }
+    const expectedCount = Number(row.final_expected_rows);
+    const difference = actualCount - expectedCount;
+    if (difference !== 0) errors.push(table + ": row count " + actualCount + ", expected " + expectedCount);
+    if (actualDuplicate.count !== 0) errors.push(table + ": " + actualDuplicate.count + " duplicate primary-key rows");
+    if (expectedCanonical.hash !== actualCanonical.hash) errors.push(table + ": canonical content checksum mismatch");
+    pkDuplicateTotalActual += actualDuplicate.count;
+    overlayInsertVerified += tableInsertVerified;
+    verifyRows.push({
+      table,
+      expected_rows: expectedCount,
+      actual_rows: actualCount,
+      difference,
+      pk_columns: pk.join("+"),
+      pk_duplicate_rows: actualDuplicate.count,
+      overlay_insert_expected: insertSource.length,
+      overlay_insert_verified: tableInsertVerified,
+      overlay_patch_expected: counters.overlayPatchesByTable.get(table) || 0,
+      overlay_patch_verified: 0,
+      expected_checksum_sha256: expectedCanonical.hash,
+      actual_checksum_sha256: actualCanonical.hash,
+      checksum_match: expectedCanonical.hash === actualCanonical.hash ? "YES" : "NO",
+      status: difference === 0 && actualDuplicate.count === 0 && expectedCanonical.hash === actualCanonical.hash && tableInsertVerified === insertSource.length ? "PASS" : "FAIL",
+    });
+  }
+
+  for (const record of counters.appliedPatchRecords) {
+    const columnMeta = structure.columns.get(record.table) || [];
+    const metaByName = new Map(columnMeta.map((column) => [column.name, column]));
+    const rows = rowsByTable.get(record.table) || [];
+    const expectedKey = record.keyColumns.length === 1
+      ? String(record.rawKey)
+      : String(record.rawKey).split("|").join("\u001f");
+    const actual = rows.find((row) => keyFor(row, record.keyColumns) === expectedKey);
+    const patchColumns = Object.keys(record.patch).sort();
+    const matches = actual
+      && normalizedSubset(actual, patchColumns, metaByName) === normalizedSubset(record.patch, patchColumns, metaByName);
+    if (matches) {
+      overlayPatchVerified += 1;
+      const verifyRow = verifyRows.find((item) => item.table === record.table);
+      verifyRow.overlay_patch_verified += 1;
+    } else errors.push(record.table + ":" + record.rawKey + ": overlay PATCH values do not match");
+  }
+
+  const orphanResult = await client.query("SELECT count(*)::int AS count FROM adoms2.\"compliance_task\" WHERE \"task_id\" = $1", ["TSK-000782"]);
+  const orphanAbsent = orphanResult.rows[0].count === 0;
+  if (!orphanAbsent) errors.push("TSK-000782 exists in compliance_task");
+
+  const auditRows = rowsByTable.get("audit_log") || [];
+  const auditMeta = new Map((structure.columns.get("audit_log") || []).map((column) => [column.name, column]));
+  const auditColumns = ["changed_at", "changed_by", "action", "note", "target", "what"];
+  const auditExpected = countSignatures(auditMapping.rows, auditColumns, auditMeta);
+  const auditActual = countSignatures(auditRows, auditColumns, auditMeta);
+  const auditLossless = auditRows.length === auditMapping.rows.length
+    && [...auditExpected].every(([signature, count]) => auditActual.get(signature) === count);
+  if (!auditLossless) errors.push("audit_log overlay rows are not losslessly preserved");
+
+  let viewSelectSuccess = 0;
+  for (const view of expectedViews) {
+    try {
+      await client.query("SELECT * FROM adoms2." + quoteIdent(view) + " LIMIT 0");
+      viewSelectSuccess += 1;
+    } catch (error) {
+      errors.push(view + ": SELECT failed: " + error.message);
+    }
+  }
+
+  for (const verifyRow of verifyRows) {
+    if (verifyRow.overlay_patch_expected !== verifyRow.overlay_patch_verified) verifyRow.status = "FAIL";
+    if (verifyRow.overlay_insert_expected !== verifyRow.overlay_insert_verified) verifyRow.status = "FAIL";
+  }
+
+  const totalRows = sumCounts(counts);
+  if (totalRows !== 25022) errors.push("total physical row count is " + totalRows + ", expected 25022");
+  if (overlayInsertVerified !== 354) errors.push("verified overlay INSERT rows are " + overlayInsertVerified + ", expected 354");
+  if (overlayPatchVerified !== 49) errors.push("verified overlay PATCH rows are " + overlayPatchVerified + ", expected 49");
+  if (mappingMissingCount !== 0) errors.push("source mapping missing count is " + mappingMissingCount + ", expected 0");
+  if (counters.orphanExcluded !== 1 || provenancePreserved !== 1) errors.push("orphan exclusion/provenance count differs from 1/1");
+
+  return {
+    structure,
+    counts,
+    rowsByTable,
+    verifyRows,
+    totalRows,
+    pkDuplicateTotalActual,
+    overlayInsertVerified,
+    overlayPatchVerified,
+    orphanAbsent,
+    auditRows: auditRows.length,
+    auditLossless,
+    viewSelectSuccess,
+    sourceMappingMissing: mappingMissingCount,
+    identityDecisions,
+    errors,
+  };
+}
+
+function writeVerificationArtifacts(result) {
+  writeCsv(verifyCsvPath, result.verifyRows);
+  const checksumMatches = result.verifyRows.filter((row) => row.checksum_match === "YES").length;
+  const tableMatches = result.verifyRows.filter((row) => row.difference === 0).length;
+  const lines = [
+    "# ADOMS SAPA Baseline Import Verification",
+    "",
+    "## Result",
+    "",
+    "- Status: PASS",
+    "- PostgreSQL schema: adoms2",
+    "- Physical tables: " + result.structure.tables.length,
+    "- Views: " + result.structure.views.length,
+    "- Primary keys: " + result.structure.pkCount,
+    "- Active foreign keys: " + result.structure.fkCount,
+    "- Expected/actual physical rows: 25,022 / " + result.totalRows,
+    "- Tables with expected == actual rows: " + tableMatches + " / 91",
+    "- Canonical content checksum matches: " + checksumMatches + " / 91",
+    "- Primary-key duplicate rows: " + result.pkDuplicateTotalActual,
+    "- Overlay INSERT rows verified: " + result.overlayInsertVerified + " / 354",
+    "- Overlay PATCH records verified: " + result.overlayPatchVerified + " / 49",
+    "- Confirmed orphan excluded: " + counters.orphanExcluded + " / 1",
+    "- Provenance records preserved: " + provenancePreserved + " / 1",
+    "- TSK-000782 absent from compliance_task: " + (result.orphanAbsent ? "YES" : "NO"),
+    "- audit_log rows: " + result.auditRows,
+    "- overlay.log lossless mapping: " + (result.auditLossless ? "241 / 241" : "FAILED"),
+    "- Views accepting SELECT: " + result.viewSelectSuccess + " / 4",
+    "- Source table mapping missing: " + result.sourceMappingMissing,
+    "- Identity columns handled from database catalog: " + result.identityDecisions.length,
+    "",
+    "## Identity handling",
+    "",
+    ...result.identityDecisions.map((item) => "- " + item.schema + "." + item.table + "." + item.column
+      + ": " + item.identityGeneration + ", source values " + item.sourceRowsWithValue + "/" + item.sourceRows
+      + ", action " + item.action),
+    "",
+    "## Transaction and rollback",
+    "",
+    "- 0004_import_compat.sql was applied in its own transaction before import.",
+    "- The baseline data load and all pre-commit content checks ran in one transaction.",
+    "- No seed or overlay source file was modified.",
+    "- No foreign key was activated.",
+    "",
+    "## Orphan handling",
+    "",
+    "- TSK-000782 was not inserted or patched into compliance_task.",
+    "- Its original patch and lifecycle evidence remain in migration_provenance.json.",
+    "",
+    "## Adapter transition condition",
+    "",
+    "- The deployed app still reads CSV + overlay data; this import does not switch application code to PostgreSQL.",
+    "- When the database adapter is introduced, audit_log.changed_at must be returned as at and changed_by as by.",
+    "- The existing activity feed behavior must be reproduced with ORDER BY changed_at DESC LIMIT 100; all 241 audit rows remain stored.",
+    "",
+    "## Per-table evidence",
+    "",
+    "- Full expected/actual row counts and order-independent canonical SHA-256 checksums are in import_verify.csv.",
+    "",
+  ];
+  fs.writeFileSync(verifyMdPath, lines.join("\n"), "utf8");
+}
+
+async function applyCompatibilityMigration() {
+  const client = await openDatabase();
+  try {
+    const before = await readStructure(client);
+    const beforeCounts = await readCounts(client, before.tables);
+    if (before.tables.length !== 91 || before.views.length !== 4 || before.pkCount !== 52 || before.fkCount !== 0) {
+      fail("Pre-migration structure differs from TABLE 91 / VIEW 4 / PK 52 / FK 0.");
+    }
+    if (sumCounts(beforeCounts) !== 0) fail("Pre-migration database is not empty.");
+    const auditBefore = new Set((before.columns.get("audit_log") || []).map((column) => column.name));
+    const missingBefore = ["target", "what"].filter((column) => !auditBefore.has(column)).length;
+    try {
+      await client.query(fs.readFileSync(compatibilitySqlPath, "utf8"));
+    } catch (error) {
+      try { await client.query("ROLLBACK"); } catch {}
+      throw error;
+    }
+    const after = await readStructure(client);
+    const afterCounts = await readCounts(client, after.tables);
+    const auditAfter = new Set((after.columns.get("audit_log") || []).map((column) => column.name));
+    if (!auditAfter.has("target") || !auditAfter.has("what")) fail("0004 completed without both audit_log.target and audit_log.what.");
+    if (!sameStringSet(after.tables, before.tables) || !sameStringSet(after.views, before.views)) fail("0004 changed the table/view object set.");
+    if (JSON.stringify(after.objects) !== JSON.stringify(before.objects)) fail("0004 changed schema object counts outside its two columns.");
+    if (after.columnCount - before.columnCount !== missingBefore) fail("0004 column-count delta is not the expected " + missingBefore + ".");
+    if (after.pkCount !== 52 || after.fkCount !== 0) fail("0004 changed PK/FK counts.");
+    if (sumCounts(afterCounts) !== 0) fail("Rows appeared while applying 0004.");
+    console.log("0004 import compatibility migration: PASS");
+    console.log("audit_log.target: PRESENT");
+    console.log("audit_log.what: PRESENT");
+    console.log("Tables/views/PK/FK: " + after.tables.length + "/" + after.views.length + "/" + after.pkCount + "/" + after.fkCount);
+    console.log("Total rows after 0004: " + sumCounts(afterCounts));
+  } finally {
+    await client.end();
+  }
+}
+
+async function applyBaselineImport() {
+  const client = await openDatabase();
+  let committed = false;
+  try {
+    const pre = await readStructure(client);
+    const preCounts = await readCounts(client, pre.tables);
+    const auditColumns = new Set((pre.columns.get("audit_log") || []).map((column) => column.name));
+    if (pre.tables.length !== 91 || pre.views.length !== 4 || pre.pkCount !== 52 || pre.fkCount !== 0) {
+      fail("Import preflight structure differs from TABLE 91 / VIEW 4 / PK 52 / FK 0.");
+    }
+    if (!auditColumns.has("target") || !auditColumns.has("what")) fail("0004 import compatibility columns are missing.");
+    if (sumCounts(preCounts) !== 0) fail("Import preflight requires all 91 tables to be empty.");
+    const identityDecisions = analyzeIdentityColumns(pre);
+    console.log("Identity handling targets:");
+    for (const item of identityDecisions) {
+      console.log("- " + item.schema + "." + item.table + "." + item.column
+        + " | generation=" + item.identityGeneration
+        + " | source_values=" + item.sourceRowsWithValue + "/" + item.sourceRows
+        + " | action=" + item.action);
+    }
+    const identityBlocked = identityDecisions.filter((item) => item.action.startsWith("BLOCK_"));
+    if (identityBlocked.length) {
+      fail("Import preflight found unresolved identity columns: "
+        + identityBlocked.map((item) => item.table + "." + item.column).join(", "));
+    }
+    await client.query("BEGIN");
+    try {
+      await insertAllTables(client, pre);
+      const inside = await verifyDatabase(client);
+      if (inside.errors.length) fail("Pre-commit verification failed: " + inside.errors.join(" | "));
+      await client.query("COMMIT");
+      committed = true;
+    } catch (error) {
+      await client.query("ROLLBACK");
+      throw error;
+    }
+    const result = await verifyDatabase(client);
+    if (result.errors.length) {
+      fail("Post-commit verification failed; application transition is prohibited: " + result.errors.join(" | "));
+    }
+    writeVerificationArtifacts(result);
+    console.log("Baseline import: PASS");
+    console.log("Physical rows: " + result.totalRows);
+    console.log("Per-table row matches: " + result.verifyRows.filter((row) => row.difference === 0).length + "/91");
+    console.log("Canonical checksum matches: " + result.verifyRows.filter((row) => row.checksum_match === "YES").length + "/91");
+    console.log("PK duplicates: " + result.pkDuplicateTotalActual);
+    console.log("Overlay INSERT verified: " + result.overlayInsertVerified + "/354");
+    console.log("Overlay PATCH verified: " + result.overlayPatchVerified + "/49");
+    console.log("Confirmed orphan excluded/provenance preserved: " + counters.orphanExcluded + "/" + provenancePreserved);
+    console.log("audit_log lossless: " + (result.auditLossless ? "241/241" : "FAILED"));
+    console.log("Views SELECT: " + result.viewSelectSuccess + "/4");
+    console.log("Active FK: " + result.structure.fkCount);
+    console.log("Verify report: " + relative(verifyMdPath));
+    console.log("Verify matrix: " + relative(verifyCsvPath));
+  } catch (error) {
+    if (!committed) {
+      try { await client.query("ROLLBACK"); } catch {}
+    }
+    throw error;
+  } finally {
+    await client.end();
+  }
+}
+
+console.log("ADOMS baseline import preparation (mode=" + mode + ")");
 console.log(`Data root: ${relative(dataRoot)}`);
 console.log(`Seed directory order: ${dirs.map(relative).join(" -> ")}`);
 console.log("");
@@ -523,6 +1093,13 @@ console.log(`task_approval_patch rows outside compliance_task: ${unmatchedTaskAp
 console.log(`task_approval_patch duplicate task_id rows: ${taskApprovalDuplicateKeys}`);
 console.log(`Manifest: ${relative(manifestPath)} (${manifestHash})`);
 console.log(`Provenance: ${relative(provenancePath)} (${provenanceHash})`);
+console.log("Identity handling targets:");
+for (const item of dryRunIdentityDecisions) {
+  console.log("- adoms2." + item.table + "." + item.column
+    + " | generation=" + item.identityGeneration
+    + " | source_values=" + item.sourceRowsWithValue + "/" + item.sourceRows
+    + " | action=" + item.action);
+}
 
 if (unmappedSourceTables.length) console.log(`Unmapped source tables: ${unmappedSourceTables.join(", ")}`);
 if (counters.mappingIssues.length) console.log(`Mapping issues: ${counters.mappingIssues.join(" | ")}`);
@@ -541,4 +1118,10 @@ const blocked = pkDuplicateTotal > 0
   || counters.orphanExcluded !== CONFIRMED_ORPHAN_TASK_PATCHES.size
   || provenancePreserved !== CONFIRMED_ORPHAN_TASK_PATCHES.size;
 console.log(`Dry-run result: ${blocked ? "BLOCKED" : "READY"}`);
-process.exitCode = blocked ? 2 : 0;
+if (blocked) {
+  process.exitCode = 2;
+} else if (mode === "apply-compat") {
+  await applyCompatibilityMigration();
+} else if (mode === "apply") {
+  await applyBaselineImport();
+}

@@ -290,3 +290,14 @@
 - 검증: Preview backend가 `postgres`임을 확인했다. `/actions`는 4역할 모두 HTTP 200으로 복구됐고 물리 SQL은 요청당 270회에서 16회로 감소했다. `checkFlagged()`는 248 logical calls 중 244 cache hits, 추가 물리 SQL 4회였다. 전체 재검증은 HTTP 137/137, golden 7,373/7,373, expected-only 0, extra 0, metrics 159/159, calculation crosscheck 68/68이다. 다만 raw mismatch 32 중 시각 의존 `/exec` 4건을 제외한 stable mismatch 28건이 남아 PostgreSQL compatibility issue로 분류했다. 따라서 5경로×10회 성능 검증과 Production 전환은 계속 보류하며 Production backend는 `csv`다.
 - 관련 파일: `lib/db.ts`, `lib/check_merge.ts`, `app/actions/page.tsx`, `READ_CUTOVER_VERIFY.md`, `db/read-shadow/remote_csv_pg_ab.csv`, `WORKLOG.md`
 - 관련 commit: `96d78bb` (본 기록 정리 commit은 pending)
+
+### [27] PostgreSQL READ 안정값 mismatch 28건 해소
+- 상태: 완료
+- 배경: `/actions` timeout을 해소한 뒤 전체 Preview 회귀는 HTTP 137/137, golden 7,373/7,373, metrics 159/159, crosscheck 68/68이었으나 안정값 mismatch 28건이 남았다. 분류는 `/actions` 2건, dashboard ordering 6건, `/duties/list` approval count 4건, `/evidence` audit-log range/order 16건이었다.
+- 결정: frozen CSV + overlay runtime을 compatibility contract로 유지하고 네 그룹의 CSV·PostgreSQL READ 경로를 각각 대조한 뒤 adapter/read layer만 최소 수정한다. 시각 의존 `/exec` 4건은 안정값과 계속 분리한다. Production은 성능 검증 전까지 `csv`를 유지한다.
+- 이유: PostgreSQL 값이나 정렬이 더 일반적으로 보이더라도 현재 화면의 행 순서, overlay 적용 범위, 논리 함수별 approval layer, 감사로그 범위가 기존 contract다. 물리 schema에 맞춰 화면 의미를 바꾸면 동결 앱 재현 목적을 위반한다.
+- 영향 범위: PostgreSQL READ의 action overlay contract, `usb1_workplace` 순서 복원, `tasks()`의 approval-layer 분리, `audit_log` 반환 범위·순서, 검증 진단. DB schema/data, WRITE, UI, role logic, golden, CSV·overlay와 Production backend에는 영향이 없다.
+- 실제 변경: `ACT-000006`의 stale READ-order override를 overlay 값 `시정`으로 교정했다. `usb1_workplace` live READ가 overlay 변경이 없을 때 raw CSV 순서를 사용하도록 했다. PostgreSQL `tasks()`는 물리적으로 병합된 `task_approval_patch` 전용 필드를 제거한 뒤 overlay `taskPatch`만 다시 적용하고, 별도 `approvals()`는 기존 병합층을 계속 사용한다. 감사로그는 `changed_at AS at`, `changed_by AS by` alias를 유지하면서 241행 전체를 import 순서로 반환한다. `/actions` request cache 전후의 `CheckFlag[]`를 role별 canonical SHA-256으로 비교할 진단을 추가했다.
+- 검증: 네 영향 경로×4역할의 대상 검증은 HTTP 16/16, 추출값 1,117/1,117, mismatch 0, expected-only/extra 0/0이었다. CSV와 PostgreSQL `CheckFlag[]`는 4역할 모두 30행 및 SHA-256이 일치했다. 전체 Preview 회귀는 HTTP 137/137, golden 7,373/7,373, expected-only/extra 0/0, 안정값 mismatch 0, metrics 159/159 mismatch 0, calculation crosscheck 68/68이다. `/exec` 경과시간 4건은 raw 시각 의존 차이로 별도 유지했다. TypeScript, production build, 로컬 READ shadow 77 case도 통과했다. Production은 계속 `csv`이며 5경로 cold/warm 성능 gate와 READ cutover는 별도 후속 작업이다.
+- 관련 파일: `lib/data.ts`, `lib/db.ts`, `lib/read-order.ts`, `lib/check_merge.ts`, `db/read-shadow/read_order_contract.json`, `db/read-shadow/remote_csv_pg_ab.csv`, `READ_COMPATIBILITY_VERIFY.md`, `READ_CUTOVER_VERIFY.md`, `WORKLOG.md`
+- 관련 commit: `453d469` (최종 기록 commit은 pending)

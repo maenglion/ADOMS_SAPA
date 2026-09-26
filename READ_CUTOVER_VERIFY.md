@@ -184,3 +184,20 @@ Only after `/actions` returned HTTP 200 for all four roles was the 137-request r
 The 28 stable differences are now classified as PostgreSQL compatibility issues rather than timeout fallout: two `/actions` cell-text differences, six dashboard row-order differences, four `/duties/list` approval-count differences, and sixteen `/evidence` audit-log range/order differences. The four remaining raw-only differences are the expected current elapsed-hours cells on `/exec`.
 
 The representative five-route, ten-request cold/warm performance suite remains blocked because stable mismatch is not zero. Production was not switched. Database schema, data, indexes, WRITE paths, role logic, UI, golden files, frozen CSV, and overlay were not changed.
+
+## PostgreSQL READ compatibility correction — 2026-09-27
+
+The 28 stable mismatches remaining after `/actions` round-trip reduction were investigated against the frozen CSV runtime contract before any adapter change. The root causes and minimal corrections are recorded in `READ_COMPATIBILITY_VERIFY.md`.
+
+| Group | Before | Root cause | After |
+| --- | ---: | --- | ---: |
+| `/actions` | 2 | stale action overlay override in the READ-order contract | 0 |
+| dashboard ordering | 6 | `usb1_workplace` live READ did not reuse frozen CSV order | 0 |
+| `/duties/list` approval count | 4 | `tasks()` exposed the physically merged approval layer | 0 |
+| `/evidence` audit-log range/order | 16 | PostgreSQL adapter returned newest 100 instead of all 241 in stored order | 0 |
+
+Targeted verification passed for 16/16 affected route-role pages, 1,117/1,117 extracted values, and 68/68 metrics. Canonical `CheckFlag[]` row count and SHA-256 matched between CSV and PostgreSQL for all four roles, confirming that request memoization preserved the `/actions` return contract.
+
+The complete PostgreSQL Preview regression then passed 137/137 HTTP 200, golden values 7,373/7,373, expected-only 0, extra 0, stable mismatch 0, key metrics 159/159 with mismatch 0, and calculation crosscheck 68/68. Four `/exec` elapsed-hours cells remain raw time-dependent differences and are kept separate from stable compatibility results. Golden files were not changed.
+
+Production remains `ADOMS_DATA_BACKEND=csv`. No database data/schema, WRITE path, UI, role logic, frozen CSV/overlay, or golden file was changed. The five-route cold/warm performance gate remains separate and must pass before Production cutover.

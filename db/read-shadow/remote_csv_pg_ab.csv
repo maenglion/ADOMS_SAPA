@@ -59,3 +59,16 @@ postgres_optimized,metrics,key_metric_mismatch,0,0,0,PASS,
 postgres_optimized,calculation,crosscheck_pass,68,68,0,PASS,
 cutover,production,postgres_cutover,0,0,0,NOT_PERFORMED,"Production remains csv"
 performance,representative_5x10,completed,1,0,-1,BLOCKED,"not run because stable PostgreSQL mismatch is 28"
+postgres_compatible,http,attempted_read_only_requests,137,137,0,PASS,"same Preview deployment after compatibility corrections; three write-causing GET combinations skipped"
+postgres_compatible,http,http_200,137,137,0,PASS,
+postgres_compatible,http,http_504,0,0,0,PASS,
+postgres_compatible,golden,extracted_values,7373,7373,0,PASS,
+postgres_compatible,golden,raw_value_mismatch,0,4,4,TIME_DEPENDENT,"four /exec role variants; current elapsed-hours field only"
+postgres_compatible,golden,stable_value_mismatch,0,0,0,PASS,"28 stable differences corrected; /exec time-dependent output excluded"
+postgres_compatible,golden,expected_only,0,0,0,PASS,
+postgres_compatible,golden,preview_only,0,0,0,PASS,
+postgres_compatible,metrics,key_metric_cases,159,159,0,PASS,
+postgres_compatible,metrics,key_metric_mismatch,0,0,0,PASS,
+postgres_compatible,calculation,crosscheck_pass,68,68,0,PASS,
+postgres_compatible,check_flagged,role_contract_matches,4,4,0,PASS,"30 rows and canonical SHA-256 match for gm road road_head ceo"
+cutover,production,postgres_cutover,0,0,0,NOT_PERFORMED,"Production remains csv; performance gate is separate"

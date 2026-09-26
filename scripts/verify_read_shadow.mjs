@@ -81,6 +81,8 @@ function classify(csvValue, dbValue, name, summary, details) {
   summary.extra_rows += extra;
   if (missing) details.push({ case: name, kind: "missing_rows", count: missing });
   if (extra) details.push({ case: name, kind: "extra_rows", count: extra });
+  if (unique && missing) details.push({ case: name, kind: "missing_keys", keys: aKeys.filter((key) => !bSet.has(key)).slice(0, 10) });
+  if (unique && extra) details.push({ case: name, kind: "extra_keys", keys: bKeys.filter((key) => !aSet.has(key)).slice(0, 10) });
   if (sameMembers && aKeys.some((key, index) => key !== bKeys[index])) {
     summary.ordering_mismatch++;
     details.push({ case: name, kind: "ordering" });

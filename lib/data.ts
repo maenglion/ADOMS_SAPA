@@ -384,9 +384,11 @@ export async function notifications(staffId?: string) {
   return fixNotifText([...rows].sort((a, b) => (a.sent_at < b.sent_at ? 1 : -1)).slice(0, 300));
 }
 export async function riskAssessments() {
+  if (useDb) return liveTable("risk_assessment");
   return readTable("risk_assessment", "risk_id");
 }
 export async function riskItems() {
+  if (useDb) return liveTable("risk_assessment_item");
   return readTable("risk_assessment_item", "item_id");
 }
 
@@ -426,7 +428,7 @@ export async function mappingFor(assetId: string, targetCode: string) {
  * `keyCol` 을 주면 덮개의 수정분(patchRow)을 그 칸 기준으로 덮어쓴다.
  */
 export async function readTable(table: string, keyCol?: string): Promise<Row[]> {
-  if (useDb) return applyReadOrder(table, await fromDb(table, "select=*&limit=100000"), "raw");
+  if (useDb) return applyReadOrder(table, await fromDb(table, "select=*&limit=100000"), keyCol ? "live" : "raw");
   const o: any = readOverlay();
   const added: Row[] = (o.tables && o.tables[table]) || [];
   const patches: Record<string, Row> = (o.patches && o.patches[table]) || {};

@@ -13,7 +13,7 @@ const sources = {
   training_record: "trainings", worker_voice: "voices", incident: "incidents",
   order_received: "orders", evidence: "evidences", inspection: "inspections", action: "actions_",
   notification: "notifications", risk_assessment: "riskAssessments",
-  risk_assessment_item: "riskItems", duty_assignment: "assignments", compliance_task: "tasks.default",
+  risk_assessment_item: "riskItems", duty_assignment: "assignments", compliance_task: "readTable.compliance_task",
 };
 
 const candidateColumns = (rows) => {
@@ -71,6 +71,20 @@ for (const [actionId, patch] of Object.entries(overlay.patches?.action || {})) {
   tables.action.overrides[actionId] = Object.fromEntries(Object.keys(patch).filter((column) => Object.hasOwn(original, column)).map((column) => [column, original[column]]));
 }
 
+for (const [table, patchSet] of Object.entries(overlay.patches || {})) {
+  const rows = cases.get(`readTable.${table}`) || [];
+  const entry = raw[table];
+  if (!entry) continue;
+  for (const [id, patch] of Object.entries(patchSet)) {
+    const idColumn = entry.columns.find((column) => String(rows.find((row) => String(row[column]) === id)?.[column] ?? "") === id);
+    const original = idColumn ? rows.find((row) => String(row[idColumn]) === id) : null;
+    if (!original) continue;
+    const key = entry.columns.map((column) => String(original[column] ?? "")).join("\u001f");
+    entry.overrides ||= {};
+    entry.overrides[key] = Object.fromEntries(Object.keys(patch).filter((column) => Object.hasOwn(original, column)).map((column) => [column, original[column]]));
+  }
+}
+
 const rawComplianceRows = cases.get("readTable.compliance_task") || [];
 for (const [taskId, patch] of Object.entries(overlay.taskPatch || {})) {
   const original = rawComplianceRows.find((row) => row.task_id === taskId);
@@ -79,6 +93,12 @@ for (const [taskId, patch] of Object.entries(overlay.taskPatch || {})) {
   const key = entry.columns.map((column) => String(original[column] ?? "")).join("\u001f");
   entry.overrides ||= {};
   entry.overrides[key] = Object.fromEntries(Object.keys(patch).filter((column) => Object.hasOwn(original, column)).map((column) => [column, original[column]]));
+}
+
+if (tables.compliance_task) {
+  tables.compliance_task.empty = {};
+  tables.compliance_task.nulls = {};
+  tables.compliance_task.overrides = {};
 }
 
 fs.mkdirSync(path.dirname(outputFile), { recursive: true });

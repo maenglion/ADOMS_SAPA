@@ -254,3 +254,16 @@
 - 검증: Preview deploy/build는 성공했고 runtime backend가 `postgres`임을 확인했다. read-only golden 요청은 133/137 HTTP 200, 4/137 HTTP 504였으며 value mismatch 178, expected-only 280, key metric mismatch 16이었다. audit log는 PostgreSQL 계약인 최신 100행을 반환했다. 검증 뒤 Railway `adoms2`의 전체 row count를 직접 재실측해 25,022행, 변경 0행을 확인했다. Production은 계속 `csv`이며 WRITE는 전환되지 않았다. rollback 방법은 Production `ADOMS_DATA_BACKEND=csv` 설정 후 재배포이고 현재는 이미 해당 상태라 rollback이 필요 없다.
 - 관련 파일: `READ_CUTOVER_VERIFY.md`, `db/read-shadow/read_cutover_compare.csv`, `WORKLOG.md`
 - 관련 commit: pending
+
+## 2026-09-27
+
+### [24] Netlify 원격 CSV baseline 복구 및 PostgreSQL A/B 재분류
+- 상태: 보류
+- 배경: Production이 CSV 설정인데도 기존 golden과 다른 값이 관측되어, PostgreSQL Preview 차이를 adapter 문제로 확정하기 전에 Netlify 원격 CSV 자체의 데이터 경로와 동결자료 포함 여부를 검증해야 했다.
+- 결정: 동결 데이터의 `us_*` 내림차순, 이어서 `ops_*` 내림차순, table별 최초 CSV 선택 규칙을 배포 artifact에서도 유지한다. CSV 원격 baseline을 먼저 복구하고 같은 commit·같은 branch에서 backend 변수만 바꿔 PostgreSQL과 A/B한다. PostgreSQL이 golden과 일치하지 않거나 `/actions` timeout이 있으면 Production cutover와 사용자 체감 성능 검증을 진행하지 않는다.
+- 이유: 기존 Netlify 실행환경에는 저장소 밖 기본 data path가 없어 overlay만 읽었고, 이 상태의 CSV 결과와 PostgreSQL 결과를 비교하면 배포 packaging 문제와 adapter 문제를 구분할 수 없기 때문이다. 또한 전체 137개 회귀 수행시간과 일반 사용자 한 화면 응답시간은 다른 지표이므로, golden 통과 전 성능 수치를 사용자 latency로 오인하지 않기 위해서다.
+- 영향 범위: Netlify branch deploy의 frozen CSV packaging, server-side data root 선택, 원격 CSV/PostgreSQL READ 회귀, Production cutover 조건. Production 설정, WRITE, DB schema/data, 원본 CSV·overlay, golden에는 영향이 없다.
+- 실제 변경: 기본 data root가 저장소의 `data/_데모_용인시_20260920`으로 fallback하도록 공통 경로를 추가하고, 현재 선택되는 73개 seed CSV와 form 자료만 server function trace에 포함했다. 안전한 진단 경로는 backend, repo-relative data root, seed directory와 table별 source만 반환하며 credential이나 host 절대경로를 반환하지 않는다. CSV 감사로그 반환은 frozen golden 계약인 overlay 241행과 원래 순서를 유지하도록 복원했다. PostgreSQL A/B 후 branch override를 다시 `csv`로 되돌려 재배포했고 runtime backend가 `csv`임을 확인했다. Production도 계속 `csv`다.
+- 검증: CSV Preview는 137/137 HTTP 200, `/actions` 4/4 HTTP 200, golden 7,373/7,373, expected-only 0, extra 0, 안정값 mismatch 0, key metrics 159/159, calculation crosscheck 68/68이다. frozen capture 시각에 종속된 `/exec` 경과시간 4건만 raw 차이로 분리했다. 로컬과 runtime의 선택 table 73개 source path 불일치는 0이다. 같은 commit의 PostgreSQL A/B는 133/137 HTTP 200, `/actions` 4/4 HTTP 504, 안정값 mismatch 26, expected-only 224로 실패했다. 현재 9개 점검 회차의 `/actions` 호출 경로는 정적 계산상 PostgreSQL query 270회를 만들며, 이 중 248회가 회차별 동일 자료를 반복 구성하는 `checkFlagged()` 경로다. 최적화와 5경로×10회 성능 측정은 golden 통과 전이므로 수행하지 않았다.
+- 관련 파일: `lib/data-root.ts`, `lib/data.ts`, `lib/forms.ts`, `lib/lawsync.ts`, `app/api/read-source/route.ts`, `next.config.ts`, `.env.example`, `READ_CUTOVER_VERIFY.md`, `db/read-shadow/remote_csv_pg_ab.csv`, `WORKLOG.md`
+- 관련 commit: pending

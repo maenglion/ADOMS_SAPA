@@ -1,0 +1,37 @@
+backend,category,metric,expected,actual,difference,result,notes
+csv,http,attempted_read_only_requests,137,137,0,PASS,"35 routes x 4 roles; three write-causing GET combinations skipped"
+csv,http,http_200,137,137,0,PASS,
+csv,http,http_504,0,0,0,PASS,
+csv,golden,extracted_values,7373,7373,0,PASS,
+csv,golden,raw_value_mismatch,0,4,4,TIME_DEPENDENT,"four /exec role variants; current elapsed-hours field only"
+csv,golden,stable_value_mismatch,0,0,0,PASS,"time-dependent elapsed-hours field separated using frozen capture time"
+csv,golden,expected_only,0,0,0,PASS,
+csv,golden,preview_only,0,0,0,PASS,
+csv,metrics,key_metric_cases,159,159,0,PASS,
+csv,metrics,key_metric_mismatch,0,0,0,PASS,
+csv,calculation,crosscheck_pass,68,68,0,PASS,
+csv,route_actions,gm_http_status,200,200,0,PASS,"3.82 seconds"
+csv,route_actions,road_http_status,200,200,0,PASS,"3.64 seconds"
+csv,route_actions,road_head_http_status,200,200,0,PASS,"3.75 seconds"
+csv,route_actions,ceo_http_status,200,200,0,PASS,"3.60 seconds"
+csv,seed_selection,selected_tables,73,73,0,PASS,
+csv,seed_selection,selected_source_mismatch,0,0,0,PASS,
+csv,seed_selection,local_directories,32,30,-2,INFO,"us_v1.3_20260924 and ops_v1.4_20260924 contain no selected source and are not traced into the deploy artifact"
+postgres,http,attempted_read_only_requests,137,137,0,INFO,"same commit and Netlify branch; backend variable only changed"
+postgres,http,http_200,137,133,-4,FAIL,
+postgres,http,http_504,0,4,4,FAIL,"all four /actions role variants"
+postgres,golden,extracted_values,7373,7149,-224,FAIL,
+postgres,golden,raw_value_mismatch,0,30,30,FAIL,
+postgres,golden,stable_value_mismatch,0,26,26,FAIL,"four current-time elapsed-hours differences excluded"
+postgres,golden,expected_only,0,224,224,FAIL,"all caused by /actions 504 bodies"
+postgres,golden,preview_only,0,0,0,PASS,
+postgres,metrics,key_metric_cases,159,159,0,PASS,
+postgres,metrics,key_metric_mismatch,0,0,0,PASS,
+postgres,calculation,crosscheck_pass,68,68,0,PASS,
+postgres,route_actions,gm_http_status,200,504,304,FAIL,"31.16 seconds"
+postgres,route_actions,road_http_status,200,504,304,FAIL,"31.02 seconds"
+postgres,route_actions,road_head_http_status,200,504,304,FAIL,"30.37 seconds"
+postgres,route_actions,ceo_http_status,200,504,304,FAIL,"30.61 seconds"
+postgres,route_actions,static_db_query_calls,0,270,270,BLOCKER,"current call graph with 9 usf_round rows; repeated full-table reads"
+cutover,production,postgres_cutover,0,0,0,NOT_PERFORMED,"Production remains csv"
+performance,representative_5x10,completed,1,0,-1,BLOCKED,"not run because PostgreSQL golden and /actions gate failed"

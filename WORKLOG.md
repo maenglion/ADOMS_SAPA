@@ -199,3 +199,14 @@
 - 검증: 수정 후 dry-run은 `READY`이며 final 25,022행, PK 중복 0, source mapping 누락 0, source column 누락 table 0을 유지했다. live preflight도 `audit_log.log_id`, `BY DEFAULT`, source 값 0/241, `EXCLUDE_FROM_INSERT`로 판정했다. 연결 종료 후 새 연결로 TABLE 91, 전체 0행, 비어 있지 않은 table 0개를 직접 확인해 transaction rollback을 검증했다. 앱은 계속 CSV + overlay mode다.
 - 관련 파일: `db/import/import_baseline.mjs`, `db/import/IDENTITY_AUDIT.md`, `db/import/IMPORT_VERIFY.md`, `db/import/IMPORT_VERIFY_FAILED_20260926.md`, `db/import/import_verify.csv`, `WORKLOG.md`
 - 관련 commit: pending
+
+### [19] Railway 내부 baseline import 전환 및 데이터 계보 확정
+- 상태: 진행
+- 배경: 로컬에서 Railway public connection으로 수행한 실제 적재가 identity 처리 누락과 장시간 연결 종료로 각각 rollback됐다. GraphDB A-Box와 3400 앱 데이터의 직접 변환 관계도 함께 명확히 할 필요가 있었다.
+- 결정: 실제 baseline 적재는 Railway 내부의 1회성 임시 실행 환경에서 private `DATABASE_URL`을 사용한다. INSERT는 PostgreSQL parameter 한도를 고려한 batch로 전송하되 전체 적재와 commit 전 검증은 하나의 transaction으로 유지한다. 성공 후 새 연결로 독립 재검증하며, 자동 재실행하지 않는다.
+- 이유: public proxy의 장시간 연결 불안정을 피하면서도 부분 적재를 남기지 않고, 현재 앱이 실제 사용하는 frozen CSV와 overlay만을 재현하기 위해서다.
+- 영향 범위: baseline importer 실행 위치, DB 연결 방식, INSERT 전송 단위, transaction 및 재검증, migration provenance
+- 실제 변경: importer가 private `DATABASE_URL`만 사용하도록 변경하고 batch 상한을 500행으로 확장했다. `pg` runtime dependency와 Node 범위를 명시했다. PostgreSQL baseline의 직접 정본은 현재 frozen 앱 CSV와 `.data/overlay.json`이며 최신 GraphDB 전체의 관계형 복제본이 아니라는 계보를 provenance에 추가했다. GraphDB A-Box 현재 판은 `R-20260926-06`, 앱 base는 `R-20260917-02`, 앱 lawtext는 `R-20260920-10`이며 3400 경로에는 N-Quads에서 CSV로 역변환하는 단계가 없다.
+- 검증: 변경 후 dry-run은 seed 24,668행, overlay INSERT 354행, overlay PATCH 49건, 최종 25,022행, PK 중복 0, source mapping 누락 0으로 `READY`다. 실제 내부 적재와 최종 소요시간 기록은 아직 진행 전이다.
+- 관련 파일: `db/import/import_baseline.mjs`, `db/import/migration_provenance.json`, `package.json`, `package-lock.json`, `WORKLOG.md`
+- 관련 commit: pending

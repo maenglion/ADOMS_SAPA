@@ -1,5 +1,23 @@
 {
   "format": "adoms-sapa-migration-provenance-v1",
+  "dataset_lineage": {
+    "decision": "The PostgreSQL baseline reproduces the frozen dataset used by the current 3400 application; it is not a relational replica of the latest GraphDB A-Box or the complete latest canonical release.",
+    "common_upstream": "canonical _RELEASE.json family CSV",
+    "branches": [
+      {
+        "path": "build_abox.py -> TTL -> GraphDB -> N-Quads",
+        "current_release": "R-20260926-06"
+      },
+      {
+        "path": "build_demo_db.py / ops_* / us_* -> application CSV",
+        "current_base_release": "R-20260917-02",
+        "current_lawtext_release": "R-20260920-10",
+        "additional_sources": "ops_* / us_* were separately generated from base and management keys plus survey, example, and operational material."
+      }
+    ],
+    "direct_source_of_truth": "current frozen application CSV plus .data/overlay.json",
+    "excluded_transform": "There is no N-Quads-to-CSV reverse transformation in the 3400 application data path."
+  },
   "records": [
     {
       "record_type": "excluded_orphan_task_patch",

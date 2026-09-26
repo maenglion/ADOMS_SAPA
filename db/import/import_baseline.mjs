@@ -51,6 +51,24 @@ const CONFIRMED_ORPHAN_TASK_PATCHES = new Map([
     exclusion_reason: "실제 삭제된 과거 업무에 대한 오래된 overlay patch이므로 현재 운영 compliance_task에는 적용하지 않는다.",
   }],
 ]);
+const DATASET_LINEAGE = {
+  decision: "The PostgreSQL baseline reproduces the frozen dataset used by the current 3400 application; it is not a relational replica of the latest GraphDB A-Box or the complete latest canonical release.",
+  common_upstream: "canonical _RELEASE.json family CSV",
+  branches: [
+    {
+      path: "build_abox.py -> TTL -> GraphDB -> N-Quads",
+      current_release: "R-20260926-06",
+    },
+    {
+      path: "build_demo_db.py / ops_* / us_* -> application CSV",
+      current_base_release: "R-20260917-02",
+      current_lawtext_release: "R-20260920-10",
+      additional_sources: "ops_* / us_* were separately generated from base and management keys plus survey, example, and operational material.",
+    },
+  ],
+  direct_source_of_truth: "current frozen application CSV plus .data/overlay.json",
+  excluded_transform: "There is no N-Quads-to-CSV reverse transformation in the 3400 application data path.",
+};
 const APPLICATION_KEYS = new Map([
   ["action", ["action_id"]],
   ["asset", ["asset_id"]],
@@ -503,6 +521,7 @@ for (const [table, target] of [...schema].sort(([a], [b]) => a.localeCompare(b))
 writeCsv(manifestPath, manifest);
 writeJson(provenancePath, {
   format: "adoms-sapa-migration-provenance-v1",
+  dataset_lineage: DATASET_LINEAGE,
   records: provenanceRecords,
 });
 
@@ -536,9 +555,9 @@ function quoteIdent(value) {
 }
 
 function requireDatabaseUrl() {
-  const value = process.env.DATABASE_PUBLIC_URL || "";
+  const value = process.env.DATABASE_URL || "";
   if (!/^postgres(?:ql)?:\/\//.test(value)) {
-    fail("DATABASE_PUBLIC_URL must be a complete PostgreSQL URI.");
+    fail("DATABASE_URL must be a complete PostgreSQL URI.");
   }
   return value;
 }
@@ -735,7 +754,7 @@ async function insertAllTables(client, structure) {
     const columns = (structure.columns.get(table) || [])
       .filter((column) => !column.generated && !excludedIdentity.has(column.name));
     const names = columns.map((column) => column.name);
-    const chunkSize = Math.max(1, Math.min(100, Math.floor(60000 / Math.max(1, names.length))));
+    const chunkSize = Math.max(1, Math.min(500, Math.floor(60000 / Math.max(1, names.length))));
     for (let start = 0; start < rows.length; start += chunkSize) {
       const chunk = rows.slice(start, start + chunkSize);
       const values = [];
@@ -896,7 +915,7 @@ async function verifyDatabase(client) {
   };
 }
 
-function writeVerificationArtifacts(result) {
+function writeVerificationArtifacts(result, timing) {
   writeCsv(verifyCsvPath, result.verifyRows);
   const checksumMatches = result.verifyRows.filter((row) => row.checksum_match === "YES").length;
   const tableMatches = result.verifyRows.filter((row) => row.difference === 0).length;
@@ -925,6 +944,8 @@ function writeVerificationArtifacts(result) {
     "- Views accepting SELECT: " + result.viewSelectSuccess + " / 4",
     "- Source table mapping missing: " + result.sourceMappingMissing,
     "- Identity columns handled from database catalog: " + result.identityDecisions.length,
+    "- Import transaction elapsed: " + timing.transactionElapsedSeconds.toFixed(3) + " seconds",
+    "- Import plus independent post-commit verification elapsed: " + timing.totalElapsedSeconds.toFixed(3) + " seconds",
     "",
     "## Identity handling",
     "",
@@ -955,7 +976,10 @@ function writeVerificationArtifacts(result) {
     "- Full expected/actual row counts and order-independent canonical SHA-256 checksums are in import_verify.csv.",
     "",
   ];
-  fs.writeFileSync(verifyMdPath, lines.join("\n"), "utf8");
+  const separator = fs.existsSync(verifyMdPath) && fs.statSync(verifyMdPath).size > 0
+    ? "\n\n---\n\n"
+    : "";
+  fs.appendFileSync(verifyMdPath, separator + lines.join("\n"), "utf8");
 }
 
 async function applyCompatibilityMigration() {
@@ -995,8 +1019,11 @@ async function applyCompatibilityMigration() {
 }
 
 async function applyBaselineImport() {
+  const operationStartedAt = Date.now();
   const client = await openDatabase();
   let committed = false;
+  let transactionStartedAt = 0;
+  let transactionFinishedAt = 0;
   try {
     const pre = await readStructure(client);
     const preCounts = await readCounts(client, pre.tables);
@@ -1019,6 +1046,7 @@ async function applyBaselineImport() {
       fail("Import preflight found unresolved identity columns: "
         + identityBlocked.map((item) => item.table + "." + item.column).join(", "));
     }
+    transactionStartedAt = Date.now();
     await client.query("BEGIN");
     try {
       await insertAllTables(client, pre);
@@ -1026,15 +1054,32 @@ async function applyBaselineImport() {
       if (inside.errors.length) fail("Pre-commit verification failed: " + inside.errors.join(" | "));
       await client.query("COMMIT");
       committed = true;
+      transactionFinishedAt = Date.now();
     } catch (error) {
       await client.query("ROLLBACK");
       throw error;
     }
-    const result = await verifyDatabase(client);
+  } catch (error) {
+    if (!committed) {
+      try { await client.query("ROLLBACK"); } catch {}
+    }
+    throw error;
+  } finally {
+    await client.end();
+  }
+
+  const verificationClient = await openDatabase();
+  try {
+    const result = await verifyDatabase(verificationClient);
     if (result.errors.length) {
       fail("Post-commit verification failed; application transition is prohibited: " + result.errors.join(" | "));
     }
-    writeVerificationArtifacts(result);
+    const operationFinishedAt = Date.now();
+    const timing = {
+      transactionElapsedSeconds: (transactionFinishedAt - transactionStartedAt) / 1000,
+      totalElapsedSeconds: (operationFinishedAt - operationStartedAt) / 1000,
+    };
+    writeVerificationArtifacts(result, timing);
     console.log("Baseline import: PASS");
     console.log("Physical rows: " + result.totalRows);
     console.log("Per-table row matches: " + result.verifyRows.filter((row) => row.difference === 0).length + "/91");
@@ -1046,15 +1091,12 @@ async function applyBaselineImport() {
     console.log("audit_log lossless: " + (result.auditLossless ? "241/241" : "FAILED"));
     console.log("Views SELECT: " + result.viewSelectSuccess + "/4");
     console.log("Active FK: " + result.structure.fkCount);
+    console.log("Import transaction elapsed seconds: " + timing.transactionElapsedSeconds.toFixed(3));
+    console.log("Import plus independent post-commit verification elapsed seconds: " + timing.totalElapsedSeconds.toFixed(3));
     console.log("Verify report: " + relative(verifyMdPath));
     console.log("Verify matrix: " + relative(verifyCsvPath));
-  } catch (error) {
-    if (!committed) {
-      try { await client.query("ROLLBACK"); } catch {}
-    }
-    throw error;
   } finally {
-    await client.end();
+    await verificationClient.end();
   }
 }
 

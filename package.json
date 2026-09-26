@@ -2,6 +2,9 @@
   "name": "adoms2-v4",
   "version": "0.1.0",
   "private": true,
+  "engines": {
+    "node": ">=20.9 <23"
+  },
   "description": "ADOMS 데모 2차 — 용인특례시 안전보건체계 통합관리시스템 (시연본)",
   "scripts": {
     "dev": "next dev -p 3400 -H 0.0.0.0",
@@ -12,6 +15,7 @@
   "dependencies": {
     "@supabase/supabase-js": "^2.45.4",
     "next": "^15.5.4",
+    "pg": "^8.23.0",
     "qrcode": "^1.5.4",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",

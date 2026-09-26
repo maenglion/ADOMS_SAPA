@@ -126,6 +126,10 @@ async function fromDb(relation: string, qs: string): Promise<Row[]> {
   return queryRows(relation, qs);
 }
 
+async function liveTable(table: string): Promise<Row[]> {
+  return applyReadOrder(table, await fromDb(table, "select=*&limit=100000"), "live");
+}
+
 /* ── 화면이 쓰는 함수들 ─────────────────────────────────────── */
 
 export type DutyRow = Row;
@@ -214,7 +218,7 @@ export async function tasks(filter: { dept?: string; staff?: string; status?: st
   const dutyRows = useDb ? await readTable("duty_class", "duty_key") : dutyClassRows(true);
   const deptRows = useDb ? await readTable("org_dept", "dept_id") : seed("org_dept");
   const assetRows = useDb ? (await readTable("asset", "asset_id")).filter((a) => a.deleted !== "Y") : assetSeed();
-  const taskRows = useDb ? await readTable("compliance_task", "task_id") : seed("compliance_task");
+  const taskRows = useDb ? await liveTable("compliance_task") : seed("compliance_task");
   const duty = new Map(dutyRows.map((d) => [d.duty_key, d]));
   const dept = new Map(deptRows.map((d) => [d.dept_id, d]));
   const asset = new Map(assetRows.map((a) => [a.asset_id, a]));
@@ -280,7 +284,7 @@ export async function inspectionBatches() {
 /** 결재 층(승인 상태·제출일·승인일) — 과제 id 로 붙인다. */
 export async function approvals() {
   const rows: Row[] = useDb
-    ? await readTable("compliance_task", "task_id")
+    ? await liveTable("compliance_task")
     : (() => {
         const patch = new Map(seed("task_approval_patch").map((r) => [r.task_id, r]));
         const ov = readOverlay().taskPatch;
@@ -317,7 +321,7 @@ export async function orders() {
   return readTable("order_received", "order_id");
 }
 export async function evidences() {
-  if (useDb) return readTable("evidence", "evidence_id");
+  if (useDb) return liveTable("evidence");
   return [...readOverlay().evidence, ...seed("evidence")];
 }
 /** 시연 중 일어난 일(덮개 기록) — 감사로그 자리. */
@@ -326,7 +330,7 @@ export async function activityLog() {
   return [...readOverlay().log].sort((a, b) => (String(a.at) < String(b.at) ? 1 : -1)).slice(0, 100);
 }
 export async function inspections() {
-  if (useDb) return readTable("inspection", "insp_id");
+  if (useDb) return liveTable("inspection");
   return [...readOverlay().inspection, ...seed("inspection")];
 }
 
@@ -362,7 +366,7 @@ export function foldByUnit(rows: Row[]): Row[] {
 }
 
 export async function actions_() {
-  if (useDb) return fromDb("action", "select=*&limit=2000");
+  if (useDb) return liveTable("action");
   return seed("action");
 }
 // 09-25 사용자: 명세 오기 단계 이름을 고쳤다(「예산·편성·집행」→「예산 편성·집행」 · 「관계법령상의무이행」→「관계 법령상 의무이행」).
@@ -374,11 +378,6 @@ export const fixNotifText = (rows: Row[]): Row[] => rows.map((r) => {
   return f === m ? r : { ...r, message: f };
 });
 export async function notifications(staffId?: string) {
-  if (useDb) {
-    const p = new URLSearchParams({ select: "*", order: "sent_at.desc", limit: "300" });
-    if (staffId) p.set("to_staff_id", `eq.${staffId}`);
-    return fixNotifText(await fromDb("notification", p.toString()));
-  }
   // 화면에서 보낸 알림(조치 요구·재점검 요청·교육 이행 지시 등)도 함께 — 받는 사람의 「내 업무」에 떠야 한다.
   let rows = await readTable("notification", "notif_id");
   if (staffId) rows = rows.filter((r) => r.to_staff_id === staffId);
@@ -427,7 +426,7 @@ export async function mappingFor(assetId: string, targetCode: string) {
  * `keyCol` 을 주면 덮개의 수정분(patchRow)을 그 칸 기준으로 덮어쓴다.
  */
 export async function readTable(table: string, keyCol?: string): Promise<Row[]> {
-  if (useDb) return applyReadOrder(table, await fromDb(table, "select=*&limit=100000"));
+  if (useDb) return applyReadOrder(table, await fromDb(table, "select=*&limit=100000"), "raw");
   const o: any = readOverlay();
   const added: Row[] = (o.tables && o.tables[table]) || [];
   const patches: Record<string, Row> = (o.patches && o.patches[table]) || {};

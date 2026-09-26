@@ -139,5 +139,5 @@ fs.writeFileSync(path.join(outputDir, "read_adapter_compare.json"), JSON.stringi
 const lines = ["case,kind,key,column,csv,postgres", ...samples.map((d) => [d.case, d.kind, d.key || "", d.column || "", JSON.stringify(d.csv ?? ""), JSON.stringify(d.postgres ?? "")].map((v) => `"${String(v).replaceAll('"', '""')}"`).join(","))];
 fs.writeFileSync(path.join(outputDir, "read_adapter_compare.csv"), lines.join("\n") + "\n", "utf8");
 const cases = Object.entries(caseCounts).map(([case_kind, count]) => ({ case_kind, count }));
-console.log(JSON.stringify({ ...report, details: samples.slice(0, 25), cases }));
+console.log(JSON.stringify({ ...report, details: samples, cases }));
 process.exit(total === 0 ? 0 : 1);

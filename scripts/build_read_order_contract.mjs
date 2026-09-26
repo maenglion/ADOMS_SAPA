@@ -13,9 +13,8 @@ const sources = {
   training_record: "trainings", worker_voice: "voices", incident: "incidents",
   order_received: "orders", evidence: "evidences", inspection: "inspections", action: "actions_",
   notification: "notifications", risk_assessment: "riskAssessments",
-  risk_assessment_item: "riskItems", duty_assignment: "assignments",
+  risk_assessment_item: "riskItems", duty_assignment: "assignments", compliance_task: "tasks.default",
 };
-for (const [name, value] of cases) if (name.startsWith("readTable.")) sources[name.slice(10)] = name;
 
 const candidateColumns = (rows) => {
   const keys = [...new Set(rows.flatMap((row) => Object.keys(row || {})))]
@@ -29,19 +28,59 @@ const candidateColumns = (rows) => {
   return keys;
 };
 
+const makeEntry = (rows) => {
+  const columns = candidateColumns(rows);
+  if (!columns.length) return null;
+  const types = {};
+  const empty = {};
+  const nulls = {};
+  for (const column of new Set(rows.flatMap((row) => Object.keys(row || {})))) {
+    const observed = new Set(rows.map((row) => row?.[column]).filter((value) => value !== null && value !== undefined && value !== "").map((value) => typeof value));
+    if (observed.size === 1 && !observed.has("string")) types[column] = [...observed][0];
+  }
+  const keys = rows.map((row) => columns.map((key) => String(row?.[key] ?? "")).join("\u001f"));
+  rows.forEach((row, index) => {
+    const emptyColumns = Object.keys(row).filter((column) => row[column] === "");
+    const nullColumns = Object.keys(row).filter((column) => row[column] === null);
+    if (emptyColumns.length) empty[keys[index]] = emptyColumns;
+    if (nullColumns.length) nulls[keys[index]] = nullColumns;
+  });
+  return { columns, keys, types, empty, nulls };
+};
+
 const tables = {};
 for (const [table, caseName] of Object.entries(sources).sort(([a], [b]) => a.localeCompare(b))) {
   let rows = cases.get(caseName);
   if (!Array.isArray(rows) || !rows.length) continue;
   if (table === "staff") rows = rows.filter((row) => row.staff_id !== "CEO-1");
-  const columns = candidateColumns(rows);
-  if (!columns.length) continue;
-  tables[table] = {
-    columns,
-    keys: rows.map((row) => columns.map((key) => String(row?.[key] ?? "")).join("\u001f")),
-  };
+  tables[table] = makeEntry(rows);
+}
+
+const raw = {};
+for (const [name, rows] of cases) {
+  if (!name.startsWith("readTable.") || !Array.isArray(rows) || !rows.length) continue;
+  raw[name.slice(10)] = makeEntry(rows);
+}
+
+const actionRows = cases.get("actions_") || [];
+const overlay = JSON.parse(fs.readFileSync(path.join(process.cwd(), ".data", "overlay.json"), "utf8"));
+for (const [actionId, patch] of Object.entries(overlay.patches?.action || {})) {
+  const original = actionRows.find((row) => row.action_id === actionId);
+  if (!original || !tables.action) continue;
+  tables.action.overrides ||= {};
+  tables.action.overrides[actionId] = Object.fromEntries(Object.keys(patch).filter((column) => Object.hasOwn(original, column)).map((column) => [column, original[column]]));
+}
+
+const rawComplianceRows = cases.get("readTable.compliance_task") || [];
+for (const [taskId, patch] of Object.entries(overlay.taskPatch || {})) {
+  const original = rawComplianceRows.find((row) => row.task_id === taskId);
+  const entry = raw.compliance_task;
+  if (!original || !entry) continue;
+  const key = entry.columns.map((column) => String(original[column] ?? "")).join("\u001f");
+  entry.overrides ||= {};
+  entry.overrides[key] = Object.fromEntries(Object.keys(patch).filter((column) => Object.hasOwn(original, column)).map((column) => [column, original[column]]));
 }
 
 fs.mkdirSync(path.dirname(outputFile), { recursive: true });
-fs.writeFileSync(outputFile, JSON.stringify({ format: "adoms-read-order-v1", tables }, null, 2) + "\n");
-console.log(JSON.stringify({ tables: Object.keys(tables).length, output: outputFile }));
+fs.writeFileSync(outputFile, JSON.stringify({ format: "adoms-read-order-v2", tables, raw }, null, 2) + "\n");
+console.log(JSON.stringify({ tables: Object.keys(tables).length, raw_tables: Object.keys(raw).length, output: outputFile }));

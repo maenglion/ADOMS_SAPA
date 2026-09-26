@@ -257,13 +257,25 @@
 
 ## 2026-09-27
 
-### [24] Netlify 원격 CSV baseline 복구 및 PostgreSQL A/B 재분류
-- 상태: 보류
-- 배경: Production이 CSV 설정인데도 기존 golden과 다른 값이 관측되어, PostgreSQL Preview 차이를 adapter 문제로 확정하기 전에 Netlify 원격 CSV 자체의 데이터 경로와 동결자료 포함 여부를 검증해야 했다.
-- 결정: 동결 데이터의 `us_*` 내림차순, 이어서 `ops_*` 내림차순, table별 최초 CSV 선택 규칙을 배포 artifact에서도 유지한다. CSV 원격 baseline을 먼저 복구하고 같은 commit·같은 branch에서 backend 변수만 바꿔 PostgreSQL과 A/B한다. PostgreSQL이 golden과 일치하지 않거나 `/actions` timeout이 있으면 Production cutover와 사용자 체감 성능 검증을 진행하지 않는다.
-- 이유: 기존 Netlify 실행환경에는 저장소 밖 기본 data path가 없어 overlay만 읽었고, 이 상태의 CSV 결과와 PostgreSQL 결과를 비교하면 배포 packaging 문제와 adapter 문제를 구분할 수 없기 때문이다. 또한 전체 137개 회귀 수행시간과 일반 사용자 한 화면 응답시간은 다른 지표이므로, golden 통과 전 성능 수치를 사용자 latency로 오인하지 않기 위해서다.
-- 영향 범위: Netlify branch deploy의 frozen CSV packaging, server-side data root 선택, 원격 CSV/PostgreSQL READ 회귀, Production cutover 조건. Production 설정, WRITE, DB schema/data, 원본 CSV·overlay, golden에는 영향이 없다.
-- 실제 변경: 기본 data root가 저장소의 `data/_데모_용인시_20260920`으로 fallback하도록 공통 경로를 추가하고, 현재 선택되는 73개 seed CSV와 form 자료만 server function trace에 포함했다. 안전한 진단 경로는 backend, repo-relative data root, seed directory와 table별 source만 반환하며 credential이나 host 절대경로를 반환하지 않는다. CSV 감사로그 반환은 frozen golden 계약인 overlay 241행과 원래 순서를 유지하도록 복원했다. PostgreSQL A/B 후 branch override를 다시 `csv`로 되돌려 재배포했고 runtime backend가 `csv`임을 확인했다. Production도 계속 `csv`다.
-- 검증: CSV Preview는 137/137 HTTP 200, `/actions` 4/4 HTTP 200, golden 7,373/7,373, expected-only 0, extra 0, 안정값 mismatch 0, key metrics 159/159, calculation crosscheck 68/68이다. frozen capture 시각에 종속된 `/exec` 경과시간 4건만 raw 차이로 분리했다. 로컬과 runtime의 선택 table 73개 source path 불일치는 0이다. 같은 commit의 PostgreSQL A/B는 133/137 HTTP 200, `/actions` 4/4 HTTP 504, 안정값 mismatch 26, expected-only 224로 실패했다. 현재 9개 점검 회차의 `/actions` 호출 경로는 정적 계산상 PostgreSQL query 270회를 만들며, 이 중 248회가 회차별 동일 자료를 반복 구성하는 `checkFlagged()` 경로다. 최적화와 5경로×10회 성능 측정은 golden 통과 전이므로 수행하지 않았다.
-- 관련 파일: `lib/data-root.ts`, `lib/data.ts`, `lib/forms.ts`, `lib/lawsync.ts`, `app/api/read-source/route.ts`, `next.config.ts`, `.env.example`, `READ_CUTOVER_VERIFY.md`, `db/read-shadow/remote_csv_pg_ab.csv`, `WORKLOG.md`
+### [24] Netlify 원격 회귀 불일치의 버전 드리프트 가설
+- 상태: 결정
+- 배경: 로컬에서는 현재 frozen CSV와 그 자료에서 만든 PostgreSQL baseline의 READ shadow mismatch가 0이었지만, Netlify PostgreSQL Preview의 137개 GET 회귀는 HTTP 200 133건, `/actions` HTTP 504 4건, value mismatch 178건, expected-only 280건, key metric mismatch 16건이었다. 동시에 당시 Production CSV 화면도 관리대상 1, 시기도래 0, 기한 초과 0으로 golden과 달라 PostgreSQL 문제만으로 단정할 수 없었다.
+- 결정: 당시 우선 가설을 앱 코드와 배포된 데이터 판 사이의 version skew/version drift로 두고, PostgreSQL adapter를 먼저 수정하지 않는다. Netlify CSV mode가 실제 선택하는 data root와 `us_*`, `ops_*`, base·mgmt·lawtext 판을 확인해 Remote CSV baseline부터 복구한다. Remote CSV mismatch가 0이 되기 전에는 PostgreSQL Preview mismatch를 최종 compatibility defect로 확정하지 않는다.
+- 이유: 최신 코드가 과거 데이터에 없던 칼럼·값·구조를 기대하거나, 최신 필터·계산식과 다른 seed 판이 결합되면 화면은 렌더링되어도 숫자와 결과가 달라질 수 있다. 코드 버전, 데이터 판, PostgreSQL baseline 판을 분리해 확인해야 원인 경계를 잘못 지정하지 않는다.
+- 영향 범위: Netlify 원격 회귀의 조사 순서, PostgreSQL adapter 수정 보류, 앱·데이터·DB 릴리스 식별 방식, Production READ cutover 조건
+- 실제 변경: 이 단계에서는 adapter, DB, seed를 변경하지 않았다. 원격 CSV의 data root, seed 선택, deploy artifact 포함 상태를 먼저 조사하는 방향을 확정했다. 후속 조사에서 일반적인 version drift보다 직접적인 원인이 seed CSV의 deploy artifact 누락으로 확인됐으며, 이 가설 기록은 당시의 합리적 판단 과정으로 보존한다.
+- 검증: 후속 조사 전 상태에서는 로컬 CSV↔PostgreSQL shadow mismatch 0과 원격 CSV·PostgreSQL 양쪽의 golden 불일치가 동시에 관측됐다. 이후 [25]에서 실제 배포 경로의 직접 원인과 해결 결과를 확정했다.
+- 관련 파일: `READ_CUTOVER_VERIFY.md`, `READ_ADAPTER_VERIFY.md`, `db/read-shadow/read_cutover_compare.csv`, `WORKLOG.md`
 - 관련 commit: pending
+
+### [25] Netlify 원격 CSV baseline 복구 및 데이터 릴리스 절차 확정
+- 상태: 완료
+- 배경: Production이 CSV 설정인데도 기존 golden과 다른 값이 관측되어, PostgreSQL Preview 차이를 adapter 문제로 확정하기 전에 Netlify 원격 CSV 자체의 데이터 경로와 동결자료 포함 여부를 검증해야 했다.
+- 결정: 동결 데이터의 `us_*` 내림차순, 이어서 `ops_*` 내림차순, table별 최초 CSV 선택 규칙을 배포 artifact에서도 유지한다. 데이터 폴더 전체가 아니라 현재 규칙이 선택한 CSV manifest만 server bundle에 포함한다. CSV 원격 baseline을 먼저 복구하고 같은 commit·같은 Netlify 조건에서 backend 변수만 바꿔 PostgreSQL과 A/B한다. 재현 가능한 앱 릴리스는 app commit, base·mgmt·ops·us·lawtext release, 선택 CSV manifest와 hash, deploy artifact 포함 상태, PostgreSQL import manifest, golden 결과를 하나의 호환 세트로 고정한다.
+- 이유: 기존 Netlify 실행환경에는 저장소 밖 기본 data path가 없고 `.data/overlay.json`만 포함됐으며 frozen seed CSV는 0개 포함되어 있었다. 이 상태에서는 CSV 결과와 PostgreSQL 결과를 비교해도 배포 packaging 문제와 adapter 문제를 구분할 수 없다. Git에 파일이 존재하는 사실만으로 runtime 배포를 증명할 수 없고, 전체 137개 회귀 수행시간과 일반 사용자 한 화면 응답시간도 서로 다른 지표다.
+- 영향 범위: Netlify branch deploy의 frozen CSV packaging, server-side data root 선택, 원격 CSV/PostgreSQL READ 회귀, Production cutover 조건, 향후 데이터 판 갱신과 릴리스 manifest. Production 설정, WRITE, DB schema/data, 원본 CSV·overlay, golden에는 영향이 없다.
+- 실제 변경: 기본 data root가 저장소의 `data/_데모_용인시_20260920`으로 fallback하도록 공통 경로를 추가하고, 현재 선택되는 73개 seed CSV와 form 자료만 server function trace에 포함했다. 안전한 진단 경로는 backend, repo-relative data root, seed directory와 table별 source만 반환하며 credential이나 host 절대경로를 반환하지 않는다. CSV 감사로그 반환은 frozen golden 계약인 overlay 241행과 원래 순서를 유지하도록 복원했다. PostgreSQL A/B 후 branch override를 다시 `csv`로 되돌려 재배포했고 runtime backend가 `csv`임을 확인했다. Production도 계속 `csv`다.
+- 검증: CSV Preview는 137/137 HTTP 200, `/actions` 4/4 HTTP 200, golden 7,373/7,373, expected-only 0, extra 0, 안정값 mismatch 0, key metrics 159/159, calculation crosscheck 68/68이다. frozen capture 시각에 종속된 `/exec` 경과시간 4건만 raw 차이로 분리했다. 로컬과 runtime의 선택 table 73개 source path 불일치는 0이다. 같은 commit의 PostgreSQL A/B는 133/137 HTTP 200, `/actions` 4/4 HTTP 504, 안정값 mismatch 26, expected-only 224로 실패했다. 현재 9개 점검 회차의 `/actions` 호출 경로는 정적 계산상 PostgreSQL query 270회를 만들며, 이 중 248회가 회차별 동일 자료를 반복 구성하는 `checkFlagged()` 경로다. 따라서 Production cutover, 최적화 전 성능 합격 처리, 5경로×10회 측정은 보류한다.
+- 후속 운영 원칙: 향후 데이터 갱신은 `데이터 판 확정 → 선택 파일 manifest 생성 → Preview artifact bundle → CSV golden → PostgreSQL 반영 → READ shadow → stable 승격 → Production cutover`를 하나의 릴리스 절차로 본다. 현재 73개는 고정 규칙이 아니라 이번 릴리스의 계산 결과다. WRITE 전환 전 데모 DB는 검증된 baseline으로 재생성할 수 있지만, WRITE 전환 후에는 법령·기준표·관리대상 같은 기준/정본층을 migration·upsert로 갱신하고 사용자 입력·업무 상태·실행 기록·증빙의 운영층은 persistent ledger/state로 보존하며 baseline으로 덮어쓰지 않는다. CSV baseline 복구와 릴리스 절차 확정은 완료했지만, PostgreSQL Production READ cutover는 별도 검증 실패로 계속 보류한다.
+- 관련 파일: `lib/data-root.ts`, `lib/data.ts`, `lib/forms.ts`, `lib/lawsync.ts`, `app/api/read-source/route.ts`, `next.config.ts`, `.env.example`, `READ_CUTOVER_VERIFY.md`, `db/read-shadow/remote_csv_pg_ab.csv`, `WORKLOG.md`
+- 관련 commit: `798e5fb`~`d367cea` (본 기록 정리 commit은 pending)

@@ -571,7 +571,7 @@
       "nulls": {},
       "overrides": {
         "ACT-000006": {
-          "action_type": "보완",
+          "action_type": "시정",
           "action_basis": ""
         }
       }
@@ -263827,7 +263827,7 @@
       "nulls": {},
       "overrides": {
         "ACT-000006": {
-          "action_type": "보완",
+          "action_type": "시정",
           "action_basis": ""
         }
       }

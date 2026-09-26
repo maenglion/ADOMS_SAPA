@@ -13,6 +13,7 @@
  *   · roundsAsBatches  — 이행점검 회차를 옛 점검 회차 모양으로(연간 일정·체계 수립 현황이 두 회차를 함께 세도록 — 메인 채팅 요청용)
  */
 import "server-only";
+import { createHash } from "node:crypto";
 import { readTable, staff, tasks, approvals, type Row } from "@/lib/data";   // 09-26 사용자: 옛 점검 화면 합치기 2차 — tasks(항목 판정으로 승인)
 import { withDbReadScope } from "@/lib/db";
 import type { TrackKey } from "@/lib/us/tracks";
@@ -70,7 +71,21 @@ export type CheckFlag = {
  * 과제 판정(②)이 이긴 칸은 옛 목록에 과제 줄로 이미 있으므로 넣지 않는다(두 번 세지 않게).
  */
 export async function checkFlagged(year: string, role: string): Promise<CheckFlag[]> {
-  return withDbReadScope("checkFlagged", () => checkFlaggedInner(year, role));
+  const rows = await withDbReadScope("checkFlagged", () => checkFlaggedInner(year, role));
+  if (process.env.ADOMS_DATA_BACKEND === "postgres" || process.env.ADOMS_READ_VERIFY === "1") {
+    console.info("[adoms-check-flagged]", JSON.stringify({ year, role, rows: rows.length, sha256: checkFlaggedDigest(rows) }));
+  }
+  return rows;
+}
+
+function stableValue(value: any): any {
+  if (Array.isArray(value)) return value.map(stableValue);
+  if (!value || typeof value !== "object") return value;
+  return Object.fromEntries(Object.keys(value).sort().map((key) => [key, stableValue(value[key])]));
+}
+
+export function checkFlaggedDigest(rows: CheckFlag[]): string {
+  return createHash("sha256").update(JSON.stringify(stableValue(rows))).digest("hex");
 }
 
 async function checkFlaggedInner(year: string, role: string): Promise<CheckFlag[]> {

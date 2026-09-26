@@ -276,7 +276,7 @@ export async function queryRows(relation: string, queryString: string): Promise<
   }
 }
 
-/** Existing audit-log contract: physical changed_* names are aliased only here. */
+/** Frozen CSV audit-log contract: all overlay rows in stored order; aliases exist only here. */
 export async function queryAuditLog(): Promise<DbRow[]> {
   const result = await postgresPool().query(`
     SELECT changed_at AS at,
@@ -286,8 +286,7 @@ export async function queryAuditLog(): Promise<DbRow[]> {
            target,
            what
       FROM adoms2."audit_log"
-     ORDER BY changed_at DESC
-     LIMIT 100
+     ORDER BY ctid
   `);
   return result.rows;
 }

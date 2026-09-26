@@ -117,6 +117,26 @@ async function liveTable(table: string): Promise<Row[]> {
   return applyReadOrder(table, await fromDb(table, "select=*&limit=100000"), "live");
 }
 
+// `task_approval_patch` is intentionally merged into the physical PostgreSQL
+// compliance_task table, but the frozen UI has two different logical reads:
+// tasks() sees the base task plus overlay.taskPatch, while approvals() also
+// sees task_approval_patch. Restore that distinction only for tasks().
+const TASK_APPROVAL_PATCH_FIELDS = [
+  "approval_status", "created_by", "submitted_at", "submitted_by", "approved_at", "approved_by",
+  "rejected_at", "reject_reason", "created_at", "period_year", "half_year", "plan_date",
+  "evidence_cnt", "check_result", "head_ok_at", "head_ok_by",
+] as const;
+
+function taskRowsForUi(rows: Row[]): Row[] {
+  if (!useDb) return rows;
+  const patches = readOverlay().taskPatch;
+  return rows.map((source) => {
+    const row = { ...source };
+    for (const field of TASK_APPROVAL_PATCH_FIELDS) delete row[field];
+    return patches[row.task_id] ? { ...row, ...patches[row.task_id] } : row;
+  });
+}
+
 /* ── 화면이 쓰는 함수들 ─────────────────────────────────────── */
 
 export type DutyRow = Row;
@@ -205,7 +225,7 @@ export async function tasks(filter: { dept?: string; staff?: string; status?: st
   const dutyRows = useDb ? await readTable("duty_class", "duty_key") : dutyClassRows(true);
   const deptRows = useDb ? await readTable("org_dept", "dept_id") : seed("org_dept");
   const assetRows = useDb ? (await readTable("asset", "asset_id")).filter((a) => a.deleted !== "Y") : assetSeed();
-  const taskRows = useDb ? await liveTable("compliance_task") : seed("compliance_task");
+  const taskRows = useDb ? taskRowsForUi(await liveTable("compliance_task")) : seed("compliance_task");
   const duty = new Map(dutyRows.map((d) => [d.duty_key, d]));
   const dept = new Map(deptRows.map((d) => [d.dept_id, d]));
   const asset = new Map(assetRows.map((a) => [a.asset_id, a]));

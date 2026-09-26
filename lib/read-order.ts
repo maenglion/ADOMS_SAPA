@@ -19,7 +19,12 @@ function orderContract() {
 }
 
 export function applyReadOrder(table: string, rows: Row[], mode: "live" | "raw" = "live"): Row[] {
-  const entry = mode === "raw" ? orderContract().raw?.[table] : orderContract().tables[table];
+  const contract = orderContract();
+  // usb1_workplace has no overlay patch, so its raw CSV order is also the
+  // keyed/live order used by the dashboard. Without this fallback PostgreSQL
+  // leaked physical row order and swapped 본청/의회.
+  const entry = mode === "raw" ? contract.raw?.[table]
+    : contract.tables[table] || (table === "usb1_workplace" ? contract.raw?.[table] : undefined);
   if (!entry) return rows;
   const positions = new Map<string, number[]>();
   entry.keys.forEach((key, index) => {

@@ -31,7 +31,27 @@ function identityKey(row) {
   if (!row || typeof row !== "object" || Array.isArray(row)) return JSON.stringify(row);
   const preferred = ["task_id", "duty_key", "assign_id", "asset_id", "dept_id", "staff_id", "evidence_id", "insp_id", "action_id", "notif_id", "round_id", "judge_id", "rec_id", "record_id", "incident_id", "order_id", "activity_id", "change_id", "contract_id", "form_id", "risk_id", "item_id", "target_code", "code", "id"];
   const found = preferred.filter((key) => Object.hasOwn(row, key) && row[key] !== null && row[key] !== "");
+  if (!found.length && Object.hasOwn(row, "at")) {
+    return ["at", "by", "action", "target"].filter((key) => Object.hasOwn(row, key)).map((key) => `${key}=${String(row[key] ?? "")}`).join("|");
+  }
   return found.length ? found.slice(0, 2).map((key) => `${key}=${String(row[key])}`).join("|") : JSON.stringify(row);
+}
+
+function compareObject(a, b, name, key, summary, details) {
+  for (const column of Object.keys(a)) {
+    const csv = a[column];
+    const postgres = b?.[column];
+    if ((csv === null || csv === "") && csv !== postgres) {
+      summary.null_empty_mismatch++;
+      details.push({ case: name, key, column, kind: "null_empty", csv, postgres });
+    } else if (typeof csv !== typeof postgres) {
+      summary.type_mismatch++;
+      details.push({ case: name, key, column, kind: "type", csv: typeof csv, postgres: typeof postgres });
+    } else if (JSON.stringify(csv) !== JSON.stringify(postgres)) {
+      summary.value_mismatch++;
+      details.push({ case: name, key, column, kind: "value", csv, postgres });
+    }
+  }
 }
 
 function classify(csvValue, dbValue, name, summary, details) {
@@ -39,6 +59,7 @@ function classify(csvValue, dbValue, name, summary, details) {
     const a = csvValue === undefined ? null : csvValue;
     const b = dbValue === undefined ? null : dbValue;
     if (typeof a !== typeof b) { summary.type_mismatch++; details.push({ case: name, kind: "type", csv: a, postgres: b }); }
+    else if (a && b && typeof a === "object") compareObject(a, b, name, identityKey(a), summary, details);
     else if (JSON.stringify(a) !== JSON.stringify(b)) { summary.value_mismatch++; details.push({ case: name, kind: "value", csv: a, postgres: b }); }
     return;
   }
@@ -66,20 +87,7 @@ function classify(csvValue, dbValue, name, summary, details) {
       else if (csvRow !== dbRow) summary.value_mismatch++;
       continue;
     }
-    for (const column of Object.keys(csvRow)) {
-      const a = csvRow[column];
-      const b = dbRow[column];
-      if ((a === null || a === "") && a !== b) {
-        summary.null_empty_mismatch++;
-        details.push({ case: name, key, column, kind: "null_empty", csv: a, postgres: b });
-      } else if (typeof a !== typeof b) {
-        summary.type_mismatch++;
-        details.push({ case: name, key, column, kind: "type", csv: typeof a, postgres: typeof b });
-      } else if (JSON.stringify(a) !== JSON.stringify(b)) {
-        summary.value_mismatch++;
-        details.push({ case: name, key, column, kind: "value", csv: a, postgres: b });
-      }
-    }
+    compareObject(csvRow, dbRow, name, key, summary, details);
   }
 }
 
@@ -109,5 +117,5 @@ const report = {
 fs.writeFileSync(path.join(outputDir, "read_adapter_compare.json"), JSON.stringify(report, null, 2) + "\n", "utf8");
 const lines = ["case,kind,key,column,csv,postgres", ...details.map((d) => [d.case, d.kind, d.key || "", d.column || "", JSON.stringify(d.csv ?? ""), JSON.stringify(d.postgres ?? "")].map((v) => `"${String(v).replaceAll('"', '""')}"`).join(","))];
 fs.writeFileSync(path.join(outputDir, "read_adapter_compare.csv"), lines.join("\n") + "\n", "utf8");
-console.log(JSON.stringify(report));
+console.log(JSON.stringify({ ...report, details: details.slice(0, 25), detail_count: details.length }));
 process.exit(total === 0 ? 0 : 1);

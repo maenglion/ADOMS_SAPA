@@ -1,16 +1,13 @@
 import "server-only";
 import fs from "node:fs";
 import path from "node:path";
+import { DATA_ROOT } from "./data-root";
 
 /**
  * 법정 서식(별표·별지서식) HTML — 법령 원문의 괘선 표를 표로 옮겨 미리 만들어 둔 것.
  * 변환은 파이썬 한 곳(`_build/schedule_to_html.py`)에서만 한다. 앱은 결과만 읽는다.
  * 파일은 최신 ops 판 폴더의 `forms/` 에 있다.
  */
-const DATA_ROOT =
-  process.env.ADOMS_OPS_DIR ||
-  path.resolve(process.cwd(), "../../../../30_데이터/_수집작업/ADOMS_DB_v1/_데모_용인시_20260920");
-
 function formsDir(): string | null {
   try {
     const dirs = fs.readdirSync(DATA_ROOT).filter((d) => d.startsWith("ops_")).sort().reverse();

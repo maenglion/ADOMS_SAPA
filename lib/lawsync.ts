@@ -21,10 +21,9 @@ import { spawn } from "node:child_process";
 import { appendRow, patchRow } from "@/lib/write";
 import { readTable, parseCsv, staff, type Row } from "@/lib/data";
 import { ymd } from "@/lib/day";
+import { DATA_ROOT } from "@/lib/data-root";
+export { DATA_ROOT } from "@/lib/data-root";
 
-export const DATA_ROOT =
-  process.env.ADOMS_OPS_DIR ||
-  path.resolve(process.cwd(), "../../../../30_데이터/_수집작업/ADOMS_DB_v1/_데모_용인시_20260920");
 const LS = path.join(DATA_ROOT, "law_sync");
 const RUNS = path.join(LS, "runs");
 const AGENT = path.join(DATA_ROOT, "_agent", "coco.py");

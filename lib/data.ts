@@ -17,31 +17,18 @@ import path from "node:path";
 import { queryAuditLog, queryRows } from "./db";
 import { applyReadOrder } from "./read-order";
 import { dataBackend, usesPostgresReads } from "./data-backend";
+import { seedDirectories } from "./data-root";
 
 export type Row = Record<string, any>;
 
 export const useDb = usesPostgresReads();
-
-/** 데모 DB 판 폴더 — ops_v0.2 → ops_v0.1 순으로 찾는다. */
-const DATA_ROOT =
-  process.env.ADOMS_OPS_DIR ||
-  path.resolve(
-    process.cwd(),
-    "../../../../30_데이터/_수집작업/ADOMS_DB_v1/_데모_용인시_20260920"
-  );
 
 /**
  * [400 · 교육자료 버전] 판 폴더 — 교육자료 버전 운영DB(`us_*`, 이 앱만 읽음)를 먼저, 그다음 공통 판(`ops_*`)을 새것부터.
  * 다른 앱(3100·3200·3300)은 `ops_*` 만 읽으므로 `us_*` 에 무엇을 넣어도 영향이 없다.
  */
 function opsDirs(): string[] {
-  try {
-    const all = fs.readdirSync(DATA_ROOT);
-    const pick = (pre: string) => all.filter((d) => d.startsWith(pre)).sort().reverse().map((d) => path.join(DATA_ROOT, d, "seed"));
-    return [...pick("us_"), ...pick("ops_")];
-  } catch {
-    return [];
-  }
+  return seedDirectories();
 }
 
 /** 아주 작은 CSV 파서 — 따옴표·줄바꿈·BOM 을 다룬다. */

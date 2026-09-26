@@ -30,11 +30,13 @@ function run(backend, file) {
 function identityKey(row) {
   if (!row || typeof row !== "object" || Array.isArray(row)) return JSON.stringify(row);
   const preferred = ["task_id", "duty_key", "assign_id", "asset_id", "dept_id", "staff_id", "evidence_id", "insp_id", "action_id", "notif_id", "round_id", "judge_id", "rec_id", "record_id", "incident_id", "order_id", "activity_id", "change_id", "contract_id", "form_id", "risk_id", "item_id", "target_code", "code", "id"];
-  const found = preferred.filter((key) => Object.hasOwn(row, key) && row[key] !== null && row[key] !== "");
+  const candidates = Object.keys(row).filter((key) => /(?:^id$|_id$|_key$|_code$|_no$|^code$)/.test(key));
+  const found = [...preferred.filter((key) => candidates.includes(key)), ...candidates.filter((key) => !preferred.includes(key)).sort()]
+    .filter((key) => row[key] !== null && row[key] !== "");
   if (!found.length && Object.hasOwn(row, "at")) {
     return ["at", "by", "action", "target"].filter((key) => Object.hasOwn(row, key)).map((key) => `${key}=${String(row[key] ?? "")}`).join("|");
   }
-  return found.length ? found.slice(0, 2).map((key) => `${key}=${String(row[key])}`).join("|") : JSON.stringify(row);
+  return found.length ? found.map((key) => `${key}=${String(row[key])}`).join("|") : JSON.stringify(row);
 }
 
 function compareObject(a, b, name, key, summary, details) {
@@ -68,20 +70,21 @@ function classify(csvValue, dbValue, name, summary, details) {
     details.push({ case: name, kind: "type", csv: "array", postgres: typeof dbValue });
     return;
   }
-  const aKeys = csvValue.map(identityKey);
-  const bKeys = dbValue.map(identityKey);
-  const aSet = new Set(aKeys), bSet = new Set(bKeys);
-  summary.missing_rows += aKeys.filter((key) => !bSet.has(key)).length;
-  summary.extra_rows += bKeys.filter((key) => !aSet.has(key)).length;
-  if (aKeys.length === bKeys.length && aKeys.some((key, index) => key !== bKeys[index]) && aKeys.every((key) => bSet.has(key))) {
+  summary.missing_rows += Math.max(0, csvValue.length - dbValue.length);
+  summary.extra_rows += Math.max(0, dbValue.length - csvValue.length);
+  const aKeys = csvValue.map(identityKey), bKeys = dbValue.map(identityKey);
+  const unique = new Set(aKeys).size === aKeys.length && new Set(bKeys).size === bKeys.length;
+  const aSorted = [...aKeys].sort(), bSorted = [...bKeys].sort();
+  const sameMembers = unique && aKeys.length === bKeys.length && aSorted.every((key, index) => key === bSorted[index]);
+  if (sameMembers && aKeys.some((key, index) => key !== bKeys[index])) {
     summary.ordering_mismatch++;
     details.push({ case: name, kind: "ordering" });
   }
-  const dbByKey = new Map(dbValue.map((row) => [identityKey(row), row]));
-  for (const csvRow of csvValue) {
+  const length = Math.min(csvValue.length, dbValue.length);
+  for (let index = 0; index < length; index++) {
+    const csvRow = csvValue[index];
     const key = identityKey(csvRow);
-    const dbRow = dbByKey.get(key);
-    if (dbRow === undefined) continue;
+    const dbRow = dbValue[index];
     if (!csvRow || typeof csvRow !== "object" || Array.isArray(csvRow)) {
       if (typeof csvRow !== typeof dbRow) summary.type_mismatch++;
       else if (csvRow !== dbRow) summary.value_mismatch++;
@@ -117,5 +120,10 @@ const report = {
 fs.writeFileSync(path.join(outputDir, "read_adapter_compare.json"), JSON.stringify(report, null, 2) + "\n", "utf8");
 const lines = ["case,kind,key,column,csv,postgres", ...details.map((d) => [d.case, d.kind, d.key || "", d.column || "", JSON.stringify(d.csv ?? ""), JSON.stringify(d.postgres ?? "")].map((v) => `"${String(v).replaceAll('"', '""')}"`).join(","))];
 fs.writeFileSync(path.join(outputDir, "read_adapter_compare.csv"), lines.join("\n") + "\n", "utf8");
-console.log(JSON.stringify({ ...report, details: details.slice(0, 25), detail_count: details.length }));
+const cases = Object.entries(details.reduce((acc, item) => {
+  const key = `${item.case}:${item.kind}`;
+  acc[key] = (acc[key] || 0) + 1;
+  return acc;
+}, {})).map(([case_kind, count]) => ({ case_kind, count }));
+console.log(JSON.stringify({ ...report, details: details.slice(0, 25), detail_count: details.length, cases }));
 process.exit(total === 0 ? 0 : 1);

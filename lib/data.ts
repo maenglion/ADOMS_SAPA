@@ -2,24 +2,24 @@
  * 데이터 접근 한 곳.
  *
  * 규칙 (메모리 adoms-ui-data-access-rule)
- *   · 화면은 **뷰만** 읽는다. 표를 직접 읽지 않는다.
+ *   · 화면은 이 파일의 공통 READ 함수만 쓴다.
  *   · 쓰기는 이 파일의 공통 경로(rpc*)로만 한다.
  *
- * 두 가지 원천을 쓴다.
- *   ① Supabase (NEXT_PUBLIC_SUPABASE_URL·ANON_KEY 가 있으면) — 스키마 adoms2 의 뷰
- *   ② CSV 대체 (없으면) — 데모 DB 판 폴더의 seed CSV 를 서버에서 읽어 같은 모양으로 만든다
+ * 두 가지 READ 원천을 쓴다.
+ *   ① PostgreSQL (ADOMS_DATA_BACKEND=postgres) — 스키마 adoms2 의 표·뷰
+ *   ② CSV (기본값) — 데모 DB 판 폴더의 seed CSV 를 서버에서 읽어 같은 모양으로 만든다
  *      적재 전에도 화면을 만들 수 있게 하기 위한 것이고, 값은 같은 시드라 결과가 같다.
  */
 import "server-only";
 import fs from "node:fs";
 import { readOverlay } from "./write";
 import path from "node:path";
+import { queryAuditLog, queryRows } from "./db";
+import { dataBackend, usesPostgresReads } from "./data-backend";
 
 export type Row = Record<string, any>;
 
-const URL_ = process.env.NEXT_PUBLIC_SUPABASE_URL || "";
-const KEY_ = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || "";
-export const useDb = Boolean(URL_ && KEY_);
+export const useDb = usesPostgresReads();
 
 /** 데모 DB 판 폴더 — ops_v0.2 → ops_v0.1 순으로 찾는다. */
 const DATA_ROOT =
@@ -120,15 +120,9 @@ export function seed(table: string): Row[] {
   return [];
 }
 
-/** Supabase 뷰 조회 (REST). 필터는 PostgREST 문법 그대로. */
-async function fromDb(view: string, qs: string): Promise<Row[]> {
-  const url = `${URL_}/rest/v1/${view}?${qs}`;
-  const r = await fetch(url, {
-    headers: { apikey: KEY_, Authorization: `Bearer ${KEY_}`, "Accept-Profile": "adoms2" },
-    cache: "no-store",
-  });
-  if (!r.ok) throw new Error(`${view}: ${r.status} ${await r.text()}`);
-  return r.json();
+/** PostgreSQL 조회. 기존 내부 query contract는 canonical DB layer에서 parameterized SQL로 바꾼다. */
+async function fromDb(relation: string, qs: string): Promise<Row[]> {
+  return queryRows(relation, qs);
 }
 
 /* ── 화면이 쓰는 함수들 ─────────────────────────────────────── */
@@ -141,21 +135,9 @@ export async function duties(filter: {
   impl?: string; mark?: string; q?: string; limit?: number;
 } = {}): Promise<DutyRow[]> {
   const lim = filter.limit ?? 500;
-  if (useDb) {
-    const p = new URLSearchParams();
-    p.set("select", "*");
-    p.set("limit", String(lim));
-    if (filter.area) p.set("area", `eq.${filter.area}`);
-    if (filter.code36) p.set("code36", `eq.${filter.code36}`);
-    if (filter.target) p.set("target_code", `eq.${filter.target}`);
-    if (filter.group) p.set("law_group", `eq.${filter.group}`);
-    if (filter.law) p.set("law", `eq.${filter.law}`);
-    if (filter.impl) p.set("impl_type", `eq.${filter.impl}`);
-    if (filter.mark) p.set("yongin_mark", `eq.${filter.mark}`);
-    if (filter.q) p.set("or", `(duty_name.ilike.*${filter.q}*,law.ilike.*${filter.q}*,article_title.ilike.*${filter.q}*)`);
-    return fromDb("v_duty_detail", p.toString());
-  }
-  let rows = dutyClassRows();
+  let rows = useDb
+    ? (await readTable("duty_class", "duty_key")).filter((r) => r.retired !== "Y")
+    : dutyClassRows();
   const f = filter;
   if (f.area) rows = rows.filter((r) => r.area === f.area);
   if (f.code36) rows = rows.filter((r) => String(r.code36 || "").split(";")[0].trim() === f.code36); // 여러 조항에 걸린 행은 첫 조항으로 센다(의무조항별 카드와 같은 규칙)
@@ -174,10 +156,7 @@ export async function duties(filter: {
 }
 
 export async function dutyByKey(key: string): Promise<DutyRow | null> {
-  if (useDb) {
-    const rows = await fromDb("v_duty_detail", `duty_key=eq.${key}&select=*&limit=1`);
-    return rows[0] ?? null;
-  }
+  if (useDb) return (await readTable("duty_class", "duty_key")).find((r) => r.duty_key === key) ?? null;
   return dutyClassRows(true).find((r) => r.duty_key === key) ?? null;
 }
 
@@ -202,53 +181,43 @@ export function assetMapSeed(): Row[] {
 
 export async function assets(filter: { target?: string; dept?: string; q?: string; limit?: number } = {}) {
   const lim = filter.limit ?? 300;
-  if (useDb) {
-    const p = new URLSearchParams({ select: "*", limit: String(lim) });
-    if (filter.dept) p.set("dept_id", `eq.${filter.dept}`);
-    if (filter.q) p.set("asset_name", `ilike.*${filter.q}*`);
-    const rows = await fromDb("asset", p.toString());
-    if (!filter.target) return rows;
-    const map = await fromDb("asset_target_map", `target_code=eq.${filter.target}&select=asset_id`);
-    const ids = new Set(map.map((m) => m.asset_id));
-    return rows.filter((r) => ids.has(r.asset_id));
-  }
-  let rows = assetSeed();
+  let rows = useDb
+    ? (await readTable("asset", "asset_id")).filter((r) => r.deleted !== "Y")
+    : assetSeed();
   if (filter.dept) rows = rows.filter((r) => r.dept_id === filter.dept);
   if (filter.q) rows = rows.filter((r) => (r.asset_name || "").includes(filter.q!));
   if (filter.target) {
-    const ids = new Set(assetMapSeed().filter((m) => m.target_code === filter.target).map((m) => m.asset_id));
+    const map = useDb ? await readTable("asset_target_map") : assetMapSeed();
+    const ids = new Set(map.filter((m) => m.target_code === filter.target).map((m) => m.asset_id));
     rows = rows.filter((r) => ids.has(r.asset_id));
   }
   return rows.slice(0, lim);
 }
 
 export async function assetById(id: string) {
-  if (useDb) return (await fromDb("asset", `asset_id=eq.${id}&select=*&limit=1`))[0] ?? null;
+  if (useDb) return (await readTable("asset", "asset_id")).find((r) => r.asset_id === id) ?? null;
   return assetSeed().find((r) => r.asset_id === id) ?? null;
 }
 
 /** 자산 하나에 걸리는 관리대상 코드들. */
 export async function assetTargets(id: string): Promise<string[]> {
-  if (useDb) return (await fromDb("asset_target_map", `asset_id=eq.${id}&select=target_code`)).map((r) => r.target_code);
+  if (useDb) return (await readTable("asset_target_map")).filter((r) => r.asset_id === id).map((r) => r.target_code);
   return assetMapSeed().filter((r) => r.asset_id === id).map((r) => r.target_code);
 }
 
 /** 과제(내 업무·이행 현황). */
 export async function tasks(filter: { dept?: string; staff?: string; status?: string; limit?: number } = {}): Promise<Row[]> {
   const lim = filter.limit ?? 400;
-  if (useDb) {
-    const p = new URLSearchParams({ select: "*", limit: String(lim) });
-    if (filter.dept) p.set("dept_id", `eq.${filter.dept}`);
-    if (filter.staff) p.set("owner_staff_id", `eq.${filter.staff}`);
-    if (filter.status) p.set("status", `eq.${filter.status}`);
-    return fromDb("v_duty_todo", p.toString());
-  }
   // CSV 대체 — 과제 × 배정 × 의무를 이어 붙인다(뷰와 같은 모양).
   const asg = new Map((await assignments()).map((a) => [a.assign_id, a]));
-  const duty = new Map(dutyClassRows(true).map((d) => [d.duty_key, d]));
-  const dept = new Map(seed("org_dept").map((d) => [d.dept_id, d]));
-  const asset = new Map(assetSeed().map((a) => [a.asset_id, a]));
-  let rows: Row[] = seed("compliance_task").map((t): Row => {
+  const dutyRows = useDb ? await readTable("duty_class", "duty_key") : dutyClassRows(true);
+  const deptRows = useDb ? await readTable("org_dept", "dept_id") : seed("org_dept");
+  const assetRows = useDb ? (await readTable("asset", "asset_id")).filter((a) => a.deleted !== "Y") : assetSeed();
+  const taskRows = useDb ? await readTable("compliance_task", "task_id") : seed("compliance_task");
+  const duty = new Map(dutyRows.map((d) => [d.duty_key, d]));
+  const dept = new Map(deptRows.map((d) => [d.dept_id, d]));
+  const asset = new Map(assetRows.map((a) => [a.asset_id, a]));
+  let rows: Row[] = taskRows.map((t): Row => {
     const a = asg.get(t.assign_id) || {};
     const c = duty.get(a.duty_key) || {};
     return {
@@ -265,8 +234,10 @@ export async function tasks(filter: { dept?: string; staff?: string; status?: st
     };
   });
   // 시연 중 입력한 값(덮개)을 판 위에 겹친다.
-  const patch = readOverlay().taskPatch;
-  rows = rows.map((r) => (patch[r.task_id] ? { ...r, ...patch[r.task_id] } : r));
+  if (!useDb) {
+    const patch = readOverlay().taskPatch;
+    rows = rows.map((r) => (patch[r.task_id] ? { ...r, ...patch[r.task_id] } : r));
+  }
   if (filter.dept) rows = rows.filter((r) => r.dept_id === filter.dept);
   if (filter.staff) rows = rows.filter((r) => r.owner_staff_id === filter.staff);
   if (filter.status) rows = rows.filter((r) => r.status === filter.status);
@@ -292,13 +263,11 @@ export async function contracts() {
   return seed("contract");
 }
 export async function ceoActivities() {
-  if (useDb) return fromDb("ceo_activity", "select=*&order=activity_date.desc");
   // [400] 기관장 예방활동 화면(/ceo)이 쓰는 표(usf_ceo_activity)도 함께 — 경영책임자 보고 요약·보고서·대시보드가 같은 기록을 본다
   const rows = [...(await readTable("usf_ceo_activity", "activity_id")), ...(await readTable("ceo_activity", "activity_id"))];
   return rows.sort((a, b) => (a.activity_date < b.activity_date ? 1 : -1));
 }
 export async function lawChanges() {
-  if (useDb) return fromDb("law_change", "select=*&order=promulgated_at.desc");
   // 법령 개정 확인(CoCo)이 반영한 개정 현황까지 — 공포일 최신순
   return (await readTable("law_change", "change_id")).sort((a, b) => (String(a.promulgated_at) < String(b.promulgated_at) ? 1 : -1));
 }
@@ -310,7 +279,7 @@ export async function inspectionBatches() {
 /** 결재 층(승인 상태·제출일·승인일) — 과제 id 로 붙인다. */
 export async function approvals() {
   const rows: Row[] = useDb
-    ? await fromDb("v_task_approval", "select=*&limit=5000")
+    ? await readTable("compliance_task", "task_id")
     : (() => {
         const patch = new Map(seed("task_approval_patch").map((r) => [r.task_id, r]));
         const ov = readOverlay().taskPatch;
@@ -357,7 +326,7 @@ export async function evidences() {
 }
 /** 시연 중 일어난 일(덮개 기록) — 감사로그 자리. */
 export async function activityLog() {
-  if (useDb) return fromDb("audit_log", "select=*&order=at.desc&limit=100");
+  if (useDb) return queryAuditLog();
   return readOverlay().log;
 }
 export async function inspections() {
@@ -475,9 +444,9 @@ export async function readTable(table: string, keyCol?: string): Promise<Row[]> 
   return rows;
 }
 
-/** 원천 표시 — 화면 하단에 운영 DB(Supabase)인지 예시 자료 파일(CSV)인지 밝힌다. 화면 말에 「판」을 쓰지 않는다. */
+/** 원천 표시 — 화면 하단에 PostgreSQL인지 예시 자료 파일(CSV)인지 밝힌다. 화면 말에 「판」을 쓰지 않는다. */
 export function source(): string {
-  if (useDb) return "Supabase · adoms2 스키마(뷰)";
+  if (useDb) return "PostgreSQL · adoms2 스키마(READ)";
   const dirs = opsDirs();
-  return dirs.length ? `예시 자료 파일(CSV) · ${path.basename(path.dirname(dirs[0])).replace(/^ops_/, "")}` : "데이터 원천 없음";
+  return dirs.length ? `예시 자료 파일(CSV) · ${path.basename(path.dirname(dirs[0])).replace(/^ops_/, "")}` : `데이터 원천 없음 (${dataBackend()})`;
 }

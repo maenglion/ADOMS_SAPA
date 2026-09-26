@@ -1,0 +1,33 @@
+﻿뷰·표,종류,기존SQL,부르는_코드,질의(앞부분)
+v_duty_detail,뷰,뷰 있음,lib/data.ts:156,p.toString())
+v_duty_detail,뷰,뷰 있음,lib/data.ts:178,`duty_key=eq.${key}&select=*&limit=1`)
+asset,표,표 있음,lib/data.ts:209,p.toString())
+asset_target_map,표,표 있음,lib/data.ts:211,`target_code=eq.${filter.target}&select=asset_id`)
+asset,표,표 있음,lib/data.ts:226,`asset_id=eq.${id}&select=*&limit=1`))[0] ?? null
+asset_target_map,표,표 있음,lib/data.ts:232,`asset_id=eq.${id}&select=target_code`)).map((r) => r.target_code)
+v_duty_todo,뷰,뷰 있음,lib/data.ts:244,p.toString())
+org_dept,표,표 있음,lib/data.ts:277,"""select=*&order=dept_id"")"
+staff,표,표 있음,lib/data.ts:283,"""select=*&order=staff_id"") : seed(""staff"")"
+form_template,표,표 있음,lib/data.ts:287,"""select=*"")"
+contract,표,표 있음,lib/data.ts:291,"""select=*&order=contract_id"")"
+ceo_activity,표,표 있음,lib/data.ts:295,"""select=*&order=activity_date.desc"")"
+law_change,표,표 있음,lib/data.ts:301,"""select=*&order=promulgated_at.desc"")"
+inspection_batch,표,표 있음,lib/data.ts:306,"""select=*&order=batch_id"")"
+v_task_approval,뷰,뷰 있음,lib/data.ts:313,"""select=*&limit=5000"")"
+v_contract_duty,뷰,뷰 있음,lib/data.ts:325,"""select=*&limit=2000"")"
+contract_hazard,표,표 있음,lib/data.ts:329,"""select=*&limit=2000"")"
+safety_budget,표,표 있음,lib/data.ts:333,"""select=*&order=budget_id"")"
+training_record,표,표 있음,lib/data.ts:337,"""select=*&order=trained_at.desc"")"
+worker_voice,표,표 있음,lib/data.ts:341,"""select=*&order=received_at.desc"")"
+incident,표,표 있음,lib/data.ts:346,"""select=*&order=occurred_at.desc"")"
+order_received,표,표 있음,lib/data.ts:351,"""select=*&order=received_at.desc"")"
+evidence,표,표 있음,lib/data.ts:355,"""select=*&limit=2000"")"
+audit_log,표,표 있음,lib/data.ts:360,"""select=*&order=at.desc&limit=100"")"
+inspection,표,표 있음,lib/data.ts:364,"""select=*&limit=2000"")"
+action,표,표 있음,lib/data.ts:400,"""select=*&limit=2000"")"
+notification,표,표 있음,lib/data.ts:415,p.toString()))
+risk_assessment,표,표 있음,lib/data.ts:423,"""select=*&order=assessed_at.desc"")"
+risk_assessment_item,표,표 있음,lib/data.ts:427,"""select=*&limit=500"")"
+duty_assignment,표,표 있음,lib/data.ts:442,`duty_key=eq.${dutyKey}&select=*&limit=200`)
+duty_assignment,표,표 있음,lib/data.ts:448,`duty_key=eq.${dutyKey}&select=*&limit=50`)
+asset_target_map,표,표 있음,lib/data.ts:456,`asset_id=eq.${assetId}&select=*`)

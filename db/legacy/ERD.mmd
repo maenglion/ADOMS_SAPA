@@ -1,0 +1,364 @@
+%% ADOMS 앱(3400) 운영 표 관계 — 자동 생성(_도구\a2_analyze_tables.py) 2026-09-26
+%% 관계선 이름: 「SQL 선언」 = 기존 DDL references · 「추정(…)」 = 칸 이름으로 읽은 것(DB 제약 아님 — 확인 필요)
+%% 관계가 하나도 잡히지 않은 표는 아래 목록에만 적는다: 
+%%   accident_case accident_stat annual_schedule audit_log civil_record contract_eval_item contract_eval_score contract_eval_setting eval_criteria evidence_split incident_nil_check org_profile sys_menu task_approval_patch training_check usb1_basic usb1_contract_duty usb1_hazard_place usb1_transport usb1_ws_mgmt usb2_basic usb2_law usb2_timing usc_record usd_record use_plan use_record use_site usf_ceo_activity usf_ceo_log usf_file usf_notice usg_case usg_stat_occur usg_ws_industry v_contract_duty v_duty_detail v_duty_todo v_task_approval
+erDiagram
+  action {
+    text action_id PK
+    text batch_id FK
+    text insp_id FK
+  }
+  asset {
+    text asset_id PK
+    text dept_id FK
+  }
+  asset_target_map {
+    text asset_id PK, FK
+    text target_code PK
+  }
+  budget_exec {
+    text exec_id PK
+    text budget_id FK
+  }
+  ceo_activity {
+    text activity_id PK
+    text asset_id FK
+    text dept_id FK
+    text follow_up_task_id FK
+  }
+  civil_manual {
+    text manual_id PK
+    text asset_id FK
+    text owner_staff_id FK
+  }
+  civil_safety_plan {
+    text plan_id PK
+    text asset_id FK
+    text owner_staff_id FK
+  }
+  compliance_task {
+    text task_id PK
+    text assign_id FK
+    text done_by FK
+  }
+  contract {
+    text contract_id PK
+    text asset_id FK
+    text dept_id FK
+    text manager_staff_id FK
+  }
+  contract_compliance {
+    text cc_id PK
+    text contract_id FK
+    text item_no FK
+  }
+  contract_duty {
+    text cduty_id PK
+    text contract_id FK
+    text duty_key FK
+    text evidence_id FK
+  }
+  contract_hazard {
+    text hazard_id PK
+    text contract_id FK
+  }
+  contract_hazard_map {
+    text hazard_id PK
+    text contract_id FK
+    text hazard_code FK
+  }
+  contract_mgmt_item {
+    text item_no PK
+  }
+  drill_eval {
+    text eval_id PK
+    text drill_id FK
+  }
+  drill_plan {
+    text drill_id PK
+  }
+  duty_assignment {
+    text assign_id PK
+    text asset_id FK
+    text dept_id FK
+    text deputy_staff_id FK
+    text duty_key FK
+    text owner_staff_id FK
+  }
+  duty_class {
+    text duty_key PK
+  }
+  evidence {
+    text evidence_id PK
+    text form_id FK
+    text task_id FK
+    text uploaded_by FK
+  }
+  form_template {
+    text form_id PK
+  }
+  hazard_code {
+    text hazard_code PK
+  }
+  hazard_report {
+    text hz_id PK
+    text asset_id FK
+  }
+  hazard_step {
+    text step_id PK
+    text hz_id FK
+  }
+  incident {
+    text incident_id PK
+    text asset_id FK
+    text dept_id FK
+    text owner_staff_id FK
+  }
+  incident_report {
+    text report_id PK
+    text incident_id FK
+    text reporter_staff_id FK
+  }
+  incident_response {
+    text resp_id PK
+    text incident_id FK
+  }
+  incident_response_setting {
+    text set_id PK
+  }
+  inspection {
+    text insp_id PK
+    text inspector_staff_id FK
+    text task_id FK
+  }
+  inspection_batch {
+    text batch_id PK
+    text scope_dept_id FK
+  }
+  law_change {
+    text change_id PK
+    text run_id FK
+  }
+  law_sync_applied {
+    text run_id PK
+  }
+  law_sync_decision {
+    text item_id PK
+    text run_id FK
+  }
+  material_item {
+    text item_id PK
+    text owner_staff_id FK
+  }
+  notification {
+    text notif_id PK
+    text action_id FK
+    text batch_id FK
+    text from_staff_id FK
+    text task_id FK
+    text to_staff_id FK
+  }
+  order_received {
+    text order_id PK
+    text asset_id FK
+    text dept_id FK
+    text owner_staff_id FK
+    text related_incident_id FK
+  }
+  org_dept {
+    text dept_id PK
+  }
+  risk_assessment {
+    text risk_id PK
+    text assessor_staff_id FK
+    text dept_id FK
+    text wp_id FK
+  }
+  risk_assessment_item {
+    text risk_item_id PK
+    text owner_staff_id FK
+    text risk_id FK
+  }
+  safety_budget {
+    text budget_id PK
+    text dept_id FK
+    text duty_key FK
+    text risk_item_id FK
+  }
+  safety_manual {
+    text manual_id PK
+    text owner_staff_id FK
+  }
+  safety_org_role {
+    text role_id PK
+    text dept_id FK
+    text staff_id FK
+  }
+  safety_policy {
+    text policy_id PK
+    text owner_staff_id FK
+  }
+  staff {
+    text staff_id PK
+    text dept_id FK
+  }
+  sys_code {
+    text code_id PK
+    text set_id FK
+  }
+  sys_mail_log {
+    text mail_id PK
+    text from_staff_id FK
+    text to_staff_id FK
+  }
+  system_record {
+    text record_id PK
+    text checker_staff_id FK
+    text target_staff_id FK
+  }
+  training_course {
+    text course_id PK
+  }
+  training_record {
+    text training_id PK
+    text course_id FK
+    text dept_id FK
+    text duty_key FK
+    text staff_id FK
+  }
+  usa_order {
+    text order_id PK
+    text from_staff_id FK
+  }
+  usb1_contract {
+    text contract_id PK
+    text asset_id FK
+    text manager_staff_id FK
+  }
+  usb1_work_site {
+    text site_id PK
+    text wp_id FK
+  }
+  usb1_workplace {
+    text wp_id PK
+  }
+  usb2_assign {
+    text map_id PK
+    text staff_id FK
+  }
+  usb2_role {
+    text rid PK
+    text staff_id FK
+  }
+  usf_judge {
+    text judge_id PK
+    text round_id FK
+  }
+  usf_letter {
+    text letter_id PK
+  }
+  usf_letter_read {
+    text read_id PK
+    text letter_id FK
+    text staff_id FK
+  }
+  usf_round {
+    text round_id PK
+  }
+  worker_voice {
+    text voice_id PK
+    text dept_id FK
+    text plan_owner_staff_id FK
+    text reviewer_staff_id FK
+  }
+  action ||--o{ notification : "action_id · 추정(같은 칸 이름)"
+  asset ||--o{ asset_target_map : "asset_id · SQL 선언"
+  asset ||--o{ ceo_activity : "asset_id · SQL 선언"
+  asset ||--o{ civil_manual : "asset_id · 추정(같은 칸 이름)"
+  asset ||--o{ civil_safety_plan : "asset_id · 추정(같은 칸 이름)"
+  asset ||--o{ contract : "asset_id · SQL 선언"
+  asset ||--o{ duty_assignment : "asset_id · SQL 선언"
+  asset ||--o{ hazard_report : "asset_id · 추정(같은 칸 이름)"
+  asset ||--o{ incident : "asset_id · SQL 선언"
+  asset ||--o{ order_received : "asset_id · SQL 선언"
+  asset ||--o{ usb1_contract : "asset_id · 추정(같은 칸 이름)"
+  compliance_task ||--o{ ceo_activity : "follow_up_task_id · SQL 선언"
+  compliance_task ||--o{ evidence : "task_id · SQL 선언"
+  compliance_task ||--o{ inspection : "task_id · SQL 선언"
+  compliance_task ||--o{ notification : "task_id · SQL 선언"
+  contract ||--o{ contract_compliance : "contract_id · SQL 선언"
+  contract ||--o{ contract_duty : "contract_id · SQL 선언"
+  contract ||--o{ contract_hazard : "contract_id · SQL 선언"
+  contract ||--o{ contract_hazard_map : "contract_id · SQL 선언"
+  contract_mgmt_item ||--o{ contract_compliance : "item_no · SQL 선언"
+  drill_plan ||--o{ drill_eval : "drill_id · 추정(같은 칸 이름)"
+  duty_assignment ||--o{ compliance_task : "assign_id · SQL 선언"
+  duty_class ||--o{ contract_duty : "duty_key · SQL 선언"
+  duty_class ||--o{ duty_assignment : "duty_key · SQL 선언"
+  duty_class ||--o{ safety_budget : "duty_key · SQL 선언"
+  duty_class ||--o{ training_record : "duty_key · SQL 선언"
+  evidence ||--o{ contract_duty : "evidence_id · 추정(같은 칸 이름)"
+  form_template ||--o{ evidence : "form_id · SQL 선언"
+  hazard_code ||--o{ contract_hazard_map : "hazard_code · SQL 선언"
+  hazard_report ||--o{ hazard_step : "hz_id · 추정(같은 칸 이름)"
+  incident ||--o{ incident_report : "incident_id · 추정(같은 칸 이름)"
+  incident ||--o{ incident_response : "incident_id · 추정(같은 칸 이름)"
+  incident ||--o{ order_received : "related_incident_id · 추정(접미사 incident_id)"
+  incident_response_setting ||--o{ sys_code : "set_id · 추정(같은 칸 이름)"
+  inspection ||--o{ action : "insp_id · SQL 선언"
+  inspection_batch ||--o{ action : "batch_id · 추정(같은 칸 이름)"
+  inspection_batch ||--o{ notification : "batch_id · 추정(같은 칸 이름)"
+  law_sync_applied ||--o{ law_change : "run_id · 추정(같은 칸 이름)"
+  law_sync_applied ||--o{ law_sync_decision : "run_id · 추정(같은 칸 이름)"
+  org_dept ||--o{ asset : "dept_id · SQL 선언"
+  org_dept ||--o{ ceo_activity : "dept_id · SQL 선언"
+  org_dept ||--o{ contract : "dept_id · SQL 선언"
+  org_dept ||--o{ duty_assignment : "dept_id · SQL 선언"
+  org_dept ||--o{ incident : "dept_id · SQL 선언"
+  org_dept ||--o{ inspection_batch : "scope_dept_id · SQL 선언"
+  org_dept ||--o{ order_received : "dept_id · SQL 선언"
+  org_dept ||--o{ risk_assessment : "dept_id · SQL 선언"
+  org_dept ||--o{ safety_budget : "dept_id · SQL 선언"
+  org_dept ||--o{ safety_org_role : "dept_id · SQL 선언"
+  org_dept ||--o{ staff : "dept_id · SQL 선언"
+  org_dept ||--o{ training_record : "dept_id · SQL 선언"
+  org_dept ||--o{ worker_voice : "dept_id · SQL 선언"
+  risk_assessment ||--o{ risk_assessment_item : "risk_id · SQL 선언"
+  risk_assessment_item ||--o{ safety_budget : "risk_item_id · 추정(같은 칸 이름)"
+  safety_budget ||--o{ budget_exec : "budget_id · 추정(같은 칸 이름)"
+  staff ||--o{ civil_manual : "owner_staff_id · 추정(접미사 staff_id)"
+  staff ||--o{ civil_safety_plan : "owner_staff_id · 추정(접미사 staff_id)"
+  staff ||--o{ compliance_task : "done_by · SQL 선언"
+  staff ||--o{ contract : "manager_staff_id · 추정(접미사 staff_id)"
+  staff ||--o{ duty_assignment : "deputy_staff_id · SQL 선언"
+  staff ||--o{ duty_assignment : "owner_staff_id · SQL 선언"
+  staff ||--o{ evidence : "uploaded_by · SQL 선언"
+  staff ||--o{ incident : "owner_staff_id · 추정(접미사 staff_id)"
+  staff ||--o{ incident_report : "reporter_staff_id · 추정(접미사 staff_id)"
+  staff ||--o{ inspection : "inspector_staff_id · SQL 선언"
+  staff ||--o{ material_item : "owner_staff_id · 추정(접미사 staff_id)"
+  staff ||--o{ notification : "from_staff_id · 추정(접미사 staff_id)"
+  staff ||--o{ notification : "to_staff_id · SQL 선언"
+  staff ||--o{ order_received : "owner_staff_id · 추정(접미사 staff_id)"
+  staff ||--o{ risk_assessment : "assessor_staff_id · SQL 선언"
+  staff ||--o{ risk_assessment_item : "owner_staff_id · SQL 선언"
+  staff ||--o{ safety_manual : "owner_staff_id · SQL 선언"
+  staff ||--o{ safety_org_role : "staff_id · SQL 선언"
+  staff ||--o{ safety_policy : "owner_staff_id · SQL 선언"
+  staff ||--o{ sys_mail_log : "from_staff_id · 추정(접미사 staff_id)"
+  staff ||--o{ sys_mail_log : "to_staff_id · 추정(접미사 staff_id)"
+  staff ||--o{ system_record : "checker_staff_id · 추정(접미사 staff_id)"
+  staff ||--o{ system_record : "target_staff_id · 추정(접미사 staff_id)"
+  staff ||--o{ training_record : "staff_id · SQL 선언"
+  staff ||--o{ usa_order : "from_staff_id · 추정(접미사 staff_id)"
+  staff ||--o{ usb1_contract : "manager_staff_id · 추정(접미사 staff_id)"
+  staff ||--o{ usb2_assign : "staff_id · 추정(같은 칸 이름)"
+  staff ||--o{ usb2_role : "staff_id · 추정(같은 칸 이름)"
+  staff ||--o{ usf_letter_read : "staff_id · 추정(같은 칸 이름)"
+  staff ||--o{ worker_voice : "plan_owner_staff_id · 추정(접미사 staff_id)"
+  staff ||--o{ worker_voice : "reviewer_staff_id · 추정(접미사 staff_id)"
+  training_course ||--o{ training_record : "course_id · 추정(같은 칸 이름)"
+  usb1_workplace ||--o{ risk_assessment : "wp_id · 추정(같은 칸 이름)"
+  usb1_workplace ||--o{ usb1_work_site : "wp_id · 추정(같은 칸 이름)"
+  usf_letter ||--o{ usf_letter_read : "letter_id · 추정(같은 칸 이름)"
+  usf_round ||--o{ usf_judge : "round_id · 추정(같은 칸 이름)"

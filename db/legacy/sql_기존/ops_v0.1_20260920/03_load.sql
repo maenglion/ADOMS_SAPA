@@ -1,0 +1,13 @@
+-- 적재 순서 (Supabase: Table Editor → Import CSV, 또는 psql \copy)
+-- 1) 01_schema.sql 실행
+-- 2) 아래 순서로 seed\*.csv 적재 (외래키 때문에 순서가 중요하다)
+--    org_dept → staff → asset → asset_target_map → duty_class
+--    → duty_assignment → compliance_task → form_template
+--    (evidence · inspection · action · notification 은 빈 표 — 화면에서 쌓인다)
+-- 3) 02_views.sql 실행
+-- 4) 화면은 뷰만 읽는다. 쓰기는 공통 경로(업로드·상태 변경)로만 한다.
+
+-- psql 예시
+-- \copy adoms2.org_dept from 'seed/org_dept.csv' csv header encoding 'UTF8';
+-- \copy adoms2.staff    from 'seed/staff.csv'    csv header encoding 'UTF8';
+-- …

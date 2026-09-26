@@ -1,0 +1,163 @@
+{
+ "seed_rows": 27331,
+ "overlay_added": 113,
+ "overlay_patched": 50,
+ "tables_total": 98,
+ "views": [
+  "v_contract_duty",
+  "v_duty_detail",
+  "v_duty_todo",
+  "v_task_approval"
+ ],
+ "not_in_sql": [
+  "accident_case",
+  "accident_stat",
+  "budget_exec",
+  "civil_record",
+  "evidence_split",
+  "law_sync_applied",
+  "law_sync_decision",
+  "org_profile",
+  "sys_code",
+  "sys_mail_log",
+  "sys_menu",
+  "usa_order",
+  "usb1_basic",
+  "usb1_contract",
+  "usb1_contract_duty",
+  "usb1_hazard_place",
+  "usb1_transport",
+  "usb1_work_site",
+  "usb1_workplace",
+  "usb1_ws_mgmt",
+  "usb2_assign",
+  "usb2_basic",
+  "usb2_law",
+  "usb2_role",
+  "usb2_timing",
+  "usc_record",
+  "usd_record",
+  "use_plan",
+  "use_record",
+  "use_site",
+  "usf_ceo_activity",
+  "usf_ceo_log",
+  "usf_file",
+  "usf_judge",
+  "usf_letter",
+  "usf_letter_read",
+  "usf_notice",
+  "usf_round",
+  "usg_case",
+  "usg_stat_occur",
+  "usg_ws_industry"
+ ],
+ "sql_tables": 53,
+ "sql_views": [
+  "v_asset_duty",
+  "v_ceo_activity",
+  "v_compliance_matrix",
+  "v_contract_duty",
+  "v_dept_progress",
+  "v_duty_detail",
+  "v_duty_todo",
+  "v_kpi_summary",
+  "v_law_tree",
+  "v_risk_overview",
+  "v_task_approval",
+  "v_vendor"
+ ],
+ "erd_edges": 91,
+ "erd_edges_sql": 49,
+ "unresolved_calls": [
+  [
+   "app/calendar/events.ts",
+   "readTable",
+   "table"
+  ],
+  [
+   "app/targets/actions.ts",
+   "readTable",
+   "table"
+  ],
+  [
+   "app/targets/actions.ts",
+   "appendRow",
+   "table"
+  ],
+  [
+   "app/targets/actions.ts",
+   "patchRow",
+   "table"
+  ],
+  [
+   "lib/data.ts",
+   "readTable",
+   "table: string"
+  ],
+  [
+   "lib/data.ts",
+   "seed",
+   "table"
+  ],
+  [
+   "lib/data.ts",
+   "fromDb",
+   "view: string"
+  ],
+  [
+   "lib/data.ts",
+   "fromDb",
+   "table"
+  ],
+  [
+   "lib/system.ts",
+   "readTable",
+   "데이터 + 화면 입력분"
+  ],
+  [
+   "lib/write.ts",
+   "appendRow",
+   "table: string"
+  ],
+  [
+   "lib/write.ts",
+   "patchRow",
+   "table: string"
+  ]
+ ],
+ "seed_order": [
+  "us_v1.9_20260926",
+  "us_v1.8_20260926",
+  "us_v1.7_20260925",
+  "us_v1.6_20260925",
+  "us_v1.5_20260924",
+  "us_v1.4_20260924",
+  "us_v1.3_20260924",
+  "us_v1.2_20260924",
+  "us_v1.1_20260924",
+  "us_v1.0_20260924",
+  "ops_v2.2_20260924",
+  "ops_v2.1_20260924",
+  "ops_v2.0_20260924",
+  "ops_v1.9_20260924",
+  "ops_v1.8_20260924",
+  "ops_v1.7_20260924",
+  "ops_v1.6_20260924",
+  "ops_v1.5_20260924",
+  "ops_v1.4_20260924",
+  "ops_v1.3_20260924",
+  "ops_v1.2_20260924",
+  "ops_v1.1_20260924",
+  "ops_v1.0_20260924",
+  "ops_v0.8_20260922",
+  "ops_v0.7_20260921",
+  "ops_v0.6_20260921",
+  "ops_v0.5_20260921",
+  "ops_v0.4_20260921",
+  "ops_v0.3_20260921",
+  "ops_v0.2_20260920",
+  "ops_v0.1_20260920"
+ ],
+ "columns": 1310
+}

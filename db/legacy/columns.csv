@@ -1,0 +1,1311 @@
+﻿표,칸,키,예시값,추정_타입,기존SQL_타입,원천,뜻(필드대장),채움률(필드대장)
+accident_case,case_no,PK,1,integer,,seed,,
+accident_case,title,,중대재해 예방을 위한 사고사례 공유('25.3.1.~3.15.),text,,seed,,
+accident_case,dept_name,,안전 총괄 부서,text,,seed,,
+accident_case,writer,,김민준,text,,seed,,
+accident_case,writer_id,,SD01-1,text,,seed,,
+accident_case,created_at,,2025-03-24 16:04,timestamptz,,seed,,
+accident_case,views,,0,integer,,seed,,
+accident_case,content,,"'25.3.1.~3.15. 발생한 중대재해처벌법 적용 주요 사고사례를 공유하오니,  우리시 유사 사업장에서는 사고유형별 안전수칙을 철저히 준수해…",text,,seed,,
+accident_case,files,,,미정(값 없음),,seed,,
+accident_case,deleted,,Y,text(Y/N 표시 · boolean 후보),,seed,,
+accident_stat,occ_id,PK,OCC-0001,text,,seed,,
+accident_stat,year,,2021,integer,,seed,,
+accident_stat,seq,,1,integer,,seed,,
+accident_stat,org_name,,직속기관,text,,seed,,
+accident_stat,dept_name,,보건 부서,text,,seed,,
+accident_stat,occurred_at,,2021-02-17,date,,seed,,
+accident_stat,report_at,,2021-03-19,date,,seed,,
+accident_stat,approve_at,,2021-03-25,date,,seed,,
+accident_stat,comp,,O,text,,seed,,
+accident_stat,disaster_kind,,부상,text,,seed,,
+accident_stat,lost_days,,5,integer,,seed,,
+accident_stat,work_type,,공무직,text,,seed,,
+accident_stat,birth_year,,1957,integer,,seed,,
+accident_stat,sex,,남,text,,seed,,
+accident_stat,acc_type,,무리한 동작,text,,seed,,
+accident_stat,injury,,염좌,text,,seed,,
+accident_stat,process,,방역 장비 적재 중 어깨 부상,text,,seed,,
+accident_stat,job,,방역·보건 업무,text,,seed,,
+accident_stat,place,,보건소·방역 현장,text,,seed,,
+accident_stat,cause,,중량물 취급,text,,seed,,
+accident_stat,note,,,미정(값 없음),,seed,,
+action,action_id,PK,ACT-000001,text,text,seed,조치 번호,100%
+action,insp_id,,INS-000014,text,text,seed,점검 번호,100%
+action,action_type,,보완,text,text,seed+overlay,조치 구분(보완·시정),100%
+action,due_date,,2026-10-19,date,date,seed,기한,100%
+action,done_at,,2026-10-15,date,date,seed,이행 완료일,67%
+action,result,,완료,text,text,seed,판정 결과,100%
+action,note,,예시 데이터(시연용),text,text,seed,비고,100%
+action,task_id,,TSK-001977,text,text,seed,과제 번호,
+action,action_basis,,,미정(값 없음),text,seed+overlay,조치 근거 조문(법정 조치 구분일 때 · 화면이 씀),
+action,requested_by,,SD01-1,text,text,seed,조치를 요구한 사람(점검자),
+action,requested_at,,2026-07-08,date,date,seed,조치 요구일,
+action,batch_id,,BAT-003,text,text,seed,점검 회차 번호,
+action,resubmit_note,,지적 사항 보완 — 증빙 다시 올림,text,text,seed,보완 제출 때 부서가 적은 말,
+action,resubmitted_by,,SD02-1,text,text,seed,보완 제출한 사람,
+action,started_at,,2026-07-10,date,date,seed,시행일,
+action,prev_action_type,,보완,text,text,overlay,바꾸기 전 조치 구분(화면이 씀),
+annual_schedule,sched_id,PK,SCH-01,text,text,seed,일정 번호,100%
+annual_schedule,kind,,서울시 운영 예시,text,text,seed,일정 종류(서울시 운영 예시 등),100%
+annual_schedule,title,,안전계획 수립 · 전년 점검 결과 제출(소관 부서 → 총괄),text,text,seed,제목,100%
+annual_schedule,month_from,,1,integer,int,seed,시작 월,100%
+annual_schedule,day_from,,1,integer,int,seed,시작 일,100%
+annual_schedule,month_to,,1,integer,int,seed,끝 월,100%
+annual_schedule,day_to,,31,integer,int,seed,끝 일,100%
+annual_schedule,basis,,시행령 제10조제4호 안전계획 연 1회 이상 수립(날짜는 법에 없음),text,text,seed,관련 조문(날짜는 법에 없음을 함께 적음),58%
+annual_schedule,source,,서울시 시민재해 안전보건업무 안내서(2023.8. 잠정) 표 4-2 · 그림 4-2,text,text,seed,출처 자료(쪽·표 번호),100%
+annual_schedule,href,,/system,text,text,seed,이어지는 화면 주소,100%
+annual_schedule,note,,예시 자료(시연용) · 기관이 날짜를 바꿀 수 있음,text,text,seed,비고,100%
+asset,asset_id,PK,AR1998-0002431,text,text,seed,자산 번호,100%
+asset,asset_name,,용인도시공사 청사,text,text,seed,자산 이름,100%
+asset,asset_gbn,,건축물,text,text,seed,시설 구분,100%
+asset,asset_kind,,기타,text,text,seed,시설 종류,100%
+asset,asset_class,,3종,text,text,seed,종별(1·2·3종),100%
+asset,safety_grade,,B등급,text,text,seed,안전등급,100%
+asset,completed_ymd,,19980529,integer,text,seed,준공일,100%
+asset,addr,,경기도 용인시 처인구 ,text,text,seed,소재지,100%
+asset,dept_id,,D09,text,text,seed,부서 번호,100%
+asset,source,,FMS,text,text,seed,출처(FMS 등),100%
+asset,sapa_l2_result,,검토필요,text,text,seed,중처법 판정,100%
+asset,sapa_basis,,시행령 별표3 제5호 2)3),text,text,seed,판정 근거,100%
+asset,need_data,,연면적·층수·용도,text,text,seed,더 필요한 자료,73%
+asset,verified,,N,text(Y/N 표시 · boolean 후보),text,seed,확인 여부,100%
+asset,subject_tier,,용인도시공사,text,,seed,,
+asset,subject_name,,(추정) 용인도시공사,text,,seed,,
+asset,subject_source,,estimated,text,,seed,,
+asset,subject_note,,명칭 추정 — 관리주체 원본 미확인,text,,seed,,
+asset,mgmt_class,,위탁 시설(용인도시공사 운영),text,,seed,,
+asset,mgmt_laws,,시설물의 안전 및 유지관리에 관한 특별법 · 석면안전관리법 · 기계설비법,text,,seed,,
+asset,res_storage_k,,18,integer,,seed,,
+asset,res_dam_height,,5,integer,,seed,,
+asset,res_emergency_plan,,대상,text,,seed,,
+asset,consign,,위탁(용인도시공사 운영),text,,seed,,
+asset,consign_note,,소유(용인시 여부)·위탁 계약 확인 필요 — 용인시 소유·위탁이면 중대재해처벌법 제9조제3항으로 용인시장 의무도 걸림,text,,seed,,
+asset,deleted,,,미정(값 없음),,코드(쓰기 객체),,
+asset_target_map,asset_id,,AR1998-0002431,text,text,seed,자산 번호,100%
+asset_target_map,target_code,,TG13,text,text,seed,관리대상 코드,100%
+asset_target_map,basis,,FMS 구분·종류 규칙,text,text,seed,대응 근거(FMS 구분·종류 규칙 등),100%
+asset_target_map,confidence,,medium,text,text,seed,대응 확신도(high·medium·low),100%
+budget_exec,exec_id,PK,,미정(값 없음),,코드(쓰기 객체),,
+budget_exec,budget_id,,,미정(값 없음),,코드(쓰기 객체),,
+budget_exec,exec_date,,,미정(값 없음),,코드(쓰기 객체),,
+budget_exec,exec_desc,,,미정(값 없음),,코드(쓰기 객체),,
+budget_exec,amount,,,미정(값 없음),,코드(쓰기 객체),,
+budget_exec,evidence_name,,,미정(값 없음),,코드(쓰기 객체),,
+budget_exec,evidence_url,,,미정(값 없음),,코드(쓰기 객체),,
+budget_exec,created_by,,,미정(값 없음),,코드(쓰기 객체),,
+budget_exec,created_at,,,미정(값 없음),,코드(쓰기 객체),,
+ceo_activity,activity_id,PK,CEO-001,text,text,seed,활동 번호,100%
+ceo_activity,activity_date,,2026-04-16,date,date,seed,활동일,100%
+ceo_activity,activity_type,,회의주재,text,text,seed,활동 유형,100%
+ceo_activity,title,,중대재해 예방 대책회의 주재,text,text,seed,제목,100%
+ceo_activity,place,,경기도 용인시 처인구,text,text,seed,현장,100%
+ceo_activity,target_code,,,미정(값 없음),text,seed,관리대상 코드,0%
+ceo_activity,asset_id,,,미정(값 없음),text,seed,자산 번호,25%
+ceo_activity,dept_id,,D02,text,text,seed,부서 번호,100%
+ceo_activity,participants,,부시장·관계부서장,text,text,seed,참석자,100%
+ceo_activity,finding,,안전난간 도색 상태 미흡,text,text,seed,점검 의견·지적사항,25%
+ceo_activity,instruction,,분기별 보고 지시,text,text,seed,지시사항,100%
+ceo_activity,follow_up_task_id,,,미정(값 없음),text,seed,후속 과제,0%
+ceo_activity,created_by,,SD01-1,text,text,seed,만든 사람,100%
+ceo_activity,note,,예시 데이터(시연용),text,text,seed,비고,100%
+civil_manual,manual_id,PK,CMN-001,text,text,seed,절차·매뉴얼·기록 번호,100%
+civil_manual,clause_ref,,10-7,text,text,seed,시행령 조·호(10-7 = 제10조제7호),100%
+civil_manual,record_kind,,업무처리절차,text,text,seed,업무처리절차 · 매뉴얼 · 반기 점검 · 교육 이수 점검 · 대피훈련,100%
+civil_manual,title,,공중이용시설 유해·위험요인 확인·점검 및 개선 절차,text,text,seed,제목,100%
+civil_manual,covers,,가·나,text,text,seed,담은 목(가·나·다·라),99%
+civil_manual,missing,,나,text,text,seed,빠진 목,1%
+civil_manual,basis,,철도안전법 제7조,text,text,seed,갈음 근거(철도안전법 제7조 등),1%
+civil_manual,asset_id,,AR2018-0000223,text,text,seed,자산 번호,88%
+civil_manual,facility_name,,용인경전철(에버라인),text,text,seed,시설 이름,92%
+civil_manual,enacted_at,,2022-06-30,date,date,seed,제정일,6%
+civil_manual,revised_at,,2025-11-20,date,date,seed,개정일,5%
+civil_manual,done_at,,2026-01-15,date,date,seed,실시일,94%
+civil_manual,last_check_at,,2026-06-25,date,date,seed,최근 점검일,6%
+civil_manual,reported_at,,2026-03-16,date,date,seed,경영책임자 보고일,6%
+civil_manual,participants,,9,integer,int,seed,참석 인원,91%
+civil_manual,owner_staff_id,,SM02-1,text,text,seed,정담당,100%
+civil_manual,note,,예시 자료(시연용),text,text,seed,비고,100%
+civil_manual,evidence_name,,,미정(값 없음),,코드(쓰기 객체),,
+civil_manual,evidence_url,,,미정(값 없음),,코드(쓰기 객체),,
+civil_record,action_done_at,,,미정(값 없음),,코드(쓰기 객체),,
+civil_safety_plan,plan_id,PK,CSP-2025-0030,text,text,seed,안전계획 번호,100%
+civil_safety_plan,plan_year,,2025,integer,int,seed,계획 연도,100%
+civil_safety_plan,facility_kind,,공중이용시설,text,text,seed,공중이용시설 · 공중교통수단,100%
+civil_safety_plan,asset_id,,AR1998-0002431,text,text,seed,자산 번호,100%
+civil_safety_plan,facility_name,,용인도시공사 청사,text,text,seed,시설 이름,100%
+civil_safety_plan,asset_gbn,,건축물,text,text,seed,시설 구분,100%
+civil_safety_plan,asset_kind,,기타,text,text,seed,시설 종류,100%
+civil_safety_plan,asset_class,,3종,text,text,seed,종별(1·2·3종),100%
+civil_safety_plan,dept_id,,D09,text,text,seed,부서 번호,100%
+civil_safety_plan,plan_status,,수립,text,text,seed,수립 · 작성중 · 미수립,100%
+civil_safety_plan,plan_basis,,시설물안전법 제6조 안전 및 유지관리계획,text,text,seed,계획 근거(자체 안전계획 · 시설물안전법 제6조 · 철도안전법 제6조),97%
+civil_safety_plan,ceo_confirmed,,Y,text(Y/N 표시 · boolean 후보),text,seed,경영책임자 확인·보고받음 Y/N(제4호 단서 갈음 성립 조건),85%
+civil_safety_plan,confirmed_at,,2025-02-15,date,date,seed,경영책임자 확인·보고받은 날,77%
+civil_safety_plan,mok_ga,,Y,text(Y/N 표시 · boolean 후보),text,seed,가목(인력) 포함 Y/N,97%
+civil_safety_plan,mok_na,,Y,text(Y/N 표시 · boolean 후보),text,seed,나목(점검) 포함 Y/N,97%
+civil_safety_plan,mok_da,,Y,text(Y/N 표시 · boolean 후보),text,seed,다목(보수·보강) 포함 Y/N,97%
+civil_safety_plan,items_planned,,8,integer,int,seed,계획 항목 수,97%
+civil_safety_plan,items_done,,8,integer,int,seed,이행한 항목 수,97%
+civil_safety_plan,established_at,,2025-02-01,date,date,seed,계획 수립일,96%
+civil_safety_plan,owner_staff_id,,SD09-1,text,text,seed,정담당,100%
+civil_safety_plan,note,,예시 자료(시연용),text,text,seed,비고,100%
+civil_safety_plan,confirm_proxy,,,미정(값 없음),text,코드(쓰기 객체),총괄이 대신 적은 확인 기록 Y(화면이 씀),
+civil_safety_plan,confirmed_by,,,미정(값 없음),text,코드(쓰기 객체),확인을 기록한 사람(화면이 씀),
+compliance_task,task_id,PK,TSK-000001,text,text,seed,과제 번호,100%
+compliance_task,assign_id,,ASG-000003,text,text,seed,배정 번호,100%
+compliance_task,period_label,,2026년 수시,text,text,seed,주기 표시,100%
+compliance_task,due_date,,2026-01-19,date,date,seed,기한,100%
+compliance_task,status,,점검완료,text,text,seed+overlay,이행 상태,100%
+compliance_task,done_at,,2026-01-11,date,date,seed+overlay,이행 완료일,39%
+compliance_task,done_by,,SD13-1,text,text,seed+overlay,이행한 사람,39%
+compliance_task,remark,,,미정(값 없음),text,seed,비고,0%
+compliance_task,approval_status,,제출,text,,overlay,결재 상태(작성중·제출·승인·반려),
+compliance_task,submitted_at,,2026-09-20T18:12:59.790Z,timestamptz,,overlay,제출 일시,
+compliance_task,submitted_by,,SD03-1,text,,overlay,제출한 사람,
+compliance_task,check_result,,보완필요,text,,overlay,점검 판정(이행완료·보완필요·미이행),
+compliance_task,reject_reason,,보완필요,text,,overlay,반려 사유,
+compliance_task,rejected_at,,2026-09-22T00:14:39.324Z,timestamptz,,overlay,반려 일시,
+compliance_task,approved_at,,2026-09-20T21:12:42.433Z,timestamptz,,overlay,승인 일시,
+compliance_task,approved_by,,SD01-1,text,,overlay,승인한 사람,
+contract,contract_id,PK,CTR-0001,text,text,seed,계약 번호,100%
+contract,contract_name,,2026년 시도 포장보수 공사(처인구),text,text,seed,계약 이름,100%
+contract,counterpart,,모현건설(주),text,text,seed,수급인(업체),100%
+contract,asset_id,,TU2011-0000223,text,text,seed,자산 번호,13%
+contract,dept_id,,D03,text,text,seed,부서 번호,100%
+contract,contract_type,,공사,text,text,seed,계약 구분(공사·용역·위탁·물품),100%
+contract,start_date,,2026-07-08,date,date,seed,계약 시작,100%
+contract,end_date,,2027-06-03,date,date,seed,계약 종료,100%
+contract,amount,,1280000000,integer,bigint,seed,계약 금액,100%
+contract,safety_clause,,안전보건 확보 조항 있음,text,text,seed,안전보건 확보 조항 유무,100%
+contract,evaluation_done,,Y,text(Y/N 표시 · boolean 후보),text,seed,수급인 안전보건 수준평가 실시 여부,100%
+contract,contract_method,,수의계약(2인견적),text,text,seed,계약 방식(제한경쟁·수의계약 등),100%
+contract,trade,,토목,text,text,seed,업종,100%
+contract,safety_cost,,28844876,integer,bigint,seed,산업안전보건관리비,25%
+contract,worker_cnt,,24,integer,int,seed,투입 인원,100%
+contract,subcontract,,Y,text(Y/N 표시 · boolean 후보),text,seed,재하도급 여부,100%
+contract,eval_score,,69,integer,int,seed,수급인 평가 점수,83%
+contract,eval_date,,2026-08-04,date,date,seed,평가 실시일,83%
+contract,manager_staff_id,,SD03-1,text,text,seed,계약 담당,100%
+contract,manager_phone,,031-324-2030,text,text,seed,부서 대표번호(예시),100%
+contract,work_start_date,,2026-07-12,date,date,seed,착공·착수일,100%
+contract,main_task,,파손 포장 절삭·덧씌우기 및 포트홀 보수,text,text,seed,주요 수행업무,100%
+contract,work_place,,처인구 관내 시도 구간,text,text,seed,업무수행장소,100%
+contract,vendor_rep_role,,현장대리인,text,text,seed,수탁 담당자(직책만),100%
+contract,vendor_safety_role,,안전담당(현장대리인 겸직),text,text,seed,수급인 쪽 안전 담당(직책만),100%
+contract,vendor_contact_on_file,,Y,text(Y/N 표시 · boolean 후보),text,seed,수탁 연락처 등록됨/미등록,100%
+contract,vendor_doc_status,,제출됨,text,text,seed,수급인 확인 서류 제출 여부,100%
+contract,regular_workers,,70,integer,int,seed,상시 근로자 수,100%
+contract,attachments,,계약서 · 설계서·내역서 · 안전관리계획서 · 산업안전보건관리비 사용계획서,text,text,seed,첨부파일 이름 목록,100%
+contract,entrust_type,,도급,text,text,seed,위탁 유형(도급·용역·민간위탁·위임),100%
+contract,apply_frame,,산업,text,text,seed,적용 틀(산업·시민·둘 다),100%
+contract,civil_scope,,확인 필요,text,text,seed,공중이용시설·교통수단 운영·관리 위탁 여부,100%
+contract,civil_basis,,시설 관련 업무이나 계약에 시설이 특정되지 않음 — 공중이용시설(시행령 별표2·3) 해당 여부를 확인해야 합니다,text,text,seed,위탁 여부 판단 근거,100%
+contract,ctl_own,,Y,text(Y/N 표시 · boolean 후보),text,seed,실질 지배 — 기관 소유 시설에서 함 Y/N,100%
+contract,ctl_lease,,N,text(Y/N 표시 · boolean 후보),text,seed,실질 지배 — 기관 임차 시설에서 함 Y/N,100%
+contract,ctl_repair,,Y,text(Y/N 표시 · boolean 후보),text,seed,실질 지배 — 보수·보강 의무·예산이 기관에 있음 Y/N,100%
+contract,ctl_command,,Y,text(Y/N 표시 · boolean 후보),text,seed,실질 지배 — 작업 중지·시정 지시 가능 Y/N,100%
+contract,ctl_vendor_site,,N,text(Y/N 표시 · boolean 후보),text,seed,수급인 소유·임차 시설에서 하는 일 있음 Y/N,100%
+contract,control_result,,해당,text,text,seed,실질 지배 판단(해당·확인 필요·해당 없음),100%
+contract,control_basis,,시 소유 시설(처인구 관내 시도 구간)에서 수행 · 보수·보강은 시 예산 · 작업 중지·시정 지시 가능,text,text,seed,실질 지배 판단 근거(계약서 조항 등),100%
+contract,control_confirmed_at,,,미정(값 없음),date,seed,판단을 확인한 날(사람이 적음),0%
+contract,control_confirmed_by,,,미정(값 없음),text,seed,판단을 확인한 사람,0%
+contract,work_risk,,위험장소,text,text,seed,작업 위험도(일반·위험장소·화재·폭발·밀폐),100%
+contract,eval_pass_mark,,75,integer,int,seed,평가 합격선(점),83%
+contract,eval_detail,,,미정(값 없음),text,seed,항목별 평가 있음 Y,0%
+contract,proc_stage,,이행,text,text,seed,도급 단계(발주·평가·계약·이행·준공 정산),100%
+contract,order_at,,2026-05-27,date,date,seed,발주일,100%
+contract,contract_at,,,미정(값 없음),date,seed,계약일,0%
+contract,completed_at,,,미정(값 없음),date,seed,준공일,0%
+contract,settled_at,,,미정(값 없음),date,seed,정산일,0%
+contract,cost_planned,,28844876,integer,bigint,seed,안전보건 관리비 계상액(원),87%
+contract,cost_settled,,,미정(값 없음),bigint,seed,안전보건 관리비 실사용 정산액(원),0%
+contract,note,,예시 데이터(시연용),text,text,seed,비고,100%
+contract_compliance,cc_id,PK,CCP-0001-1,text,text,seed,준수여부 번호,100%
+contract_compliance,contract_id,,CTR-0001,text,text,seed,계약 번호,100%
+contract_compliance,item_no,,1,integer,int,seed,관리의무 항목 번호(1~4),100%
+contract_compliance,item_code,,E4-9-GA,text,text,seed,관리의무 항목 코드,100%
+contract_compliance,status,,보완필요,text,text,seed,준수 여부(이행·보완필요·미이행·해당없음),100%
+contract_compliance,evidence_name,,수급인 안전보건 수준 평가표(2026-08-04).pdf,text,text,seed,증빙 이름,70%
+contract_compliance,checked_at,,2026-09-03,date,date,seed,점검일,70%
+contract_compliance,finding,,평가 점수 69점 — 기준(75점) 미달인데 보완계획 없이 선정,text,text,seed,점검 의견·지적사항,59%
+contract_compliance,note,,예시 데이터(시연용),text,text,seed,비고,100%
+contract_compliance,checked_by,,,미정(값 없음),text,코드(쓰기 객체),점검한 사람,
+contract_compliance,evidence_url,,,미정(값 없음),,코드(쓰기 객체),,
+contract_duty,cduty_id,PK,CDT-0001-1,text,text,seed,계약 의무 번호,100%
+contract_duty,contract_id,,CTR-0001,text,text,seed,계약 번호,100%
+contract_duty,duty_key,,DTY-01670,text,text,seed,의무 열쇠(정본),100%
+contract_duty,status,,이행완료,text,text,seed,이행 상태,100%
+contract_duty,done_at,,2026-08-04,date,date,seed,이행 완료일,52%
+contract_duty,evidence_id,,,미정(값 없음),text,seed,증빙 번호,0%
+contract_duty,note,,예시 데이터(시연용),text,text,seed,비고,100%
+contract_eval_item,item_no,PK,1,integer,int,seed,평가 항목 순번,100%
+contract_eval_item,item_code,,EV01,text,text,seed,평가 항목 코드(EV01~),100%
+contract_eval_item,group_code,,가,text,text,seed,묶음 코드(가·나·다),100%
+contract_eval_item,group_name,,체계,text,text,seed,묶음 이름(체계·실행·운영),100%
+contract_eval_item,item_name,,조직·인력,text,text,seed,평가 항목 이름,100%
+contract_eval_item,pt_good,,5,integer,int,seed,우수 점수,100%
+contract_eval_item,pt_mid,,3,integer,int,seed,보통 점수,100%
+contract_eval_item,pt_low,,1,integer,int,seed,미흡 점수,100%
+contract_eval_item,mid_hint,,과태료,text,text,seed,보통 판단 예시,10%
+contract_eval_item,low_hint,,영업정지,text,text,seed,미흡 판단 예시,10%
+contract_eval_item,default_weight,,2,integer,int,seed,기본 가중치,100%
+contract_eval_item,source,,서울시 중대재해 예방 안내서 4-6 수급자 안전관리능력 평가(p.139~141),text,text,seed,출처 자료(쪽 번호),100%
+contract_eval_item,basis,,시행령 제4조제9호가목 · 시행령 제10조제8호가목,text,text,seed,근거 조문,100%
+contract_eval_item,basis_unit_id,,UNIT-0004835 · UNIT-0004778,text,text,seed,근거 조항호목 번호(정본),100%
+contract_eval_setting,setting_id,PK,,미정(값 없음),text,코드(쓰기 객체),설정 번호(가장 늦은 줄이 지금 설정 · 화면이 씀),
+contract_eval_setting,pass_default,,,미정(값 없음),int,코드(쓰기 객체),합격선 — 기본,
+contract_eval_setting,pass_general,,,미정(값 없음),int,코드(쓰기 객체),합격선 — 일반 작업,
+contract_eval_setting,pass_risk,,,미정(값 없음),int,코드(쓰기 객체),합격선 — 위험장소 작업,
+contract_eval_setting,pass_fire,,,미정(값 없음),int,코드(쓰기 객체),합격선 — 화재·폭발·밀폐 작업,
+contract_eval_setting,weights,,,미정(값 없음),text,코드(쓰기 객체),항목별 가중치(쉼표 구분),
+contract_eval_setting,set_at,,,미정(값 없음),timestamptz,코드(쓰기 객체),설정 일시,
+contract_eval_setting,set_by,,,미정(값 없음),text,코드(쓰기 객체),설정한 사람,
+contract_hazard,hazard_id,PK,HZD-0001-1,text,text,seed,위험요인 번호,100%
+contract_hazard,contract_id,,CTR-0001,text,text,seed,계약 번호,100%
+contract_hazard,hazard_place,,작업 구간,text,text,seed,장소,100%
+contract_hazard,hazard_factor,,추락·낙하,text,text,seed,위험요인,100%
+contract_hazard,risk_level,,높음,text,text,seed,위험도(높음·보통·낮음),100%
+contract_hazard,measure,,안전난간·안전대 착용·낙하물 방지망 설치,text,text,seed,조치,100%
+contract_hazard_map,hazard_id,PK,HZD-0001-1,text,text,seed,계약 위험요인 번호,100%
+contract_hazard_map,contract_id,,CTR-0001,text,text,seed,계약 번호,100%
+contract_hazard_map,hazard_code,,HZ01,text,text,seed,유해·위험요인 코드(18항목),100%
+contract_hazard_map,map_basis,,위험요인 문구,text,text,seed,연결 근거(위험요인 문구 등),100%
+contract_hazard_map,source_text,,작업 구간 / 추락·낙하,text,text,seed,조문 원문,100%
+contract_mgmt_item,item_no,PK,1,integer,int,seed,관리의무 항목 번호(1~4),100%
+contract_mgmt_item,item_code,,E4-9-GA,text,text,seed,관리의무 항목 코드(E4-9-GA 등),100%
+contract_mgmt_item,item_name,,수급인의 안전·보건 확보 능력·기술 평가 기준·절차,text,text,seed,관리의무 항목 이름,100%
+contract_mgmt_item,basis,,중대재해 처벌 등에 관한 법률 시행령 제4조제9호가목,text,text,seed,근거 조문,100%
+contract_mgmt_item,basis_unit_id,,UNIT-0004835,text,text,seed,근거 조항호목 번호(정본),100%
+contract_mgmt_item,basis_text,,"도급, 용역, 위탁 등을 받는 자의 산업재해 예방을 위한 조치 능력과 기술에 관한 평가기준ㆍ절차",text,text,seed,근거 조문 원문,100%
+contract_mgmt_item,applies_to,,전체,text,text,seed,적용 범위,100%
+contract_mgmt_item,evidence_hint,,수급인 안전보건 수준 평가표 · 평가 기준·절차 문서,text,text,seed,증빙 예시,100%
+drill_eval,eval_id,PK,DRE-0001,text,text,seed,평가 번호,100%
+drill_eval,drill_id,,DRL-0001,text,text,seed,훈련 번호,100%
+drill_eval,evaluator,,SM02-2,text,text,seed,평가자,100%
+drill_eval,evaluated_at,,2025-11-15,date,date,seed,평가일,100%
+drill_eval,p1,,10,integer,int,seed,계획 — 훈련계획 문서 수립(10점),100%
+drill_eval,p2,,8,integer,int,seed,계획 — 시나리오 적정성(10점),100%
+drill_eval,p3,,5,integer,int,seed,계획 — 참석대상 통보·사전 교육(5점),100%
+drill_eval,p4,,4,integer,int,seed,계획 — 시설·장비 준비 확인(5점),100%
+drill_eval,c1,,7,integer,int,seed,전파 — 사전안내·안내방송·교육(10점),100%
+drill_eval,c2,,9,integer,int,seed,전파 — 신고·경보·자위소방대 연락(10점),100%
+drill_eval,x1,,6,integer,int,seed,실행 — 목표시간 내 대피(10점),100%
+drill_eval,x2,,8,integer,int,seed,실행 — 병목 없는 대피유도(10점),100%
+drill_eval,x3,,4,integer,int,seed,실행 — 관계자·이용자 모두 참석(5점),100%
+drill_eval,x4,,5,integer,int,seed,실행 — 유관기관 협업(5점),100%
+drill_eval,e1,,10,integer,int,seed,평가 — 종료 후 평가 실시(10점),100%
+drill_eval,e2,,9,integer,int,seed,평가 — 결과보고서에 잘된 점·개선사항(10점),100%
+drill_eval,total,,85,integer,int,seed,합계(100점),100%
+drill_eval,comment,,잘된 점: 운영사·소방서 합동으로 현장감 있게 진행 / 미흡: 목표 대피시간 2분 초과 · 안내방송 음량 작음,text,text,seed,평가 의견,100%
+drill_eval,note,,예시 자료,text,text,seed,비고,100%
+drill_plan,drill_id,PK,DRL-0001,text,text,seed,훈련 번호,100%
+drill_plan,target_key,,LRT-EVERLINE,text,text,seed,대상 열쇠(자산 번호 또는 LRT-EVERLINE),100%
+drill_plan,target_name,,용인경전철(에버라인),text,text,seed,훈련 대상 이름,100%
+drill_plan,target_kind,,공중교통수단,text,text,seed,공중교통수단 · 제1종시설물 · 2종시설물,100%
+drill_plan,asset_class,,1종,text,text,seed,종별(1·2·3종),80%
+drill_plan,legal_scope,,법정 대상,text,text,seed,법정 대상 · 자체 확대,100%
+drill_plan,dept_id,,D16,text,text,seed,부서 번호,100%
+drill_plan,year,,2025,integer,int,seed,연도,100%
+drill_plan,half,,하반기,text,text,seed,반기,100%
+drill_plan,drill_type,,화재,text,text,seed,훈련 유형(화재·지진·위험물 누출),100%
+drill_plan,method,,실행기반,text,text,seed,훈련 방식(실행기반·토론기반·도상+실제),100%
+drill_plan,planned_at,,2025-11-12 14:00,timestamptz,timestamptz,seed,계획 일시,100%
+drill_plan,place,,기흥역 승강장·전동차,text,text,seed,훈련 장소,100%
+drill_plan,scenario,,전동차 객실 화재 → 승객 대피·역사 밖 유도,text,text,seed,시나리오,100%
+drill_plan,target_minutes,,10,integer,int,seed,목표 대피시간(분),100%
+drill_plan,prep_coop,,완료,text,text,seed,준비 — 사전협조 완료 여부,100%
+drill_plan,prep_items,,완료,text,text,seed,준비 — 훈련준비 완료 여부,100%
+drill_plan,prep_budget,,완료,text,text,seed,준비 — 예산·행정 완료 여부,100%
+drill_plan,prep_memo,,소방서·경찰서 협조 공문 · 방송 원고 · 집결지 표지 · 구급함,text,text,seed,준비 메모,80%
+drill_plan,carry_over,,승강장 안내방송 음량 개선 · 대피유도 인원 2명 추가,text,text,seed,지난 훈련에서 넘겨받은 개선 과제,33%
+drill_plan,r_cmd_main,,SD10-1,text,text,seed,임무 — 위기상황 총괄자(정),100%
+drill_plan,r_cmd_sub,,SD10-2,text,text,seed,임무 — 위기상황 총괄자(부),100%
+drill_plan,r_evac_main,,SD10-2,text,text,seed,임무 — 대피유도팀(정),100%
+drill_plan,r_evac_sub,,SD02-2,text,text,seed,임무 — 대피유도팀(부),100%
+drill_plan,r_resp_main,,SD13-1,text,text,seed,임무 — 현장대응팀(정),100%
+drill_plan,r_resp_sub,,SD13-2,text,text,seed,임무 — 현장대응팀(부),87%
+drill_plan,r_aid_main,,SD11-1,text,text,seed,임무 — 구호지원팀(정),100%
+drill_plan,r_aid_sub,,SD11-2,text,text,seed,임무 — 구호지원팀(부),87%
+drill_plan,r_eval_main,,SM02-2,text,text,seed,임무 — 훈련 검증자(정),100%
+drill_plan,r_eval_sub,,SM02-3,text,text,seed,임무 — 훈련 검증자(부),100%
+drill_plan,status,,평가 완료,text,text,seed,진행 상태(계획·준비·실시·평가 완료),100%
+drill_plan,done_at,,2025-11-12,date,date,seed,훈련 실시일,73%
+drill_plan,actual_minutes,,12,integer,int,seed,실제 대피시간(분),67%
+drill_plan,participants,,46,integer,int,seed,참여 인원,73%
+drill_plan,absent,,4,integer,int,seed,불참 인원,73%
+drill_plan,photos,,,미정(값 없음),text,seed,사진 주소(「 | 」로 구분),0%
+drill_plan,good_points,,운영사·소방서 합동으로 현장감 있게 진행,text,text,seed,잘된 점,73%
+drill_plan,shortfalls,,목표 대피시간 2분 초과 · 안내방송 음량 작음,text,text,seed,미흡사항,73%
+drill_plan,improvements,,승강장 안내방송 음량 개선 · 대피유도 인원 2명 추가,text,text,seed,개선사항(다음 훈련 과제),73%
+drill_plan,substitute,,Y,text(Y/N 표시 · boolean 후보),text,seed,비상대응계획으로 갈음 Y/N,20%
+drill_plan,substitute_basis,,철도안전법 제7조 비상대응계획(철도안전관리체계),text,text,seed,갈음 근거,20%
+drill_plan,ceo_checked,,Y,text(Y/N 표시 · boolean 후보),text,seed,경영책임자 확인 Y/N,20%
+drill_plan,ceo_checked_at,,2025-11-20,date,date,seed,경영책임자 확인일,7%
+drill_plan,ceo_check_mode,,보고받음,text,text,seed,확인 방식(직접 확인·보고받음),7%
+drill_plan,note,,예시 자료,text,text,seed,비고,100%
+duty_assignment,assign_id,PK,ASG-000001,text,text,seed,배정 번호,100%
+duty_assignment,duty_key,,DTY-00001,text,text,seed,의무 열쇠(정본),100%
+duty_assignment,asset_id,,BR1992-0000156,text,text,seed,자산 번호,38%
+duty_assignment,scope,,유형,text,text,seed,적용 범위(자산·유형),100%
+duty_assignment,target_code,,TG18,text,text,seed,관리대상 코드,100%
+duty_assignment,dept_id,,D09,text,text,seed,부서 번호,100%
+duty_assignment,owner_staff_id,,SD09-1,text,text,seed,정담당,92%
+duty_assignment,deputy_staff_id,,SD09-2,text,text,seed,부담당,92%
+duty_assignment,applicability,,확인필요,text,text,seed,해당 여부,100%
+duty_assignment,applicability_note,,조건부 의무 — 보유·해당 여부 확인 필요,text,text,seed,해당 여부 메모,42%
+duty_assignment,cycle,,반기 1회,text,text,seed,주기,100%
+duty_assignment,cycle_days,,180,integer,int,seed,주기(일),100%
+duty_assignment,decided_by,,,미정(값 없음),text,seed,정한 사람,0%
+duty_assignment,decided_at,,,미정(값 없음),timestamptz,seed,정한 날짜,0%
+duty_assignment,badge,,자산 대장 없음 — 보유 확인 필요,text,text,seed,화면 표시(배지),63%
+duty_class,duty_key,PK,DTY-00001,text,text,seed,의무 열쇠(정본),100%
+duty_class,yongin_mark,,Y,text,text,seed,용인시 해당 표시,100%
+duty_class,area,,F,text,text,seed,재해 구분(I 산업·F 시설교통·M 원료제조물),100%
+duty_class,code36,,F01,text,text,seed,중처법 의무조항 36,100%
+duty_class,code36_name,,인력배치,text,text,seed,의무조항 이름,100%
+duty_class,task_name,,고압가스안전관리기준통합고시 (조 번호 없는 본문),text,text,seed,세부 이행업무,100%
+duty_class,target_code,,TG18,text,text,seed,관리대상 코드,100%
+duty_class,target_name,,가스(충전소·고압가스),text,text,seed,관리대상 이름,100%
+duty_class,impl_type,,T04,text,text,seed,이행 유형 T01~T10,100%
+duty_class,impl_type_name,,점검·검사·진단·측정,text,text,seed,이행 유형 이름,100%
+duty_class,law_group,,LF05,text,text,seed,법령 그룹,100%
+duty_class,law_group_name,,전기·가스·에너지,text,text,seed,법령 그룹 이름,100%
+duty_class,law,,고압가스 안전관리법,text,text,seed,근거 법령,100%
+duty_class,doc,,고압가스안전관리기준통합고시,text,text,seed,문서,100%
+duty_class,layer,,고시,text,text,seed,법령 계층(법률·대통령령·부령·고시),100%
+duty_class,unit_label_ko,,(조 번호 없는 본문)제3항제1호타목,text,text,seed,조문(우리말 표기),100%
+duty_class,article_title,,a901/p3/n1/mta/s0-2,text,text,seed,조 제목,100%
+duty_class,duty_name,,고압가스안전관리기준통합고시 — 안전성평가기법 선정 심사,text,text,seed,의무 이름,75%
+duty_class,verdict,,obligation,text,text,seed,판정,100%
+duty_class,duty_subject,,요청을 받은 관계기관의 장,text,text,seed,수범주체,65%
+duty_class,cycle_text,,축척: 1/400,text,text,seed,주기(원문),20%
+duty_class,assign_basis,,규칙 R14 — 인력 선임·배치,text,text,seed,배정 근거,100%
+duty_class,evidence_kind,,"조직도, 업무분장",text,text,seed,증빙 종류,100%
+duty_class,badge,,자산 대장 없음 — 보유 확인 필요,text,text,seed,화면 표시(배지),82%
+duty_class,why,,본문 수범자가 관리주체·지자체장 계열 1항목,text,text,seed,왜 이 의무인가,100%
+duty_class,source_text,,② 대책본부의 장은 테러사건에 신속히 대응하기 위하여 필요한 경우에 관계기관의 장에게 인력ㆍ장비 등의 지원을 요청할 수 있다. 이 경우 요청을 …,text,text,seed,조문 원문,97%
+duty_class,law_id,,LAW-KR-000013,text,text,seed,법령 번호(정본),88%
+duty_class,doc_id,,DOC-003932,text,text,seed,문서 번호(정본),88%
+duty_class,unit_id,,UNIT-0327071,text,text,seed,조항호목 번호(정본),60%
+duty_class,schedule_id,,SCH-0012303,text,text,seed,별표·서식 번호(정본),40%
+duty_class,obl_id,,OBL-0008229,text,text,seed,의무 번호(정본),7%
+duty_class,review_status,,pending,text,text,seed,검수 상태,100%
+duty_class,rev_state,,,미정(값 없음),,코드(쓰기 객체),,
+duty_class,rev_at,,,미정(값 없음),,코드(쓰기 객체),,
+duty_class,rev_run,,,미정(값 없음),,코드(쓰기 객체),,
+duty_class,rev_item,,,미정(값 없음),,코드(쓰기 객체),,
+duty_class,rev_text,,,미정(값 없음),,코드(쓰기 객체),,
+duty_class,rev_note,,,미정(값 없음),,코드(쓰기 객체),,
+duty_class,retired,,,미정(값 없음),,코드(쓰기 객체),,
+eval_criteria,criteria_id,PK,C01,text,text,seed,평가 기준 번호,100%
+eval_criteria,target_role,,안전보건관리책임자,text,text,seed,대상 직위,100%
+eval_criteria,item_no,,1,integer,int,seed,항목 순번,100%
+eval_criteria,item,,사업장의 산업재해 예방계획 수립,text,text,seed,평가 항목(법정 업무),100%
+eval_criteria,points,,11,integer,int,seed,배점(기관이 정함),100%
+eval_criteria,law_basis,,산업안전보건법 제15조제1항 제1호,text,text,seed,근거 조문,100%
+eval_criteria,active,,Y,text(Y/N 표시 · boolean 후보),text,seed,사용 여부 Y/N,100%
+eval_criteria,note,,예시 자료(시연용) · 배점은 기관이 정함,text,text,seed,비고,100%
+evidence,evidence_id,PK,EVD-000001,text,text,seed+overlay,증빙 번호,100%
+evidence,task_id,,TSK-000001,text,text,seed+overlay,과제 번호,100%
+evidence,evidence_kind,,임명·선임 문서,text,text,seed+overlay,증빙 종류,100%
+evidence,file_name,,인력배치 선임 통보서.pdf,text,text,seed+overlay,파일 이름,100%
+evidence,file_url,,/api/file/20260921_v2os24_%ED%98%84%EC%9E%A5%EC%82%AC%EC%A7%84_2.png,text,text,seed+overlay,파일 주소,0%
+evidence,form_id,,SCH-0005304,text,text,seed+overlay,법정 서식 번호,29%
+evidence,uploaded_by,,SD13-1,text,text,seed+overlay,올린 사람,100%
+evidence,uploaded_at,,2026-01-11,date,timestamptz,seed+overlay,올린 날짜,100%
+evidence,note,,예시 데이터(시연용),text,text,seed+overlay,비고,100%
+evidence,file_size,,441,integer,bigint,overlay,파일 크기(바이트),
+evidence,file_type,,image/png,text,text,overlay,올린 파일 형식,
+evidence_split,split_id,PK,,미정(값 없음),,코드(쓰기 객체),,
+evidence_split,pair_key,,,미정(값 없음),,코드(쓰기 객체),,
+evidence_split,act,,,미정(값 없음),,코드(쓰기 객체),,
+evidence_split,file_name,,,미정(값 없음),,코드(쓰기 객체),,
+evidence_split,at,,,미정(값 없음),,코드(쓰기 객체),,
+evidence_split,by,,,미정(값 없음),,코드(쓰기 객체),,
+form_template,form_id,PK,SCH-0000604,text,text,seed,법정 서식 번호,100%
+form_template,title,,보험금액(제27조제3항 관련),text,text,seed,제목,100%
+form_template,doc_id,,DOC-000019,text,text,seed,문서 번호(정본),100%
+form_template,law_id,,LAW-KR-000007,text,text,seed,법령 번호(정본),100%
+form_template,schedule_kind,,table,text,text,seed,별표·서식 구분,100%
+form_template,schedule_no,,6,integer,text,seed,별표·서식 번호,100%
+form_template,source,,정본 별표·서식,text,text,seed,출처(FMS 등),100%
+form_template,file_html,,,미정(값 없음),text,seed,서식 HTML,0%
+form_template,file_docx,,,미정(값 없음),text,seed,서식 DOCX,0%
+form_template,canon_release,,R-20260920-08,text,text,seed,정본 발행판,100%
+hazard_code,hazard_code,PK,HZ01,text,text,seed,유해·위험요인 코드(18항목),100%
+hazard_code,hazard_name,,추락,text,text,seed,유해·위험요인 이름,100%
+hazard_code,sort_no,,1,integer,int,seed,정렬 순서,100%
+hazard_code,note,,도급 작업 유해·위험요인 체크 항목,text,text,seed,비고,100%
+hazard_report,hz_id,PK,HZR-0001,text,text,seed,신고 번호,100%
+hazard_report,received_at,,2026-03-04 09:20,timestamptz,timestamptz,seed,접수일,100%
+hazard_report,channel,,상시점검,text,text,seed,접수 경로,100%
+hazard_report,channel_detail,,응답소,text,text,seed,세부 경로(안전신문고·120 등),38%
+hazard_report,reporter,,이민준 주무관,text,text,seed,신고한 사람,100%
+hazard_report,received_by,,SD09-1,text,text,seed,접수한 사람,100%
+hazard_report,asset_id,,AR2005-0002918,text,text,seed,자산 번호,100%
+hazard_report,asset_name,,용인시문화복지행정타운본청사,text,text,seed,자산 이름,100%
+hazard_report,asset_gbn,,건축물,text,text,seed,시설 구분,100%
+hazard_report,asset_class,,2종,text,text,seed,종별(1·2·3종),100%
+hazard_report,dept_id,,D09,text,text,seed,부서 번호,100%
+hazard_report,location,,본청사 1층 민원실 출입구,text,text,seed,위치,100%
+hazard_report,description,,우천 시 출입구 바닥 대리석에 물기가 고여 미끄러움,text,text,seed,위험요인 설명,100%
+hazard_report,code_group,,이용자 안전,text,text,seed,유해·위험요인 대분류(이용자 안전·시설물 안전),100%
+hazard_report,code,,1 물리적,text,text,seed,유해·위험요인 분류 코드,100%
+hazard_report,accident_type,,넘어짐,text,text,seed,사고 유형(넘어짐·부딪힘 등),100%
+hazard_report,possible_accident,,출입 시민 미끄러져 넘어짐,text,text,seed,예상되는 사고,100%
+hazard_report,photo_wide,,,미정(값 없음),text,seed,전경 사진 주소,0%
+hazard_report,photo_close,,,미정(값 없음),text,seed,근접 사진 주소,0%
+hazard_report,protect_action,,미끄럼 주의 표지·흡수 매트 설치,text,text,seed,피해방지조치(대피·접근차단·통제),78%
+hazard_report,protect_at,,2026-03-04 10:20,timestamptz,timestamptz,seed,피해방지조치 일시,78%
+hazard_report,protect_by,,SD09-1,text,text,seed,피해방지조치한 사람,78%
+hazard_report,severity,,경미,text,text,seed,1차 판단(경미·심각),88%
+hazard_report,judged_by,,SD02-2,text,text,seed,판단한 사람,88%
+hazard_report,judged_at,,2026-03-04 12:20,timestamptz,timestamptz,seed,판단 일시,88%
+hazard_report,judge_memo,,현장 즉시 조치 가능,text,text,seed,판단 메모,88%
+hazard_report,minor_action,,미끄럼 방지 매트 교체·우산 비닐 비치,text,text,seed,경미 건 즉시 조치 내용,68%
+hazard_report,closed_at,,2026-03-07,date,date,seed,종결일,68%
+hazard_report,closed_by,,SD09-1,text,text,seed,종결한 사람,68%
+hazard_report,notified_reporter,,Y,text(Y/N 표시 · boolean 후보),text,seed,신고자 결과 통보 Y/N,25%
+hazard_report,notified_at,,2026-03-16,date,date,seed,신고자 통보일,25%
+hazard_report,ceo_reported_at,,2026-02-10 13:30,timestamptz,timestamptz,seed,경영책임자 보고 일시,15%
+hazard_report,ceo_report_mode,,구두 선보고 후 서면,text,text,seed,보고 방식(서면·구두 선보고 후 서면),15%
+hazard_report,ceo_reported_by,,SM01-1,text,text,seed,보고한 사람,15%
+hazard_report,ceo_instruction,,"긴급안전점검 실시, 결과에 따라 보수·보강 계획 수립",text,text,seed,경영책임자 지시,15%
+hazard_report,insp_at,,2026-02-20,date,date,seed,긴급안전점검일,12%
+hazard_report,insp_by,,SD03-1,text,text,seed,긴급안전점검한 사람,12%
+hazard_report,insp_result,,"배부름 12mm, 균열폭 최대 4mm — 긴급 보수·보강 필요(중대한결함 해당)",text,text,seed,긴급안전점검 결과,12%
+hazard_report,order_types,,보수·보강 · 이용제한(하부 보도),text,text,seed,개선 지시 종류(이용제한·보수·보강·정밀안전진단),12%
+hazard_report,order_at,,2026-02-21,date,date,seed,개선 지시일,12%
+hazard_report,order_memo,,"긴급안전점검 실시, 결과에 따라 보수·보강 계획 수립",text,text,seed,개선 지시 메모,12%
+hazard_report,fsam_applies,,Y,text(Y/N 표시 · boolean 후보),text,seed,시설물안전법 제24조 기한 적용 Y/N,12%
+hazard_report,basis_date,,2026-03-05,date,date,seed,기한 기준일(조치명령·통보를 받은 날),12%
+hazard_report,fix_items,,배수공 준설·추가 천공~42개소~1800~2026-04 | 균열 보수(에폭시 주입)~35m~2600~2026-05 | 앵커 보강~24공~9800…,text,text,seed,보수·보강 계획(항목~물량~비용~기간),10%
+hazard_report,fix_budget,,확보(재해예방 예비비),text,text,seed,보수·보강 예산 확보 상태,10%
+hazard_report,fix_started_at,,2026-04-01,date,date,seed,보수·보강 착수일,5%
+hazard_report,fix_done_at,,2026-08-28,date,date,seed,보수·보강 완료일,5%
+hazard_report,done_at,,2026-03-07,date,date,seed,처리 완료일,72%
+hazard_report,note,,예시 자료,text,text,seed,비고,100%
+hazard_step,step_id,PK,HZS-0001,text,text,seed,처리 기록 번호,100%
+hazard_step,hz_id,,HZR-0001,text,text,seed,신고 번호,100%
+hazard_step,step,,접수,text,text,seed,처리 단계(접수·피해방지조치·1차 판단 …),100%
+hazard_step,at,,2026-03-04 09:20,timestamptz(날짜·일시 섞임),timestamptz,seed,처리 일시,100%
+hazard_step,by,,SD09-1,text,text,seed,처리한 사람,100%
+hazard_step,memo,,상시점검,text,text,seed,처리 메모,99%
+hazard_step,note,,예시 자료,text,text,seed,비고,100%
+incident,incident_id,PK,INC-001,text,text,seed,사고 번호,100%
+incident,occurred_at,,2026-01-23,date,date,seed,발생 일시,100%
+incident,disaster_type,,중대산업재해,text,text,seed,재해 구분,100%
+incident,asset_id,,ST2005-0000048,text,text,seed,자산 번호,80%
+incident,dept_id,,D01,text,text,seed,부서 번호,100%
+incident,summary,,하수처리시설 정비 중 추락(가상),text,text,seed,개요,100%
+incident,cause,,안전난간 미설치·안전대 미착용,text,text,seed,원인,80%
+incident,casualties,,부상 1명,text,text,seed,인명 피해,100%
+incident,recurrence_plan,,난간 전수 점검·작업 전 위험성평가 의무화,text,text,seed,재발방지 대책,70%
+incident,plan_due,,2026-03-04,date,date,seed,대책 기한,70%
+incident,plan_done_at,,2026-03-14,date,date,seed,대책 완료일,40%
+incident,note,,예시 데이터(시연용) · 예시 자료(시연용),text,text,seed,비고,100%
+incident,event_class,,산업재해,text,text,seed,구분(산업재해·시민재해·아차사고),100%
+incident,event_area,,산업,text,text,seed,피해 대상(산업·시민),100%
+incident,serious,,확인 필요,text,text,seed,중대재해 해당 여부(해당·해당 안 됨·확인 필요),100%
+incident,accident_type,,추락,text,text,seed,사고 유형(추락·끼임 등),100%
+incident,place,,슬러지 탈수기실,text,text,seed,발생 장소,80%
+incident,basis_clause,,법 제4조제1항제2호,text,text,seed,적용 조문(법 제4조제1항제2호 등),100%
+incident,reported_by,,SD01-1,text,text,seed,등록한 사람,100%
+incident,owner_staff_id,,SD01-1,text,text,seed,정담당,100%
+incident,cause_due,,2026-01-30,date,date,seed,원인 조사 기한,100%
+incident,investigated_at,,2026-01-29,date,date,seed,원인 조사일,80%
+incident,investigated_by,,SD01-1,text,text,seed,원인 조사한 사람,80%
+incident,cause_evidence,,사고조사보고서_INC-001.pdf,text,text,seed,조사 기록(파일 이름),70%
+incident,plan_set_due,,2026-02-13,date,date,seed,대책 수립 기한,80%
+incident,plan_set_at,,2026-02-10,date,date,seed,대책 수립일,70%
+incident,plan_set_by,,SM01-1,text,text,seed,대책 수립한 사람,70%
+incident,plan_evidence,,재발방지대책_결재문서_INC-001.pdf,text,text,seed,대책 문서(파일 이름),60%
+incident,done_note,,안전난간 설치 완료 · 작업 전 위험성평가 절차 시행,text,text,seed,이행 내용,40%
+incident,done_evidence,,안전난간_보수_사진대지.pdf,text,text,seed,이행 증빙(파일 이름),40%
+incident,done_by,,SD01-2,text,text,seed,이행한 사람,40%
+incident,effect_due,,2026-06-14,date,date,seed,효과 확인 예정일,40%
+incident,effect_checked_at,,2026-06-10,date,date,seed,효과 확인일,30%
+incident,effect_checked_by,,SM01-1,text,text,seed,효과 확인한 사람,30%
+incident,effect_result,,유효,text,text,seed,효과 판단(유효·재검토 필요),30%
+incident,effect_note,,3개월간 같은 작업에서 추락 위험 지적 0건,text,text,seed,효과 판단 근거,30%
+incident,effect_evidence,,효과확인_현장점검표_202606.pdf,text,text,seed,효과 확인 증빙(파일 이름),20%
+incident,related_order_id,,ORD-001,text,text,seed,관련 명령 번호,50%
+incident,check_note,,시설 번호(용인시 평생학습관)와 사고 설명(하수처리시설)이 맞지 않음 · 피해 「부상 1명」은 법 제2조제2호 중대산업재해 정의에 못 미침 — …,text,text,seed,옮겨 온 행의 확인 필요 사항,20%
+incident,cause_evidence_url,,,미정(값 없음),,코드(쓰기 객체),,
+incident,plan_evidence_url,,,미정(값 없음),,코드(쓰기 객체),,
+incident,done_evidence_url,,,미정(값 없음),,코드(쓰기 객체),,
+incident_nil_check,nil_id,PK,NIL-001,text,text,seed,확인 번호,100%
+incident_nil_check,period,,2026-H1,text,text,seed,반기(2026-H1 등),100%
+incident_nil_check,dept_id,,D03,text,text,seed,부서 번호,100%
+incident_nil_check,confirmed_by,,SD03-1,text,text,seed,확인한 사람,100%
+incident_nil_check,confirmed_at,,2026-07-03,date,date,seed,확인일,100%
+incident_nil_check,memo,,확인 시점까지 부서 내 재해 발생 없음,text,text,seed,확인 메모,100%
+incident_nil_check,note,,예시 자료(시연용),text,text,seed,비고,100%
+incident_report,report_id,PK,IRP-001,text,text,seed,보고 번호(IRP-…),100%
+incident_report,incident_id,,INC-005,text,text,seed,사고 번호,100%
+incident_report,report_stage,,최초보고,text,text,seed,단계: 최초보고 · 직후보고 · 수시보고,100%
+incident_report,seq,,1,integer,text,seed,수시보고 차수,33%
+incident_report,reported_at,,2026-07-22 22:15,timestamptz,text,seed,보고 시각(YYYY-MM-DD HH:MM),100%
+incident_report,reporter_staff_id,,SD03-1,text,text,seed,보고자,100%
+incident_report,recipients,,경영책임자 · 총괄,text,text,seed,수신(경영책임자 · 총괄 · 관계 행정기관),100%
+incident_report,agency_name,,경기도 재난안전상황실,text,text,seed,관계 행정기관 이름,22%
+incident_report,channel,,전화,text,text,seed,접수 경로,100%
+incident_report,overview,,"07-22 21:35경 청명터널 상행 조명등 1기 낙하, 주행 차량 앞유리 파손 · 추정 원인 고정 볼트 부식 · 담당 도로과",text,text,seed,개요(언제·어디서·무엇이·어떻게),100%
+incident_report,damage,,인명 피해 없음 · 차량 1대 파손,text,text,seed,피해(인명·기타),67%
+incident_report,rescue,,구호 대상 없음,text,text,seed,긴급구조,33%
+incident_report,recovery,,상행 2차로 차단·위험표지,text,text,seed,수습(조치·동원 인력·장비),67%
+incident_report,support,,112 교통 통제 협조,text,text,seed,지원·협조,11%
+incident_report,next_plan,,상행 전 구간 조명 고정부 긴급 점검(야간),text,text,seed,향후 대책,56%
+incident_report,evidence_name,,상황보고_2보_청명터널.hwp,text,text,seed,증빙 이름,33%
+incident_report,evidence_url,,,미정(값 없음),text,seed,올린 파일 주소,0%
+incident_report,ceo_ack_at,,2026-07-22 22:20,timestamptz,text,seed,경영책임자 받은 시각(최초보고),22%
+incident_report,ceo_ack_by,,CEO-1,text,text,seed,받은 사람(CEO-1),22%
+incident_report,ceo_ack_proxy,,Y,text(Y/N 표시 · boolean 후보),text,seed,총괄 대리 기록 Y,11%
+incident_report,ceo_ack_recorded_by,,CEO-1,text,text,seed,받음을 적은 사람,22%
+incident_report,recorded_by,,SD03-1,text,text,seed,기록한 사람,100%
+incident_report,recorded_at,,2026-07-22 22:15,timestamptz,text,seed,기록한 시각,100%
+incident_report,note,,예시 자료,text,text,seed,비고,100%
+incident_response,resp_id,PK,IRS-001,text,text,seed,대응 기록 번호(IRS-…),100%
+incident_response,incident_id,,INC-005,text,text,seed,사고 번호,100%
+incident_response,kind,,recognize,text,text,seed,종류: recognize 인지 · call 112·119 · rescue 긴급구호 · inspect 긴급안전점검 · sign 위험표지 · restrict 이용 제한·통제(산업은 작업 중지·대피) · notify 주민 알림 · agency 관계 행정기관 신고 · press 언론 창구 · family 피해자·유가족 연락 · ceo_prevent·ceo_cause 경영책임자 지시,100%
+incident_response,status,,완료,text,text,seed,이행 상태,100%
+incident_response,done_at,,2026-07-22 21:40,timestamptz,text,seed,이행 완료일,100%
+incident_response,done_by,,SD03-2,text,text,seed,이행한 사람,100%
+incident_response,target_org,,112,text,text,seed,신고한 기관·대상(지시면 받는 사람 staff_id),43%
+incident_response,detail,,"도로 순찰 무전 — 터널 상행 조명등 1기 낙하, 주행 차량 앞유리 파손",text,text,seed,내용(해당 없음이면 이유),100%
+incident_response,evidence_name,,위험표지_설치사진_0722.jpg,text,text,seed,증빙 이름,18%
+incident_response,evidence_url,,,미정(값 없음),text,seed,올린 파일 주소,0%
+incident_response,proxy,,Y,text(Y/N 표시 · boolean 후보),text,seed,총괄이 대신 적은 경영책임자 지시 Y,4%
+incident_response,recorded_by,,SD03-2,text,text,seed,기록한 사람,100%
+incident_response,recorded_at,,2026-07-22 21:40,timestamptz,text,seed,기록한 시각,100%
+incident_response,note,,예시 자료,text,text,seed,비고,100%
+incident_response_setting,set_id,PK,,미정(값 없음),text,코드(쓰기 객체),설정 번호(IRT-…),
+incident_response_setting,first_report_limit_min,,,미정(값 없음),integer,코드(쓰기 객체),"최초보고 기한(분) — 안내서는 「즉시」, 시간은 기관이 정함",
+incident_response_setting,set_at,,,미정(값 없음),text,코드(쓰기 객체),정한 시각,
+incident_response_setting,set_by,,,미정(값 없음),text,코드(쓰기 객체),정한 사람,
+incident_response_setting,memo,,,미정(값 없음),text,코드(쓰기 객체),정한 근거,
+incident_response_setting,note,,,미정(값 없음),text,코드(쓰기 객체),비고,
+inspection,insp_id,PK,INS-000001,text,text,seed+overlay,점검 번호,100%
+inspection,task_id,,TSK-000001,text,text,seed+overlay,과제 번호,100%
+inspection,inspector_staff_id,,SM02-2,text,text,seed+overlay,점검자,100%
+inspection,insp_date,,2026-01-14,date,date,seed+overlay,점검일,100%
+inspection,result,,적합,text,text,seed+overlay,판정 결과,100%
+inspection,finding,,서식 미사용 — 법정 서식으로 다시 제출,text,text,seed+overlay,점검 의견·지적사항,20%
+inspection,note,,예시 데이터(시연용),text,text,seed+overlay,비고,100%
+inspection,action_need,,보완,text,text,seed+overlay,판정 때 고른 필요한 조치(화면이 씀),
+inspection,round_no,,1,integer,int,overlay,몇 번째 판정인가(재점검 차수),
+inspection_batch,batch_id,PK,BAT-001,text,text,seed,점검 회차 번호,100%
+inspection_batch,title,,2025년 하반기 안전보건 의무이행 점검,text,text,seed,제목,100%
+inspection_batch,period_year,,2025,integer,int,seed,연도,100%
+inspection_batch,half_year,,하반기,text,text,seed,반기,100%
+inspection_batch,scope_dept_id,,D02,text,text,seed,주관 부서,100%
+inspection_batch,target_dept_ids,,"D01,D02,D03,D04,D05,D09,D13",text,text,seed,대상 부서,100%
+inspection_batch,code36_list,,"F01,F03,F04,F07,F11,I06,I12",text,text,seed,대상 의무조항,100%
+inspection_batch,status,,결재완료,text,text,seed,이행 상태,100%
+inspection_batch,started_by,,SD02-1,text,text,seed,시행한 사람,100%
+inspection_batch,started_at,,2025-11-03,date,timestamptz,seed,시행일,100%
+inspection_batch,approved_by,,SD01-1,text,text,seed,승인한 사람,67%
+inspection_batch,note,,예시 데이터(시연용),text,text,seed,비고,100%
+inspection_batch,open_reason,,,미정(값 없음),text,코드(쓰기 객체),조치 중인 건을 두고 상신한 사유(필수),
+inspection_batch,open_kind,,,미정(값 없음),text,코드(쓰기 객체),상신 사유 유형(예산·인력 조치 필요 · 임시조치 완료 등),
+inspection_batch,requested_by,,,미정(값 없음),text,코드(쓰기 객체),결재 상신한 사람,
+inspection_batch,requested_at,,,미정(값 없음),timestamptz,코드(쓰기 객체),결재 상신 일시,
+inspection_batch,n_total,,,미정(값 없음),int,코드(쓰기 객체),상신할 때의 숫자(대상),
+inspection_batch,n_ok,,,미정(값 없음),int,코드(쓰기 객체),상신 때 적합 수,
+inspection_batch,n_fix,,,미정(값 없음),int,코드(쓰기 객체),상신 때 보완필요 수,
+inspection_batch,n_bad,,,미정(값 없음),int,코드(쓰기 객체),상신 때 부적합 수,
+inspection_batch,n_open,,,미정(값 없음),int,코드(쓰기 객체),상신 때 조치 중 수,
+inspection_batch,n_unsubmitted,,,미정(값 없음),int,코드(쓰기 객체),상신 때 미제출 수,
+inspection_batch,return_reason,,,미정(값 없음),text,코드(쓰기 객체),돌려보낸 사유,
+inspection_batch,approved_at,,,미정(값 없음),timestamptz,코드(쓰기 객체),승인 일시,
+inspection_batch,approve_note,,,미정(값 없음),text,코드(쓰기 객체),결재 의견,
+inspection_batch,returned_at,,,미정(값 없음),timestamptz,코드(쓰기 객체),돌려보낸 일시,
+law_change,change_id,PK,LCH-001,text,text,seed+overlay,개정 번호,100%
+law_change,law,,재난 및 안전관리 기본법,text,text,seed+overlay,근거 법령,100%
+law_change,doc,,재난 및 안전관리 기본법 시행령,text,text,seed+overlay,문서,100%
+law_change,changed_kind,,일부개정,text,text,seed+overlay,개정 구분,100%
+law_change,promulgated_at,,2026-08-11,date,date,seed+overlay,공포일,100%
+law_change,effective_at,,2026-10-10,date,date,seed+overlay,시행일,100%
+law_change,affected_duty_cnt,,162,integer,int,seed+overlay,영향 의무 수,100%
+law_change,notice_sent_at,,2026-09-24,date,timestamptz,seed+overlay,알림 발송일,0%
+law_change,note,,예시 데이터(시연용),text,text,seed+overlay,비고,100%
+law_change,run_id,,RUN-20260924-203421,text,,overlay,,
+law_change,status,,담당 확인 중,text,,overlay,,
+law_change,new_mst,,289913,integer,,overlay,,
+law_change,changed_units,,0,integer,,overlay,,
+law_change,new_units,,0,integer,,overlay,,
+law_change,removed_units,,0,integer,,overlay,,
+law_change,human_items,,1,integer,,overlay,,
+law_sync_applied,run_id,PK,RUN-20260924-211650,text,,overlay,,
+law_sync_applied,applied_at,,2026-09-24T12:16:56.780Z,timestamptz,,overlay,,
+law_sync_applied,by,,CoCo,text,,overlay,,
+law_sync_applied,law_change_n,,0,integer,,overlay,,
+law_sync_applied,duty_marked_n,,0,integer,,overlay,,
+law_sync_applied,notified_n,,0,integer,,overlay,,
+law_sync_decision,item_id,PK,,미정(값 없음),,코드(쓰기 객체),,
+law_sync_decision,run_id,,,미정(값 없음),,코드(쓰기 객체),,
+law_sync_decision,action,,,미정(값 없음),,코드(쓰기 객체),,
+law_sync_decision,decision,,,미정(값 없음),,코드(쓰기 객체),,
+law_sync_decision,by,,,미정(값 없음),,코드(쓰기 객체),,
+law_sync_decision,at,,,미정(값 없음),,코드(쓰기 객체),,
+law_sync_decision,note,,,미정(값 없음),,코드(쓰기 객체),,
+law_sync_decision,duty_keys,,,미정(값 없음),,코드(쓰기 객체),,
+material_item,item_id,PK,MAT-001,text,text,seed,품목 번호(MAT-…),100%
+material_item,item_name,,수돗물(지방상수도 정수·급수),text,text,seed,품목,100%
+material_item,dept_id,,D04,text,text,seed,부서 번호,100%
+material_item,owner_staff_id,,SD04-1,text,text,seed,정담당,83%
+material_item,acts,,produce,text,text,seed,행위: produce·process·enduse·provide 를 「;」로,67%
+material_item,byeolpyo5,,,미정(값 없음),text,seed,별표 5: 호 번호(「;」로 여럿) · N(아님) · 빈칸(확인 필요),0%
+material_item,related_law,,수도법 · 먹는물관리법,text,text,seed,관계 법령,83%
+material_item,verdict,,확인 필요,text,text,seed,판정,100%
+material_item,reason,,"상수도사업소가 정수해 주민에게 공급한다. 수돗물을 원료·제조물로 보는지 환경부 해설서는 판단하지 않았다(수도법은 관계 법령 예시로만 실림, 95…",text,text,seed,사유(필수),100%
+material_item,basis_ref,,ADOMS 해석(확인 필요) — 해설서 95~96쪽(수도법 관계 법령 예시),text,text,seed,근거(해설서 쪽 또는 「ADOMS 해석(확인 필요)」),100%
+material_item,judged_by,,SD09-1,text,text,seed,판단자,17%
+material_item,judged_at,,2026-09-18,date,date,seed,판단일,17%
+material_item,ceo_confirmed_at,,,미정(값 없음),date,seed,경영책임자 확인일,0%
+material_item,ceo_confirmed_by,,,미정(값 없음),text,seed,확인한 사람,0%
+material_item,ceo_proxy,,,미정(값 없음),text,seed,총괄이 대신 적은 확인 Y,0%
+material_item,updated_at,,2026-09-22,date,date,seed,고친 일시,100%
+material_item,created_by,,SD01-1,text,text,seed,만든 사람,100%
+material_item,note,,예시 자료(시연용),text,text,seed,비고,100%
+notification,notif_id,PK,NTF-000001,text,text,seed+overlay,알림 번호,100%
+notification,task_id,,TSK-000003,text,text,seed+overlay,과제 번호,100%
+notification,notif_type,,기한초과,text,text,seed+overlay,알림 종류(기한임박·기한초과),100%
+notification,to_staff_id,,SD03-1,text,text,seed+overlay,받는 사람,100%
+notification,sent_at,,2026-08-28,date,timestamptz,seed+overlay,보낸 날짜,100%
+notification,message,,[기한초과] 안전관리 — 기한 2026-08-25 (30일 경과),text,text,seed+overlay,알림 내용,100%
+notification,read_at,,2026-05-21,date,timestamptz,seed+overlay,읽은 일시,0%
+notification,note,,예시 데이터(시연용),text,text,seed+overlay,비고,100%
+notification,from_staff_id,,SD01-1,text,text,seed+overlay,보낸 사람,
+notification,action_id,,ACT-000044,text,text,seed+overlay,조치 번호,
+notification,batch_id,,RWS-2026H1,text,text,seed+overlay,점검 회차 번호,
+order_received,order_id,PK,ORD-001,text,text,seed,명령 번호,100%
+order_received,received_at,,2026-04-23,date,date,seed,접수일,100%
+order_received,issuer,,고용노동부,text,text,seed,발령 기관,100%
+order_received,law,,산업안전보건법,text,text,seed,근거 법령,100%
+order_received,content,,안전난간 보수 명령,text,text,seed,내용,100%
+order_received,due_date,,2026-05-23,date,date,seed,기한,89%
+order_received,dept_id,,D01,text,text,seed,부서 번호,100%
+order_received,asset_id,,ST2005-0000048,text,text,seed,자산 번호,74%
+order_received,done_at,,2026-06-22,date,date,seed,이행 완료일,42%
+order_received,result,,조치 중,text,text,seed,처리 상태(접수·조치 중·조치 완료·종결),100%
+order_received,evidence_file,,방호덮개_설치사진.pdf,text,text,seed,증빙 파일,21%
+order_received,issuer_kind,,중앙행정기관,text,text,seed,발령기관 구분(중앙행정기관·지방자치단체),100%
+order_received,law_article,,산업안전보건법 제53조제1항,text,text,seed,근거 조문,58%
+order_received,order_no,,근로감독-2026-0715(가상),text,text,seed,문서 번호,68%
+order_received,place,,재활용 선별장,text,text,seed,대상 장소,26%
+order_received,owner_staff_id,,SD01-1,text,text,seed,정담당,84%
+order_received,assigned_at,,2026-04-24,date,date,seed,담당 지정일,84%
+order_received,action_plan,,난간 보수 업체 선정 · 임시 출입통제,text,text,seed,이행 계획,79%
+order_received,started_at,,2026-04-28,date,date,seed,시행일,79%
+order_received,done_note,,정밀안전진단 완료 · 결과보고서 접수,text,text,seed,이행 내용,42%
+order_received,done_by,,SD02-1,text,text,seed,이행한 사람,42%
+order_received,reported_at,,2026-06-25,date,date,seed,이행 결과 보고일,37%
+order_received,report_evidence,,정밀안전진단_결과보고_공문.pdf,text,text,seed,보고 문서(파일 이름),37%
+order_received,closed_at,,2026-07-10,date,date,seed,종결일,26%
+order_received,closed_note,,발령기관 이행 확인 공문 접수,text,text,seed,발령기관 확인 방법,26%
+order_received,extended_due,,2026-10-10,date,date,seed,연장된 기한,5%
+order_received,extend_reason,,"유도등 부품 조달 지연 — 기간연장 신청·승인(같은 법 제45조, 가상)",text,text,seed,연장 근거,5%
+order_received,related_incident_id,,INC-001,text,text,seed,관련 사고 번호,26%
+order_received,check_note,,근거 조문 미기재 · 시설 번호와 내용 확인 필요 — 원 공문 대조 필요,text,text,seed,옮겨 온 행의 확인 필요 사항,32%
+order_received,doc_nature,,서면 행정처분,text,text,seed,문서 성격(서면 행정처분·지도·권고·조언),100%
+order_received,note,,옮겨 온 행 · 예시 자료(시연용),text,text,seed,비고,100%
+order_received,order_area,,산업,text,text,seed,재해 구분(화면이 씀),
+order_received,basis_clause,,,미정(값 없음),text,코드(쓰기 객체),적용 조문(재해 구분에 따라 · 화면이 씀),
+org_dept,dept_id,PK,D01,text,text,seed,부서 번호,100%
+org_dept,dept_name,,중대재해예방팀,text,text,seed,부서 이름,100%
+org_dept,dept_role,,총괄,text,text,seed,부서 역할(총괄·관리·현업),100%
+org_dept,parent_dept_id,,D01,text,text,seed,상위 부서,87%
+org_dept,org_path,,제2부시장 › 안전정책관 › 중대재해예방팀,text,,seed,,
+org_dept,unit_kind,,팀,text,,seed,,
+org_dept,duties,,"중대산업재해·중대시민재해 예방 종합계획, 중대재해처벌법 의무사항 이행 확인 점검, 도급·용역·위탁 산업재해 예방 기준, 안전관리자·보건관리자(사…",text,,seed,,
+org_dept,related_note,,안전정책관 소속 — 안전정책팀(안전관리계획·재난관리평가) · 시민안전교육팀(시민 안전교육) · 민방위팀(충무계획)은 유관,text,,seed,,
+org_dept,web_checked,,Y,text(Y/N 표시 · boolean 후보),,seed,,
+risk_assessment,risk_id,PK,RSK-001,text,text,seed,위험성평가 번호,100%
+risk_assessment,title,,정수장 약품 투입실 위험성평가,text,text,seed,제목,100%
+risk_assessment,dept_id,,D04,text,text,seed,부서 번호,100%
+risk_assessment,place,,정수장 약품 투입실,text,text,seed,현장,100%
+risk_assessment,method,,체크리스트법,text,text,seed,평가 방법,100%
+risk_assessment,assessed_at,,2026-03-12,date,date,seed,평가 실시일,100%
+risk_assessment,assessor_staff_id,,SD04-1,text,text,seed,평가자,100%
+risk_assessment,worker_joined,,Y,text(Y/N 표시 · boolean 후보),text,seed,종사자 참여 여부,100%
+risk_assessment,review_cycle,,연 1회,text,text,seed,재검토 주기,100%
+risk_assessment,next_due,,2027-03-12,date,date,seed,다음 평가 기한,100%
+risk_assessment,status,,완료,text,text,seed,이행 상태,100%
+risk_assessment,note,,,미정(값 없음),text,seed,비고,100%
+risk_assessment,wp_id,,WP-09,text,,seed,,
+risk_assessment,kind,,정기평가,text,,seed,,
+risk_assessment,targets,,사무 공간 · 전기 설비(분전반) · 문서고,text,,seed,,
+risk_assessment,source,,위험성평가 지원 시스템,text,,seed,,
+risk_assessment_item,risk_item_id,PK,RSK-001-1,text,text,seed,위험요인 항목 번호,100%
+risk_assessment_item,risk_id,,RSK-001,text,text,seed,위험성평가 번호,100%
+risk_assessment_item,hazard_factor,,염소 누출,text,text,seed,위험요인,100%
+risk_assessment_item,hazard_kind,,화학,text,text,seed,위험 유형,100%
+risk_assessment_item,risk_level,,높음,text,text,seed,위험도(높음·보통·낮음),100%
+risk_assessment_item,measure,,누출 감지기·보호구 비치·2인 1조 작업,text,text,seed,조치,100%
+risk_assessment_item,measure_due,,2026-04-11,date,date,seed,조치 기한,100%
+risk_assessment_item,measure_done_at,,2026-04-06,date,date,seed,조치 완료일,75%
+risk_assessment_item,owner_staff_id,,SD04-1,text,text,seed,정담당,100%
+risk_assessment_item,note,,,미정(값 없음),text,seed,비고,100%
+risk_assessment_item,freq,,1,integer,,seed,,
+risk_assessment_item,sev,,4,integer,,seed,,
+risk_assessment_item,score,,4,integer,,seed,,
+risk_assessment_item,current_measure,,비상벨 설치,text,,seed,,
+risk_assessment_item,residual_level,,낮음,text,,seed,,
+safety_budget,budget_id,PK,BUD-0101,text,text,seed,예산 번호,100%
+safety_budget,fiscal_year,,2026,integer,int,seed,회계연도,100%
+safety_budget,dept_id,,D01,text,text,seed,부서 번호,100%
+safety_budget,target_code,,,미정(값 없음),text,seed,관리대상 코드,0%
+safety_budget,budget_kind,,인력,text,text,seed,용도,100%
+safety_budget,budget_item,,안전·보건 인력비,text,text,seed,예산 항목(고정 6행 이름),100%
+safety_budget,budget_use,,가,text,text,seed,제4호 용도(가·나·밖),100%
+safety_budget,use_basis,,시행령 제4조제4호가목,text,text,seed,용도 근거 조문,62%
+safety_budget,planned_amount,,420000000,integer,bigint,seed,편성액,100%
+safety_budget,executed_amount,,302400000,integer,bigint,seed,집행액,100%
+safety_budget,risk_item_id,,RSK-004-1,text,text,seed,위험요인 항목 번호,8%
+safety_budget,duty_key,,,미정(값 없음),text,seed,의무 열쇠(정본),0%
+safety_budget,updated_at,,2026-09-24,date,date,seed,고친 일시,9%
+safety_budget,note,,예시 자료(시연용) · 안전·보건 전담 인력 인건비,text,text,seed,비고,100%
+safety_budget,area,,I,text,text,seed,재해 구분(I 산업·F 시설교통·M 원료제조물),
+safety_manual,manual_id,PK,MAN-001,text,text,seed,절차·매뉴얼 번호,100%
+safety_manual,clause_no,,3,integer,text,seed,제3·5·7·8·9호,100%
+safety_manual,title,,위험성평가 실시 규정,text,text,seed,제목,100%
+safety_manual,covers,,절차,text,text,seed,담은 목(가·나·다),100%
+safety_manual,missing,,다,text,text,seed,빠진 목,17%
+safety_manual,enacted_at,,2023-03-20,date,date,seed,제정일,100%
+safety_manual,revised_at,,2025-12-15,date,date,seed,개정일,67%
+safety_manual,last_check_at,,2026-06-30,date,date,seed,반기 1회 점검,100%
+safety_manual,owner_staff_id,,SM02-1,text,text,seed,정담당,100%
+safety_manual,note,,예시 자료(시연용),text,text,seed,비고,100%
+safety_org_role,role_id,PK,SOR-001,text,text,seed,선임·지정 번호,100%
+safety_org_role,role_item,,안전보건관리규정,text,text,seed,선임·지정 7항목(안전보건관리책임자·안전관리자·보건관리자 …),100%
+safety_org_role,scope,,기관,text,text,seed,적용 범위(자산·유형),100%
+safety_org_role,dept_id,,D01,text,text,seed,부서 번호,91%
+safety_org_role,designated,,Y,text(Y/N 표시 · boolean 후보),text,seed,Y/N,100%
+safety_org_role,status,,제정,text,text,seed,선임·지정 상태,100%
+safety_org_role,method,,직접,text,text,seed,선임 방식(직접·겸직·위탁),91%
+safety_org_role,designated_at,,2023-04-17,date,date,seed,선임·지정일,91%
+safety_org_role,law_basis,,산업안전보건법 제25조,text,text,seed,산업안전보건법 제15조 등,100%
+safety_org_role,clause_no,,5,integer,text,seed,시행령 제4조 몇 호,98%
+safety_org_role,staff_id,,SM01-1,text,text,seed,담당자 번호,63%
+safety_org_role,doc_name,,용인시 안전보건관리규정,text,text,seed,근거 문서 이름,91%
+safety_org_role,last_eval_at,,,미정(값 없음),date,seed,시행령 제4조제5호 반기 평가,0%
+safety_org_role,note,,예시 자료(시연용),text,text,seed,비고,100%
+safety_org_role,evidence_url,,,미정(값 없음),,코드(쓰기 객체),,
+safety_policy,policy_id,PK,POL-001,text,text,seed,경영방침·목표 번호,100%
+safety_policy,clause_no,,1,integer,text,seed,시행령 제4조 몇 호,100%
+safety_policy,policy_kind,,경영방침,text,text,seed,경영방침 · 안전보건 목표 · 부서별 세부 목표,100%
+safety_policy,title,,용인시 안전보건 경영방침,text,text,seed,제목,100%
+safety_policy,fiscal_year,,2026,integer,text,seed,회계연도,67%
+safety_policy,summary,,종사자와 시민의 생명·안전을 행정의 최우선 가치로 둔다 · 유해·위험요인을 찾아 없앤다 · 종사자 의견을 듣는다,text,text,seed,개요,100%
+safety_policy,enacted_at,,2022-03-02,date,date,seed,제정일,100%
+safety_policy,revised_at,,2026-01-05,date,date,seed,개정일,33%
+safety_policy,posted,,Y,text(Y/N 표시 · boolean 후보),text,seed,게시 Y/N,100%
+safety_policy,posted_where,,청사 게시판 · 내부 누리집,text,text,seed,게시한 곳,67%
+safety_policy,approver_role,,경영책임자(시장),text,text,seed,승인 직위,100%
+safety_policy,owner_staff_id,,SM01-1,text,text,seed,정담당,100%
+safety_policy,note,,예시 자료(시연용),text,text,seed,비고,100%
+staff,staff_id,PK,SD01-1,text,text,seed,담당자 번호,100%
+staff,display_name,,김민준 주무관,text,text,seed,담당자 이름,100%
+staff,dept_id,,D01,text,text,seed,부서 번호,100%
+staff,duty_role,,정담당,text,text,seed,역할(정담당·부담당·점검팀장 등),100%
+staff,position,,주무관,text,,seed,,
+staff,approval_level,,1,integer,,seed,,
+staff,email,,d01.main@demo.yongin.go.kr,text,text,seed,전자우편,100%
+staff,phone,,,미정(값 없음),text,seed,전화,0%
+staff,note,,가상 인물(시연용),text,text,seed,비고,100%
+sys_code,code_id,PK,,미정(값 없음),,코드(쓰기 객체),,
+sys_code,set_id,,,미정(값 없음),,코드(쓰기 객체),,
+sys_code,value,,,미정(값 없음),,코드(쓰기 객체),,
+sys_code,sort,,,미정(값 없음),,코드(쓰기 객체),,
+sys_code,state,,,미정(값 없음),,코드(쓰기 객체),,
+sys_code,note,,,미정(값 없음),,코드(쓰기 객체),,
+sys_code,at,,,미정(값 없음),,코드(쓰기 객체),,
+sys_code,by,,,미정(값 없음),,코드(쓰기 객체),,
+sys_mail_log,mail_id,PK,,미정(값 없음),,코드(쓰기 객체),,
+sys_mail_log,msg_id,,,미정(값 없음),,코드(쓰기 객체),,
+sys_mail_log,at,,,미정(값 없음),,코드(쓰기 객체),,
+sys_mail_log,notif_type,,,미정(값 없음),,코드(쓰기 객체),,
+sys_mail_log,from_staff_id,,,미정(값 없음),,코드(쓰기 객체),,
+sys_mail_log,to_staff_id,,,미정(값 없음),,코드(쓰기 객체),,
+sys_mail_log,to_name,,,미정(값 없음),,코드(쓰기 객체),,
+sys_mail_log,to_dept,,,미정(값 없음),,코드(쓰기 객체),,
+sys_mail_log,to_email,,,미정(값 없음),,코드(쓰기 객체),,
+sys_mail_log,subject,,,미정(값 없음),,코드(쓰기 객체),,
+sys_mail_log,status,,,미정(값 없음),,코드(쓰기 객체),,
+sys_mail_log,error,,,미정(값 없음),,코드(쓰기 객체),,
+sys_menu,menu_rid,PK,,미정(값 없음),,코드(쓰기 객체),,
+sys_menu,data,,,미정(값 없음),,코드(쓰기 객체),,
+sys_menu,at,,,미정(값 없음),,코드(쓰기 객체),,
+sys_menu,by,,,미정(값 없음),,코드(쓰기 객체),,
+system_record,record_id,PK,SYR-001,text,text,seed,기록 번호,100%
+system_record,clause_no,,1,integer,text,seed,시행령 제4조 몇 호,100%
+system_record,mok,,가,text,text,seed,목(가·나·다),59%
+system_record,record_kind,,문서 개정,text,text,seed,기록 종류(문서 등록·문서 개정·반기 점검·반기 평가·위험성평가 결과 보고 …),100%
+system_record,title,,용인시 안전보건 경영방침 개정,text,text,seed,제목,100%
+system_record,target_role,,안전보건관리책임자,text,text,seed,대상 직위(안전보건관리책임자·관리감독자·안전보건총괄책임자),59%
+system_record,target_ref,,POL-001,text,text,seed,대상 문서·지정 기록 번호(POL·MAN·SOR),94%
+system_record,target_staff_id,,SD01-1,text,text,seed,평가 대상자,41%
+system_record,dept_id,,D01,text,text,seed,부서 번호,41%
+system_record,done_at,,2026-01-05,date,date,seed,실시일,100%
+system_record,half,,2026 상반기,text,text,seed,반기(2026 상반기 등),100%
+system_record,checker_staff_id,,SM01-1,text,text,seed,점검·평가한 사람,100%
+system_record,content,,경영방침 3개 문장 중 「종사자 의견을 듣는다」를 더함 · 청사 게시판과 내부 누리집 게시,text,text,seed,내용,100%
+system_record,action_needed,,진행 중인 2곳(터널 점검 통로·옥상 방수 보수) 평가를 마치고 결과를 올릴 것,text,text,seed,필요한 조치,24%
+system_record,action_done_at,,,미정(값 없음),date,seed,필요 조치 완료일,0%
+system_record,covers,,가·나,text,text,seed,담은 목(제8호 가·나·다),12%
+system_record,score,,83,integer,int,seed,평가 점수(합),47%
+system_record,item_scores,,C01=10;C02=10;C03=9;C04=8;C05=9;C06=10;C07=9;C08=8;C09=10,text,text,seed,항목별 점수(C01=10;C02=9 …),6%
+system_record,substitute,,위험성평가,text,text,seed,갈음 근거(위험성평가·산업안전보건위원회),12%
+system_record,budget_amount,,1000000,integer,bigint,seed,부여한 예산(원 · 제5호 가목),6%
+system_record,doc_name,,안전보건관리규정 제9조 · 2026년 안전보건 예산 배정표,text,text,seed,근거 문서 이름,18%
+system_record,ceo_reported,,Y,text(Y/N 표시 · boolean 후보),text,seed,경영책임자 보고받음 Y,88%
+system_record,reported_at,,2026-01-05,date,date,seed,경영책임자 보고일,88%
+system_record,report_method,,전자 결재,text,text,seed,보고 방식(전자 결재·대면 보고·서면 보고),88%
+system_record,created_by,,SM01-1,text,text,seed,만든 사람,100%
+system_record,note,,예시 자료(시연용),text,text,seed,비고,100%
+system_record,evidence_url,,,미정(값 없음),,코드(쓰기 객체),,
+system_record,report_proxy,,,미정(값 없음),text,코드(쓰기 객체),총괄이 대신 적은 보고 기록 Y(화면이 씀),
+task_approval_patch,task_id,PK,TSK-000001,text,text,seed,과제 번호,100%
+task_approval_patch,approval_status,,승인,text,text,seed,결재 상태(작성중·제출·승인·반려),100%
+task_approval_patch,created_by,,SD13-1,text,text,seed,만든 사람,100%
+task_approval_patch,submitted_at,,2026-01-11,date,text,seed,제출 일시,63%
+task_approval_patch,submitted_by,,SD03-1,text,text,seed,제출한 사람,63%
+task_approval_patch,approved_at,,2026-01-14,date,text,seed,승인 일시,6%
+task_approval_patch,approved_by,,SM02-2,text,text,seed,승인한 사람,6%
+task_approval_patch,rejected_at,,2026-09-07,date,text,seed,반려 일시,2%
+task_approval_patch,reject_reason,,증빙 사진에 일자 표기가 없음,text,text,seed,반려 사유,14%
+task_approval_patch,created_at,,2026-01-02,date,text,seed,만든 일시,100%
+task_approval_patch,period_year,,2026,integer,text,seed,연도,100%
+task_approval_patch,half_year,,상반기,text,text,seed,반기,100%
+task_approval_patch,plan_date,,2026-01-14,date,text,seed,계획일,100%
+task_approval_patch,evidence_cnt,,1,integer,text,seed,증빙 수,100%
+task_approval_patch,check_result,,이행완료,text,text,seed,점검 판정(이행완료·보완필요·미이행),46%
+task_approval_patch,head_ok_at,,2026-01-12,date,,seed,,
+task_approval_patch,head_ok_by,,H13,text,,seed,,
+training_check,check_id,PK,,미정(값 없음),text,코드(쓰기 객체),점검 기록 번호(화면이 씀),
+training_check,area,,,미정(값 없음),text,코드(쓰기 객체),재해 구분(I 산업·F 시설교통·M 원료제조물),
+training_check,period,,,미정(값 없음),text,코드(쓰기 객체),점검 기간(반기 또는 연),
+training_check,half,,,미정(값 없음),text,코드(쓰기 객체),반기,
+training_check,checked_at,,,미정(값 없음),date,코드(쓰기 객체),점검일,
+training_check,checked_by,,,미정(값 없음),text,코드(쓰기 객체),점검한 사람,
+training_check,method,,,미정(값 없음),text,코드(쓰기 객체),점검 방식(직접 점검·점검 결과 보고받음),
+training_check,proxy,,,미정(값 없음),text,코드(쓰기 객체),총괄이 대신 적은 기록 Y,
+training_check,summary,,,미정(값 없음),text,코드(쓰기 객체),점검 결과 요약,
+training_check,note,,,미정(값 없음),text,코드(쓰기 객체),비고,
+training_course,course_id,PK,TC01,text,text,seed,교육 과정 번호,100%
+training_course,course_name,,근로자 정기교육,text,text,seed,과정명,100%
+training_course,law,,산업안전보건법,text,text,seed,근거 법령,100%
+training_course,basis,,산업안전보건법 제29조제1항 · 시행규칙 제26조제1항 · 별표 4 제1호가목,text,text,seed,근거 조문(법·시행규칙·별표),100%
+training_course,target,,소속 근로자,text,text,seed,대상,100%
+training_course,cycle,,반기,text,text,seed,주기,100%
+training_course,cycle_months,,6,integer,int,seed,주기(개월),69%
+training_course,required_hours,,사무직 매반기 6시간 이상 · 그 밖의 근로자(판매업무 외) 매반기 12시간 이상,text,text,seed,법정 시간(원문 요지),100%
+training_course,applies_depts,,D01 D02 D03 D04 D05 D06 D07 D08 D09 D10 D11 D12 D13 D14,text,text,seed,적용 부서(공백 구분 · 예시),92%
+training_course,hazardous_work,,N,text(Y/N 표시 · boolean 후보),text,seed,유해·위험 작업 교육 Y/N,100%
+training_course,note,,예시 자료(시연용),text,text,seed,비고,100%
+training_course,area,,I,text,text,seed,재해 구분(I 산업·F 시설교통·M 원료제조물),100%
+training_record,training_id,PK,TRN-0001,text,text,seed,교육 번호,100%
+training_record,staff_id,,SD01-1,text,text,seed,담당자 번호,100%
+training_record,dept_id,,D01,text,text,seed,부서 번호,100%
+training_record,course_id,,TC02,text,text,seed,교육 과정 번호,100%
+training_record,course_name,,관리감독자 정기교육,text,text,seed,과정명,100%
+training_record,law,,산업안전보건법,text,text,seed,근거 법령,100%
+training_record,hours,,16,integer,numeric,seed,시간,76%
+training_record,period,,2026년,text,text,seed,교육 기간 표시(2026년·상반기 등),100%
+training_record,due_date,,2026-12-31,date,date,seed,기한,72%
+training_record,trained_at,,2026-05-27,date,date,seed,이수일,77%
+training_record,status,,이수,text,text,seed,이수 상태(이수·미실시),100%
+training_record,certificate_file,,이수증_TRN-0001.pdf,text,text,seed,수료증,77%
+training_record,duty_key,,,미정(값 없음),text,seed,의무 열쇠(정본),0%
+training_record,note,,예시 자료(시연용),text,text,seed,비고,100%
+training_record,instructed_at,,,미정(값 없음),date,코드(쓰기 객체),이행 지시일(제4호 · 화면이 씀),
+training_record,instructed_by,,,미정(값 없음),text,코드(쓰기 객체),이행 지시한 사람(화면이 씀),
+training_record,instruct_due,,,미정(값 없음),date,코드(쓰기 객체),지시한 이수 기한(화면이 씀),
+training_record,instruct_basis,,,미정(값 없음),text,코드(쓰기 객체),지시 근거 조문(화면이 씀),
+training_record,evidence_url,,,미정(값 없음),,코드(쓰기 객체),,
+training_record,done_by,,,미정(값 없음),text,코드(쓰기 객체),이행한 사람,
+usa_order,order_id,PK,USAO-MUGZKJC73KM,text,,overlay,,
+usa_order,sent_at,,2026-09-25T13:18:03.791Z,timestamptz,,overlay,,
+usa_order,from_staff_id,,SD01-1,text,,overlay,,
+usa_order,from_name,,김민준 주무관,text,,overlay,,
+usa_order,track,,ws,text,,overlay,,
+usa_order,to_dept_ids,,"D06,D12,D01,D09",text,,overlay,,
+usa_order,to_names,,"중대재해예방팀, 푸른공원사업소, 건축과, 자원순환과",text,,overlay,,
+usa_order,to_owners,,중대재해예방팀:김민준 주무관 · 푸른공원사업소:한우진 주무관 · 건축과:이민준 주무관 · 자원순환과:윤우진 주무관,text,,overlay,,
+usa_order,rates,,중대재해예방팀 33.3% · 푸른공원사업소 28.6% · 건축과 63.6% · 자원순환과 20.0%,text,,overlay,,
+usa_order,message,,"중대재해예방팀, 푸른공원사업소, 건축과, 자원순환과 는 이행률 개선 조치 바람",text,,overlay,,
+usa_order,channels,,app,text,,overlay,,
+usa_order,results,,"{""app"":""발송 4건""}",jsonb,,overlay,,
+usb1_basic,basic_id,PK,ws:D01:2026-01-01,text,,seed+overlay,,
+usb1_basic,track,,ws,text,,seed+overlay,,
+usb1_basic,target_id,,D01,text,,seed+overlay,,
+usb1_basic,base_date,,2026-01-01,date,,seed+overlay,,
+usb1_basic,addr,,경기도 용인시 처인구 중부대로 1199,text,,seed+overlay,,
+usb1_basic,ind_class,,공공행정,text,,seed+overlay,,
+usb1_basic,ind_code,,84113,integer,,seed+overlay,,
+usb1_basic,headcount,,"{""현원"": [9, 1, 0, 1, 0, 0, 0, 0], ""현업업무종사자"": [0, 0, 0, 0, 0, 0, 0, 0]}",jsonb,,seed+overlay,,
+usb1_basic,workers,,"[{""name"": ""김민준"", ""org"": ""중대재해예방팀"", ""phone"": ""031-324-2010""}, {""name"": ""이준호"", ""or…",jsonb,,seed+overlay,,
+usb1_basic,sups,,"[{""state"": ""지정"", ""name"": ""김민준"", ""phone"": ""031-324-2010"", ""pos"": ""주무관"", ""to"": """",…",jsonb,,seed+overlay,,
+usb1_basic,files,,"[{""name"": ""관리감독자 지정 문서.pdf"", ""url"": """"}]",jsonb,,seed+overlay,,
+usb1_basic,spec,,{},jsonb,,seed+overlay,,
+usb1_basic,extra,,{},jsonb,,seed+overlay,,
+usb1_basic,state,,입력,text,,seed+overlay,,
+usb1_basic,saved_at,,2026-01-15,date,,seed+overlay,,
+usb1_basic,saved_by,,SD01-1,text,,seed+overlay,,
+usb1_contract,contract_id,PK,CTR-0001,text,,overlay,,
+usb1_contract,contract_name,,2026년 시도 포장보수 공사(처인구),text,,overlay,,
+usb1_contract,counterpart,,모현건설(주),text,,overlay,,
+usb1_contract,asset_id,,,미정(값 없음),,overlay,,
+usb1_contract,dept_id,,D03,text,,overlay,,
+usb1_contract,contract_type,,도급,text,,overlay,,
+usb1_contract,start_date,,2026-07-08,date,,overlay,,
+usb1_contract,end_date,,2027-06-03,date,,overlay,,
+usb1_contract,amount,,1280000000,integer,,overlay,,
+usb1_contract,safety_clause,,안전보건 확보 조항 있음,text,,overlay,,
+usb1_contract,evaluation_done,,Y,text(Y/N 표시 · boolean 후보),,overlay,,
+usb1_contract,contract_method,,수의계약(2인견적),text,,overlay,,
+usb1_contract,trade,,토목,text,,overlay,,
+usb1_contract,safety_cost,,28844876,integer,,overlay,,
+usb1_contract,worker_cnt,,24,integer,,overlay,,
+usb1_contract,subcontract,,Y,text(Y/N 표시 · boolean 후보),,overlay,,
+usb1_contract,eval_score,,69,integer,,overlay,,
+usb1_contract,eval_date,,2026-08-04,date,,overlay,,
+usb1_contract,manager_staff_id,,SD03-1,text,,overlay,,
+usb1_contract,manager_phone,,031-324-2030,text,,overlay,,
+usb1_contract,work_start_date,,2026-07-12,date,,overlay,,
+usb1_contract,main_task,,파손 포장 절삭·덧씌우기 및 포트홀 보수,text,,overlay,,
+usb1_contract,work_place,,처인구 관내 시도 구간,text,,overlay,,
+usb1_contract,vendor_rep_role,,현장대리인,text,,overlay,,
+usb1_contract,vendor_safety_role,,안전담당(현장대리인 겸직),text,,overlay,,
+usb1_contract,vendor_contact_on_file,,Y,text(Y/N 표시 · boolean 후보),,overlay,,
+usb1_contract,vendor_doc_status,,제출됨,text,,overlay,,
+usb1_contract,regular_workers,,70,integer,,overlay,,
+usb1_contract,attachments,,계약서 · 설계서·내역서 · 안전관리계획서 · 산업안전보건관리비 사용계획서,text,,overlay,,
+usb1_contract,entrust_type,,도급,text,,overlay,,
+usb1_contract,apply_frame,,산업,text,,overlay,,
+usb1_contract,civil_scope,,확인 필요,text,,overlay,,
+usb1_contract,civil_basis,,시설 관련 업무이나 계약에 시설이 특정되지 않음 — 공중이용시설(시행령 별표2·3) 해당 여부를 확인해야 합니다,text,,overlay,,
+usb1_contract,ctl_own,,Y,text(Y/N 표시 · boolean 후보),,overlay,,
+usb1_contract,ctl_lease,,N,text(Y/N 표시 · boolean 후보),,overlay,,
+usb1_contract,ctl_repair,,Y,text(Y/N 표시 · boolean 후보),,overlay,,
+usb1_contract,ctl_command,,Y,text(Y/N 표시 · boolean 후보),,overlay,,
+usb1_contract,ctl_vendor_site,,N,text(Y/N 표시 · boolean 후보),,overlay,,
+usb1_contract,control_result,,해당,text,,overlay,,
+usb1_contract,control_basis,,시 소유 시설(처인구 관내 시도 구간)에서 수행 · 보수·보강은 시 예산 · 작업 중지·시정 지시 가능,text,,overlay,,
+usb1_contract,control_confirmed_at,,,미정(값 없음),,overlay,,
+usb1_contract,control_confirmed_by,,,미정(값 없음),,overlay,,
+usb1_contract,work_risk,,위험장소,text,,overlay,,
+usb1_contract,eval_pass_mark,,75,integer,,overlay,,
+usb1_contract,eval_detail,,,미정(값 없음),,overlay,,
+usb1_contract,proc_stage,,이행,text,,overlay,,
+usb1_contract,order_at,,2026-05-27,date,,overlay,,
+usb1_contract,contract_at,,,미정(값 없음),,overlay,,
+usb1_contract,completed_at,,,미정(값 없음),,overlay,,
+usb1_contract,settled_at,,,미정(값 없음),,overlay,,
+usb1_contract,cost_planned,,28844876,integer,,overlay,,
+usb1_contract,cost_settled,,,미정(값 없음),,overlay,,
+usb1_contract,note,,,미정(값 없음),,overlay,,
+usb1_contract,order_dept,,도로과(교량·터널),text,,overlay,,
+usb1_contract,manager_name,,정민준,text,,overlay,,
+usb1_contract,vendor_manager,,,미정(값 없음),,overlay,,
+usb1_contract,vendor_phone,,,미정(값 없음),,overlay,,
+usb1_contract,biz_no,,,미정(값 없음),,overlay,,
+usb1_contract,place_codes,,,미정(값 없음),,overlay,,
+usb1_contract,attach,,"[{""name"":""계약서"",""url"":""""},{""name"":""설계서"",""url"":""""},{""name"":""내역서"",""url"":""""},{""name""…",jsonb,,overlay,,
+usb1_contract,updated_at,,2026-09-24,date,,overlay,,
+usb1_contract,updated_by,,SD01-1,text,,overlay,,
+usb1_contract_duty,cd_id,PK,CTR-0001:C3B,text,,overlay,,
+usb1_contract_duty,contract_id,,CTR-0001,text,,overlay,,
+usb1_contract_duty,item_code,,C3B,text,,overlay,,
+usb1_contract_duty,status,,이행완료,text,,overlay,,
+usb1_contract_duty,files,,[],jsonb,,overlay,,
+usb1_contract_duty,basis,,중대재해 처벌 등에 관한 법률 시행령 제4조제9호,text,,overlay,,
+usb1_contract_duty,updated_at,,2026-09-24,date,,overlay,,
+usb1_contract_duty,updated_by,,SD01-1,text,,overlay,,
+usb1_hazard_place,place_code,PK,P01,text,,seed,,
+usb1_hazard_place,no,,1,integer,,seed,,
+usb1_hazard_place,place_name,,토사(土砂)ㆍ구축물ㆍ인공구조물 등이 붕괴될 우려가 있는 장소,text,,seed,,
+usb1_hazard_place,note,,※ 가. 선박 내부에서의 용접ㆍ용단작업 | ※ 나. 안전보건규칙 제225조제4호에 따른 인화성 액체를 취급ㆍ저장하는 설비 및 용기에서의 용접ㆍ용…,text,,seed,,
+usb1_hazard_place,basis,,산업안전보건법 시행령 제11조제1호,text,,seed,,
+usb1_hazard_place,unit_id,,UNIT-0032679,text,,seed,,
+usb1_transport,tr_id,PK,TR-01,text,,seed,,
+usb1_transport,tr_name,,용인경전철(에버라인) 도시철도차량,text,,seed,,
+usb1_transport,tr_kind,,도시철도차량,text,,seed,,
+usb1_transport,dept_id,,D16,text,,seed,,
+usb1_transport,addr,,경기도 용인시 기흥구·처인구 일원(기흥역~전대·에버랜드역),text,,seed,,
+usb1_transport,basis,,중대재해 처벌 등에 관한 법률 제2조제5호가목,text,,seed,,
+usb1_transport,basis_unit_id,,UNIT-0004701,text,,seed,,
+usb1_transport,law_family,,도시철도법 계열(궤도운송법 비적용 — 궤도운송법 제3조제1호),text,,seed,,
+usb1_transport,note,,운영 주체는 용인특례시(2026-09-20 결정),text,,seed,,
+usb1_work_site,site_id,PK,WS-001,text,,seed,,
+usb1_work_site,wp_id,,WP-01,text,,seed,,
+usb1_work_site,site_name,,용인중앙도서관,text,,seed,,
+usb1_work_site,site_kind,,공공도서관,text,,seed,,
+usb1_work_site,addr,,경기도 용인시 처인구 명지로 27(역북동 504-1),text,,seed,,
+usb1_work_site,org_note,,도서관사업소 동부도서관과(사업소장실 시청사 8층),text,,seed,,
+usb1_work_site,confirm_state,,확인필요,text,,seed,,
+usb1_work_site,src_url,,https://lib.yongin.go.kr/intro/menu/10118/program/30047/libraryStatus.do,text,,seed,,
+usb1_work_site,sort,,1,integer,,seed,,
+usb1_workplace,wp_id,PK,WP-01,text,,seed,,
+usb1_workplace,wp_name,,용인시청 본청,text,,seed,,
+usb1_workplace,wp_kind,,본청,text,,seed,,
+usb1_workplace,addr,,경기도 용인시 처인구 중부대로 1199(삼가동),text,,seed,,
+usb1_workplace,addr_note,,정수장 주소는 누리집에 직접 없다 — 정수과 주소로 본 추정(근거 강함),text,,seed,,
+usb1_workplace,site_note,,시청사 + 제1별관 + 제2별관(한 부지 · 연결). 같은 부지(용인문화복지행정타운)에 의회청사 · 처인구보건소 · 문화예술원이 있다,text,,seed,,
+usb1_workplace,field_work,,현업 있음,text,,seed,,
+usb1_workplace,field_basis,,청사안내 근거 — 지하1층 미화원휴게실 · 청원경찰휴게실(청소 · 경비),text,,seed,,
+usb1_workplace,org_note,,본청 실·국·과(도서관사업소장실 시청사 8층 포함),text,,seed,,
+usb1_workplace,subject,,용인시,text,,seed,,
+usb1_workplace,confirm_state,,확인필요,text,,seed,,
+usb1_workplace,src_url,,https://www.yongin.go.kr/home/yiIf/yiIfHall/yiIfHall03.jsp · https://www.yongin.…,text,,seed,,
+usb1_workplace,ind_class,,공공행정,text,,seed,,
+usb1_workplace,ind_code,,84113,integer,,seed,,
+usb1_workplace,sort,,1,integer,,seed,,
+usb1_workplace,note,,지금 등록된 부서 · 이행 과제는 모두 이 사업장에 붙어 있다. 근거: 20_개발\_데모_용인시_20260920\01_설계\v2_추가화면_202…,text,,seed,,
+usb1_ws_mgmt,dept_id,PK,,미정(값 없음),,코드(쓰기 객체),,
+usb1_ws_mgmt,state,,,미정(값 없음),,코드(쓰기 객체),,
+usb1_ws_mgmt,updated_at,,,미정(값 없음),,코드(쓰기 객체),,
+usb1_ws_mgmt,updated_by,,,미정(값 없음),,코드(쓰기 객체),,
+usb2_assign,map_id,PK,ind|SM01-1,text,,overlay,,
+usb2_assign,disaster,,ind,text,,overlay,,
+usb2_assign,staff_id,,SM01-1,text,,overlay,,
+usb2_assign,targets,,D01;D02;D03;D04;D05;D06;D07;D08;D09;D10;D11;D12;D13;D14;D15;D17;D18;D19;D20;D21;…,text,,overlay,,
+usb2_assign,at,,2026-09-24 20:48,timestamptz,,overlay,,
+usb2_assign,by,,SD01-1,text,,overlay,,
+usb2_basic,dept_id,PK,D03,text,,seed+overlay,,
+usb2_basic,site_name,,용인시청 본청,text,,seed+overlay,,
+usb2_basic,addr,,경기도 용인시 처인구 중부대로 1199,text,,seed+overlay,,
+usb2_basic,ind_class,,공공행정,text,,seed+overlay,,
+usb2_basic,ind_code,,84113,integer,,seed+overlay,,
+usb2_basic,rule,,제정,text,,seed+overlay,,
+usb2_basic,chief,,지정,text,,seed+overlay,,
+usb2_basic,safety_mgr,,선임,text,,seed+overlay,,
+usb2_basic,health_mgr,,선임,text,,seed+overlay,,
+usb2_basic,doctor,,위촉,text,,seed+overlay,,
+usb2_basic,committee,,구성,text,,seed+overlay,,
+usb2_basic,supervisor,,지정,text,,seed+overlay,,
+usb2_basic,deleted,,,미정(값 없음),,seed+overlay,,
+usb2_basic,at,,2026-09-20 10:00,timestamptz,,seed+overlay,,
+usb2_basic,by,,SD03-1,text,,seed+overlay,,
+usb2_law,law_rid,PK,F|TG03|어린이놀이시설 안전관리법,text,,overlay,,
+usb2_law,disaster,,civ,text,,overlay,,
+usb2_law,area,,F,text,,overlay,,
+usb2_law,target_code,,TG03,text,,overlay,,
+usb2_law,target_name,,교량·터널·도로,text,,overlay,,
+usb2_law,doc,,어린이놀이시설 안전관리법,text,,overlay,,
+usb2_law,law,,어린이놀이시설 안전관리법,text,,overlay,,
+usb2_law,layer,,법률,text,,overlay,,
+usb2_law,n,,0,integer,,overlay,,
+usb2_law,y,,0,integer,,overlay,,
+usb2_law,apply,,중대재해처벌법 의무사항,text,,overlay,,
+usb2_law,state,,off,text,,overlay,,
+usb2_law,at,,2026-09-24 09:08,timestamptz,,overlay,,
+usb2_law,by,,SD01-1,text,,overlay,,
+usb2_role,rid,PK,ind|SM01-1,text,,seed+overlay,,
+usb2_role,disaster,,ind,text,,seed+overlay,,
+usb2_role,staff_id,,SM01-1,text,,seed+overlay,,
+usb2_role,level,,1000,integer,,seed+overlay,,
+usb2_role,kind,,정,text,,seed+overlay,,
+usb2_role,state,,on,text,,seed+overlay,,
+usb2_role,at,,2026-09-20 10:00,timestamptz,,seed+overlay,,
+usb2_role,by,,SD01-1,text,,seed+overlay,,
+usb2_timing,rec_id,PK,T-fc-BR1992-0000156,text,,seed+overlay,,
+usb2_timing,track,,fc,text,,seed+overlay,,
+usb2_timing,target_id,,BR1992-0000156,text,,seed+overlay,,
+usb2_timing,saved_at,,2026-09-10 14:00,timestamptz,,seed+overlay,,
+usb2_timing,by,,SD03-1,text,,seed+overlay,,
+usb2_timing,vals,,"{""f1"": ""2026-02"", ""f2"": ""2026-02"", ""f3a"": ""2026-03"", ""f3b"": ""2026-09"", ""f3c"": ""2…",jsonb,,seed+overlay,,
+usb2_timing,laws,,{},jsonb,,seed+overlay,,
+usb2_timing,hidden,,f5d,text,,seed+overlay,,
+usc_record,rec_id,PK,USC-S0001,text,,seed+overlay,,
+usc_record,dept_id,,D03,text,,seed+overlay,,
+usc_record,year,,2026,integer,,seed+overlay,,
+usc_record,step,,goal,text,,seed+overlay,,
+usc_record,section,,main,text,,seed+overlay,,
+usc_record,parent_id,,USC-INC-INC-001,text,,seed+overlay,,
+usc_record,ord,,1,numeric,,seed+overlay,,
+usc_record,locked,,Y,text(Y/N 표시 · boolean 후보),,seed+overlay,,
+usc_record,deleted,,Y,text(Y/N 표시 · boolean 후보),,seed+overlay,,
+usc_record,status,,이행완료,text,,seed+overlay,,
+usc_record,data,,"{""date"": ""2026-01-15"", ""note"": """"}",jsonb,,seed+overlay,,
+usc_record,files,,"[{""name"": ""용인특례시 안전보건 경영방침.pdf"", ""url"": """", ""at"": ""2026-01-01T00:00:00""}]",jsonb,,seed+overlay,,
+usc_record,updated_at,,2026-09-24,date,,seed+overlay,,
+usc_record,updated_by,,SD01-1,text,,seed+overlay,,
+usc_record,site_id,,,미정(값 없음),,코드(쓰기 객체),,
+usc_record,block,,,미정(값 없음),,코드(쓰기 객체),,
+usc_record,seq,,,미정(값 없음),,코드(쓰기 객체),,
+usd_record,rec_id,PK,USD-S0001,text,,seed+overlay,,
+usd_record,scope,,TU2009-0000102,text,,seed+overlay,,
+usd_record,dept_id,,D03,text,,seed+overlay,,
+usd_record,year,,2026,integer,,seed+overlay,,
+usd_record,step,,staff,text,,seed+overlay,,
+usd_record,block,,people,text,,seed+overlay,,
+usd_record,ord,,1,integer,,seed+overlay,,
+usd_record,deleted,,Y,text(Y/N 표시 · boolean 후보),,seed+overlay,,
+usd_record,status,,보완필요,text,,seed+overlay,,
+usd_record,data,,"{""rank"": ""팀장"", ""date"": ""2026-01-02"", ""name"": ""서다혜"", ""dept"": ""안전점검팀"", ""note"": ""점검…",jsonb,,seed+overlay,,
+usd_record,files,,{},jsonb,,seed+overlay,,
+usd_record,updated_at,,2026-09-24,date,,seed+overlay,,
+usd_record,updated_by,,SD03-1,text,,seed+overlay,,
+use_plan,plan_id,PK,UPL-S001,text,,seed,,
+use_plan,site_id,,MS01,text,,seed,,
+use_plan,step,,staff,text,,seed,,
+use_plan,block,,row,text,,seed,,
+use_plan,data,,"{""rank"": ""안전보건관리책임자"", ""staff_id"": ""SD04-1"", ""name"": ""조우진 주무관"", ""dept"": ""상수도사업소"",…",jsonb,,seed,,
+use_record,rec_id,PK,USE-S0001,text,,seed,,
+use_record,site_id,,MS01,text,,seed,,
+use_record,dept_id,,D04,text,,seed,,
+use_record,year,,2026,integer,,seed,,
+use_record,step,,staff,text,,seed,,
+use_record,block,,row,text,,seed,,
+use_record,seq,,1,integer,,seed,,
+use_record,deleted,,,미정(값 없음),,seed,,
+use_record,status,,이행완료,text,,seed,,
+use_record,data,,"{""rank"": ""안전보건관리책임자"", ""date"": ""2026-01-02"", ""staff_id"": ""SD04-1"", ""name"": ""조우진 주…",jsonb,,seed,,
+use_record,files,,"[{""name"": ""상수도사업소_안전관리_조직도_2026.pdf"", ""url"": """", ""slot"": """", ""at"": ""2026-09-24""}…",jsonb,,seed,,
+use_record,updated_at,,2026-09-24,date,,seed,,
+use_record,updated_by,,,미정(값 없음),,seed,,
+use_site,site_id,PK,MS01,text,,seed,,
+use_site,site_name,,수돗물 생산·공급(정수장),text,,seed,,
+use_site,dept_id,,D04,text,,seed,,
+use_site,targets,,상수도(정수장·관로);기관 전체(모든 시설 공통),text,,seed,,
+use_site,note,,상수도사업소 정수장에서 생산해 공급하는 수돗물,text,,seed,,
+usf_ceo_activity,updated_by,,,미정(값 없음),,코드(쓰기 객체),,
+usf_ceo_activity,updated_at,,,미정(값 없음),,코드(쓰기 객체),,
+usf_ceo_activity,activity_id,PK,,미정(값 없음),,코드(쓰기 객체),,
+usf_ceo_activity,evidence_name,,,미정(값 없음),,코드(쓰기 객체),,
+usf_ceo_activity,evidence_url,,,미정(값 없음),,코드(쓰기 객체),,
+usf_ceo_activity,created_by,,,미정(값 없음),,코드(쓰기 객체),,
+usf_ceo_activity,created_at,,,미정(값 없음),,코드(쓰기 객체),,
+usf_ceo_activity,proxy,,,미정(값 없음),,코드(쓰기 객체),,
+usf_ceo_activity,deleted,,,미정(값 없음),,코드(쓰기 객체),,
+usf_ceo_activity,deleted_by,,,미정(값 없음),,코드(쓰기 객체),,
+usf_ceo_activity,deleted_at,,,미정(값 없음),,코드(쓰기 객체),,
+usf_ceo_log,log_id,PK,CLOG-S001,text,,seed+overlay,,
+usf_ceo_log,at,,2026-03-24T13:53:00+09:00,timestamptz,,seed+overlay,,
+usf_ceo_log,activity,,이행률 조회(사업장),text,,seed+overlay,,
+usf_ceo_log,detail,,이행현황 › 중대산업재해 이행률 조회,text,,seed+overlay,,
+usf_ceo_log,by,,CEO-1,text,,seed+overlay,,
+usf_file,file_id,PK,FIL-S006,text,,seed,,
+usf_file,category,,지침·매뉴얼,text,,seed,,
+usf_file,title,,중대재해처벌법 의무이행 점검표(사업장),text,,seed,,
+usf_file,body,,사업장(용인시청 본청) 부서가 스스로 점검할 때 쓰는 점검표입니다. 이행점검 항목과 같은 순서입니다.,text,,seed,,
+usf_file,written_by,,SD01-1,text,,seed,,
+usf_file,created_at,,2026-09-10T09:10:00+09:00,timestamptz,,seed,,
+usf_file,evidence_name,,의무이행_점검표_사업장.csv,text,,seed,,
+usf_file,evidence_url,,,미정(값 없음),,seed,,
+usf_file,gen_content,,"번호,점검 항목,근거,이행 여부(O/△/X/-),의무이행 일자,증빙자료,비고 1,안전·보건 목표 및 경영방침 설정,중대재해처벌법 시행령 제4조제…",text,,seed,,
+usf_judge,judge_id,PK,JDG-S0001,text,,seed+overlay,,
+usf_judge,round_id,,RWS-2026H2,text,,seed+overlay,,
+usf_judge,track,,ws,text,,seed+overlay,,
+usf_judge,item_key,,goal,text,,seed+overlay,,
+usf_judge,dept_id,,D03,text,,seed+overlay,,
+usf_judge,status,,이행완료,text,,seed+overlay,,
+usf_judge,comment,,특이사항 없음,text,,seed+overlay,,
+usf_judge,proposed,,해당없음,text,,seed+overlay,,
+usf_judge,basis,,배정된 과제 없음,text,,seed+overlay,,
+usf_judge,judged_by,,SD02-1,text,,seed+overlay,,
+usf_judge,judged_at,,2026-09-16T10:05:00+09:00,timestamptz,,seed+overlay,,
+usf_letter,letter_id,PK,LTR-2026-001,text,,seed,,
+usf_letter,title,,2026년 안전보건 경영방침 선포 서한,text,,seed,,
+usf_letter,recipients,,전 직원;실·국·사업소장,text,,seed,,
+usf_letter,related_duty,,안전·보건 목표 및 경영방침 설정(중대재해처벌법 시행령 제4조제1호),text,,seed,,
+usf_letter,body,,용인특례시 공직자 여러분께  올해도 시민의 생명과 안전을 지키는 일에 힘써 주시는 여러분께 감사드립니다.  「중대재해 처벌 등에 관한 법률」은 …,text,,seed,,
+usf_letter,sent_at,,2026-01-02,date,,seed,,
+usf_letter,status,,발송,text,,seed,,
+usf_letter,sender,,용인특례시장,text,,seed,,
+usf_letter,written_by,,SD01-1,text,,seed,,
+usf_letter,created_at,,2026-01-02T09:00:00+09:00,timestamptz,,seed,,
+usf_letter,evidence_name,,,미정(값 없음),,seed,,
+usf_letter,evidence_url,,,미정(값 없음),,seed,,
+usf_letter_read,read_id,PK,LRD-S001,text,,seed+overlay,,
+usf_letter_read,letter_id,,LTR-2026-001,text,,seed+overlay,,
+usf_letter_read,dept_id,,D02,text,,seed+overlay,,
+usf_letter_read,staff_id,,SD02-1,text,,seed+overlay,,
+usf_letter_read,read_at,,2026-01-02T10:12:00+09:00,timestamptz,,seed+overlay,,
+usf_notice,notice_id,PK,NTC-S005,text,,seed,,
+usf_notice,title,,2026년 하반기 중대재해처벌법 이행점검 일정 안내,text,,seed,,
+usf_notice,body,,하반기 이행점검을 다음과 같이 진행합니다.  1. 취합 기간: 2026. 9. 15.(화) ~ 9. 30.(수) 2. 점검 대상: 사업장(용인시…,text,,seed,,
+usf_notice,pinned,,Y,text(Y/N 표시 · boolean 후보),,seed,,
+usf_notice,written_by,,SD01-1,text,,seed,,
+usf_notice,created_at,,2026-09-10T09:00:00+09:00,timestamptz,,seed,,
+usf_notice,evidence_name,,,미정(값 없음),,seed,,
+usf_notice,evidence_url,,,미정(값 없음),,seed,,
+usf_round,round_id,PK,RWS-2026H2,text,,seed,,
+usf_round,track,,ws,text,,seed,,
+usf_round,title,,2026년 하반기 이행점검(사업장),text,,seed,,
+usf_round,dept_ids,,D01;D02;D03;D09,text,,seed,,
+usf_round,item_keys,,goal;org;staff;risk;budget;work;opinion;emergency;recur;order;law;edu,text,,seed,,
+usf_round,status,,점검중,text,,seed,,
+usf_round,created_by,,SD02-1,text,,seed,,
+usf_round,created_at,,2026-09-15T09:10:00+09:00,timestamptz,,seed,,
+usf_round,approved_by,,SD01-1,text,,seed,,
+usf_round,approved_at,,2026-06-24T16:30:00+09:00,timestamptz,,seed,,
+usf_round,approve_note,,상반기 점검 결과 확인 — 보완필요·미이행 부서는 하반기 1차 취합 때 재점검,text,,seed,,
+usf_round,insp_method,,직접 점검,text,,seed,,
+usf_round,outsource_org,,시설물 안전진단 전문기관(점검 용역),text,,seed,,
+usf_round,report_received_at,,2026-06-19,date,,seed,,
+usg_case,case_no,PK,1,integer,,seed,,
+usg_case,title,,중대재해 예방을 위한 사고사례 공유('25.3.1.~3.15.),text,,seed+overlay,,
+usg_case,dept_name,,안전 총괄 부서,text,,seed,,
+usg_case,writer,,김민준,text,,seed,,
+usg_case,writer_id,,SD01-1,text,,seed,,
+usg_case,created_at,,2025-03-24 16:04,timestamptz,,seed,,
+usg_case,views,,0,integer,,seed+overlay,,
+usg_case,content,,"'25.3.1.~3.15. 발생한 중대재해처벌법 적용 주요 사고사례를 공유하오니,  우리시 유사 사업장에서는 사고유형별 안전수칙을 철저히 준수해…",text,,seed+overlay,,
+usg_case,files,,,미정(값 없음),,seed+overlay,,
+usg_case,deleted,,Y,text(Y/N 표시 · boolean 후보),,seed,,
+usg_case,updated_at,,2026-09-24 22:58,timestamptz,,overlay,,
+usg_case,updated_by,,SD01-1,text,,overlay,,
+usg_case,deleted_at,,,미정(값 없음),,코드(쓰기 객체),,
+usg_case,deleted_by,,,미정(값 없음),,코드(쓰기 객체),,
+usg_stat_occur,occ_id,PK,OCC-0001,text,,seed,,
+usg_stat_occur,year,,2021,integer,,seed,,
+usg_stat_occur,seq,,1,integer,,seed,,
+usg_stat_occur,org_name,,직속기관,text,,seed,,
+usg_stat_occur,dept_name,,보건 부서,text,,seed,,
+usg_stat_occur,occurred_at,,2021-02-17,date,,seed,,
+usg_stat_occur,report_at,,2021-03-19,date,,seed,,
+usg_stat_occur,approve_at,,2021-03-25,date,,seed,,
+usg_stat_occur,comp,,O,text,,seed,,
+usg_stat_occur,disaster_kind,,부상,text,,seed,,
+usg_stat_occur,lost_days,,5,integer,,seed,,
+usg_stat_occur,work_type,,공무직,text,,seed,,
+usg_stat_occur,birth_year,,1957,integer,,seed,,
+usg_stat_occur,sex,,남,text,,seed,,
+usg_stat_occur,acc_type,,무리한 동작,text,,seed,,
+usg_stat_occur,injury,,염좌,text,,seed,,
+usg_stat_occur,process,,방역 장비 적재 중 어깨 부상,text,,seed,,
+usg_stat_occur,job,,방역·보건 업무,text,,seed,,
+usg_stat_occur,place,,보건소·방역 현장,text,,seed,,
+usg_stat_occur,cause,,중량물 취급,text,,seed,,
+usg_stat_occur,note,,,미정(값 없음),,seed,,
+usg_stat_occur,uploaded_by,,,미정(값 없음),,코드(쓰기 객체),,
+usg_stat_occur,uploaded_file,,,미정(값 없음),,코드(쓰기 객체),,
+usg_ws_industry,dept_id,PK,D01,text,,seed,,
+usg_ws_industry,workplace,,용인시청 본청,text,,seed,,
+usg_ws_industry,industry,,공공행정,text,,seed,,
+worker_voice,voice_id,PK,VOC-001,text,text,seed,의견 번호,100%
+worker_voice,received_at,,2026-06-12,date,date,seed,접수일,100%
+worker_voice,channel,,현장 건의,text,text,seed,접수 경로,100%
+worker_voice,dept_id,,D01,text,text,seed,부서 번호,100%
+worker_voice,content,,현장 순회 중 안전난간 파손 발견,text,text,seed,내용,100%
+worker_voice,review_result,,보수 요청 접수,text,text,seed,검토 결과,78%
+worker_voice,action_taken,,난간 교체 완료,text,text,seed,조치 내용,56%
+worker_voice,closed_at,,2026-07-02,date,date,seed,종결일,44%
+worker_voice,stage,,종결,text,text,seed,처리 단계(접수·검토·개선방안·이행·종결),100%
+worker_voice,needs_improvement,,Y,text(Y/N 표시 · boolean 후보),text,seed,개선 필요 Y,67%
+worker_voice,reviewed_at,,2026-06-15,date,date,seed,검토일,67%
+worker_voice,reviewer_staff_id,,SD01-2,text,text,seed,검토한 사람,78%
+worker_voice,plan,,파손 난간 교체,text,text,seed,개선방안,67%
+worker_voice,plan_due,,2026-07-10,date,date,seed,대책 기한,67%
+worker_voice,plan_owner_staff_id,,SD01-2,text,text,seed,개선방안 담당자,67%
+worker_voice,done_at,,2026-07-02,date,date,seed,개선 이행 완료일,44%
+worker_voice,substitute,,산업안전보건위원회,text,text,seed,갈음한 회의체(산업안전보건위원회·협의체),11%
+worker_voice,ceo_reported,,Y,text(Y/N 표시 · boolean 후보),text,seed,경영책임자 보고받음 Y,22%
+worker_voice,reported_at,,2026-07-31,date,date,seed,경영책임자 보고일,22%
+worker_voice,report_method,,대면 보고,text,text,seed,보고 방식,22%
+worker_voice,note,,예시 자료(시연용),text,text,seed,비고,100%

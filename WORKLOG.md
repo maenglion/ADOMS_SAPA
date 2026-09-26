@@ -89,3 +89,25 @@
 - 검증: 각 항목에 상태, 배경, 결정, 이유, 영향 범위, 실제 변경, 검증, 관련 파일 및 commit 상태를 구분해 기록했다.
 - 관련 파일: `WORKLOG.md`
 - 관련 commit: pending
+
+### [9] 초기 웹 배포 대상 Netlify로 변경
+- 상태: 결정
+- 배경: 현재 앱은 Next.js 단일 코드베이스이며 React 화면과 Server Actions, Route Handlers가 함께 있다.
+- 결정: 최초 웹 배포는 GitHub 저장소를 Netlify에 연결하여 현재 Next.js 앱 전체를 실행한다. Railway는 우선 PostgreSQL 용도로 사용한다. 별도 backend 서비스 분리는 현재 수행하지 않는다.
+- 이유: 현재 구조를 최소 변경으로 원격 재현하고, 프론트와 서버 로직을 조기에 분리하면서 발생할 수 있는 회귀를 피하기 위해서다.
+- 영향 범위: 웹 배포, 서버 실행 위치, Railway 구성
+- 실제 변경: 아직 배포 전.
+- 검증: `package.json` 및 `package-lock.json`이 baseline에 포함되어 있으며 `node_modules`와 Next.js build output은 Git 제외 상태다.
+- 관련 파일: `package.json`, `package-lock.json`, `next.config.ts`
+- 관련 commit: pending
+
+### [10] 최초 웹 배포 및 PostgreSQL 준비 상태
+- 상태: 완료
+- 배경: 최초 웹 배포 대상 변경 결정 이후 실제 배포와 데이터베이스 준비 상태를 기록할 필요가 있다.
+- 결정: 웹 앱은 Netlify에서 실행하고 Railway PostgreSQL은 이후 데이터 이관 대상으로 유지한다.
+- 이유: 현재 Next.js 단일 코드베이스를 먼저 원격 재현하고, 스키마와 데이터는 감사 결과를 기준으로 별도 이관하기 위해서다.
+- 영향 범위: Netlify 웹 배포, Railway PostgreSQL, 런타임 환경변수, 향후 데이터 이관
+- 실제 변경: Netlify 최초 배포를 완료했고 Railway PostgreSQL을 생성했다. Netlify에 `DATABASE_URL` 환경변수를 설정했다. PostgreSQL에는 아직 schema와 data를 적재하지 않았으며 현재 앱 코드도 `DATABASE_URL`을 사용하지 않는다.
+- 검증: 배포 완료 상태와 환경변수 설정 상태를 확인했다. 데이터베이스 접속 및 schema/data 생성·적재 검증은 수행하지 않았다.
+- 관련 파일: `WORKLOG.md`
+- 관련 commit: pending

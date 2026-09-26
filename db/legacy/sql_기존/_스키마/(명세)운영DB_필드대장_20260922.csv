@@ -1,0 +1,905 @@
+﻿표,칸,자료형,생긴 판,뜻,채움률,예시값,행수,쓰는 화면
+action,action_id,text primary key,v0.3,조치 번호,100%,ACT-000001,43,/actions /budget /calendar /contracts /drills /drills/[id] /duties/[key] /evidence /hazards /hazards/[id] /inspections /m /recurrence /review /settings /system /system/record /training
+action,insp_id,text references inspection(insp_id),v0.3,점검 번호,100%,INS-000014,43,/actions /budget /calendar /contracts /drills /drills/[id] /duties/[key] /evidence /hazards /hazards/[id] /inspections /m /recurrence /review /settings /system /system/record /training
+action,action_type,text,v0.3,조치 구분(보완·시정),100%,보완,43,/actions /budget /calendar /contracts /drills /drills/[id] /duties/[key] /evidence /hazards /hazards/[id] /inspections /m /recurrence /review /settings /system /system/record /training
+action,due_date,date,v0.3,기한,100%,2026-10-19,43,/actions /budget /calendar /contracts /drills /drills/[id] /duties/[key] /evidence /hazards /hazards/[id] /inspections /m /recurrence /review /settings /system /system/record /training
+action,done_at,date,v0.3,이행 완료일,67%,2026-10-15,43,/actions /budget /calendar /contracts /drills /drills/[id] /duties/[key] /evidence /hazards /hazards/[id] /inspections /m /recurrence /review /settings /system /system/record /training
+action,result,text,v0.3,판정 결과,100%,완료,43,/actions /budget /calendar /contracts /drills /drills/[id] /duties/[key] /evidence /hazards /hazards/[id] /inspections /m /recurrence /review /settings /system /system/record /training
+action,note,text,v0.3,비고,100%,예시 데이터(시연용),43,/actions /budget /calendar /contracts /drills /drills/[id] /duties/[key] /evidence /hazards /hazards/[id] /inspections /m /recurrence /review /settings /system /system/record /training
+action,approval_status,text,v0.2,결재 상태(작성중·제출·승인·반려),,,,/actions /budget /calendar /contracts /drills /drills/[id] /duties/[key] /evidence /hazards /hazards/[id] /inspections /m /recurrence /review /settings /system /system/record /training
+action,created_by,text,v0.2,만든 사람,,,,/actions /budget /calendar /contracts /drills /drills/[id] /duties/[key] /evidence /hazards /hazards/[id] /inspections /m /recurrence /review /settings /system /system/record /training
+action,submitted_at,timestamptz,v0.2,제출 일시,,,,/actions /budget /calendar /contracts /drills /drills/[id] /duties/[key] /evidence /hazards /hazards/[id] /inspections /m /recurrence /review /settings /system /system/record /training
+action,submitted_by,text,v0.2,제출한 사람,,,,/actions /budget /calendar /contracts /drills /drills/[id] /duties/[key] /evidence /hazards /hazards/[id] /inspections /m /recurrence /review /settings /system /system/record /training
+action,approved_at,timestamptz,v0.2,승인 일시,,,,/actions /budget /calendar /contracts /drills /drills/[id] /duties/[key] /evidence /hazards /hazards/[id] /inspections /m /recurrence /review /settings /system /system/record /training
+action,approved_by,text,v0.2,승인한 사람,,,,/actions /budget /calendar /contracts /drills /drills/[id] /duties/[key] /evidence /hazards /hazards/[id] /inspections /m /recurrence /review /settings /system /system/record /training
+action,rejected_at,timestamptz,v0.2,반려 일시,,,,/actions /budget /calendar /contracts /drills /drills/[id] /duties/[key] /evidence /hazards /hazards/[id] /inspections /m /recurrence /review /settings /system /system/record /training
+action,reject_reason,text,v0.2,반려 사유,,,,/actions /budget /calendar /contracts /drills /drills/[id] /duties/[key] /evidence /hazards /hazards/[id] /inspections /m /recurrence /review /settings /system /system/record /training
+action,created_at,timestamptz,v0.2,만든 일시,,,,/actions /budget /calendar /contracts /drills /drills/[id] /duties/[key] /evidence /hazards /hazards/[id] /inspections /m /recurrence /review /settings /system /system/record /training
+action,updated_at,timestamptz,v0.2,고친 일시,,,,/actions /budget /calendar /contracts /drills /drills/[id] /duties/[key] /evidence /hazards /hazards/[id] /inspections /m /recurrence /review /settings /system /system/record /training
+action,task_id,text,v0.5,과제 번호,,,,/actions /budget /calendar /contracts /drills /drills/[id] /duties/[key] /evidence /hazards /hazards/[id] /inspections /m /recurrence /review /settings /system /system/record /training
+action,batch_id,text,v0.5,점검 회차 번호,,,,/actions /budget /calendar /contracts /drills /drills/[id] /duties/[key] /evidence /hazards /hazards/[id] /inspections /m /recurrence /review /settings /system /system/record /training
+action,requested_by,text,v0.5,조치를 요구한 사람(점검자),,,,/actions /budget /calendar /contracts /drills /drills/[id] /duties/[key] /evidence /hazards /hazards/[id] /inspections /m /recurrence /review /settings /system /system/record /training
+action,requested_at,date,v0.5,조치 요구일,,,,/actions /budget /calendar /contracts /drills /drills/[id] /duties/[key] /evidence /hazards /hazards/[id] /inspections /m /recurrence /review /settings /system /system/record /training
+action,started_at,date,v0.5,시행일,,,,/actions /budget /calendar /contracts /drills /drills/[id] /duties/[key] /evidence /hazards /hazards/[id] /inspections /m /recurrence /review /settings /system /system/record /training
+action,resubmit_note,text,v0.5,보완 제출 때 부서가 적은 말,,,,/actions /budget /calendar /contracts /drills /drills/[id] /duties/[key] /evidence /hazards /hazards/[id] /inspections /m /recurrence /review /settings /system /system/record /training
+action,resubmitted_by,text,v0.5,보완 제출한 사람,,,,/actions /budget /calendar /contracts /drills /drills/[id] /duties/[key] /evidence /hazards /hazards/[id] /inspections /m /recurrence /review /settings /system /system/record /training
+action,rejudged_insp_id,text,v0.5,이 조치를 닫은(또는 되돌린) 재판정,,,,/actions /budget /calendar /contracts /drills /drills/[id] /duties/[key] /evidence /hazards /hazards/[id] /inspections /m /recurrence /review /settings /system /system/record /training
+action,action_basis,text,v0.7,조치 근거 조문(법정 조치 구분일 때 · 화면이 씀),,,,/actions /budget /calendar /contracts /drills /drills/[id] /duties/[key] /evidence /hazards /hazards/[id] /inspections /m /recurrence /review /settings /system /system/record /training
+action,prev_action_type,text,v0.7,바꾸기 전 조치 구분(화면이 씀),,,,/actions /budget /calendar /contracts /drills /drills/[id] /duties/[key] /evidence /hazards /hazards/[id] /inspections /m /recurrence /review /settings /system /system/record /training
+annual_schedule,sched_id,text primary key,v0.6,일정 번호,100%,SCH-01,12,/calendar
+annual_schedule,kind,text,v0.6,일정 종류(서울시 운영 예시 등),100%,서울시 운영 예시,12,/calendar
+annual_schedule,title,text,v0.6,제목,100%,안전계획 수립 · 전년 점검 결과 제출(소관 부서 → 총괄),12,/calendar
+annual_schedule,month_from,int,v0.6,시작 월,100%,1,12,/calendar
+annual_schedule,day_from,int,v0.6,시작 일,100%,1,12,/calendar
+annual_schedule,month_to,int,v0.6,끝 월,100%,1,12,/calendar
+annual_schedule,day_to,int,v0.6,끝 일,100%,31,12,/calendar
+annual_schedule,basis,text,v0.6,관련 조문(날짜는 법에 없음을 함께 적음),58%,시행령 제10조제4호 안전계획 연 1회 이상 수립(날짜는 법에,12,/calendar
+annual_schedule,source,text,v0.6,출처 자료(쪽·표 번호),100%,서울시 시민재해 안전보건업무 안내서(2023.8. 잠정) 표 ,12,/calendar
+annual_schedule,href,text,v0.6,이어지는 화면 주소,100%,/system,12,/calendar
+annual_schedule,note,text,v0.6,비고,100%,예시 자료(시연용) · 기관이 날짜를 바꿀 수 있음,12,/calendar
+asset,asset_id,text primary key,v0.1,자산 번호,100%,AR1967-0000142,1026,/duties/[key] /targets/[id]
+asset,asset_name,text,v0.1,자산 이름,100%,고기초등학교 교사동,1026,/duties/[key] /targets/[id]
+asset,asset_gbn,text,v0.1,시설 구분,100%,건축물,1026,/duties/[key] /targets/[id]
+asset,asset_kind,text,v0.1,시설 종류,100%,다중이용건축물,1026,/duties/[key] /targets/[id]
+asset,asset_class,text,v0.1,종별(1·2·3종),100%,3종,1026,/duties/[key] /targets/[id]
+asset,safety_grade,text,v0.1,안전등급,100%,B등급,1026,/duties/[key] /targets/[id]
+asset,completed_ymd,text,v0.1,준공일,100%,19670301,1026,/duties/[key] /targets/[id]
+asset,addr,text,v0.1,소재지,100%,경기도 용인시 수지구,1026,/duties/[key] /targets/[id]
+asset,dept_id,text references org_dept(dept_id),v0.1,부서 번호,100%,D09,1026,/duties/[key] /targets/[id]
+asset,source,text,v0.1,출처(FMS 등),100%,FMS,1026,/duties/[key] /targets/[id]
+asset,sapa_l2_result,text,v0.1,중처법 판정,100%,제외,1026,/duties/[key] /targets/[id]
+asset,sapa_basis,text,v0.1,판정 근거,100%,중처법 제2조제4호 단서,1026,/duties/[key] /targets/[id]
+asset,need_data,text,v0.1,더 필요한 자료,73%,연면적·층수·용도,1026,/duties/[key] /targets/[id]
+asset,verified,text default,v0.1,확인 여부,100%,N,1026,/duties/[key] /targets/[id]
+asset_target_map,asset_id,text references asset(asset_id),v0.1,자산 번호,100%,AR1967-0000142,2134,
+asset_target_map,target_code,text,v0.1,관리대상 코드,100%,TG13,2134,
+asset_target_map,basis,text,v0.1,대응 근거(FMS 구분·종류 규칙 등),100%,FMS 구분·종류 규칙,2134,
+asset_target_map,confidence,text,v0.1,대응 확신도(high·medium·low),100%,medium,2134,
+audit_log,log_id,bigserial primary key,v0.2,기록 번호,,,,
+audit_log,table_name,text,v0.2,표 이름,,,,
+audit_log,row_key,text,v0.2,행 열쇠,,,,
+audit_log,action,text,v0.2,한 일(insert·update·approve·reject),,,,
+audit_log,changed_by,text,v0.2,바꾼 사람,,,,
+audit_log,changed_at,timestamptz default now(),v0.2,바꾼 일시,,,,
+audit_log,before_json,jsonb,v0.2,바꾸기 전 값(JSON),,,,
+audit_log,after_json,jsonb,v0.2,바꾼 뒤 값(JSON),,,,
+audit_log,note,text,v0.2,비고,,,,
+ceo_activity,activity_id,text primary key,v0.2,활동 번호,100%,CEO-001,12,
+ceo_activity,activity_date,date,v0.2,활동일,100%,2026-04-16,12,
+ceo_activity,activity_type,text,v0.2,활동 유형,100%,회의주재,12,
+ceo_activity,title,text,v0.2,제목,100%,중대재해 예방 대책회의 주재,12,
+ceo_activity,place,text,v0.2,현장,100%,경기도 용인시 처인구,12,
+ceo_activity,target_code,text,v0.2,관리대상 코드,0%,,12,
+ceo_activity,asset_id,text references asset(asset_id),v0.2,자산 번호,25%,AR1970-0000535,12,
+ceo_activity,dept_id,text references org_dept(dept_id),v0.2,부서 번호,100%,D02,12,
+ceo_activity,participants,text,v0.2,참석자,100%,부시장·관계부서장,12,
+ceo_activity,finding,text,v0.2,점검 의견·지적사항,25%,안전난간 도색 상태 미흡,12,
+ceo_activity,instruction,text,v0.2,지시사항,100%,분기별 보고 지시,12,
+ceo_activity,follow_up_task_id,text references compliance_task(task_id),v0.2,후속 과제,0%,,12,
+ceo_activity,evidence_file,text,v0.2,증빙 파일,,,,
+ceo_activity,created_by,text,v0.2,만든 사람,100%,SD01-1,12,
+ceo_activity,note,text,v0.2,비고,100%,예시 데이터(시연용),12,
+ceo_activity,created_at,timestamptz default now(),v0.2,만든 일시,,,,
+civil_manual,manual_id,text primary key,v0.6,절차·매뉴얼·기록 번호,100%,CMN-001,85,/drills /evidence /system
+civil_manual,clause_ref,text,v0.6,시행령 조·호(10-7 = 제10조제7호),100%,10-7,85,/drills /evidence /system
+civil_manual,record_kind,text,v0.6,업무처리절차 · 매뉴얼 · 반기 점검 · 교육 이수 점검 · 대피훈련,100%,업무처리절차,85,/drills /evidence /system
+civil_manual,title,text,v0.6,제목,100%,공중이용시설 유해·위험요인 확인·점검 및 개선 절차,85,/drills /evidence /system
+civil_manual,covers,text,v0.6,담은 목(가·나·다·라),99%,가·나,85,/drills /evidence /system
+civil_manual,missing,text,v0.6,빠진 목,1%,나,85,/drills /evidence /system
+civil_manual,basis,text,v0.6,갈음 근거(철도안전법 제7조 등),1%,철도안전법 제7조,85,/drills /evidence /system
+civil_manual,asset_id,text,v0.6,자산 번호,88%,AR2018-0000223,85,/drills /evidence /system
+civil_manual,facility_name,text,v0.6,시설 이름,92%,용인경전철(에버라인),85,/drills /evidence /system
+civil_manual,enacted_at,date,v0.6,제정일,6%,2022-06-30,85,/drills /evidence /system
+civil_manual,revised_at,date,v0.6,개정일,5%,2025-11-20,85,/drills /evidence /system
+civil_manual,done_at,date,v0.6,실시일,94%,2026-01-15,85,/drills /evidence /system
+civil_manual,last_check_at,date,v0.6,최근 점검일,6%,2026-06-25,85,/drills /evidence /system
+civil_manual,reported_at,date,v0.6,경영책임자 보고일,6%,2026-03-16,85,/drills /evidence /system
+civil_manual,participants,int,v0.6,참석 인원,91%,9,85,/drills /evidence /system
+civil_manual,owner_staff_id,text,v0.6,정담당,100%,SM02-1,85,/drills /evidence /system
+civil_manual,note,text,v0.6,비고,100%,예시 자료(시연용),85,/drills /evidence /system
+civil_safety_plan,plan_id,text primary key,v0.6,안전계획 번호,100%,CSP-2025-0001,1564,/calendar /evidence /system
+civil_safety_plan,plan_year,int,v0.6,계획 연도,100%,2025,1564,/calendar /evidence /system
+civil_safety_plan,facility_kind,text,v0.6,공중이용시설 · 공중교통수단,100%,공중이용시설,1564,/calendar /evidence /system
+civil_safety_plan,asset_id,text,v0.6,자산 번호,100%,AR1978-0000349,1564,/calendar /evidence /system
+civil_safety_plan,facility_name,text,v0.6,시설 이름,100%,죽전(서울)휴게소(본관),1564,/calendar /evidence /system
+civil_safety_plan,asset_gbn,text,v0.6,시설 구분,100%,건축물,1564,/calendar /evidence /system
+civil_safety_plan,asset_kind,text,v0.6,시설 종류,100%,다중이용건축물,1564,/calendar /evidence /system
+civil_safety_plan,asset_class,text,v0.6,종별(1·2·3종),100%,3종,1564,/calendar /evidence /system
+civil_safety_plan,dept_id,text,v0.6,부서 번호,100%,D09,1564,/calendar /evidence /system
+civil_safety_plan,plan_status,text,v0.6,수립 · 작성중 · 미수립,100%,수립,1564,/calendar /evidence /system
+civil_safety_plan,plan_basis,text,v0.6,계획 근거(자체 안전계획 · 시설물안전법 제6조 · 철도안전법 제6조),97%,자체 안전계획,1564,/calendar /evidence /system
+civil_safety_plan,ceo_confirmed,text,v0.6,경영책임자 확인·보고받음 Y/N(제4호 단서 갈음 성립 조건),85%,Y,1564,/calendar /evidence /system
+civil_safety_plan,confirmed_at,date,v0.6,경영책임자 확인·보고받은 날,77%,2025-02-28,1564,/calendar /evidence /system
+civil_safety_plan,mok_ga,text,v0.6,가목(인력) 포함 Y/N,97%,N,1564,/calendar /evidence /system
+civil_safety_plan,mok_na,text,v0.6,나목(점검) 포함 Y/N,97%,Y,1564,/calendar /evidence /system
+civil_safety_plan,mok_da,text,v0.6,다목(보수·보강) 포함 Y/N,97%,Y,1564,/calendar /evidence /system
+civil_safety_plan,items_planned,int,v0.6,계획 항목 수,97%,9,1564,/calendar /evidence /system
+civil_safety_plan,items_done,int,v0.6,이행한 항목 수,97%,9,1564,/calendar /evidence /system
+civil_safety_plan,established_at,date,v0.6,계획 수립일,96%,2025-02-11,1564,/calendar /evidence /system
+civil_safety_plan,owner_staff_id,text,v0.6,정담당,100%,SD09-1,1564,/calendar /evidence /system
+civil_safety_plan,note,text,v0.6,비고,100%,예시 자료(시연용),1564,/calendar /evidence /system
+civil_safety_plan,confirm_proxy,text,v0.6,총괄이 대신 적은 확인 기록 Y(화면이 씀),,,,/calendar /evidence /system
+civil_safety_plan,confirmed_by,text,v0.6,확인을 기록한 사람(화면이 씀),,,,/calendar /evidence /system
+compliance_task,task_id,text primary key,v0.1,과제 번호,100%,TSK-000001,2717,
+compliance_task,assign_id,text references duty_assignment(assign_id),v0.1,배정 번호,100%,ASG-000003,2717,
+compliance_task,period_label,text,v0.1,주기 표시,100%,2026년 수시,2717,
+compliance_task,due_date,date,v0.1,기한,100%,2026-07-28,2717,
+compliance_task,status,"text check (status in ('이행대기','기간초과','이행완료','조치필요','점검완료')",v0.1,이행 상태,100%,점검완료,2717,
+compliance_task,done_at,date,v0.1,이행 완료일,39%,2026-07-27,2717,
+compliance_task,done_by,text references staff(staff_id),v0.1,이행한 사람,39%,SD13-1,2717,
+compliance_task,remark,text,v0.1,비고,0%,,2717,
+compliance_task,created_at,timestamptz default now(),v0.1,만든 일시,,,,
+compliance_task,updated_at,timestamptz default now(),v0.1,고친 일시,,,,
+compliance_task,period_year,int,v0.2,연도,,,,
+compliance_task,half_year,text,v0.2,반기,,,,
+compliance_task,plan_date,date,v0.2,계획일,,,,
+compliance_task,evidence_cnt,int,v0.2,증빙 수,,,,
+compliance_task,check_result,text,v0.2,점검 판정(이행완료·보완필요·미이행),,,,
+compliance_task,approval_status,text,v0.2,결재 상태(작성중·제출·승인·반려),,,,
+compliance_task,created_by,text,v0.2,만든 사람,,,,
+compliance_task,submitted_at,timestamptz,v0.2,제출 일시,,,,
+compliance_task,submitted_by,text,v0.2,제출한 사람,,,,
+compliance_task,approved_at,timestamptz,v0.2,승인 일시,,,,
+compliance_task,approved_by,text,v0.2,승인한 사람,,,,
+compliance_task,rejected_at,timestamptz,v0.2,반려 일시,,,,
+compliance_task,reject_reason,text,v0.2,반려 사유,,,,
+compliance_task,entered_in_demo,boolean,v0.3,시연 중 입력분 표시,,,,
+compliance_task,resubmit_round,int,v0.7,보완 제출 뒤 다음 판정 차수(화면이 씀),,,,
+compliance_task,resubmit_note,text,v0.7,보완 제출 때 부서가 적은 말(화면이 씀),,,,
+contract,contract_id,text primary key,v0.2,계약 번호,100%,CTR-0001,71,/api/export /calendar /contracts /evidence
+contract,contract_name,text,v0.2,계약 이름,100%,2026년 시도 포장보수 공사(처인구),71,/api/export /calendar /contracts /evidence
+contract,counterpart,text,v0.2,수급인(업체),100%,모현건설(주),71,/api/export /calendar /contracts /evidence
+contract,asset_id,text references asset(asset_id),v0.2,자산 번호,13%,BR1990-0000453,71,/api/export /calendar /contracts /evidence
+contract,dept_id,text references org_dept(dept_id),v0.2,부서 번호,100%,D03,71,/api/export /calendar /contracts /evidence
+contract,contract_type,text,v0.2,계약 구분(공사·용역·위탁·물품),100%,공사,71,/api/export /calendar /contracts /evidence
+contract,start_date,date,v0.2,계약 시작,100%,2026-07-08,71,/api/export /calendar /contracts /evidence
+contract,end_date,date,v0.2,계약 종료,100%,2027-06-03,71,/api/export /calendar /contracts /evidence
+contract,amount,bigint,v0.2,계약 금액,100%,1280000000,71,/api/export /calendar /contracts /evidence
+contract,safety_clause,text,v0.2,안전보건 확보 조항 유무,100%,안전보건 확보 조항 있음,71,/api/export /calendar /contracts /evidence
+contract,evaluation_done,text default,v0.2,수급인 안전보건 수준평가 실시 여부,100%,Y,71,/api/export /calendar /contracts /evidence
+contract,note,text,v0.2,비고,100%,예시 데이터(시연용),71,/api/export /calendar /contracts /evidence
+contract,created_at,timestamptz default now(),v0.2,만든 일시,,,,/api/export /calendar /contracts /evidence
+contract,updated_at,timestamptz default now(),v0.2,고친 일시,,,,/api/export /calendar /contracts /evidence
+contract,contract_method,text,v0.4,계약 방식(제한경쟁·수의계약 등),100%,수의계약(2인견적),71,/api/export /calendar /contracts /evidence
+contract,trade,text,v0.4,업종,100%,토목,71,/api/export /calendar /contracts /evidence
+contract,safety_cost,bigint,v0.4,산업안전보건관리비,25%,28844876,71,/api/export /calendar /contracts /evidence
+contract,worker_cnt,int,v0.4,투입 인원,100%,24,71,/api/export /calendar /contracts /evidence
+contract,subcontract,text,v0.4,재하도급 여부,100%,Y,71,/api/export /calendar /contracts /evidence
+contract,eval_score,int,v0.4,수급인 평가 점수,83%,69,71,/api/export /calendar /contracts /evidence
+contract,eval_date,date,v0.4,평가 실시일,83%,2026-08-04,71,/api/export /calendar /contracts /evidence
+contract,manager_staff_id,text,v0.4,계약 담당,100%,SD03-1,71,/api/export /calendar /contracts /evidence
+contract,manager_phone,text,v0.5,부서 대표번호(예시),100%,031-324-2030,71,/api/export /calendar /contracts /evidence
+contract,work_start_date,date,v0.5,착공·착수일,100%,2026-07-12,71,/api/export /calendar /contracts /evidence
+contract,main_task,text,v0.5,주요 수행업무,100%,파손 포장 절삭·덧씌우기 및 포트홀 보수,71,/api/export /calendar /contracts /evidence
+contract,work_place,text,v0.5,업무수행장소,100%,처인구 관내 시도 구간,71,/api/export /calendar /contracts /evidence
+contract,vendor_rep_role,text,v0.5,수탁 담당자(직책만),100%,현장대리인,71,/api/export /calendar /contracts /evidence
+contract,vendor_safety_role,text,v0.5,수급인 쪽 안전 담당(직책만),100%,안전담당(현장대리인 겸직),71,/api/export /calendar /contracts /evidence
+contract,vendor_contact_on_file,text,v0.5,수탁 연락처 등록됨/미등록,100%,Y,71,/api/export /calendar /contracts /evidence
+contract,vendor_doc_status,text,v0.5,수급인 확인 서류 제출 여부,100%,제출됨,71,/api/export /calendar /contracts /evidence
+contract,regular_workers,int,v0.5,상시 근로자 수,100%,70,71,/api/export /calendar /contracts /evidence
+contract,attachments,text,v0.5,첨부파일 이름 목록,100%,계약서 · 설계서·내역서 · 안전관리계획서 · 산업안전보건관리,71,/api/export /calendar /contracts /evidence
+contract,entrust_type,text,v0.7,위탁 유형(도급·용역·민간위탁·위임),100%,도급,71,/api/export /calendar /contracts /evidence
+contract,apply_frame,text,v0.7,적용 틀(산업·시민·둘 다),100%,산업,71,/api/export /calendar /contracts /evidence
+contract,civil_scope,text,v0.7,공중이용시설·교통수단 운영·관리 위탁 여부,100%,확인 필요,71,/api/export /calendar /contracts /evidence
+contract,civil_basis,text,v0.7,위탁 여부 판단 근거,100%,시설 관련 업무이나 계약에 시설이 특정되지 않음 — 공중이용시,71,/api/export /calendar /contracts /evidence
+contract,ctl_own,text,v0.7,실질 지배 — 기관 소유 시설에서 함 Y/N,100%,Y,71,/api/export /calendar /contracts /evidence
+contract,ctl_lease,text,v0.7,실질 지배 — 기관 임차 시설에서 함 Y/N,100%,N,71,/api/export /calendar /contracts /evidence
+contract,ctl_repair,text,v0.7,실질 지배 — 보수·보강 의무·예산이 기관에 있음 Y/N,100%,Y,71,/api/export /calendar /contracts /evidence
+contract,ctl_command,text,v0.7,실질 지배 — 작업 중지·시정 지시 가능 Y/N,100%,Y,71,/api/export /calendar /contracts /evidence
+contract,ctl_vendor_site,text,v0.7,수급인 소유·임차 시설에서 하는 일 있음 Y/N,100%,N,71,/api/export /calendar /contracts /evidence
+contract,control_result,text,v0.7,실질 지배 판단(해당·확인 필요·해당 없음),100%,해당,71,/api/export /calendar /contracts /evidence
+contract,control_basis,text,v0.7,실질 지배 판단 근거(계약서 조항 등),100%,시 소유 시설(처인구 관내 시도 구간)에서 수행 · 보수·보강,71,/api/export /calendar /contracts /evidence
+contract,control_confirmed_at,date,v0.7,판단을 확인한 날(사람이 적음),0%,,71,/api/export /calendar /contracts /evidence
+contract,control_confirmed_by,text,v0.7,판단을 확인한 사람,0%,,71,/api/export /calendar /contracts /evidence
+contract,work_risk,text,v0.7,작업 위험도(일반·위험장소·화재·폭발·밀폐),100%,위험장소,71,/api/export /calendar /contracts /evidence
+contract,eval_pass_mark,int,v0.7,평가 합격선(점),83%,75,71,/api/export /calendar /contracts /evidence
+contract,eval_detail,text,v0.7,항목별 평가 있음 Y,0%,,71,/api/export /calendar /contracts /evidence
+contract,proc_stage,text,v0.7,도급 단계(발주·평가·계약·이행·준공 정산),100%,이행,71,/api/export /calendar /contracts /evidence
+contract,order_at,date,v0.7,발주일,100%,2026-05-27,71,/api/export /calendar /contracts /evidence
+contract,contract_at,date,v0.7,계약일,0%,,71,/api/export /calendar /contracts /evidence
+contract,completed_at,date,v0.7,준공일,0%,,71,/api/export /calendar /contracts /evidence
+contract,settled_at,date,v0.7,정산일,0%,,71,/api/export /calendar /contracts /evidence
+contract,cost_planned,bigint,v0.7,안전보건 관리비 계상액(원),87%,28844876,71,/api/export /calendar /contracts /evidence
+contract,cost_settled,bigint,v0.7,안전보건 관리비 실사용 정산액(원),0%,,71,/api/export /calendar /contracts /evidence
+contract_compliance,cc_id,text primary key,v0.5,준수여부 번호,100%,CCP-0001-1,284,/contracts
+contract_compliance,contract_id,text references contract(contract_id),v0.5,계약 번호,100%,CTR-0001,284,/contracts
+contract_compliance,item_no,int references contract_mgmt_item(item_no),v0.5,관리의무 항목 번호(1~4),100%,1,284,/contracts
+contract_compliance,item_code,text,v0.5,관리의무 항목 코드,100%,E4-9-GA,284,/contracts
+contract_compliance,status,text,v0.5,준수 여부(이행·보완필요·미이행·해당없음),100%,보완필요,284,/contracts
+contract_compliance,evidence_name,text,v0.5,증빙 이름,70%,수급인 안전보건 수준 평가표(2026-08-04).pdf,284,/contracts
+contract_compliance,checked_at,date,v0.5,점검일,70%,2026-09-03,284,/contracts
+contract_compliance,checked_by,text,v0.5,점검한 사람,,,,/contracts
+contract_compliance,finding,text,v0.5,점검 의견·지적사항,59%,평가 점수 69점 — 기준(75점) 미달인데 보완계획 없이 선,284,/contracts
+contract_compliance,note,text,v0.5,비고,100%,예시 데이터(시연용),284,/contracts
+contract_duty,cduty_id,text primary key,v0.2,계약 의무 번호,100%,CDT-0001-1,251,
+contract_duty,contract_id,text references contract(contract_id),v0.2,계약 번호,100%,CTR-0001,251,
+contract_duty,duty_key,text references duty_class(duty_key),v0.2,의무 열쇠(정본),100%,DTY-01670,251,
+contract_duty,status,text,v0.2,이행 상태,100%,이행완료,251,
+contract_duty,done_at,date,v0.2,이행 완료일,52%,2026-08-04,251,
+contract_duty,evidence_id,text,v0.2,증빙 번호,0%,,251,
+contract_duty,note,text,v0.2,비고,100%,예시 데이터(시연용),251,
+contract_eval_item,item_no,int primary key,v0.7,평가 항목 순번,100%,1,10,/contracts
+contract_eval_item,item_code,text,v0.7,평가 항목 코드(EV01~),100%,EV01,10,/contracts
+contract_eval_item,group_code,text,v0.7,묶음 코드(가·나·다),100%,가,10,/contracts
+contract_eval_item,group_name,text,v0.7,묶음 이름(체계·실행·운영),100%,체계,10,/contracts
+contract_eval_item,item_name,text,v0.7,평가 항목 이름,100%,조직·인력,10,/contracts
+contract_eval_item,pt_good,int,v0.7,우수 점수,100%,5,10,/contracts
+contract_eval_item,pt_mid,int,v0.7,보통 점수,100%,3,10,/contracts
+contract_eval_item,pt_low,int,v0.7,미흡 점수,100%,1,10,/contracts
+contract_eval_item,mid_hint,text,v0.7,보통 판단 예시,10%,과태료,10,/contracts
+contract_eval_item,low_hint,text,v0.7,미흡 판단 예시,10%,영업정지,10,/contracts
+contract_eval_item,default_weight,int,v0.7,기본 가중치,100%,2,10,/contracts
+contract_eval_item,source,text,v0.7,출처 자료(쪽 번호),100%,서울시 중대재해 예방 안내서 4-6 수급자 안전관리능력 평가(,10,/contracts
+contract_eval_item,basis,text,v0.7,근거 조문,100%,시행령 제4조제9호가목 · 시행령 제10조제8호가목,10,/contracts
+contract_eval_item,basis_unit_id,text,v0.7,근거 조항호목 번호(정본),100%,UNIT-0004835 · UNIT-0004778,10,/contracts
+contract_eval_score,score_id,text primary key,v0.7,평가 기록 번호(화면이 씀),,,,/contracts
+contract_eval_score,contract_id,text,v0.7,계약 번호,,,,/contracts
+contract_eval_score,eval_date,date,v0.7,평가 실시일,,,,/contracts
+contract_eval_score,work_risk,text,v0.7,작업 위험도,,,,/contracts
+contract_eval_score,pass_mark,int,v0.7,적용한 합격선,,,,/contracts
+contract_eval_score,total,int,v0.7,100점 환산 점수,,,,/contracts
+contract_eval_score,result,text,v0.7,합격·미달,,,,/contracts
+contract_eval_score,weights,text,v0.7,적용한 가중치(쉼표 구분),,,,/contracts
+contract_eval_score,evaluated_by,text,v0.7,평가한 사람,,,,/contracts
+contract_eval_score,note,text,v0.7,평가 메모,,,,/contracts
+contract_eval_score,p1,int,v0.7,항목 1 점수(우수 5·보통 3·미흡 1),,,,/contracts
+contract_eval_score,p2,int,v0.7,항목 2 점수,,,,/contracts
+contract_eval_score,p3,int,v0.7,항목 3 점수,,,,/contracts
+contract_eval_score,p4,int,v0.7,항목 4 점수,,,,/contracts
+contract_eval_score,p5,int,v0.7,항목 5 점수,,,,/contracts
+contract_eval_score,p6,int,v0.7,항목 6 점수,,,,/contracts
+contract_eval_score,p7,int,v0.7,항목 7 점수,,,,/contracts
+contract_eval_score,p8,int,v0.7,항목 8 점수,,,,/contracts
+contract_eval_score,p9,int,v0.7,항목 9 점수,,,,/contracts
+contract_eval_score,p10,int,v0.7,항목 10 점수,,,,/contracts
+contract_eval_setting,setting_id,text primary key,v0.7,설정 번호(가장 늦은 줄이 지금 설정 · 화면이 씀),,,,/contracts
+contract_eval_setting,pass_default,int,v0.7,합격선 — 기본,,,,/contracts
+contract_eval_setting,pass_general,int,v0.7,합격선 — 일반 작업,,,,/contracts
+contract_eval_setting,pass_risk,int,v0.7,합격선 — 위험장소 작업,,,,/contracts
+contract_eval_setting,pass_fire,int,v0.7,합격선 — 화재·폭발·밀폐 작업,,,,/contracts
+contract_eval_setting,weights,text,v0.7,항목별 가중치(쉼표 구분),,,,/contracts
+contract_eval_setting,set_at,timestamptz,v0.7,설정 일시,,,,/contracts
+contract_eval_setting,set_by,text,v0.7,설정한 사람,,,,/contracts
+contract_hazard,hazard_id,text primary key,v0.2,위험요인 번호,100%,HZD-0001-1,206,
+contract_hazard,contract_id,text references contract(contract_id),v0.2,계약 번호,100%,CTR-0001,206,
+contract_hazard,hazard_place,text,v0.2,장소,100%,작업 구간,206,
+contract_hazard,hazard_factor,text,v0.2,위험요인,100%,추락·낙하,206,
+contract_hazard,risk_level,text,v0.2,위험도(높음·보통·낮음),100%,높음,206,
+contract_hazard,measure,text,v0.2,조치,100%,안전난간·안전대 착용·낙하물 방지망 설치,206,
+contract_hazard_map,hazard_id,text,v0.5,계약 위험요인 번호,100%,HZD-0001-1,305,/contracts
+contract_hazard_map,contract_id,text references contract(contract_id),v0.5,계약 번호,100%,CTR-0001,305,/contracts
+contract_hazard_map,hazard_code,text references hazard_code(hazard_code),v0.5,유해·위험요인 코드(18항목),100%,HZ01,305,/contracts
+contract_hazard_map,map_basis,text,v0.5,연결 근거(위험요인 문구 등),100%,위험요인 문구,305,/contracts
+contract_hazard_map,source_text,text,v0.5,조문 원문,100%,작업 구간 / 추락·낙하,305,/contracts
+contract_mgmt_item,item_no,int primary key,v0.5,관리의무 항목 번호(1~4),100%,1,4,/contracts
+contract_mgmt_item,item_code,text,v0.5,관리의무 항목 코드(E4-9-GA 등),100%,E4-9-GA,4,/contracts
+contract_mgmt_item,item_name,text,v0.5,관리의무 항목 이름,100%,수급인의 안전·보건 확보 능력·기술 평가 기준·절차,4,/contracts
+contract_mgmt_item,basis,text,v0.5,근거 조문,100%,중대재해 처벌 등에 관한 법률 시행령 제4조제9호가목,4,/contracts
+contract_mgmt_item,basis_unit_id,text,v0.5,근거 조항호목 번호(정본),100%,UNIT-0004835,4,/contracts
+contract_mgmt_item,basis_text,text,v0.5,근거 조문 원문,100%,"도급, 용역, 위탁 등을 받는 자의 산업재해 예방을 위한 조치",4,/contracts
+contract_mgmt_item,applies_to,text,v0.5,적용 범위,100%,전체,4,/contracts
+contract_mgmt_item,evidence_hint,text,v0.5,증빙 예시,100%,수급인 안전보건 수준 평가표 · 평가 기준·절차 문서,4,/contracts
+drill_eval,eval_id,text primary key,v0.6,평가 번호,100%,DRE-0001,11,/drills
+drill_eval,drill_id,text,v0.6,훈련 번호,100%,DRL-0001,11,/drills
+drill_eval,evaluator,text,v0.6,평가자,100%,SM02-2,11,/drills
+drill_eval,evaluated_at,date,v0.6,평가일,100%,2025-11-15,11,/drills
+drill_eval,p1,int,v0.6,계획 — 훈련계획 문서 수립(10점),100%,10,11,/drills
+drill_eval,p2,int,v0.6,계획 — 시나리오 적정성(10점),100%,8,11,/drills
+drill_eval,p3,int,v0.6,계획 — 참석대상 통보·사전 교육(5점),100%,5,11,/drills
+drill_eval,p4,int,v0.6,계획 — 시설·장비 준비 확인(5점),100%,4,11,/drills
+drill_eval,c1,int,v0.6,전파 — 사전안내·안내방송·교육(10점),100%,7,11,/drills
+drill_eval,c2,int,v0.6,전파 — 신고·경보·자위소방대 연락(10점),100%,9,11,/drills
+drill_eval,x1,int,v0.6,실행 — 목표시간 내 대피(10점),100%,6,11,/drills
+drill_eval,x2,int,v0.6,실행 — 병목 없는 대피유도(10점),100%,8,11,/drills
+drill_eval,x3,int,v0.6,실행 — 관계자·이용자 모두 참석(5점),100%,4,11,/drills
+drill_eval,x4,int,v0.6,실행 — 유관기관 협업(5점),100%,5,11,/drills
+drill_eval,e1,int,v0.6,평가 — 종료 후 평가 실시(10점),100%,10,11,/drills
+drill_eval,e2,int,v0.6,평가 — 결과보고서에 잘된 점·개선사항(10점),100%,9,11,/drills
+drill_eval,total,int,v0.6,합계(100점),100%,85,11,/drills
+drill_eval,comment,text,v0.6,평가 의견,100%,잘된 점: 운영사·소방서 합동으로 현장감 있게 진행 / 미흡:,11,/drills
+drill_eval,note,text,v0.6,비고,100%,예시 자료,11,/drills
+drill_plan,drill_id,text primary key,v0.6,훈련 번호,100%,DRL-0001,15,/calendar /drills /evidence
+drill_plan,target_key,text,v0.6,대상 열쇠(자산 번호 또는 LRT-EVERLINE),100%,LRT-EVERLINE,15,/calendar /drills /evidence
+drill_plan,target_name,text,v0.6,훈련 대상 이름,100%,용인경전철(에버라인),15,/calendar /drills /evidence
+drill_plan,target_kind,text,v0.6,공중교통수단 · 제1종시설물 · 2종시설물,100%,공중교통수단,15,/calendar /drills /evidence
+drill_plan,asset_class,text,v0.6,종별(1·2·3종),80%,1종,15,/calendar /drills /evidence
+drill_plan,legal_scope,text,v0.6,법정 대상 · 자체 확대,100%,법정 대상,15,/calendar /drills /evidence
+drill_plan,dept_id,text,v0.6,부서 번호,100%,D10,15,/calendar /drills /evidence
+drill_plan,year,int,v0.6,연도,100%,2025,15,/calendar /drills /evidence
+drill_plan,half,text,v0.6,반기,100%,하반기,15,/calendar /drills /evidence
+drill_plan,drill_type,text,v0.6,훈련 유형(화재·지진·위험물 누출),100%,화재,15,/calendar /drills /evidence
+drill_plan,method,text,v0.6,훈련 방식(실행기반·토론기반·도상+실제),100%,실행기반,15,/calendar /drills /evidence
+drill_plan,planned_at,timestamptz,v0.6,계획 일시,100%,2025-11-12 14:00,15,/calendar /drills /evidence
+drill_plan,place,text,v0.6,훈련 장소,100%,기흥역 승강장·전동차,15,/calendar /drills /evidence
+drill_plan,scenario,text,v0.6,시나리오,100%,전동차 객실 화재 → 승객 대피·역사 밖 유도,15,/calendar /drills /evidence
+drill_plan,target_minutes,int,v0.6,목표 대피시간(분),100%,10,15,/calendar /drills /evidence
+drill_plan,prep_coop,text,v0.6,준비 — 사전협조 완료 여부,100%,완료,15,/calendar /drills /evidence
+drill_plan,prep_items,text,v0.6,준비 — 훈련준비 완료 여부,100%,완료,15,/calendar /drills /evidence
+drill_plan,prep_budget,text,v0.6,준비 — 예산·행정 완료 여부,100%,완료,15,/calendar /drills /evidence
+drill_plan,prep_memo,text,v0.6,준비 메모,80%,소방서·경찰서 협조 공문 · 방송 원고 · 집결지 표지 · 구,15,/calendar /drills /evidence
+drill_plan,carry_over,text,v0.6,지난 훈련에서 넘겨받은 개선 과제,33%,승강장 안내방송 음량 개선 · 대피유도 인원 2명 추가,15,/calendar /drills /evidence
+drill_plan,r_cmd_main,text,v0.6,임무 — 위기상황 총괄자(정),100%,SD10-1,15,/calendar /drills /evidence
+drill_plan,r_cmd_sub,text,v0.6,임무 — 위기상황 총괄자(부),100%,SD10-2,15,/calendar /drills /evidence
+drill_plan,r_evac_main,text,v0.6,임무 — 대피유도팀(정),100%,SD10-2,15,/calendar /drills /evidence
+drill_plan,r_evac_sub,text,v0.6,임무 — 대피유도팀(부),100%,SD02-2,15,/calendar /drills /evidence
+drill_plan,r_resp_main,text,v0.6,임무 — 현장대응팀(정),100%,SD13-1,15,/calendar /drills /evidence
+drill_plan,r_resp_sub,text,v0.6,임무 — 현장대응팀(부),87%,SD13-2,15,/calendar /drills /evidence
+drill_plan,r_aid_main,text,v0.6,임무 — 구호지원팀(정),100%,SD11-1,15,/calendar /drills /evidence
+drill_plan,r_aid_sub,text,v0.6,임무 — 구호지원팀(부),87%,SD11-2,15,/calendar /drills /evidence
+drill_plan,r_eval_main,text,v0.6,임무 — 훈련 검증자(정),100%,SM02-2,15,/calendar /drills /evidence
+drill_plan,r_eval_sub,text,v0.6,임무 — 훈련 검증자(부),100%,SM02-3,15,/calendar /drills /evidence
+drill_plan,status,text,v0.6,진행 상태(계획·준비·실시·평가 완료),100%,평가 완료,15,/calendar /drills /evidence
+drill_plan,done_at,date,v0.6,훈련 실시일,73%,2025-11-12,15,/calendar /drills /evidence
+drill_plan,actual_minutes,int,v0.6,실제 대피시간(분),67%,12,15,/calendar /drills /evidence
+drill_plan,participants,int,v0.6,참여 인원,73%,46,15,/calendar /drills /evidence
+drill_plan,absent,int,v0.6,불참 인원,73%,4,15,/calendar /drills /evidence
+drill_plan,photos,text,v0.6,사진 주소(「 | 」로 구분),0%,,15,/calendar /drills /evidence
+drill_plan,good_points,text,v0.6,잘된 점,73%,운영사·소방서 합동으로 현장감 있게 진행,15,/calendar /drills /evidence
+drill_plan,shortfalls,text,v0.6,미흡사항,73%,목표 대피시간 2분 초과 · 안내방송 음량 작음,15,/calendar /drills /evidence
+drill_plan,improvements,text,v0.6,개선사항(다음 훈련 과제),73%,승강장 안내방송 음량 개선 · 대피유도 인원 2명 추가,15,/calendar /drills /evidence
+drill_plan,substitute,text,v0.6,비상대응계획으로 갈음 Y/N,20%,Y,15,/calendar /drills /evidence
+drill_plan,substitute_basis,text,v0.6,갈음 근거,20%,철도안전법 제7조 비상대응계획(철도안전관리체계),15,/calendar /drills /evidence
+drill_plan,ceo_checked,text,v0.6,경영책임자 확인 Y/N,20%,Y,15,/calendar /drills /evidence
+drill_plan,ceo_checked_at,date,v0.6,경영책임자 확인일,7%,2025-11-20,15,/calendar /drills /evidence
+drill_plan,ceo_check_mode,text,v0.6,확인 방식(직접 확인·보고받음),7%,보고받음,15,/calendar /drills /evidence
+drill_plan,note,text,v0.6,비고,100%,예시 자료,15,/calendar /drills /evidence
+duty_assignment,assign_id,text primary key,v0.1,배정 번호,100%,ASG-000001,4652,/duties/[key]
+duty_assignment,duty_key,text references duty_class(duty_key),v0.1,의무 열쇠(정본),100%,DTY-00001,4652,/duties/[key]
+duty_assignment,asset_id,text references asset(asset_id),v0.1,자산 번호,38%,BR0000-0000002,4652,/duties/[key]
+duty_assignment,scope,"text check (scope in ('기관','유형','자산')",v0.1,적용 범위(자산·유형),100%,유형,4652,/duties/[key]
+duty_assignment,target_code,text,v0.1,관리대상 코드,100%,TG18,4652,/duties/[key]
+duty_assignment,dept_id,text references org_dept(dept_id),v0.1,부서 번호,100%,D09,4652,/duties/[key]
+duty_assignment,owner_staff_id,text references staff(staff_id),v0.1,정담당,92%,SD09-1,4652,/duties/[key]
+duty_assignment,deputy_staff_id,text references staff(staff_id),v0.1,부담당,92%,SD09-2,4652,/duties/[key]
+duty_assignment,applicability,"text check (applicability in ('해당','비해당','확인필요')",v0.1,해당 여부,100%,확인필요,4652,/duties/[key]
+duty_assignment,applicability_note,text,v0.1,해당 여부 메모,42%,조건부 의무 — 보유·해당 여부 확인 필요,4652,/duties/[key]
+duty_assignment,cycle,text,v0.1,주기,100%,반기 1회,4652,/duties/[key]
+duty_assignment,cycle_days,int,v0.1,주기(일),100%,180,4652,/duties/[key]
+duty_assignment,decided_by,text,v0.1,정한 사람,0%,,4652,/duties/[key]
+duty_assignment,decided_at,timestamptz,v0.1,정한 날짜,0%,,4652,/duties/[key]
+duty_assignment,badge,text,v0.1,화면 표시(배지),63%,자산 대장 없음 — 보유 확인 필요,4652,/duties/[key]
+duty_assignment,created_at,timestamptz default now(),v0.1,만든 일시,,,,/duties/[key]
+duty_assignment,updated_at,timestamptz default now(),v0.1,고친 일시,,,,/duties/[key]
+duty_assignment,plan_input_type,text,v0.2,계획 입력 유형(DATE_YM 연-월 · HALF_YEAR 반기),,,,/duties/[key]
+duty_class,duty_key,text primary key,v0.1,의무 열쇠(정본),100%,DTY-00001,2876,
+duty_class,yongin_mark,text,v0.1,용인시 해당 표시,100%,Y,2876,
+duty_class,area,text,v0.1,재해 구분(I 산업·F 시설교통·M 원료제조물),100%,F,2876,
+duty_class,code36,text,v0.1,중처법 의무조항 36,100%,F01,2876,
+duty_class,code36_name,text,v0.1,의무조항 이름,100%,인력배치,2876,
+duty_class,task_name,text,v0.1,세부 이행업무,100%,고압가스안전관리기준통합고시 (조 번호 없는 본문),2876,
+duty_class,target_code,text,v0.1,관리대상 코드,100%,TG18,2876,
+duty_class,target_name,text,v0.1,관리대상 이름,100%,가스(충전소·고압가스),2876,
+duty_class,impl_type,text,v0.1,이행 유형 T01~T10,100%,T04,2876,
+duty_class,impl_type_name,text,v0.1,이행 유형 이름,100%,점검·검사·진단·측정,2876,
+duty_class,law_group,text,v0.1,법령 그룹,100%,LF05,2876,
+duty_class,law_group_name,text,v0.1,법령 그룹 이름,100%,전기·가스·에너지,2876,
+duty_class,law,text,v0.1,근거 법령,100%,고압가스 안전관리법,2876,
+duty_class,doc,text,v0.1,문서,100%,고압가스안전관리기준통합고시,2876,
+duty_class,layer,text,v0.1,법령 계층(법률·대통령령·부령·고시),100%,고시,2876,
+duty_class,unit_label_ko,text,v0.1,조문(우리말 표기),100%,(조 번호 없는 본문)제3항제1호타목,2876,
+duty_class,article_title,text,v0.1,조 제목,100%,a901/p3/n1/mta/s0-2,2876,
+duty_class,duty_name,text,v0.1,의무 이름,75%,고압가스안전관리기준통합고시 — 안전성평가기법 선정 심사,2876,
+duty_class,verdict,text,v0.1,판정,100%,obligation,2876,
+duty_class,duty_subject,text,v0.1,수범주체,65%,요청을 받은 관계기관의 장,2876,
+duty_class,cycle_text,text,v0.1,주기(원문),20%,축척: 1/400,2876,
+duty_class,assign_basis,text,v0.1,배정 근거,100%,규칙 R14 — 인력 선임·배치,2876,
+duty_class,evidence_kind,text,v0.1,증빙 종류,100%,"조직도, 업무분장",2876,
+duty_class,badge,text,v0.1,화면 표시(배지),82%,자산 대장 없음 — 보유 확인 필요,2876,
+duty_class,why,text,v0.1,왜 이 의무인가,100%,본문 수범자가 관리주체·지자체장 계열 1항목,2876,
+duty_class,source_text,text,v0.1,조문 원문,97%,② 대책본부의 장은 테러사건에 신속히 대응하기 위하여 필요한 ,2876,
+duty_class,law_id,text,v0.1,법령 번호(정본),88%,LAW-KR-000013,2876,
+duty_class,doc_id,text,v0.1,문서 번호(정본),88%,DOC-003932,2876,
+duty_class,unit_id,text,v0.1,조항호목 번호(정본),60%,UNIT-0327071,2876,
+duty_class,schedule_id,text,v0.1,별표·서식 번호(정본),40%,SCH-0012303,2876,
+duty_class,obl_id,text,v0.1,의무 번호(정본),7%,OBL-0008229,2876,
+duty_class,review_status,text default,v0.1,검수 상태,100%,pending,2876,
+duty_class,sapa_clause,text,v0.2,확보의무 대분류,,,,
+duty_class,sapa_clause_name,text,v0.2,확보의무 이름,,,,
+eval_criteria,criteria_id,text primary key,v0.7,평가 기준 번호,100%,C01,21,/system /system/record
+eval_criteria,target_role,text,v0.7,대상 직위,100%,안전보건관리책임자,21,/system /system/record
+eval_criteria,item_no,int,v0.7,항목 순번,100%,1,21,/system /system/record
+eval_criteria,item,text,v0.7,평가 항목(법정 업무),100%,사업장의 산업재해 예방계획 수립,21,/system /system/record
+eval_criteria,points,int,v0.7,배점(기관이 정함),100%,11,21,/system /system/record
+eval_criteria,law_basis,text,v0.7,근거 조문,100%,산업안전보건법 제15조제1항 제1호,21,/system /system/record
+eval_criteria,active,text,v0.7,사용 여부 Y/N,100%,Y,21,/system /system/record
+eval_criteria,note,text,v0.7,비고,100%,예시 자료(시연용) · 배점은 기관이 정함,21,/system /system/record
+evidence,evidence_id,text primary key,v0.3,증빙 번호,100%,EVD-000001,1264,/ /actions /api/export /budget /contracts /duties/[key] /evidence /exec /inspections /m /recurrence /review /scenario /system
+evidence,task_id,text references compliance_task(task_id),v0.3,과제 번호,100%,TSK-000001,1264,/ /actions /api/export /budget /contracts /duties/[key] /evidence /exec /inspections /m /recurrence /review /scenario /system
+evidence,evidence_kind,text,v0.3,증빙 종류,100%,임명·선임 문서,1264,/ /actions /api/export /budget /contracts /duties/[key] /evidence /exec /inspections /m /recurrence /review /scenario /system
+evidence,file_name,text,v0.3,파일 이름,100%,인력배치 선임 통보서.pdf,1264,/ /actions /api/export /budget /contracts /duties/[key] /evidence /exec /inspections /m /recurrence /review /scenario /system
+evidence,file_url,text,v0.3,파일 주소,0%,,1264,/ /actions /api/export /budget /contracts /duties/[key] /evidence /exec /inspections /m /recurrence /review /scenario /system
+evidence,form_id,text references form_template(form_id),v0.3,법정 서식 번호,29%,SCH-0005304,1264,/ /actions /api/export /budget /contracts /duties/[key] /evidence /exec /inspections /m /recurrence /review /scenario /system
+evidence,uploaded_by,text references staff(staff_id),v0.3,올린 사람,100%,SD13-1,1264,/ /actions /api/export /budget /contracts /duties/[key] /evidence /exec /inspections /m /recurrence /review /scenario /system
+evidence,uploaded_at,timestamptz default now(),v0.3,올린 날짜,100%,2026-07-27,1264,/ /actions /api/export /budget /contracts /duties/[key] /evidence /exec /inspections /m /recurrence /review /scenario /system
+evidence,note,text,v0.3,비고,100%,예시 데이터(시연용),1264,/ /actions /api/export /budget /contracts /duties/[key] /evidence /exec /inspections /m /recurrence /review /scenario /system
+evidence,file_size,bigint,v0.2,파일 크기(바이트),,,,/ /actions /api/export /budget /contracts /duties/[key] /evidence /exec /inspections /m /recurrence /review /scenario /system
+evidence,mime_type,text,v0.2,파일 형식(MIME),,,,/ /actions /api/export /budget /contracts /duties/[key] /evidence /exec /inspections /m /recurrence /review /scenario /system
+evidence,approval_status,text,v0.2,결재 상태(작성중·제출·승인·반려),,,,/ /actions /api/export /budget /contracts /duties/[key] /evidence /exec /inspections /m /recurrence /review /scenario /system
+evidence,created_by,text,v0.2,만든 사람,,,,/ /actions /api/export /budget /contracts /duties/[key] /evidence /exec /inspections /m /recurrence /review /scenario /system
+evidence,submitted_at,timestamptz,v0.2,제출 일시,,,,/ /actions /api/export /budget /contracts /duties/[key] /evidence /exec /inspections /m /recurrence /review /scenario /system
+evidence,submitted_by,text,v0.2,제출한 사람,,,,/ /actions /api/export /budget /contracts /duties/[key] /evidence /exec /inspections /m /recurrence /review /scenario /system
+evidence,approved_at,timestamptz,v0.2,승인 일시,,,,/ /actions /api/export /budget /contracts /duties/[key] /evidence /exec /inspections /m /recurrence /review /scenario /system
+evidence,approved_by,text,v0.2,승인한 사람,,,,/ /actions /api/export /budget /contracts /duties/[key] /evidence /exec /inspections /m /recurrence /review /scenario /system
+evidence,rejected_at,timestamptz,v0.2,반려 일시,,,,/ /actions /api/export /budget /contracts /duties/[key] /evidence /exec /inspections /m /recurrence /review /scenario /system
+evidence,reject_reason,text,v0.2,반려 사유,,,,/ /actions /api/export /budget /contracts /duties/[key] /evidence /exec /inspections /m /recurrence /review /scenario /system
+evidence,created_at,timestamptz,v0.2,만든 일시,,,,/ /actions /api/export /budget /contracts /duties/[key] /evidence /exec /inspections /m /recurrence /review /scenario /system
+evidence,updated_at,timestamptz,v0.2,고친 일시,,,,/ /actions /api/export /budget /contracts /duties/[key] /evidence /exec /inspections /m /recurrence /review /scenario /system
+evidence,entered_in_demo,boolean,v0.3,시연 중 입력분 표시,,,,/ /actions /api/export /budget /contracts /duties/[key] /evidence /exec /inspections /m /recurrence /review /scenario /system
+evidence,file_type,text,v0.7,올린 파일 형식,,,,/ /actions /api/export /budget /contracts /duties/[key] /evidence /exec /inspections /m /recurrence /review /scenario /system
+form_template,form_id,text primary key,v0.1,법정 서식 번호,100%,SCH-0000604,131,
+form_template,title,text,v0.1,제목,100%,보험금액(제27조제3항 관련),131,
+form_template,doc_id,text,v0.1,문서 번호(정본),100%,DOC-000019,131,
+form_template,law_id,text,v0.1,법령 번호(정본),100%,LAW-KR-000007,131,
+form_template,schedule_kind,text,v0.1,별표·서식 구분,100%,table,131,
+form_template,schedule_no,text,v0.1,별표·서식 번호,100%,6,131,
+form_template,source,text,v0.1,출처(FMS 등),100%,정본 별표·서식,131,
+form_template,file_html,text,v0.1,서식 HTML,0%,,131,
+form_template,file_docx,text,v0.1,서식 DOCX,0%,,131,
+form_template,canon_release,text,v0.1,정본 발행판,100%,R-20260920-08,131,
+hazard_code,hazard_code,text primary key,v0.5,유해·위험요인 코드(18항목),100%,HZ01,18,/contracts
+hazard_code,hazard_name,text,v0.5,유해·위험요인 이름,100%,추락,18,/contracts
+hazard_code,sort_no,int,v0.5,정렬 순서,100%,1,18,/contracts
+hazard_code,note,text,v0.5,비고,100%,도급 작업 유해·위험요인 체크 항목,18,/contracts
+hazard_report,hz_id,text primary key,v0.6,신고 번호,100%,HZR-0001,40,/calendar /evidence /hazards
+hazard_report,received_at,timestamptz,v0.6,접수일,100%,2026-03-04 09:20,40,/calendar /evidence /hazards
+hazard_report,channel,text,v0.6,접수 경로,100%,상시점검,40,/calendar /evidence /hazards
+hazard_report,channel_detail,text,v0.6,세부 경로(안전신문고·120 등),38%,응답소,40,/calendar /evidence /hazards
+hazard_report,reporter,text,v0.6,신고한 사람,100%,이민준 주무관,40,/calendar /evidence /hazards
+hazard_report,received_by,text,v0.6,접수한 사람,100%,SD09-1,40,/calendar /evidence /hazards
+hazard_report,asset_id,text,v0.6,자산 번호,100%,AR2005-0002918,40,/calendar /evidence /hazards
+hazard_report,asset_name,text,v0.6,자산 이름,100%,용인시문화복지행정타운본청사,40,/calendar /evidence /hazards
+hazard_report,asset_gbn,text,v0.6,시설 구분,100%,건축물,40,/calendar /evidence /hazards
+hazard_report,asset_class,text,v0.6,종별(1·2·3종),100%,2종,40,/calendar /evidence /hazards
+hazard_report,dept_id,text,v0.6,부서 번호,100%,D09,40,/calendar /evidence /hazards
+hazard_report,location,text,v0.6,위치,100%,본청사 1층 민원실 출입구,40,/calendar /evidence /hazards
+hazard_report,description,text,v0.6,위험요인 설명,100%,우천 시 출입구 바닥 대리석에 물기가 고여 미끄러움,40,/calendar /evidence /hazards
+hazard_report,code_group,text,v0.6,유해·위험요인 대분류(이용자 안전·시설물 안전),100%,이용자 안전,40,/calendar /evidence /hazards
+hazard_report,code,text,v0.6,유해·위험요인 분류 코드,100%,1 물리적,40,/calendar /evidence /hazards
+hazard_report,accident_type,text,v0.6,사고 유형(넘어짐·부딪힘 등),100%,넘어짐,40,/calendar /evidence /hazards
+hazard_report,possible_accident,text,v0.6,예상되는 사고,100%,출입 시민 미끄러져 넘어짐,40,/calendar /evidence /hazards
+hazard_report,photo_wide,text,v0.6,전경 사진 주소,0%,,40,/calendar /evidence /hazards
+hazard_report,photo_close,text,v0.6,근접 사진 주소,0%,,40,/calendar /evidence /hazards
+hazard_report,protect_action,text,v0.6,피해방지조치(대피·접근차단·통제),78%,미끄럼 주의 표지·흡수 매트 설치,40,/calendar /evidence /hazards
+hazard_report,protect_at,timestamptz,v0.6,피해방지조치 일시,78%,2026-03-04 10:20,40,/calendar /evidence /hazards
+hazard_report,protect_by,text,v0.6,피해방지조치한 사람,78%,SD09-1,40,/calendar /evidence /hazards
+hazard_report,severity,text,v0.6,1차 판단(경미·심각),88%,경미,40,/calendar /evidence /hazards
+hazard_report,judged_by,text,v0.6,판단한 사람,88%,SD02-2,40,/calendar /evidence /hazards
+hazard_report,judged_at,timestamptz,v0.6,판단 일시,88%,2026-03-04 12:20,40,/calendar /evidence /hazards
+hazard_report,judge_memo,text,v0.6,판단 메모,88%,현장 즉시 조치 가능,40,/calendar /evidence /hazards
+hazard_report,minor_action,text,v0.6,경미 건 즉시 조치 내용,68%,미끄럼 방지 매트 교체·우산 비닐 비치,40,/calendar /evidence /hazards
+hazard_report,closed_at,date,v0.6,종결일,68%,2026-03-07,40,/calendar /evidence /hazards
+hazard_report,closed_by,text,v0.6,종결한 사람,68%,SD09-1,40,/calendar /evidence /hazards
+hazard_report,notified_reporter,text,v0.6,신고자 결과 통보 Y/N,25%,Y,40,/calendar /evidence /hazards
+hazard_report,notified_at,date,v0.6,신고자 통보일,25%,2026-03-16,40,/calendar /evidence /hazards
+hazard_report,ceo_reported_at,timestamptz,v0.6,경영책임자 보고 일시,15%,2026-02-10 13:30,40,/calendar /evidence /hazards
+hazard_report,ceo_report_mode,text,v0.6,보고 방식(서면·구두 선보고 후 서면),15%,구두 선보고 후 서면,40,/calendar /evidence /hazards
+hazard_report,ceo_reported_by,text,v0.6,보고한 사람,15%,SM01-1,40,/calendar /evidence /hazards
+hazard_report,ceo_instruction,text,v0.6,경영책임자 지시,15%,"긴급안전점검 실시, 결과에 따라 보수·보강 계획 수립",40,/calendar /evidence /hazards
+hazard_report,insp_at,date,v0.6,긴급안전점검일,12%,2026-02-20,40,/calendar /evidence /hazards
+hazard_report,insp_by,text,v0.6,긴급안전점검한 사람,12%,SD03-1,40,/calendar /evidence /hazards
+hazard_report,insp_result,text,v0.6,긴급안전점검 결과,12%,"배부름 12mm, 균열폭 최대 4mm — 긴급 보수·보강 필요",40,/calendar /evidence /hazards
+hazard_report,order_types,text,v0.6,개선 지시 종류(이용제한·보수·보강·정밀안전진단),12%,보수·보강 · 이용제한(하부 보도),40,/calendar /evidence /hazards
+hazard_report,order_at,date,v0.6,개선 지시일,12%,2026-02-21,40,/calendar /evidence /hazards
+hazard_report,order_memo,text,v0.6,개선 지시 메모,12%,"긴급안전점검 실시, 결과에 따라 보수·보강 계획 수립",40,/calendar /evidence /hazards
+hazard_report,fsam_applies,text,v0.6,시설물안전법 제24조 기한 적용 Y/N,12%,Y,40,/calendar /evidence /hazards
+hazard_report,basis_date,date,v0.6,기한 기준일(조치명령·통보를 받은 날),12%,2026-03-05,40,/calendar /evidence /hazards
+hazard_report,fix_items,text,v0.6,보수·보강 계획(항목~물량~비용~기간),10%,배수공 준설·추가 천공~42개소~1800~2026-04 | 균,40,/calendar /evidence /hazards
+hazard_report,fix_budget,text,v0.6,보수·보강 예산 확보 상태,10%,확보(재해예방 예비비),40,/calendar /evidence /hazards
+hazard_report,fix_started_at,date,v0.6,보수·보강 착수일,5%,2026-04-01,40,/calendar /evidence /hazards
+hazard_report,fix_done_at,date,v0.6,보수·보강 완료일,5%,2026-08-28,40,/calendar /evidence /hazards
+hazard_report,done_at,date,v0.6,처리 완료일,72%,2026-03-07,40,/calendar /evidence /hazards
+hazard_report,note,text,v0.6,비고,100%,예시 자료,40,/calendar /evidence /hazards
+hazard_step,step_id,text primary key,v0.6,처리 기록 번호,100%,HZS-0001,167,/hazards
+hazard_step,hz_id,text,v0.6,신고 번호,100%,HZR-0001,167,/hazards
+hazard_step,step,text,v0.6,처리 단계(접수·피해방지조치·1차 판단 …),100%,접수,167,/hazards
+hazard_step,at,timestamptz,v0.6,처리 일시,100%,2026-03-04 09:20,167,/hazards
+hazard_step,by,text,v0.6,처리한 사람,100%,SD09-1,167,/hazards
+hazard_step,memo,text,v0.6,처리 메모,99%,상시점검,167,/hazards
+hazard_step,note,text,v0.6,비고,100%,예시 자료,167,/hazards
+incident,incident_id,text primary key,v0.2,사고 번호,100%,INC-001,10,/evidence /recurrence
+incident,occurred_at,date,v0.2,발생 일시,100%,2026-01-23,10,/evidence /recurrence
+incident,disaster_type,text,v0.2,재해 구분,100%,중대산업재해,10,/evidence /recurrence
+incident,asset_id,text references asset(asset_id),v0.2,자산 번호,80%,AR1967-0000142,10,/evidence /recurrence
+incident,dept_id,text references org_dept(dept_id),v0.2,부서 번호,100%,D01,10,/evidence /recurrence
+incident,summary,text,v0.2,개요,100%,하수처리시설 정비 중 추락(가상),10,/evidence /recurrence
+incident,cause,text,v0.2,원인,80%,안전난간 미설치·안전대 미착용,10,/evidence /recurrence
+incident,casualties,text,v0.2,인명 피해,100%,부상 1명,10,/evidence /recurrence
+incident,recurrence_plan,text,v0.2,재발방지 대책,70%,난간 전수 점검·작업 전 위험성평가 의무화,10,/evidence /recurrence
+incident,plan_due,date,v0.2,대책 기한,70%,2026-03-04,10,/evidence /recurrence
+incident,plan_done_at,date,v0.2,대책 완료일,40%,2026-03-14,10,/evidence /recurrence
+incident,note,text,v0.2,비고,100%,예시 데이터(시연용) · 예시 자료(시연용),10,/evidence /recurrence
+incident,event_class,text,v0.6,구분(산업재해·시민재해·아차사고),100%,산업재해,10,/evidence /recurrence
+incident,event_area,text,v0.6,피해 대상(산업·시민),100%,산업,10,/evidence /recurrence
+incident,serious,text,v0.6,중대재해 해당 여부(해당·해당 안 됨·확인 필요),100%,확인 필요,10,/evidence /recurrence
+incident,accident_type,text,v0.6,사고 유형(추락·끼임 등),100%,추락,10,/evidence /recurrence
+incident,place,text,v0.6,발생 장소,80%,슬러지 탈수기실,10,/evidence /recurrence
+incident,basis_clause,text,v0.6,적용 조문(법 제4조제1항제2호 등),100%,법 제4조제1항제2호,10,/evidence /recurrence
+incident,reported_by,text,v0.6,등록한 사람,100%,SD01-1,10,/evidence /recurrence
+incident,owner_staff_id,text,v0.6,정담당,100%,SD01-1,10,/evidence /recurrence
+incident,cause_due,date,v0.6,원인 조사 기한,100%,2026-01-30,10,/evidence /recurrence
+incident,investigated_at,date,v0.6,원인 조사일,80%,2026-01-29,10,/evidence /recurrence
+incident,investigated_by,text,v0.6,원인 조사한 사람,80%,SD01-1,10,/evidence /recurrence
+incident,cause_evidence,text,v0.6,조사 기록(파일 이름),70%,사고조사보고서_INC-001.pdf,10,/evidence /recurrence
+incident,plan_set_due,date,v0.6,대책 수립 기한,80%,2026-02-13,10,/evidence /recurrence
+incident,plan_set_at,date,v0.6,대책 수립일,70%,2026-02-10,10,/evidence /recurrence
+incident,plan_set_by,text,v0.6,대책 수립한 사람,70%,SM01-1,10,/evidence /recurrence
+incident,plan_evidence,text,v0.6,대책 문서(파일 이름),60%,재발방지대책_결재문서_INC-001.pdf,10,/evidence /recurrence
+incident,done_note,text,v0.6,이행 내용,40%,안전난간 설치 완료 · 작업 전 위험성평가 절차 시행,10,/evidence /recurrence
+incident,done_evidence,text,v0.6,이행 증빙(파일 이름),40%,안전난간_보수_사진대지.pdf,10,/evidence /recurrence
+incident,done_by,text,v0.6,이행한 사람,40%,SD01-2,10,/evidence /recurrence
+incident,effect_due,date,v0.6,효과 확인 예정일,40%,2026-06-14,10,/evidence /recurrence
+incident,effect_checked_at,date,v0.6,효과 확인일,30%,2026-06-10,10,/evidence /recurrence
+incident,effect_checked_by,text,v0.6,효과 확인한 사람,30%,SM01-1,10,/evidence /recurrence
+incident,effect_result,text,v0.6,효과 판단(유효·재검토 필요),30%,유효,10,/evidence /recurrence
+incident,effect_note,text,v0.6,효과 판단 근거,30%,3개월간 같은 작업에서 추락 위험 지적 0건,10,/evidence /recurrence
+incident,effect_evidence,text,v0.6,효과 확인 증빙(파일 이름),20%,효과확인_현장점검표_202606.pdf,10,/evidence /recurrence
+incident,related_order_id,text,v0.6,관련 명령 번호,50%,ORD-001,10,/evidence /recurrence
+incident,check_note,text,v0.6,옮겨 온 행의 확인 필요 사항,20%,시설 번호(고기초등학교 교사동)와 사고 설명(하수처리시설)이 ,10,/evidence /recurrence
+incident,history,text,v0.6,효과 확인 이력(「 | 」로 이어 적음 · 화면이 씀),,,,/evidence /recurrence
+incident,reopen_count,int,v0.6,대책 수립으로 되돌린 횟수(화면이 씀),,,,/evidence /recurrence
+incident_nil_check,nil_id,text primary key,v0.6,확인 번호,100%,NIL-001,14,/recurrence
+incident_nil_check,period,text,v0.6,반기(2026-H1 등),100%,2026-H1,14,/recurrence
+incident_nil_check,dept_id,text,v0.6,부서 번호,100%,D03,14,/recurrence
+incident_nil_check,confirmed_by,text,v0.6,확인한 사람,100%,SD03-1,14,/recurrence
+incident_nil_check,confirmed_at,date,v0.6,확인일,100%,2026-07-03,14,/recurrence
+incident_nil_check,memo,text,v0.6,확인 메모,100%,확인 시점까지 부서 내 재해 발생 없음,14,/recurrence
+incident_nil_check,note,text,v0.6,비고,100%,예시 자료(시연용),14,/recurrence
+incident_report,report_id,text primary key,v0.8,보고 번호(IRP-…),100%,IRP-001,9,/recurrence
+incident_report,incident_id,text,v0.8,사고 번호,100%,INC-005,9,/recurrence
+incident_report,report_stage,text,v0.8,단계: 최초보고 · 직후보고 · 수시보고,100%,최초보고,9,/recurrence
+incident_report,seq,text,v0.8,수시보고 차수,33%,1,9,/recurrence
+incident_report,reported_at,text,v0.8,보고 시각(YYYY-MM-DD HH:MM),100%,2026-07-22 22:15,9,/recurrence
+incident_report,reporter_staff_id,text,v0.8,보고자,100%,SD03-1,9,/recurrence
+incident_report,recipients,text,v0.8,수신(경영책임자 · 총괄 · 관계 행정기관),100%,경영책임자 · 총괄,9,/recurrence
+incident_report,agency_name,text,v0.8,관계 행정기관 이름,22%,경기도 재난안전상황실,9,/recurrence
+incident_report,channel,text,v0.8,접수 경로,100%,전화,9,/recurrence
+incident_report,overview,text,v0.8,개요(언제·어디서·무엇이·어떻게),100%,"07-22 21:35경 청명터널 상행 조명등 1기 낙하, 주행",9,/recurrence
+incident_report,damage,text,v0.8,피해(인명·기타),67%,인명 피해 없음 · 차량 1대 파손,9,/recurrence
+incident_report,rescue,text,v0.8,긴급구조,33%,구호 대상 없음,9,/recurrence
+incident_report,recovery,text,v0.8,수습(조치·동원 인력·장비),67%,상행 2차로 차단·위험표지,9,/recurrence
+incident_report,support,text,v0.8,지원·협조,11%,112 교통 통제 협조,9,/recurrence
+incident_report,next_plan,text,v0.8,향후 대책,56%,상행 전 구간 조명 고정부 긴급 점검(야간),9,/recurrence
+incident_report,evidence_name,text,v0.8,증빙 이름,33%,상황보고_2보_청명터널.hwp,9,/recurrence
+incident_report,evidence_url,text,v0.8,올린 파일 주소,0%,,9,/recurrence
+incident_report,ceo_ack_at,text,v0.8,경영책임자 받은 시각(최초보고),22%,2026-07-22 22:20,9,/recurrence
+incident_report,ceo_ack_by,text,v0.8,받은 사람(CEO-1),22%,CEO-1,9,/recurrence
+incident_report,ceo_ack_proxy,text,v0.8,총괄 대리 기록 Y,11%,Y,9,/recurrence
+incident_report,ceo_ack_recorded_by,text,v0.8,받음을 적은 사람,22%,CEO-1,9,/recurrence
+incident_report,recorded_by,text,v0.8,기록한 사람,100%,SD03-1,9,/recurrence
+incident_report,recorded_at,text,v0.8,기록한 시각,100%,2026-07-22 22:15,9,/recurrence
+incident_report,note,text,v0.8,비고,100%,예시 자료,9,/recurrence
+incident_response,resp_id,text primary key,v0.8,대응 기록 번호(IRS-…),100%,IRS-001,28,/recurrence
+incident_response,incident_id,text,v0.8,사고 번호,100%,INC-005,28,/recurrence
+incident_response,kind,text,v0.8,종류: recognize 인지 · call 112·119 · rescue 긴급구호 · inspect 긴급안전점검 · sign 위험표지 · restrict 이용 제한·통제(산업은 작업 중지·대피) · notify 주민 알림 · agency 관계 행정기관 신고 · press 언론 창구 · family 피해자·유가족 연락 · ceo_prevent·ceo_cause 경영책임자 지시,100%,recognize,28,/recurrence
+incident_response,status,text,v0.8,이행 상태,100%,완료,28,/recurrence
+incident_response,done_at,text,v0.8,이행 완료일,100%,2026-07-22 21:40,28,/recurrence
+incident_response,done_by,text,v0.8,이행한 사람,100%,SD03-2,28,/recurrence
+incident_response,target_org,text,v0.8,신고한 기관·대상(지시면 받는 사람 staff_id),43%,112,28,/recurrence
+incident_response,detail,text,v0.8,내용(해당 없음이면 이유),100%,"도로 순찰 무전 — 터널 상행 조명등 1기 낙하, 주행 차량 ",28,/recurrence
+incident_response,evidence_name,text,v0.8,증빙 이름,18%,위험표지_설치사진_0722.jpg,28,/recurrence
+incident_response,evidence_url,text,v0.8,올린 파일 주소,0%,,28,/recurrence
+incident_response,proxy,text,v0.8,총괄이 대신 적은 경영책임자 지시 Y,4%,Y,28,/recurrence
+incident_response,recorded_by,text,v0.8,기록한 사람,100%,SD03-2,28,/recurrence
+incident_response,recorded_at,text,v0.8,기록한 시각,100%,2026-07-22 21:40,28,/recurrence
+incident_response,note,text,v0.8,비고,100%,예시 자료,28,/recurrence
+incident_response_setting,set_id,text primary key,v0.8,설정 번호(IRT-…),,,,/recurrence
+incident_response_setting,first_report_limit_min,integer,v0.8,"최초보고 기한(분) — 안내서는 「즉시」, 시간은 기관이 정함",,,,/recurrence
+incident_response_setting,set_at,text,v0.8,정한 시각,,,,/recurrence
+incident_response_setting,set_by,text,v0.8,정한 사람,,,,/recurrence
+incident_response_setting,memo,text,v0.8,정한 근거,,,,/recurrence
+incident_response_setting,note,text,v0.8,비고,,,,/recurrence
+inspection,insp_id,text primary key,v0.3,점검 번호,100%,INS-000001,212,/review
+inspection,task_id,text references compliance_task(task_id),v0.3,과제 번호,100%,TSK-000001,212,/review
+inspection,inspector_staff_id,text references staff(staff_id),v0.3,점검자,100%,SM02-2,212,/review
+inspection,insp_date,date,v0.3,점검일,100%,2026-08-04,212,/review
+inspection,result,"text check (result in ('적합','부적합','보류')",v0.3,판정 결과,100%,적합,212,/review
+inspection,finding,text,v0.3,점검 의견·지적사항,20%,서식 미사용 — 법정 서식으로 다시 제출,212,/review
+inspection,note,text,v0.3,비고,100%,예시 데이터(시연용),212,/review
+inspection,batch_id,text,v0.2,점검 회차 번호,,,,/review
+inspection,approval_status,text,v0.2,결재 상태(작성중·제출·승인·반려),,,,/review
+inspection,created_by,text,v0.2,만든 사람,,,,/review
+inspection,submitted_at,timestamptz,v0.2,제출 일시,,,,/review
+inspection,submitted_by,text,v0.2,제출한 사람,,,,/review
+inspection,approved_at,timestamptz,v0.2,승인 일시,,,,/review
+inspection,approved_by,text,v0.2,승인한 사람,,,,/review
+inspection,rejected_at,timestamptz,v0.2,반려 일시,,,,/review
+inspection,reject_reason,text,v0.2,반려 사유,,,,/review
+inspection,created_at,timestamptz,v0.2,만든 일시,,,,/review
+inspection,updated_at,timestamptz,v0.2,고친 일시,,,,/review
+inspection,round_no,int,v0.5,몇 번째 판정인가(재점검 차수),,,,/review
+inspection,action_need,text,v0.7,판정 때 고른 필요한 조치(화면이 씀),,,,/review
+inspection_batch,batch_id,text primary key,v0.2,점검 회차 번호,100%,BAT-001,3,/inspections
+inspection_batch,title,text,v0.2,제목,100%,2025년 하반기 안전보건 의무이행 점검,3,/inspections
+inspection_batch,period_year,int,v0.2,연도,100%,2025,3,/inspections
+inspection_batch,half_year,text,v0.2,반기,100%,하반기,3,/inspections
+inspection_batch,scope_dept_id,text references org_dept(dept_id),v0.2,주관 부서,100%,D02,3,/inspections
+inspection_batch,target_dept_ids,text,v0.2,대상 부서,100%,"D01,D02,D03,D04,D05,D09,D13",3,/inspections
+inspection_batch,code36_list,text,v0.2,대상 의무조항,100%,"F01,F03,F04,F07,F11,I06,I12",3,/inspections
+inspection_batch,status,text default,v0.2,이행 상태,100%,결재완료,3,/inspections
+inspection_batch,started_by,text,v0.2,시행한 사람,100%,SD02-1,3,/inspections
+inspection_batch,started_at,timestamptz default now(),v0.2,시행일,100%,2025-11-03,3,/inspections
+inspection_batch,approved_by,text,v0.2,승인한 사람,67%,SD01-1,3,/inspections
+inspection_batch,approved_at,timestamptz,v0.2,승인 일시,,,,/inspections
+inspection_batch,note,text,v0.2,비고,100%,예시 데이터(시연용),3,/inspections
+inspection_batch,requested_by,text,v0.5,결재 상신한 사람,,,,/inspections
+inspection_batch,requested_at,timestamptz,v0.5,결재 상신 일시,,,,/inspections
+inspection_batch,approve_note,text,v0.5,결재 의견,,,,/inspections
+inspection_batch,return_reason,text,v0.5,돌려보낸 사유,,,,/inspections
+inspection_batch,returned_at,timestamptz,v0.5,돌려보낸 일시,,,,/inspections
+inspection_batch,n_total,int,v0.5,상신할 때의 숫자(대상),,,,/inspections
+inspection_batch,n_ok,int,v0.5,상신 때 적합 수,,,,/inspections
+inspection_batch,n_fix,int,v0.5,상신 때 보완필요 수,,,,/inspections
+inspection_batch,n_bad,int,v0.5,상신 때 부적합 수,,,,/inspections
+inspection_batch,n_open,int,v0.5,상신 때 조치 중 수,,,,/inspections
+inspection_batch,n_unsubmitted,int,v0.5,상신 때 미제출 수,,,,/inspections
+inspection_batch,open_reason,text,v0.5,조치 중인 건을 두고 상신한 사유(필수),,,,/inspections
+inspection_batch,open_kind,text,v0.5,상신 사유 유형(예산·인력 조치 필요 · 임시조치 완료 등),,,,/inspections
+inspection_batch,rule_basis,text,v0.7,근거 주기(의무조항 코드로 자동 · 화면이 씀),,,,/inspections
+inspection_batch,insp_method,text,v0.7,점검 방식(직접 점검·위탁 점검 · 화면이 씀),,,,/inspections
+inspection_batch,outsource_org,text,v0.7,위탁 점검 기관(화면이 씀),,,,/inspections
+inspection_batch,report_received_at,date,v0.7,위탁 점검 결과 보고받은 날(화면이 씀),,,,/inspections
+inspection_batch,report_received_by,text,v0.7,보고받은 사람(화면이 씀),,,,/inspections
+inspection_batch,report_recorded_by,text,v0.7,보고받음을 기록한 사람(화면이 씀),,,,/inspections
+inspection_batch,report_proxy,text,v0.7,총괄이 대신 적은 보고 기록 Y(화면이 씀),,,,/inspections
+law_change,change_id,text primary key,v0.2,개정 번호,100%,LCH-001,3,
+law_change,law,text,v0.2,근거 법령,100%,재난 및 안전관리 기본법,3,
+law_change,doc,text,v0.2,문서,100%,재난 및 안전관리 기본법 시행령,3,
+law_change,changed_kind,text,v0.2,개정 구분,100%,일부개정,3,
+law_change,promulgated_at,date,v0.2,공포일,100%,2026-08-11,3,
+law_change,effective_at,date,v0.2,시행일,100%,2026-10-10,3,
+law_change,affected_duty_cnt,int,v0.2,영향 의무 수,100%,162,3,
+law_change,notice_sent_at,timestamptz,v0.2,알림 발송일,0%,,3,
+law_change,note,text,v0.2,비고,100%,예시 데이터(시연용),3,
+material_item,item_id,text primary key,v0.8,품목 번호(MAT-…),100%,MAT-001,6,/system
+material_item,item_name,text,v0.8,품목,100%,수돗물(지방상수도 정수·급수),6,/system
+material_item,dept_id,text,v0.8,부서 번호,100%,D04,6,/system
+material_item,owner_staff_id,text,v0.8,정담당,83%,SD04-1,6,/system
+material_item,acts,text,v0.8,행위: produce·process·enduse·provide 를 「;」로,67%,produce,6,/system
+material_item,byeolpyo5,text,v0.8,별표 5: 호 번호(「;」로 여럿) · N(아님) · 빈칸(확인 필요),0%,,6,/system
+material_item,related_law,text,v0.8,관계 법령,83%,수도법 · 먹는물관리법,6,/system
+material_item,verdict,text,v0.8,판정,100%,확인 필요,6,/system
+material_item,reason,text,v0.8,사유(필수),100%,상수도사업소가 정수해 주민에게 공급한다. 수돗물을 원료·제조물,6,/system
+material_item,basis_ref,text,v0.8,근거(해설서 쪽 또는 「ADOMS 해석(확인 필요)」),100%,ADOMS 해석(확인 필요) — 해설서 95~96쪽(수도법 관,6,/system
+material_item,judged_by,text,v0.8,판단자,17%,SD09-1,6,/system
+material_item,judged_at,date,v0.8,판단일,17%,2026-09-18,6,/system
+material_item,ceo_confirmed_at,date,v0.8,경영책임자 확인일,0%,,6,/system
+material_item,ceo_confirmed_by,text,v0.8,확인한 사람,0%,,6,/system
+material_item,ceo_proxy,text,v0.8,총괄이 대신 적은 확인 Y,0%,,6,/system
+material_item,updated_at,date,v0.8,고친 일시,100%,2026-09-22,6,/system
+material_item,created_by,text,v0.8,만든 사람,100%,SD01-1,6,/system
+material_item,note,text,v0.8,비고,100%,예시 자료(시연용),6,/system
+notification,notif_id,text primary key,v0.3,알림 번호,100%,NTF-000001,338,/actions /training
+notification,to_staff_id,text references staff(staff_id),v0.3,받는 사람,100%,SD03-1,338,/actions /training
+notification,task_id,text references compliance_task(task_id),v0.3,과제 번호,100%,TSK-000003,338,/actions /training
+notification,notif_type,text,v0.3,알림 종류(기한임박·기한초과),100%,기한초과,338,/actions /training
+notification,sent_at,timestamptz default now(),v0.3,보낸 날짜,100%,2026-08-16,338,/actions /training
+notification,read_at,timestamptz,v0.3,읽은 일시,0%,,338,/actions /training
+notification,message,text,v0.3,알림 내용,100%,[기한초과] 안전관리 — 기한 2026-08-11 (41일 경,338,/actions /training
+notification,note,text,v0.3,비고,100%,예시 데이터(시연용),338,/actions /training
+notification,from_staff_id,text,v0.5,보낸 사람,,,,/actions /training
+notification,action_id,text,v0.5,조치 번호,,,,/actions /training
+notification,batch_id,text,v0.5,점검 회차 번호,,,,/actions /training
+order_received,order_id,text primary key,v0.2,명령 번호,100%,ORD-001,19,/calendar /evidence /recurrence
+order_received,received_at,date,v0.2,접수일,100%,2026-04-23,19,/calendar /evidence /recurrence
+order_received,issuer,text,v0.2,발령 기관,100%,고용노동부,19,/calendar /evidence /recurrence
+order_received,law,text,v0.2,근거 법령,100%,산업안전보건법,19,/calendar /evidence /recurrence
+order_received,content,text,v0.2,내용,100%,안전난간 보수 명령,19,/calendar /evidence /recurrence
+order_received,due_date,date,v0.2,기한,89%,2026-05-23,19,/calendar /evidence /recurrence
+order_received,dept_id,text references org_dept(dept_id),v0.2,부서 번호,100%,D01,19,/calendar /evidence /recurrence
+order_received,asset_id,text references asset(asset_id),v0.2,자산 번호,74%,AR1967-0000142,19,/calendar /evidence /recurrence
+order_received,done_at,date,v0.2,이행 완료일,42%,2026-06-22,19,/calendar /evidence /recurrence
+order_received,result,text,v0.2,처리 상태(접수·조치 중·조치 완료·종결),100%,조치 중,19,/calendar /evidence /recurrence
+order_received,evidence_file,text,v0.2,증빙 파일,21%,방호덮개_설치사진.pdf,19,/calendar /evidence /recurrence
+order_received,issuer_kind,text,v0.6,발령기관 구분(중앙행정기관·지방자치단체),100%,중앙행정기관,19,/calendar /evidence /recurrence
+order_received,law_article,text,v0.6,근거 조문,58%,산업안전보건법 제53조제1항,19,/calendar /evidence /recurrence
+order_received,order_no,text,v0.6,문서 번호,68%,근로감독-2026-0715(가상),19,/calendar /evidence /recurrence
+order_received,place,text,v0.6,대상 장소,26%,재활용 선별장,19,/calendar /evidence /recurrence
+order_received,owner_staff_id,text,v0.6,정담당,84%,SD01-1,19,/calendar /evidence /recurrence
+order_received,assigned_at,date,v0.6,담당 지정일,84%,2026-04-24,19,/calendar /evidence /recurrence
+order_received,action_plan,text,v0.6,이행 계획,79%,난간 보수 업체 선정 · 임시 출입통제,19,/calendar /evidence /recurrence
+order_received,started_at,date,v0.6,시행일,79%,2026-04-28,19,/calendar /evidence /recurrence
+order_received,done_note,text,v0.6,이행 내용,42%,정밀안전진단 완료 · 결과보고서 접수,19,/calendar /evidence /recurrence
+order_received,done_by,text,v0.6,이행한 사람,42%,SD02-1,19,/calendar /evidence /recurrence
+order_received,reported_at,date,v0.6,이행 결과 보고일,37%,2026-06-25,19,/calendar /evidence /recurrence
+order_received,report_evidence,text,v0.6,보고 문서(파일 이름),37%,정밀안전진단_결과보고_공문.pdf,19,/calendar /evidence /recurrence
+order_received,closed_at,date,v0.6,종결일,26%,2026-07-10,19,/calendar /evidence /recurrence
+order_received,closed_note,text,v0.6,발령기관 확인 방법,26%,발령기관 이행 확인 공문 접수,19,/calendar /evidence /recurrence
+order_received,extended_due,date,v0.6,연장된 기한,5%,2026-10-10,19,/calendar /evidence /recurrence
+order_received,extend_reason,text,v0.6,연장 근거,5%,유도등 부품 조달 지연 — 기간연장 신청·승인(같은 법 제45,19,/calendar /evidence /recurrence
+order_received,related_incident_id,text,v0.6,관련 사고 번호,26%,INC-001,19,/calendar /evidence /recurrence
+order_received,check_note,text,v0.6,옮겨 온 행의 확인 필요 사항,32%,근거 조문 미기재 · 시설 번호와 내용 확인 필요 — 원 공문,19,/calendar /evidence /recurrence
+order_received,note,text,v0.6,비고,100%,옮겨 온 행 · 예시 자료(시연용),19,/calendar /evidence /recurrence
+order_received,doc_nature,text,v0.7,문서 성격(서면 행정처분·지도·권고·조언),100%,서면 행정처분,19,/calendar /evidence /recurrence
+order_received,order_area,text,v0.7,재해 구분(화면이 씀),,,,/calendar /evidence /recurrence
+order_received,basis_clause,text,v0.7,적용 조문(재해 구분에 따라 · 화면이 씀),,,,/calendar /evidence /recurrence
+org_dept,dept_id,text primary key,v0.1,부서 번호,100%,D01,15,
+org_dept,dept_name,text not null,v0.1,부서 이름,100%,중대재해예방과,15,
+org_dept,dept_role,text,v0.1,부서 역할(총괄·관리·현업),100%,총괄,15,
+org_dept,parent_dept_id,text,v0.1,상위 부서,87%,D01,15,
+risk_assessment,risk_id,text primary key,v0.3,위험성평가 번호,100%,RSK-001,12,/budget /evidence
+risk_assessment,title,text,v0.3,제목,100%,정수장 약품 투입실 위험성평가,12,/budget /evidence
+risk_assessment,dept_id,text references org_dept(dept_id),v0.3,부서 번호,100%,D04,12,/budget /evidence
+risk_assessment,place,text,v0.3,현장,100%,정수장 약품 투입실,12,/budget /evidence
+risk_assessment,method,text,v0.3,평가 방법,100%,체크리스트법,12,/budget /evidence
+risk_assessment,assessed_at,date,v0.3,평가 실시일,100%,2026-03-12,12,/budget /evidence
+risk_assessment,assessor_staff_id,text references staff(staff_id),v0.3,평가자,100%,SD04-1,12,/budget /evidence
+risk_assessment,worker_joined,text,v0.3,종사자 참여 여부,100%,Y,12,/budget /evidence
+risk_assessment,review_cycle,text,v0.3,재검토 주기,100%,연 1회,12,/budget /evidence
+risk_assessment,next_due,date,v0.3,다음 평가 기한,100%,2027-03-12,12,/budget /evidence
+risk_assessment,status,text,v0.3,이행 상태,100%,완료,12,/budget /evidence
+risk_assessment,note,text,v0.3,비고,100%,예시 데이터(시연용),12,/budget /evidence
+risk_assessment,created_at,timestamptz default now(),v0.3,만든 일시,,,,/budget /evidence
+risk_assessment_item,risk_item_id,text primary key,v0.3,위험요인 항목 번호,100%,RSK-001-1,36,/budget
+risk_assessment_item,risk_id,text references risk_assessment(risk_id),v0.3,위험성평가 번호,100%,RSK-001,36,/budget
+risk_assessment_item,hazard_factor,text,v0.3,위험요인,100%,염소 누출,36,/budget
+risk_assessment_item,hazard_kind,text,v0.3,위험 유형,100%,화학,36,/budget
+risk_assessment_item,risk_level,text,v0.3,위험도(높음·보통·낮음),100%,높음,36,/budget
+risk_assessment_item,measure,text,v0.3,조치,100%,누출 감지기·보호구 비치·2인 1조 작업,36,/budget
+risk_assessment_item,measure_due,date,v0.3,조치 기한,100%,2026-04-11,36,/budget
+risk_assessment_item,measure_done_at,date,v0.3,조치 완료일,75%,2026-04-06,36,/budget
+risk_assessment_item,owner_staff_id,text references staff(staff_id),v0.3,정담당,100%,SD04-1,36,/budget
+risk_assessment_item,note,text,v0.3,비고,100%,예시 데이터(시연용),36,/budget
+safety_budget,budget_id,text primary key,v0.2,예산 번호,100%,BUD-0001,77,/budget /evidence
+safety_budget,fiscal_year,int,v0.2,회계연도,100%,2026,77,/budget /evidence
+safety_budget,dept_id,text references org_dept(dept_id),v0.2,부서 번호,100%,D01,77,/budget /evidence
+safety_budget,target_code,text,v0.2,관리대상 코드,0%,,77,/budget /evidence
+safety_budget,budget_kind,text,v0.2,용도,100%,인력,77,/budget /evidence
+safety_budget,planned_amount,bigint,v0.2,편성액,100%,337000000,77,/budget /evidence
+safety_budget,executed_amount,bigint,v0.2,집행액,100%,188720000,77,/budget /evidence
+safety_budget,duty_key,text references duty_class(duty_key),v0.2,의무 열쇠(정본),0%,,77,/budget /evidence
+safety_budget,note,text,v0.2,비고,100%,예시 자료(시연용),77,/budget /evidence
+safety_budget,budget_item,text,v0.6,예산 항목(고정 6행 이름),100%,안전·보건 인력비,77,/budget /evidence
+safety_budget,budget_use,text,v0.6,제4호 용도(가·나·밖),100%,가,77,/budget /evidence
+safety_budget,use_basis,text,v0.6,용도 근거 조문,62%,시행령 제4조제4호가목,77,/budget /evidence
+safety_budget,risk_item_id,text,v0.6,위험요인 항목 번호,8%,RSK-004-1,77,/budget /evidence
+safety_budget,updated_at,date,v0.6,고친 일시,9%,2026-09-01,77,/budget /evidence
+safety_budget,area,text,v0.7,재해 구분(I 산업·F 시설교통·M 원료제조물),,,,/budget /evidence
+safety_manual,manual_id,text primary key,v0.5,절차·매뉴얼 번호,100%,MAN-001,6,/system
+safety_manual,clause_no,text,v0.5,제3·5·7·8·9호,100%,3,6,/system
+safety_manual,title,text,v0.5,제목,100%,위험성평가 실시 규정,6,/system
+safety_manual,covers,text,v0.5,담은 목(가·나·다),100%,절차,6,/system
+safety_manual,missing,text,v0.5,빠진 목,17%,다,6,/system
+safety_manual,enacted_at,date,v0.5,제정일,100%,2023-03-20,6,/system
+safety_manual,revised_at,date,v0.5,개정일,67%,2025-12-15,6,/system
+safety_manual,last_check_at,date,v0.5,반기 1회 점검,100%,2026-06-30,6,/system
+safety_manual,owner_staff_id,text references staff(staff_id),v0.5,정담당,100%,SM02-1,6,/system
+safety_manual,note,text,v0.5,비고,100%,예시 자료(시연용),6,/system
+safety_org_role,role_id,text primary key,v0.5,선임·지정 번호,100%,SOR-001,46,/system /system/record
+safety_org_role,role_item,text,v0.5,선임·지정 7항목(안전보건관리책임자·안전관리자·보건관리자 …),100%,안전보건관리규정,46,/system /system/record
+safety_org_role,scope,text,v0.5,적용 범위(자산·유형),100%,기관,46,/system /system/record
+safety_org_role,dept_id,text references org_dept(dept_id),v0.5,부서 번호,91%,D01,46,/system /system/record
+safety_org_role,designated,text,v0.5,Y/N,100%,Y,46,/system /system/record
+safety_org_role,status,text,v0.5,선임·지정 상태,100%,제정,46,/system /system/record
+safety_org_role,method,text,v0.5,선임 방식(직접·겸직·위탁),91%,직접,46,/system /system/record
+safety_org_role,designated_at,date,v0.5,선임·지정일,91%,2023-04-17,46,/system /system/record
+safety_org_role,law_basis,text,v0.5,산업안전보건법 제15조 등,100%,산업안전보건법 제25조,46,/system /system/record
+safety_org_role,clause_no,text,v0.5,시행령 제4조 몇 호,98%,5,46,/system /system/record
+safety_org_role,staff_id,text references staff(staff_id),v0.5,담당자 번호,63%,SM01-1,46,/system /system/record
+safety_org_role,doc_name,text,v0.5,근거 문서 이름,91%,용인시 안전보건관리규정,46,/system /system/record
+safety_org_role,last_eval_at,date,v0.5,시행령 제4조제5호 반기 평가,0%,,46,/system /system/record
+safety_org_role,note,text,v0.5,비고,100%,예시 자료(시연용),46,/system /system/record
+safety_policy,policy_id,text primary key,v0.5,경영방침·목표 번호,100%,POL-001,3,/system
+safety_policy,clause_no,text,v0.5,시행령 제4조 몇 호,100%,1,3,/system
+safety_policy,policy_kind,text,v0.5,경영방침 · 안전보건 목표 · 부서별 세부 목표,100%,경영방침,3,/system
+safety_policy,title,text,v0.5,제목,100%,용인시 안전보건 경영방침,3,/system
+safety_policy,fiscal_year,text,v0.5,회계연도,67%,2026,3,/system
+safety_policy,summary,text,v0.5,개요,100%,종사자와 시민의 생명·안전을 행정의 최우선 가치로 둔다 · 유,3,/system
+safety_policy,enacted_at,date,v0.5,제정일,100%,2022-03-02,3,/system
+safety_policy,revised_at,date,v0.5,개정일,33%,2026-01-05,3,/system
+safety_policy,posted,text,v0.5,게시 Y/N,100%,Y,3,/system
+safety_policy,posted_where,text,v0.5,게시한 곳,67%,청사 게시판 · 내부 누리집,3,/system
+safety_policy,approver_role,text,v0.5,승인 직위,100%,경영책임자(시장),3,/system
+safety_policy,owner_staff_id,text references staff(staff_id),v0.5,정담당,100%,SM01-1,3,/system
+safety_policy,note,text,v0.5,비고,100%,예시 자료(시연용),3,/system
+staff,staff_id,text primary key,v0.1,담당자 번호,100%,SD01-1,32,/contracts /drills /drills/[id] /duties/[key] /hazards /hazards/[id] /inspections /m /recurrence /risk /settings /system /targets /tasks /training
+staff,display_name,text not null,v0.1,담당자 이름,100%,김민준 주무관,32,/contracts /drills /drills/[id] /duties/[key] /hazards /hazards/[id] /inspections /m /recurrence /risk /settings /system /targets /tasks /training
+staff,dept_id,text references org_dept(dept_id),v0.1,부서 번호,100%,D01,32,/contracts /drills /drills/[id] /duties/[key] /hazards /hazards/[id] /inspections /m /recurrence /risk /settings /system /targets /tasks /training
+staff,duty_role,text,v0.1,역할(정담당·부담당·점검팀장 등),100%,정담당,32,/contracts /drills /drills/[id] /duties/[key] /hazards /hazards/[id] /inspections /m /recurrence /risk /settings /system /targets /tasks /training
+staff,email,text,v0.1,전자우편,100%,d01.main@demo.yongin.go.kr,32,/contracts /drills /drills/[id] /duties/[key] /hazards /hazards/[id] /inspections /m /recurrence /risk /settings /system /targets /tasks /training
+staff,phone,text,v0.1,전화,0%,,32,/contracts /drills /drills/[id] /duties/[key] /hazards /hazards/[id] /inspections /m /recurrence /risk /settings /system /targets /tasks /training
+staff,note,text,v0.3,비고,100%,가상 인물(시연용),32,/contracts /drills /drills/[id] /duties/[key] /hazards /hazards/[id] /inspections /m /recurrence /risk /settings /system /targets /tasks /training
+system_record,record_id,text primary key,v0.7,기록 번호,100%,SYR-001,17,/system /system/record
+system_record,clause_no,text,v0.7,시행령 제4조 몇 호,100%,1,17,/system /system/record
+system_record,mok,text,v0.7,목(가·나·다),59%,가,17,/system /system/record
+system_record,record_kind,text,v0.7,기록 종류(문서 등록·문서 개정·반기 점검·반기 평가·위험성평가 결과 보고 …),100%,문서 개정,17,/system /system/record
+system_record,title,text,v0.7,제목,100%,용인시 안전보건 경영방침 개정,17,/system /system/record
+system_record,target_role,text,v0.7,대상 직위(안전보건관리책임자·관리감독자·안전보건총괄책임자),59%,안전보건관리책임자,17,/system /system/record
+system_record,target_ref,text,v0.7,대상 문서·지정 기록 번호(POL·MAN·SOR),94%,POL-001,17,/system /system/record
+system_record,target_staff_id,text,v0.7,평가 대상자,41%,SD01-1,17,/system /system/record
+system_record,dept_id,text,v0.7,부서 번호,41%,D01,17,/system /system/record
+system_record,done_at,date,v0.7,실시일,100%,2026-01-05,17,/system /system/record
+system_record,half,text,v0.7,반기(2026 상반기 등),100%,2026 상반기,17,/system /system/record
+system_record,checker_staff_id,text,v0.7,점검·평가한 사람,100%,SM01-1,17,/system /system/record
+system_record,content,text,v0.7,내용,100%,경영방침 3개 문장 중 「종사자 의견을 듣는다」를 더함 · 청,17,/system /system/record
+system_record,action_needed,text,v0.7,필요한 조치,24%,진행 중인 2곳(터널 점검 통로·옥상 방수 보수) 평가를 마치,17,/system /system/record
+system_record,action_done_at,date,v0.7,필요 조치 완료일,0%,,17,/system /system/record
+system_record,covers,text,v0.7,담은 목(제8호 가·나·다),12%,가·나,17,/system /system/record
+system_record,score,int,v0.7,평가 점수(합),47%,83,17,/system /system/record
+system_record,item_scores,text,v0.7,항목별 점수(C01=10;C02=9 …),6%,C01=10;C02=10;C03=9;C04=8;C05=9;C0,17,/system /system/record
+system_record,substitute,text,v0.7,갈음 근거(위험성평가·산업안전보건위원회),12%,위험성평가,17,/system /system/record
+system_record,budget_amount,bigint,v0.7,부여한 예산(원 · 제5호 가목),6%,1000000,17,/system /system/record
+system_record,doc_name,text,v0.7,근거 문서 이름,18%,안전보건관리규정 제9조 · 2026년 안전보건 예산 배정표,17,/system /system/record
+system_record,ceo_reported,text,v0.7,경영책임자 보고받음 Y,88%,Y,17,/system /system/record
+system_record,reported_at,date,v0.7,경영책임자 보고일,88%,2026-01-05,17,/system /system/record
+system_record,report_method,text,v0.7,보고 방식(전자 결재·대면 보고·서면 보고),88%,전자 결재,17,/system /system/record
+system_record,created_by,text,v0.7,만든 사람,100%,SM01-1,17,/system /system/record
+system_record,note,text,v0.7,비고,100%,예시 자료(시연용),17,/system /system/record
+system_record,report_proxy,text,v0.7,총괄이 대신 적은 보고 기록 Y(화면이 씀),,,,/system /system/record
+task_approval_patch,task_id,(패치),v0.2,과제 번호,100%,TSK-000001,2717,compliance_task 를 갱신하는 패치 파일(테이블 아님)
+task_approval_patch,approval_status,(패치),v0.2,결재 상태(작성중·제출·승인·반려),100%,승인,2717,compliance_task 를 갱신하는 패치 파일(테이블 아님)
+task_approval_patch,created_by,(패치),v0.2,만든 사람,100%,SD13-1,2717,compliance_task 를 갱신하는 패치 파일(테이블 아님)
+task_approval_patch,submitted_at,(패치),v0.2,제출 일시,63%,2026-08-02,2717,compliance_task 를 갱신하는 패치 파일(테이블 아님)
+task_approval_patch,submitted_by,(패치),v0.2,제출한 사람,63%,SD03-1,2717,compliance_task 를 갱신하는 패치 파일(테이블 아님)
+task_approval_patch,approved_at,(패치),v0.2,승인 일시,6%,2026-08-04,2717,compliance_task 를 갱신하는 패치 파일(테이블 아님)
+task_approval_patch,approved_by,(패치),v0.2,승인한 사람,6%,SM02-2,2717,compliance_task 를 갱신하는 패치 파일(테이블 아님)
+task_approval_patch,rejected_at,(패치),v0.2,반려 일시,2%,2026-09-19,2717,compliance_task 를 갱신하는 패치 파일(테이블 아님)
+task_approval_patch,reject_reason,(패치),v0.2,반려 사유,14%,증빙 사진에 일자 표기가 없음,2717,compliance_task 를 갱신하는 패치 파일(테이블 아님)
+task_approval_patch,created_at,(패치),v0.2,만든 일시,100%,2026-06-23,2717,compliance_task 를 갱신하는 패치 파일(테이블 아님)
+task_approval_patch,period_year,(패치),v0.2,연도,100%,2026,2717,compliance_task 를 갱신하는 패치 파일(테이블 아님)
+task_approval_patch,half_year,(패치),v0.2,반기,100%,상반기,2717,compliance_task 를 갱신하는 패치 파일(테이블 아님)
+task_approval_patch,plan_date,(패치),v0.2,계획일,100%,2026-08-22,2717,compliance_task 를 갱신하는 패치 파일(테이블 아님)
+task_approval_patch,evidence_cnt,(패치),v0.2,증빙 수,100%,1,2717,compliance_task 를 갱신하는 패치 파일(테이블 아님)
+task_approval_patch,check_result,(패치),v0.2,점검 판정(이행완료·보완필요·미이행),46%,이행완료,2717,compliance_task 를 갱신하는 패치 파일(테이블 아님)
+training_check,check_id,text primary key,v0.7,점검 기록 번호(화면이 씀),,,,/training
+training_check,area,text,v0.7,재해 구분(I 산업·F 시설교통·M 원료제조물),,,,/training
+training_check,period,text,v0.7,점검 기간(반기 또는 연),,,,/training
+training_check,half,text,v0.7,반기,,,,/training
+training_check,checked_at,date,v0.7,점검일,,,,/training
+training_check,checked_by,text,v0.7,점검한 사람,,,,/training
+training_check,method,text,v0.7,점검 방식(직접 점검·점검 결과 보고받음),,,,/training
+training_check,proxy,text,v0.7,총괄이 대신 적은 기록 Y,,,,/training
+training_check,summary,text,v0.7,점검 결과 요약,,,,/training
+training_check,note,text,v0.7,비고,,,,/training
+training_course,course_id,text primary key,v0.6,교육 과정 번호,100%,TC01,13,/calendar /training
+training_course,course_name,text,v0.6,과정명,100%,근로자 정기교육,13,/calendar /training
+training_course,law,text,v0.6,근거 법령,100%,산업안전보건법,13,/calendar /training
+training_course,basis,text,v0.6,근거 조문(법·시행규칙·별표),100%,산업안전보건법 제29조제1항 · 시행규칙 제26조제1항 · 별,13,/calendar /training
+training_course,target,text,v0.6,대상,100%,소속 근로자,13,/calendar /training
+training_course,cycle,text,v0.6,주기,100%,반기,13,/calendar /training
+training_course,cycle_months,int,v0.6,주기(개월),69%,6,13,/calendar /training
+training_course,required_hours,text,v0.6,법정 시간(원문 요지),100%,사무직 매반기 6시간 이상 · 그 밖의 근로자(판매업무 외) ,13,/calendar /training
+training_course,applies_depts,text,v0.6,적용 부서(공백 구분 · 예시),92%,D01 D02 D03 D04 D05 D06 D07 D08 D0,13,/calendar /training
+training_course,hazardous_work,text,v0.6,유해·위험 작업 교육 Y/N,100%,N,13,/calendar /training
+training_course,note,text,v0.6,비고,100%,예시 자료(시연용),13,/calendar /training
+training_course,area,text,v0.7,재해 구분(I 산업·F 시설교통·M 원료제조물),100%,I,13,/calendar /training
+training_record,training_id,text primary key,v0.2,교육 번호,100%,TRN-0001,87,/calendar /training
+training_record,staff_id,text references staff(staff_id),v0.2,담당자 번호,100%,SD01-1,87,/calendar /training
+training_record,dept_id,text references org_dept(dept_id),v0.2,부서 번호,100%,D01,87,/calendar /training
+training_record,course_name,text,v0.2,과정명,100%,관리감독자 정기교육,87,/calendar /training
+training_record,law,text,v0.2,근거 법령,100%,산업안전보건법,87,/calendar /training
+training_record,hours,numeric,v0.2,시간,76%,16,87,/calendar /training
+training_record,trained_at,date,v0.2,이수일,77%,2026-05-27,87,/calendar /training
+training_record,certificate_file,text,v0.2,수료증,77%,이수증_TRN-0001.pdf,87,/calendar /training
+training_record,duty_key,text references duty_class(duty_key),v0.2,의무 열쇠(정본),0%,,87,/calendar /training
+training_record,course_id,text,v0.6,교육 과정 번호,100%,TC02,87,/calendar /training
+training_record,period,text,v0.6,교육 기간 표시(2026년·상반기 등),100%,2026년,87,/calendar /training
+training_record,due_date,date,v0.6,기한,72%,2026-12-31,87,/calendar /training
+training_record,status,text,v0.6,이수 상태(이수·미실시),100%,이수,87,/calendar /training
+training_record,note,text,v0.6,비고,100%,예시 자료(시연용),87,/calendar /training
+training_record,instructed_at,date,v0.6,이행 지시일(제4호 · 화면이 씀),,,,/calendar /training
+training_record,instructed_by,text,v0.6,이행 지시한 사람(화면이 씀),,,,/calendar /training
+training_record,instruct_due,date,v0.6,지시한 이수 기한(화면이 씀),,,,/calendar /training
+training_record,instruct_basis,text,v0.6,지시 근거 조문(화면이 씀),,,,/calendar /training
+training_record,done_by,text,v0.6,이행한 사람,,,,/calendar /training
+worker_voice,voice_id,text primary key,v0.2,의견 번호,100%,VOC-001,9,/evidence /system /system/record
+worker_voice,received_at,date,v0.2,접수일,100%,2026-06-12,9,/evidence /system /system/record
+worker_voice,channel,text,v0.2,접수 경로,100%,현장 건의,9,/evidence /system /system/record
+worker_voice,dept_id,text references org_dept(dept_id),v0.2,부서 번호,100%,D01,9,/evidence /system /system/record
+worker_voice,content,text,v0.2,내용,100%,현장 순회 중 안전난간 파손 발견,9,/evidence /system /system/record
+worker_voice,review_result,text,v0.2,검토 결과,78%,보수 요청 접수,9,/evidence /system /system/record
+worker_voice,action_taken,text,v0.2,조치 내용,56%,난간 교체 완료,9,/evidence /system /system/record
+worker_voice,closed_at,date,v0.2,종결일,44%,2026-07-02,9,/evidence /system /system/record
+worker_voice,stage,text,v0.7,처리 단계(접수·검토·개선방안·이행·종결),100%,종결,9,/evidence /system /system/record
+worker_voice,needs_improvement,text,v0.7,개선 필요 Y,67%,Y,9,/evidence /system /system/record
+worker_voice,reviewed_at,date,v0.7,검토일,67%,2026-06-15,9,/evidence /system /system/record
+worker_voice,reviewer_staff_id,text,v0.7,검토한 사람,78%,SD01-2,9,/evidence /system /system/record
+worker_voice,plan,text,v0.7,개선방안,67%,파손 난간 교체,9,/evidence /system /system/record
+worker_voice,plan_due,date,v0.7,대책 기한,67%,2026-07-10,9,/evidence /system /system/record
+worker_voice,plan_owner_staff_id,text,v0.7,개선방안 담당자,67%,SD01-2,9,/evidence /system /system/record
+worker_voice,done_at,date,v0.7,개선 이행 완료일,44%,2026-07-02,9,/evidence /system /system/record
+worker_voice,substitute,text,v0.7,갈음한 회의체(산업안전보건위원회·협의체),11%,산업안전보건위원회,9,/evidence /system /system/record
+worker_voice,ceo_reported,text,v0.7,경영책임자 보고받음 Y,22%,Y,9,/evidence /system /system/record
+worker_voice,reported_at,date,v0.7,경영책임자 보고일,22%,2026-07-31,9,/evidence /system /system/record
+worker_voice,report_method,text,v0.7,보고 방식,22%,대면 보고,9,/evidence /system /system/record
+worker_voice,note,text,v0.7,비고,100%,예시 자료(시연용),9,/evidence /system /system/record
+worker_voice,report_proxy,text,v0.7,총괄이 대신 적은 보고 기록 Y(화면이 씀),,,,/evidence /system /system/record

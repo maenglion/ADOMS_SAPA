@@ -1,0 +1,1091 @@
+<!doctype html><html lang="ko"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1"><title>운영DB 필드 대장</title><style>
+body{margin:0;background:#f7f7fa;color:#1e2124;font:15px/1.6 Pretendard,"Noto Sans KR","Malgun Gothic",system-ui,sans-serif}
+header{background:#172b4d;color:#fff;padding:22px 28px}header h1{margin:0;font-size:24px}
+header p{margin:7px 0 0;opacity:.82;font-size:14px}
+main{max-width:1400px;margin:0 auto;padding:22px 28px 70px}
+h2{font-size:18px;color:#003675;margin:26px 0 6px}
+table{border-collapse:collapse;width:100%;background:#fff;font-size:13.5px;margin:6px 0 14px}
+th,td{border:1px solid #dce3ea;padding:6px 8px;text-align:left;vertical-align:top}
+th{background:#eef3f8;color:#003675;font-weight:700;font-size:13px}
+td.c{white-space:nowrap}
+.note{background:#e7f1f8;border:1px solid #cfe0ef;border-radius:9px;padding:13px 16px;font-size:14px}
+.warn{background:#faf1e4;border:1px solid #e6d5ba;border-radius:9px;padding:13px 16px;font-size:14px;margin-top:12px}
+.tag{display:inline-block;background:#f2f5f9;border:1px solid #e1e7ef;border-radius:5px;padding:1px 7px;font-size:12px;color:#3f4a5a}
+.mut{color:#525c6b}
+</style></head><body><header><h1>운영 DB 필드 대장</h1>
+<p>자동 생성 2026-09-22 · 생성기 <code>_build/export_schema.py</code> · 손으로 고치지 않습니다</p></header><main>
+<div class="note"><b>이 문서는 무엇인가</b><br>
+데모 운영 DB 의 <b>모든 표와 칸</b>을 DDL·시드 CSV·앱 코드에서 <b>실제로 훑어</b> 만든 것입니다.
+칸을 새로 만들면 다시 돌릴 때 자동으로 올라옵니다.
+<b>사용자가 지우라고 하기 전에는 어떤 칸도 누적 DDL 에서 빠지지 않습니다</b>(지시 2026-09-21).<br>
+같은 폴더의 <code>ops_cumulative.sql</code> 하나만 돌리면 지금 컬럼 전부가 든 스키마가 만들어집니다.</div>
+
+<div class="warn"><b>어긋난 칸 114건</b><br>
+DDL 에만 있음 — <code>action.approval_status</code><br>DDL 에만 있음 — <code>action.created_by</code><br>DDL 에만 있음 — <code>action.submitted_at</code><br>DDL 에만 있음 — <code>action.submitted_by</code><br>DDL 에만 있음 — <code>action.approved_at</code><br>DDL 에만 있음 — <code>action.approved_by</code><br>DDL 에만 있음 — <code>action.rejected_at</code><br>DDL 에만 있음 — <code>action.reject_reason</code><br>DDL 에만 있음 — <code>action.created_at</code><br>DDL 에만 있음 — <code>action.updated_at</code><br>DDL 에만 있음 — <code>action.task_id</code><br>DDL 에만 있음 — <code>action.batch_id</code><br>DDL 에만 있음 — <code>action.requested_by</code><br>DDL 에만 있음 — <code>action.requested_at</code><br>DDL 에만 있음 — <code>action.started_at</code><br>DDL 에만 있음 — <code>action.resubmit_note</code><br>DDL 에만 있음 — <code>action.resubmitted_by</code><br>DDL 에만 있음 — <code>action.rejudged_insp_id</code><br>DDL 에만 있음 — <code>action.action_basis</code><br>DDL 에만 있음 — <code>action.prev_action_type</code><br>DDL 에만 있음 — <code>ceo_activity.evidence_file</code><br>DDL 에만 있음 — <code>ceo_activity.created_at</code><br>DDL 에만 있음 — <code>civil_safety_plan.confirm_proxy</code><br>DDL 에만 있음 — <code>civil_safety_plan.confirmed_by</code><br>DDL 에만 있음 — <code>compliance_task.created_at</code><br>DDL 에만 있음 — <code>compliance_task.updated_at</code><br>DDL 에만 있음 — <code>compliance_task.period_year</code><br>DDL 에만 있음 — <code>compliance_task.half_year</code><br>DDL 에만 있음 — <code>compliance_task.plan_date</code><br>DDL 에만 있음 — <code>compliance_task.evidence_cnt</code><br>DDL 에만 있음 — <code>compliance_task.check_result</code><br>DDL 에만 있음 — <code>compliance_task.approval_status</code><br>DDL 에만 있음 — <code>compliance_task.created_by</code><br>DDL 에만 있음 — <code>compliance_task.submitted_at</code><br>DDL 에만 있음 — <code>compliance_task.submitted_by</code><br>DDL 에만 있음 — <code>compliance_task.approved_at</code><br>DDL 에만 있음 — <code>compliance_task.approved_by</code><br>DDL 에만 있음 — <code>compliance_task.rejected_at</code><br>DDL 에만 있음 — <code>compliance_task.reject_reason</code><br>DDL 에만 있음 — <code>compliance_task.entered_in_demo</code>
+</div>
+<p class="mut">표 53개 · 칸 904개</p>
+<h2>action <span class="tag">/actions /budget /calendar /contracts /drills /drills/[id] /duties/[key] /evidence /hazards /hazards/[id] /inspections /m /recurrence /review /settings /system /system/record /training</span></h2>
+<table><thead><tr><th style='width:190px'>칸</th><th style='width:110px'>자료형</th><th style='width:74px'>생긴 판</th><th>뜻</th><th style='width:74px'>채움률</th><th style='width:230px'>예시값</th></tr></thead><tbody>
+<tr><td class='c'><code>action_id</code></td><td class='c'>text primary key</td><td class='c'>v0.3</td><td>조치 번호</td><td class='c'>100%</td><td class='mut'>ACT-000001</td></tr>
+<tr><td class='c'><code>insp_id</code></td><td class='c'>text references inspection(insp_id)</td><td class='c'>v0.3</td><td>점검 번호</td><td class='c'>100%</td><td class='mut'>INS-000014</td></tr>
+<tr><td class='c'><code>action_type</code></td><td class='c'>text</td><td class='c'>v0.3</td><td>조치 구분(보완·시정)</td><td class='c'>100%</td><td class='mut'>보완</td></tr>
+<tr><td class='c'><code>due_date</code></td><td class='c'>date</td><td class='c'>v0.3</td><td>기한</td><td class='c'>100%</td><td class='mut'>2026-10-19</td></tr>
+<tr><td class='c'><code>done_at</code></td><td class='c'>date</td><td class='c'>v0.3</td><td>이행 완료일</td><td class='c'>67%</td><td class='mut'>2026-10-15</td></tr>
+<tr><td class='c'><code>result</code></td><td class='c'>text</td><td class='c'>v0.3</td><td>판정 결과</td><td class='c'>100%</td><td class='mut'>완료</td></tr>
+<tr><td class='c'><code>note</code></td><td class='c'>text</td><td class='c'>v0.3</td><td>비고</td><td class='c'>100%</td><td class='mut'>예시 데이터(시연용)</td></tr>
+<tr><td class='c'><code>approval_status</code></td><td class='c'>text</td><td class='c'>v0.2</td><td>결재 상태(작성중·제출·승인·반려)</td><td class='c'></td><td class='mut'></td></tr>
+<tr><td class='c'><code>created_by</code></td><td class='c'>text</td><td class='c'>v0.2</td><td>만든 사람</td><td class='c'></td><td class='mut'></td></tr>
+<tr><td class='c'><code>submitted_at</code></td><td class='c'>timestamptz</td><td class='c'>v0.2</td><td>제출 일시</td><td class='c'></td><td class='mut'></td></tr>
+<tr><td class='c'><code>submitted_by</code></td><td class='c'>text</td><td class='c'>v0.2</td><td>제출한 사람</td><td class='c'></td><td class='mut'></td></tr>
+<tr><td class='c'><code>approved_at</code></td><td class='c'>timestamptz</td><td class='c'>v0.2</td><td>승인 일시</td><td class='c'></td><td class='mut'></td></tr>
+<tr><td class='c'><code>approved_by</code></td><td class='c'>text</td><td class='c'>v0.2</td><td>승인한 사람</td><td class='c'></td><td class='mut'></td></tr>
+<tr><td class='c'><code>rejected_at</code></td><td class='c'>timestamptz</td><td class='c'>v0.2</td><td>반려 일시</td><td class='c'></td><td class='mut'></td></tr>
+<tr><td class='c'><code>reject_reason</code></td><td class='c'>text</td><td class='c'>v0.2</td><td>반려 사유</td><td class='c'></td><td class='mut'></td></tr>
+<tr><td class='c'><code>created_at</code></td><td class='c'>timestamptz</td><td class='c'>v0.2</td><td>만든 일시</td><td class='c'></td><td class='mut'></td></tr>
+<tr><td class='c'><code>updated_at</code></td><td class='c'>timestamptz</td><td class='c'>v0.2</td><td>고친 일시</td><td class='c'></td><td class='mut'></td></tr>
+<tr><td class='c'><code>task_id</code></td><td class='c'>text</td><td class='c'>v0.5</td><td>과제 번호</td><td class='c'></td><td class='mut'></td></tr>
+<tr><td class='c'><code>batch_id</code></td><td class='c'>text</td><td class='c'>v0.5</td><td>점검 회차 번호</td><td class='c'></td><td class='mut'></td></tr>
+<tr><td class='c'><code>requested_by</code></td><td class='c'>text</td><td class='c'>v0.5</td><td>조치를 요구한 사람(점검자)</td><td class='c'></td><td class='mut'></td></tr>
+<tr><td class='c'><code>requested_at</code></td><td class='c'>date</td><td class='c'>v0.5</td><td>조치 요구일</td><td class='c'></td><td class='mut'></td></tr>
+<tr><td class='c'><code>started_at</code></td><td class='c'>date</td><td class='c'>v0.5</td><td>시행일</td><td class='c'></td><td class='mut'></td></tr>
+<tr><td class='c'><code>resubmit_note</code></td><td class='c'>text</td><td class='c'>v0.5</td><td>보완 제출 때 부서가 적은 말</td><td class='c'></td><td class='mut'></td></tr>
+<tr><td class='c'><code>resubmitted_by</code></td><td class='c'>text</td><td class='c'>v0.5</td><td>보완 제출한 사람</td><td class='c'></td><td class='mut'></td></tr>
+<tr><td class='c'><code>rejudged_insp_id</code></td><td class='c'>text</td><td class='c'>v0.5</td><td>이 조치를 닫은(또는 되돌린) 재판정</td><td class='c'></td><td class='mut'></td></tr>
+<tr><td class='c'><code>action_basis</code></td><td class='c'>text</td><td class='c'>v0.7</td><td>조치 근거 조문(법정 조치 구분일 때 · 화면이 씀)</td><td class='c'></td><td class='mut'></td></tr>
+<tr><td class='c'><code>prev_action_type</code></td><td class='c'>text</td><td class='c'>v0.7</td><td>바꾸기 전 조치 구분(화면이 씀)</td><td class='c'></td><td class='mut'></td></tr>
+</tbody></table>
+<h2>annual_schedule <span class="tag">/calendar</span></h2>
+<table><thead><tr><th style='width:190px'>칸</th><th style='width:110px'>자료형</th><th style='width:74px'>생긴 판</th><th>뜻</th><th style='width:74px'>채움률</th><th style='width:230px'>예시값</th></tr></thead><tbody>
+<tr><td class='c'><code>sched_id</code></td><td class='c'>text primary key</td><td class='c'>v0.6</td><td>일정 번호</td><td class='c'>100%</td><td class='mut'>SCH-01</td></tr>
+<tr><td class='c'><code>kind</code></td><td class='c'>text</td><td class='c'>v0.6</td><td>일정 종류(서울시 운영 예시 등)</td><td class='c'>100%</td><td class='mut'>서울시 운영 예시</td></tr>
+<tr><td class='c'><code>title</code></td><td class='c'>text</td><td class='c'>v0.6</td><td>제목</td><td class='c'>100%</td><td class='mut'>안전계획 수립 · 전년 점검 결과 제출(소관 부서 → 총괄)</td></tr>
+<tr><td class='c'><code>month_from</code></td><td class='c'>int</td><td class='c'>v0.6</td><td>시작 월</td><td class='c'>100%</td><td class='mut'>1</td></tr>
+<tr><td class='c'><code>day_from</code></td><td class='c'>int</td><td class='c'>v0.6</td><td>시작 일</td><td class='c'>100%</td><td class='mut'>1</td></tr>
+<tr><td class='c'><code>month_to</code></td><td class='c'>int</td><td class='c'>v0.6</td><td>끝 월</td><td class='c'>100%</td><td class='mut'>1</td></tr>
+<tr><td class='c'><code>day_to</code></td><td class='c'>int</td><td class='c'>v0.6</td><td>끝 일</td><td class='c'>100%</td><td class='mut'>31</td></tr>
+<tr><td class='c'><code>basis</code></td><td class='c'>text</td><td class='c'>v0.6</td><td>관련 조문(날짜는 법에 없음을 함께 적음)</td><td class='c'>58%</td><td class='mut'>시행령 제10조제4호 안전계획 연 1회 이상 수립(날짜는 법에</td></tr>
+<tr><td class='c'><code>source</code></td><td class='c'>text</td><td class='c'>v0.6</td><td>출처 자료(쪽·표 번호)</td><td class='c'>100%</td><td class='mut'>서울시 시민재해 안전보건업무 안내서(2023.8. 잠정) 표 </td></tr>
+<tr><td class='c'><code>href</code></td><td class='c'>text</td><td class='c'>v0.6</td><td>이어지는 화면 주소</td><td class='c'>100%</td><td class='mut'>/system</td></tr>
+<tr><td class='c'><code>note</code></td><td class='c'>text</td><td class='c'>v0.6</td><td>비고</td><td class='c'>100%</td><td class='mut'>예시 자료(시연용) · 기관이 날짜를 바꿀 수 있음</td></tr>
+</tbody></table>
+<h2>asset <span class="tag">/duties/[key] /targets/[id]</span></h2>
+<table><thead><tr><th style='width:190px'>칸</th><th style='width:110px'>자료형</th><th style='width:74px'>생긴 판</th><th>뜻</th><th style='width:74px'>채움률</th><th style='width:230px'>예시값</th></tr></thead><tbody>
+<tr><td class='c'><code>asset_id</code></td><td class='c'>text primary key</td><td class='c'>v0.1</td><td>자산 번호</td><td class='c'>100%</td><td class='mut'>AR1967-0000142</td></tr>
+<tr><td class='c'><code>asset_name</code></td><td class='c'>text</td><td class='c'>v0.1</td><td>자산 이름</td><td class='c'>100%</td><td class='mut'>고기초등학교 교사동</td></tr>
+<tr><td class='c'><code>asset_gbn</code></td><td class='c'>text</td><td class='c'>v0.1</td><td>시설 구분</td><td class='c'>100%</td><td class='mut'>건축물</td></tr>
+<tr><td class='c'><code>asset_kind</code></td><td class='c'>text</td><td class='c'>v0.1</td><td>시설 종류</td><td class='c'>100%</td><td class='mut'>다중이용건축물</td></tr>
+<tr><td class='c'><code>asset_class</code></td><td class='c'>text</td><td class='c'>v0.1</td><td>종별(1·2·3종)</td><td class='c'>100%</td><td class='mut'>3종</td></tr>
+<tr><td class='c'><code>safety_grade</code></td><td class='c'>text</td><td class='c'>v0.1</td><td>안전등급</td><td class='c'>100%</td><td class='mut'>B등급</td></tr>
+<tr><td class='c'><code>completed_ymd</code></td><td class='c'>text</td><td class='c'>v0.1</td><td>준공일</td><td class='c'>100%</td><td class='mut'>19670301</td></tr>
+<tr><td class='c'><code>addr</code></td><td class='c'>text</td><td class='c'>v0.1</td><td>소재지</td><td class='c'>100%</td><td class='mut'>경기도 용인시 수지구</td></tr>
+<tr><td class='c'><code>dept_id</code></td><td class='c'>text references org_dept(dept_id)</td><td class='c'>v0.1</td><td>부서 번호</td><td class='c'>100%</td><td class='mut'>D09</td></tr>
+<tr><td class='c'><code>source</code></td><td class='c'>text</td><td class='c'>v0.1</td><td>출처(FMS 등)</td><td class='c'>100%</td><td class='mut'>FMS</td></tr>
+<tr><td class='c'><code>sapa_l2_result</code></td><td class='c'>text</td><td class='c'>v0.1</td><td>중처법 판정</td><td class='c'>100%</td><td class='mut'>제외</td></tr>
+<tr><td class='c'><code>sapa_basis</code></td><td class='c'>text</td><td class='c'>v0.1</td><td>판정 근거</td><td class='c'>100%</td><td class='mut'>중처법 제2조제4호 단서</td></tr>
+<tr><td class='c'><code>need_data</code></td><td class='c'>text</td><td class='c'>v0.1</td><td>더 필요한 자료</td><td class='c'>73%</td><td class='mut'>연면적·층수·용도</td></tr>
+<tr><td class='c'><code>verified</code></td><td class='c'>text default</td><td class='c'>v0.1</td><td>확인 여부</td><td class='c'>100%</td><td class='mut'>N</td></tr>
+</tbody></table>
+<h2>asset_target_map </h2>
+<table><thead><tr><th style='width:190px'>칸</th><th style='width:110px'>자료형</th><th style='width:74px'>생긴 판</th><th>뜻</th><th style='width:74px'>채움률</th><th style='width:230px'>예시값</th></tr></thead><tbody>
+<tr><td class='c'><code>asset_id</code></td><td class='c'>text references asset(asset_id)</td><td class='c'>v0.1</td><td>자산 번호</td><td class='c'>100%</td><td class='mut'>AR1967-0000142</td></tr>
+<tr><td class='c'><code>target_code</code></td><td class='c'>text</td><td class='c'>v0.1</td><td>관리대상 코드</td><td class='c'>100%</td><td class='mut'>TG13</td></tr>
+<tr><td class='c'><code>basis</code></td><td class='c'>text</td><td class='c'>v0.1</td><td>대응 근거(FMS 구분·종류 규칙 등)</td><td class='c'>100%</td><td class='mut'>FMS 구분·종류 규칙</td></tr>
+<tr><td class='c'><code>confidence</code></td><td class='c'>text</td><td class='c'>v0.1</td><td>대응 확신도(high·medium·low)</td><td class='c'>100%</td><td class='mut'>medium</td></tr>
+</tbody></table>
+<h2>audit_log </h2>
+<table><thead><tr><th style='width:190px'>칸</th><th style='width:110px'>자료형</th><th style='width:74px'>생긴 판</th><th>뜻</th><th style='width:74px'>채움률</th><th style='width:230px'>예시값</th></tr></thead><tbody>
+<tr><td class='c'><code>log_id</code></td><td class='c'>bigserial primary key</td><td class='c'>v0.2</td><td>기록 번호</td><td class='c'></td><td class='mut'></td></tr>
+<tr><td class='c'><code>table_name</code></td><td class='c'>text</td><td class='c'>v0.2</td><td>표 이름</td><td class='c'></td><td class='mut'></td></tr>
+<tr><td class='c'><code>row_key</code></td><td class='c'>text</td><td class='c'>v0.2</td><td>행 열쇠</td><td class='c'></td><td class='mut'></td></tr>
+<tr><td class='c'><code>action</code></td><td class='c'>text</td><td class='c'>v0.2</td><td>한 일(insert·update·approve·reject)</td><td class='c'></td><td class='mut'></td></tr>
+<tr><td class='c'><code>changed_by</code></td><td class='c'>text</td><td class='c'>v0.2</td><td>바꾼 사람</td><td class='c'></td><td class='mut'></td></tr>
+<tr><td class='c'><code>changed_at</code></td><td class='c'>timestamptz default now()</td><td class='c'>v0.2</td><td>바꾼 일시</td><td class='c'></td><td class='mut'></td></tr>
+<tr><td class='c'><code>before_json</code></td><td class='c'>jsonb</td><td class='c'>v0.2</td><td>바꾸기 전 값(JSON)</td><td class='c'></td><td class='mut'></td></tr>
+<tr><td class='c'><code>after_json</code></td><td class='c'>jsonb</td><td class='c'>v0.2</td><td>바꾼 뒤 값(JSON)</td><td class='c'></td><td class='mut'></td></tr>
+<tr><td class='c'><code>note</code></td><td class='c'>text</td><td class='c'>v0.2</td><td>비고</td><td class='c'></td><td class='mut'></td></tr>
+</tbody></table>
+<h2>ceo_activity </h2>
+<table><thead><tr><th style='width:190px'>칸</th><th style='width:110px'>자료형</th><th style='width:74px'>생긴 판</th><th>뜻</th><th style='width:74px'>채움률</th><th style='width:230px'>예시값</th></tr></thead><tbody>
+<tr><td class='c'><code>activity_id</code></td><td class='c'>text primary key</td><td class='c'>v0.2</td><td>활동 번호</td><td class='c'>100%</td><td class='mut'>CEO-001</td></tr>
+<tr><td class='c'><code>activity_date</code></td><td class='c'>date</td><td class='c'>v0.2</td><td>활동일</td><td class='c'>100%</td><td class='mut'>2026-04-16</td></tr>
+<tr><td class='c'><code>activity_type</code></td><td class='c'>text</td><td class='c'>v0.2</td><td>활동 유형</td><td class='c'>100%</td><td class='mut'>회의주재</td></tr>
+<tr><td class='c'><code>title</code></td><td class='c'>text</td><td class='c'>v0.2</td><td>제목</td><td class='c'>100%</td><td class='mut'>중대재해 예방 대책회의 주재</td></tr>
+<tr><td class='c'><code>place</code></td><td class='c'>text</td><td class='c'>v0.2</td><td>현장</td><td class='c'>100%</td><td class='mut'>경기도 용인시 처인구</td></tr>
+<tr><td class='c'><code>target_code</code></td><td class='c'>text</td><td class='c'>v0.2</td><td>관리대상 코드</td><td class='c'>0%</td><td class='mut'></td></tr>
+<tr><td class='c'><code>asset_id</code></td><td class='c'>text references asset(asset_id)</td><td class='c'>v0.2</td><td>자산 번호</td><td class='c'>25%</td><td class='mut'>AR1970-0000535</td></tr>
+<tr><td class='c'><code>dept_id</code></td><td class='c'>text references org_dept(dept_id)</td><td class='c'>v0.2</td><td>부서 번호</td><td class='c'>100%</td><td class='mut'>D02</td></tr>
+<tr><td class='c'><code>participants</code></td><td class='c'>text</td><td class='c'>v0.2</td><td>참석자</td><td class='c'>100%</td><td class='mut'>부시장·관계부서장</td></tr>
+<tr><td class='c'><code>finding</code></td><td class='c'>text</td><td class='c'>v0.2</td><td>점검 의견·지적사항</td><td class='c'>25%</td><td class='mut'>안전난간 도색 상태 미흡</td></tr>
+<tr><td class='c'><code>instruction</code></td><td class='c'>text</td><td class='c'>v0.2</td><td>지시사항</td><td class='c'>100%</td><td class='mut'>분기별 보고 지시</td></tr>
+<tr><td class='c'><code>follow_up_task_id</code></td><td class='c'>text references compliance_task(task_id)</td><td class='c'>v0.2</td><td>후속 과제</td><td class='c'>0%</td><td class='mut'></td></tr>
+<tr><td class='c'><code>evidence_file</code></td><td class='c'>text</td><td class='c'>v0.2</td><td>증빙 파일</td><td class='c'></td><td class='mut'></td></tr>
+<tr><td class='c'><code>created_by</code></td><td class='c'>text</td><td class='c'>v0.2</td><td>만든 사람</td><td class='c'>100%</td><td class='mut'>SD01-1</td></tr>
+<tr><td class='c'><code>note</code></td><td class='c'>text</td><td class='c'>v0.2</td><td>비고</td><td class='c'>100%</td><td class='mut'>예시 데이터(시연용)</td></tr>
+<tr><td class='c'><code>created_at</code></td><td class='c'>timestamptz default now()</td><td class='c'>v0.2</td><td>만든 일시</td><td class='c'></td><td class='mut'></td></tr>
+</tbody></table>
+<h2>civil_manual <span class="tag">/drills /evidence /system</span></h2>
+<table><thead><tr><th style='width:190px'>칸</th><th style='width:110px'>자료형</th><th style='width:74px'>생긴 판</th><th>뜻</th><th style='width:74px'>채움률</th><th style='width:230px'>예시값</th></tr></thead><tbody>
+<tr><td class='c'><code>manual_id</code></td><td class='c'>text primary key</td><td class='c'>v0.6</td><td>절차·매뉴얼·기록 번호</td><td class='c'>100%</td><td class='mut'>CMN-001</td></tr>
+<tr><td class='c'><code>clause_ref</code></td><td class='c'>text</td><td class='c'>v0.6</td><td>시행령 조·호(10-7 = 제10조제7호)</td><td class='c'>100%</td><td class='mut'>10-7</td></tr>
+<tr><td class='c'><code>record_kind</code></td><td class='c'>text</td><td class='c'>v0.6</td><td>업무처리절차 · 매뉴얼 · 반기 점검 · 교육 이수 점검 · 대피훈련</td><td class='c'>100%</td><td class='mut'>업무처리절차</td></tr>
+<tr><td class='c'><code>title</code></td><td class='c'>text</td><td class='c'>v0.6</td><td>제목</td><td class='c'>100%</td><td class='mut'>공중이용시설 유해·위험요인 확인·점검 및 개선 절차</td></tr>
+<tr><td class='c'><code>covers</code></td><td class='c'>text</td><td class='c'>v0.6</td><td>담은 목(가·나·다·라)</td><td class='c'>99%</td><td class='mut'>가·나</td></tr>
+<tr><td class='c'><code>missing</code></td><td class='c'>text</td><td class='c'>v0.6</td><td>빠진 목</td><td class='c'>1%</td><td class='mut'>나</td></tr>
+<tr><td class='c'><code>basis</code></td><td class='c'>text</td><td class='c'>v0.6</td><td>갈음 근거(철도안전법 제7조 등)</td><td class='c'>1%</td><td class='mut'>철도안전법 제7조</td></tr>
+<tr><td class='c'><code>asset_id</code></td><td class='c'>text</td><td class='c'>v0.6</td><td>자산 번호</td><td class='c'>88%</td><td class='mut'>AR2018-0000223</td></tr>
+<tr><td class='c'><code>facility_name</code></td><td class='c'>text</td><td class='c'>v0.6</td><td>시설 이름</td><td class='c'>92%</td><td class='mut'>용인경전철(에버라인)</td></tr>
+<tr><td class='c'><code>enacted_at</code></td><td class='c'>date</td><td class='c'>v0.6</td><td>제정일</td><td class='c'>6%</td><td class='mut'>2022-06-30</td></tr>
+<tr><td class='c'><code>revised_at</code></td><td class='c'>date</td><td class='c'>v0.6</td><td>개정일</td><td class='c'>5%</td><td class='mut'>2025-11-20</td></tr>
+<tr><td class='c'><code>done_at</code></td><td class='c'>date</td><td class='c'>v0.6</td><td>실시일</td><td class='c'>94%</td><td class='mut'>2026-01-15</td></tr>
+<tr><td class='c'><code>last_check_at</code></td><td class='c'>date</td><td class='c'>v0.6</td><td>최근 점검일</td><td class='c'>6%</td><td class='mut'>2026-06-25</td></tr>
+<tr><td class='c'><code>reported_at</code></td><td class='c'>date</td><td class='c'>v0.6</td><td>경영책임자 보고일</td><td class='c'>6%</td><td class='mut'>2026-03-16</td></tr>
+<tr><td class='c'><code>participants</code></td><td class='c'>int</td><td class='c'>v0.6</td><td>참석 인원</td><td class='c'>91%</td><td class='mut'>9</td></tr>
+<tr><td class='c'><code>owner_staff_id</code></td><td class='c'>text</td><td class='c'>v0.6</td><td>정담당</td><td class='c'>100%</td><td class='mut'>SM02-1</td></tr>
+<tr><td class='c'><code>note</code></td><td class='c'>text</td><td class='c'>v0.6</td><td>비고</td><td class='c'>100%</td><td class='mut'>예시 자료(시연용)</td></tr>
+</tbody></table>
+<h2>civil_safety_plan <span class="tag">/calendar /evidence /system</span></h2>
+<table><thead><tr><th style='width:190px'>칸</th><th style='width:110px'>자료형</th><th style='width:74px'>생긴 판</th><th>뜻</th><th style='width:74px'>채움률</th><th style='width:230px'>예시값</th></tr></thead><tbody>
+<tr><td class='c'><code>plan_id</code></td><td class='c'>text primary key</td><td class='c'>v0.6</td><td>안전계획 번호</td><td class='c'>100%</td><td class='mut'>CSP-2025-0001</td></tr>
+<tr><td class='c'><code>plan_year</code></td><td class='c'>int</td><td class='c'>v0.6</td><td>계획 연도</td><td class='c'>100%</td><td class='mut'>2025</td></tr>
+<tr><td class='c'><code>facility_kind</code></td><td class='c'>text</td><td class='c'>v0.6</td><td>공중이용시설 · 공중교통수단</td><td class='c'>100%</td><td class='mut'>공중이용시설</td></tr>
+<tr><td class='c'><code>asset_id</code></td><td class='c'>text</td><td class='c'>v0.6</td><td>자산 번호</td><td class='c'>100%</td><td class='mut'>AR1978-0000349</td></tr>
+<tr><td class='c'><code>facility_name</code></td><td class='c'>text</td><td class='c'>v0.6</td><td>시설 이름</td><td class='c'>100%</td><td class='mut'>죽전(서울)휴게소(본관)</td></tr>
+<tr><td class='c'><code>asset_gbn</code></td><td class='c'>text</td><td class='c'>v0.6</td><td>시설 구분</td><td class='c'>100%</td><td class='mut'>건축물</td></tr>
+<tr><td class='c'><code>asset_kind</code></td><td class='c'>text</td><td class='c'>v0.6</td><td>시설 종류</td><td class='c'>100%</td><td class='mut'>다중이용건축물</td></tr>
+<tr><td class='c'><code>asset_class</code></td><td class='c'>text</td><td class='c'>v0.6</td><td>종별(1·2·3종)</td><td class='c'>100%</td><td class='mut'>3종</td></tr>
+<tr><td class='c'><code>dept_id</code></td><td class='c'>text</td><td class='c'>v0.6</td><td>부서 번호</td><td class='c'>100%</td><td class='mut'>D09</td></tr>
+<tr><td class='c'><code>plan_status</code></td><td class='c'>text</td><td class='c'>v0.6</td><td>수립 · 작성중 · 미수립</td><td class='c'>100%</td><td class='mut'>수립</td></tr>
+<tr><td class='c'><code>plan_basis</code></td><td class='c'>text</td><td class='c'>v0.6</td><td>계획 근거(자체 안전계획 · 시설물안전법 제6조 · 철도안전법 제6조)</td><td class='c'>97%</td><td class='mut'>자체 안전계획</td></tr>
+<tr><td class='c'><code>ceo_confirmed</code></td><td class='c'>text</td><td class='c'>v0.6</td><td>경영책임자 확인·보고받음 Y/N(제4호 단서 갈음 성립 조건)</td><td class='c'>85%</td><td class='mut'>Y</td></tr>
+<tr><td class='c'><code>confirmed_at</code></td><td class='c'>date</td><td class='c'>v0.6</td><td>경영책임자 확인·보고받은 날</td><td class='c'>77%</td><td class='mut'>2025-02-28</td></tr>
+<tr><td class='c'><code>mok_ga</code></td><td class='c'>text</td><td class='c'>v0.6</td><td>가목(인력) 포함 Y/N</td><td class='c'>97%</td><td class='mut'>N</td></tr>
+<tr><td class='c'><code>mok_na</code></td><td class='c'>text</td><td class='c'>v0.6</td><td>나목(점검) 포함 Y/N</td><td class='c'>97%</td><td class='mut'>Y</td></tr>
+<tr><td class='c'><code>mok_da</code></td><td class='c'>text</td><td class='c'>v0.6</td><td>다목(보수·보강) 포함 Y/N</td><td class='c'>97%</td><td class='mut'>Y</td></tr>
+<tr><td class='c'><code>items_planned</code></td><td class='c'>int</td><td class='c'>v0.6</td><td>계획 항목 수</td><td class='c'>97%</td><td class='mut'>9</td></tr>
+<tr><td class='c'><code>items_done</code></td><td class='c'>int</td><td class='c'>v0.6</td><td>이행한 항목 수</td><td class='c'>97%</td><td class='mut'>9</td></tr>
+<tr><td class='c'><code>established_at</code></td><td class='c'>date</td><td class='c'>v0.6</td><td>계획 수립일</td><td class='c'>96%</td><td class='mut'>2025-02-11</td></tr>
+<tr><td class='c'><code>owner_staff_id</code></td><td class='c'>text</td><td class='c'>v0.6</td><td>정담당</td><td class='c'>100%</td><td class='mut'>SD09-1</td></tr>
+<tr><td class='c'><code>note</code></td><td class='c'>text</td><td class='c'>v0.6</td><td>비고</td><td class='c'>100%</td><td class='mut'>예시 자료(시연용)</td></tr>
+<tr><td class='c'><code>confirm_proxy</code></td><td class='c'>text</td><td class='c'>v0.6</td><td>총괄이 대신 적은 확인 기록 Y(화면이 씀)</td><td class='c'></td><td class='mut'></td></tr>
+<tr><td class='c'><code>confirmed_by</code></td><td class='c'>text</td><td class='c'>v0.6</td><td>확인을 기록한 사람(화면이 씀)</td><td class='c'></td><td class='mut'></td></tr>
+</tbody></table>
+<h2>compliance_task </h2>
+<table><thead><tr><th style='width:190px'>칸</th><th style='width:110px'>자료형</th><th style='width:74px'>생긴 판</th><th>뜻</th><th style='width:74px'>채움률</th><th style='width:230px'>예시값</th></tr></thead><tbody>
+<tr><td class='c'><code>task_id</code></td><td class='c'>text primary key</td><td class='c'>v0.1</td><td>과제 번호</td><td class='c'>100%</td><td class='mut'>TSK-000001</td></tr>
+<tr><td class='c'><code>assign_id</code></td><td class='c'>text references duty_assignment(assign_id)</td><td class='c'>v0.1</td><td>배정 번호</td><td class='c'>100%</td><td class='mut'>ASG-000003</td></tr>
+<tr><td class='c'><code>period_label</code></td><td class='c'>text</td><td class='c'>v0.1</td><td>주기 표시</td><td class='c'>100%</td><td class='mut'>2026년 수시</td></tr>
+<tr><td class='c'><code>due_date</code></td><td class='c'>date</td><td class='c'>v0.1</td><td>기한</td><td class='c'>100%</td><td class='mut'>2026-07-28</td></tr>
+<tr><td class='c'><code>status</code></td><td class='c'>text check (status in ('이행대기','기간초과','이행완료','조치필요','점검완료')</td><td class='c'>v0.1</td><td>이행 상태</td><td class='c'>100%</td><td class='mut'>점검완료</td></tr>
+<tr><td class='c'><code>done_at</code></td><td class='c'>date</td><td class='c'>v0.1</td><td>이행 완료일</td><td class='c'>39%</td><td class='mut'>2026-07-27</td></tr>
+<tr><td class='c'><code>done_by</code></td><td class='c'>text references staff(staff_id)</td><td class='c'>v0.1</td><td>이행한 사람</td><td class='c'>39%</td><td class='mut'>SD13-1</td></tr>
+<tr><td class='c'><code>remark</code></td><td class='c'>text</td><td class='c'>v0.1</td><td>비고</td><td class='c'>0%</td><td class='mut'></td></tr>
+<tr><td class='c'><code>created_at</code></td><td class='c'>timestamptz default now()</td><td class='c'>v0.1</td><td>만든 일시</td><td class='c'></td><td class='mut'></td></tr>
+<tr><td class='c'><code>updated_at</code></td><td class='c'>timestamptz default now()</td><td class='c'>v0.1</td><td>고친 일시</td><td class='c'></td><td class='mut'></td></tr>
+<tr><td class='c'><code>period_year</code></td><td class='c'>int</td><td class='c'>v0.2</td><td>연도</td><td class='c'></td><td class='mut'></td></tr>
+<tr><td class='c'><code>half_year</code></td><td class='c'>text</td><td class='c'>v0.2</td><td>반기</td><td class='c'></td><td class='mut'></td></tr>
+<tr><td class='c'><code>plan_date</code></td><td class='c'>date</td><td class='c'>v0.2</td><td>계획일</td><td class='c'></td><td class='mut'></td></tr>
+<tr><td class='c'><code>evidence_cnt</code></td><td class='c'>int</td><td class='c'>v0.2</td><td>증빙 수</td><td class='c'></td><td class='mut'></td></tr>
+<tr><td class='c'><code>check_result</code></td><td class='c'>text</td><td class='c'>v0.2</td><td>점검 판정(이행완료·보완필요·미이행)</td><td class='c'></td><td class='mut'></td></tr>
+<tr><td class='c'><code>approval_status</code></td><td class='c'>text</td><td class='c'>v0.2</td><td>결재 상태(작성중·제출·승인·반려)</td><td class='c'></td><td class='mut'></td></tr>
+<tr><td class='c'><code>created_by</code></td><td class='c'>text</td><td class='c'>v0.2</td><td>만든 사람</td><td class='c'></td><td class='mut'></td></tr>
+<tr><td class='c'><code>submitted_at</code></td><td class='c'>timestamptz</td><td class='c'>v0.2</td><td>제출 일시</td><td class='c'></td><td class='mut'></td></tr>
+<tr><td class='c'><code>submitted_by</code></td><td class='c'>text</td><td class='c'>v0.2</td><td>제출한 사람</td><td class='c'></td><td class='mut'></td></tr>
+<tr><td class='c'><code>approved_at</code></td><td class='c'>timestamptz</td><td class='c'>v0.2</td><td>승인 일시</td><td class='c'></td><td class='mut'></td></tr>
+<tr><td class='c'><code>approved_by</code></td><td class='c'>text</td><td class='c'>v0.2</td><td>승인한 사람</td><td class='c'></td><td class='mut'></td></tr>
+<tr><td class='c'><code>rejected_at</code></td><td class='c'>timestamptz</td><td class='c'>v0.2</td><td>반려 일시</td><td class='c'></td><td class='mut'></td></tr>
+<tr><td class='c'><code>reject_reason</code></td><td class='c'>text</td><td class='c'>v0.2</td><td>반려 사유</td><td class='c'></td><td class='mut'></td></tr>
+<tr><td class='c'><code>entered_in_demo</code></td><td class='c'>boolean</td><td class='c'>v0.3</td><td>시연 중 입력분 표시</td><td class='c'></td><td class='mut'></td></tr>
+<tr><td class='c'><code>resubmit_round</code></td><td class='c'>int</td><td class='c'>v0.7</td><td>보완 제출 뒤 다음 판정 차수(화면이 씀)</td><td class='c'></td><td class='mut'></td></tr>
+<tr><td class='c'><code>resubmit_note</code></td><td class='c'>text</td><td class='c'>v0.7</td><td>보완 제출 때 부서가 적은 말(화면이 씀)</td><td class='c'></td><td class='mut'></td></tr>
+</tbody></table>
+<h2>contract <span class="tag">/api/export /calendar /contracts /evidence</span></h2>
+<table><thead><tr><th style='width:190px'>칸</th><th style='width:110px'>자료형</th><th style='width:74px'>생긴 판</th><th>뜻</th><th style='width:74px'>채움률</th><th style='width:230px'>예시값</th></tr></thead><tbody>
+<tr><td class='c'><code>contract_id</code></td><td class='c'>text primary key</td><td class='c'>v0.2</td><td>계약 번호</td><td class='c'>100%</td><td class='mut'>CTR-0001</td></tr>
+<tr><td class='c'><code>contract_name</code></td><td class='c'>text</td><td class='c'>v0.2</td><td>계약 이름</td><td class='c'>100%</td><td class='mut'>2026년 시도 포장보수 공사(처인구)</td></tr>
+<tr><td class='c'><code>counterpart</code></td><td class='c'>text</td><td class='c'>v0.2</td><td>수급인(업체)</td><td class='c'>100%</td><td class='mut'>모현건설(주)</td></tr>
+<tr><td class='c'><code>asset_id</code></td><td class='c'>text references asset(asset_id)</td><td class='c'>v0.2</td><td>자산 번호</td><td class='c'>13%</td><td class='mut'>BR1990-0000453</td></tr>
+<tr><td class='c'><code>dept_id</code></td><td class='c'>text references org_dept(dept_id)</td><td class='c'>v0.2</td><td>부서 번호</td><td class='c'>100%</td><td class='mut'>D03</td></tr>
+<tr><td class='c'><code>contract_type</code></td><td class='c'>text</td><td class='c'>v0.2</td><td>계약 구분(공사·용역·위탁·물품)</td><td class='c'>100%</td><td class='mut'>공사</td></tr>
+<tr><td class='c'><code>start_date</code></td><td class='c'>date</td><td class='c'>v0.2</td><td>계약 시작</td><td class='c'>100%</td><td class='mut'>2026-07-08</td></tr>
+<tr><td class='c'><code>end_date</code></td><td class='c'>date</td><td class='c'>v0.2</td><td>계약 종료</td><td class='c'>100%</td><td class='mut'>2027-06-03</td></tr>
+<tr><td class='c'><code>amount</code></td><td class='c'>bigint</td><td class='c'>v0.2</td><td>계약 금액</td><td class='c'>100%</td><td class='mut'>1280000000</td></tr>
+<tr><td class='c'><code>safety_clause</code></td><td class='c'>text</td><td class='c'>v0.2</td><td>안전보건 확보 조항 유무</td><td class='c'>100%</td><td class='mut'>안전보건 확보 조항 있음</td></tr>
+<tr><td class='c'><code>evaluation_done</code></td><td class='c'>text default</td><td class='c'>v0.2</td><td>수급인 안전보건 수준평가 실시 여부</td><td class='c'>100%</td><td class='mut'>Y</td></tr>
+<tr><td class='c'><code>note</code></td><td class='c'>text</td><td class='c'>v0.2</td><td>비고</td><td class='c'>100%</td><td class='mut'>예시 데이터(시연용)</td></tr>
+<tr><td class='c'><code>created_at</code></td><td class='c'>timestamptz default now()</td><td class='c'>v0.2</td><td>만든 일시</td><td class='c'></td><td class='mut'></td></tr>
+<tr><td class='c'><code>updated_at</code></td><td class='c'>timestamptz default now()</td><td class='c'>v0.2</td><td>고친 일시</td><td class='c'></td><td class='mut'></td></tr>
+<tr><td class='c'><code>contract_method</code></td><td class='c'>text</td><td class='c'>v0.4</td><td>계약 방식(제한경쟁·수의계약 등)</td><td class='c'>100%</td><td class='mut'>수의계약(2인견적)</td></tr>
+<tr><td class='c'><code>trade</code></td><td class='c'>text</td><td class='c'>v0.4</td><td>업종</td><td class='c'>100%</td><td class='mut'>토목</td></tr>
+<tr><td class='c'><code>safety_cost</code></td><td class='c'>bigint</td><td class='c'>v0.4</td><td>산업안전보건관리비</td><td class='c'>25%</td><td class='mut'>28844876</td></tr>
+<tr><td class='c'><code>worker_cnt</code></td><td class='c'>int</td><td class='c'>v0.4</td><td>투입 인원</td><td class='c'>100%</td><td class='mut'>24</td></tr>
+<tr><td class='c'><code>subcontract</code></td><td class='c'>text</td><td class='c'>v0.4</td><td>재하도급 여부</td><td class='c'>100%</td><td class='mut'>Y</td></tr>
+<tr><td class='c'><code>eval_score</code></td><td class='c'>int</td><td class='c'>v0.4</td><td>수급인 평가 점수</td><td class='c'>83%</td><td class='mut'>69</td></tr>
+<tr><td class='c'><code>eval_date</code></td><td class='c'>date</td><td class='c'>v0.4</td><td>평가 실시일</td><td class='c'>83%</td><td class='mut'>2026-08-04</td></tr>
+<tr><td class='c'><code>manager_staff_id</code></td><td class='c'>text</td><td class='c'>v0.4</td><td>계약 담당</td><td class='c'>100%</td><td class='mut'>SD03-1</td></tr>
+<tr><td class='c'><code>manager_phone</code></td><td class='c'>text</td><td class='c'>v0.5</td><td>부서 대표번호(예시)</td><td class='c'>100%</td><td class='mut'>031-324-2030</td></tr>
+<tr><td class='c'><code>work_start_date</code></td><td class='c'>date</td><td class='c'>v0.5</td><td>착공·착수일</td><td class='c'>100%</td><td class='mut'>2026-07-12</td></tr>
+<tr><td class='c'><code>main_task</code></td><td class='c'>text</td><td class='c'>v0.5</td><td>주요 수행업무</td><td class='c'>100%</td><td class='mut'>파손 포장 절삭·덧씌우기 및 포트홀 보수</td></tr>
+<tr><td class='c'><code>work_place</code></td><td class='c'>text</td><td class='c'>v0.5</td><td>업무수행장소</td><td class='c'>100%</td><td class='mut'>처인구 관내 시도 구간</td></tr>
+<tr><td class='c'><code>vendor_rep_role</code></td><td class='c'>text</td><td class='c'>v0.5</td><td>수탁 담당자(직책만)</td><td class='c'>100%</td><td class='mut'>현장대리인</td></tr>
+<tr><td class='c'><code>vendor_safety_role</code></td><td class='c'>text</td><td class='c'>v0.5</td><td>수급인 쪽 안전 담당(직책만)</td><td class='c'>100%</td><td class='mut'>안전담당(현장대리인 겸직)</td></tr>
+<tr><td class='c'><code>vendor_contact_on_file</code></td><td class='c'>text</td><td class='c'>v0.5</td><td>수탁 연락처 등록됨/미등록</td><td class='c'>100%</td><td class='mut'>Y</td></tr>
+<tr><td class='c'><code>vendor_doc_status</code></td><td class='c'>text</td><td class='c'>v0.5</td><td>수급인 확인 서류 제출 여부</td><td class='c'>100%</td><td class='mut'>제출됨</td></tr>
+<tr><td class='c'><code>regular_workers</code></td><td class='c'>int</td><td class='c'>v0.5</td><td>상시 근로자 수</td><td class='c'>100%</td><td class='mut'>70</td></tr>
+<tr><td class='c'><code>attachments</code></td><td class='c'>text</td><td class='c'>v0.5</td><td>첨부파일 이름 목록</td><td class='c'>100%</td><td class='mut'>계약서 · 설계서·내역서 · 안전관리계획서 · 산업안전보건관리</td></tr>
+<tr><td class='c'><code>entrust_type</code></td><td class='c'>text</td><td class='c'>v0.7</td><td>위탁 유형(도급·용역·민간위탁·위임)</td><td class='c'>100%</td><td class='mut'>도급</td></tr>
+<tr><td class='c'><code>apply_frame</code></td><td class='c'>text</td><td class='c'>v0.7</td><td>적용 틀(산업·시민·둘 다)</td><td class='c'>100%</td><td class='mut'>산업</td></tr>
+<tr><td class='c'><code>civil_scope</code></td><td class='c'>text</td><td class='c'>v0.7</td><td>공중이용시설·교통수단 운영·관리 위탁 여부</td><td class='c'>100%</td><td class='mut'>확인 필요</td></tr>
+<tr><td class='c'><code>civil_basis</code></td><td class='c'>text</td><td class='c'>v0.7</td><td>위탁 여부 판단 근거</td><td class='c'>100%</td><td class='mut'>시설 관련 업무이나 계약에 시설이 특정되지 않음 — 공중이용시</td></tr>
+<tr><td class='c'><code>ctl_own</code></td><td class='c'>text</td><td class='c'>v0.7</td><td>실질 지배 — 기관 소유 시설에서 함 Y/N</td><td class='c'>100%</td><td class='mut'>Y</td></tr>
+<tr><td class='c'><code>ctl_lease</code></td><td class='c'>text</td><td class='c'>v0.7</td><td>실질 지배 — 기관 임차 시설에서 함 Y/N</td><td class='c'>100%</td><td class='mut'>N</td></tr>
+<tr><td class='c'><code>ctl_repair</code></td><td class='c'>text</td><td class='c'>v0.7</td><td>실질 지배 — 보수·보강 의무·예산이 기관에 있음 Y/N</td><td class='c'>100%</td><td class='mut'>Y</td></tr>
+<tr><td class='c'><code>ctl_command</code></td><td class='c'>text</td><td class='c'>v0.7</td><td>실질 지배 — 작업 중지·시정 지시 가능 Y/N</td><td class='c'>100%</td><td class='mut'>Y</td></tr>
+<tr><td class='c'><code>ctl_vendor_site</code></td><td class='c'>text</td><td class='c'>v0.7</td><td>수급인 소유·임차 시설에서 하는 일 있음 Y/N</td><td class='c'>100%</td><td class='mut'>N</td></tr>
+<tr><td class='c'><code>control_result</code></td><td class='c'>text</td><td class='c'>v0.7</td><td>실질 지배 판단(해당·확인 필요·해당 없음)</td><td class='c'>100%</td><td class='mut'>해당</td></tr>
+<tr><td class='c'><code>control_basis</code></td><td class='c'>text</td><td class='c'>v0.7</td><td>실질 지배 판단 근거(계약서 조항 등)</td><td class='c'>100%</td><td class='mut'>시 소유 시설(처인구 관내 시도 구간)에서 수행 · 보수·보강</td></tr>
+<tr><td class='c'><code>control_confirmed_at</code></td><td class='c'>date</td><td class='c'>v0.7</td><td>판단을 확인한 날(사람이 적음)</td><td class='c'>0%</td><td class='mut'></td></tr>
+<tr><td class='c'><code>control_confirmed_by</code></td><td class='c'>text</td><td class='c'>v0.7</td><td>판단을 확인한 사람</td><td class='c'>0%</td><td class='mut'></td></tr>
+<tr><td class='c'><code>work_risk</code></td><td class='c'>text</td><td class='c'>v0.7</td><td>작업 위험도(일반·위험장소·화재·폭발·밀폐)</td><td class='c'>100%</td><td class='mut'>위험장소</td></tr>
+<tr><td class='c'><code>eval_pass_mark</code></td><td class='c'>int</td><td class='c'>v0.7</td><td>평가 합격선(점)</td><td class='c'>83%</td><td class='mut'>75</td></tr>
+<tr><td class='c'><code>eval_detail</code></td><td class='c'>text</td><td class='c'>v0.7</td><td>항목별 평가 있음 Y</td><td class='c'>0%</td><td class='mut'></td></tr>
+<tr><td class='c'><code>proc_stage</code></td><td class='c'>text</td><td class='c'>v0.7</td><td>도급 단계(발주·평가·계약·이행·준공 정산)</td><td class='c'>100%</td><td class='mut'>이행</td></tr>
+<tr><td class='c'><code>order_at</code></td><td class='c'>date</td><td class='c'>v0.7</td><td>발주일</td><td class='c'>100%</td><td class='mut'>2026-05-27</td></tr>
+<tr><td class='c'><code>contract_at</code></td><td class='c'>date</td><td class='c'>v0.7</td><td>계약일</td><td class='c'>0%</td><td class='mut'></td></tr>
+<tr><td class='c'><code>completed_at</code></td><td class='c'>date</td><td class='c'>v0.7</td><td>준공일</td><td class='c'>0%</td><td class='mut'></td></tr>
+<tr><td class='c'><code>settled_at</code></td><td class='c'>date</td><td class='c'>v0.7</td><td>정산일</td><td class='c'>0%</td><td class='mut'></td></tr>
+<tr><td class='c'><code>cost_planned</code></td><td class='c'>bigint</td><td class='c'>v0.7</td><td>안전보건 관리비 계상액(원)</td><td class='c'>87%</td><td class='mut'>28844876</td></tr>
+<tr><td class='c'><code>cost_settled</code></td><td class='c'>bigint</td><td class='c'>v0.7</td><td>안전보건 관리비 실사용 정산액(원)</td><td class='c'>0%</td><td class='mut'></td></tr>
+</tbody></table>
+<h2>contract_compliance <span class="tag">/contracts</span></h2>
+<table><thead><tr><th style='width:190px'>칸</th><th style='width:110px'>자료형</th><th style='width:74px'>생긴 판</th><th>뜻</th><th style='width:74px'>채움률</th><th style='width:230px'>예시값</th></tr></thead><tbody>
+<tr><td class='c'><code>cc_id</code></td><td class='c'>text primary key</td><td class='c'>v0.5</td><td>준수여부 번호</td><td class='c'>100%</td><td class='mut'>CCP-0001-1</td></tr>
+<tr><td class='c'><code>contract_id</code></td><td class='c'>text references contract(contract_id)</td><td class='c'>v0.5</td><td>계약 번호</td><td class='c'>100%</td><td class='mut'>CTR-0001</td></tr>
+<tr><td class='c'><code>item_no</code></td><td class='c'>int references contract_mgmt_item(item_no)</td><td class='c'>v0.5</td><td>관리의무 항목 번호(1~4)</td><td class='c'>100%</td><td class='mut'>1</td></tr>
+<tr><td class='c'><code>item_code</code></td><td class='c'>text</td><td class='c'>v0.5</td><td>관리의무 항목 코드</td><td class='c'>100%</td><td class='mut'>E4-9-GA</td></tr>
+<tr><td class='c'><code>status</code></td><td class='c'>text</td><td class='c'>v0.5</td><td>준수 여부(이행·보완필요·미이행·해당없음)</td><td class='c'>100%</td><td class='mut'>보완필요</td></tr>
+<tr><td class='c'><code>evidence_name</code></td><td class='c'>text</td><td class='c'>v0.5</td><td>증빙 이름</td><td class='c'>70%</td><td class='mut'>수급인 안전보건 수준 평가표(2026-08-04).pdf</td></tr>
+<tr><td class='c'><code>checked_at</code></td><td class='c'>date</td><td class='c'>v0.5</td><td>점검일</td><td class='c'>70%</td><td class='mut'>2026-09-03</td></tr>
+<tr><td class='c'><code>checked_by</code></td><td class='c'>text</td><td class='c'>v0.5</td><td>점검한 사람</td><td class='c'></td><td class='mut'></td></tr>
+<tr><td class='c'><code>finding</code></td><td class='c'>text</td><td class='c'>v0.5</td><td>점검 의견·지적사항</td><td class='c'>59%</td><td class='mut'>평가 점수 69점 — 기준(75점) 미달인데 보완계획 없이 선</td></tr>
+<tr><td class='c'><code>note</code></td><td class='c'>text</td><td class='c'>v0.5</td><td>비고</td><td class='c'>100%</td><td class='mut'>예시 데이터(시연용)</td></tr>
+</tbody></table>
+<h2>contract_duty </h2>
+<table><thead><tr><th style='width:190px'>칸</th><th style='width:110px'>자료형</th><th style='width:74px'>생긴 판</th><th>뜻</th><th style='width:74px'>채움률</th><th style='width:230px'>예시값</th></tr></thead><tbody>
+<tr><td class='c'><code>cduty_id</code></td><td class='c'>text primary key</td><td class='c'>v0.2</td><td>계약 의무 번호</td><td class='c'>100%</td><td class='mut'>CDT-0001-1</td></tr>
+<tr><td class='c'><code>contract_id</code></td><td class='c'>text references contract(contract_id)</td><td class='c'>v0.2</td><td>계약 번호</td><td class='c'>100%</td><td class='mut'>CTR-0001</td></tr>
+<tr><td class='c'><code>duty_key</code></td><td class='c'>text references duty_class(duty_key)</td><td class='c'>v0.2</td><td>의무 열쇠(정본)</td><td class='c'>100%</td><td class='mut'>DTY-01670</td></tr>
+<tr><td class='c'><code>status</code></td><td class='c'>text</td><td class='c'>v0.2</td><td>이행 상태</td><td class='c'>100%</td><td class='mut'>이행완료</td></tr>
+<tr><td class='c'><code>done_at</code></td><td class='c'>date</td><td class='c'>v0.2</td><td>이행 완료일</td><td class='c'>52%</td><td class='mut'>2026-08-04</td></tr>
+<tr><td class='c'><code>evidence_id</code></td><td class='c'>text</td><td class='c'>v0.2</td><td>증빙 번호</td><td class='c'>0%</td><td class='mut'></td></tr>
+<tr><td class='c'><code>note</code></td><td class='c'>text</td><td class='c'>v0.2</td><td>비고</td><td class='c'>100%</td><td class='mut'>예시 데이터(시연용)</td></tr>
+</tbody></table>
+<h2>contract_eval_item <span class="tag">/contracts</span></h2>
+<table><thead><tr><th style='width:190px'>칸</th><th style='width:110px'>자료형</th><th style='width:74px'>생긴 판</th><th>뜻</th><th style='width:74px'>채움률</th><th style='width:230px'>예시값</th></tr></thead><tbody>
+<tr><td class='c'><code>item_no</code></td><td class='c'>int primary key</td><td class='c'>v0.7</td><td>평가 항목 순번</td><td class='c'>100%</td><td class='mut'>1</td></tr>
+<tr><td class='c'><code>item_code</code></td><td class='c'>text</td><td class='c'>v0.7</td><td>평가 항목 코드(EV01~)</td><td class='c'>100%</td><td class='mut'>EV01</td></tr>
+<tr><td class='c'><code>group_code</code></td><td class='c'>text</td><td class='c'>v0.7</td><td>묶음 코드(가·나·다)</td><td class='c'>100%</td><td class='mut'>가</td></tr>
+<tr><td class='c'><code>group_name</code></td><td class='c'>text</td><td class='c'>v0.7</td><td>묶음 이름(체계·실행·운영)</td><td class='c'>100%</td><td class='mut'>체계</td></tr>
+<tr><td class='c'><code>item_name</code></td><td class='c'>text</td><td class='c'>v0.7</td><td>평가 항목 이름</td><td class='c'>100%</td><td class='mut'>조직·인력</td></tr>
+<tr><td class='c'><code>pt_good</code></td><td class='c'>int</td><td class='c'>v0.7</td><td>우수 점수</td><td class='c'>100%</td><td class='mut'>5</td></tr>
+<tr><td class='c'><code>pt_mid</code></td><td class='c'>int</td><td class='c'>v0.7</td><td>보통 점수</td><td class='c'>100%</td><td class='mut'>3</td></tr>
+<tr><td class='c'><code>pt_low</code></td><td class='c'>int</td><td class='c'>v0.7</td><td>미흡 점수</td><td class='c'>100%</td><td class='mut'>1</td></tr>
+<tr><td class='c'><code>mid_hint</code></td><td class='c'>text</td><td class='c'>v0.7</td><td>보통 판단 예시</td><td class='c'>10%</td><td class='mut'>과태료</td></tr>
+<tr><td class='c'><code>low_hint</code></td><td class='c'>text</td><td class='c'>v0.7</td><td>미흡 판단 예시</td><td class='c'>10%</td><td class='mut'>영업정지</td></tr>
+<tr><td class='c'><code>default_weight</code></td><td class='c'>int</td><td class='c'>v0.7</td><td>기본 가중치</td><td class='c'>100%</td><td class='mut'>2</td></tr>
+<tr><td class='c'><code>source</code></td><td class='c'>text</td><td class='c'>v0.7</td><td>출처 자료(쪽 번호)</td><td class='c'>100%</td><td class='mut'>서울시 중대재해 예방 안내서 4-6 수급자 안전관리능력 평가(</td></tr>
+<tr><td class='c'><code>basis</code></td><td class='c'>text</td><td class='c'>v0.7</td><td>근거 조문</td><td class='c'>100%</td><td class='mut'>시행령 제4조제9호가목 · 시행령 제10조제8호가목</td></tr>
+<tr><td class='c'><code>basis_unit_id</code></td><td class='c'>text</td><td class='c'>v0.7</td><td>근거 조항호목 번호(정본)</td><td class='c'>100%</td><td class='mut'>UNIT-0004835 · UNIT-0004778</td></tr>
+</tbody></table>
+<h2>contract_eval_score <span class="tag">/contracts</span></h2>
+<table><thead><tr><th style='width:190px'>칸</th><th style='width:110px'>자료형</th><th style='width:74px'>생긴 판</th><th>뜻</th><th style='width:74px'>채움률</th><th style='width:230px'>예시값</th></tr></thead><tbody>
+<tr><td class='c'><code>score_id</code></td><td class='c'>text primary key</td><td class='c'>v0.7</td><td>평가 기록 번호(화면이 씀)</td><td class='c'></td><td class='mut'></td></tr>
+<tr><td class='c'><code>contract_id</code></td><td class='c'>text</td><td class='c'>v0.7</td><td>계약 번호</td><td class='c'></td><td class='mut'></td></tr>
+<tr><td class='c'><code>eval_date</code></td><td class='c'>date</td><td class='c'>v0.7</td><td>평가 실시일</td><td class='c'></td><td class='mut'></td></tr>
+<tr><td class='c'><code>work_risk</code></td><td class='c'>text</td><td class='c'>v0.7</td><td>작업 위험도</td><td class='c'></td><td class='mut'></td></tr>
+<tr><td class='c'><code>pass_mark</code></td><td class='c'>int</td><td class='c'>v0.7</td><td>적용한 합격선</td><td class='c'></td><td class='mut'></td></tr>
+<tr><td class='c'><code>total</code></td><td class='c'>int</td><td class='c'>v0.7</td><td>100점 환산 점수</td><td class='c'></td><td class='mut'></td></tr>
+<tr><td class='c'><code>result</code></td><td class='c'>text</td><td class='c'>v0.7</td><td>합격·미달</td><td class='c'></td><td class='mut'></td></tr>
+<tr><td class='c'><code>weights</code></td><td class='c'>text</td><td class='c'>v0.7</td><td>적용한 가중치(쉼표 구분)</td><td class='c'></td><td class='mut'></td></tr>
+<tr><td class='c'><code>evaluated_by</code></td><td class='c'>text</td><td class='c'>v0.7</td><td>평가한 사람</td><td class='c'></td><td class='mut'></td></tr>
+<tr><td class='c'><code>note</code></td><td class='c'>text</td><td class='c'>v0.7</td><td>평가 메모</td><td class='c'></td><td class='mut'></td></tr>
+<tr><td class='c'><code>p1</code></td><td class='c'>int</td><td class='c'>v0.7</td><td>항목 1 점수(우수 5·보통 3·미흡 1)</td><td class='c'></td><td class='mut'></td></tr>
+<tr><td class='c'><code>p2</code></td><td class='c'>int</td><td class='c'>v0.7</td><td>항목 2 점수</td><td class='c'></td><td class='mut'></td></tr>
+<tr><td class='c'><code>p3</code></td><td class='c'>int</td><td class='c'>v0.7</td><td>항목 3 점수</td><td class='c'></td><td class='mut'></td></tr>
+<tr><td class='c'><code>p4</code></td><td class='c'>int</td><td class='c'>v0.7</td><td>항목 4 점수</td><td class='c'></td><td class='mut'></td></tr>
+<tr><td class='c'><code>p5</code></td><td class='c'>int</td><td class='c'>v0.7</td><td>항목 5 점수</td><td class='c'></td><td class='mut'></td></tr>
+<tr><td class='c'><code>p6</code></td><td class='c'>int</td><td class='c'>v0.7</td><td>항목 6 점수</td><td class='c'></td><td class='mut'></td></tr>
+<tr><td class='c'><code>p7</code></td><td class='c'>int</td><td class='c'>v0.7</td><td>항목 7 점수</td><td class='c'></td><td class='mut'></td></tr>
+<tr><td class='c'><code>p8</code></td><td class='c'>int</td><td class='c'>v0.7</td><td>항목 8 점수</td><td class='c'></td><td class='mut'></td></tr>
+<tr><td class='c'><code>p9</code></td><td class='c'>int</td><td class='c'>v0.7</td><td>항목 9 점수</td><td class='c'></td><td class='mut'></td></tr>
+<tr><td class='c'><code>p10</code></td><td class='c'>int</td><td class='c'>v0.7</td><td>항목 10 점수</td><td class='c'></td><td class='mut'></td></tr>
+</tbody></table>
+<h2>contract_eval_setting <span class="tag">/contracts</span></h2>
+<table><thead><tr><th style='width:190px'>칸</th><th style='width:110px'>자료형</th><th style='width:74px'>생긴 판</th><th>뜻</th><th style='width:74px'>채움률</th><th style='width:230px'>예시값</th></tr></thead><tbody>
+<tr><td class='c'><code>setting_id</code></td><td class='c'>text primary key</td><td class='c'>v0.7</td><td>설정 번호(가장 늦은 줄이 지금 설정 · 화면이 씀)</td><td class='c'></td><td class='mut'></td></tr>
+<tr><td class='c'><code>pass_default</code></td><td class='c'>int</td><td class='c'>v0.7</td><td>합격선 — 기본</td><td class='c'></td><td class='mut'></td></tr>
+<tr><td class='c'><code>pass_general</code></td><td class='c'>int</td><td class='c'>v0.7</td><td>합격선 — 일반 작업</td><td class='c'></td><td class='mut'></td></tr>
+<tr><td class='c'><code>pass_risk</code></td><td class='c'>int</td><td class='c'>v0.7</td><td>합격선 — 위험장소 작업</td><td class='c'></td><td class='mut'></td></tr>
+<tr><td class='c'><code>pass_fire</code></td><td class='c'>int</td><td class='c'>v0.7</td><td>합격선 — 화재·폭발·밀폐 작업</td><td class='c'></td><td class='mut'></td></tr>
+<tr><td class='c'><code>weights</code></td><td class='c'>text</td><td class='c'>v0.7</td><td>항목별 가중치(쉼표 구분)</td><td class='c'></td><td class='mut'></td></tr>
+<tr><td class='c'><code>set_at</code></td><td class='c'>timestamptz</td><td class='c'>v0.7</td><td>설정 일시</td><td class='c'></td><td class='mut'></td></tr>
+<tr><td class='c'><code>set_by</code></td><td class='c'>text</td><td class='c'>v0.7</td><td>설정한 사람</td><td class='c'></td><td class='mut'></td></tr>
+</tbody></table>
+<h2>contract_hazard </h2>
+<table><thead><tr><th style='width:190px'>칸</th><th style='width:110px'>자료형</th><th style='width:74px'>생긴 판</th><th>뜻</th><th style='width:74px'>채움률</th><th style='width:230px'>예시값</th></tr></thead><tbody>
+<tr><td class='c'><code>hazard_id</code></td><td class='c'>text primary key</td><td class='c'>v0.2</td><td>위험요인 번호</td><td class='c'>100%</td><td class='mut'>HZD-0001-1</td></tr>
+<tr><td class='c'><code>contract_id</code></td><td class='c'>text references contract(contract_id)</td><td class='c'>v0.2</td><td>계약 번호</td><td class='c'>100%</td><td class='mut'>CTR-0001</td></tr>
+<tr><td class='c'><code>hazard_place</code></td><td class='c'>text</td><td class='c'>v0.2</td><td>장소</td><td class='c'>100%</td><td class='mut'>작업 구간</td></tr>
+<tr><td class='c'><code>hazard_factor</code></td><td class='c'>text</td><td class='c'>v0.2</td><td>위험요인</td><td class='c'>100%</td><td class='mut'>추락·낙하</td></tr>
+<tr><td class='c'><code>risk_level</code></td><td class='c'>text</td><td class='c'>v0.2</td><td>위험도(높음·보통·낮음)</td><td class='c'>100%</td><td class='mut'>높음</td></tr>
+<tr><td class='c'><code>measure</code></td><td class='c'>text</td><td class='c'>v0.2</td><td>조치</td><td class='c'>100%</td><td class='mut'>안전난간·안전대 착용·낙하물 방지망 설치</td></tr>
+</tbody></table>
+<h2>contract_hazard_map <span class="tag">/contracts</span></h2>
+<table><thead><tr><th style='width:190px'>칸</th><th style='width:110px'>자료형</th><th style='width:74px'>생긴 판</th><th>뜻</th><th style='width:74px'>채움률</th><th style='width:230px'>예시값</th></tr></thead><tbody>
+<tr><td class='c'><code>hazard_id</code></td><td class='c'>text</td><td class='c'>v0.5</td><td>계약 위험요인 번호</td><td class='c'>100%</td><td class='mut'>HZD-0001-1</td></tr>
+<tr><td class='c'><code>contract_id</code></td><td class='c'>text references contract(contract_id)</td><td class='c'>v0.5</td><td>계약 번호</td><td class='c'>100%</td><td class='mut'>CTR-0001</td></tr>
+<tr><td class='c'><code>hazard_code</code></td><td class='c'>text references hazard_code(hazard_code)</td><td class='c'>v0.5</td><td>유해·위험요인 코드(18항목)</td><td class='c'>100%</td><td class='mut'>HZ01</td></tr>
+<tr><td class='c'><code>map_basis</code></td><td class='c'>text</td><td class='c'>v0.5</td><td>연결 근거(위험요인 문구 등)</td><td class='c'>100%</td><td class='mut'>위험요인 문구</td></tr>
+<tr><td class='c'><code>source_text</code></td><td class='c'>text</td><td class='c'>v0.5</td><td>조문 원문</td><td class='c'>100%</td><td class='mut'>작업 구간 / 추락·낙하</td></tr>
+</tbody></table>
+<h2>contract_mgmt_item <span class="tag">/contracts</span></h2>
+<table><thead><tr><th style='width:190px'>칸</th><th style='width:110px'>자료형</th><th style='width:74px'>생긴 판</th><th>뜻</th><th style='width:74px'>채움률</th><th style='width:230px'>예시값</th></tr></thead><tbody>
+<tr><td class='c'><code>item_no</code></td><td class='c'>int primary key</td><td class='c'>v0.5</td><td>관리의무 항목 번호(1~4)</td><td class='c'>100%</td><td class='mut'>1</td></tr>
+<tr><td class='c'><code>item_code</code></td><td class='c'>text</td><td class='c'>v0.5</td><td>관리의무 항목 코드(E4-9-GA 등)</td><td class='c'>100%</td><td class='mut'>E4-9-GA</td></tr>
+<tr><td class='c'><code>item_name</code></td><td class='c'>text</td><td class='c'>v0.5</td><td>관리의무 항목 이름</td><td class='c'>100%</td><td class='mut'>수급인의 안전·보건 확보 능력·기술 평가 기준·절차</td></tr>
+<tr><td class='c'><code>basis</code></td><td class='c'>text</td><td class='c'>v0.5</td><td>근거 조문</td><td class='c'>100%</td><td class='mut'>중대재해 처벌 등에 관한 법률 시행령 제4조제9호가목</td></tr>
+<tr><td class='c'><code>basis_unit_id</code></td><td class='c'>text</td><td class='c'>v0.5</td><td>근거 조항호목 번호(정본)</td><td class='c'>100%</td><td class='mut'>UNIT-0004835</td></tr>
+<tr><td class='c'><code>basis_text</code></td><td class='c'>text</td><td class='c'>v0.5</td><td>근거 조문 원문</td><td class='c'>100%</td><td class='mut'>도급, 용역, 위탁 등을 받는 자의 산업재해 예방을 위한 조치</td></tr>
+<tr><td class='c'><code>applies_to</code></td><td class='c'>text</td><td class='c'>v0.5</td><td>적용 범위</td><td class='c'>100%</td><td class='mut'>전체</td></tr>
+<tr><td class='c'><code>evidence_hint</code></td><td class='c'>text</td><td class='c'>v0.5</td><td>증빙 예시</td><td class='c'>100%</td><td class='mut'>수급인 안전보건 수준 평가표 · 평가 기준·절차 문서</td></tr>
+</tbody></table>
+<h2>drill_eval <span class="tag">/drills</span></h2>
+<table><thead><tr><th style='width:190px'>칸</th><th style='width:110px'>자료형</th><th style='width:74px'>생긴 판</th><th>뜻</th><th style='width:74px'>채움률</th><th style='width:230px'>예시값</th></tr></thead><tbody>
+<tr><td class='c'><code>eval_id</code></td><td class='c'>text primary key</td><td class='c'>v0.6</td><td>평가 번호</td><td class='c'>100%</td><td class='mut'>DRE-0001</td></tr>
+<tr><td class='c'><code>drill_id</code></td><td class='c'>text</td><td class='c'>v0.6</td><td>훈련 번호</td><td class='c'>100%</td><td class='mut'>DRL-0001</td></tr>
+<tr><td class='c'><code>evaluator</code></td><td class='c'>text</td><td class='c'>v0.6</td><td>평가자</td><td class='c'>100%</td><td class='mut'>SM02-2</td></tr>
+<tr><td class='c'><code>evaluated_at</code></td><td class='c'>date</td><td class='c'>v0.6</td><td>평가일</td><td class='c'>100%</td><td class='mut'>2025-11-15</td></tr>
+<tr><td class='c'><code>p1</code></td><td class='c'>int</td><td class='c'>v0.6</td><td>계획 — 훈련계획 문서 수립(10점)</td><td class='c'>100%</td><td class='mut'>10</td></tr>
+<tr><td class='c'><code>p2</code></td><td class='c'>int</td><td class='c'>v0.6</td><td>계획 — 시나리오 적정성(10점)</td><td class='c'>100%</td><td class='mut'>8</td></tr>
+<tr><td class='c'><code>p3</code></td><td class='c'>int</td><td class='c'>v0.6</td><td>계획 — 참석대상 통보·사전 교육(5점)</td><td class='c'>100%</td><td class='mut'>5</td></tr>
+<tr><td class='c'><code>p4</code></td><td class='c'>int</td><td class='c'>v0.6</td><td>계획 — 시설·장비 준비 확인(5점)</td><td class='c'>100%</td><td class='mut'>4</td></tr>
+<tr><td class='c'><code>c1</code></td><td class='c'>int</td><td class='c'>v0.6</td><td>전파 — 사전안내·안내방송·교육(10점)</td><td class='c'>100%</td><td class='mut'>7</td></tr>
+<tr><td class='c'><code>c2</code></td><td class='c'>int</td><td class='c'>v0.6</td><td>전파 — 신고·경보·자위소방대 연락(10점)</td><td class='c'>100%</td><td class='mut'>9</td></tr>
+<tr><td class='c'><code>x1</code></td><td class='c'>int</td><td class='c'>v0.6</td><td>실행 — 목표시간 내 대피(10점)</td><td class='c'>100%</td><td class='mut'>6</td></tr>
+<tr><td class='c'><code>x2</code></td><td class='c'>int</td><td class='c'>v0.6</td><td>실행 — 병목 없는 대피유도(10점)</td><td class='c'>100%</td><td class='mut'>8</td></tr>
+<tr><td class='c'><code>x3</code></td><td class='c'>int</td><td class='c'>v0.6</td><td>실행 — 관계자·이용자 모두 참석(5점)</td><td class='c'>100%</td><td class='mut'>4</td></tr>
+<tr><td class='c'><code>x4</code></td><td class='c'>int</td><td class='c'>v0.6</td><td>실행 — 유관기관 협업(5점)</td><td class='c'>100%</td><td class='mut'>5</td></tr>
+<tr><td class='c'><code>e1</code></td><td class='c'>int</td><td class='c'>v0.6</td><td>평가 — 종료 후 평가 실시(10점)</td><td class='c'>100%</td><td class='mut'>10</td></tr>
+<tr><td class='c'><code>e2</code></td><td class='c'>int</td><td class='c'>v0.6</td><td>평가 — 결과보고서에 잘된 점·개선사항(10점)</td><td class='c'>100%</td><td class='mut'>9</td></tr>
+<tr><td class='c'><code>total</code></td><td class='c'>int</td><td class='c'>v0.6</td><td>합계(100점)</td><td class='c'>100%</td><td class='mut'>85</td></tr>
+<tr><td class='c'><code>comment</code></td><td class='c'>text</td><td class='c'>v0.6</td><td>평가 의견</td><td class='c'>100%</td><td class='mut'>잘된 점: 운영사·소방서 합동으로 현장감 있게 진행 / 미흡:</td></tr>
+<tr><td class='c'><code>note</code></td><td class='c'>text</td><td class='c'>v0.6</td><td>비고</td><td class='c'>100%</td><td class='mut'>예시 자료</td></tr>
+</tbody></table>
+<h2>drill_plan <span class="tag">/calendar /drills /evidence</span></h2>
+<table><thead><tr><th style='width:190px'>칸</th><th style='width:110px'>자료형</th><th style='width:74px'>생긴 판</th><th>뜻</th><th style='width:74px'>채움률</th><th style='width:230px'>예시값</th></tr></thead><tbody>
+<tr><td class='c'><code>drill_id</code></td><td class='c'>text primary key</td><td class='c'>v0.6</td><td>훈련 번호</td><td class='c'>100%</td><td class='mut'>DRL-0001</td></tr>
+<tr><td class='c'><code>target_key</code></td><td class='c'>text</td><td class='c'>v0.6</td><td>대상 열쇠(자산 번호 또는 LRT-EVERLINE)</td><td class='c'>100%</td><td class='mut'>LRT-EVERLINE</td></tr>
+<tr><td class='c'><code>target_name</code></td><td class='c'>text</td><td class='c'>v0.6</td><td>훈련 대상 이름</td><td class='c'>100%</td><td class='mut'>용인경전철(에버라인)</td></tr>
+<tr><td class='c'><code>target_kind</code></td><td class='c'>text</td><td class='c'>v0.6</td><td>공중교통수단 · 제1종시설물 · 2종시설물</td><td class='c'>100%</td><td class='mut'>공중교통수단</td></tr>
+<tr><td class='c'><code>asset_class</code></td><td class='c'>text</td><td class='c'>v0.6</td><td>종별(1·2·3종)</td><td class='c'>80%</td><td class='mut'>1종</td></tr>
+<tr><td class='c'><code>legal_scope</code></td><td class='c'>text</td><td class='c'>v0.6</td><td>법정 대상 · 자체 확대</td><td class='c'>100%</td><td class='mut'>법정 대상</td></tr>
+<tr><td class='c'><code>dept_id</code></td><td class='c'>text</td><td class='c'>v0.6</td><td>부서 번호</td><td class='c'>100%</td><td class='mut'>D10</td></tr>
+<tr><td class='c'><code>year</code></td><td class='c'>int</td><td class='c'>v0.6</td><td>연도</td><td class='c'>100%</td><td class='mut'>2025</td></tr>
+<tr><td class='c'><code>half</code></td><td class='c'>text</td><td class='c'>v0.6</td><td>반기</td><td class='c'>100%</td><td class='mut'>하반기</td></tr>
+<tr><td class='c'><code>drill_type</code></td><td class='c'>text</td><td class='c'>v0.6</td><td>훈련 유형(화재·지진·위험물 누출)</td><td class='c'>100%</td><td class='mut'>화재</td></tr>
+<tr><td class='c'><code>method</code></td><td class='c'>text</td><td class='c'>v0.6</td><td>훈련 방식(실행기반·토론기반·도상+실제)</td><td class='c'>100%</td><td class='mut'>실행기반</td></tr>
+<tr><td class='c'><code>planned_at</code></td><td class='c'>timestamptz</td><td class='c'>v0.6</td><td>계획 일시</td><td class='c'>100%</td><td class='mut'>2025-11-12 14:00</td></tr>
+<tr><td class='c'><code>place</code></td><td class='c'>text</td><td class='c'>v0.6</td><td>훈련 장소</td><td class='c'>100%</td><td class='mut'>기흥역 승강장·전동차</td></tr>
+<tr><td class='c'><code>scenario</code></td><td class='c'>text</td><td class='c'>v0.6</td><td>시나리오</td><td class='c'>100%</td><td class='mut'>전동차 객실 화재 → 승객 대피·역사 밖 유도</td></tr>
+<tr><td class='c'><code>target_minutes</code></td><td class='c'>int</td><td class='c'>v0.6</td><td>목표 대피시간(분)</td><td class='c'>100%</td><td class='mut'>10</td></tr>
+<tr><td class='c'><code>prep_coop</code></td><td class='c'>text</td><td class='c'>v0.6</td><td>준비 — 사전협조 완료 여부</td><td class='c'>100%</td><td class='mut'>완료</td></tr>
+<tr><td class='c'><code>prep_items</code></td><td class='c'>text</td><td class='c'>v0.6</td><td>준비 — 훈련준비 완료 여부</td><td class='c'>100%</td><td class='mut'>완료</td></tr>
+<tr><td class='c'><code>prep_budget</code></td><td class='c'>text</td><td class='c'>v0.6</td><td>준비 — 예산·행정 완료 여부</td><td class='c'>100%</td><td class='mut'>완료</td></tr>
+<tr><td class='c'><code>prep_memo</code></td><td class='c'>text</td><td class='c'>v0.6</td><td>준비 메모</td><td class='c'>80%</td><td class='mut'>소방서·경찰서 협조 공문 · 방송 원고 · 집결지 표지 · 구</td></tr>
+<tr><td class='c'><code>carry_over</code></td><td class='c'>text</td><td class='c'>v0.6</td><td>지난 훈련에서 넘겨받은 개선 과제</td><td class='c'>33%</td><td class='mut'>승강장 안내방송 음량 개선 · 대피유도 인원 2명 추가</td></tr>
+<tr><td class='c'><code>r_cmd_main</code></td><td class='c'>text</td><td class='c'>v0.6</td><td>임무 — 위기상황 총괄자(정)</td><td class='c'>100%</td><td class='mut'>SD10-1</td></tr>
+<tr><td class='c'><code>r_cmd_sub</code></td><td class='c'>text</td><td class='c'>v0.6</td><td>임무 — 위기상황 총괄자(부)</td><td class='c'>100%</td><td class='mut'>SD10-2</td></tr>
+<tr><td class='c'><code>r_evac_main</code></td><td class='c'>text</td><td class='c'>v0.6</td><td>임무 — 대피유도팀(정)</td><td class='c'>100%</td><td class='mut'>SD10-2</td></tr>
+<tr><td class='c'><code>r_evac_sub</code></td><td class='c'>text</td><td class='c'>v0.6</td><td>임무 — 대피유도팀(부)</td><td class='c'>100%</td><td class='mut'>SD02-2</td></tr>
+<tr><td class='c'><code>r_resp_main</code></td><td class='c'>text</td><td class='c'>v0.6</td><td>임무 — 현장대응팀(정)</td><td class='c'>100%</td><td class='mut'>SD13-1</td></tr>
+<tr><td class='c'><code>r_resp_sub</code></td><td class='c'>text</td><td class='c'>v0.6</td><td>임무 — 현장대응팀(부)</td><td class='c'>87%</td><td class='mut'>SD13-2</td></tr>
+<tr><td class='c'><code>r_aid_main</code></td><td class='c'>text</td><td class='c'>v0.6</td><td>임무 — 구호지원팀(정)</td><td class='c'>100%</td><td class='mut'>SD11-1</td></tr>
+<tr><td class='c'><code>r_aid_sub</code></td><td class='c'>text</td><td class='c'>v0.6</td><td>임무 — 구호지원팀(부)</td><td class='c'>87%</td><td class='mut'>SD11-2</td></tr>
+<tr><td class='c'><code>r_eval_main</code></td><td class='c'>text</td><td class='c'>v0.6</td><td>임무 — 훈련 검증자(정)</td><td class='c'>100%</td><td class='mut'>SM02-2</td></tr>
+<tr><td class='c'><code>r_eval_sub</code></td><td class='c'>text</td><td class='c'>v0.6</td><td>임무 — 훈련 검증자(부)</td><td class='c'>100%</td><td class='mut'>SM02-3</td></tr>
+<tr><td class='c'><code>status</code></td><td class='c'>text</td><td class='c'>v0.6</td><td>진행 상태(계획·준비·실시·평가 완료)</td><td class='c'>100%</td><td class='mut'>평가 완료</td></tr>
+<tr><td class='c'><code>done_at</code></td><td class='c'>date</td><td class='c'>v0.6</td><td>훈련 실시일</td><td class='c'>73%</td><td class='mut'>2025-11-12</td></tr>
+<tr><td class='c'><code>actual_minutes</code></td><td class='c'>int</td><td class='c'>v0.6</td><td>실제 대피시간(분)</td><td class='c'>67%</td><td class='mut'>12</td></tr>
+<tr><td class='c'><code>participants</code></td><td class='c'>int</td><td class='c'>v0.6</td><td>참여 인원</td><td class='c'>73%</td><td class='mut'>46</td></tr>
+<tr><td class='c'><code>absent</code></td><td class='c'>int</td><td class='c'>v0.6</td><td>불참 인원</td><td class='c'>73%</td><td class='mut'>4</td></tr>
+<tr><td class='c'><code>photos</code></td><td class='c'>text</td><td class='c'>v0.6</td><td>사진 주소(「 | 」로 구분)</td><td class='c'>0%</td><td class='mut'></td></tr>
+<tr><td class='c'><code>good_points</code></td><td class='c'>text</td><td class='c'>v0.6</td><td>잘된 점</td><td class='c'>73%</td><td class='mut'>운영사·소방서 합동으로 현장감 있게 진행</td></tr>
+<tr><td class='c'><code>shortfalls</code></td><td class='c'>text</td><td class='c'>v0.6</td><td>미흡사항</td><td class='c'>73%</td><td class='mut'>목표 대피시간 2분 초과 · 안내방송 음량 작음</td></tr>
+<tr><td class='c'><code>improvements</code></td><td class='c'>text</td><td class='c'>v0.6</td><td>개선사항(다음 훈련 과제)</td><td class='c'>73%</td><td class='mut'>승강장 안내방송 음량 개선 · 대피유도 인원 2명 추가</td></tr>
+<tr><td class='c'><code>substitute</code></td><td class='c'>text</td><td class='c'>v0.6</td><td>비상대응계획으로 갈음 Y/N</td><td class='c'>20%</td><td class='mut'>Y</td></tr>
+<tr><td class='c'><code>substitute_basis</code></td><td class='c'>text</td><td class='c'>v0.6</td><td>갈음 근거</td><td class='c'>20%</td><td class='mut'>철도안전법 제7조 비상대응계획(철도안전관리체계)</td></tr>
+<tr><td class='c'><code>ceo_checked</code></td><td class='c'>text</td><td class='c'>v0.6</td><td>경영책임자 확인 Y/N</td><td class='c'>20%</td><td class='mut'>Y</td></tr>
+<tr><td class='c'><code>ceo_checked_at</code></td><td class='c'>date</td><td class='c'>v0.6</td><td>경영책임자 확인일</td><td class='c'>7%</td><td class='mut'>2025-11-20</td></tr>
+<tr><td class='c'><code>ceo_check_mode</code></td><td class='c'>text</td><td class='c'>v0.6</td><td>확인 방식(직접 확인·보고받음)</td><td class='c'>7%</td><td class='mut'>보고받음</td></tr>
+<tr><td class='c'><code>note</code></td><td class='c'>text</td><td class='c'>v0.6</td><td>비고</td><td class='c'>100%</td><td class='mut'>예시 자료</td></tr>
+</tbody></table>
+<h2>duty_assignment <span class="tag">/duties/[key]</span></h2>
+<table><thead><tr><th style='width:190px'>칸</th><th style='width:110px'>자료형</th><th style='width:74px'>생긴 판</th><th>뜻</th><th style='width:74px'>채움률</th><th style='width:230px'>예시값</th></tr></thead><tbody>
+<tr><td class='c'><code>assign_id</code></td><td class='c'>text primary key</td><td class='c'>v0.1</td><td>배정 번호</td><td class='c'>100%</td><td class='mut'>ASG-000001</td></tr>
+<tr><td class='c'><code>duty_key</code></td><td class='c'>text references duty_class(duty_key)</td><td class='c'>v0.1</td><td>의무 열쇠(정본)</td><td class='c'>100%</td><td class='mut'>DTY-00001</td></tr>
+<tr><td class='c'><code>asset_id</code></td><td class='c'>text references asset(asset_id)</td><td class='c'>v0.1</td><td>자산 번호</td><td class='c'>38%</td><td class='mut'>BR0000-0000002</td></tr>
+<tr><td class='c'><code>scope</code></td><td class='c'>text check (scope in ('기관','유형','자산')</td><td class='c'>v0.1</td><td>적용 범위(자산·유형)</td><td class='c'>100%</td><td class='mut'>유형</td></tr>
+<tr><td class='c'><code>target_code</code></td><td class='c'>text</td><td class='c'>v0.1</td><td>관리대상 코드</td><td class='c'>100%</td><td class='mut'>TG18</td></tr>
+<tr><td class='c'><code>dept_id</code></td><td class='c'>text references org_dept(dept_id)</td><td class='c'>v0.1</td><td>부서 번호</td><td class='c'>100%</td><td class='mut'>D09</td></tr>
+<tr><td class='c'><code>owner_staff_id</code></td><td class='c'>text references staff(staff_id)</td><td class='c'>v0.1</td><td>정담당</td><td class='c'>92%</td><td class='mut'>SD09-1</td></tr>
+<tr><td class='c'><code>deputy_staff_id</code></td><td class='c'>text references staff(staff_id)</td><td class='c'>v0.1</td><td>부담당</td><td class='c'>92%</td><td class='mut'>SD09-2</td></tr>
+<tr><td class='c'><code>applicability</code></td><td class='c'>text check (applicability in ('해당','비해당','확인필요')</td><td class='c'>v0.1</td><td>해당 여부</td><td class='c'>100%</td><td class='mut'>확인필요</td></tr>
+<tr><td class='c'><code>applicability_note</code></td><td class='c'>text</td><td class='c'>v0.1</td><td>해당 여부 메모</td><td class='c'>42%</td><td class='mut'>조건부 의무 — 보유·해당 여부 확인 필요</td></tr>
+<tr><td class='c'><code>cycle</code></td><td class='c'>text</td><td class='c'>v0.1</td><td>주기</td><td class='c'>100%</td><td class='mut'>반기 1회</td></tr>
+<tr><td class='c'><code>cycle_days</code></td><td class='c'>int</td><td class='c'>v0.1</td><td>주기(일)</td><td class='c'>100%</td><td class='mut'>180</td></tr>
+<tr><td class='c'><code>decided_by</code></td><td class='c'>text</td><td class='c'>v0.1</td><td>정한 사람</td><td class='c'>0%</td><td class='mut'></td></tr>
+<tr><td class='c'><code>decided_at</code></td><td class='c'>timestamptz</td><td class='c'>v0.1</td><td>정한 날짜</td><td class='c'>0%</td><td class='mut'></td></tr>
+<tr><td class='c'><code>badge</code></td><td class='c'>text</td><td class='c'>v0.1</td><td>화면 표시(배지)</td><td class='c'>63%</td><td class='mut'>자산 대장 없음 — 보유 확인 필요</td></tr>
+<tr><td class='c'><code>created_at</code></td><td class='c'>timestamptz default now()</td><td class='c'>v0.1</td><td>만든 일시</td><td class='c'></td><td class='mut'></td></tr>
+<tr><td class='c'><code>updated_at</code></td><td class='c'>timestamptz default now()</td><td class='c'>v0.1</td><td>고친 일시</td><td class='c'></td><td class='mut'></td></tr>
+<tr><td class='c'><code>plan_input_type</code></td><td class='c'>text</td><td class='c'>v0.2</td><td>계획 입력 유형(DATE_YM 연-월 · HALF_YEAR 반기)</td><td class='c'></td><td class='mut'></td></tr>
+</tbody></table>
+<h2>duty_class </h2>
+<table><thead><tr><th style='width:190px'>칸</th><th style='width:110px'>자료형</th><th style='width:74px'>생긴 판</th><th>뜻</th><th style='width:74px'>채움률</th><th style='width:230px'>예시값</th></tr></thead><tbody>
+<tr><td class='c'><code>duty_key</code></td><td class='c'>text primary key</td><td class='c'>v0.1</td><td>의무 열쇠(정본)</td><td class='c'>100%</td><td class='mut'>DTY-00001</td></tr>
+<tr><td class='c'><code>yongin_mark</code></td><td class='c'>text</td><td class='c'>v0.1</td><td>용인시 해당 표시</td><td class='c'>100%</td><td class='mut'>Y</td></tr>
+<tr><td class='c'><code>area</code></td><td class='c'>text</td><td class='c'>v0.1</td><td>재해 구분(I 산업·F 시설교통·M 원료제조물)</td><td class='c'>100%</td><td class='mut'>F</td></tr>
+<tr><td class='c'><code>code36</code></td><td class='c'>text</td><td class='c'>v0.1</td><td>중처법 의무조항 36</td><td class='c'>100%</td><td class='mut'>F01</td></tr>
+<tr><td class='c'><code>code36_name</code></td><td class='c'>text</td><td class='c'>v0.1</td><td>의무조항 이름</td><td class='c'>100%</td><td class='mut'>인력배치</td></tr>
+<tr><td class='c'><code>task_name</code></td><td class='c'>text</td><td class='c'>v0.1</td><td>세부 이행업무</td><td class='c'>100%</td><td class='mut'>고압가스안전관리기준통합고시 (조 번호 없는 본문)</td></tr>
+<tr><td class='c'><code>target_code</code></td><td class='c'>text</td><td class='c'>v0.1</td><td>관리대상 코드</td><td class='c'>100%</td><td class='mut'>TG18</td></tr>
+<tr><td class='c'><code>target_name</code></td><td class='c'>text</td><td class='c'>v0.1</td><td>관리대상 이름</td><td class='c'>100%</td><td class='mut'>가스(충전소·고압가스)</td></tr>
+<tr><td class='c'><code>impl_type</code></td><td class='c'>text</td><td class='c'>v0.1</td><td>이행 유형 T01~T10</td><td class='c'>100%</td><td class='mut'>T04</td></tr>
+<tr><td class='c'><code>impl_type_name</code></td><td class='c'>text</td><td class='c'>v0.1</td><td>이행 유형 이름</td><td class='c'>100%</td><td class='mut'>점검·검사·진단·측정</td></tr>
+<tr><td class='c'><code>law_group</code></td><td class='c'>text</td><td class='c'>v0.1</td><td>법령 그룹</td><td class='c'>100%</td><td class='mut'>LF05</td></tr>
+<tr><td class='c'><code>law_group_name</code></td><td class='c'>text</td><td class='c'>v0.1</td><td>법령 그룹 이름</td><td class='c'>100%</td><td class='mut'>전기·가스·에너지</td></tr>
+<tr><td class='c'><code>law</code></td><td class='c'>text</td><td class='c'>v0.1</td><td>근거 법령</td><td class='c'>100%</td><td class='mut'>고압가스 안전관리법</td></tr>
+<tr><td class='c'><code>doc</code></td><td class='c'>text</td><td class='c'>v0.1</td><td>문서</td><td class='c'>100%</td><td class='mut'>고압가스안전관리기준통합고시</td></tr>
+<tr><td class='c'><code>layer</code></td><td class='c'>text</td><td class='c'>v0.1</td><td>법령 계층(법률·대통령령·부령·고시)</td><td class='c'>100%</td><td class='mut'>고시</td></tr>
+<tr><td class='c'><code>unit_label_ko</code></td><td class='c'>text</td><td class='c'>v0.1</td><td>조문(우리말 표기)</td><td class='c'>100%</td><td class='mut'>(조 번호 없는 본문)제3항제1호타목</td></tr>
+<tr><td class='c'><code>article_title</code></td><td class='c'>text</td><td class='c'>v0.1</td><td>조 제목</td><td class='c'>100%</td><td class='mut'>a901/p3/n1/mta/s0-2</td></tr>
+<tr><td class='c'><code>duty_name</code></td><td class='c'>text</td><td class='c'>v0.1</td><td>의무 이름</td><td class='c'>75%</td><td class='mut'>고압가스안전관리기준통합고시 — 안전성평가기법 선정 심사</td></tr>
+<tr><td class='c'><code>verdict</code></td><td class='c'>text</td><td class='c'>v0.1</td><td>판정</td><td class='c'>100%</td><td class='mut'>obligation</td></tr>
+<tr><td class='c'><code>duty_subject</code></td><td class='c'>text</td><td class='c'>v0.1</td><td>수범주체</td><td class='c'>65%</td><td class='mut'>요청을 받은 관계기관의 장</td></tr>
+<tr><td class='c'><code>cycle_text</code></td><td class='c'>text</td><td class='c'>v0.1</td><td>주기(원문)</td><td class='c'>20%</td><td class='mut'>축척: 1/400</td></tr>
+<tr><td class='c'><code>assign_basis</code></td><td class='c'>text</td><td class='c'>v0.1</td><td>배정 근거</td><td class='c'>100%</td><td class='mut'>규칙 R14 — 인력 선임·배치</td></tr>
+<tr><td class='c'><code>evidence_kind</code></td><td class='c'>text</td><td class='c'>v0.1</td><td>증빙 종류</td><td class='c'>100%</td><td class='mut'>조직도, 업무분장</td></tr>
+<tr><td class='c'><code>badge</code></td><td class='c'>text</td><td class='c'>v0.1</td><td>화면 표시(배지)</td><td class='c'>82%</td><td class='mut'>자산 대장 없음 — 보유 확인 필요</td></tr>
+<tr><td class='c'><code>why</code></td><td class='c'>text</td><td class='c'>v0.1</td><td>왜 이 의무인가</td><td class='c'>100%</td><td class='mut'>본문 수범자가 관리주체·지자체장 계열 1항목</td></tr>
+<tr><td class='c'><code>source_text</code></td><td class='c'>text</td><td class='c'>v0.1</td><td>조문 원문</td><td class='c'>97%</td><td class='mut'>② 대책본부의 장은 테러사건에 신속히 대응하기 위하여 필요한 </td></tr>
+<tr><td class='c'><code>law_id</code></td><td class='c'>text</td><td class='c'>v0.1</td><td>법령 번호(정본)</td><td class='c'>88%</td><td class='mut'>LAW-KR-000013</td></tr>
+<tr><td class='c'><code>doc_id</code></td><td class='c'>text</td><td class='c'>v0.1</td><td>문서 번호(정본)</td><td class='c'>88%</td><td class='mut'>DOC-003932</td></tr>
+<tr><td class='c'><code>unit_id</code></td><td class='c'>text</td><td class='c'>v0.1</td><td>조항호목 번호(정본)</td><td class='c'>60%</td><td class='mut'>UNIT-0327071</td></tr>
+<tr><td class='c'><code>schedule_id</code></td><td class='c'>text</td><td class='c'>v0.1</td><td>별표·서식 번호(정본)</td><td class='c'>40%</td><td class='mut'>SCH-0012303</td></tr>
+<tr><td class='c'><code>obl_id</code></td><td class='c'>text</td><td class='c'>v0.1</td><td>의무 번호(정본)</td><td class='c'>7%</td><td class='mut'>OBL-0008229</td></tr>
+<tr><td class='c'><code>review_status</code></td><td class='c'>text default</td><td class='c'>v0.1</td><td>검수 상태</td><td class='c'>100%</td><td class='mut'>pending</td></tr>
+<tr><td class='c'><code>sapa_clause</code></td><td class='c'>text</td><td class='c'>v0.2</td><td>확보의무 대분류</td><td class='c'></td><td class='mut'></td></tr>
+<tr><td class='c'><code>sapa_clause_name</code></td><td class='c'>text</td><td class='c'>v0.2</td><td>확보의무 이름</td><td class='c'></td><td class='mut'></td></tr>
+</tbody></table>
+<h2>eval_criteria <span class="tag">/system /system/record</span></h2>
+<table><thead><tr><th style='width:190px'>칸</th><th style='width:110px'>자료형</th><th style='width:74px'>생긴 판</th><th>뜻</th><th style='width:74px'>채움률</th><th style='width:230px'>예시값</th></tr></thead><tbody>
+<tr><td class='c'><code>criteria_id</code></td><td class='c'>text primary key</td><td class='c'>v0.7</td><td>평가 기준 번호</td><td class='c'>100%</td><td class='mut'>C01</td></tr>
+<tr><td class='c'><code>target_role</code></td><td class='c'>text</td><td class='c'>v0.7</td><td>대상 직위</td><td class='c'>100%</td><td class='mut'>안전보건관리책임자</td></tr>
+<tr><td class='c'><code>item_no</code></td><td class='c'>int</td><td class='c'>v0.7</td><td>항목 순번</td><td class='c'>100%</td><td class='mut'>1</td></tr>
+<tr><td class='c'><code>item</code></td><td class='c'>text</td><td class='c'>v0.7</td><td>평가 항목(법정 업무)</td><td class='c'>100%</td><td class='mut'>사업장의 산업재해 예방계획 수립</td></tr>
+<tr><td class='c'><code>points</code></td><td class='c'>int</td><td class='c'>v0.7</td><td>배점(기관이 정함)</td><td class='c'>100%</td><td class='mut'>11</td></tr>
+<tr><td class='c'><code>law_basis</code></td><td class='c'>text</td><td class='c'>v0.7</td><td>근거 조문</td><td class='c'>100%</td><td class='mut'>산업안전보건법 제15조제1항 제1호</td></tr>
+<tr><td class='c'><code>active</code></td><td class='c'>text</td><td class='c'>v0.7</td><td>사용 여부 Y/N</td><td class='c'>100%</td><td class='mut'>Y</td></tr>
+<tr><td class='c'><code>note</code></td><td class='c'>text</td><td class='c'>v0.7</td><td>비고</td><td class='c'>100%</td><td class='mut'>예시 자료(시연용) · 배점은 기관이 정함</td></tr>
+</tbody></table>
+<h2>evidence <span class="tag">/ /actions /api/export /budget /contracts /duties/[key] /evidence /exec /inspections /m /recurrence /review /scenario /system</span></h2>
+<table><thead><tr><th style='width:190px'>칸</th><th style='width:110px'>자료형</th><th style='width:74px'>생긴 판</th><th>뜻</th><th style='width:74px'>채움률</th><th style='width:230px'>예시값</th></tr></thead><tbody>
+<tr><td class='c'><code>evidence_id</code></td><td class='c'>text primary key</td><td class='c'>v0.3</td><td>증빙 번호</td><td class='c'>100%</td><td class='mut'>EVD-000001</td></tr>
+<tr><td class='c'><code>task_id</code></td><td class='c'>text references compliance_task(task_id)</td><td class='c'>v0.3</td><td>과제 번호</td><td class='c'>100%</td><td class='mut'>TSK-000001</td></tr>
+<tr><td class='c'><code>evidence_kind</code></td><td class='c'>text</td><td class='c'>v0.3</td><td>증빙 종류</td><td class='c'>100%</td><td class='mut'>임명·선임 문서</td></tr>
+<tr><td class='c'><code>file_name</code></td><td class='c'>text</td><td class='c'>v0.3</td><td>파일 이름</td><td class='c'>100%</td><td class='mut'>인력배치 선임 통보서.pdf</td></tr>
+<tr><td class='c'><code>file_url</code></td><td class='c'>text</td><td class='c'>v0.3</td><td>파일 주소</td><td class='c'>0%</td><td class='mut'></td></tr>
+<tr><td class='c'><code>form_id</code></td><td class='c'>text references form_template(form_id)</td><td class='c'>v0.3</td><td>법정 서식 번호</td><td class='c'>29%</td><td class='mut'>SCH-0005304</td></tr>
+<tr><td class='c'><code>uploaded_by</code></td><td class='c'>text references staff(staff_id)</td><td class='c'>v0.3</td><td>올린 사람</td><td class='c'>100%</td><td class='mut'>SD13-1</td></tr>
+<tr><td class='c'><code>uploaded_at</code></td><td class='c'>timestamptz default now()</td><td class='c'>v0.3</td><td>올린 날짜</td><td class='c'>100%</td><td class='mut'>2026-07-27</td></tr>
+<tr><td class='c'><code>note</code></td><td class='c'>text</td><td class='c'>v0.3</td><td>비고</td><td class='c'>100%</td><td class='mut'>예시 데이터(시연용)</td></tr>
+<tr><td class='c'><code>file_size</code></td><td class='c'>bigint</td><td class='c'>v0.2</td><td>파일 크기(바이트)</td><td class='c'></td><td class='mut'></td></tr>
+<tr><td class='c'><code>mime_type</code></td><td class='c'>text</td><td class='c'>v0.2</td><td>파일 형식(MIME)</td><td class='c'></td><td class='mut'></td></tr>
+<tr><td class='c'><code>approval_status</code></td><td class='c'>text</td><td class='c'>v0.2</td><td>결재 상태(작성중·제출·승인·반려)</td><td class='c'></td><td class='mut'></td></tr>
+<tr><td class='c'><code>created_by</code></td><td class='c'>text</td><td class='c'>v0.2</td><td>만든 사람</td><td class='c'></td><td class='mut'></td></tr>
+<tr><td class='c'><code>submitted_at</code></td><td class='c'>timestamptz</td><td class='c'>v0.2</td><td>제출 일시</td><td class='c'></td><td class='mut'></td></tr>
+<tr><td class='c'><code>submitted_by</code></td><td class='c'>text</td><td class='c'>v0.2</td><td>제출한 사람</td><td class='c'></td><td class='mut'></td></tr>
+<tr><td class='c'><code>approved_at</code></td><td class='c'>timestamptz</td><td class='c'>v0.2</td><td>승인 일시</td><td class='c'></td><td class='mut'></td></tr>
+<tr><td class='c'><code>approved_by</code></td><td class='c'>text</td><td class='c'>v0.2</td><td>승인한 사람</td><td class='c'></td><td class='mut'></td></tr>
+<tr><td class='c'><code>rejected_at</code></td><td class='c'>timestamptz</td><td class='c'>v0.2</td><td>반려 일시</td><td class='c'></td><td class='mut'></td></tr>
+<tr><td class='c'><code>reject_reason</code></td><td class='c'>text</td><td class='c'>v0.2</td><td>반려 사유</td><td class='c'></td><td class='mut'></td></tr>
+<tr><td class='c'><code>created_at</code></td><td class='c'>timestamptz</td><td class='c'>v0.2</td><td>만든 일시</td><td class='c'></td><td class='mut'></td></tr>
+<tr><td class='c'><code>updated_at</code></td><td class='c'>timestamptz</td><td class='c'>v0.2</td><td>고친 일시</td><td class='c'></td><td class='mut'></td></tr>
+<tr><td class='c'><code>entered_in_demo</code></td><td class='c'>boolean</td><td class='c'>v0.3</td><td>시연 중 입력분 표시</td><td class='c'></td><td class='mut'></td></tr>
+<tr><td class='c'><code>file_type</code></td><td class='c'>text</td><td class='c'>v0.7</td><td>올린 파일 형식</td><td class='c'></td><td class='mut'></td></tr>
+</tbody></table>
+<h2>form_template </h2>
+<table><thead><tr><th style='width:190px'>칸</th><th style='width:110px'>자료형</th><th style='width:74px'>생긴 판</th><th>뜻</th><th style='width:74px'>채움률</th><th style='width:230px'>예시값</th></tr></thead><tbody>
+<tr><td class='c'><code>form_id</code></td><td class='c'>text primary key</td><td class='c'>v0.1</td><td>법정 서식 번호</td><td class='c'>100%</td><td class='mut'>SCH-0000604</td></tr>
+<tr><td class='c'><code>title</code></td><td class='c'>text</td><td class='c'>v0.1</td><td>제목</td><td class='c'>100%</td><td class='mut'>보험금액(제27조제3항 관련)</td></tr>
+<tr><td class='c'><code>doc_id</code></td><td class='c'>text</td><td class='c'>v0.1</td><td>문서 번호(정본)</td><td class='c'>100%</td><td class='mut'>DOC-000019</td></tr>
+<tr><td class='c'><code>law_id</code></td><td class='c'>text</td><td class='c'>v0.1</td><td>법령 번호(정본)</td><td class='c'>100%</td><td class='mut'>LAW-KR-000007</td></tr>
+<tr><td class='c'><code>schedule_kind</code></td><td class='c'>text</td><td class='c'>v0.1</td><td>별표·서식 구분</td><td class='c'>100%</td><td class='mut'>table</td></tr>
+<tr><td class='c'><code>schedule_no</code></td><td class='c'>text</td><td class='c'>v0.1</td><td>별표·서식 번호</td><td class='c'>100%</td><td class='mut'>6</td></tr>
+<tr><td class='c'><code>source</code></td><td class='c'>text</td><td class='c'>v0.1</td><td>출처(FMS 등)</td><td class='c'>100%</td><td class='mut'>정본 별표·서식</td></tr>
+<tr><td class='c'><code>file_html</code></td><td class='c'>text</td><td class='c'>v0.1</td><td>서식 HTML</td><td class='c'>0%</td><td class='mut'></td></tr>
+<tr><td class='c'><code>file_docx</code></td><td class='c'>text</td><td class='c'>v0.1</td><td>서식 DOCX</td><td class='c'>0%</td><td class='mut'></td></tr>
+<tr><td class='c'><code>canon_release</code></td><td class='c'>text</td><td class='c'>v0.1</td><td>정본 발행판</td><td class='c'>100%</td><td class='mut'>R-20260920-08</td></tr>
+</tbody></table>
+<h2>hazard_code <span class="tag">/contracts</span></h2>
+<table><thead><tr><th style='width:190px'>칸</th><th style='width:110px'>자료형</th><th style='width:74px'>생긴 판</th><th>뜻</th><th style='width:74px'>채움률</th><th style='width:230px'>예시값</th></tr></thead><tbody>
+<tr><td class='c'><code>hazard_code</code></td><td class='c'>text primary key</td><td class='c'>v0.5</td><td>유해·위험요인 코드(18항목)</td><td class='c'>100%</td><td class='mut'>HZ01</td></tr>
+<tr><td class='c'><code>hazard_name</code></td><td class='c'>text</td><td class='c'>v0.5</td><td>유해·위험요인 이름</td><td class='c'>100%</td><td class='mut'>추락</td></tr>
+<tr><td class='c'><code>sort_no</code></td><td class='c'>int</td><td class='c'>v0.5</td><td>정렬 순서</td><td class='c'>100%</td><td class='mut'>1</td></tr>
+<tr><td class='c'><code>note</code></td><td class='c'>text</td><td class='c'>v0.5</td><td>비고</td><td class='c'>100%</td><td class='mut'>도급 작업 유해·위험요인 체크 항목</td></tr>
+</tbody></table>
+<h2>hazard_report <span class="tag">/calendar /evidence /hazards</span></h2>
+<table><thead><tr><th style='width:190px'>칸</th><th style='width:110px'>자료형</th><th style='width:74px'>생긴 판</th><th>뜻</th><th style='width:74px'>채움률</th><th style='width:230px'>예시값</th></tr></thead><tbody>
+<tr><td class='c'><code>hz_id</code></td><td class='c'>text primary key</td><td class='c'>v0.6</td><td>신고 번호</td><td class='c'>100%</td><td class='mut'>HZR-0001</td></tr>
+<tr><td class='c'><code>received_at</code></td><td class='c'>timestamptz</td><td class='c'>v0.6</td><td>접수일</td><td class='c'>100%</td><td class='mut'>2026-03-04 09:20</td></tr>
+<tr><td class='c'><code>channel</code></td><td class='c'>text</td><td class='c'>v0.6</td><td>접수 경로</td><td class='c'>100%</td><td class='mut'>상시점검</td></tr>
+<tr><td class='c'><code>channel_detail</code></td><td class='c'>text</td><td class='c'>v0.6</td><td>세부 경로(안전신문고·120 등)</td><td class='c'>38%</td><td class='mut'>응답소</td></tr>
+<tr><td class='c'><code>reporter</code></td><td class='c'>text</td><td class='c'>v0.6</td><td>신고한 사람</td><td class='c'>100%</td><td class='mut'>이민준 주무관</td></tr>
+<tr><td class='c'><code>received_by</code></td><td class='c'>text</td><td class='c'>v0.6</td><td>접수한 사람</td><td class='c'>100%</td><td class='mut'>SD09-1</td></tr>
+<tr><td class='c'><code>asset_id</code></td><td class='c'>text</td><td class='c'>v0.6</td><td>자산 번호</td><td class='c'>100%</td><td class='mut'>AR2005-0002918</td></tr>
+<tr><td class='c'><code>asset_name</code></td><td class='c'>text</td><td class='c'>v0.6</td><td>자산 이름</td><td class='c'>100%</td><td class='mut'>용인시문화복지행정타운본청사</td></tr>
+<tr><td class='c'><code>asset_gbn</code></td><td class='c'>text</td><td class='c'>v0.6</td><td>시설 구분</td><td class='c'>100%</td><td class='mut'>건축물</td></tr>
+<tr><td class='c'><code>asset_class</code></td><td class='c'>text</td><td class='c'>v0.6</td><td>종별(1·2·3종)</td><td class='c'>100%</td><td class='mut'>2종</td></tr>
+<tr><td class='c'><code>dept_id</code></td><td class='c'>text</td><td class='c'>v0.6</td><td>부서 번호</td><td class='c'>100%</td><td class='mut'>D09</td></tr>
+<tr><td class='c'><code>location</code></td><td class='c'>text</td><td class='c'>v0.6</td><td>위치</td><td class='c'>100%</td><td class='mut'>본청사 1층 민원실 출입구</td></tr>
+<tr><td class='c'><code>description</code></td><td class='c'>text</td><td class='c'>v0.6</td><td>위험요인 설명</td><td class='c'>100%</td><td class='mut'>우천 시 출입구 바닥 대리석에 물기가 고여 미끄러움</td></tr>
+<tr><td class='c'><code>code_group</code></td><td class='c'>text</td><td class='c'>v0.6</td><td>유해·위험요인 대분류(이용자 안전·시설물 안전)</td><td class='c'>100%</td><td class='mut'>이용자 안전</td></tr>
+<tr><td class='c'><code>code</code></td><td class='c'>text</td><td class='c'>v0.6</td><td>유해·위험요인 분류 코드</td><td class='c'>100%</td><td class='mut'>1 물리적</td></tr>
+<tr><td class='c'><code>accident_type</code></td><td class='c'>text</td><td class='c'>v0.6</td><td>사고 유형(넘어짐·부딪힘 등)</td><td class='c'>100%</td><td class='mut'>넘어짐</td></tr>
+<tr><td class='c'><code>possible_accident</code></td><td class='c'>text</td><td class='c'>v0.6</td><td>예상되는 사고</td><td class='c'>100%</td><td class='mut'>출입 시민 미끄러져 넘어짐</td></tr>
+<tr><td class='c'><code>photo_wide</code></td><td class='c'>text</td><td class='c'>v0.6</td><td>전경 사진 주소</td><td class='c'>0%</td><td class='mut'></td></tr>
+<tr><td class='c'><code>photo_close</code></td><td class='c'>text</td><td class='c'>v0.6</td><td>근접 사진 주소</td><td class='c'>0%</td><td class='mut'></td></tr>
+<tr><td class='c'><code>protect_action</code></td><td class='c'>text</td><td class='c'>v0.6</td><td>피해방지조치(대피·접근차단·통제)</td><td class='c'>78%</td><td class='mut'>미끄럼 주의 표지·흡수 매트 설치</td></tr>
+<tr><td class='c'><code>protect_at</code></td><td class='c'>timestamptz</td><td class='c'>v0.6</td><td>피해방지조치 일시</td><td class='c'>78%</td><td class='mut'>2026-03-04 10:20</td></tr>
+<tr><td class='c'><code>protect_by</code></td><td class='c'>text</td><td class='c'>v0.6</td><td>피해방지조치한 사람</td><td class='c'>78%</td><td class='mut'>SD09-1</td></tr>
+<tr><td class='c'><code>severity</code></td><td class='c'>text</td><td class='c'>v0.6</td><td>1차 판단(경미·심각)</td><td class='c'>88%</td><td class='mut'>경미</td></tr>
+<tr><td class='c'><code>judged_by</code></td><td class='c'>text</td><td class='c'>v0.6</td><td>판단한 사람</td><td class='c'>88%</td><td class='mut'>SD02-2</td></tr>
+<tr><td class='c'><code>judged_at</code></td><td class='c'>timestamptz</td><td class='c'>v0.6</td><td>판단 일시</td><td class='c'>88%</td><td class='mut'>2026-03-04 12:20</td></tr>
+<tr><td class='c'><code>judge_memo</code></td><td class='c'>text</td><td class='c'>v0.6</td><td>판단 메모</td><td class='c'>88%</td><td class='mut'>현장 즉시 조치 가능</td></tr>
+<tr><td class='c'><code>minor_action</code></td><td class='c'>text</td><td class='c'>v0.6</td><td>경미 건 즉시 조치 내용</td><td class='c'>68%</td><td class='mut'>미끄럼 방지 매트 교체·우산 비닐 비치</td></tr>
+<tr><td class='c'><code>closed_at</code></td><td class='c'>date</td><td class='c'>v0.6</td><td>종결일</td><td class='c'>68%</td><td class='mut'>2026-03-07</td></tr>
+<tr><td class='c'><code>closed_by</code></td><td class='c'>text</td><td class='c'>v0.6</td><td>종결한 사람</td><td class='c'>68%</td><td class='mut'>SD09-1</td></tr>
+<tr><td class='c'><code>notified_reporter</code></td><td class='c'>text</td><td class='c'>v0.6</td><td>신고자 결과 통보 Y/N</td><td class='c'>25%</td><td class='mut'>Y</td></tr>
+<tr><td class='c'><code>notified_at</code></td><td class='c'>date</td><td class='c'>v0.6</td><td>신고자 통보일</td><td class='c'>25%</td><td class='mut'>2026-03-16</td></tr>
+<tr><td class='c'><code>ceo_reported_at</code></td><td class='c'>timestamptz</td><td class='c'>v0.6</td><td>경영책임자 보고 일시</td><td class='c'>15%</td><td class='mut'>2026-02-10 13:30</td></tr>
+<tr><td class='c'><code>ceo_report_mode</code></td><td class='c'>text</td><td class='c'>v0.6</td><td>보고 방식(서면·구두 선보고 후 서면)</td><td class='c'>15%</td><td class='mut'>구두 선보고 후 서면</td></tr>
+<tr><td class='c'><code>ceo_reported_by</code></td><td class='c'>text</td><td class='c'>v0.6</td><td>보고한 사람</td><td class='c'>15%</td><td class='mut'>SM01-1</td></tr>
+<tr><td class='c'><code>ceo_instruction</code></td><td class='c'>text</td><td class='c'>v0.6</td><td>경영책임자 지시</td><td class='c'>15%</td><td class='mut'>긴급안전점검 실시, 결과에 따라 보수·보강 계획 수립</td></tr>
+<tr><td class='c'><code>insp_at</code></td><td class='c'>date</td><td class='c'>v0.6</td><td>긴급안전점검일</td><td class='c'>12%</td><td class='mut'>2026-02-20</td></tr>
+<tr><td class='c'><code>insp_by</code></td><td class='c'>text</td><td class='c'>v0.6</td><td>긴급안전점검한 사람</td><td class='c'>12%</td><td class='mut'>SD03-1</td></tr>
+<tr><td class='c'><code>insp_result</code></td><td class='c'>text</td><td class='c'>v0.6</td><td>긴급안전점검 결과</td><td class='c'>12%</td><td class='mut'>배부름 12mm, 균열폭 최대 4mm — 긴급 보수·보강 필요</td></tr>
+<tr><td class='c'><code>order_types</code></td><td class='c'>text</td><td class='c'>v0.6</td><td>개선 지시 종류(이용제한·보수·보강·정밀안전진단)</td><td class='c'>12%</td><td class='mut'>보수·보강 · 이용제한(하부 보도)</td></tr>
+<tr><td class='c'><code>order_at</code></td><td class='c'>date</td><td class='c'>v0.6</td><td>개선 지시일</td><td class='c'>12%</td><td class='mut'>2026-02-21</td></tr>
+<tr><td class='c'><code>order_memo</code></td><td class='c'>text</td><td class='c'>v0.6</td><td>개선 지시 메모</td><td class='c'>12%</td><td class='mut'>긴급안전점검 실시, 결과에 따라 보수·보강 계획 수립</td></tr>
+<tr><td class='c'><code>fsam_applies</code></td><td class='c'>text</td><td class='c'>v0.6</td><td>시설물안전법 제24조 기한 적용 Y/N</td><td class='c'>12%</td><td class='mut'>Y</td></tr>
+<tr><td class='c'><code>basis_date</code></td><td class='c'>date</td><td class='c'>v0.6</td><td>기한 기준일(조치명령·통보를 받은 날)</td><td class='c'>12%</td><td class='mut'>2026-03-05</td></tr>
+<tr><td class='c'><code>fix_items</code></td><td class='c'>text</td><td class='c'>v0.6</td><td>보수·보강 계획(항목~물량~비용~기간)</td><td class='c'>10%</td><td class='mut'>배수공 준설·추가 천공~42개소~1800~2026-04 | 균</td></tr>
+<tr><td class='c'><code>fix_budget</code></td><td class='c'>text</td><td class='c'>v0.6</td><td>보수·보강 예산 확보 상태</td><td class='c'>10%</td><td class='mut'>확보(재해예방 예비비)</td></tr>
+<tr><td class='c'><code>fix_started_at</code></td><td class='c'>date</td><td class='c'>v0.6</td><td>보수·보강 착수일</td><td class='c'>5%</td><td class='mut'>2026-04-01</td></tr>
+<tr><td class='c'><code>fix_done_at</code></td><td class='c'>date</td><td class='c'>v0.6</td><td>보수·보강 완료일</td><td class='c'>5%</td><td class='mut'>2026-08-28</td></tr>
+<tr><td class='c'><code>done_at</code></td><td class='c'>date</td><td class='c'>v0.6</td><td>처리 완료일</td><td class='c'>72%</td><td class='mut'>2026-03-07</td></tr>
+<tr><td class='c'><code>note</code></td><td class='c'>text</td><td class='c'>v0.6</td><td>비고</td><td class='c'>100%</td><td class='mut'>예시 자료</td></tr>
+</tbody></table>
+<h2>hazard_step <span class="tag">/hazards</span></h2>
+<table><thead><tr><th style='width:190px'>칸</th><th style='width:110px'>자료형</th><th style='width:74px'>생긴 판</th><th>뜻</th><th style='width:74px'>채움률</th><th style='width:230px'>예시값</th></tr></thead><tbody>
+<tr><td class='c'><code>step_id</code></td><td class='c'>text primary key</td><td class='c'>v0.6</td><td>처리 기록 번호</td><td class='c'>100%</td><td class='mut'>HZS-0001</td></tr>
+<tr><td class='c'><code>hz_id</code></td><td class='c'>text</td><td class='c'>v0.6</td><td>신고 번호</td><td class='c'>100%</td><td class='mut'>HZR-0001</td></tr>
+<tr><td class='c'><code>step</code></td><td class='c'>text</td><td class='c'>v0.6</td><td>처리 단계(접수·피해방지조치·1차 판단 …)</td><td class='c'>100%</td><td class='mut'>접수</td></tr>
+<tr><td class='c'><code>at</code></td><td class='c'>timestamptz</td><td class='c'>v0.6</td><td>처리 일시</td><td class='c'>100%</td><td class='mut'>2026-03-04 09:20</td></tr>
+<tr><td class='c'><code>by</code></td><td class='c'>text</td><td class='c'>v0.6</td><td>처리한 사람</td><td class='c'>100%</td><td class='mut'>SD09-1</td></tr>
+<tr><td class='c'><code>memo</code></td><td class='c'>text</td><td class='c'>v0.6</td><td>처리 메모</td><td class='c'>99%</td><td class='mut'>상시점검</td></tr>
+<tr><td class='c'><code>note</code></td><td class='c'>text</td><td class='c'>v0.6</td><td>비고</td><td class='c'>100%</td><td class='mut'>예시 자료</td></tr>
+</tbody></table>
+<h2>incident <span class="tag">/evidence /recurrence</span></h2>
+<table><thead><tr><th style='width:190px'>칸</th><th style='width:110px'>자료형</th><th style='width:74px'>생긴 판</th><th>뜻</th><th style='width:74px'>채움률</th><th style='width:230px'>예시값</th></tr></thead><tbody>
+<tr><td class='c'><code>incident_id</code></td><td class='c'>text primary key</td><td class='c'>v0.2</td><td>사고 번호</td><td class='c'>100%</td><td class='mut'>INC-001</td></tr>
+<tr><td class='c'><code>occurred_at</code></td><td class='c'>date</td><td class='c'>v0.2</td><td>발생 일시</td><td class='c'>100%</td><td class='mut'>2026-01-23</td></tr>
+<tr><td class='c'><code>disaster_type</code></td><td class='c'>text</td><td class='c'>v0.2</td><td>재해 구분</td><td class='c'>100%</td><td class='mut'>중대산업재해</td></tr>
+<tr><td class='c'><code>asset_id</code></td><td class='c'>text references asset(asset_id)</td><td class='c'>v0.2</td><td>자산 번호</td><td class='c'>80%</td><td class='mut'>AR1967-0000142</td></tr>
+<tr><td class='c'><code>dept_id</code></td><td class='c'>text references org_dept(dept_id)</td><td class='c'>v0.2</td><td>부서 번호</td><td class='c'>100%</td><td class='mut'>D01</td></tr>
+<tr><td class='c'><code>summary</code></td><td class='c'>text</td><td class='c'>v0.2</td><td>개요</td><td class='c'>100%</td><td class='mut'>하수처리시설 정비 중 추락(가상)</td></tr>
+<tr><td class='c'><code>cause</code></td><td class='c'>text</td><td class='c'>v0.2</td><td>원인</td><td class='c'>80%</td><td class='mut'>안전난간 미설치·안전대 미착용</td></tr>
+<tr><td class='c'><code>casualties</code></td><td class='c'>text</td><td class='c'>v0.2</td><td>인명 피해</td><td class='c'>100%</td><td class='mut'>부상 1명</td></tr>
+<tr><td class='c'><code>recurrence_plan</code></td><td class='c'>text</td><td class='c'>v0.2</td><td>재발방지 대책</td><td class='c'>70%</td><td class='mut'>난간 전수 점검·작업 전 위험성평가 의무화</td></tr>
+<tr><td class='c'><code>plan_due</code></td><td class='c'>date</td><td class='c'>v0.2</td><td>대책 기한</td><td class='c'>70%</td><td class='mut'>2026-03-04</td></tr>
+<tr><td class='c'><code>plan_done_at</code></td><td class='c'>date</td><td class='c'>v0.2</td><td>대책 완료일</td><td class='c'>40%</td><td class='mut'>2026-03-14</td></tr>
+<tr><td class='c'><code>note</code></td><td class='c'>text</td><td class='c'>v0.2</td><td>비고</td><td class='c'>100%</td><td class='mut'>예시 데이터(시연용) · 예시 자료(시연용)</td></tr>
+<tr><td class='c'><code>event_class</code></td><td class='c'>text</td><td class='c'>v0.6</td><td>구분(산업재해·시민재해·아차사고)</td><td class='c'>100%</td><td class='mut'>산업재해</td></tr>
+<tr><td class='c'><code>event_area</code></td><td class='c'>text</td><td class='c'>v0.6</td><td>피해 대상(산업·시민)</td><td class='c'>100%</td><td class='mut'>산업</td></tr>
+<tr><td class='c'><code>serious</code></td><td class='c'>text</td><td class='c'>v0.6</td><td>중대재해 해당 여부(해당·해당 안 됨·확인 필요)</td><td class='c'>100%</td><td class='mut'>확인 필요</td></tr>
+<tr><td class='c'><code>accident_type</code></td><td class='c'>text</td><td class='c'>v0.6</td><td>사고 유형(추락·끼임 등)</td><td class='c'>100%</td><td class='mut'>추락</td></tr>
+<tr><td class='c'><code>place</code></td><td class='c'>text</td><td class='c'>v0.6</td><td>발생 장소</td><td class='c'>80%</td><td class='mut'>슬러지 탈수기실</td></tr>
+<tr><td class='c'><code>basis_clause</code></td><td class='c'>text</td><td class='c'>v0.6</td><td>적용 조문(법 제4조제1항제2호 등)</td><td class='c'>100%</td><td class='mut'>법 제4조제1항제2호</td></tr>
+<tr><td class='c'><code>reported_by</code></td><td class='c'>text</td><td class='c'>v0.6</td><td>등록한 사람</td><td class='c'>100%</td><td class='mut'>SD01-1</td></tr>
+<tr><td class='c'><code>owner_staff_id</code></td><td class='c'>text</td><td class='c'>v0.6</td><td>정담당</td><td class='c'>100%</td><td class='mut'>SD01-1</td></tr>
+<tr><td class='c'><code>cause_due</code></td><td class='c'>date</td><td class='c'>v0.6</td><td>원인 조사 기한</td><td class='c'>100%</td><td class='mut'>2026-01-30</td></tr>
+<tr><td class='c'><code>investigated_at</code></td><td class='c'>date</td><td class='c'>v0.6</td><td>원인 조사일</td><td class='c'>80%</td><td class='mut'>2026-01-29</td></tr>
+<tr><td class='c'><code>investigated_by</code></td><td class='c'>text</td><td class='c'>v0.6</td><td>원인 조사한 사람</td><td class='c'>80%</td><td class='mut'>SD01-1</td></tr>
+<tr><td class='c'><code>cause_evidence</code></td><td class='c'>text</td><td class='c'>v0.6</td><td>조사 기록(파일 이름)</td><td class='c'>70%</td><td class='mut'>사고조사보고서_INC-001.pdf</td></tr>
+<tr><td class='c'><code>plan_set_due</code></td><td class='c'>date</td><td class='c'>v0.6</td><td>대책 수립 기한</td><td class='c'>80%</td><td class='mut'>2026-02-13</td></tr>
+<tr><td class='c'><code>plan_set_at</code></td><td class='c'>date</td><td class='c'>v0.6</td><td>대책 수립일</td><td class='c'>70%</td><td class='mut'>2026-02-10</td></tr>
+<tr><td class='c'><code>plan_set_by</code></td><td class='c'>text</td><td class='c'>v0.6</td><td>대책 수립한 사람</td><td class='c'>70%</td><td class='mut'>SM01-1</td></tr>
+<tr><td class='c'><code>plan_evidence</code></td><td class='c'>text</td><td class='c'>v0.6</td><td>대책 문서(파일 이름)</td><td class='c'>60%</td><td class='mut'>재발방지대책_결재문서_INC-001.pdf</td></tr>
+<tr><td class='c'><code>done_note</code></td><td class='c'>text</td><td class='c'>v0.6</td><td>이행 내용</td><td class='c'>40%</td><td class='mut'>안전난간 설치 완료 · 작업 전 위험성평가 절차 시행</td></tr>
+<tr><td class='c'><code>done_evidence</code></td><td class='c'>text</td><td class='c'>v0.6</td><td>이행 증빙(파일 이름)</td><td class='c'>40%</td><td class='mut'>안전난간_보수_사진대지.pdf</td></tr>
+<tr><td class='c'><code>done_by</code></td><td class='c'>text</td><td class='c'>v0.6</td><td>이행한 사람</td><td class='c'>40%</td><td class='mut'>SD01-2</td></tr>
+<tr><td class='c'><code>effect_due</code></td><td class='c'>date</td><td class='c'>v0.6</td><td>효과 확인 예정일</td><td class='c'>40%</td><td class='mut'>2026-06-14</td></tr>
+<tr><td class='c'><code>effect_checked_at</code></td><td class='c'>date</td><td class='c'>v0.6</td><td>효과 확인일</td><td class='c'>30%</td><td class='mut'>2026-06-10</td></tr>
+<tr><td class='c'><code>effect_checked_by</code></td><td class='c'>text</td><td class='c'>v0.6</td><td>효과 확인한 사람</td><td class='c'>30%</td><td class='mut'>SM01-1</td></tr>
+<tr><td class='c'><code>effect_result</code></td><td class='c'>text</td><td class='c'>v0.6</td><td>효과 판단(유효·재검토 필요)</td><td class='c'>30%</td><td class='mut'>유효</td></tr>
+<tr><td class='c'><code>effect_note</code></td><td class='c'>text</td><td class='c'>v0.6</td><td>효과 판단 근거</td><td class='c'>30%</td><td class='mut'>3개월간 같은 작업에서 추락 위험 지적 0건</td></tr>
+<tr><td class='c'><code>effect_evidence</code></td><td class='c'>text</td><td class='c'>v0.6</td><td>효과 확인 증빙(파일 이름)</td><td class='c'>20%</td><td class='mut'>효과확인_현장점검표_202606.pdf</td></tr>
+<tr><td class='c'><code>related_order_id</code></td><td class='c'>text</td><td class='c'>v0.6</td><td>관련 명령 번호</td><td class='c'>50%</td><td class='mut'>ORD-001</td></tr>
+<tr><td class='c'><code>check_note</code></td><td class='c'>text</td><td class='c'>v0.6</td><td>옮겨 온 행의 확인 필요 사항</td><td class='c'>20%</td><td class='mut'>시설 번호(고기초등학교 교사동)와 사고 설명(하수처리시설)이 </td></tr>
+<tr><td class='c'><code>history</code></td><td class='c'>text</td><td class='c'>v0.6</td><td>효과 확인 이력(「 | 」로 이어 적음 · 화면이 씀)</td><td class='c'></td><td class='mut'></td></tr>
+<tr><td class='c'><code>reopen_count</code></td><td class='c'>int</td><td class='c'>v0.6</td><td>대책 수립으로 되돌린 횟수(화면이 씀)</td><td class='c'></td><td class='mut'></td></tr>
+</tbody></table>
+<h2>incident_nil_check <span class="tag">/recurrence</span></h2>
+<table><thead><tr><th style='width:190px'>칸</th><th style='width:110px'>자료형</th><th style='width:74px'>생긴 판</th><th>뜻</th><th style='width:74px'>채움률</th><th style='width:230px'>예시값</th></tr></thead><tbody>
+<tr><td class='c'><code>nil_id</code></td><td class='c'>text primary key</td><td class='c'>v0.6</td><td>확인 번호</td><td class='c'>100%</td><td class='mut'>NIL-001</td></tr>
+<tr><td class='c'><code>period</code></td><td class='c'>text</td><td class='c'>v0.6</td><td>반기(2026-H1 등)</td><td class='c'>100%</td><td class='mut'>2026-H1</td></tr>
+<tr><td class='c'><code>dept_id</code></td><td class='c'>text</td><td class='c'>v0.6</td><td>부서 번호</td><td class='c'>100%</td><td class='mut'>D03</td></tr>
+<tr><td class='c'><code>confirmed_by</code></td><td class='c'>text</td><td class='c'>v0.6</td><td>확인한 사람</td><td class='c'>100%</td><td class='mut'>SD03-1</td></tr>
+<tr><td class='c'><code>confirmed_at</code></td><td class='c'>date</td><td class='c'>v0.6</td><td>확인일</td><td class='c'>100%</td><td class='mut'>2026-07-03</td></tr>
+<tr><td class='c'><code>memo</code></td><td class='c'>text</td><td class='c'>v0.6</td><td>확인 메모</td><td class='c'>100%</td><td class='mut'>확인 시점까지 부서 내 재해 발생 없음</td></tr>
+<tr><td class='c'><code>note</code></td><td class='c'>text</td><td class='c'>v0.6</td><td>비고</td><td class='c'>100%</td><td class='mut'>예시 자료(시연용)</td></tr>
+</tbody></table>
+<h2>incident_report <span class="tag">/recurrence</span></h2>
+<table><thead><tr><th style='width:190px'>칸</th><th style='width:110px'>자료형</th><th style='width:74px'>생긴 판</th><th>뜻</th><th style='width:74px'>채움률</th><th style='width:230px'>예시값</th></tr></thead><tbody>
+<tr><td class='c'><code>report_id</code></td><td class='c'>text primary key</td><td class='c'>v0.8</td><td>보고 번호(IRP-…)</td><td class='c'>100%</td><td class='mut'>IRP-001</td></tr>
+<tr><td class='c'><code>incident_id</code></td><td class='c'>text</td><td class='c'>v0.8</td><td>사고 번호</td><td class='c'>100%</td><td class='mut'>INC-005</td></tr>
+<tr><td class='c'><code>report_stage</code></td><td class='c'>text</td><td class='c'>v0.8</td><td>단계: 최초보고 · 직후보고 · 수시보고</td><td class='c'>100%</td><td class='mut'>최초보고</td></tr>
+<tr><td class='c'><code>seq</code></td><td class='c'>text</td><td class='c'>v0.8</td><td>수시보고 차수</td><td class='c'>33%</td><td class='mut'>1</td></tr>
+<tr><td class='c'><code>reported_at</code></td><td class='c'>text</td><td class='c'>v0.8</td><td>보고 시각(YYYY-MM-DD HH:MM)</td><td class='c'>100%</td><td class='mut'>2026-07-22 22:15</td></tr>
+<tr><td class='c'><code>reporter_staff_id</code></td><td class='c'>text</td><td class='c'>v0.8</td><td>보고자</td><td class='c'>100%</td><td class='mut'>SD03-1</td></tr>
+<tr><td class='c'><code>recipients</code></td><td class='c'>text</td><td class='c'>v0.8</td><td>수신(경영책임자 · 총괄 · 관계 행정기관)</td><td class='c'>100%</td><td class='mut'>경영책임자 · 총괄</td></tr>
+<tr><td class='c'><code>agency_name</code></td><td class='c'>text</td><td class='c'>v0.8</td><td>관계 행정기관 이름</td><td class='c'>22%</td><td class='mut'>경기도 재난안전상황실</td></tr>
+<tr><td class='c'><code>channel</code></td><td class='c'>text</td><td class='c'>v0.8</td><td>접수 경로</td><td class='c'>100%</td><td class='mut'>전화</td></tr>
+<tr><td class='c'><code>overview</code></td><td class='c'>text</td><td class='c'>v0.8</td><td>개요(언제·어디서·무엇이·어떻게)</td><td class='c'>100%</td><td class='mut'>07-22 21:35경 청명터널 상행 조명등 1기 낙하, 주행</td></tr>
+<tr><td class='c'><code>damage</code></td><td class='c'>text</td><td class='c'>v0.8</td><td>피해(인명·기타)</td><td class='c'>67%</td><td class='mut'>인명 피해 없음 · 차량 1대 파손</td></tr>
+<tr><td class='c'><code>rescue</code></td><td class='c'>text</td><td class='c'>v0.8</td><td>긴급구조</td><td class='c'>33%</td><td class='mut'>구호 대상 없음</td></tr>
+<tr><td class='c'><code>recovery</code></td><td class='c'>text</td><td class='c'>v0.8</td><td>수습(조치·동원 인력·장비)</td><td class='c'>67%</td><td class='mut'>상행 2차로 차단·위험표지</td></tr>
+<tr><td class='c'><code>support</code></td><td class='c'>text</td><td class='c'>v0.8</td><td>지원·협조</td><td class='c'>11%</td><td class='mut'>112 교통 통제 협조</td></tr>
+<tr><td class='c'><code>next_plan</code></td><td class='c'>text</td><td class='c'>v0.8</td><td>향후 대책</td><td class='c'>56%</td><td class='mut'>상행 전 구간 조명 고정부 긴급 점검(야간)</td></tr>
+<tr><td class='c'><code>evidence_name</code></td><td class='c'>text</td><td class='c'>v0.8</td><td>증빙 이름</td><td class='c'>33%</td><td class='mut'>상황보고_2보_청명터널.hwp</td></tr>
+<tr><td class='c'><code>evidence_url</code></td><td class='c'>text</td><td class='c'>v0.8</td><td>올린 파일 주소</td><td class='c'>0%</td><td class='mut'></td></tr>
+<tr><td class='c'><code>ceo_ack_at</code></td><td class='c'>text</td><td class='c'>v0.8</td><td>경영책임자 받은 시각(최초보고)</td><td class='c'>22%</td><td class='mut'>2026-07-22 22:20</td></tr>
+<tr><td class='c'><code>ceo_ack_by</code></td><td class='c'>text</td><td class='c'>v0.8</td><td>받은 사람(CEO-1)</td><td class='c'>22%</td><td class='mut'>CEO-1</td></tr>
+<tr><td class='c'><code>ceo_ack_proxy</code></td><td class='c'>text</td><td class='c'>v0.8</td><td>총괄 대리 기록 Y</td><td class='c'>11%</td><td class='mut'>Y</td></tr>
+<tr><td class='c'><code>ceo_ack_recorded_by</code></td><td class='c'>text</td><td class='c'>v0.8</td><td>받음을 적은 사람</td><td class='c'>22%</td><td class='mut'>CEO-1</td></tr>
+<tr><td class='c'><code>recorded_by</code></td><td class='c'>text</td><td class='c'>v0.8</td><td>기록한 사람</td><td class='c'>100%</td><td class='mut'>SD03-1</td></tr>
+<tr><td class='c'><code>recorded_at</code></td><td class='c'>text</td><td class='c'>v0.8</td><td>기록한 시각</td><td class='c'>100%</td><td class='mut'>2026-07-22 22:15</td></tr>
+<tr><td class='c'><code>note</code></td><td class='c'>text</td><td class='c'>v0.8</td><td>비고</td><td class='c'>100%</td><td class='mut'>예시 자료</td></tr>
+</tbody></table>
+<h2>incident_response <span class="tag">/recurrence</span></h2>
+<table><thead><tr><th style='width:190px'>칸</th><th style='width:110px'>자료형</th><th style='width:74px'>생긴 판</th><th>뜻</th><th style='width:74px'>채움률</th><th style='width:230px'>예시값</th></tr></thead><tbody>
+<tr><td class='c'><code>resp_id</code></td><td class='c'>text primary key</td><td class='c'>v0.8</td><td>대응 기록 번호(IRS-…)</td><td class='c'>100%</td><td class='mut'>IRS-001</td></tr>
+<tr><td class='c'><code>incident_id</code></td><td class='c'>text</td><td class='c'>v0.8</td><td>사고 번호</td><td class='c'>100%</td><td class='mut'>INC-005</td></tr>
+<tr><td class='c'><code>kind</code></td><td class='c'>text</td><td class='c'>v0.8</td><td>종류: recognize 인지 · call 112·119 · rescue 긴급구호 · inspect 긴급안전점검 · sign 위험표지 · restrict 이용 제한·통제(산업은 작업 중지·대피) · notify 주민 알림 · agency 관계 행정기관 신고 · press 언론 창구 · family 피해자·유가족 연락 · ceo_prevent·ceo_cause 경영책임자 지시</td><td class='c'>100%</td><td class='mut'>recognize</td></tr>
+<tr><td class='c'><code>status</code></td><td class='c'>text</td><td class='c'>v0.8</td><td>이행 상태</td><td class='c'>100%</td><td class='mut'>완료</td></tr>
+<tr><td class='c'><code>done_at</code></td><td class='c'>text</td><td class='c'>v0.8</td><td>이행 완료일</td><td class='c'>100%</td><td class='mut'>2026-07-22 21:40</td></tr>
+<tr><td class='c'><code>done_by</code></td><td class='c'>text</td><td class='c'>v0.8</td><td>이행한 사람</td><td class='c'>100%</td><td class='mut'>SD03-2</td></tr>
+<tr><td class='c'><code>target_org</code></td><td class='c'>text</td><td class='c'>v0.8</td><td>신고한 기관·대상(지시면 받는 사람 staff_id)</td><td class='c'>43%</td><td class='mut'>112</td></tr>
+<tr><td class='c'><code>detail</code></td><td class='c'>text</td><td class='c'>v0.8</td><td>내용(해당 없음이면 이유)</td><td class='c'>100%</td><td class='mut'>도로 순찰 무전 — 터널 상행 조명등 1기 낙하, 주행 차량 </td></tr>
+<tr><td class='c'><code>evidence_name</code></td><td class='c'>text</td><td class='c'>v0.8</td><td>증빙 이름</td><td class='c'>18%</td><td class='mut'>위험표지_설치사진_0722.jpg</td></tr>
+<tr><td class='c'><code>evidence_url</code></td><td class='c'>text</td><td class='c'>v0.8</td><td>올린 파일 주소</td><td class='c'>0%</td><td class='mut'></td></tr>
+<tr><td class='c'><code>proxy</code></td><td class='c'>text</td><td class='c'>v0.8</td><td>총괄이 대신 적은 경영책임자 지시 Y</td><td class='c'>4%</td><td class='mut'>Y</td></tr>
+<tr><td class='c'><code>recorded_by</code></td><td class='c'>text</td><td class='c'>v0.8</td><td>기록한 사람</td><td class='c'>100%</td><td class='mut'>SD03-2</td></tr>
+<tr><td class='c'><code>recorded_at</code></td><td class='c'>text</td><td class='c'>v0.8</td><td>기록한 시각</td><td class='c'>100%</td><td class='mut'>2026-07-22 21:40</td></tr>
+<tr><td class='c'><code>note</code></td><td class='c'>text</td><td class='c'>v0.8</td><td>비고</td><td class='c'>100%</td><td class='mut'>예시 자료</td></tr>
+</tbody></table>
+<h2>incident_response_setting <span class="tag">/recurrence</span></h2>
+<table><thead><tr><th style='width:190px'>칸</th><th style='width:110px'>자료형</th><th style='width:74px'>생긴 판</th><th>뜻</th><th style='width:74px'>채움률</th><th style='width:230px'>예시값</th></tr></thead><tbody>
+<tr><td class='c'><code>set_id</code></td><td class='c'>text primary key</td><td class='c'>v0.8</td><td>설정 번호(IRT-…)</td><td class='c'></td><td class='mut'></td></tr>
+<tr><td class='c'><code>first_report_limit_min</code></td><td class='c'>integer</td><td class='c'>v0.8</td><td>최초보고 기한(분) — 안내서는 「즉시」, 시간은 기관이 정함</td><td class='c'></td><td class='mut'></td></tr>
+<tr><td class='c'><code>set_at</code></td><td class='c'>text</td><td class='c'>v0.8</td><td>정한 시각</td><td class='c'></td><td class='mut'></td></tr>
+<tr><td class='c'><code>set_by</code></td><td class='c'>text</td><td class='c'>v0.8</td><td>정한 사람</td><td class='c'></td><td class='mut'></td></tr>
+<tr><td class='c'><code>memo</code></td><td class='c'>text</td><td class='c'>v0.8</td><td>정한 근거</td><td class='c'></td><td class='mut'></td></tr>
+<tr><td class='c'><code>note</code></td><td class='c'>text</td><td class='c'>v0.8</td><td>비고</td><td class='c'></td><td class='mut'></td></tr>
+</tbody></table>
+<h2>inspection <span class="tag">/review</span></h2>
+<table><thead><tr><th style='width:190px'>칸</th><th style='width:110px'>자료형</th><th style='width:74px'>생긴 판</th><th>뜻</th><th style='width:74px'>채움률</th><th style='width:230px'>예시값</th></tr></thead><tbody>
+<tr><td class='c'><code>insp_id</code></td><td class='c'>text primary key</td><td class='c'>v0.3</td><td>점검 번호</td><td class='c'>100%</td><td class='mut'>INS-000001</td></tr>
+<tr><td class='c'><code>task_id</code></td><td class='c'>text references compliance_task(task_id)</td><td class='c'>v0.3</td><td>과제 번호</td><td class='c'>100%</td><td class='mut'>TSK-000001</td></tr>
+<tr><td class='c'><code>inspector_staff_id</code></td><td class='c'>text references staff(staff_id)</td><td class='c'>v0.3</td><td>점검자</td><td class='c'>100%</td><td class='mut'>SM02-2</td></tr>
+<tr><td class='c'><code>insp_date</code></td><td class='c'>date</td><td class='c'>v0.3</td><td>점검일</td><td class='c'>100%</td><td class='mut'>2026-08-04</td></tr>
+<tr><td class='c'><code>result</code></td><td class='c'>text check (result in ('적합','부적합','보류')</td><td class='c'>v0.3</td><td>판정 결과</td><td class='c'>100%</td><td class='mut'>적합</td></tr>
+<tr><td class='c'><code>finding</code></td><td class='c'>text</td><td class='c'>v0.3</td><td>점검 의견·지적사항</td><td class='c'>20%</td><td class='mut'>서식 미사용 — 법정 서식으로 다시 제출</td></tr>
+<tr><td class='c'><code>note</code></td><td class='c'>text</td><td class='c'>v0.3</td><td>비고</td><td class='c'>100%</td><td class='mut'>예시 데이터(시연용)</td></tr>
+<tr><td class='c'><code>batch_id</code></td><td class='c'>text</td><td class='c'>v0.2</td><td>점검 회차 번호</td><td class='c'></td><td class='mut'></td></tr>
+<tr><td class='c'><code>approval_status</code></td><td class='c'>text</td><td class='c'>v0.2</td><td>결재 상태(작성중·제출·승인·반려)</td><td class='c'></td><td class='mut'></td></tr>
+<tr><td class='c'><code>created_by</code></td><td class='c'>text</td><td class='c'>v0.2</td><td>만든 사람</td><td class='c'></td><td class='mut'></td></tr>
+<tr><td class='c'><code>submitted_at</code></td><td class='c'>timestamptz</td><td class='c'>v0.2</td><td>제출 일시</td><td class='c'></td><td class='mut'></td></tr>
+<tr><td class='c'><code>submitted_by</code></td><td class='c'>text</td><td class='c'>v0.2</td><td>제출한 사람</td><td class='c'></td><td class='mut'></td></tr>
+<tr><td class='c'><code>approved_at</code></td><td class='c'>timestamptz</td><td class='c'>v0.2</td><td>승인 일시</td><td class='c'></td><td class='mut'></td></tr>
+<tr><td class='c'><code>approved_by</code></td><td class='c'>text</td><td class='c'>v0.2</td><td>승인한 사람</td><td class='c'></td><td class='mut'></td></tr>
+<tr><td class='c'><code>rejected_at</code></td><td class='c'>timestamptz</td><td class='c'>v0.2</td><td>반려 일시</td><td class='c'></td><td class='mut'></td></tr>
+<tr><td class='c'><code>reject_reason</code></td><td class='c'>text</td><td class='c'>v0.2</td><td>반려 사유</td><td class='c'></td><td class='mut'></td></tr>
+<tr><td class='c'><code>created_at</code></td><td class='c'>timestamptz</td><td class='c'>v0.2</td><td>만든 일시</td><td class='c'></td><td class='mut'></td></tr>
+<tr><td class='c'><code>updated_at</code></td><td class='c'>timestamptz</td><td class='c'>v0.2</td><td>고친 일시</td><td class='c'></td><td class='mut'></td></tr>
+<tr><td class='c'><code>round_no</code></td><td class='c'>int</td><td class='c'>v0.5</td><td>몇 번째 판정인가(재점검 차수)</td><td class='c'></td><td class='mut'></td></tr>
+<tr><td class='c'><code>action_need</code></td><td class='c'>text</td><td class='c'>v0.7</td><td>판정 때 고른 필요한 조치(화면이 씀)</td><td class='c'></td><td class='mut'></td></tr>
+</tbody></table>
+<h2>inspection_batch <span class="tag">/inspections</span></h2>
+<table><thead><tr><th style='width:190px'>칸</th><th style='width:110px'>자료형</th><th style='width:74px'>생긴 판</th><th>뜻</th><th style='width:74px'>채움률</th><th style='width:230px'>예시값</th></tr></thead><tbody>
+<tr><td class='c'><code>batch_id</code></td><td class='c'>text primary key</td><td class='c'>v0.2</td><td>점검 회차 번호</td><td class='c'>100%</td><td class='mut'>BAT-001</td></tr>
+<tr><td class='c'><code>title</code></td><td class='c'>text</td><td class='c'>v0.2</td><td>제목</td><td class='c'>100%</td><td class='mut'>2025년 하반기 안전보건 의무이행 점검</td></tr>
+<tr><td class='c'><code>period_year</code></td><td class='c'>int</td><td class='c'>v0.2</td><td>연도</td><td class='c'>100%</td><td class='mut'>2025</td></tr>
+<tr><td class='c'><code>half_year</code></td><td class='c'>text</td><td class='c'>v0.2</td><td>반기</td><td class='c'>100%</td><td class='mut'>하반기</td></tr>
+<tr><td class='c'><code>scope_dept_id</code></td><td class='c'>text references org_dept(dept_id)</td><td class='c'>v0.2</td><td>주관 부서</td><td class='c'>100%</td><td class='mut'>D02</td></tr>
+<tr><td class='c'><code>target_dept_ids</code></td><td class='c'>text</td><td class='c'>v0.2</td><td>대상 부서</td><td class='c'>100%</td><td class='mut'>D01,D02,D03,D04,D05,D09,D13</td></tr>
+<tr><td class='c'><code>code36_list</code></td><td class='c'>text</td><td class='c'>v0.2</td><td>대상 의무조항</td><td class='c'>100%</td><td class='mut'>F01,F03,F04,F07,F11,I06,I12</td></tr>
+<tr><td class='c'><code>status</code></td><td class='c'>text default</td><td class='c'>v0.2</td><td>이행 상태</td><td class='c'>100%</td><td class='mut'>결재완료</td></tr>
+<tr><td class='c'><code>started_by</code></td><td class='c'>text</td><td class='c'>v0.2</td><td>시행한 사람</td><td class='c'>100%</td><td class='mut'>SD02-1</td></tr>
+<tr><td class='c'><code>started_at</code></td><td class='c'>timestamptz default now()</td><td class='c'>v0.2</td><td>시행일</td><td class='c'>100%</td><td class='mut'>2025-11-03</td></tr>
+<tr><td class='c'><code>approved_by</code></td><td class='c'>text</td><td class='c'>v0.2</td><td>승인한 사람</td><td class='c'>67%</td><td class='mut'>SD01-1</td></tr>
+<tr><td class='c'><code>approved_at</code></td><td class='c'>timestamptz</td><td class='c'>v0.2</td><td>승인 일시</td><td class='c'></td><td class='mut'></td></tr>
+<tr><td class='c'><code>note</code></td><td class='c'>text</td><td class='c'>v0.2</td><td>비고</td><td class='c'>100%</td><td class='mut'>예시 데이터(시연용)</td></tr>
+<tr><td class='c'><code>requested_by</code></td><td class='c'>text</td><td class='c'>v0.5</td><td>결재 상신한 사람</td><td class='c'></td><td class='mut'></td></tr>
+<tr><td class='c'><code>requested_at</code></td><td class='c'>timestamptz</td><td class='c'>v0.5</td><td>결재 상신 일시</td><td class='c'></td><td class='mut'></td></tr>
+<tr><td class='c'><code>approve_note</code></td><td class='c'>text</td><td class='c'>v0.5</td><td>결재 의견</td><td class='c'></td><td class='mut'></td></tr>
+<tr><td class='c'><code>return_reason</code></td><td class='c'>text</td><td class='c'>v0.5</td><td>돌려보낸 사유</td><td class='c'></td><td class='mut'></td></tr>
+<tr><td class='c'><code>returned_at</code></td><td class='c'>timestamptz</td><td class='c'>v0.5</td><td>돌려보낸 일시</td><td class='c'></td><td class='mut'></td></tr>
+<tr><td class='c'><code>n_total</code></td><td class='c'>int</td><td class='c'>v0.5</td><td>상신할 때의 숫자(대상)</td><td class='c'></td><td class='mut'></td></tr>
+<tr><td class='c'><code>n_ok</code></td><td class='c'>int</td><td class='c'>v0.5</td><td>상신 때 적합 수</td><td class='c'></td><td class='mut'></td></tr>
+<tr><td class='c'><code>n_fix</code></td><td class='c'>int</td><td class='c'>v0.5</td><td>상신 때 보완필요 수</td><td class='c'></td><td class='mut'></td></tr>
+<tr><td class='c'><code>n_bad</code></td><td class='c'>int</td><td class='c'>v0.5</td><td>상신 때 부적합 수</td><td class='c'></td><td class='mut'></td></tr>
+<tr><td class='c'><code>n_open</code></td><td class='c'>int</td><td class='c'>v0.5</td><td>상신 때 조치 중 수</td><td class='c'></td><td class='mut'></td></tr>
+<tr><td class='c'><code>n_unsubmitted</code></td><td class='c'>int</td><td class='c'>v0.5</td><td>상신 때 미제출 수</td><td class='c'></td><td class='mut'></td></tr>
+<tr><td class='c'><code>open_reason</code></td><td class='c'>text</td><td class='c'>v0.5</td><td>조치 중인 건을 두고 상신한 사유(필수)</td><td class='c'></td><td class='mut'></td></tr>
+<tr><td class='c'><code>open_kind</code></td><td class='c'>text</td><td class='c'>v0.5</td><td>상신 사유 유형(예산·인력 조치 필요 · 임시조치 완료 등)</td><td class='c'></td><td class='mut'></td></tr>
+<tr><td class='c'><code>rule_basis</code></td><td class='c'>text</td><td class='c'>v0.7</td><td>근거 주기(의무조항 코드로 자동 · 화면이 씀)</td><td class='c'></td><td class='mut'></td></tr>
+<tr><td class='c'><code>insp_method</code></td><td class='c'>text</td><td class='c'>v0.7</td><td>점검 방식(직접 점검·위탁 점검 · 화면이 씀)</td><td class='c'></td><td class='mut'></td></tr>
+<tr><td class='c'><code>outsource_org</code></td><td class='c'>text</td><td class='c'>v0.7</td><td>위탁 점검 기관(화면이 씀)</td><td class='c'></td><td class='mut'></td></tr>
+<tr><td class='c'><code>report_received_at</code></td><td class='c'>date</td><td class='c'>v0.7</td><td>위탁 점검 결과 보고받은 날(화면이 씀)</td><td class='c'></td><td class='mut'></td></tr>
+<tr><td class='c'><code>report_received_by</code></td><td class='c'>text</td><td class='c'>v0.7</td><td>보고받은 사람(화면이 씀)</td><td class='c'></td><td class='mut'></td></tr>
+<tr><td class='c'><code>report_recorded_by</code></td><td class='c'>text</td><td class='c'>v0.7</td><td>보고받음을 기록한 사람(화면이 씀)</td><td class='c'></td><td class='mut'></td></tr>
+<tr><td class='c'><code>report_proxy</code></td><td class='c'>text</td><td class='c'>v0.7</td><td>총괄이 대신 적은 보고 기록 Y(화면이 씀)</td><td class='c'></td><td class='mut'></td></tr>
+</tbody></table>
+<h2>law_change </h2>
+<table><thead><tr><th style='width:190px'>칸</th><th style='width:110px'>자료형</th><th style='width:74px'>생긴 판</th><th>뜻</th><th style='width:74px'>채움률</th><th style='width:230px'>예시값</th></tr></thead><tbody>
+<tr><td class='c'><code>change_id</code></td><td class='c'>text primary key</td><td class='c'>v0.2</td><td>개정 번호</td><td class='c'>100%</td><td class='mut'>LCH-001</td></tr>
+<tr><td class='c'><code>law</code></td><td class='c'>text</td><td class='c'>v0.2</td><td>근거 법령</td><td class='c'>100%</td><td class='mut'>재난 및 안전관리 기본법</td></tr>
+<tr><td class='c'><code>doc</code></td><td class='c'>text</td><td class='c'>v0.2</td><td>문서</td><td class='c'>100%</td><td class='mut'>재난 및 안전관리 기본법 시행령</td></tr>
+<tr><td class='c'><code>changed_kind</code></td><td class='c'>text</td><td class='c'>v0.2</td><td>개정 구분</td><td class='c'>100%</td><td class='mut'>일부개정</td></tr>
+<tr><td class='c'><code>promulgated_at</code></td><td class='c'>date</td><td class='c'>v0.2</td><td>공포일</td><td class='c'>100%</td><td class='mut'>2026-08-11</td></tr>
+<tr><td class='c'><code>effective_at</code></td><td class='c'>date</td><td class='c'>v0.2</td><td>시행일</td><td class='c'>100%</td><td class='mut'>2026-10-10</td></tr>
+<tr><td class='c'><code>affected_duty_cnt</code></td><td class='c'>int</td><td class='c'>v0.2</td><td>영향 의무 수</td><td class='c'>100%</td><td class='mut'>162</td></tr>
+<tr><td class='c'><code>notice_sent_at</code></td><td class='c'>timestamptz</td><td class='c'>v0.2</td><td>알림 발송일</td><td class='c'>0%</td><td class='mut'></td></tr>
+<tr><td class='c'><code>note</code></td><td class='c'>text</td><td class='c'>v0.2</td><td>비고</td><td class='c'>100%</td><td class='mut'>예시 데이터(시연용)</td></tr>
+</tbody></table>
+<h2>material_item <span class="tag">/system</span></h2>
+<table><thead><tr><th style='width:190px'>칸</th><th style='width:110px'>자료형</th><th style='width:74px'>생긴 판</th><th>뜻</th><th style='width:74px'>채움률</th><th style='width:230px'>예시값</th></tr></thead><tbody>
+<tr><td class='c'><code>item_id</code></td><td class='c'>text primary key</td><td class='c'>v0.8</td><td>품목 번호(MAT-…)</td><td class='c'>100%</td><td class='mut'>MAT-001</td></tr>
+<tr><td class='c'><code>item_name</code></td><td class='c'>text</td><td class='c'>v0.8</td><td>품목</td><td class='c'>100%</td><td class='mut'>수돗물(지방상수도 정수·급수)</td></tr>
+<tr><td class='c'><code>dept_id</code></td><td class='c'>text</td><td class='c'>v0.8</td><td>부서 번호</td><td class='c'>100%</td><td class='mut'>D04</td></tr>
+<tr><td class='c'><code>owner_staff_id</code></td><td class='c'>text</td><td class='c'>v0.8</td><td>정담당</td><td class='c'>83%</td><td class='mut'>SD04-1</td></tr>
+<tr><td class='c'><code>acts</code></td><td class='c'>text</td><td class='c'>v0.8</td><td>행위: produce·process·enduse·provide 를 「;」로</td><td class='c'>67%</td><td class='mut'>produce</td></tr>
+<tr><td class='c'><code>byeolpyo5</code></td><td class='c'>text</td><td class='c'>v0.8</td><td>별표 5: 호 번호(「;」로 여럿) · N(아님) · 빈칸(확인 필요)</td><td class='c'>0%</td><td class='mut'></td></tr>
+<tr><td class='c'><code>related_law</code></td><td class='c'>text</td><td class='c'>v0.8</td><td>관계 법령</td><td class='c'>83%</td><td class='mut'>수도법 · 먹는물관리법</td></tr>
+<tr><td class='c'><code>verdict</code></td><td class='c'>text</td><td class='c'>v0.8</td><td>판정</td><td class='c'>100%</td><td class='mut'>확인 필요</td></tr>
+<tr><td class='c'><code>reason</code></td><td class='c'>text</td><td class='c'>v0.8</td><td>사유(필수)</td><td class='c'>100%</td><td class='mut'>상수도사업소가 정수해 주민에게 공급한다. 수돗물을 원료·제조물</td></tr>
+<tr><td class='c'><code>basis_ref</code></td><td class='c'>text</td><td class='c'>v0.8</td><td>근거(해설서 쪽 또는 「ADOMS 해석(확인 필요)」)</td><td class='c'>100%</td><td class='mut'>ADOMS 해석(확인 필요) — 해설서 95~96쪽(수도법 관</td></tr>
+<tr><td class='c'><code>judged_by</code></td><td class='c'>text</td><td class='c'>v0.8</td><td>판단자</td><td class='c'>17%</td><td class='mut'>SD09-1</td></tr>
+<tr><td class='c'><code>judged_at</code></td><td class='c'>date</td><td class='c'>v0.8</td><td>판단일</td><td class='c'>17%</td><td class='mut'>2026-09-18</td></tr>
+<tr><td class='c'><code>ceo_confirmed_at</code></td><td class='c'>date</td><td class='c'>v0.8</td><td>경영책임자 확인일</td><td class='c'>0%</td><td class='mut'></td></tr>
+<tr><td class='c'><code>ceo_confirmed_by</code></td><td class='c'>text</td><td class='c'>v0.8</td><td>확인한 사람</td><td class='c'>0%</td><td class='mut'></td></tr>
+<tr><td class='c'><code>ceo_proxy</code></td><td class='c'>text</td><td class='c'>v0.8</td><td>총괄이 대신 적은 확인 Y</td><td class='c'>0%</td><td class='mut'></td></tr>
+<tr><td class='c'><code>updated_at</code></td><td class='c'>date</td><td class='c'>v0.8</td><td>고친 일시</td><td class='c'>100%</td><td class='mut'>2026-09-22</td></tr>
+<tr><td class='c'><code>created_by</code></td><td class='c'>text</td><td class='c'>v0.8</td><td>만든 사람</td><td class='c'>100%</td><td class='mut'>SD01-1</td></tr>
+<tr><td class='c'><code>note</code></td><td class='c'>text</td><td class='c'>v0.8</td><td>비고</td><td class='c'>100%</td><td class='mut'>예시 자료(시연용)</td></tr>
+</tbody></table>
+<h2>notification <span class="tag">/actions /training</span></h2>
+<table><thead><tr><th style='width:190px'>칸</th><th style='width:110px'>자료형</th><th style='width:74px'>생긴 판</th><th>뜻</th><th style='width:74px'>채움률</th><th style='width:230px'>예시값</th></tr></thead><tbody>
+<tr><td class='c'><code>notif_id</code></td><td class='c'>text primary key</td><td class='c'>v0.3</td><td>알림 번호</td><td class='c'>100%</td><td class='mut'>NTF-000001</td></tr>
+<tr><td class='c'><code>to_staff_id</code></td><td class='c'>text references staff(staff_id)</td><td class='c'>v0.3</td><td>받는 사람</td><td class='c'>100%</td><td class='mut'>SD03-1</td></tr>
+<tr><td class='c'><code>task_id</code></td><td class='c'>text references compliance_task(task_id)</td><td class='c'>v0.3</td><td>과제 번호</td><td class='c'>100%</td><td class='mut'>TSK-000003</td></tr>
+<tr><td class='c'><code>notif_type</code></td><td class='c'>text</td><td class='c'>v0.3</td><td>알림 종류(기한임박·기한초과)</td><td class='c'>100%</td><td class='mut'>기한초과</td></tr>
+<tr><td class='c'><code>sent_at</code></td><td class='c'>timestamptz default now()</td><td class='c'>v0.3</td><td>보낸 날짜</td><td class='c'>100%</td><td class='mut'>2026-08-16</td></tr>
+<tr><td class='c'><code>read_at</code></td><td class='c'>timestamptz</td><td class='c'>v0.3</td><td>읽은 일시</td><td class='c'>0%</td><td class='mut'></td></tr>
+<tr><td class='c'><code>message</code></td><td class='c'>text</td><td class='c'>v0.3</td><td>알림 내용</td><td class='c'>100%</td><td class='mut'>[기한초과] 안전관리 — 기한 2026-08-11 (41일 경</td></tr>
+<tr><td class='c'><code>note</code></td><td class='c'>text</td><td class='c'>v0.3</td><td>비고</td><td class='c'>100%</td><td class='mut'>예시 데이터(시연용)</td></tr>
+<tr><td class='c'><code>from_staff_id</code></td><td class='c'>text</td><td class='c'>v0.5</td><td>보낸 사람</td><td class='c'></td><td class='mut'></td></tr>
+<tr><td class='c'><code>action_id</code></td><td class='c'>text</td><td class='c'>v0.5</td><td>조치 번호</td><td class='c'></td><td class='mut'></td></tr>
+<tr><td class='c'><code>batch_id</code></td><td class='c'>text</td><td class='c'>v0.5</td><td>점검 회차 번호</td><td class='c'></td><td class='mut'></td></tr>
+</tbody></table>
+<h2>order_received <span class="tag">/calendar /evidence /recurrence</span></h2>
+<table><thead><tr><th style='width:190px'>칸</th><th style='width:110px'>자료형</th><th style='width:74px'>생긴 판</th><th>뜻</th><th style='width:74px'>채움률</th><th style='width:230px'>예시값</th></tr></thead><tbody>
+<tr><td class='c'><code>order_id</code></td><td class='c'>text primary key</td><td class='c'>v0.2</td><td>명령 번호</td><td class='c'>100%</td><td class='mut'>ORD-001</td></tr>
+<tr><td class='c'><code>received_at</code></td><td class='c'>date</td><td class='c'>v0.2</td><td>접수일</td><td class='c'>100%</td><td class='mut'>2026-04-23</td></tr>
+<tr><td class='c'><code>issuer</code></td><td class='c'>text</td><td class='c'>v0.2</td><td>발령 기관</td><td class='c'>100%</td><td class='mut'>고용노동부</td></tr>
+<tr><td class='c'><code>law</code></td><td class='c'>text</td><td class='c'>v0.2</td><td>근거 법령</td><td class='c'>100%</td><td class='mut'>산업안전보건법</td></tr>
+<tr><td class='c'><code>content</code></td><td class='c'>text</td><td class='c'>v0.2</td><td>내용</td><td class='c'>100%</td><td class='mut'>안전난간 보수 명령</td></tr>
+<tr><td class='c'><code>due_date</code></td><td class='c'>date</td><td class='c'>v0.2</td><td>기한</td><td class='c'>89%</td><td class='mut'>2026-05-23</td></tr>
+<tr><td class='c'><code>dept_id</code></td><td class='c'>text references org_dept(dept_id)</td><td class='c'>v0.2</td><td>부서 번호</td><td class='c'>100%</td><td class='mut'>D01</td></tr>
+<tr><td class='c'><code>asset_id</code></td><td class='c'>text references asset(asset_id)</td><td class='c'>v0.2</td><td>자산 번호</td><td class='c'>74%</td><td class='mut'>AR1967-0000142</td></tr>
+<tr><td class='c'><code>done_at</code></td><td class='c'>date</td><td class='c'>v0.2</td><td>이행 완료일</td><td class='c'>42%</td><td class='mut'>2026-06-22</td></tr>
+<tr><td class='c'><code>result</code></td><td class='c'>text</td><td class='c'>v0.2</td><td>처리 상태(접수·조치 중·조치 완료·종결)</td><td class='c'>100%</td><td class='mut'>조치 중</td></tr>
+<tr><td class='c'><code>evidence_file</code></td><td class='c'>text</td><td class='c'>v0.2</td><td>증빙 파일</td><td class='c'>21%</td><td class='mut'>방호덮개_설치사진.pdf</td></tr>
+<tr><td class='c'><code>issuer_kind</code></td><td class='c'>text</td><td class='c'>v0.6</td><td>발령기관 구분(중앙행정기관·지방자치단체)</td><td class='c'>100%</td><td class='mut'>중앙행정기관</td></tr>
+<tr><td class='c'><code>law_article</code></td><td class='c'>text</td><td class='c'>v0.6</td><td>근거 조문</td><td class='c'>58%</td><td class='mut'>산업안전보건법 제53조제1항</td></tr>
+<tr><td class='c'><code>order_no</code></td><td class='c'>text</td><td class='c'>v0.6</td><td>문서 번호</td><td class='c'>68%</td><td class='mut'>근로감독-2026-0715(가상)</td></tr>
+<tr><td class='c'><code>place</code></td><td class='c'>text</td><td class='c'>v0.6</td><td>대상 장소</td><td class='c'>26%</td><td class='mut'>재활용 선별장</td></tr>
+<tr><td class='c'><code>owner_staff_id</code></td><td class='c'>text</td><td class='c'>v0.6</td><td>정담당</td><td class='c'>84%</td><td class='mut'>SD01-1</td></tr>
+<tr><td class='c'><code>assigned_at</code></td><td class='c'>date</td><td class='c'>v0.6</td><td>담당 지정일</td><td class='c'>84%</td><td class='mut'>2026-04-24</td></tr>
+<tr><td class='c'><code>action_plan</code></td><td class='c'>text</td><td class='c'>v0.6</td><td>이행 계획</td><td class='c'>79%</td><td class='mut'>난간 보수 업체 선정 · 임시 출입통제</td></tr>
+<tr><td class='c'><code>started_at</code></td><td class='c'>date</td><td class='c'>v0.6</td><td>시행일</td><td class='c'>79%</td><td class='mut'>2026-04-28</td></tr>
+<tr><td class='c'><code>done_note</code></td><td class='c'>text</td><td class='c'>v0.6</td><td>이행 내용</td><td class='c'>42%</td><td class='mut'>정밀안전진단 완료 · 결과보고서 접수</td></tr>
+<tr><td class='c'><code>done_by</code></td><td class='c'>text</td><td class='c'>v0.6</td><td>이행한 사람</td><td class='c'>42%</td><td class='mut'>SD02-1</td></tr>
+<tr><td class='c'><code>reported_at</code></td><td class='c'>date</td><td class='c'>v0.6</td><td>이행 결과 보고일</td><td class='c'>37%</td><td class='mut'>2026-06-25</td></tr>
+<tr><td class='c'><code>report_evidence</code></td><td class='c'>text</td><td class='c'>v0.6</td><td>보고 문서(파일 이름)</td><td class='c'>37%</td><td class='mut'>정밀안전진단_결과보고_공문.pdf</td></tr>
+<tr><td class='c'><code>closed_at</code></td><td class='c'>date</td><td class='c'>v0.6</td><td>종결일</td><td class='c'>26%</td><td class='mut'>2026-07-10</td></tr>
+<tr><td class='c'><code>closed_note</code></td><td class='c'>text</td><td class='c'>v0.6</td><td>발령기관 확인 방법</td><td class='c'>26%</td><td class='mut'>발령기관 이행 확인 공문 접수</td></tr>
+<tr><td class='c'><code>extended_due</code></td><td class='c'>date</td><td class='c'>v0.6</td><td>연장된 기한</td><td class='c'>5%</td><td class='mut'>2026-10-10</td></tr>
+<tr><td class='c'><code>extend_reason</code></td><td class='c'>text</td><td class='c'>v0.6</td><td>연장 근거</td><td class='c'>5%</td><td class='mut'>유도등 부품 조달 지연 — 기간연장 신청·승인(같은 법 제45</td></tr>
+<tr><td class='c'><code>related_incident_id</code></td><td class='c'>text</td><td class='c'>v0.6</td><td>관련 사고 번호</td><td class='c'>26%</td><td class='mut'>INC-001</td></tr>
+<tr><td class='c'><code>check_note</code></td><td class='c'>text</td><td class='c'>v0.6</td><td>옮겨 온 행의 확인 필요 사항</td><td class='c'>32%</td><td class='mut'>근거 조문 미기재 · 시설 번호와 내용 확인 필요 — 원 공문</td></tr>
+<tr><td class='c'><code>note</code></td><td class='c'>text</td><td class='c'>v0.6</td><td>비고</td><td class='c'>100%</td><td class='mut'>옮겨 온 행 · 예시 자료(시연용)</td></tr>
+<tr><td class='c'><code>doc_nature</code></td><td class='c'>text</td><td class='c'>v0.7</td><td>문서 성격(서면 행정처분·지도·권고·조언)</td><td class='c'>100%</td><td class='mut'>서면 행정처분</td></tr>
+<tr><td class='c'><code>order_area</code></td><td class='c'>text</td><td class='c'>v0.7</td><td>재해 구분(화면이 씀)</td><td class='c'></td><td class='mut'></td></tr>
+<tr><td class='c'><code>basis_clause</code></td><td class='c'>text</td><td class='c'>v0.7</td><td>적용 조문(재해 구분에 따라 · 화면이 씀)</td><td class='c'></td><td class='mut'></td></tr>
+</tbody></table>
+<h2>org_dept </h2>
+<table><thead><tr><th style='width:190px'>칸</th><th style='width:110px'>자료형</th><th style='width:74px'>생긴 판</th><th>뜻</th><th style='width:74px'>채움률</th><th style='width:230px'>예시값</th></tr></thead><tbody>
+<tr><td class='c'><code>dept_id</code></td><td class='c'>text primary key</td><td class='c'>v0.1</td><td>부서 번호</td><td class='c'>100%</td><td class='mut'>D01</td></tr>
+<tr><td class='c'><code>dept_name</code></td><td class='c'>text not null</td><td class='c'>v0.1</td><td>부서 이름</td><td class='c'>100%</td><td class='mut'>중대재해예방과</td></tr>
+<tr><td class='c'><code>dept_role</code></td><td class='c'>text</td><td class='c'>v0.1</td><td>부서 역할(총괄·관리·현업)</td><td class='c'>100%</td><td class='mut'>총괄</td></tr>
+<tr><td class='c'><code>parent_dept_id</code></td><td class='c'>text</td><td class='c'>v0.1</td><td>상위 부서</td><td class='c'>87%</td><td class='mut'>D01</td></tr>
+</tbody></table>
+<h2>risk_assessment <span class="tag">/budget /evidence</span></h2>
+<table><thead><tr><th style='width:190px'>칸</th><th style='width:110px'>자료형</th><th style='width:74px'>생긴 판</th><th>뜻</th><th style='width:74px'>채움률</th><th style='width:230px'>예시값</th></tr></thead><tbody>
+<tr><td class='c'><code>risk_id</code></td><td class='c'>text primary key</td><td class='c'>v0.3</td><td>위험성평가 번호</td><td class='c'>100%</td><td class='mut'>RSK-001</td></tr>
+<tr><td class='c'><code>title</code></td><td class='c'>text</td><td class='c'>v0.3</td><td>제목</td><td class='c'>100%</td><td class='mut'>정수장 약품 투입실 위험성평가</td></tr>
+<tr><td class='c'><code>dept_id</code></td><td class='c'>text references org_dept(dept_id)</td><td class='c'>v0.3</td><td>부서 번호</td><td class='c'>100%</td><td class='mut'>D04</td></tr>
+<tr><td class='c'><code>place</code></td><td class='c'>text</td><td class='c'>v0.3</td><td>현장</td><td class='c'>100%</td><td class='mut'>정수장 약품 투입실</td></tr>
+<tr><td class='c'><code>method</code></td><td class='c'>text</td><td class='c'>v0.3</td><td>평가 방법</td><td class='c'>100%</td><td class='mut'>체크리스트법</td></tr>
+<tr><td class='c'><code>assessed_at</code></td><td class='c'>date</td><td class='c'>v0.3</td><td>평가 실시일</td><td class='c'>100%</td><td class='mut'>2026-03-12</td></tr>
+<tr><td class='c'><code>assessor_staff_id</code></td><td class='c'>text references staff(staff_id)</td><td class='c'>v0.3</td><td>평가자</td><td class='c'>100%</td><td class='mut'>SD04-1</td></tr>
+<tr><td class='c'><code>worker_joined</code></td><td class='c'>text</td><td class='c'>v0.3</td><td>종사자 참여 여부</td><td class='c'>100%</td><td class='mut'>Y</td></tr>
+<tr><td class='c'><code>review_cycle</code></td><td class='c'>text</td><td class='c'>v0.3</td><td>재검토 주기</td><td class='c'>100%</td><td class='mut'>연 1회</td></tr>
+<tr><td class='c'><code>next_due</code></td><td class='c'>date</td><td class='c'>v0.3</td><td>다음 평가 기한</td><td class='c'>100%</td><td class='mut'>2027-03-12</td></tr>
+<tr><td class='c'><code>status</code></td><td class='c'>text</td><td class='c'>v0.3</td><td>이행 상태</td><td class='c'>100%</td><td class='mut'>완료</td></tr>
+<tr><td class='c'><code>note</code></td><td class='c'>text</td><td class='c'>v0.3</td><td>비고</td><td class='c'>100%</td><td class='mut'>예시 데이터(시연용)</td></tr>
+<tr><td class='c'><code>created_at</code></td><td class='c'>timestamptz default now()</td><td class='c'>v0.3</td><td>만든 일시</td><td class='c'></td><td class='mut'></td></tr>
+</tbody></table>
+<h2>risk_assessment_item <span class="tag">/budget</span></h2>
+<table><thead><tr><th style='width:190px'>칸</th><th style='width:110px'>자료형</th><th style='width:74px'>생긴 판</th><th>뜻</th><th style='width:74px'>채움률</th><th style='width:230px'>예시값</th></tr></thead><tbody>
+<tr><td class='c'><code>risk_item_id</code></td><td class='c'>text primary key</td><td class='c'>v0.3</td><td>위험요인 항목 번호</td><td class='c'>100%</td><td class='mut'>RSK-001-1</td></tr>
+<tr><td class='c'><code>risk_id</code></td><td class='c'>text references risk_assessment(risk_id)</td><td class='c'>v0.3</td><td>위험성평가 번호</td><td class='c'>100%</td><td class='mut'>RSK-001</td></tr>
+<tr><td class='c'><code>hazard_factor</code></td><td class='c'>text</td><td class='c'>v0.3</td><td>위험요인</td><td class='c'>100%</td><td class='mut'>염소 누출</td></tr>
+<tr><td class='c'><code>hazard_kind</code></td><td class='c'>text</td><td class='c'>v0.3</td><td>위험 유형</td><td class='c'>100%</td><td class='mut'>화학</td></tr>
+<tr><td class='c'><code>risk_level</code></td><td class='c'>text</td><td class='c'>v0.3</td><td>위험도(높음·보통·낮음)</td><td class='c'>100%</td><td class='mut'>높음</td></tr>
+<tr><td class='c'><code>measure</code></td><td class='c'>text</td><td class='c'>v0.3</td><td>조치</td><td class='c'>100%</td><td class='mut'>누출 감지기·보호구 비치·2인 1조 작업</td></tr>
+<tr><td class='c'><code>measure_due</code></td><td class='c'>date</td><td class='c'>v0.3</td><td>조치 기한</td><td class='c'>100%</td><td class='mut'>2026-04-11</td></tr>
+<tr><td class='c'><code>measure_done_at</code></td><td class='c'>date</td><td class='c'>v0.3</td><td>조치 완료일</td><td class='c'>75%</td><td class='mut'>2026-04-06</td></tr>
+<tr><td class='c'><code>owner_staff_id</code></td><td class='c'>text references staff(staff_id)</td><td class='c'>v0.3</td><td>정담당</td><td class='c'>100%</td><td class='mut'>SD04-1</td></tr>
+<tr><td class='c'><code>note</code></td><td class='c'>text</td><td class='c'>v0.3</td><td>비고</td><td class='c'>100%</td><td class='mut'>예시 데이터(시연용)</td></tr>
+</tbody></table>
+<h2>safety_budget <span class="tag">/budget /evidence</span></h2>
+<table><thead><tr><th style='width:190px'>칸</th><th style='width:110px'>자료형</th><th style='width:74px'>생긴 판</th><th>뜻</th><th style='width:74px'>채움률</th><th style='width:230px'>예시값</th></tr></thead><tbody>
+<tr><td class='c'><code>budget_id</code></td><td class='c'>text primary key</td><td class='c'>v0.2</td><td>예산 번호</td><td class='c'>100%</td><td class='mut'>BUD-0001</td></tr>
+<tr><td class='c'><code>fiscal_year</code></td><td class='c'>int</td><td class='c'>v0.2</td><td>회계연도</td><td class='c'>100%</td><td class='mut'>2026</td></tr>
+<tr><td class='c'><code>dept_id</code></td><td class='c'>text references org_dept(dept_id)</td><td class='c'>v0.2</td><td>부서 번호</td><td class='c'>100%</td><td class='mut'>D01</td></tr>
+<tr><td class='c'><code>target_code</code></td><td class='c'>text</td><td class='c'>v0.2</td><td>관리대상 코드</td><td class='c'>0%</td><td class='mut'></td></tr>
+<tr><td class='c'><code>budget_kind</code></td><td class='c'>text</td><td class='c'>v0.2</td><td>용도</td><td class='c'>100%</td><td class='mut'>인력</td></tr>
+<tr><td class='c'><code>planned_amount</code></td><td class='c'>bigint</td><td class='c'>v0.2</td><td>편성액</td><td class='c'>100%</td><td class='mut'>337000000</td></tr>
+<tr><td class='c'><code>executed_amount</code></td><td class='c'>bigint</td><td class='c'>v0.2</td><td>집행액</td><td class='c'>100%</td><td class='mut'>188720000</td></tr>
+<tr><td class='c'><code>duty_key</code></td><td class='c'>text references duty_class(duty_key)</td><td class='c'>v0.2</td><td>의무 열쇠(정본)</td><td class='c'>0%</td><td class='mut'></td></tr>
+<tr><td class='c'><code>note</code></td><td class='c'>text</td><td class='c'>v0.2</td><td>비고</td><td class='c'>100%</td><td class='mut'>예시 자료(시연용)</td></tr>
+<tr><td class='c'><code>budget_item</code></td><td class='c'>text</td><td class='c'>v0.6</td><td>예산 항목(고정 6행 이름)</td><td class='c'>100%</td><td class='mut'>안전·보건 인력비</td></tr>
+<tr><td class='c'><code>budget_use</code></td><td class='c'>text</td><td class='c'>v0.6</td><td>제4호 용도(가·나·밖)</td><td class='c'>100%</td><td class='mut'>가</td></tr>
+<tr><td class='c'><code>use_basis</code></td><td class='c'>text</td><td class='c'>v0.6</td><td>용도 근거 조문</td><td class='c'>62%</td><td class='mut'>시행령 제4조제4호가목</td></tr>
+<tr><td class='c'><code>risk_item_id</code></td><td class='c'>text</td><td class='c'>v0.6</td><td>위험요인 항목 번호</td><td class='c'>8%</td><td class='mut'>RSK-004-1</td></tr>
+<tr><td class='c'><code>updated_at</code></td><td class='c'>date</td><td class='c'>v0.6</td><td>고친 일시</td><td class='c'>9%</td><td class='mut'>2026-09-01</td></tr>
+<tr><td class='c'><code>area</code></td><td class='c'>text</td><td class='c'>v0.7</td><td>재해 구분(I 산업·F 시설교통·M 원료제조물)</td><td class='c'></td><td class='mut'></td></tr>
+</tbody></table>
+<h2>safety_manual <span class="tag">/system</span></h2>
+<table><thead><tr><th style='width:190px'>칸</th><th style='width:110px'>자료형</th><th style='width:74px'>생긴 판</th><th>뜻</th><th style='width:74px'>채움률</th><th style='width:230px'>예시값</th></tr></thead><tbody>
+<tr><td class='c'><code>manual_id</code></td><td class='c'>text primary key</td><td class='c'>v0.5</td><td>절차·매뉴얼 번호</td><td class='c'>100%</td><td class='mut'>MAN-001</td></tr>
+<tr><td class='c'><code>clause_no</code></td><td class='c'>text</td><td class='c'>v0.5</td><td>제3·5·7·8·9호</td><td class='c'>100%</td><td class='mut'>3</td></tr>
+<tr><td class='c'><code>title</code></td><td class='c'>text</td><td class='c'>v0.5</td><td>제목</td><td class='c'>100%</td><td class='mut'>위험성평가 실시 규정</td></tr>
+<tr><td class='c'><code>covers</code></td><td class='c'>text</td><td class='c'>v0.5</td><td>담은 목(가·나·다)</td><td class='c'>100%</td><td class='mut'>절차</td></tr>
+<tr><td class='c'><code>missing</code></td><td class='c'>text</td><td class='c'>v0.5</td><td>빠진 목</td><td class='c'>17%</td><td class='mut'>다</td></tr>
+<tr><td class='c'><code>enacted_at</code></td><td class='c'>date</td><td class='c'>v0.5</td><td>제정일</td><td class='c'>100%</td><td class='mut'>2023-03-20</td></tr>
+<tr><td class='c'><code>revised_at</code></td><td class='c'>date</td><td class='c'>v0.5</td><td>개정일</td><td class='c'>67%</td><td class='mut'>2025-12-15</td></tr>
+<tr><td class='c'><code>last_check_at</code></td><td class='c'>date</td><td class='c'>v0.5</td><td>반기 1회 점검</td><td class='c'>100%</td><td class='mut'>2026-06-30</td></tr>
+<tr><td class='c'><code>owner_staff_id</code></td><td class='c'>text references staff(staff_id)</td><td class='c'>v0.5</td><td>정담당</td><td class='c'>100%</td><td class='mut'>SM02-1</td></tr>
+<tr><td class='c'><code>note</code></td><td class='c'>text</td><td class='c'>v0.5</td><td>비고</td><td class='c'>100%</td><td class='mut'>예시 자료(시연용)</td></tr>
+</tbody></table>
+<h2>safety_org_role <span class="tag">/system /system/record</span></h2>
+<table><thead><tr><th style='width:190px'>칸</th><th style='width:110px'>자료형</th><th style='width:74px'>생긴 판</th><th>뜻</th><th style='width:74px'>채움률</th><th style='width:230px'>예시값</th></tr></thead><tbody>
+<tr><td class='c'><code>role_id</code></td><td class='c'>text primary key</td><td class='c'>v0.5</td><td>선임·지정 번호</td><td class='c'>100%</td><td class='mut'>SOR-001</td></tr>
+<tr><td class='c'><code>role_item</code></td><td class='c'>text</td><td class='c'>v0.5</td><td>선임·지정 7항목(안전보건관리책임자·안전관리자·보건관리자 …)</td><td class='c'>100%</td><td class='mut'>안전보건관리규정</td></tr>
+<tr><td class='c'><code>scope</code></td><td class='c'>text</td><td class='c'>v0.5</td><td>적용 범위(자산·유형)</td><td class='c'>100%</td><td class='mut'>기관</td></tr>
+<tr><td class='c'><code>dept_id</code></td><td class='c'>text references org_dept(dept_id)</td><td class='c'>v0.5</td><td>부서 번호</td><td class='c'>91%</td><td class='mut'>D01</td></tr>
+<tr><td class='c'><code>designated</code></td><td class='c'>text</td><td class='c'>v0.5</td><td>Y/N</td><td class='c'>100%</td><td class='mut'>Y</td></tr>
+<tr><td class='c'><code>status</code></td><td class='c'>text</td><td class='c'>v0.5</td><td>선임·지정 상태</td><td class='c'>100%</td><td class='mut'>제정</td></tr>
+<tr><td class='c'><code>method</code></td><td class='c'>text</td><td class='c'>v0.5</td><td>선임 방식(직접·겸직·위탁)</td><td class='c'>91%</td><td class='mut'>직접</td></tr>
+<tr><td class='c'><code>designated_at</code></td><td class='c'>date</td><td class='c'>v0.5</td><td>선임·지정일</td><td class='c'>91%</td><td class='mut'>2023-04-17</td></tr>
+<tr><td class='c'><code>law_basis</code></td><td class='c'>text</td><td class='c'>v0.5</td><td>산업안전보건법 제15조 등</td><td class='c'>100%</td><td class='mut'>산업안전보건법 제25조</td></tr>
+<tr><td class='c'><code>clause_no</code></td><td class='c'>text</td><td class='c'>v0.5</td><td>시행령 제4조 몇 호</td><td class='c'>98%</td><td class='mut'>5</td></tr>
+<tr><td class='c'><code>staff_id</code></td><td class='c'>text references staff(staff_id)</td><td class='c'>v0.5</td><td>담당자 번호</td><td class='c'>63%</td><td class='mut'>SM01-1</td></tr>
+<tr><td class='c'><code>doc_name</code></td><td class='c'>text</td><td class='c'>v0.5</td><td>근거 문서 이름</td><td class='c'>91%</td><td class='mut'>용인시 안전보건관리규정</td></tr>
+<tr><td class='c'><code>last_eval_at</code></td><td class='c'>date</td><td class='c'>v0.5</td><td>시행령 제4조제5호 반기 평가</td><td class='c'>0%</td><td class='mut'></td></tr>
+<tr><td class='c'><code>note</code></td><td class='c'>text</td><td class='c'>v0.5</td><td>비고</td><td class='c'>100%</td><td class='mut'>예시 자료(시연용)</td></tr>
+</tbody></table>
+<h2>safety_policy <span class="tag">/system</span></h2>
+<table><thead><tr><th style='width:190px'>칸</th><th style='width:110px'>자료형</th><th style='width:74px'>생긴 판</th><th>뜻</th><th style='width:74px'>채움률</th><th style='width:230px'>예시값</th></tr></thead><tbody>
+<tr><td class='c'><code>policy_id</code></td><td class='c'>text primary key</td><td class='c'>v0.5</td><td>경영방침·목표 번호</td><td class='c'>100%</td><td class='mut'>POL-001</td></tr>
+<tr><td class='c'><code>clause_no</code></td><td class='c'>text</td><td class='c'>v0.5</td><td>시행령 제4조 몇 호</td><td class='c'>100%</td><td class='mut'>1</td></tr>
+<tr><td class='c'><code>policy_kind</code></td><td class='c'>text</td><td class='c'>v0.5</td><td>경영방침 · 안전보건 목표 · 부서별 세부 목표</td><td class='c'>100%</td><td class='mut'>경영방침</td></tr>
+<tr><td class='c'><code>title</code></td><td class='c'>text</td><td class='c'>v0.5</td><td>제목</td><td class='c'>100%</td><td class='mut'>용인시 안전보건 경영방침</td></tr>
+<tr><td class='c'><code>fiscal_year</code></td><td class='c'>text</td><td class='c'>v0.5</td><td>회계연도</td><td class='c'>67%</td><td class='mut'>2026</td></tr>
+<tr><td class='c'><code>summary</code></td><td class='c'>text</td><td class='c'>v0.5</td><td>개요</td><td class='c'>100%</td><td class='mut'>종사자와 시민의 생명·안전을 행정의 최우선 가치로 둔다 · 유</td></tr>
+<tr><td class='c'><code>enacted_at</code></td><td class='c'>date</td><td class='c'>v0.5</td><td>제정일</td><td class='c'>100%</td><td class='mut'>2022-03-02</td></tr>
+<tr><td class='c'><code>revised_at</code></td><td class='c'>date</td><td class='c'>v0.5</td><td>개정일</td><td class='c'>33%</td><td class='mut'>2026-01-05</td></tr>
+<tr><td class='c'><code>posted</code></td><td class='c'>text</td><td class='c'>v0.5</td><td>게시 Y/N</td><td class='c'>100%</td><td class='mut'>Y</td></tr>
+<tr><td class='c'><code>posted_where</code></td><td class='c'>text</td><td class='c'>v0.5</td><td>게시한 곳</td><td class='c'>67%</td><td class='mut'>청사 게시판 · 내부 누리집</td></tr>
+<tr><td class='c'><code>approver_role</code></td><td class='c'>text</td><td class='c'>v0.5</td><td>승인 직위</td><td class='c'>100%</td><td class='mut'>경영책임자(시장)</td></tr>
+<tr><td class='c'><code>owner_staff_id</code></td><td class='c'>text references staff(staff_id)</td><td class='c'>v0.5</td><td>정담당</td><td class='c'>100%</td><td class='mut'>SM01-1</td></tr>
+<tr><td class='c'><code>note</code></td><td class='c'>text</td><td class='c'>v0.5</td><td>비고</td><td class='c'>100%</td><td class='mut'>예시 자료(시연용)</td></tr>
+</tbody></table>
+<h2>staff <span class="tag">/contracts /drills /drills/[id] /duties/[key] /hazards /hazards/[id] /inspections /m /recurrence /risk /settings /system /targets /tasks /training</span></h2>
+<table><thead><tr><th style='width:190px'>칸</th><th style='width:110px'>자료형</th><th style='width:74px'>생긴 판</th><th>뜻</th><th style='width:74px'>채움률</th><th style='width:230px'>예시값</th></tr></thead><tbody>
+<tr><td class='c'><code>staff_id</code></td><td class='c'>text primary key</td><td class='c'>v0.1</td><td>담당자 번호</td><td class='c'>100%</td><td class='mut'>SD01-1</td></tr>
+<tr><td class='c'><code>display_name</code></td><td class='c'>text not null</td><td class='c'>v0.1</td><td>담당자 이름</td><td class='c'>100%</td><td class='mut'>김민준 주무관</td></tr>
+<tr><td class='c'><code>dept_id</code></td><td class='c'>text references org_dept(dept_id)</td><td class='c'>v0.1</td><td>부서 번호</td><td class='c'>100%</td><td class='mut'>D01</td></tr>
+<tr><td class='c'><code>duty_role</code></td><td class='c'>text</td><td class='c'>v0.1</td><td>역할(정담당·부담당·점검팀장 등)</td><td class='c'>100%</td><td class='mut'>정담당</td></tr>
+<tr><td class='c'><code>email</code></td><td class='c'>text</td><td class='c'>v0.1</td><td>전자우편</td><td class='c'>100%</td><td class='mut'>d01.main@demo.yongin.go.kr</td></tr>
+<tr><td class='c'><code>phone</code></td><td class='c'>text</td><td class='c'>v0.1</td><td>전화</td><td class='c'>0%</td><td class='mut'></td></tr>
+<tr><td class='c'><code>note</code></td><td class='c'>text</td><td class='c'>v0.3</td><td>비고</td><td class='c'>100%</td><td class='mut'>가상 인물(시연용)</td></tr>
+</tbody></table>
+<h2>system_record <span class="tag">/system /system/record</span></h2>
+<table><thead><tr><th style='width:190px'>칸</th><th style='width:110px'>자료형</th><th style='width:74px'>생긴 판</th><th>뜻</th><th style='width:74px'>채움률</th><th style='width:230px'>예시값</th></tr></thead><tbody>
+<tr><td class='c'><code>record_id</code></td><td class='c'>text primary key</td><td class='c'>v0.7</td><td>기록 번호</td><td class='c'>100%</td><td class='mut'>SYR-001</td></tr>
+<tr><td class='c'><code>clause_no</code></td><td class='c'>text</td><td class='c'>v0.7</td><td>시행령 제4조 몇 호</td><td class='c'>100%</td><td class='mut'>1</td></tr>
+<tr><td class='c'><code>mok</code></td><td class='c'>text</td><td class='c'>v0.7</td><td>목(가·나·다)</td><td class='c'>59%</td><td class='mut'>가</td></tr>
+<tr><td class='c'><code>record_kind</code></td><td class='c'>text</td><td class='c'>v0.7</td><td>기록 종류(문서 등록·문서 개정·반기 점검·반기 평가·위험성평가 결과 보고 …)</td><td class='c'>100%</td><td class='mut'>문서 개정</td></tr>
+<tr><td class='c'><code>title</code></td><td class='c'>text</td><td class='c'>v0.7</td><td>제목</td><td class='c'>100%</td><td class='mut'>용인시 안전보건 경영방침 개정</td></tr>
+<tr><td class='c'><code>target_role</code></td><td class='c'>text</td><td class='c'>v0.7</td><td>대상 직위(안전보건관리책임자·관리감독자·안전보건총괄책임자)</td><td class='c'>59%</td><td class='mut'>안전보건관리책임자</td></tr>
+<tr><td class='c'><code>target_ref</code></td><td class='c'>text</td><td class='c'>v0.7</td><td>대상 문서·지정 기록 번호(POL·MAN·SOR)</td><td class='c'>94%</td><td class='mut'>POL-001</td></tr>
+<tr><td class='c'><code>target_staff_id</code></td><td class='c'>text</td><td class='c'>v0.7</td><td>평가 대상자</td><td class='c'>41%</td><td class='mut'>SD01-1</td></tr>
+<tr><td class='c'><code>dept_id</code></td><td class='c'>text</td><td class='c'>v0.7</td><td>부서 번호</td><td class='c'>41%</td><td class='mut'>D01</td></tr>
+<tr><td class='c'><code>done_at</code></td><td class='c'>date</td><td class='c'>v0.7</td><td>실시일</td><td class='c'>100%</td><td class='mut'>2026-01-05</td></tr>
+<tr><td class='c'><code>half</code></td><td class='c'>text</td><td class='c'>v0.7</td><td>반기(2026 상반기 등)</td><td class='c'>100%</td><td class='mut'>2026 상반기</td></tr>
+<tr><td class='c'><code>checker_staff_id</code></td><td class='c'>text</td><td class='c'>v0.7</td><td>점검·평가한 사람</td><td class='c'>100%</td><td class='mut'>SM01-1</td></tr>
+<tr><td class='c'><code>content</code></td><td class='c'>text</td><td class='c'>v0.7</td><td>내용</td><td class='c'>100%</td><td class='mut'>경영방침 3개 문장 중 「종사자 의견을 듣는다」를 더함 · 청</td></tr>
+<tr><td class='c'><code>action_needed</code></td><td class='c'>text</td><td class='c'>v0.7</td><td>필요한 조치</td><td class='c'>24%</td><td class='mut'>진행 중인 2곳(터널 점검 통로·옥상 방수 보수) 평가를 마치</td></tr>
+<tr><td class='c'><code>action_done_at</code></td><td class='c'>date</td><td class='c'>v0.7</td><td>필요 조치 완료일</td><td class='c'>0%</td><td class='mut'></td></tr>
+<tr><td class='c'><code>covers</code></td><td class='c'>text</td><td class='c'>v0.7</td><td>담은 목(제8호 가·나·다)</td><td class='c'>12%</td><td class='mut'>가·나</td></tr>
+<tr><td class='c'><code>score</code></td><td class='c'>int</td><td class='c'>v0.7</td><td>평가 점수(합)</td><td class='c'>47%</td><td class='mut'>83</td></tr>
+<tr><td class='c'><code>item_scores</code></td><td class='c'>text</td><td class='c'>v0.7</td><td>항목별 점수(C01=10;C02=9 …)</td><td class='c'>6%</td><td class='mut'>C01=10;C02=10;C03=9;C04=8;C05=9;C0</td></tr>
+<tr><td class='c'><code>substitute</code></td><td class='c'>text</td><td class='c'>v0.7</td><td>갈음 근거(위험성평가·산업안전보건위원회)</td><td class='c'>12%</td><td class='mut'>위험성평가</td></tr>
+<tr><td class='c'><code>budget_amount</code></td><td class='c'>bigint</td><td class='c'>v0.7</td><td>부여한 예산(원 · 제5호 가목)</td><td class='c'>6%</td><td class='mut'>1000000</td></tr>
+<tr><td class='c'><code>doc_name</code></td><td class='c'>text</td><td class='c'>v0.7</td><td>근거 문서 이름</td><td class='c'>18%</td><td class='mut'>안전보건관리규정 제9조 · 2026년 안전보건 예산 배정표</td></tr>
+<tr><td class='c'><code>ceo_reported</code></td><td class='c'>text</td><td class='c'>v0.7</td><td>경영책임자 보고받음 Y</td><td class='c'>88%</td><td class='mut'>Y</td></tr>
+<tr><td class='c'><code>reported_at</code></td><td class='c'>date</td><td class='c'>v0.7</td><td>경영책임자 보고일</td><td class='c'>88%</td><td class='mut'>2026-01-05</td></tr>
+<tr><td class='c'><code>report_method</code></td><td class='c'>text</td><td class='c'>v0.7</td><td>보고 방식(전자 결재·대면 보고·서면 보고)</td><td class='c'>88%</td><td class='mut'>전자 결재</td></tr>
+<tr><td class='c'><code>created_by</code></td><td class='c'>text</td><td class='c'>v0.7</td><td>만든 사람</td><td class='c'>100%</td><td class='mut'>SM01-1</td></tr>
+<tr><td class='c'><code>note</code></td><td class='c'>text</td><td class='c'>v0.7</td><td>비고</td><td class='c'>100%</td><td class='mut'>예시 자료(시연용)</td></tr>
+<tr><td class='c'><code>report_proxy</code></td><td class='c'>text</td><td class='c'>v0.7</td><td>총괄이 대신 적은 보고 기록 Y(화면이 씀)</td><td class='c'></td><td class='mut'></td></tr>
+</tbody></table>
+<h2>task_approval_patch </h2>
+<table><thead><tr><th style='width:190px'>칸</th><th style='width:110px'>자료형</th><th style='width:74px'>생긴 판</th><th>뜻</th><th style='width:74px'>채움률</th><th style='width:230px'>예시값</th></tr></thead><tbody>
+<tr><td class='c'><code>task_id</code></td><td class='c'>(패치)</td><td class='c'>v0.2</td><td>과제 번호</td><td class='c'>100%</td><td class='mut'>TSK-000001</td></tr>
+<tr><td class='c'><code>approval_status</code></td><td class='c'>(패치)</td><td class='c'>v0.2</td><td>결재 상태(작성중·제출·승인·반려)</td><td class='c'>100%</td><td class='mut'>승인</td></tr>
+<tr><td class='c'><code>created_by</code></td><td class='c'>(패치)</td><td class='c'>v0.2</td><td>만든 사람</td><td class='c'>100%</td><td class='mut'>SD13-1</td></tr>
+<tr><td class='c'><code>submitted_at</code></td><td class='c'>(패치)</td><td class='c'>v0.2</td><td>제출 일시</td><td class='c'>63%</td><td class='mut'>2026-08-02</td></tr>
+<tr><td class='c'><code>submitted_by</code></td><td class='c'>(패치)</td><td class='c'>v0.2</td><td>제출한 사람</td><td class='c'>63%</td><td class='mut'>SD03-1</td></tr>
+<tr><td class='c'><code>approved_at</code></td><td class='c'>(패치)</td><td class='c'>v0.2</td><td>승인 일시</td><td class='c'>6%</td><td class='mut'>2026-08-04</td></tr>
+<tr><td class='c'><code>approved_by</code></td><td class='c'>(패치)</td><td class='c'>v0.2</td><td>승인한 사람</td><td class='c'>6%</td><td class='mut'>SM02-2</td></tr>
+<tr><td class='c'><code>rejected_at</code></td><td class='c'>(패치)</td><td class='c'>v0.2</td><td>반려 일시</td><td class='c'>2%</td><td class='mut'>2026-09-19</td></tr>
+<tr><td class='c'><code>reject_reason</code></td><td class='c'>(패치)</td><td class='c'>v0.2</td><td>반려 사유</td><td class='c'>14%</td><td class='mut'>증빙 사진에 일자 표기가 없음</td></tr>
+<tr><td class='c'><code>created_at</code></td><td class='c'>(패치)</td><td class='c'>v0.2</td><td>만든 일시</td><td class='c'>100%</td><td class='mut'>2026-06-23</td></tr>
+<tr><td class='c'><code>period_year</code></td><td class='c'>(패치)</td><td class='c'>v0.2</td><td>연도</td><td class='c'>100%</td><td class='mut'>2026</td></tr>
+<tr><td class='c'><code>half_year</code></td><td class='c'>(패치)</td><td class='c'>v0.2</td><td>반기</td><td class='c'>100%</td><td class='mut'>상반기</td></tr>
+<tr><td class='c'><code>plan_date</code></td><td class='c'>(패치)</td><td class='c'>v0.2</td><td>계획일</td><td class='c'>100%</td><td class='mut'>2026-08-22</td></tr>
+<tr><td class='c'><code>evidence_cnt</code></td><td class='c'>(패치)</td><td class='c'>v0.2</td><td>증빙 수</td><td class='c'>100%</td><td class='mut'>1</td></tr>
+<tr><td class='c'><code>check_result</code></td><td class='c'>(패치)</td><td class='c'>v0.2</td><td>점검 판정(이행완료·보완필요·미이행)</td><td class='c'>46%</td><td class='mut'>이행완료</td></tr>
+</tbody></table>
+<h2>training_check <span class="tag">/training</span></h2>
+<table><thead><tr><th style='width:190px'>칸</th><th style='width:110px'>자료형</th><th style='width:74px'>생긴 판</th><th>뜻</th><th style='width:74px'>채움률</th><th style='width:230px'>예시값</th></tr></thead><tbody>
+<tr><td class='c'><code>check_id</code></td><td class='c'>text primary key</td><td class='c'>v0.7</td><td>점검 기록 번호(화면이 씀)</td><td class='c'></td><td class='mut'></td></tr>
+<tr><td class='c'><code>area</code></td><td class='c'>text</td><td class='c'>v0.7</td><td>재해 구분(I 산업·F 시설교통·M 원료제조물)</td><td class='c'></td><td class='mut'></td></tr>
+<tr><td class='c'><code>period</code></td><td class='c'>text</td><td class='c'>v0.7</td><td>점검 기간(반기 또는 연)</td><td class='c'></td><td class='mut'></td></tr>
+<tr><td class='c'><code>half</code></td><td class='c'>text</td><td class='c'>v0.7</td><td>반기</td><td class='c'></td><td class='mut'></td></tr>
+<tr><td class='c'><code>checked_at</code></td><td class='c'>date</td><td class='c'>v0.7</td><td>점검일</td><td class='c'></td><td class='mut'></td></tr>
+<tr><td class='c'><code>checked_by</code></td><td class='c'>text</td><td class='c'>v0.7</td><td>점검한 사람</td><td class='c'></td><td class='mut'></td></tr>
+<tr><td class='c'><code>method</code></td><td class='c'>text</td><td class='c'>v0.7</td><td>점검 방식(직접 점검·점검 결과 보고받음)</td><td class='c'></td><td class='mut'></td></tr>
+<tr><td class='c'><code>proxy</code></td><td class='c'>text</td><td class='c'>v0.7</td><td>총괄이 대신 적은 기록 Y</td><td class='c'></td><td class='mut'></td></tr>
+<tr><td class='c'><code>summary</code></td><td class='c'>text</td><td class='c'>v0.7</td><td>점검 결과 요약</td><td class='c'></td><td class='mut'></td></tr>
+<tr><td class='c'><code>note</code></td><td class='c'>text</td><td class='c'>v0.7</td><td>비고</td><td class='c'></td><td class='mut'></td></tr>
+</tbody></table>
+<h2>training_course <span class="tag">/calendar /training</span></h2>
+<table><thead><tr><th style='width:190px'>칸</th><th style='width:110px'>자료형</th><th style='width:74px'>생긴 판</th><th>뜻</th><th style='width:74px'>채움률</th><th style='width:230px'>예시값</th></tr></thead><tbody>
+<tr><td class='c'><code>course_id</code></td><td class='c'>text primary key</td><td class='c'>v0.6</td><td>교육 과정 번호</td><td class='c'>100%</td><td class='mut'>TC01</td></tr>
+<tr><td class='c'><code>course_name</code></td><td class='c'>text</td><td class='c'>v0.6</td><td>과정명</td><td class='c'>100%</td><td class='mut'>근로자 정기교육</td></tr>
+<tr><td class='c'><code>law</code></td><td class='c'>text</td><td class='c'>v0.6</td><td>근거 법령</td><td class='c'>100%</td><td class='mut'>산업안전보건법</td></tr>
+<tr><td class='c'><code>basis</code></td><td class='c'>text</td><td class='c'>v0.6</td><td>근거 조문(법·시행규칙·별표)</td><td class='c'>100%</td><td class='mut'>산업안전보건법 제29조제1항 · 시행규칙 제26조제1항 · 별</td></tr>
+<tr><td class='c'><code>target</code></td><td class='c'>text</td><td class='c'>v0.6</td><td>대상</td><td class='c'>100%</td><td class='mut'>소속 근로자</td></tr>
+<tr><td class='c'><code>cycle</code></td><td class='c'>text</td><td class='c'>v0.6</td><td>주기</td><td class='c'>100%</td><td class='mut'>반기</td></tr>
+<tr><td class='c'><code>cycle_months</code></td><td class='c'>int</td><td class='c'>v0.6</td><td>주기(개월)</td><td class='c'>69%</td><td class='mut'>6</td></tr>
+<tr><td class='c'><code>required_hours</code></td><td class='c'>text</td><td class='c'>v0.6</td><td>법정 시간(원문 요지)</td><td class='c'>100%</td><td class='mut'>사무직 매반기 6시간 이상 · 그 밖의 근로자(판매업무 외) </td></tr>
+<tr><td class='c'><code>applies_depts</code></td><td class='c'>text</td><td class='c'>v0.6</td><td>적용 부서(공백 구분 · 예시)</td><td class='c'>92%</td><td class='mut'>D01 D02 D03 D04 D05 D06 D07 D08 D0</td></tr>
+<tr><td class='c'><code>hazardous_work</code></td><td class='c'>text</td><td class='c'>v0.6</td><td>유해·위험 작업 교육 Y/N</td><td class='c'>100%</td><td class='mut'>N</td></tr>
+<tr><td class='c'><code>note</code></td><td class='c'>text</td><td class='c'>v0.6</td><td>비고</td><td class='c'>100%</td><td class='mut'>예시 자료(시연용)</td></tr>
+<tr><td class='c'><code>area</code></td><td class='c'>text</td><td class='c'>v0.7</td><td>재해 구분(I 산업·F 시설교통·M 원료제조물)</td><td class='c'>100%</td><td class='mut'>I</td></tr>
+</tbody></table>
+<h2>training_record <span class="tag">/calendar /training</span></h2>
+<table><thead><tr><th style='width:190px'>칸</th><th style='width:110px'>자료형</th><th style='width:74px'>생긴 판</th><th>뜻</th><th style='width:74px'>채움률</th><th style='width:230px'>예시값</th></tr></thead><tbody>
+<tr><td class='c'><code>training_id</code></td><td class='c'>text primary key</td><td class='c'>v0.2</td><td>교육 번호</td><td class='c'>100%</td><td class='mut'>TRN-0001</td></tr>
+<tr><td class='c'><code>staff_id</code></td><td class='c'>text references staff(staff_id)</td><td class='c'>v0.2</td><td>담당자 번호</td><td class='c'>100%</td><td class='mut'>SD01-1</td></tr>
+<tr><td class='c'><code>dept_id</code></td><td class='c'>text references org_dept(dept_id)</td><td class='c'>v0.2</td><td>부서 번호</td><td class='c'>100%</td><td class='mut'>D01</td></tr>
+<tr><td class='c'><code>course_name</code></td><td class='c'>text</td><td class='c'>v0.2</td><td>과정명</td><td class='c'>100%</td><td class='mut'>관리감독자 정기교육</td></tr>
+<tr><td class='c'><code>law</code></td><td class='c'>text</td><td class='c'>v0.2</td><td>근거 법령</td><td class='c'>100%</td><td class='mut'>산업안전보건법</td></tr>
+<tr><td class='c'><code>hours</code></td><td class='c'>numeric</td><td class='c'>v0.2</td><td>시간</td><td class='c'>76%</td><td class='mut'>16</td></tr>
+<tr><td class='c'><code>trained_at</code></td><td class='c'>date</td><td class='c'>v0.2</td><td>이수일</td><td class='c'>77%</td><td class='mut'>2026-05-27</td></tr>
+<tr><td class='c'><code>certificate_file</code></td><td class='c'>text</td><td class='c'>v0.2</td><td>수료증</td><td class='c'>77%</td><td class='mut'>이수증_TRN-0001.pdf</td></tr>
+<tr><td class='c'><code>duty_key</code></td><td class='c'>text references duty_class(duty_key)</td><td class='c'>v0.2</td><td>의무 열쇠(정본)</td><td class='c'>0%</td><td class='mut'></td></tr>
+<tr><td class='c'><code>course_id</code></td><td class='c'>text</td><td class='c'>v0.6</td><td>교육 과정 번호</td><td class='c'>100%</td><td class='mut'>TC02</td></tr>
+<tr><td class='c'><code>period</code></td><td class='c'>text</td><td class='c'>v0.6</td><td>교육 기간 표시(2026년·상반기 등)</td><td class='c'>100%</td><td class='mut'>2026년</td></tr>
+<tr><td class='c'><code>due_date</code></td><td class='c'>date</td><td class='c'>v0.6</td><td>기한</td><td class='c'>72%</td><td class='mut'>2026-12-31</td></tr>
+<tr><td class='c'><code>status</code></td><td class='c'>text</td><td class='c'>v0.6</td><td>이수 상태(이수·미실시)</td><td class='c'>100%</td><td class='mut'>이수</td></tr>
+<tr><td class='c'><code>note</code></td><td class='c'>text</td><td class='c'>v0.6</td><td>비고</td><td class='c'>100%</td><td class='mut'>예시 자료(시연용)</td></tr>
+<tr><td class='c'><code>instructed_at</code></td><td class='c'>date</td><td class='c'>v0.6</td><td>이행 지시일(제4호 · 화면이 씀)</td><td class='c'></td><td class='mut'></td></tr>
+<tr><td class='c'><code>instructed_by</code></td><td class='c'>text</td><td class='c'>v0.6</td><td>이행 지시한 사람(화면이 씀)</td><td class='c'></td><td class='mut'></td></tr>
+<tr><td class='c'><code>instruct_due</code></td><td class='c'>date</td><td class='c'>v0.6</td><td>지시한 이수 기한(화면이 씀)</td><td class='c'></td><td class='mut'></td></tr>
+<tr><td class='c'><code>instruct_basis</code></td><td class='c'>text</td><td class='c'>v0.6</td><td>지시 근거 조문(화면이 씀)</td><td class='c'></td><td class='mut'></td></tr>
+<tr><td class='c'><code>done_by</code></td><td class='c'>text</td><td class='c'>v0.6</td><td>이행한 사람</td><td class='c'></td><td class='mut'></td></tr>
+</tbody></table>
+<h2>worker_voice <span class="tag">/evidence /system /system/record</span></h2>
+<table><thead><tr><th style='width:190px'>칸</th><th style='width:110px'>자료형</th><th style='width:74px'>생긴 판</th><th>뜻</th><th style='width:74px'>채움률</th><th style='width:230px'>예시값</th></tr></thead><tbody>
+<tr><td class='c'><code>voice_id</code></td><td class='c'>text primary key</td><td class='c'>v0.2</td><td>의견 번호</td><td class='c'>100%</td><td class='mut'>VOC-001</td></tr>
+<tr><td class='c'><code>received_at</code></td><td class='c'>date</td><td class='c'>v0.2</td><td>접수일</td><td class='c'>100%</td><td class='mut'>2026-06-12</td></tr>
+<tr><td class='c'><code>channel</code></td><td class='c'>text</td><td class='c'>v0.2</td><td>접수 경로</td><td class='c'>100%</td><td class='mut'>현장 건의</td></tr>
+<tr><td class='c'><code>dept_id</code></td><td class='c'>text references org_dept(dept_id)</td><td class='c'>v0.2</td><td>부서 번호</td><td class='c'>100%</td><td class='mut'>D01</td></tr>
+<tr><td class='c'><code>content</code></td><td class='c'>text</td><td class='c'>v0.2</td><td>내용</td><td class='c'>100%</td><td class='mut'>현장 순회 중 안전난간 파손 발견</td></tr>
+<tr><td class='c'><code>review_result</code></td><td class='c'>text</td><td class='c'>v0.2</td><td>검토 결과</td><td class='c'>78%</td><td class='mut'>보수 요청 접수</td></tr>
+<tr><td class='c'><code>action_taken</code></td><td class='c'>text</td><td class='c'>v0.2</td><td>조치 내용</td><td class='c'>56%</td><td class='mut'>난간 교체 완료</td></tr>
+<tr><td class='c'><code>closed_at</code></td><td class='c'>date</td><td class='c'>v0.2</td><td>종결일</td><td class='c'>44%</td><td class='mut'>2026-07-02</td></tr>
+<tr><td class='c'><code>stage</code></td><td class='c'>text</td><td class='c'>v0.7</td><td>처리 단계(접수·검토·개선방안·이행·종결)</td><td class='c'>100%</td><td class='mut'>종결</td></tr>
+<tr><td class='c'><code>needs_improvement</code></td><td class='c'>text</td><td class='c'>v0.7</td><td>개선 필요 Y</td><td class='c'>67%</td><td class='mut'>Y</td></tr>
+<tr><td class='c'><code>reviewed_at</code></td><td class='c'>date</td><td class='c'>v0.7</td><td>검토일</td><td class='c'>67%</td><td class='mut'>2026-06-15</td></tr>
+<tr><td class='c'><code>reviewer_staff_id</code></td><td class='c'>text</td><td class='c'>v0.7</td><td>검토한 사람</td><td class='c'>78%</td><td class='mut'>SD01-2</td></tr>
+<tr><td class='c'><code>plan</code></td><td class='c'>text</td><td class='c'>v0.7</td><td>개선방안</td><td class='c'>67%</td><td class='mut'>파손 난간 교체</td></tr>
+<tr><td class='c'><code>plan_due</code></td><td class='c'>date</td><td class='c'>v0.7</td><td>대책 기한</td><td class='c'>67%</td><td class='mut'>2026-07-10</td></tr>
+<tr><td class='c'><code>plan_owner_staff_id</code></td><td class='c'>text</td><td class='c'>v0.7</td><td>개선방안 담당자</td><td class='c'>67%</td><td class='mut'>SD01-2</td></tr>
+<tr><td class='c'><code>done_at</code></td><td class='c'>date</td><td class='c'>v0.7</td><td>개선 이행 완료일</td><td class='c'>44%</td><td class='mut'>2026-07-02</td></tr>
+<tr><td class='c'><code>substitute</code></td><td class='c'>text</td><td class='c'>v0.7</td><td>갈음한 회의체(산업안전보건위원회·협의체)</td><td class='c'>11%</td><td class='mut'>산업안전보건위원회</td></tr>
+<tr><td class='c'><code>ceo_reported</code></td><td class='c'>text</td><td class='c'>v0.7</td><td>경영책임자 보고받음 Y</td><td class='c'>22%</td><td class='mut'>Y</td></tr>
+<tr><td class='c'><code>reported_at</code></td><td class='c'>date</td><td class='c'>v0.7</td><td>경영책임자 보고일</td><td class='c'>22%</td><td class='mut'>2026-07-31</td></tr>
+<tr><td class='c'><code>report_method</code></td><td class='c'>text</td><td class='c'>v0.7</td><td>보고 방식</td><td class='c'>22%</td><td class='mut'>대면 보고</td></tr>
+<tr><td class='c'><code>note</code></td><td class='c'>text</td><td class='c'>v0.7</td><td>비고</td><td class='c'>100%</td><td class='mut'>예시 자료(시연용)</td></tr>
+<tr><td class='c'><code>report_proxy</code></td><td class='c'>text</td><td class='c'>v0.7</td><td>총괄이 대신 적은 보고 기록 Y(화면이 씀)</td><td class='c'></td><td class='mut'></td></tr>
+</tbody></table>
+</main></body></html>

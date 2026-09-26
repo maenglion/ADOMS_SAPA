@@ -1,0 +1,99 @@
+표,종류,원천,seed_행수,덮개_더한행,덮개_고친행,키_칸,키_근거,기존SQL,판_이력(새것부터),부름,쓰는_화면·코드,비고
+accident_case,표,seed:ops_v1.6_20260924,32,,,case_no,첫 칸(추정),없음 — 새로 만들어야 함,ops_v1.6_20260924,,,이관 안 함 — 앱 코드가 부르지 않는 표(같은 32행의 usg_case 를 쓴다) · 09-26 사용자 결정
+accident_stat,표,seed:ops_v1.6_20260924,166,,,occ_id,첫 칸(추정),없음 — 새로 만들어야 함,ops_v1.6_20260924,,,이관 안 함 — 앱 코드가 부르지 않는 표(같은 166행의 usg_stat_occur 를 쓴다) · 09-26 사용자 결정
+action,표,seed:us_v1.9_20260926 + overlay,50,,1,action_id,코드(readTable·patchRow 키),있음,us_v1.9_20260926 > ops_v0.3_20260921 > ops_v0.1_20260920,appendRow×2 · fromDb×1 · patchRow×4 · readTable×2 · readTable(감싼 부름 safe)×1 · seed×1,/actions /calendar /inspections /review lib/cycle.ts lib/data.ts,
+annual_schedule,표,seed:ops_v0.6_20260921,12,,,sched_id,코드(readTable·patchRow 키),있음,ops_v0.6_20260921,readTable(감싼 부름 safe)×1,/calendar,
+asset,표,seed:us_v1.7_20260925,416,,,asset_id,코드(readTable·patchRow 키),있음,us_v1.7_20260925 > us_v1.6_20260925 > ops_v2.1_20260924 > ops_v2.0_20260924 > ops_v1.9_20260924 > ops_v1.8_20260924 > ops_v1.7_20260924 > ops_v1.6_20260924 > ops_v1.5_20260924 > ops_v0.1_20260920,appendRow×1 · fromDb×2 · patchRow×1 · seed×1,/settings lib/data.ts,assetSeed() — 덮개 tables.asset 더함 · patches.asset[id].deleted=Y 는 지우지 않고 숨김
+asset_target_map,표,seed:us_v1.7_20260925,631,,,"asset_id,target_code",기존 SQL primary key,있음,us_v1.7_20260925 > us_v1.6_20260925 > ops_v2.0_20260924 > ops_v1.9_20260924 > ops_v0.1_20260920,appendRow×1 · fromDb×3 · seed×1,/settings lib/data.ts,assetMapSeed() — 덮개 tables.asset_target_map 더함 · 살아 있는 자산만
+audit_log,표,코드만(판·덮개에 행 없음),,,,log_id,기존 SQL primary key,있음,,fromDb×1,lib/data.ts,
+budget_exec,표,코드만(판·덮개에 행 없음),,,,exec_id,코드(readTable·patchRow 키),없음 — 새로 만들어야 함,,appendRow×1 · readTable×2,/budget /evidence,
+ceo_activity,표,seed:ops_v1.5_20260924,12,,,activity_id,코드(readTable·patchRow 키),있음,ops_v1.5_20260924 > ops_v0.2_20260920,fromDb×1 · readTable×1,lib/data.ts,
+civil_manual,표,seed:ops_v1.9_20260924,57,,,manual_id,코드(readTable·patchRow 키),있음,ops_v1.9_20260924 > ops_v1.6_20260924 > ops_v0.6_20260921,appendRow×2 · patchRow×3 · readTable×6,/evidence /perform/fc /system lib/drill.ts lib/system.ts,
+civil_record,표,코드만(판·덮개에 행 없음),,,,record_id,코드(readTable·patchRow 키),없음 — 새로 만들어야 함,,appendRow×1 · patchRow×2 · readTable×2,/evidence /system lib/system.ts,
+civil_safety_plan,표,seed:ops_v1.9_20260924,342,,,plan_id,코드(readTable·patchRow 키),있음,ops_v1.9_20260924 > ops_v1.6_20260924 > ops_v1.5_20260924 > ops_v0.6_20260921,appendRow×1 · patchRow×3 · readTable×5 · readTable(감싼 부름 safe)×1,/calendar /evidence /perform/fc /system lib/drill.ts lib/system.ts,
+compliance_task,표,seed:ops_v2.2_20260924 + overlay,2465,,13,task_id,기존 SQL primary key,있음,ops_v2.2_20260924 > ops_v2.0_20260924 > ops_v1.9_20260924 > ops_v0.3_20260921 > ops_v0.1_20260920,seed×2,lib/data.ts,덮개 옛 자리 taskPatch(과제번호 → 바뀐 칸)가 이 표를 고친다 · 결재 칸은 task_approval_patch 가 먼저 겹친다(lib/data.ts)
+contract,표,seed:ops_v1.9_20260924,63,,,contract_id,코드(readTable·patchRow 키),있음,ops_v1.9_20260924 > ops_v1.5_20260924 > ops_v1.0_20260924 > ops_v0.7_20260921 > ops_v0.5_20260921 > ops_v0.4_20260921 > ops_v0.3_20260921 > ops_v0.2_20260920,fromDb×1 · patchRow×4 · readTable×7 · readTable(감싼 부름 safe)×1 · seed×1,/api/export /calendar /contracts /evidence /targets/contract/[id] lib/data.ts,
+contract_compliance,표,seed:ops_v0.5_20260921,284,,,cc_id,코드(readTable·patchRow 키),있음,ops_v0.5_20260921,patchRow×3 · readTable×4,/contracts /evidence /status/contract /targets,
+contract_duty,표,seed:ops_v0.4_20260921,251,,,cduty_id,기존 SQL primary key,있음,ops_v0.4_20260921 > ops_v0.3_20260921 > ops_v0.2_20260920,seed×1,lib/data.ts,
+contract_eval_item,표,seed:ops_v0.7_20260921,10,,,item_no,기존 SQL primary key,있음,ops_v0.7_20260921,readTable×1,/contracts,
+contract_eval_score,표,코드만(판·덮개에 행 없음),,,,score_id,기존 SQL primary key,있음,,appendRow×1 · readTable×1,/contracts,
+contract_eval_setting,표,코드만(판·덮개에 행 없음),,,,setting_id,기존 SQL primary key,있음,,appendRow×1 · readTable×1,/contracts,
+contract_hazard,표,seed:ops_v0.4_20260921,206,,,hazard_id,기존 SQL primary key,있음,ops_v0.4_20260921 > ops_v0.3_20260921 > ops_v0.2_20260920,fromDb×1 · seed×1,lib/data.ts,
+contract_hazard_map,표,seed:ops_v0.5_20260921,305,,,hazard_id,코드(readTable·patchRow 키),있음,ops_v0.5_20260921,readTable×2,/contracts /targets/contract/[id],
+contract_mgmt_item,표,seed:ops_v0.5_20260921,4,,,item_no,기존 SQL primary key,있음,ops_v0.5_20260921,readTable×1,/contracts,
+drill_eval,표,seed:ops_v0.6_20260921,11,,,eval_id,코드(readTable·patchRow 키),있음,ops_v0.6_20260921,appendRow×1 · readTable×1,/drills,
+drill_plan,표,seed:ops_v1.5_20260924,15,,,drill_id,코드(readTable·patchRow 키),있음,ops_v1.5_20260924 > ops_v0.6_20260921,appendRow×1 · patchRow×1 · readTable×8 · readTable(감싼 부름 safe)×1,/calendar /drills /evidence /perform/fc /perform/ws /perform/ws/[step] lib/drill.ts,
+duty_assignment,표,seed:ops_v2.0_20260924,4400,,,assign_id,코드(readTable·patchRow 키),있음,ops_v2.0_20260924 > ops_v1.9_20260924 > ops_v1.8_20260924 > ops_v1.7_20260924 > ops_v1.6_20260924 > ops_v1.5_20260924 > ops_v0.1_20260920,appendRow×1 · fromDb×2 · patchRow×2 · readTable×3,/duties/[key] lib/data.ts lib/lawsync.ts,
+duty_class,표,seed:ops_v1.3_20260924,11075,,,duty_key,코드(readTable·patchRow 키),있음,ops_v1.3_20260924 > ops_v1.2_20260924 > ops_v0.3_20260921 > ops_v0.1_20260920,appendRow×1 · patchRow×3 · readTable×1 · seed×1,lib/data.ts lib/lawsync.ts,dutyClassRows() — 덮개 tables/patches(키 duty_key)를 겹치고 retired=Y 는 숨긴다(법령 개정 반영)
+eval_criteria,표,seed:ops_v0.7_20260921,21,,,criteria_id,코드(readTable·patchRow 키),있음,ops_v0.7_20260921,appendRow×1 · patchRow×1 · readTable×2,/system /system/record lib/system.ts,
+evidence,표,seed:ops_v2.2_20260924 + overlay,1128,7,,evidence_id,기존 SQL primary key,있음,ops_v2.2_20260924 > ops_v1.9_20260924 > ops_v0.3_20260921 > ops_v0.1_20260920,fromDb×1 · seed×1,lib/data.ts,덮개 옛 자리 evidence 배열이 앞에 더해진다
+evidence_split,표,코드만(판·덮개에 행 없음),,,,split_id,코드(readTable·patchRow 키),없음 — 새로 만들어야 함,,appendRow×1 · readTable×1,/evidence,
+form_template,표,seed:ops_v0.1_20260920,131,,,form_id,기존 SQL primary key,있음,ops_v0.1_20260920,fromDb×1 · seed×1,lib/data.ts,
+hazard_code,표,seed:ops_v0.5_20260921,18,,,hazard_code,기존 SQL primary key,있음,ops_v0.5_20260921,readTable×1,/contracts,
+hazard_report,표,seed:us_v1.9_20260926,34,,,hz_id,코드(readTable·patchRow 키),있음,us_v1.9_20260926 > ops_v1.9_20260924 > ops_v1.5_20260924 > ops_v0.6_20260921,appendRow×1 · patchRow×1 · readTable×3 · readTable(감싼 부름 safe)×1,/calendar /evidence /hazards /perform/fc,
+hazard_step,표,seed:us_v1.9_20260926,224,,,step_id,코드(readTable·patchRow 키),있음,us_v1.9_20260926 > ops_v0.6_20260921,appendRow×1 · readTable×1,/hazards,
+incident,표,seed:us_v1.9_20260926,14,,,incident_id,코드(readTable·patchRow 키),있음,us_v1.9_20260926 > ops_v1.9_20260924 > ops_v1.8_20260924 > ops_v1.5_20260924 > ops_v0.6_20260921 > ops_v0.2_20260920,appendRow×1 · fromDb×1 · patchRow×5 · readTable×7,/evidence /recurrence lib/data.ts,
+incident_nil_check,표,seed:us_v1.9_20260926,28,,,nil_id,코드(readTable·patchRow 키),있음,us_v1.9_20260926 > ops_v0.6_20260921,appendRow×1 · readTable×1,/recurrence,
+incident_report,표,seed:us_v1.9_20260926,16,,,report_id,코드(readTable·patchRow 키),있음,us_v1.9_20260926 > ops_v0.8_20260922,appendRow×1 · patchRow×1 · readTable×3,/recurrence,
+incident_response,표,seed:us_v1.9_20260926,57,,,resp_id,코드(readTable·patchRow 키),있음,us_v1.9_20260926 > ops_v0.8_20260922,appendRow×2 · readTable×1,/recurrence,
+incident_response_setting,표,코드만(판·덮개에 행 없음),,,,set_id,기존 SQL primary key,있음,,appendRow×1 · readTable×1,/recurrence,
+inspection,표,seed:us_v1.9_20260926 + overlay,199,10,10,insp_id,코드(readTable·patchRow 키),있음,us_v1.9_20260926 > ops_v2.2_20260924 > ops_v1.9_20260924 > ops_v0.3_20260921 > ops_v0.1_20260920,fromDb×1 · patchRow×1 · seed×1,/review lib/data.ts,덮개 옛 자리 inspection 배열 + patches.inspection
+inspection_batch,표,seed:ops_v0.3_20260921,3,,,batch_id,코드(readTable·patchRow 키),있음,ops_v0.3_20260921 > ops_v0.2_20260920,appendRow×1 · fromDb×1 · patchRow×4 · readTable×1 · seed×1,/inspections lib/cycle.ts lib/data.ts,
+law_change,표,seed:ops_v0.2_20260920 + overlay,3,31,,change_id,코드(readTable·patchRow 키),있음,ops_v0.2_20260920,appendRow×1 · fromDb×1 · readTable×2,lib/data.ts lib/lawsync.ts,법령 개정 현황 — lib/lawsync.ts 가 law_sync\runs 결과를 이 표로 옮긴다
+law_sync_applied,표,overlay,,3,,run_id,첫 칸(추정),없음 — 새로 만들어야 함,,appendRow×1 · readTable×1,lib/lawsync.ts,법령 개정 확인 실행(run) 반영 기록 — lib/lawsync.ts
+law_sync_decision,표,코드만(판·덮개에 행 없음),,,,item_id,코드(readTable·patchRow 키),없음 — 새로 만들어야 함,,appendRow×1 · readTable×1,lib/lawsync.ts,법령 개정 후보 항목별 총괄 결정 — lib/lawsync.ts
+material_item,표,seed:ops_v0.8_20260922,6,,,item_id,코드(readTable·patchRow 키),있음,ops_v0.8_20260922,appendRow×1 · patchRow×2 · readTable×7,/ /law /stats/target /system /targets lib/system.ts,
+notification,표,seed:us_v1.9_20260926 + overlay,398,14,,notif_id,코드(readTable·patchRow 키),있음,us_v1.9_20260926 > ops_v2.2_20260924 > ops_v1.9_20260924 > ops_v0.3_20260921 > ops_v0.1_20260920,appendRow×8 · fromDb×1 · patchRow×1 · readTable×6,/actions /ceo /check/[track] /status /training lib/channels.ts lib/check_merge.ts lib/data.ts lib/lawsync.ts,알림(여러 화면이 appendRow) · 메일은 sys_mail_log
+order_received,표,seed:us_v1.9_20260926,25,,,order_id,코드(readTable·patchRow 키),있음,us_v1.9_20260926 > ops_v1.9_20260924 > ops_v1.5_20260924 > ops_v0.7_20260921 > ops_v0.6_20260921 > ops_v0.2_20260920,appendRow×1 · fromDb×1 · patchRow×1 · readTable×4 · readTable(감싼 부름 safe)×1,/calendar /evidence /recurrence lib/data.ts,
+org_dept,표,seed:ops_v1.9_20260924,24,,,dept_id,코드(readTable·patchRow 키),있음,ops_v1.9_20260924 > ops_v1.6_20260924 > ops_v1.5_20260924 > ops_v0.1_20260920,fromDb×1 · readTable×1 · seed×2,/perform/fc lib/data.ts,
+org_profile,표,코드만(판·덮개에 행 없음),,,,org_id,코드(readTable·patchRow 키),없음 — 새로 만들어야 함,,appendRow×2 · readTable×1,/admin /settings lib/org.ts,
+risk_assessment,표,seed:us_v1.8_20260926,98,,,risk_id,코드(readTable·patchRow 키),있음,us_v1.8_20260926 > ops_v0.3_20260921,fromDb×1 · readTable×3 · seed×1,/budget /evidence /risk lib/data.ts,
+risk_assessment_item,표,seed:us_v1.8_20260926,296,,,risk_item_id,코드(readTable·patchRow 키),있음,us_v1.8_20260926 > ops_v0.3_20260921,fromDb×1 · readTable×2 · seed×1,/budget /risk lib/data.ts,
+safety_budget,표,seed:ops_v1.5_20260924,62,,,budget_id,코드(readTable·patchRow 키),있음,ops_v1.5_20260924 > ops_v1.1_20260924 > ops_v0.6_20260921 > ops_v0.2_20260920,appendRow×1 · fromDb×1 · patchRow×2 · readTable×9,/budget /evidence /perform/mt lib/data.ts lib/system.ts,
+safety_manual,표,seed:ops_v0.5_20260921,6,,,manual_id,코드(readTable·patchRow 키),있음,ops_v0.5_20260921,appendRow×1 · patchRow×2 · readTable×1,/system lib/system.ts,
+safety_org_role,표,seed:ops_v0.5_20260921,46,,,role_id,코드(readTable·patchRow 키),있음,ops_v0.5_20260921,appendRow×1 · patchRow×1 · readTable×4,/evidence /system /system/record /targets/workplace lib/system.ts,
+safety_policy,표,seed:ops_v0.5_20260921,3,,,policy_id,코드(readTable·patchRow 키),있음,ops_v0.5_20260921,appendRow×1 · patchRow×1 · readTable×1,/system lib/system.ts,
+staff,표,seed:ops_v1.9_20260924,75,,,staff_id,기존 SQL primary key,있음,ops_v1.9_20260924 > ops_v1.6_20260924 > ops_v1.5_20260924 > ops_v1.4_20260924 > ops_v0.3_20260921 > ops_v0.1_20260920,fromDb×1 · seed×1,lib/data.ts,
+sys_code,표,코드만(판·덮개에 행 없음),,,,code_id,첫 칸(추정),없음 — 새로 만들어야 함,,appendRow×2 · readTable×1,/admin/system lib/codes.ts,"추가만 하는 이력 표 — 같은 code_id 여러 줄, 가장 최근 줄이 현재값(대리 PK 필요)"
+sys_mail_log,표,코드만(판·덮개에 행 없음),,,,mail_id,첫 칸(추정),없음 — 새로 만들어야 함,,appendRow×1 · readTable×1,/admin/system/mail lib/channels.ts,메일 발송 기록(추가만)
+sys_menu,표,코드만(판·덮개에 행 없음),,,,menu_rid,첫 칸(추정),없음 — 새로 만들어야 함,,appendRow×1 · readTable×1,lib/menu_store.ts,"추가만 하는 이력 표 — menu_rid='ALL' 한 종류, data 칸에 메뉴 설정 JSON 전체, 가장 최근 줄이 현재값(대리 PK 필요)"
+system_record,표,seed:ops_v0.7_20260921,17,,,record_id,코드(readTable·patchRow 키),있음,ops_v0.7_20260921,appendRow×2 · patchRow×1 · readTable×6,/evidence /system /system/record lib/system.ts,
+task_approval_patch,표,seed:ops_v2.2_20260924,2465,,,task_id,첫 칸(추정),있음,ops_v2.2_20260924 > ops_v2.0_20260924 > ops_v1.9_20260924 > ops_v1.5_20260924 > ops_v0.3_20260921 > ops_v0.2_20260920,seed×1,lib/data.ts,compliance_task 결재 칸을 덮는 seed 판 — 이관 때 compliance_task 에 합친다(원천 → task_approval_patch → 덮개 taskPatch 순)
+training_check,표,코드만(판·덮개에 행 없음),,,,check_id,코드(readTable·patchRow 키),있음,,appendRow×1 · readTable×1,/training,
+training_course,표,seed:ops_v1.5_20260924,13,,,course_id,코드(readTable·patchRow 키),있음,ops_v1.5_20260924 > ops_v0.7_20260921 > ops_v0.6_20260921,readTable×4 · readTable(감싼 부름 safe)×1,/calendar /evidence /training,
+training_record,표,seed:ops_v0.6_20260921,87,,,training_id,코드(readTable·patchRow 키),있음,ops_v0.6_20260921 > ops_v0.2_20260920,appendRow×1 · fromDb×1 · patchRow×2 · readTable×4 · readTable(감싼 부름 safe)×1,/calendar /evidence /training lib/data.ts,
+usa_order,표,overlay,,4,,order_id,코드(readTable·patchRow 키),없음 — 새로 만들어야 함,,appendRow×1 · readTable×1,/status,
+usb1_basic,표,seed:us_v1.2_20260924 + overlay,7,,1,basic_id,코드(readTable·patchRow 키),없음 — 새로 만들어야 함,us_v1.2_20260924 > us_v1.0_20260924,readTable×1 · readTable(감싼 부름 upsert)×1,/targets,
+usb1_contract,표,overlay,,1,,contract_id,코드(readTable·patchRow 키),없음 — 새로 만들어야 함,,appendRow×1 · patchRow×1 · readTable×3,/status/contract /targets,
+usb1_contract_duty,표,overlay,,4,,cd_id,코드(readTable·patchRow 키),없음 — 새로 만들어야 함,,readTable×2 · readTable(감싼 부름 upsert)×1,/status/contract /targets,
+usb1_hazard_place,표,seed:us_v1.0_20260924,21,,,place_code,코드(readTable·patchRow 키),없음 — 새로 만들어야 함,us_v1.0_20260924,readTable×1,/targets,
+usb1_transport,표,seed:us_v1.1_20260924,1,,,tr_id,코드(readTable·patchRow 키),없음 — 새로 만들어야 함,us_v1.1_20260924 > us_v1.0_20260924,readTable×5,/ /perform/fc /targets lib/evidence_merge.ts,
+usb1_work_site,표,seed:us_v1.5_20260924,76,,,site_id,코드(readTable·patchRow 키),없음 — 새로 만들어야 함,us_v1.5_20260924,readTable×1,/targets,
+usb1_workplace,표,seed:us_v1.5_20260924,20,,,wp_id,코드(readTable·patchRow 키),없음 — 새로 만들어야 함,us_v1.5_20260924 > us_v1.0_20260924,readTable×7,/ /check/[track] /status /status/contract /targets lib/evidence_merge.ts,
+usb1_ws_mgmt,표,코드만(판·덮개에 행 없음),,,,dept_id,코드(readTable·patchRow 키),없음 — 새로 만들어야 함,,readTable×1 · readTable(감싼 부름 upsert)×2,/targets /targets/workplace,
+usb2_assign,표,overlay,,3,,map_id,코드(readTable·patchRow 키),없음 — 새로 만들어야 함,,appendRow×2 · readTable×2,/admin lib/us/links.ts,
+usb2_basic,표,seed:us_v1.0_20260924 + overlay,3,2,,dept_id,코드(readTable·patchRow 키),없음 — 새로 만들어야 함,us_v1.0_20260924,appendRow×1 · readTable×1,/admin,
+usb2_law,표,overlay,,2,,law_rid,코드(readTable·patchRow 키),없음 — 새로 만들어야 함,,appendRow×2 · readTable×1,/admin,
+usb2_role,표,seed:us_v1.0_20260924 + overlay,13,2,,rid,코드(readTable·patchRow 키),없음 — 새로 만들어야 함,us_v1.0_20260924,appendRow×4 · readTable×1,/admin,
+usb2_timing,표,seed:us_v1.4_20260924 + overlay,8,5,,rec_id,코드(readTable·patchRow 키),없음 — 새로 만들어야 함,us_v1.4_20260924 > us_v1.3_20260924 > us_v1.0_20260924,appendRow×1 · readTable×2,/law lib/us/links.ts,
+usc_record,표,seed:us_v1.2_20260924 + overlay,112,14,13,rec_id,코드(readTable·patchRow 키),없음 — 새로 만들어야 함,us_v1.2_20260924 > us_v1.0_20260924,appendRow×14 · patchRow×16 · readTable×6,/check /perform/fc /perform/mt /perform/ws /status lib/evidence_merge.ts lib/us/links.ts,의무이행 기록 — 사업장(ws). data·files 칸은 JSON 글자
+usd_record,표,seed:us_v1.2_20260924 + overlay,48,8,10,rec_id,코드(readTable·patchRow 키),없음 — 새로 만들어야 함,us_v1.2_20260924 > us_v1.1_20260924 > us_v1.0_20260924,readTable×6,/check /perform/fc /status lib/evidence_merge.ts lib/us/links.ts,의무이행 기록 — 공중이용시설·공중교통수단(fc). data·files 칸은 JSON 글자
+use_plan,표,seed:us_v1.2_20260924,19,,,plan_id,코드(readTable·patchRow 키),없음 — 새로 만들어야 함,us_v1.2_20260924 > us_v1.0_20260924,readTable×2,/perform/mt,
+use_record,표,seed:us_v1.2_20260924,40,,,rec_id,코드(readTable·patchRow 키),없음 — 새로 만들어야 함,us_v1.2_20260924 > us_v1.0_20260924,readTable×7,/check /perform/mt /status lib/evidence_merge.ts lib/us/links.ts,의무이행 기록 — 원료·제조물(mt). data·files 칸은 JSON 글자
+use_site,표,seed:us_v1.0_20260924,3,,,site_id,코드(readTable·patchRow 키),없음 — 새로 만들어야 함,us_v1.0_20260924,readTable×2,/perform/mt lib/evidence_merge.ts,
+usf_ceo_activity,표,코드만(판·덮개에 행 없음),,,,activity_id,코드(readTable·patchRow 키),없음 — 새로 만들어야 함,,appendRow×1 · patchRow×2 · readTable×3,/ceo lib/data.ts,
+usf_ceo_log,표,seed:us_v1.2_20260924 + overlay,10,1,,log_id,코드(readTable·patchRow 키),없음 — 새로 만들어야 함,us_v1.2_20260924 > us_v1.0_20260924,appendRow×2 · readTable×2,/ceo /check/[track]/summary,
+usf_file,표,seed:us_v1.0_20260924,6,,,file_id,코드(readTable·patchRow 키),없음 — 새로 만들어야 함,us_v1.0_20260924,appendRow×1 · readTable×2,/board /board/files/dl/[id],
+usf_judge,표,seed:us_v1.9_20260926 + overlay,393,1,,judge_id,코드(readTable·patchRow 키),없음 — 새로 만들어야 함,us_v1.9_20260926 > us_v1.0_20260924,appendRow×1 · readTable×5,/check /check/[track] lib/check_merge.ts lib/us/links.ts,고칠 때마다 새 줄 — (항목|부서)마다 가장 최근 줄이 현재 판정(이력 보존)
+usf_letter,표,seed:us_v1.0_20260924,3,,,letter_id,코드(readTable·patchRow 키),없음 — 새로 만들어야 함,us_v1.0_20260924,appendRow×1 · patchRow×2 · readTable×5,/ceo /ceo/letter /ceo/letter/[id] /ceo/letter/new,
+usf_letter_read,표,seed:us_v1.0_20260924 + overlay,9,1,,read_id,코드(readTable·patchRow 키),없음 — 새로 만들어야 함,us_v1.0_20260924,appendRow×1 · readTable×3,/ceo /ceo/letter /ceo/letter/[id],
+usf_notice,표,seed:us_v1.2_20260924,5,,,notice_id,코드(readTable·patchRow 키),없음 — 새로 만들어야 함,us_v1.2_20260924 > us_v1.0_20260924,appendRow×1 · readTable×1,/board,
+usf_round,표,seed:us_v1.9_20260926,9,,,round_id,코드(readTable·patchRow 키),없음 — 새로 만들어야 함,us_v1.9_20260926 > us_v1.0_20260924,appendRow×1 · patchRow×1 · readTable×3,/check /check/[track] lib/check_merge.ts lib/us/links.ts,
+usg_case,표,seed:us_v1.0_20260924 + overlay,32,,2,case_no,코드(readTable·patchRow 키),없음 — 새로 만들어야 함,us_v1.0_20260924,appendRow×1 · patchRow×3 · readTable×1,/stats /stats/cases /stats/cases/open,
+usg_stat_occur,표,seed:us_v1.0_20260924,166,,,occ_id,코드(readTable·patchRow 키),없음 — 새로 만들어야 함,us_v1.0_20260924,appendRow×2 · readTable×1,/stats /stats/occur,
+usg_ws_industry,표,seed:us_v1.0_20260924,14,,,dept_id,코드(readTable·patchRow 키),없음 — 새로 만들어야 함,us_v1.0_20260924,readTable×1,/stats/target,
+v_contract_duty,뷰,코드만(판·덮개에 행 없음),,,,,,뷰 있음,,fromDb×1,lib/data.ts,Supabase 모드(useDb) 전용 뷰 — CSV 모드에서는 lib/data.ts 가 같은 모양을 만든다
+v_duty_detail,뷰,코드만(판·덮개에 행 없음),,,,,,뷰 있음,,fromDb×2,lib/data.ts,Supabase 모드(useDb) 전용 뷰 — CSV 모드에서는 lib/data.ts 가 같은 모양을 만든다
+v_duty_todo,뷰,코드만(판·덮개에 행 없음),,,,,,뷰 있음,,fromDb×1,lib/data.ts,Supabase 모드(useDb) 전용 뷰 — CSV 모드에서는 lib/data.ts 가 같은 모양을 만든다
+v_task_approval,뷰,코드만(판·덮개에 행 없음),,,,,,뷰 있음,,fromDb×1,lib/data.ts,Supabase 모드(useDb) 전용 뷰 — CSV 모드에서는 lib/data.ts 가 같은 모양을 만든다
+worker_voice,표,seed:ops_v0.7_20260921,9,,,voice_id,코드(readTable·patchRow 키),있음,ops_v0.7_20260921 > ops_v0.2_20260920,appendRow×1 · fromDb×1 · patchRow×1 · readTable×4,/evidence /system /system/record lib/data.ts lib/system.ts,

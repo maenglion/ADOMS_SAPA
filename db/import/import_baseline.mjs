@@ -573,15 +573,15 @@ async function openDatabase() {
 }
 
 async function readStructure(client) {
-  const [schemas, tablesResult, viewsResult, columnsResult, pkResult, fkResult, objectsResult] = await Promise.all([
-    client.query("SELECT schema_name FROM information_schema.schemata WHERE schema_name = 'adoms2'"),
-    client.query("SELECT table_name FROM information_schema.tables WHERE table_schema = 'adoms2' AND table_type = 'BASE TABLE' ORDER BY table_name"),
-    client.query("SELECT table_name FROM information_schema.views WHERE table_schema = 'adoms2' ORDER BY table_name"),
-    client.query("SELECT table_name, column_name, ordinal_position, data_type, udt_name, is_generated, is_identity, identity_generation FROM information_schema.columns WHERE table_schema = 'adoms2' ORDER BY table_name, ordinal_position"),
-    client.query("SELECT c.relname AS table_name, array_agg(a.attname::text ORDER BY k.ordinality) AS columns FROM pg_catalog.pg_class c JOIN pg_catalog.pg_namespace n ON n.oid = c.relnamespace JOIN pg_catalog.pg_index i ON i.indrelid = c.oid AND i.indisprimary CROSS JOIN LATERAL unnest(i.indkey) WITH ORDINALITY AS k(attnum, ordinality) JOIN pg_catalog.pg_attribute a ON a.attrelid = c.oid AND a.attnum = k.attnum WHERE n.nspname = 'adoms2' GROUP BY c.relname ORDER BY c.relname"),
-    client.query("SELECT count(*)::int AS count FROM pg_catalog.pg_constraint c JOIN pg_catalog.pg_namespace n ON n.oid = c.connamespace WHERE n.nspname = 'adoms2' AND c.contype = 'f'"),
-    client.query("SELECT relkind, count(*)::int AS count FROM pg_catalog.pg_class c JOIN pg_catalog.pg_namespace n ON n.oid = c.relnamespace WHERE n.nspname = 'adoms2' GROUP BY relkind ORDER BY relkind"),
-  ]);
+  // A pg Client serializes one wire protocol stream. Keep metadata reads
+  // explicitly sequential so preflight never relies on concurrent query calls.
+  const schemas = await client.query("SELECT schema_name FROM information_schema.schemata WHERE schema_name = 'adoms2'");
+  const tablesResult = await client.query("SELECT table_name FROM information_schema.tables WHERE table_schema = 'adoms2' AND table_type = 'BASE TABLE' ORDER BY table_name");
+  const viewsResult = await client.query("SELECT table_name FROM information_schema.views WHERE table_schema = 'adoms2' ORDER BY table_name");
+  const columnsResult = await client.query("SELECT table_name, column_name, ordinal_position, data_type, udt_name, is_generated, is_identity, identity_generation FROM information_schema.columns WHERE table_schema = 'adoms2' ORDER BY table_name, ordinal_position");
+  const pkResult = await client.query("SELECT c.relname AS table_name, array_agg(a.attname::text ORDER BY k.ordinality) AS columns FROM pg_catalog.pg_class c JOIN pg_catalog.pg_namespace n ON n.oid = c.relnamespace JOIN pg_catalog.pg_index i ON i.indrelid = c.oid AND i.indisprimary CROSS JOIN LATERAL unnest(i.indkey) WITH ORDINALITY AS k(attnum, ordinality) JOIN pg_catalog.pg_attribute a ON a.attrelid = c.oid AND a.attnum = k.attnum WHERE n.nspname = 'adoms2' GROUP BY c.relname ORDER BY c.relname");
+  const fkResult = await client.query("SELECT count(*)::int AS count FROM pg_catalog.pg_constraint c JOIN pg_catalog.pg_namespace n ON n.oid = c.connamespace WHERE n.nspname = 'adoms2' AND c.contype = 'f'");
+  const objectsResult = await client.query("SELECT relkind, count(*)::int AS count FROM pg_catalog.pg_class c JOIN pg_catalog.pg_namespace n ON n.oid = c.relnamespace WHERE n.nspname = 'adoms2' GROUP BY relkind ORDER BY relkind");
   const columns = new Map();
   for (const row of columnsResult.rows) {
     if (!columns.has(row.table_name)) columns.set(row.table_name, []);

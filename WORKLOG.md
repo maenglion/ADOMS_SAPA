@@ -122,3 +122,36 @@
 - 검증: CREATE TABLE/VIEW 수, PK 및 FK 후보 수, UNKNOWN→TEXT 반영 수, 참조 칼럼 존재 여부와 SQL 구문 구조를 정적으로 검사한다.
 - 관련 파일: `db/migrations/0001_tables.sql`, `db/migrations/0002_constraints.sql`, `db/migrations/0003_views.sql`, `db/MIGRATION_DECISIONS.md`, `WORKLOG.md`
 - 관련 commit: pending
+
+### [12] Railway PostgreSQL schema 적용 보류
+- 상태: 보류
+- 배경: 빈 Railway PostgreSQL에 schema migration만 단일 transaction으로 적용하고 물리 객체 및 데이터 부재를 직접 검증할 예정이었다.
+- 결정: 연결 정보가 완전한 PostgreSQL URI로 확인되기 전에는 migration을 실행하지 않는다. 사용자명·비밀번호·데이터베이스명을 임의로 추정하지 않는다.
+- 이유: 현재 Netlify의 `DATABASE_URL` 값은 `host:port` 형식으로만 설정되어 URI scheme, 사용자명, 비밀번호 및 데이터베이스명이 없어 안전한 DB 연결을 만들 수 없다.
+- 영향 범위: Railway PostgreSQL schema 적용, DB catalog 실측 검증, 이후 데이터 이관
+- 실제 변경: 연결 사전검증 단계에서 중단했다. `0001_tables.sql`, `0002_constraints.sql`, `0003_views.sql`은 모두 미실행이며 migration 원본과 앱 코드, CSV 및 `.data`는 수정하지 않았다. schema 적용 여부와 table/view/PK/FK 수치는 미측정이며 data도 적재하지 않았다.
+- 검증: 환경변수 존재 여부와 값의 연결 URI 형식을 확인했다. DB 연결, transaction 시작, schema 생성 및 row count 검증은 수행되지 않았다.
+- 관련 파일: `db/SCHEMA_DEPLOY_VERIFY.md`, `WORKLOG.md`
+- 관련 commit: pending
+
+### [13] Railway PostgreSQL schema 적용 재시도 보류
+- 상태: 보류
+- 배경: Netlify의 `DATABASE_URL`을 Railway 외부 접속용 전체 URI로 수정했다는 확인 후 기존 schema 적용 계획을 다시 수행했다.
+- 결정: 실제 저장된 연결값이 완전한 PostgreSQL URI로 확인되지 않으면 migration을 실행하지 않는다. 이전 실패 기록은 유지하고 재시도 결과를 별도 항목으로 누적한다.
+- 이유: Netlify `adoms-runtime` 프로젝트의 Production `DATABASE_URL`을 새로 불러와 재검증했으나 값이 여전히 27자의 `host:port` 형식이었고 scheme, 사용자명, 비밀번호 및 데이터베이스 경로가 없었다.
+- 영향 범위: Railway PostgreSQL 연결, schema 적용, DB catalog와 row count 실측
+- 실제 변경: 연결 사전검증에서 다시 중단했다. 세 migration, transaction, schema 변경 및 data 적재는 수행하지 않았다. 앱 코드, migration SQL, CSV 및 `.data`도 수정하지 않았다.
+- 검증: 페이지를 새로 불러온 뒤 Production 환경변수 형식을 재확인했다. TABLE, VIEW, PK, FK 및 row count는 DB 미접속으로 모두 미측정이다.
+- 관련 파일: `db/SCHEMA_DEPLOY_VERIFY.md`, `WORKLOG.md`
+- 관련 commit: pending
+
+### [14] Railway PostgreSQL schema 적용 및 실측 완료
+- 상태: 완료
+- 배경: Railway 내부 접속용 `DATABASE_URL`과 외부 접속용 `DATABASE_PUBLIC_URL`이 구분되어 설정된 뒤 외부 URL로 schema 적용을 재시도했다.
+- 결정: 외부 실행 환경에서는 `DATABASE_PUBLIC_URL`로 접속하고, migration 세 파일을 단일 transaction과 오류 즉시 중단 조건으로 적용한다. FK 후보 51개는 비활성 상태를 유지하며 seed/data는 적재하지 않는다.
+- 이유: `DATABASE_URL`의 `railway.internal` 호스트는 Railway 내부 네트워크 전용이고, 현재 실행 위치에서는 외부 접속용 URL이 필요하기 때문이다.
+- 영향 범위: Railway PostgreSQL `adoms2` schema, 향후 data migration 및 애플리케이션 DB 전환
+- 실제 변경: 빈 Railway PostgreSQL에 `0001_tables.sql`, `0002_constraints.sql`, `0003_views.sql`을 순서대로 한 transaction에서 적용했다. `adoms2` schema에 table 91개와 view 4개가 생성됐다. data는 적재하지 않았다. 앱 코드, migration SQL, CSV 및 `.data`는 수정하지 않았다.
+- 검증: TABLE 91, VIEW 4, PK 52, 활성 FK 0, 중복 이름 0을 DB catalog에서 확인했다. view 4개는 모두 참조 검증을 통과했고, table 91개의 실제 row count와 전체 합계가 모두 0이었다.
+- 관련 파일: `db/migrations/0001_tables.sql`, `db/migrations/0002_constraints.sql`, `db/migrations/0003_views.sql`, `db/SCHEMA_DEPLOY_VERIFY.md`, `WORKLOG.md`
+- 관련 commit: pending

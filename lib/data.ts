@@ -15,6 +15,7 @@ import fs from "node:fs";
 import { readOverlay } from "./write";
 import path from "node:path";
 import { queryAuditLog, queryRows } from "./db";
+import { applyReadOrder } from "./read-order";
 import { dataBackend, usesPostgresReads } from "./data-backend";
 
 export type Row = Record<string, any>;
@@ -245,21 +246,21 @@ export async function tasks(filter: { dept?: string; staff?: string; status?: st
 }
 
 export async function depts() {
-  if (useDb) return fromDb("org_dept", "select=*&order=dept_id");
+  if (useDb) return readTable("org_dept", "dept_id");
   return seed("org_dept");
 }
 /** 경영책임자 — 직원 명부 밖이지만 결재·보고받음 기록의 주체다(ROLE_STAFF.ceo). */
 const CEO_ROW = { staff_id: "CEO-1", display_name: "경영책임자(시장)", dept_id: "", duty_role: "경영책임자", note: "기록 주체 표시용" };
 export async function staff() {
-  const rows = useDb ? await fromDb("staff", "select=*&order=staff_id") : seed("staff");
+  const rows = useDb ? await readTable("staff", "staff_id") : seed("staff");
   return rows.some((r: Row) => r.staff_id === CEO_ROW.staff_id) ? rows : [...rows, CEO_ROW];
 }
 export async function forms() {
-  if (useDb) return fromDb("form_template", "select=*");
+  if (useDb) return readTable("form_template", "form_id");
   return seed("form_template");
 }
 export async function contracts() {
-  if (useDb) return fromDb("contract", "select=*&order=contract_id");
+  if (useDb) return readTable("contract", "contract_id");
   return seed("contract");
 }
 export async function ceoActivities() {
@@ -272,7 +273,7 @@ export async function lawChanges() {
   return (await readTable("law_change", "change_id")).sort((a, b) => (String(a.promulgated_at) < String(b.promulgated_at) ? 1 : -1));
 }
 export async function inspectionBatches() {
-  if (useDb) return fromDb("inspection_batch", "select=*&order=batch_id");
+  if (useDb) return readTable("inspection_batch", "batch_id");
   return seed("inspection_batch");
 }
 
@@ -291,7 +292,7 @@ export async function approvals() {
   return applyItemApproval(rows);
 }
 export async function contractDuties() {
-  if (useDb) return fromDb("v_contract_duty", "select=*&limit=2000");
+  if (useDb) return readTable("contract_duty", "cduty_id");
   return seed("contract_duty");
 }
 export async function contractHazards() {
@@ -299,38 +300,33 @@ export async function contractHazards() {
   return seed("contract_hazard");
 }
 export async function budgets() {
-  if (useDb) return fromDb("safety_budget", "select=*&order=budget_id");
   return readTable("safety_budget", "budget_id");
 }
 export async function trainings() {
-  if (useDb) return fromDb("training_record", "select=*&order=trained_at.desc");
   return readTable("training_record", "training_id");
 }
 export async function voices() {
-  if (useDb) return fromDb("worker_voice", "select=*&order=received_at.desc");
   // 화면(/system 기록 입력·/budget·/training)에서 넣은 것까지 — 대시보드·보고서·기관장 화면이 같은 숫자를 낸다.
   return readTable("worker_voice", "voice_id");
 }
 export async function incidents() {
-  if (useDb) return fromDb("incident", "select=*&order=occurred_at.desc");
   // 화면(/recurrence)에서 등록·진행한 것까지 겹쳐 읽는다.
   return readTable("incident", "incident_id");
 }
 export async function orders() {
-  if (useDb) return fromDb("order_received", "select=*&order=received_at.desc");
   return readTable("order_received", "order_id");
 }
 export async function evidences() {
-  if (useDb) return fromDb("evidence", "select=*&limit=2000");
+  if (useDb) return readTable("evidence", "evidence_id");
   return [...readOverlay().evidence, ...seed("evidence")];
 }
 /** 시연 중 일어난 일(덮개 기록) — 감사로그 자리. */
 export async function activityLog() {
   if (useDb) return queryAuditLog();
-  return readOverlay().log;
+  return [...readOverlay().log].sort((a, b) => (String(a.at) < String(b.at) ? 1 : -1)).slice(0, 100);
 }
 export async function inspections() {
-  if (useDb) return fromDb("inspection", "select=*&limit=2000");
+  if (useDb) return readTable("inspection", "insp_id");
   return [...readOverlay().inspection, ...seed("inspection")];
 }
 
@@ -389,12 +385,10 @@ export async function notifications(staffId?: string) {
   return fixNotifText([...rows].sort((a, b) => (a.sent_at < b.sent_at ? 1 : -1)).slice(0, 300));
 }
 export async function riskAssessments() {
-  if (useDb) return fromDb("risk_assessment", "select=*&order=assessed_at.desc");
-  return seed("risk_assessment");
+  return readTable("risk_assessment", "risk_id");
 }
 export async function riskItems() {
-  if (useDb) return fromDb("risk_assessment_item", "select=*&limit=500");
-  return seed("risk_assessment_item");
+  return readTable("risk_assessment_item", "item_id");
 }
 
 /** 설명 경로용 — 의무 한 건의 배정(자산이 있으면 그 자산 것을 먼저). */
@@ -433,7 +427,7 @@ export async function mappingFor(assetId: string, targetCode: string) {
  * `keyCol` 을 주면 덮개의 수정분(patchRow)을 그 칸 기준으로 덮어쓴다.
  */
 export async function readTable(table: string, keyCol?: string): Promise<Row[]> {
-  if (useDb) return fromDb(table, "select=*&limit=100000");
+  if (useDb) return applyReadOrder(table, await fromDb(table, "select=*&limit=100000"));
   const o: any = readOverlay();
   const added: Row[] = (o.tables && o.tables[table]) || [];
   const patches: Record<string, Row> = (o.patches && o.patches[table]) || {};

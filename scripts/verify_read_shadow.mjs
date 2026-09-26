@@ -119,8 +119,8 @@ const details = {
   push(item) {
     detailCount++;
     const key = `${item.case}:${item.kind}`;
-    caseCounts[key] = (caseCounts[key] || 0) + 1;
-    if (samples.length < 1000) samples.push(item);
+    caseCounts[key] = (caseCounts[key] || 0) + (item.count || 1);
+    if (caseCounts[key] <= 5) samples.push(item);
   },
 };
 for (const item of csv.cases) classify(item.value, dbCases.get(item.name), item.name, summary, details);

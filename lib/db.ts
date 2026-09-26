@@ -1,5 +1,5 @@
 import "server-only";
-import { Pool, type PoolConfig } from "pg";
+import { Pool, types, type PoolConfig } from "pg";
 
 export type DbRow = Record<string, any>;
 
@@ -26,6 +26,10 @@ const RELATIONS = new Set([
 const VIEWS = new Set(["v_contract_duty", "v_duty_detail", "v_duty_todo", "v_task_approval"]);
 
 const IDENT = /^[A-Za-z_][A-Za-z0-9_]*$/;
+
+for (const oid of [20, 21, 23, 700, 701, 1700, 1082, 1114, 1184]) {
+  types.setTypeParser(oid, (value) => value);
+}
 
 function relationName(value: string): string {
   if (!RELATIONS.has(value)) throw new Error(`PostgreSQL relation is not allowlisted: ${value}`);

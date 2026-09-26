@@ -9,6 +9,7 @@ const csvFile = path.join(outputDir, "csv_snapshot.json");
 const postgresFile = path.join(outputDir, "postgres_snapshot.json");
 const loader = path.join(root, "scripts", "ts_loader.mjs");
 const worker = path.join(root, "scripts", "read_contract_snapshot.mjs");
+const hashContract = path.join(root, "db", "read-shadow", "read_comparison_contract.json");
 fs.mkdirSync(outputDir, { recursive: true });
 
 function run(backend, file) {
@@ -20,6 +21,7 @@ function run(backend, file) {
       ADOMS_OPS_DIR: process.env.ADOMS_OPS_DIR || path.join(root, "data", "_데모_용인시_20260920"),
       ADOMS_DATA_BACKEND: backend,
       TZ: "Asia/Seoul",
+      ...(fs.existsSync(hashContract) ? { ADOMS_HASH_CONTRACT: hashContract } : {}),
     },
     encoding: "utf8",
     maxBuffer: 1024 * 1024 * 200,

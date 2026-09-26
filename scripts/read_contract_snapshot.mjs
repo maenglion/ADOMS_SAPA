@@ -1,5 +1,6 @@
 import fs from "node:fs";
 import path from "node:path";
+import { caseSignature } from "./read_signature.mjs";
 
 const output = process.argv[2];
 if (!output) throw new Error("snapshot output path is required");
@@ -7,8 +8,13 @@ if (!output) throw new Error("snapshot output path is required");
 const D = await import("@/lib/data.ts");
 const { closePostgresPool } = await import("@/lib/db.ts");
 
+const hashContractFile = process.env.ADOMS_HASH_CONTRACT;
+const hashContract = hashContractFile ? JSON.parse(fs.readFileSync(hashContractFile, "utf8")) : null;
 const cases = [];
-const add = async (name, call) => cases.push({ name, value: await call() });
+const add = async (name, call) => {
+  const value = await call();
+  cases.push({ name, value: hashContract ? caseSignature(value, hashContract.cases[name]) : value });
+};
 
 await add("duties.default", () => D.duties({ limit: 100000 }));
 await add("duties.area", () => D.duties({ area: "F", limit: 100000 }));

@@ -1,0 +1,9 @@
+.stats { align-items: stretch; }
+.next { margin-top: 12px; display: flex; gap: 12px; align-items: center; flex-wrap: wrap; }
+.bulk { margin-top: 12px; display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
+.inl { display: inline-flex; align-items: center; gap: 6px; margin: 0; }
+.rowform { display: flex; gap: 5px; flex-wrap: wrap; align-items: center; margin: 2px 0; }
+.rowform input[type=text] { width: 100%; }
+@media (max-width: 900px) {
+  .stats { grid-template-columns: repeat(3, 1fr) !important; }
+}

@@ -1,0 +1,77 @@
+﻿site_id,wp_id,site_name,site_kind,addr,org_note,confirm_state,src_url,sort
+WS-001,WP-01,용인중앙도서관,공공도서관,경기도 용인시 처인구 명지로 27(역북동 504-1),도서관사업소 동부도서관과(사업소장실 시청사 8층),확인필요,https://lib.yongin.go.kr/intro/menu/10118/program/30047/libraryStatus.do,1
+WS-002,WP-01,포곡도서관,공공도서관,경기도 용인시 처인구 포곡읍 포곡로278번길 8(삼계리 556-2),도서관사업소 동부도서관과(사업소장실 시청사 8층),확인필요,https://lib.yongin.go.kr/intro/menu/10118/program/30047/libraryStatus.do,2
+WS-003,WP-01,동백도서관,공공도서관,경기도 용인시 기흥구 동백3로 80(중동 921),도서관사업소 동부도서관과(사업소장실 시청사 8층),확인필요,https://lib.yongin.go.kr/intro/menu/10118/program/30047/libraryStatus.do,3
+WS-004,WP-01,모현도서관,공공도서관,경기도 용인시 처인구 모현읍 백옥대로 2378(왕산리 804-3),도서관사업소 동부도서관과(사업소장실 시청사 8층),확인필요,https://lib.yongin.go.kr/intro/menu/10118/program/30047/libraryStatus.do,4
+WS-005,WP-01,청덕도서관,공공도서관,경기도 용인시 기흥구 구성1로 44(청덕동 549),도서관사업소 동부도서관과(사업소장실 시청사 8층),확인필요,https://lib.yongin.go.kr/intro/menu/10118/program/30047/libraryStatus.do,5
+WS-006,WP-01,남사도서관,공공도서관,경기도 용인시 처인구 남사읍 한숲로 61(아곡리 681-1),도서관사업소 동부도서관과(사업소장실 시청사 8층),확인필요,https://lib.yongin.go.kr/intro/menu/10118/program/30047/libraryStatus.do,6
+WS-007,WP-01,양지해밀도서관,공공도서관,경기도 용인시 처인구 양지면 교동로18번길 8(양지리 364-1),도서관사업소 동부도서관과(사업소장실 시청사 8층),확인필요,https://lib.yongin.go.kr/intro/menu/10118/program/30047/libraryStatus.do,7
+WS-008,WP-01,이동꿈틀도서관,공공도서관,경기도 용인시 처인구 이동읍 경기동로 705번길 16(송전리 1228-1),도서관사업소 동부도서관과(사업소장실 시청사 8층),확인필요,https://lib.yongin.go.kr/intro/menu/10118/program/30047/libraryStatus.do,8
+WS-009,WP-01,기흥도서관,공공도서관,경기도 용인시 기흥구 기흥로116번길 10(신갈동 산14),도서관사업소 중부도서관과(사업소장실 시청사 8층),확인필요,https://lib.yongin.go.kr/intro/menu/10118/program/30047/libraryStatus.do,9
+WS-010,WP-01,구성도서관,공공도서관,경기도 용인시 기흥구 구성로77번길 17(언남동 342-1),도서관사업소 중부도서관과(사업소장실 시청사 8층),확인필요,https://lib.yongin.go.kr/intro/menu/10118/program/30047/libraryStatus.do,10
+WS-011,WP-01,보라도서관,공공도서관,경기도 용인시 기흥구 한보라2로 116(보라동 619),도서관사업소 중부도서관과(사업소장실 시청사 8층),확인필요,https://lib.yongin.go.kr/intro/menu/10118/program/30047/libraryStatus.do,11
+WS-012,WP-01,흥덕도서관,공공도서관,경기도 용인시 기흥구 흥덕중앙로 153(영덕동 1235),도서관사업소 중부도서관과(사업소장실 시청사 8층),확인필요,https://lib.yongin.go.kr/intro/menu/10118/program/30047/libraryStatus.do,12
+WS-013,WP-01,서농도서관,공공도서관,경기도 용인시 기흥구 서천서로 83(서천동 748),도서관사업소 중부도서관과(사업소장실 시청사 8층),확인필요,https://lib.yongin.go.kr/intro/menu/10118/program/30047/libraryStatus.do,13
+WS-014,WP-01,영덕도서관,공공도서관,경기도 용인시 기흥구 덕영대로 2077번길 7 영덕도서관 (영덕동 1329),도서관사업소 중부도서관과(사업소장실 시청사 8층),확인필요,https://lib.yongin.go.kr/intro/menu/10118/program/30047/libraryStatus.do,14
+WS-015,WP-01,보정도서관,공공도서관,경기 용인시 기흥구 죽전로 30(보정동 1264-2) 보정미르휴먼센터 4층,도서관사업소 중부도서관과(사업소장실 시청사 8층),확인필요,https://lib.yongin.go.kr/intro/menu/10118/program/30047/libraryStatus.do,15
+WS-016,WP-01,구갈희망누리도서관,공공도서관,경기도 용인시 기흥구 갈곡로12번길 1 (구갈동 598),도서관사업소 중부도서관과(사업소장실 시청사 8층),확인필요,https://lib.yongin.go.kr/intro/menu/10118/program/30047/libraryStatus.do,16
+WS-017,WP-01,수지도서관,공공도서관,경기도 용인시 수지구 문정로7번길 23(풍덕천동 1088),도서관사업소 서부도서관과(사업소장실 시청사 8층),확인필요,https://lib.yongin.go.kr/intro/menu/10118/program/30047/libraryStatus.do,17
+WS-018,WP-01,죽전도서관,공공도서관,경기도 용인시 수지구 대지로 89(죽전동 1212),도서관사업소 서부도서관과(사업소장실 시청사 8층),확인필요,https://lib.yongin.go.kr/intro/menu/10118/program/30047/libraryStatus.do,18
+WS-019,WP-01,상현도서관,공공도서관,경기도 용인시 수지구 법조로 232(상현동 1129-2),도서관사업소 서부도서관과(사업소장실 시청사 8층),확인필요,https://lib.yongin.go.kr/intro/menu/10118/program/30047/libraryStatus.do,19
+WS-020,WP-01,성복도서관,공공도서관,경기도 용인시 수지구 성복1로164번길 6(성복동),도서관사업소 서부도서관과(사업소장실 시청사 8층),확인필요,https://lib.yongin.go.kr/intro/menu/10118/program/30047/libraryStatus.do,20
+WS-021,WP-01,동천도서관,공공도서관,경기도 용인시 수지구 수풍로 57-14 (동천동),도서관사업소 서부도서관과(사업소장실 시청사 8층),확인필요,https://lib.yongin.go.kr/intro/menu/10118/program/30047/libraryStatus.do,21
+WS-022,WP-06,포곡보건지소,보건지소,처인구 포곡읍 포곡로 258,처인구보건소,확인필요,https://www.yongin.go.kr/home/health/pbhlthIntrcn/ciPbhlth/ciPbhlth06/ciPbhlth06_02.jsp,22
+WS-023,WP-06,모현보건지소,보건지소,모현읍 독점로 31-6,처인구보건소,확인필요,https://www.yongin.go.kr/home/health/pbhlthIntrcn/ciPbhlth/ciPbhlth06/ciPbhlth06_02.jsp,23
+WS-024,WP-06,남사보건지소,보건지소,남사읍 내기로 22,처인구보건소,확인필요,https://www.yongin.go.kr/home/health/pbhlthIntrcn/ciPbhlth/ciPbhlth06/ciPbhlth06_02.jsp,24
+WS-025,WP-06,이동보건지소,보건지소,이동읍 경기동로 673,처인구보건소,확인필요,https://www.yongin.go.kr/home/health/pbhlthIntrcn/ciPbhlth/ciPbhlth06/ciPbhlth06_02.jsp,25
+WS-026,WP-06,원삼보건지소,보건지소,원삼면 원양로 64,처인구보건소,확인필요,https://www.yongin.go.kr/home/health/pbhlthIntrcn/ciPbhlth/ciPbhlth06/ciPbhlth06_02.jsp,26
+WS-027,WP-06,백암보건지소,보건지소,백암면 백암로 189,처인구보건소,확인필요,https://www.yongin.go.kr/home/health/pbhlthIntrcn/ciPbhlth/ciPbhlth06/ciPbhlth06_02.jsp,27
+WS-028,WP-06,양지보건지소,보건지소,양지면 양지로 105번길 5,처인구보건소,확인필요,https://www.yongin.go.kr/home/health/pbhlthIntrcn/ciPbhlth/ciPbhlth06/ciPbhlth06_02.jsp,28
+WS-029,WP-06,원암보건진료소,보건진료소,남사읍 천덕산로 421번길 8-1,처인구보건소,확인필요,https://www.yongin.go.kr/home/health/pbhlthIntrcn/ciPbhlth/ciPbhlth06/ciPbhlth06_03.jsp,29
+WS-030,WP-06,아곡보건진료소,보건진료소,남사읍 남산로 6번길 2,처인구보건소,확인필요,https://www.yongin.go.kr/home/health/pbhlthIntrcn/ciPbhlth/ciPbhlth06/ciPbhlth06_03.jsp,30
+WS-031,WP-06,죽능보건진료소,보건진료소,"원삼면 어현로9, 2층",처인구보건소,확인필요,https://www.yongin.go.kr/home/health/pbhlthIntrcn/ciPbhlth/ciPbhlth06/ciPbhlth06_03.jsp,31
+WS-032,WP-06,대대보건진료소,보건진료소,양지면 한터로 571번길 25,처인구보건소,확인필요,https://www.yongin.go.kr/home/health/pbhlthIntrcn/ciPbhlth/ciPbhlth06/ciPbhlth06_03.jsp,32
+WS-033,WP-06,백봉보건진료소,보건진료소,백암면 죽양대로 797번길 48,처인구보건소,확인필요,https://www.yongin.go.kr/home/health/pbhlthIntrcn/ciPbhlth/ciPbhlth06/ciPbhlth06_03.jsp,33
+WS-034,WP-06,장평보건진료소,보건진료소,백암면 삼백로 599-3,처인구보건소,확인필요,https://www.yongin.go.kr/home/health/pbhlthIntrcn/ciPbhlth/ciPbhlth06/ciPbhlth06_03.jsp,34
+WS-035,WP-06,가창보건진료소,보건진료소,백암면 가창로 24번길 25,처인구보건소,확인필요,https://www.yongin.go.kr/home/health/pbhlthIntrcn/ciPbhlth/ciPbhlth06/ciPbhlth06_03.jsp,35
+WS-036,WP-07,고매보건진료소,보건진료소,기흥구 동탄기흥로 713-1,기흥구보건소,확인필요,https://www.yongin.go.kr/home/health/pbhlthIntrcn/ghPbhlth/ghPbhlth06/ghPbhlth06_02.jsp,36
+WS-037,WP-07,공세보건진료소,보건진료소,기흥구 공세로 90번길 64,기흥구보건소,확인필요,https://www.yongin.go.kr/home/health/pbhlthIntrcn/ghPbhlth/ghPbhlth06/ghPbhlth06_02.jsp,37
+WS-038,WP-03,포곡읍 행정복지센터,읍·면·동 행정복지센터,,처인구,확인필요,https://www.cheoingu.go.kr/home/townInfo.do?menu_no=222,38
+WS-039,WP-03,모현읍 행정복지센터,읍·면·동 행정복지센터,,처인구,확인필요,https://www.cheoingu.go.kr/home/townInfo.do?menu_no=237,39
+WS-040,WP-03,이동읍 행정복지센터,읍·면·동 행정복지센터,,처인구,확인필요,https://www.cheoingu.go.kr/home/townInfo.do?menu_no=255,40
+WS-041,WP-03,남사읍 행정복지센터,읍·면·동 행정복지센터,,처인구,확인필요,https://www.cheoingu.go.kr/home/townInfo.do?menu_no=273,41
+WS-042,WP-03,양지읍 행정복지센터,읍·면·동 행정복지센터,,처인구,확인필요,https://www.cheoingu.go.kr/home/townInfo.do?menu_no=336,42
+WS-043,WP-03,원삼면 행정복지센터,읍·면·동 행정복지센터,,처인구,확인필요,https://www.cheoingu.go.kr/home/townInfo.do?menu_no=292,43
+WS-044,WP-03,백암면 행정복지센터,읍·면·동 행정복지센터,,처인구,확인필요,https://www.cheoingu.go.kr/home/townInfo.do?menu_no=310,44
+WS-045,WP-03,중앙동 행정복지센터,읍·면·동 행정복지센터,,처인구,확인필요,https://www.cheoingu.go.kr/home/townInfo.do?menu_no=365,45
+WS-046,WP-03,역북동 행정복지센터,읍·면·동 행정복지센터,,처인구,확인필요,https://www.cheoingu.go.kr/home/townInfo.do?menu_no=395,46
+WS-047,WP-03,삼가동 행정복지센터,읍·면·동 행정복지센터,,처인구,확인필요,https://www.cheoingu.go.kr/home/townInfo.do?menu_no=1561,47
+WS-048,WP-03,유림1동 행정복지센터,읍·면·동 행정복지센터,,처인구,확인필요,https://www.cheoingu.go.kr/home/townInfo.do?menu_no=425,48
+WS-049,WP-03,유림2동 행정복지센터,읍·면·동 행정복지센터,,처인구,확인필요,https://www.cheoingu.go.kr/home/townInfo.do?menu_no=1721,49
+WS-050,WP-03,동부동 행정복지센터,읍·면·동 행정복지센터,,처인구,확인필요,https://www.cheoingu.go.kr/home/townInfo.do?menu_no=456,50
+WS-051,WP-04,신갈동 행정복지센터,읍·면·동 행정복지센터,,기흥구,확인필요,https://www.giheunggu.go.kr/_lmth/06_dong/dong_0101.asp,51
+WS-052,WP-04,영덕1동 행정복지센터,읍·면·동 행정복지센터,,기흥구,확인필요,https://www.giheunggu.go.kr/_lmth/06_dong/dong_0201.asp,52
+WS-053,WP-04,구갈동 행정복지센터,읍·면·동 행정복지센터,,기흥구,확인필요,https://www.giheunggu.go.kr/_lmth/06_dong/dong_0301.asp,53
+WS-054,WP-04,상갈동 행정복지센터,읍·면·동 행정복지센터,,기흥구,확인필요,https://www.giheunggu.go.kr/_lmth/06_dong/dong_0401.asp,54
+WS-055,WP-04,기흥동 행정복지센터,읍·면·동 행정복지센터,,기흥구,확인필요,https://www.giheunggu.go.kr/_lmth/06_dong/dong_0501.asp,55
+WS-056,WP-04,서농동 행정복지센터,읍·면·동 행정복지센터,,기흥구,확인필요,https://www.giheunggu.go.kr/_lmth/06_dong/dong_0601.asp,56
+WS-057,WP-04,구성동 행정복지센터,읍·면·동 행정복지센터,,기흥구,확인필요,https://www.giheunggu.go.kr/_lmth/06_dong/dong_0701.asp,57
+WS-058,WP-04,마북동 행정복지센터,읍·면·동 행정복지센터,,기흥구,확인필요,https://www.giheunggu.go.kr/_lmth/06_dong/dong_0801.asp,58
+WS-059,WP-04,동백2동 행정복지센터,읍·면·동 행정복지센터,,기흥구,확인필요,https://www.giheunggu.go.kr/_lmth/06_dong/dong_0901.asp,59
+WS-060,WP-04,상하동 행정복지센터,읍·면·동 행정복지센터,,기흥구,확인필요,https://www.giheunggu.go.kr/_lmth/06_dong/dong_1001.asp,60
+WS-061,WP-04,보정동 행정복지센터,읍·면·동 행정복지센터,,기흥구,확인필요,https://www.giheunggu.go.kr/_lmth/06_dong/dong_1101.asp,61
+WS-062,WP-04,영덕2동 행정복지센터,읍·면·동 행정복지센터,,기흥구,확인필요,https://www.giheunggu.go.kr/_lmth/06_dong/dong_1201.asp,62
+WS-063,WP-04,보라동 행정복지센터,읍·면·동 행정복지센터,,기흥구,확인필요,https://www.giheunggu.go.kr/_lmth/06_dong/dong_1301.asp,63
+WS-064,WP-04,동백1동 행정복지센터,읍·면·동 행정복지센터,,기흥구,확인필요,https://www.giheunggu.go.kr/_lmth/06_dong/dong_1401.asp,64
+WS-065,WP-04,동백3동 행정복지센터,읍·면·동 행정복지센터,,기흥구,확인필요,https://www.giheunggu.go.kr/_lmth/06_dong/dong_1501.asp,65
+WS-066,WP-05,풍덕천1동 행정복지센터,읍·면·동 행정복지센터,,수지구,확인필요,https://www.sujigu.go.kr/lmth/06center01.asp,66
+WS-067,WP-05,풍덕천2동 행정복지센터,읍·면·동 행정복지센터,,수지구,확인필요,https://www.sujigu.go.kr/lmth/06center02.asp,67
+WS-068,WP-05,신봉동 행정복지센터,읍·면·동 행정복지센터,,수지구,확인필요,https://www.sujigu.go.kr/lmth/06center03.asp,68
+WS-069,WP-05,죽전1동 행정복지센터,읍·면·동 행정복지센터,,수지구,확인필요,https://www.sujigu.go.kr/lmth/06center04.asp,69
+WS-070,WP-05,죽전2동 행정복지센터,읍·면·동 행정복지센터,,수지구,확인필요,https://www.sujigu.go.kr/lmth/06center05.asp,70
+WS-071,WP-05,동천동 행정복지센터,읍·면·동 행정복지센터,,수지구,확인필요,https://www.sujigu.go.kr/lmth/06center06.asp,71
+WS-072,WP-05,상현1동 행정복지센터,읍·면·동 행정복지센터,,수지구,확인필요,https://www.sujigu.go.kr/lmth/06center07.asp,72
+WS-073,WP-05,상현2동 행정복지센터,읍·면·동 행정복지센터,,수지구,확인필요,https://www.sujigu.go.kr/lmth/06center08.asp,73
+WS-074,WP-05,성복동 행정복지센터,읍·면·동 행정복지센터,,수지구,확인필요,https://www.sujigu.go.kr/lmth/06center09.asp,74
+WS-075,WP-05,죽전3동 행정복지센터,읍·면·동 행정복지센터,,수지구,확인필요,https://www.sujigu.go.kr/lmth/06center10.asp,75
+WS-076,WP-05,상현3동 행정복지센터,읍·면·동 행정복지센터,,수지구,확인필요,https://www.sujigu.go.kr/lmth/06center11.asp,76

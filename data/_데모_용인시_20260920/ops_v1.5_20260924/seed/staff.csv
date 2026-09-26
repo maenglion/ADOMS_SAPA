@@ -1,0 +1,73 @@
+﻿staff_id,display_name,dept_id,duty_role,position,approval_level,email,phone,note
+SD01-1,김민준 주무관,D01,정담당,주무관,1,d01.main@demo.yongin.go.kr,,가상 인물(시연용)
+SD01-2,이준호 주무관,D01,부담당,주무관,1,d01.sub@demo.yongin.go.kr,,가상 인물(시연용)
+SD02-1,박우진 주무관,D02,정담당,주무관,1,d02.main@demo.yongin.go.kr,,가상 인물(시연용)
+SD02-2,최은정 주무관,D02,부담당,주무관,1,d02.sub@demo.yongin.go.kr,,가상 인물(시연용)
+SD03-1,정민준 주무관,D03,정담당,주무관,1,d03.main@demo.yongin.go.kr,,가상 인물(시연용)
+SD03-2,강준호 주무관,D03,부담당,주무관,1,d03.sub@demo.yongin.go.kr,,가상 인물(시연용)
+SD04-1,조우진 주무관,D04,정담당,주무관,1,d04.main@demo.yongin.go.kr,,가상 인물(시연용)
+SD04-2,윤재석 주무관,D04,부담당,주무관,1,d04.sub@demo.yongin.go.kr,,가상 인물(시연용)
+SD05-1,장민준 주무관,D05,정담당,주무관,1,d05.main@demo.yongin.go.kr,,가상 인물(시연용)
+SD05-2,임준호 주무관,D05,부담당,주무관,1,d05.sub@demo.yongin.go.kr,,가상 인물(시연용)
+SD06-1,한우진 주무관,D06,정담당,주무관,1,d06.main@demo.yongin.go.kr,,가상 인물(시연용)
+SD06-2,오현주 주무관,D06,부담당,주무관,1,d06.sub@demo.yongin.go.kr,,가상 인물(시연용)
+SD07-1,서민준 주무관,D07,정담당,주무관,1,d07.main@demo.yongin.go.kr,,가상 인물(시연용)
+SD07-2,신준호 주무관,D07,부담당,주무관,1,d07.sub@demo.yongin.go.kr,,가상 인물(시연용)
+SD08-1,권우진 주무관,D08,정담당,주무관,1,d08.main@demo.yongin.go.kr,,가상 인물(시연용)
+SD08-2,김태형 주무관,D08,부담당,주무관,1,d08.sub@demo.yongin.go.kr,,가상 인물(시연용)
+SD09-1,이민준 주무관,D09,정담당,주무관,1,d09.main@demo.yongin.go.kr,,가상 인물(시연용)
+SD09-2,박준호 주무관,D09,부담당,주무관,1,d09.sub@demo.yongin.go.kr,,가상 인물(시연용)
+SD10-1,최우진 주무관,D10,정담당,주무관,1,d10.main@demo.yongin.go.kr,,가상 인물(시연용)
+SD10-2,정수빈 주무관,D10,부담당,주무관,1,d10.sub@demo.yongin.go.kr,,가상 인물(시연용)
+SD11-1,강민준 주무관,D11,정담당,주무관,1,d11.main@demo.yongin.go.kr,,가상 인물(시연용)
+SD11-2,조준호 주무관,D11,부담당,주무관,1,d11.sub@demo.yongin.go.kr,,가상 인물(시연용)
+SD12-1,윤우진 주무관,D12,정담당,주무관,1,d12.main@demo.yongin.go.kr,,가상 인물(시연용)
+SD12-2,장혜원 주무관,D12,부담당,주무관,1,d12.sub@demo.yongin.go.kr,,가상 인물(시연용)
+SD13-1,임민준 주무관,D13,정담당,주무관,1,d13.main@demo.yongin.go.kr,,가상 인물(시연용)
+SD13-2,한준호 주무관,D13,부담당,주무관,1,d13.sub@demo.yongin.go.kr,,가상 인물(시연용)
+SD14-1,오우진 주무관,D14,정담당,주무관,1,d14.main@demo.yongin.go.kr,,가상 인물(시연용)
+SD14-2,서동욱 주무관,D14,부담당,주무관,1,d14.sub@demo.yongin.go.kr,,가상 인물(시연용)
+SM01-1,한서연 과장,D01,총괄과장,주무관,1,sm01.1@demo.yongin.go.kr,,가상 인물(시연용) · 점검반
+SM02-1,오지훈 과장,D02,점검총괄,주무관,1,sm02.1@demo.yongin.go.kr,,가상 인물(시연용) · 점검반
+SM02-2,서다혜 팀장,D02,점검팀장,주무관,1,sm02.2@demo.yongin.go.kr,,가상 인물(시연용) · 점검반
+SM02-3,권성민 팀장,D02,점검팀장,주무관,1,sm02.3@demo.yongin.go.kr,,가상 인물(시연용) · 점검반
+SD15-1,김도윤 주무관,D15,정담당,주무관,1,d15.main@demo.yongin.go.kr,,가상 인물
+SD15-2,이서현 주무관,D15,부담당,주무관,1,d15.sub@demo.yongin.go.kr,,가상 인물
+SD16-1,박지호 주무관,D16,정담당,주무관,1,d16.main@demo.yongin.go.kr,,가상 인물
+SD16-2,최유진 주무관,D16,부담당,주무관,1,d16.sub@demo.yongin.go.kr,,가상 인물
+SD17-1,정하준 주무관,D17,정담당,주무관,1,d17.main@demo.yongin.go.kr,,가상 인물
+SD17-2,강민서 주무관,D17,부담당,주무관,1,d17.sub@demo.yongin.go.kr,,가상 인물
+SD18-1,조은비 주무관,D18,정담당,주무관,1,d18.main@demo.yongin.go.kr,,가상 인물
+SD18-2,윤성호 주무관,D18,부담당,주무관,1,d18.sub@demo.yongin.go.kr,,가상 인물
+SD19-1,장다은 주무관,D19,정담당,주무관,1,d19.main@demo.yongin.go.kr,,가상 인물
+SD19-2,임재훈 주무관,D19,부담당,주무관,1,d19.sub@demo.yongin.go.kr,,가상 인물
+SD20-1,한지원 주무관,D20,정담당,주무관,1,d20.main@demo.yongin.go.kr,,가상 인물
+SD20-2,오세진 주무관,D20,부담당,주무관,1,d20.sub@demo.yongin.go.kr,,가상 인물
+SD21-1,서준영 주무관,D21,정담당,주무관,1,d21.main@demo.yongin.go.kr,,가상 인물
+SD21-2,신미경 주무관,D21,부담당,주무관,1,d21.sub@demo.yongin.go.kr,,가상 인물
+SD22-1,권태호 주무관,D22,정담당,주무관,1,d22.main@demo.yongin.go.kr,,가상 인물
+SD22-2,황수진 주무관,D22,부담당,주무관,1,d22.sub@demo.yongin.go.kr,,가상 인물
+H01,안정우 중대재해예방팀장,D01,부서장,중대재해예방팀장,2,d01.head@demo.yongin.go.kr,,가상 인물 · 결재선 부서장
+H02,송예린 안전점검팀장,D02,부서장,안전점검팀장,2,d02.head@demo.yongin.go.kr,,가상 인물 · 결재선 부서장
+H03,전현우 도로구조물과장,D03,부서장,도로구조물과장,2,d03.head@demo.yongin.go.kr,,가상 인물 · 결재선 부서장
+H04,홍승민 정수과장,D04,부서장,정수과장,2,d04.head@demo.yongin.go.kr,,가상 인물 · 결재선 부서장
+H05,유다인 하수운영과장,D05,부서장,하수운영과장,2,d05.head@demo.yongin.go.kr,,가상 인물 · 결재선 부서장
+H06,고민재 동부공원관리과장,D06,부서장,동부공원관리과장,2,d06.head@demo.yongin.go.kr,,가상 인물 · 결재선 부서장
+H07,문성희 보육정책과장,D07,부서장,보육정책과장,2,d07.head@demo.yongin.go.kr,,가상 인물 · 결재선 부서장
+H08,양지훈 체육진흥과장,D08,부서장,체육진흥과장,2,d08.head@demo.yongin.go.kr,,가상 인물 · 결재선 부서장
+H09,손유나 건축과장,D09,부서장,건축과장,2,d09.head@demo.yongin.go.kr,,가상 인물 · 결재선 부서장
+H10,배준혁 교통정책과장,D10,부서장,교통정책과장,2,d10.head@demo.yongin.go.kr,,가상 인물 · 결재선 부서장
+H11,백서영 보건정책과장,D11,부서장,보건정책과장,2,d11.head@demo.yongin.go.kr,,가상 인물 · 결재선 부서장
+H12,허동현 자원순환과장,D12,부서장,자원순환과장,2,d12.head@demo.yongin.go.kr,,가상 인물 · 결재선 부서장
+H13,노은서 재난대응담당관,D13,부서장,재난대응담당관,2,d13.head@demo.yongin.go.kr,,가상 인물 · 결재선 부서장
+H14,구본석 기술지원과장,D14,부서장,기술지원과장,2,d14.head@demo.yongin.go.kr,,가상 인물 · 결재선 부서장
+H15,민채원 도로건설과장,D15,부서장,도로건설과장,2,d15.head@demo.yongin.go.kr,,가상 인물 · 결재선 부서장
+H16,하승우 도시철도과장,D16,부서장,도시철도과장,2,d16.head@demo.yongin.go.kr,,가상 인물 · 결재선 부서장
+H17,진소영 생태하천과장,D17,부서장,생태하천과장,2,d17.head@demo.yongin.go.kr,,가상 인물 · 결재선 부서장
+H18,탁용준 산림과장,D18,부서장,산림과장,2,d18.head@demo.yongin.go.kr,,가상 인물 · 결재선 부서장
+H19,변지민 공공건축과장,D19,부서장,공공건축과장,2,d19.head@demo.yongin.go.kr,,가상 인물 · 결재선 부서장
+H20,염태경 대중교통과장,D20,부서장,대중교통과장,2,d20.head@demo.yongin.go.kr,,가상 인물 · 결재선 부서장
+H21,곽나연 공동주택과장,D21,부서장,공동주택과장,2,d21.head@demo.yongin.go.kr,,가상 인물 · 결재선 부서장
+H22,석진호 안전정책팀장,D22,부서장,안전정책팀장,2,d22.head@demo.yongin.go.kr,,가상 인물 · 결재선 부서장
+G01,우혜린 안전정책관,D01,총괄,안전정책관,3,safety.director@demo.yongin.go.kr,,가상 인물 · 결재선 총괄 확인(국장급)
+CEO-1,시장,,경영책임자,시장,4,,,경영책임자 — 실명 쓰지 않음

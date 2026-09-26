@@ -1,0 +1,501 @@
+/* ADOMS 2차 — 디자인 토큰 (1차 앱 실측값 승계)
+ *
+ * 글자 크기 규칙 (2026-09-21 재조정)
+ *   · 기준을 **15px**로 되돌렸다. 18px 로 키웠더니 한 화면에 들어가는 양이 줄어
+ *     오히려 읽기 어려웠다(사용자 지적). 표가 촘촘해야 눈이 훑기 쉽다.
+ *   · 대신 **제목과 본문의 차이를 크게** 벌렸다 — 제목은 본문의 1.75배까지.
+ *     크기로 위계를 만들면 기준 글자가 작아도 구조가 보인다.
+ *   · 멀리서 보거나 눈이 불편한 분을 위해 머리띠의 **글자 크기** 단추로
+ *     보통(15) · 크게(17.5) · 아주 크게(20)로 올릴 수 있다. 모든 크기가 rem 이라 같이 커진다.
+ */
+html{font-size:15px}
+html[data-fs="lg"]{font-size:17.5px}
+html[data-fs="xl"]{font-size:20px}
+
+:root{
+  --deep:#172b4d;      /* 헤더·활성 칩 (주조색) */
+  --navy:#003675;      /* 주요 버튼·강조 */
+  --blue:#2f66b0;      /* 링크·수치 */
+  --blue2:#1d6fa3;     /* 보조 버튼 */
+  --blush:#e7f1f8;     /* 배지·활성 배경 */
+  --surface:#fff;
+  --surface-soft:#f7f7fa;
+  --surface-blush:#f3f7fa;
+  --line:#dce3ea;
+  --ink:#1e2124;
+  --mut:#525c6b;
+  --ok:#3f7263; --warn:#8f6a33; --bad:#8f4d45; --none:#6f7783;  /* 09-21 채도 낮춤 — 주조색과 어울리게 */
+  --r-card:12px; --r-ctl:8px;
+  --shadow:0 1px 2px #172b4d0d, 0 6px 18px #172b4d0a;
+}
+*{box-sizing:border-box}
+html,body{padding:0;margin:0}
+body{background:var(--surface-soft);color:var(--ink);
+  font:1rem/1.65 "Pretendard Variable",Pretendard,"Noto Sans KR","Malgun Gothic",system-ui,sans-serif}
+a{color:var(--blue);text-decoration:none}
+a:hover{text-decoration:underline}
+b,strong{font-weight:700}
+
+/* 셸 */
+.topband{background:var(--blush);color:var(--deep);font-size:.9rem;padding:7px 20px;border-bottom:1px solid var(--line)}
+.header{background:var(--deep);color:#fff;padding:13px 20px;display:flex;align-items:center;gap:20px;flex-wrap:wrap}
+/* 로고 — 화면 기준 글자와 상관없이 크게(사용자 요청 09-21). */
+.header .logo{font-weight:800;letter-spacing:-1px;font-size:2.1rem;line-height:1.1;
+  display:inline-flex;flex-direction:column;align-items:stretch;gap:2px}
+/* [캡처 v2] 시스템 이름은 ADOMS 아래 한 줄로, 두 줄의 양 끝을 맞춘다(09-23 사용자 지시).
+   ADOMS 글자 폭이 상자 폭을 정하고, 아래 문구는 그 폭에 맞춰 양쪽 정렬된다(width:0 + min-width:100%). */
+.header .logo .logo-main{font-size:3.2rem;font-weight:800;letter-spacing:.06em;line-height:1;margin-right:-.06em}
+.header .logo span{width:0;min-width:100%;opacity:.85;font-weight:500;font-size:.86rem;letter-spacing:-.2px;line-height:1.2;
+  white-space:nowrap;text-align:justify;text-align-last:justify}
+.gnb{display:flex;gap:4px;flex-wrap:wrap;margin-left:6px}
+/* 메뉴 글자 — 기준(15px)과 무관하게 18px 로 본다. 줄이기 전 크기(사용자 요청 09-21). */
+.gnb a{color:#e6eef8;padding:8px 14px;border-radius:7px;font-size:1.2rem;font-weight:500;letter-spacing:-.3px}
+.gnb a.on,.gnb a:hover{background:#ffffff26;color:#fff;text-decoration:none}
+.userbox{margin-left:auto;display:flex;align-items:center;gap:12px;font-size:.88rem}
+/* 역할 선택 — 펼친 목록은 운영체제가 **흰 바탕**에 그린다.
+ * select 글자를 흰색으로 두면 option 이 그 색을 물려받아, 고른 줄 말고는 안 보인다(09-21 정정).
+ * 그래서 닫힌 상태도 **흰 바탕 + 짙은 글자**인 보통 입력칸 모양으로 바꾼다. 열든 닫든 잘 읽힌다. */
+.userbox select{background:#fff;color:#172b4d;border:1px solid #ffffff66;border-radius:6px;
+  padding:6px 10px;font-size:.92rem;font-weight:600;color-scheme:light}
+.userbox select option,.userbox select optgroup{background:#fff !important;color:#172b4d !important}
+.fs-switch{display:flex;align-items:center;gap:4px;font-size:.82rem;color:#c9d8ea}
+.fs-switch button{background:#ffffff1a;color:#fff;border:1px solid #ffffff33;border-radius:var(--r-ctl);
+  padding:4px 9px;cursor:pointer;font-family:inherit}
+.fs-switch button.on{background:#fff;color:var(--deep);border-color:#fff;font-weight:700}
+.page{max-width:1500px;margin:0 auto;padding:20px}
+.foot{max-width:1500px;margin:0 auto;padding:18px 20px 34px;color:var(--mut);font-size:.85rem;border-top:1px solid var(--line)}
+
+/* 조각 */
+.card{background:var(--surface);border:1px solid var(--line);border-radius:var(--r-card);box-shadow:var(--shadow);padding:16px 18px}
+.grid{display:grid;gap:14px}
+.g2{grid-template-columns:repeat(2,1fr)} .g3{grid-template-columns:repeat(3,1fr)}
+.g4{grid-template-columns:repeat(4,1fr)} .g5{grid-template-columns:repeat(5,1fr)} .g6{grid-template-columns:repeat(6,1fr)}
+@media(max-width:1400px){.g5,.g6{grid-template-columns:repeat(3,1fr)}}
+@media(max-width:1000px){.g2,.g3,.g4,.g5,.g6{grid-template-columns:repeat(2,1fr)}}
+
+h1{font-size:1.75rem;margin:6px 0 12px;color:var(--deep);letter-spacing:-.5px;font-weight:700;line-height:1.3}
+h2{font-size:1.32rem;margin:26px 0 10px;color:var(--navy);font-weight:700;line-height:1.35}
+h3{font-size:1.1rem;margin:2px 0 10px;color:var(--blue2);font-weight:700}
+
+.stat{display:flex;flex-direction:column;gap:3px}
+.stat .n{font-size:2.1rem;font-weight:700;color:var(--navy);letter-spacing:-.8px;line-height:1.15}
+.stat .l{font-size:.86rem;color:var(--mut)}
+.stat.bad .n{color:var(--bad)} .stat.warn .n{color:var(--warn)} .stat.ok .n{color:var(--ok)}
+
+.chips{display:flex;gap:7px;flex-wrap:wrap;margin:12px 0;align-items:center}
+.chip{border:1px solid #e1e7ef;background:#fff;color:#4b5563;border-radius:6px;
+  padding:5px 12px;font-size:.88rem;font-weight:500;cursor:pointer}
+.chip:hover{border-color:#bcc8d6;text-decoration:none}
+.chip.on{background:var(--deep);color:#fff;border-color:var(--deep);font-weight:600}
+/* 배지 — 기업용 칩(2026-09-21 개편).
+ * 알약에 원색을 채우면 화면이 알록달록해진다. 바탕은 중성으로 두고 **점 하나만 색**을 준다.
+ * ★ 배지 디자인을 통째로 바꿀 일이 생기면 이 블록과 components/bits.tsx 두 곳만 고치면 된다. */
+.badge{display:inline-flex;align-items:center;gap:5px;border-radius:5px;padding:2px 8px;
+  font-size:.8rem;font-weight:500;line-height:1.5;white-space:nowrap;
+  background:#f2f5f9;color:#3f4a5a;border:1px solid #e1e7ef}
+.badge.ok,.badge.warn,.badge.bad,.badge.none{background:#f4f6f9;border-color:#e3e8ef}
+.badge.ok::before,.badge.warn::before,.badge.bad::before,.badge.none::before{
+  content:"";width:6px;height:6px;border-radius:50%;flex:none;background:currentColor}
+.badge.ok{color:#3f7263} .badge.warn{color:#8f6a33}
+.badge.bad{color:#8f4d45} .badge.none{color:#71798a}
+
+table{border-collapse:collapse;width:100%;font-size:.89rem;background:#fff}
+th,td{border-bottom:1px solid var(--line);padding:8px 10px;text-align:left;vertical-align:middle}
+/* 글자 수가 정해진 칸은 줄바꿈하지 않는다 — 날짜(2026-09-21)·비율·건수·코드.
+ * 「보통(18px)」에서 날짜 한 줄에 필요한 너비는 padding 24px 포함 약 118px 이다.
+ * 표 머리글에 class="dt" 를 주면 그 열 전체가 한 줄로 유지된다. */
+th.dt,td.dt{white-space:nowrap;min-width:98px}
+th.num,td.num{white-space:nowrap;text-align:right;font-variant-numeric:tabular-nums}
+th.pct,td.pct{white-space:nowrap;min-width:92px}
+th.cd,td.cd{white-space:nowrap}
+td .badge{white-space:nowrap}
+/* 한글은 낱말 단위로 끊는다 — 어절 가운데서 잘리지 않게 */
+td,th{word-break:keep-all;overflow-wrap:anywhere}
+th{background:var(--surface-blush);color:var(--navy);font-weight:700;position:sticky;top:0;
+   font-size:1rem;letter-spacing:-.3px;padding-top:10px;padding-bottom:10px}
+tr:hover td{background:#f6fafd}
+.tbl-wrap{overflow:auto;max-height:76vh;border:1px solid var(--line);border-radius:var(--r-card);background:#fff}
+
+.bar{height:9px;background:#e8edf3;border-radius:99px;overflow:hidden}
+.bar>i{display:block;height:100%;background:#3f6ea5}
+.muted{color:var(--mut);font-size:.85rem}
+
+.axis-card{display:block;border:1px solid var(--line);background:#fff;border-radius:var(--r-card);padding:22px;box-shadow:var(--shadow)}
+.axis-card:hover{border-color:var(--blue);text-decoration:none}
+.axis-card .t{font-size:1.3rem;font-weight:700;color:var(--deep)}
+.axis-card .d{font-size:.95rem;color:var(--mut);margin:8px 0 12px;min-height:44px}
+.axis-card .n{font-size:1.75rem;font-weight:700;color:var(--blue)}
+
+.btn{display:inline-block;background:#26456e;color:#fff;border:0;border-radius:6px;
+  padding:8px 16px;font-size:.94rem;font-weight:500;cursor:pointer;font-family:inherit}
+.btn:hover{text-decoration:none;background:#2f5382}
+.btn.ghost{background:#fff;color:#3f6ea5;border:1px solid #d8e0ea}
+.btn.ghost:hover{background:#f5f8fc}
+.btn.sm{padding:5px 12px;font-size:.88rem}
+.src{font-size:.85rem;color:var(--mut);margin-top:8px}
+
+input[type=text],input[type=date],select,textarea{
+  font:inherit;font-size:.95rem;padding:8px 10px;border:1px solid var(--line);
+  border-radius:var(--r-ctl);background:#fff;color:var(--ink)}
+label{font-size:.92rem;color:var(--mut);display:block;margin-bottom:4px}
+
+/* 큰 수치를 읽기 쉽게 — 경영책임자 화면 */
+.kpi{font-size:3.1rem;font-weight:800;color:var(--navy);letter-spacing:-1.5px;line-height:1.1}
+.kpi.bad{color:var(--bad)} .kpi.ok{color:var(--ok)} .kpi.warn{color:var(--warn)}
+
+
+/* ── 인쇄용 한 장 보고서 ──────────────────────────────────────────
+ * 화면에서는 읽기 좋게, 인쇄하면 A4 세로 한 장에 들어가게 줄인다.
+ * 머리띠·메뉴·발바닥은 인쇄에서 빠진다. */
+.report .sheet{background:#fff;border:1px solid var(--line);border-radius:10px;padding:26px 30px;
+  max-width:900px;margin:0 auto;color:#1e2124}
+.report .rhead{display:flex;justify-content:space-between;align-items:flex-start;gap:20px;
+  border-bottom:2px solid var(--deep);padding-bottom:12px;margin-bottom:16px}
+.report .rtitle{font-size:1.5rem;font-weight:800;color:var(--deep);letter-spacing:-.6px}
+.report .rsub{font-size:.9rem;color:var(--mut);margin-top:5px}
+.report .sign{width:300px;border-collapse:collapse;flex:none}
+.report .sign th,.report .sign td{border:1px solid #b9c3cf;font-size:.72rem;text-align:center;padding:3px}
+.report .sign th{background:#f2f5f9;font-weight:600;color:#3f4a5a}
+.report .sign td{height:38px}
+
+.report .kpis{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin:14px 0 6px}
+.report .kpis>div{border:1px solid var(--line);border-radius:8px;padding:10px 12px;background:#f8fafc;text-align:center}
+.report .kpis b{display:block;font-size:1.6rem;font-weight:800;color:var(--navy);line-height:1.2;letter-spacing:-.8px}
+.report .kpis span{font-size:.78rem;color:var(--mut)}
+.report .kpis .bad b{color:#8f4d45}
+
+.report h3{font-size:1rem;color:var(--deep);margin:16px 0 6px;padding-left:2px}
+.report h3 .note{font-weight:400;font-size:.82rem;color:var(--mut)}
+.report table.r{width:100%;border-collapse:collapse;font-size:.82rem}
+.report table.r th,.report table.r td{border:1px solid #d5dde6;padding:4px 7px;text-align:left}
+.report table.r th{background:#f2f5f9;color:var(--navy);font-weight:700;font-size:.88rem}
+.report table.r td.num,.report table.r th:not(:first-child){text-align:right}
+.report table.r td.num{font-variant-numeric:tabular-nums}
+.report .sumrow td{background:#f2f5f9;font-weight:700}
+.report .warnrow td{background:#faf1e4}
+.report b.ok{color:#3f7263} .report b.warn{color:#8f6a33} .report b.bad{color:#8f4d45}
+.report .gauge{display:block;height:8px;background:#e8edf3;border-radius:99px;overflow:hidden}
+.report .gauge>u{display:block;height:100%;background:#3f6ea5;text-decoration:none}
+.report .two{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.report .todo{font-size:.85rem;margin:6px 0 0;padding-left:20px;line-height:1.75}
+.report .todo li{margin:3px 0}
+.report .foot2{margin-top:16px;padding-top:9px;border-top:1px solid var(--line);
+  font-size:.75rem;color:var(--mut)}
+
+@media print{
+  @page{size:A4 portrait;margin:11mm}
+  html{font-size:13px}
+  body{background:#fff}
+  .topband,.header,.foot,.noprint{display:none !important}
+  .page{max-width:none;padding:0}
+  .report .sheet{border:0;border-radius:0;padding:0;max-width:none;box-shadow:none}
+  .report table.r,.report .kpis>div,.report .sign{break-inside:avoid}
+  .report h3{break-after:avoid}
+}
+
+
+/* ── 휴대폰 현장 등록 화면 (/m) ───────────────────────────────────
+ * 손가락으로 누르는 화면이라 글자와 단추를 크게 잡는다.
+ * 입력칸은 16px 이상이어야 iOS 에서 자동 확대가 일어나지 않는다. */
+.mob{max-width:560px;margin:0 auto;padding:0 0 40px;font-size:16px}
+.mtop{background:var(--deep);color:#fff;padding:14px 16px;display:flex;flex-direction:column;gap:2px;
+  position:sticky;top:0;z-index:5}
+.mtop b{font-size:19px;letter-spacing:-.3px}
+.mtop span{font-size:13px;opacity:.8}
+.mtab{display:flex;gap:8px;padding:12px 14px 0}
+.mchip{flex:1;text-align:center;border:1px solid var(--line);background:#fff;border-radius:8px;
+  padding:11px 8px;font-size:15px;color:var(--mut)}
+.mchip.on{background:var(--deep);color:#fff;border-color:var(--deep);font-weight:700}
+.mchip:hover{text-decoration:none}
+.msum{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;padding:12px 14px}
+.msum>div{background:#fff;border:1px solid var(--line);border-radius:10px;padding:12px;text-align:center}
+.msum b{display:block;font-size:26px;font-weight:800;color:var(--navy);line-height:1.2}
+.msum span{font-size:12.5px;color:var(--mut)}
+.mlist{display:flex;flex-direction:column;gap:9px;padding:4px 14px}
+.mcard{display:block;background:#fff;border:1px solid var(--line);border-radius:11px;padding:14px;
+  box-shadow:0 1px 2px #172b4d0d}
+.mcard:hover{text-decoration:none;border-color:var(--blue)}
+.mtitle{font-size:16.5px;font-weight:700;color:var(--deep);line-height:1.45;word-break:keep-all}
+.mtitle.big{font-size:19px}
+.mmeta{font-size:13.5px;color:var(--mut);margin-top:4px;line-height:1.55}
+.mmeta2{display:flex;gap:7px;flex-wrap:wrap;align-items:center;margin-top:8px}
+.mbadge{display:inline-block;background:#f2f5f9;border:1px solid #e1e7ef;border-radius:5px;
+  padding:3px 9px;font-size:12.5px;color:#3f4a5a}
+.mbadge.warn{background:#faf1e4;border-color:#e6d5ba;color:#8f6a33}
+.mbadge.bad{background:#f8ebe9;border-color:#e6c6c1;color:#8f4d45;font-weight:700}
+.mdim{font-size:12.5px;color:var(--none)}
+.mback{display:inline-block;padding:12px 14px;font-size:15px}
+.mdetail{background:#fff;border:1px solid var(--line);border-radius:11px;padding:15px;margin:0 14px 10px}
+.mhint{background:var(--surface-blush);border:1px solid #cfe0ef;border-radius:8px;
+  padding:10px 12px;margin-top:10px;font-size:13.5px;line-height:1.6}
+.mev{display:flex;gap:10px;align-items:center;margin-top:9px;font-size:13.5px}
+.mev img{width:56px;height:56px;object-fit:cover;border-radius:7px;border:1px solid var(--line);flex:none}
+.mform{padding:0 14px}
+.mform textarea{width:100%;font-size:16px;padding:12px;border:1px solid var(--line);
+  border-radius:9px;margin-top:10px;font-family:inherit}
+.mbtn{display:block;width:100%;text-align:center;border-radius:10px;padding:16px;
+  font-size:17px;font-weight:700;margin-top:10px;cursor:pointer;border:1px solid transparent}
+.mbtn input[type=file]{display:none}
+.mbtn.cam{background:#26456e;color:#fff}
+.mbtn.file{background:#fff;color:#26456e;border-color:#cbd6e3}
+.mbtn.go{background:#3f7263;color:#fff;border:0}
+.mfoot{padding:18px 16px 30px;font-size:12px;color:var(--none);text-align:center}
+
+/* 표 안의 행 제목 — 링크 색(연한 파랑)이라 흐려 보였다(사용자 지적 09-21).
+ * 짙은 남회색 + 굵기 600 으로 바꾼다. 검은색 보통 굵기보다 촘촘한 표에서 더 잘 읽힌다.
+ * 누를 수 있다는 신호는 **마우스를 올렸을 때** 파랑+밑줄로 준다. */
+td a{color:#22344f;font-weight:600;text-decoration:none}
+td a:hover{color:var(--blue);text-decoration:underline}
+td .muted a{color:var(--blue2);font-weight:500}   /* 부제목 줄의 링크는 그대로 */
+
+
+/* ── 설명 경로 (왜 이 의무가 걸리는가) ─────────────────────────────
+ * 고리마다 사실·규칙·확인 필요를 색과 테두리 모양으로 가른다.
+ * 확인 필요는 점선 — 사슬 전체가 그 고리만큼만 믿을 만하다는 뜻이다. */
+.why{border-color:#c9d6e5}
+.whykey{display:inline-flex;align-items:center;gap:6px;font-size:.84rem;font-weight:600;margin-left:6px}
+.whykey i{width:14px;height:14px;border-width:1.5px;border-radius:3px;display:inline-block}
+.whyweak{display:flex;flex-direction:column;gap:3px;background:#faf1e4;border:1px dashed #c9a46a;
+  border-radius:9px;padding:11px 15px;margin:12px 0 4px}
+.whyweak b{color:#8f6a33}
+.whylist{list-style:none;padding:0;margin:14px 0 0}
+.whylist>li{display:grid;grid-template-columns:150px 1fr;gap:16px;padding:0 0 14px;position:relative}
+.whylist>li:not(:last-child)::before{content:"";position:absolute;left:74px;top:44px;bottom:0;
+  width:2px;background:#d8e1ec}
+.whynode{border-width:1.5px;border-radius:9px;padding:8px 10px;text-align:center;position:relative;z-index:1;
+  display:flex;flex-direction:column;gap:1px;align-self:start}
+.whylabel{font-weight:700;color:var(--deep);font-size:.95rem}
+.whystr{font-size:.76rem;font-weight:700}
+.whybody{padding-top:4px;min-width:0}
+.whyval{font-weight:700;color:#22344f;font-size:1rem}
+.whyval a{color:#22344f}
+.whyquote{margin:7px 0 4px;padding:9px 13px;background:#f6f9fc;border-left:3px solid #22456e;
+  color:#2c3a4d;font-size:.9rem;line-height:1.7;border-radius:0 6px 6px 0}
+.whybasis{color:var(--mut);font-size:.88rem;margin-top:4px;line-height:1.65}
+@media(max-width:800px){.whylist>li{grid-template-columns:1fr}.whylist>li::before{display:none}}
+
+
+/* ── 흐름 막대 — 한 바퀴의 몇 번째인가 (2026-09-21) ──────────────────
+ * 화면이 늘어도 흐름이 끊기지 않게, 흐름 위의 화면은 모두 맨 위에 이것을 둔다. */
+.flowbar{background:#fff;border:1px solid var(--line);border-radius:10px;padding:10px 14px;margin:0 0 16px}
+.flowbar ol{list-style:none;display:flex;gap:4px;margin:0;padding:0;flex-wrap:wrap}
+.flowbar li{flex:1;min-width:92px}
+.flowbar li a{display:block;text-align:center;padding:7px 6px;border-radius:7px;font-size:.88rem;
+  color:#6f7783;background:#f4f6f9;border:1px solid transparent;font-weight:600;white-space:nowrap}
+.flowbar li a:hover{text-decoration:none;border-color:#c9d6e5;color:#22344f}
+.flowbar li.done a{color:#3f6ea5;background:#eef3f9}
+.flowbar li.on a{background:var(--deep);color:#fff}
+.flowbar .fno{margin-right:4px;opacity:.8}
+.fnav{display:flex;align-items:center;gap:12px;margin-top:9px;flex-wrap:wrap}
+.fnow{flex:1;font-size:.9rem;min-width:240px}
+.fbtn{border:1px solid #d8e0ea;border-radius:7px;padding:5px 12px;font-size:.88rem;font-weight:600;
+  color:#3f6ea5;background:#fff;white-space:nowrap}
+.fbtn:hover{text-decoration:none;background:#f5f8fc}
+.fbtn.next{background:#26456e;color:#fff;border-color:#26456e}
+.fbtn.next:hover{background:#2f5382}
+
+
+/* ── 법정 서식 보기 ─────────────────────────────────────────────── */
+.form-sheet .sch{border-collapse:collapse;width:100%;margin:10px 0;font-size:.9rem}
+.form-sheet .sch th,.form-sheet .sch td{border:1px solid #8f9aa8;padding:6px 8px;vertical-align:top;
+  text-align:left;word-break:keep-all}
+.form-sheet .sch th{background:#eef3f8;color:var(--navy);font-weight:700}
+.form-sheet .sch-title{font-size:1.2rem;color:var(--deep);margin:4px 0 10px}
+.form-sheet .sch-p{margin:6px 0;white-space:pre-wrap;font-size:.9rem}
+.form-sheet .sch-raw{white-space:pre;overflow:auto;background:#f7f7fa;border:1px solid var(--line);
+  border-radius:8px;padding:12px;font-size:.8rem;line-height:1.5}
+
+
+/* ── 증빙 여러 줄 입력 — 한 줄을 두 단으로 ──────────────────────────── */
+.erows{display:flex;flex-direction:column;gap:8px}
+.erow{display:grid;grid-template-columns:28px 1fr 36px;gap:8px;align-items:start;
+  border:1px solid var(--line);border-radius:9px;padding:9px 10px;background:#fbfcfe}
+.eno{font-weight:700;color:#6f7783;text-align:center;padding-top:7px}
+.ebody{display:flex;flex-direction:column;gap:6px;min-width:0}
+.eline{display:flex;gap:6px;min-width:0}
+.edate{width:140px;flex:none}
+.ekind{width:118px;flex:none}
+.etitle{flex:1;min-width:0}
+.efile{flex:1;min-width:0;font-size:.84rem;padding:5px 6px}
+.enote{width:170px;flex:none}
+.edel{margin-top:2px}
+
+
+/* ── 사진 크게 보기 ─────────────────────────────────────────────── */
+.thumbbtn{padding:0;border:1px solid var(--line);border-radius:5px;background:#fff;cursor:zoom-in;line-height:0}
+.thumbbtn img{object-fit:cover;border-radius:4px}
+.thumbbtn:hover{border-color:var(--blue)}
+.lbox{position:fixed;inset:0;background:#0d1a2ecc;z-index:100;display:flex;align-items:center;justify-content:center;padding:24px}
+.lbox-in{background:#fff;border-radius:12px;max-width:min(1100px,94vw);max-height:92vh;display:flex;flex-direction:column;overflow:hidden}
+.lbox-in img{max-width:100%;max-height:calc(92vh - 64px);object-fit:contain;background:#f2f4f7}
+.lbox-bar{display:flex;gap:8px;align-items:center;padding:10px 14px;border-top:1px solid var(--line);flex-wrap:wrap}
+
+/* 보고서 — 체계 수립 한 줄 */
+.report .rsys { font-size: .82rem; margin: 6px 0 2px; padding: 5px 8px; border: 1px solid var(--line, #d9e0e8); border-radius: 4px; }
+
+/* 직원 검색 창 · 배정 확인 폼 (2026-09-21) */
+.spick{display:inline-flex;gap:8px;align-items:center;flex-wrap:wrap}
+.spick-box{background:#fff;border-radius:12px;width:min(640px,94vw);padding:16px 18px;box-shadow:0 10px 30px #0003}
+.asg-form{display:grid;grid-template-columns:repeat(4,minmax(160px,1fr));gap:12px 18px;align-items:end;margin-top:8px}
+.asg-form label{display:block;font-weight:600;font-size:.88rem;margin-bottom:4px}
+.asg-form .asg-app{grid-column:span 2}
+.asg-form .asg-note{grid-column:span 3}
+@media (max-width:900px){.asg-form{grid-template-columns:1fr 1fr}.asg-form .asg-note{grid-column:span 2}}
+
+/* 2계층 메뉴(lib/menu.ts MENU_MODE="group") — 묶음에 마우스를 올리면 펼친다 (2026-09-22) */
+.gnb2{display:flex;gap:2px;align-items:stretch}
+.gnb2 .grp{position:relative}
+.gnb2 .grp-h{display:flex;align-items:center;gap:4px;height:100%}
+.gnb2 .caret{font-size:.7em;opacity:.7}
+.gnb2 .grp.on>.grp-h{background:#ffffff26;color:#fff;box-shadow:inset 0 -4px 0 #fff}
+.gnb2 .grp-m{display:none;position:absolute;left:0;top:100%;min-width:190px;background:#fff;border:1px solid #d5dce5;border-radius:6px;
+  box-shadow:0 8px 20px #0002;padding:6px;z-index:60}
+.gnb2 .grp:hover .grp-m,.gnb2 .grp:focus-within .grp-m{display:block}
+.gnb2 .grp-m a{display:block;color:#22344f !important;font-size:1rem;padding:8px 12px;border-radius:4px;white-space:nowrap;font-weight:500}
+.gnb2 .grp-m a:hover{background:#eef3f9}
+.gnb2 .grp-m a.on{background:#e3ebf5;font-weight:700}
+
+/* 나란한 두 단의 아래 끝 맞추기 (2026-09-22)
+ *  .fillcol  = 격자 한 칸을 세로 흐름으로 — 이웃 칸 높이까지 늘어난다(격자 기본 stretch).
+ *  .fill     = 그 칸의 마지막 표(스크롤 상자) — 남는 높이를 채운다. 내용 길이는 칸 높이에 넣지 않는다(height:0 기준)
+ *              → 긴 표가 이웃보다 길어지지 않고, 짧은 쪽이 이웃 끝까지 늘어난다. 최소 높이는 --minh.
+ *  .grow     = 마지막 카드가 남는 높이를 채운다(카드 내용은 그대로 두고 테두리만 늘어남). */
+.fillcol{display:flex;flex-direction:column;min-width:0}
+.fillcol>.fill{flex:1 1 auto;contain:size;min-height:var(--minh,280px);max-height:none!important}  /* contain:size = 표 길이를 칸 높이 계산에 넣지 않음 */
+.fillcol>.grow{flex:1 1 auto}
+
+/* 격자 칸 끝 맞춤(일반) — 이름 없는 감싸개 칸은 세로 흐름으로 두고, 마지막 카드가 이웃 칸 끝까지 늘어난다(2026-09-22).
+   카드 안 내용은 그대로(테두리만 늘어남). 표 스크롤 상자는 건드리지 않는다 — 필요한 화면에만 .fillcol/.fill. */
+.grid>div:not([class]){display:flex;flex-direction:column;min-width:0}
+.grid>div:not([class])>*{flex-shrink:0}   /* 세로 흐름에서 표 상자가 눌려 줄지 않게 */
+.grid>div:not([class])>.card:last-child{flex:1 1 auto}
+
+/* 격자 칸 자체가 스크롤 상자일 때 — 이웃 칸 높이에 맞춰 늘거나 줄어든다(내용 길이는 칸 높이에 넣지 않음). */
+.grid>.fillself{align-self:stretch;contain:size;min-height:var(--minh,300px);max-height:none!important;overflow:auto}
+
+/* 의무조항 36 — 재해 구분 3열 (2026-09-22) */
+.d36{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;margin-top:14px;align-items:start}
+.d36-col h2{font-size:1.05rem;margin:0 0 8px;line-height:1.4}
+.d36-col h2 .muted{font-weight:400;font-size:.85rem}
+.d36-card{display:block;text-decoration:none;padding:10px 12px;margin-bottom:8px}
+.d36-card:hover{border-color:#9fb6d3;text-decoration:none}
+.d36-top{display:flex;align-items:baseline;gap:8px}
+.d36-top b{color:var(--deep);flex:1}
+.d36-code{font-size:.8rem;color:#5b6675;font-variant-numeric:tabular-nums;min-width:2.6em}
+.d36-n{font-size:1.15rem;font-weight:700;color:var(--blue)}
+.d36-basis{font-size:.78rem;margin-top:2px}
+@media (max-width:1100px){.d36{grid-template-columns:1fr}}
+
+.gnb2 .grp-m .grp-sub{font-size:.82rem;color:#5b6675;font-weight:700;padding:8px 12px 3px;border-top:1px solid #e3e8ef;margin-top:4px}
+.gnb2 .grp-m .grp-sub:first-child{border-top:0;margin-top:0}
+.gnb2 .grp-m{min-width:260px}
+
+/* 로그인 사용자 표시(캡처본) */
+.userme{display:inline-flex;align-items:center;gap:6px;color:#e6eef8;font-size:.9rem;white-space:nowrap}
+.userme b{color:#fff}
+.userme-dept{opacity:.85}
+.userme-duty{opacity:.85}
+.userme-sep{opacity:.4;margin:0 2px}
+.userme-link{color:#cfe0f3 !important;font-size:.82rem}
+.userme-link:hover{color:#fff !important}
+
+/* ═══ [캡처 v2] 글자 줄이기 (2026-09-22 사용자 지시 — 업무용 시스템답게 한눈에) ═══════════════
+   원칙: 설명 문단·법령 인용은 화면에서 뺀다(필요하면 접기) · 표는 한 칸 한 줄 · 절차는 맨 위 단계 막대로. */
+.crumb{font-size:.85rem;color:var(--mut);margin-bottom:4px}
+h1.v2h{margin-bottom:6px}
+.steps{display:flex;list-style:none;padding:0;margin:14px 0 12px;counter-reset:none;gap:0}
+.steps li{flex:1;position:relative}
+.steps li>a,.steps li>div{display:flex;align-items:center;gap:8px;padding:10px 14px;background:#f1f4f8;color:var(--mut);
+  border:1px solid var(--line);border-left:none;height:100%;text-decoration:none}
+.steps li:first-child>a,.steps li:first-child>div{border-left:1px solid var(--line);border-radius:8px 0 0 8px}
+.steps li:last-child>a,.steps li:last-child>div{border-radius:0 8px 8px 0}
+.steps .st-no{width:22px;height:22px;border-radius:50%;background:#cfd8e3;color:#fff;font-size:.78rem;font-weight:700;display:inline-flex;align-items:center;justify-content:center;flex:0 0 22px}
+.steps .st-label{font-weight:700;white-space:nowrap}
+.steps .st-n{margin-left:auto;font-size:1.15rem;font-weight:700;color:var(--navy)}
+.steps li.done>a,.steps li.done>div{background:#eaf2ee;color:#2f5f52}.steps li.done .st-no{background:#5a9a84}
+.steps li.on>a,.steps li.on>div{background:var(--navy);color:#fff}.steps li.on .st-no{background:#fff;color:var(--navy)}.steps li.on .st-n{color:#fff}
+.steps li.warn>a,.steps li.warn>div{background:#fbf1e3;color:#8f6a33}.steps li.warn .st-no{background:#c79a4f}
+.facts{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:8px;margin:0 0 4px}
+.fact{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:8px 12px}
+.fact .fk{font-size:.8rem;color:var(--mut)}.fact .fv{font-size:1.05rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.tone-bad{color:#a8453b}
+details.fold>summary{cursor:pointer;font-weight:700;color:var(--blue2);list-style:none}
+details.fold>summary::before{content:"▸ ";color:var(--mut)}details.fold[open]>summary::before{content:"▾ "}
+details.fold[open]>summary{margin-bottom:8px}
+.more{display:inline-block;margin-top:6px;font-size:.9rem}
+.btn.ghost{background:#fff;color:var(--navy);border:1px solid var(--navy)}
+/* 표: 한 칸 한 줄(전체 글은 칸에 마우스를 올리면 title 로) — 입력칸이 든 칸은 예외 */
+table td{max-width:26em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+table td:has(input,select,textarea,button,form){white-space:normal;max-width:none;overflow:visible}
+table.v2t td{max-width:18em}
+/* 흐름 막대의 설명 줄(누가·다음으로 넘기는 것) 대신 단계만 */
+.flowbar .fnow .muted{display:none}
+/* 화면 머리의 설명 문단 — 제목 바로 뒤 p.muted 는 감춘다(페이지별로 더 줄인다) */
+h1+p.muted,h1+.chips+p.muted,h2+p.muted,h3+p.muted{display:none}
+
+/* 이용자 바꾸기(09-23) — 이름 자리가 고르기 칸. 테두리 없이 글자처럼, 누르면 목록 */
+.userme .userpick{appearance:auto;background:transparent;color:inherit;border:1px solid transparent;border-radius:6px;
+  font:inherit;font-weight:700;padding:2px 4px;cursor:pointer;max-width:22em}
+.userme .userpick:hover,.userme .userpick:focus{border-color:rgba(255,255,255,.45);outline:none}
+.userme .userpick option{color:#1d2733;font-weight:400}
+
+/* [캡처 v2] 설정 › 기관 정보 · 관리대상 관리(09-23) */
+.orgform{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:10px 14px;align-items:end}
+.orgform label{display:flex;flex-direction:column;gap:4px;font-size:.9rem;color:var(--mut)}
+.orgform label.wide{grid-column:1/-1}
+.orgform input,.orgform select{font-size:1rem;padding:6px 8px;border:1px solid var(--line);border-radius:6px;color:var(--ink,#1d2733)}
+table.kv th{background:transparent;color:var(--mut);font-weight:600;position:static}
+table.kv td{white-space:normal;max-width:none}
+
+/* [캡처 v2] 조항별 이행 현황표(09-24) — 참고 명세의 두 단계 표 · 3단 등급 색 */
+table.clause tr.lv1 td:first-child{font-weight:700}
+table.clause tr.grp td{background:#f6f8fb}
+table.clause tr.lv2 td:first-child{padding-left:28px}
+td.g3,.badge.g3{text-align:center;font-weight:700}
+td.g3.ok,.badge.g3.ok{background:#e4f1e8;color:#2f5f52}
+td.g3.warn,.badge.g3.warn{background:#fdf3d8;color:#7a5d2c}
+td.g3.bad,.badge.g3.bad{background:#fbe5df;color:#8f4d45}
+td.g3.none{color:var(--mut)}
+/* [캡처 v2] 의무조항 36 — 전용 화면으로 가는 체계 의무 카드(09-24) */
+.d36-card.own{border-style:dashed}
+.d36-n.own{font-size:.85rem;font-weight:600;color:var(--blue2);white-space:nowrap}
+/* [캡처 v2] K03 증빙 파일 첨부(09-24) — components/FileAttach.tsx */
+.fattach input[type=file],.fattach-in{font:inherit;font-size:.88rem;max-width:100%;padding:4px 0}
+.fattach-cur{display:inline-block;margin-left:6px;font-size:.88rem}
+a.flink{text-decoration:underline;text-underline-offset:2px}
+
+/* ── 09-24 메뉴 「bar」 모양 · 새 색(참고 그림: 메뉴구성_2단계 메뉴 … _20260924.png) ─────────────
+ * lib/menu.ts 의 MENU_MODE 를 "group" 으로 바꾸면 이 블록은 쓰이지 않는다(.th-bar 가 붙지 않는다) → 전과 똑같은 모양. */
+.th-bar .header{background:#fff;color:#0f2350;padding:10px 20px;border-bottom:1px solid var(--line)}
+.th-bar .header .logo{color:#0f2350}
+.th-bar .header .logo span{opacity:1;color:#34507a}
+.th-bar .fs-switch{color:#44546a}
+.th-bar .fs-switch button{background:#eef3f9;color:#0f2350;border-color:#cfd9e5}
+.th-bar .fs-switch button.on{background:#0f2350;color:#fff;border-color:#0f2350}
+.th-bar .userme{color:#2b3a50}
+.th-bar .userme b{color:#0f2350}
+.th-bar .userme-link{color:#3b5b8a !important}
+.th-bar .userme-link:hover{color:#0f2350 !important}
+.th-bar .userbox select{border-color:#b9c7d8}
+.nb-in{max-width:1500px;margin:0 auto;padding:0 20px;display:flex}
+.nb-row{display:flex;flex-wrap:wrap}
+.nb-top{background:linear-gradient(90deg,#0c1a38 0%,#0f2350 62%,#1d4590 100%)}
+.nb-top .nb-in{flex-wrap:wrap}
+.nb-top a{color:#dfe7f3;font-size:1.2rem;font-weight:600;padding:17px 26px;letter-spacing:-.3px;white-space:nowrap}
+.nb-top a:hover{color:#fff;background:#ffffff14;text-decoration:none}
+.nb-top a.on{color:#fff;font-weight:800;background:#0d2c63}
+.nb-sec{background:#0c2a5e;border-top:1px solid #ffffff14}
+.nb-sec a{color:#aebfd8;font-size:1rem;font-weight:600;padding:9px 26px;white-space:nowrap}
+.nb-sec a:hover{color:#fff;text-decoration:none}
+.nb-sec a.on{color:#47d6e6;font-weight:800}
+.nb-sub{background:#0a5bbf;box-shadow:0 2px 4px #0a2a5a33}
+.nb-sub a{color:#fff;font-size:1.12rem;font-weight:600;padding:12px 26px;border-top:3px solid transparent;white-space:nowrap}
+.nb-sub a:hover{background:#0a51ad;text-decoration:none}
+.nb-sub a.on{background:#0848a3;border-top-color:#fff;font-weight:800}
+/* 상태 배지 — 참고 그림의 「상태플래그」: 흰 바탕 · 둥근 테두리 · 점 · 청록/주황/회색 */
+.th-bar .badge.ok,.th-bar .badge.warn,.th-bar .badge.bad,.th-bar .badge.none{background:#fff;border:1.5px solid currentColor;
+  border-radius:999px;padding:1px 10px;font-weight:600}
+.th-bar .badge.ok{color:#0aa3a8} .th-bar .badge.warn{color:#e5661a}
+.th-bar .badge.none{color:#8a8f96} .th-bar .badge.bad{color:#cf4436}
+@media print{.nb{display:none !important}}
+@media(max-width:760px){.nb-top a,.nb-sub a,.nb-sec a{padding-left:14px;padding-right:14px}}

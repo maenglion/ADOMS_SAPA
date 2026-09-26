@@ -1,0 +1,39 @@
+.head { display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+.nav { display: flex; gap: 6px; flex-wrap: wrap; }
+
+.src { display: inline-block; font-size: .78rem; font-weight: 600; border-radius: 4px; padding: 0 6px; line-height: 1.6; border: 1px solid transparent; white-space: nowrap; }
+.law { color: #fff; background: var(--navy); }
+.ex  { color: #6b5a2e; background: #f7f1e3; border-color: #e8dcc0; border-style: dashed; }
+.op  { color: var(--navy); background: #eef2f8; border-color: #dbe3ee; }
+
+.annual { border-left: 4px solid var(--navy); }
+.rules { list-style: none; margin: 6px 0 8px; padding: 0; }
+.rules li { padding: 6px 0; border-bottom: 1px dashed var(--line); line-height: 1.6; }
+.rules li:last-child { border-bottom: 0; }
+
+.list { list-style: none; margin: 6px 0 0; padding: 0; max-height: 560px; overflow: auto; }
+/* [캡처 v2] 날짜 칸 좁히고 제목은 한 줄 */
+.item { display: grid; grid-template-columns: 5.5rem minmax(0, 1fr) auto; gap: 10px; align-items: start; padding: 7px 4px; border-bottom: 1px dashed var(--line); line-height: 1.55; }
+.item:last-child { border-bottom: 0; }
+.when { color: var(--mut); font-size: .88rem; font-variant-numeric: tabular-nums; }
+.what { min-width: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.late { background: #fbf2f1; }
+
+.months { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; }
+.month { padding: 12px 14px; }
+.cur { outline: 2px solid var(--blue); }
+.mhead { font-weight: 700; color: var(--deep); font-size: 1.1rem; display: flex; align-items: center; gap: 8px; margin-bottom: 6px; }
+.mlist { list-style: none; margin: 0; padding: 0; }
+.mlist li { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; padding: 5px 2px; border-bottom: 1px dashed var(--line); line-height: 1.5; font-size: .92rem; }
+.mlist li:last-child { border-bottom: 0; }
+.day { color: var(--mut); font-size: .85rem; font-variant-numeric: tabular-nums; }
+
+@media (max-width: 1200px) { .months { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+@media (max-width: 900px)  { .months { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 600px)  {
+  .months { grid-template-columns: 1fr; }
+  .item { grid-template-columns: 1fr; gap: 2px; }
+}
+
+/* 09-26 사용자: 메뉴 밖 화면 합치기 — 좌측 메뉴가 붙어 본문이 좁아졌으니 좁은 화면에서는 달 칸 3줄 */
+@media (max-width: 1400px) { .months { grid-template-columns: repeat(3, minmax(0, 1fr)); } }

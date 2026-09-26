@@ -1,0 +1,140 @@
+/* [400] 묶음 B2 전용 — 클래스 이름은 usb2- 로 시작
+ * 법 의무사항(SCR-034·035) · 관리자(SCR-021~025). 색은 us.css 의 연녹색 계열 변수만 쓴다. */
+
+/* 머리 — 「중대산업재해 담당자 권한지정」: 앞말은 보통 글씨, 뒷말은 굵게(명세 원문) */
+.usb2-head{align-items:center}
+.usb2-pre{font-weight:500;font-size:1.05rem;color:#333;margin-right:6px}
+.usb2-tbox{display:inline-block;min-width:150px;text-align:center;background:#e2e4e1;border:1px solid #c6cac3;border-radius:6px;padding:5px 16px;color:#555;font-weight:600}
+.usb2-note{background:var(--us-g4);border:1px solid #bcd6ad;color:#2f5f20;border-radius:8px;padding:8px 14px;margin:0 0 12px;font-weight:700}
+.usb2-small{font-size:.88rem;margin:6px 0}
+.usb2-empty{color:#888;padding:22px 8px !important}
+.usb2-ghost{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
+
+/* 좌우 2단(TransferList · MasterDetail) */
+.usb2-two{display:grid;grid-template-columns:1fr 1fr;gap:26px;align-items:start}
+.usb2-two-a{grid-template-columns:minmax(0,.9fr) minmax(0,1.3fr)}
+.usb2-h2{font-size:1.2rem;font-weight:800;margin:4px 0 10px;color:#111}
+.usb2-who{font-weight:600;color:var(--us-g1);font-size:1rem}
+
+/* 회색 둥근 검색 상자 */
+.usb2-sbox{background:#eff1ee;border-radius:26px;padding:12px 18px;margin-bottom:12px}
+.usb2-sform{display:flex;gap:12px;align-items:center;flex-wrap:wrap}
+.usb2-sform label{display:flex;gap:8px;align-items:center;color:#444;font-weight:600}
+.usb2-sform input,.usb2-sform select{border:1px solid #c9cfc6;border-radius:6px;padding:7px 10px;font:inherit;background:#fff;width:9.5rem}
+.usb2-ibtn{border:1px solid #c9cfc6;background:#fff;border-radius:6px;padding:6px 12px;cursor:pointer;font:inherit}
+.usb2-obtn{display:inline-flex;align-items:center;border:1px solid #9aa196;background:#fff;border-radius:6px;padding:6px 16px;color:#333 !important;font-weight:600;cursor:pointer}
+.usb2-obtn:hover{border-color:var(--us-g1);color:var(--us-g1) !important;text-decoration:none}
+.usb2-count{margin:6px 0 8px;color:#444}
+.usb2-count b{color:#1f6fd1;font-weight:800}
+.usb2-cntrow{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap}
+.usb2-lv{display:flex;gap:8px;align-items:center;font-weight:600;color:#444}
+.usb2-lv select{border:1px solid #c9cfc6;border-radius:6px;padding:5px 8px;font:inherit;background:#fff}
+
+/* 표 */
+.usb2-tl td{font-size:.95rem}
+.usb2-ell{max-width:15rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.usb2-cbtn{white-space:nowrap;background:#fff;border:1px solid #b9bfb5;border-radius:4px;padding:4px 14px;cursor:pointer;font:inherit;font-size:.9rem;color:#555}
+.usb2-cbtn:hover{border-color:var(--us-g1);color:var(--us-g1)}
+.usb2-lvtag{display:inline-block;background:var(--us-g3);color:var(--us-g1);border-radius:4px;padding:0 6px;font-weight:800;font-size:.82rem}
+.usb2-sub{font-size:.8rem;color:var(--us-mut)}
+.usb2-click a{color:#222}
+.usb2-click a:hover{color:var(--us-g1)}
+.usb2-sel td{background:#e8f1fb !important}
+.usb2-onrow td{background:#eef6fd}
+.usb2-off td{color:#9a9a9a;background:#fafafa}
+.usb2-legend{margin-top:18px;background:#f6f7f5;border:1px solid #e0e4dd;border-radius:10px;padding:10px 16px}
+.usb2-legend ul{margin:6px 0 0;padding-left:0;list-style:none;line-height:1.9}
+.usb2-scroll{max-height:36rem;overflow:auto;border-bottom:1px solid var(--us-line)}
+.usb2-scroll thead th{position:sticky;top:0;z-index:1}
+.usb2-ck{width:28px;height:28px;border-radius:50%;border:1px solid #b8bdb4;background:#fff;color:#fff;font-weight:900;cursor:pointer;line-height:1}
+.usb2-ck.on{background:#1f6fd1;border-color:#1f6fd1}
+.usb2-ck:disabled{opacity:.4;cursor:default}
+
+/* 페이지 번호 */
+.usb2-pager{display:flex;justify-content:center;gap:6px;margin:12px 0}
+.usb2-pager a,.usb2-pager span{min-width:26px;text-align:center;padding:2px 7px;border-radius:4px;color:#444 !important;font-size:.95rem}
+.usb2-pager span.on{background:#555;color:#fff !important;font-weight:700}
+.usb2-pager a:hover{background:var(--us-g3);text-decoration:none}
+
+/* 법 의무사항 목록(SCR-034) 검색 패널 */
+.usb2-panel{background:#eff1ee;border-radius:18px;padding:14px;display:flex;flex-direction:column;gap:10px;margin-bottom:14px}
+.usb2-prow{display:grid;grid-template-columns:10rem 1fr;align-items:center}
+.usb2-plabel{font-weight:800;padding-left:22px}
+.usb2-pbody{background:#fff;border-radius:10px;padding:12px 18px}
+.usb2-radios{display:flex;gap:18px;flex-wrap:wrap}
+.usb2-radios label{display:flex;gap:6px;align-items:center;cursor:pointer}
+.usb2-radios input{width:1.1rem;height:1.1rem;accent-color:#1f6fd1}
+.usb2-radios-s{margin-top:6px;gap:12px;font-size:.85rem;color:#555}
+.usb2-search{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.usb2-search select,.usb2-search input[type=text]{border:1px solid #c9cfc6;border-radius:6px;padding:7px 10px;font:inherit;background:#fff}
+.usb2-search input[type=text]{flex:1;min-width:14rem}
+.usb2-sbtn{border:1px solid #1f6fd1;color:#1f6fd1;background:#fff;border-radius:6px;padding:7px 22px;font:inherit;font-weight:700;cursor:pointer}
+.usb2-sbtn:hover{background:#eef5fd}
+.usb2-split{display:grid;grid-template-columns:1fr 1fr;padding:0}
+.usb2-split>div{display:flex;align-items:baseline;gap:14px;padding:16px 30px}
+.usb2-split>div+div{border-left:1px solid #e0e3de}
+.usb2-split span{color:#555}
+.usb2-split b{font-size:1.9rem;font-weight:600;color:#222}
+.usb2-split small{color:#555}
+
+/* SCR-035 계층표 */
+.usb2-hier td{font-size:.97rem}
+.usb2-no{font-size:1.1rem}
+.usb2-cellx{display:flex;justify-content:space-between;align-items:center;gap:8px}
+.usb2-trash{border:1px solid #9aa196;background:#fff;border-radius:4px;padding:1px 6px;cursor:pointer;font-size:.9rem}
+.usb2-trash:hover{border-color:var(--us-red)}
+.usb2-month{max-width:11rem}
+.usb2-half{display:flex;gap:16px;justify-content:center}
+.usb2-half label{display:flex;gap:5px;align-items:center;cursor:pointer;white-space:nowrap}
+.usb2-actions{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-top:14px;flex-wrap:wrap}
+.usb2-right{justify-content:flex-end}
+
+/* ④ 관계 법령 목록 */
+.usb2-lawhead{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:8px;flex-wrap:wrap}
+.usb2-laws td{vertical-align:top}
+.usb2-chk{width:1.2rem;height:1.2rem;accent-color:var(--us-g1)}
+.usb2-det summary{cursor:pointer}
+.usb2-det[open] summary{margin-bottom:6px}
+.usb2-docs{font-size:.85rem;color:#555;margin-bottom:6px}
+.usb2-tag{display:inline-block;margin-left:6px;background:#fff6db;border:1px solid #f0d27a;color:#9a6a00;border-radius:4px;padding:0 6px;font-size:.78rem;font-weight:700}
+table.usb2-mini{width:100%;border-collapse:collapse;font-size:.86rem;background:#fafbf9}
+table.usb2-mini td{border-top:1px solid #e3e7e0;padding:4px 6px}
+
+/* 관계 법령 관리(SCR-024·025) 검색 상자 */
+.usb2-lawbox{display:grid;grid-template-columns:12rem 1fr;background:#eff1ee;border-radius:18px;padding:14px;margin-bottom:14px;align-items:center}
+.usb2-lawbox-l{font-weight:800;padding-left:40px}
+.usb2-lawbox-r{background:#fff;border-radius:10px;padding:14px 20px;display:flex;flex-direction:column;gap:12px}
+.usb2-lrow{display:flex;gap:16px;align-items:center;flex-wrap:wrap}
+.usb2-llab{width:7rem;color:#444;font-weight:600}
+.usb2-wide{flex:1;min-width:14rem;border:1px solid #c9cfc6;border-radius:6px;padding:8px 10px;font:inherit}
+.usb2-lawtbl td{font-size:1rem}
+.usb2-dn{display:block;font-size:.8rem;color:var(--us-mut)}
+
+/* 기본정보(SCR-023) */
+.usb2-deptpick{display:flex;gap:10px;align-items:center}
+.usb2-deptpick label{display:flex;gap:8px;align-items:center;font-weight:600}
+.usb2-deptpick select{border:1px solid #c9cfc6;border-radius:6px;padding:6px 10px;font:inherit}
+.usb2-basic{border-top:1px solid #ddd;padding-top:12px}
+.usb2-frow{display:grid;grid-template-columns:13rem 1fr;gap:10px;align-items:center;margin-bottom:12px}
+.usb2-frow2{grid-template-columns:13rem 1fr 9rem 1fr}
+.usb2-frow label{font-weight:700;font-size:.95rem;color:#333}
+.usb2-frow label::before{content:"○ ";color:#999;font-size:.8rem}
+.usb2-frow input,.usb2-frow select{border:1px solid #c9cfc6;border-radius:6px;padding:8px 12px;font:inherit;background:#fff}
+.usb2-basic .ro{background:#eceeeb;color:#777}
+.usb2-basic .blue{color:#1f6fd1}
+table.usb2-mgmt{width:100%;border-collapse:collapse;margin-top:26px;border-top:2px solid #999}
+table.usb2-mgmt th{width:13rem;background:#f1f2f0;font-weight:700;font-size:.95rem;padding:10px;border-bottom:1px solid #e1e4df;text-align:center}
+table.usb2-mgmt td{padding:8px 14px;border-bottom:1px solid #e1e4df}
+table.usb2-mgmt select{width:100%;border:1px solid #c9cfc6;border-radius:6px;padding:7px 10px;font:inherit;background:#fff}
+.usb2-redbtn{border:1px solid #e04848;color:#e04848 !important;background:#fff;border-radius:6px;padding:9px 34px;font:inherit;font-weight:700;cursor:pointer}
+.usb2-bluebtn{border:0;background:#1f6fd1;color:#fff !important;border-radius:6px;padding:10px 34px;font:inherit;font-weight:700;cursor:pointer}
+.usb2-bluebtn:hover{background:#1858a8}
+
+/* 모달 */
+.usb2-mwide{min-width:min(900px,92vw)}
+.usb2-x{color:#fff !important;text-decoration:none !important;font-weight:800}
+.usb2-form{display:flex;flex-direction:column;gap:12px;min-width:30rem}
+.usb2-form label{display:flex;flex-direction:column;gap:6px;font-weight:700}
+.usb2-form select{border:1px solid #c9cfc6;border-radius:6px;padding:8px 10px;font:inherit}
+
+@media(max-width:1100px){.usb2-two,.usb2-two-a{grid-template-columns:1fr}.usb2-prow,.usb2-lawbox{grid-template-columns:1fr}.usb2-frow2{grid-template-columns:13rem 1fr}}

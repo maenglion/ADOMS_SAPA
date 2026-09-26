@@ -1,0 +1,232 @@
+﻿table,key,col,old,new,why
+org_dept,D23,(행),,농업기반팀,④ 부서 추가
+duty_assignment,ASG-000178,dept_id,D13,D23,④ 저수지 담당 = 농업기반팀
+duty_assignment,ASG-000178,owner_staff_id,SD13-1,SD23-1,④ 저수지 담당 = 농업기반팀
+duty_assignment,ASG-000178,deputy_staff_id,SD13-2,SD23-2,④ 저수지 담당 = 농업기반팀
+duty_assignment,ASG-000182,dept_id,D13,D23,④ 저수지 담당 = 농업기반팀
+duty_assignment,ASG-000182,owner_staff_id,SD13-1,SD23-1,④ 저수지 담당 = 농업기반팀
+duty_assignment,ASG-000182,deputy_staff_id,SD13-2,SD23-2,④ 저수지 담당 = 농업기반팀
+duty_assignment,ASG-000205,dept_id,D13,D23,④ 저수지 담당 = 농업기반팀
+duty_assignment,ASG-000205,owner_staff_id,SD13-1,SD23-1,④ 저수지 담당 = 농업기반팀
+duty_assignment,ASG-000205,deputy_staff_id,SD13-2,SD23-2,④ 저수지 담당 = 농업기반팀
+duty_assignment,ASG-000209,dept_id,D13,D23,④ 저수지 담당 = 농업기반팀
+duty_assignment,ASG-000209,owner_staff_id,SD13-1,SD23-1,④ 저수지 담당 = 농업기반팀
+duty_assignment,ASG-000209,deputy_staff_id,SD13-2,SD23-2,④ 저수지 담당 = 농업기반팀
+duty_assignment,ASG-000213,dept_id,D13,D23,④ 저수지 담당 = 농업기반팀
+duty_assignment,ASG-000213,owner_staff_id,SD13-1,SD23-1,④ 저수지 담당 = 농업기반팀
+duty_assignment,ASG-000213,deputy_staff_id,SD13-2,SD23-2,④ 저수지 담당 = 농업기반팀
+duty_assignment,ASG-000628,dept_id,D13,D23,④ 저수지 담당 = 농업기반팀
+duty_assignment,ASG-000628,owner_staff_id,SD13-1,SD23-1,④ 저수지 담당 = 농업기반팀
+duty_assignment,ASG-000628,deputy_staff_id,SD13-2,SD23-2,④ 저수지 담당 = 농업기반팀
+duty_assignment,ASG-000632,dept_id,D13,D23,④ 저수지 담당 = 농업기반팀
+duty_assignment,ASG-000632,owner_staff_id,SD13-1,SD23-1,④ 저수지 담당 = 농업기반팀
+duty_assignment,ASG-000632,deputy_staff_id,SD13-2,SD23-2,④ 저수지 담당 = 농업기반팀
+duty_assignment,ASG-000636,dept_id,D13,D23,④ 저수지 담당 = 농업기반팀
+duty_assignment,ASG-000636,owner_staff_id,SD13-1,SD23-1,④ 저수지 담당 = 농업기반팀
+duty_assignment,ASG-000636,deputy_staff_id,SD13-2,SD23-2,④ 저수지 담당 = 농업기반팀
+duty_assignment,ASG-000640,dept_id,D13,D23,④ 저수지 담당 = 농업기반팀
+duty_assignment,ASG-000640,owner_staff_id,SD13-1,SD23-1,④ 저수지 담당 = 농업기반팀
+duty_assignment,ASG-000640,deputy_staff_id,SD13-2,SD23-2,④ 저수지 담당 = 농업기반팀
+duty_assignment,ASG-000644,dept_id,D13,D23,④ 저수지 담당 = 농업기반팀
+duty_assignment,ASG-000644,owner_staff_id,SD13-1,SD23-1,④ 저수지 담당 = 농업기반팀
+duty_assignment,ASG-000644,deputy_staff_id,SD13-2,SD23-2,④ 저수지 담당 = 농업기반팀
+duty_assignment,ASG-000648,dept_id,D13,D23,④ 저수지 담당 = 농업기반팀
+duty_assignment,ASG-000648,owner_staff_id,SD13-1,SD23-1,④ 저수지 담당 = 농업기반팀
+duty_assignment,ASG-000648,deputy_staff_id,SD13-2,SD23-2,④ 저수지 담당 = 농업기반팀
+duty_assignment,ASG-000652,dept_id,D13,D23,④ 저수지 담당 = 농업기반팀
+duty_assignment,ASG-000652,owner_staff_id,SD13-1,SD23-1,④ 저수지 담당 = 농업기반팀
+duty_assignment,ASG-000652,deputy_staff_id,SD13-2,SD23-2,④ 저수지 담당 = 농업기반팀
+duty_assignment,ASG-001082,dept_id,D13,D23,④ 저수지 담당 = 농업기반팀
+duty_assignment,ASG-001082,owner_staff_id,SD13-1,SD23-1,④ 저수지 담당 = 농업기반팀
+duty_assignment,ASG-001082,deputy_staff_id,SD13-2,SD23-2,④ 저수지 담당 = 농업기반팀
+duty_assignment,ASG-001086,dept_id,D13,D23,④ 저수지 담당 = 농업기반팀
+duty_assignment,ASG-001086,owner_staff_id,SD13-1,SD23-1,④ 저수지 담당 = 농업기반팀
+duty_assignment,ASG-001086,deputy_staff_id,SD13-2,SD23-2,④ 저수지 담당 = 농업기반팀
+duty_assignment,ASG-001090,dept_id,D13,D23,④ 저수지 담당 = 농업기반팀
+duty_assignment,ASG-001090,owner_staff_id,SD13-1,SD23-1,④ 저수지 담당 = 농업기반팀
+duty_assignment,ASG-001090,deputy_staff_id,SD13-2,SD23-2,④ 저수지 담당 = 농업기반팀
+duty_assignment,ASG-001094,dept_id,D13,D23,④ 저수지 담당 = 농업기반팀
+duty_assignment,ASG-001094,owner_staff_id,SD13-1,SD23-1,④ 저수지 담당 = 농업기반팀
+duty_assignment,ASG-001094,deputy_staff_id,SD13-2,SD23-2,④ 저수지 담당 = 농업기반팀
+duty_assignment,ASG-001098,dept_id,D13,D23,④ 저수지 담당 = 농업기반팀
+duty_assignment,ASG-001098,owner_staff_id,SD13-1,SD23-1,④ 저수지 담당 = 농업기반팀
+duty_assignment,ASG-001098,deputy_staff_id,SD13-2,SD23-2,④ 저수지 담당 = 농업기반팀
+duty_assignment,ASG-001596,dept_id,D13,D23,④ 저수지 담당 = 농업기반팀
+duty_assignment,ASG-001596,owner_staff_id,SD13-1,SD23-1,④ 저수지 담당 = 농업기반팀
+duty_assignment,ASG-001596,deputy_staff_id,SD13-2,SD23-2,④ 저수지 담당 = 농업기반팀
+duty_assignment,ASG-001600,dept_id,D13,D23,④ 저수지 담당 = 농업기반팀
+duty_assignment,ASG-001600,owner_staff_id,SD13-1,SD23-1,④ 저수지 담당 = 농업기반팀
+duty_assignment,ASG-001600,deputy_staff_id,SD13-2,SD23-2,④ 저수지 담당 = 농업기반팀
+duty_assignment,ASG-001604,dept_id,D13,D23,④ 저수지 담당 = 농업기반팀
+duty_assignment,ASG-001604,owner_staff_id,SD13-1,SD23-1,④ 저수지 담당 = 농업기반팀
+duty_assignment,ASG-001604,deputy_staff_id,SD13-2,SD23-2,④ 저수지 담당 = 농업기반팀
+duty_assignment,ASG-001661,dept_id,D13,D23,④ 저수지 담당 = 농업기반팀
+duty_assignment,ASG-001661,owner_staff_id,SD13-1,SD23-1,④ 저수지 담당 = 농업기반팀
+duty_assignment,ASG-001661,deputy_staff_id,SD13-2,SD23-2,④ 저수지 담당 = 농업기반팀
+duty_assignment,ASG-002172,dept_id,D13,D23,④ 저수지 담당 = 농업기반팀
+duty_assignment,ASG-002172,owner_staff_id,SD13-1,SD23-1,④ 저수지 담당 = 농업기반팀
+duty_assignment,ASG-002172,deputy_staff_id,SD13-2,SD23-2,④ 저수지 담당 = 농업기반팀
+duty_assignment,ASG-002946,dept_id,D13,D23,④ 저수지 담당 = 농업기반팀
+duty_assignment,ASG-002946,owner_staff_id,SD13-1,SD23-1,④ 저수지 담당 = 농업기반팀
+duty_assignment,ASG-002946,deputy_staff_id,SD13-2,SD23-2,④ 저수지 담당 = 농업기반팀
+duty_assignment,ASG-003026,dept_id,D13,D23,④ 저수지 담당 = 농업기반팀
+duty_assignment,ASG-003026,owner_staff_id,SD13-1,SD23-1,④ 저수지 담당 = 농업기반팀
+duty_assignment,ASG-003026,deputy_staff_id,SD13-2,SD23-2,④ 저수지 담당 = 농업기반팀
+duty_assignment,ASG-003030,dept_id,D13,D23,④ 저수지 담당 = 농업기반팀
+duty_assignment,ASG-003030,owner_staff_id,SD13-1,SD23-1,④ 저수지 담당 = 농업기반팀
+duty_assignment,ASG-003030,deputy_staff_id,SD13-2,SD23-2,④ 저수지 담당 = 농업기반팀
+duty_assignment,ASG-003034,dept_id,D13,D23,④ 저수지 담당 = 농업기반팀
+duty_assignment,ASG-003034,owner_staff_id,SD13-1,SD23-1,④ 저수지 담당 = 농업기반팀
+duty_assignment,ASG-003034,deputy_staff_id,SD13-2,SD23-2,④ 저수지 담당 = 농업기반팀
+duty_assignment,ASG-004146,dept_id,D13,D23,④ 저수지 담당 = 농업기반팀
+duty_assignment,ASG-004146,owner_staff_id,SD13-1,SD23-1,④ 저수지 담당 = 농업기반팀
+duty_assignment,ASG-004146,deputy_staff_id,SD13-2,SD23-2,④ 저수지 담당 = 농업기반팀
+duty_assignment,ASG-004147,dept_id,D13,D23,④ 저수지 담당 = 농업기반팀
+duty_assignment,ASG-004147,owner_staff_id,SD13-1,SD23-1,④ 저수지 담당 = 농업기반팀
+duty_assignment,ASG-004147,deputy_staff_id,SD13-2,SD23-2,④ 저수지 담당 = 농업기반팀
+duty_assignment,ASG-004148,dept_id,D13,D23,④ 저수지 담당 = 농업기반팀
+duty_assignment,ASG-004148,owner_staff_id,SD13-1,SD23-1,④ 저수지 담당 = 농업기반팀
+duty_assignment,ASG-004148,deputy_staff_id,SD13-2,SD23-2,④ 저수지 담당 = 농업기반팀
+duty_assignment,ASG-004219,dept_id,D13,D23,④ 저수지 담당 = 농업기반팀
+duty_assignment,ASG-004219,owner_staff_id,SD13-1,SD23-1,④ 저수지 담당 = 농업기반팀
+duty_assignment,ASG-004219,deputy_staff_id,SD13-2,SD23-2,④ 저수지 담당 = 농업기반팀
+duty_assignment,ASG-004220,dept_id,D13,D23,④ 저수지 담당 = 농업기반팀
+duty_assignment,ASG-004220,owner_staff_id,SD13-1,SD23-1,④ 저수지 담당 = 농업기반팀
+duty_assignment,ASG-004220,deputy_staff_id,SD13-2,SD23-2,④ 저수지 담당 = 농업기반팀
+duty_assignment,ASG-004221,dept_id,D13,D23,④ 저수지 담당 = 농업기반팀
+duty_assignment,ASG-004221,owner_staff_id,SD13-1,SD23-1,④ 저수지 담당 = 농업기반팀
+duty_assignment,ASG-004221,deputy_staff_id,SD13-2,SD23-2,④ 저수지 담당 = 농업기반팀
+duty_assignment,ASG-004222,dept_id,D13,D23,④ 저수지 담당 = 농업기반팀
+duty_assignment,ASG-004222,owner_staff_id,SD13-1,SD23-1,④ 저수지 담당 = 농업기반팀
+duty_assignment,ASG-004222,deputy_staff_id,SD13-2,SD23-2,④ 저수지 담당 = 농업기반팀
+duty_assignment,ASG-004223,dept_id,D13,D23,④ 저수지 담당 = 농업기반팀
+duty_assignment,ASG-004223,owner_staff_id,SD13-1,SD23-1,④ 저수지 담당 = 농업기반팀
+duty_assignment,ASG-004223,deputy_staff_id,SD13-2,SD23-2,④ 저수지 담당 = 농업기반팀
+duty_assignment,ASG-004224,dept_id,D13,D23,④ 저수지 담당 = 농업기반팀
+duty_assignment,ASG-004224,owner_staff_id,SD13-1,SD23-1,④ 저수지 담당 = 농업기반팀
+duty_assignment,ASG-004224,deputy_staff_id,SD13-2,SD23-2,④ 저수지 담당 = 농업기반팀
+duty_assignment,ASG-004225,dept_id,D13,D23,④ 저수지 담당 = 농업기반팀
+duty_assignment,ASG-004225,owner_staff_id,SD13-1,SD23-1,④ 저수지 담당 = 농업기반팀
+duty_assignment,ASG-004225,deputy_staff_id,SD13-2,SD23-2,④ 저수지 담당 = 농업기반팀
+duty_assignment,ASG-004226,dept_id,D13,D23,④ 저수지 담당 = 농업기반팀
+duty_assignment,ASG-004226,owner_staff_id,SD13-1,SD23-1,④ 저수지 담당 = 농업기반팀
+duty_assignment,ASG-004226,deputy_staff_id,SD13-2,SD23-2,④ 저수지 담당 = 농업기반팀
+duty_assignment,ASG-004227,dept_id,D13,D23,④ 저수지 담당 = 농업기반팀
+duty_assignment,ASG-004227,owner_staff_id,SD13-1,SD23-1,④ 저수지 담당 = 농업기반팀
+duty_assignment,ASG-004227,deputy_staff_id,SD13-2,SD23-2,④ 저수지 담당 = 농업기반팀
+duty_assignment,ASG-004228,dept_id,D13,D23,④ 저수지 담당 = 농업기반팀
+duty_assignment,ASG-004228,owner_staff_id,SD13-1,SD23-1,④ 저수지 담당 = 농업기반팀
+duty_assignment,ASG-004228,deputy_staff_id,SD13-2,SD23-2,④ 저수지 담당 = 농업기반팀
+duty_assignment,ASG-004229,dept_id,D13,D23,④ 저수지 담당 = 농업기반팀
+duty_assignment,ASG-004229,owner_staff_id,SD13-1,SD23-1,④ 저수지 담당 = 농업기반팀
+duty_assignment,ASG-004229,deputy_staff_id,SD13-2,SD23-2,④ 저수지 담당 = 농업기반팀
+duty_assignment,ASG-004230,dept_id,D13,D23,④ 저수지 담당 = 농업기반팀
+duty_assignment,ASG-004230,owner_staff_id,SD13-1,SD23-1,④ 저수지 담당 = 농업기반팀
+duty_assignment,ASG-004230,deputy_staff_id,SD13-2,SD23-2,④ 저수지 담당 = 농업기반팀
+duty_assignment,ASG-004231,dept_id,D13,D23,④ 저수지 담당 = 농업기반팀
+duty_assignment,ASG-004231,owner_staff_id,SD13-1,SD23-1,④ 저수지 담당 = 농업기반팀
+duty_assignment,ASG-004231,deputy_staff_id,SD13-2,SD23-2,④ 저수지 담당 = 농업기반팀
+duty_assignment,ASG-004243,dept_id,D13,D23,④ 저수지 담당 = 농업기반팀
+duty_assignment,ASG-004243,owner_staff_id,SD13-1,SD23-1,④ 저수지 담당 = 농업기반팀
+duty_assignment,ASG-004243,deputy_staff_id,SD13-2,SD23-2,④ 저수지 담당 = 농업기반팀
+duty_assignment,ASG-004287,dept_id,D13,D23,④ 저수지 담당 = 농업기반팀
+duty_assignment,ASG-004287,owner_staff_id,SD13-1,SD23-1,④ 저수지 담당 = 농업기반팀
+duty_assignment,ASG-004287,deputy_staff_id,SD13-2,SD23-2,④ 저수지 담당 = 농업기반팀
+duty_assignment,ASG-004321,dept_id,D13,D23,④ 저수지 담당 = 농업기반팀
+duty_assignment,ASG-004321,owner_staff_id,SD13-1,SD23-1,④ 저수지 담당 = 농업기반팀
+duty_assignment,ASG-004321,deputy_staff_id,SD13-2,SD23-2,④ 저수지 담당 = 농업기반팀
+duty_assignment,ASG-004322,dept_id,D13,D23,④ 저수지 담당 = 농업기반팀
+duty_assignment,ASG-004322,owner_staff_id,SD13-1,SD23-1,④ 저수지 담당 = 농업기반팀
+duty_assignment,ASG-004322,deputy_staff_id,SD13-2,SD23-2,④ 저수지 담당 = 농업기반팀
+duty_assignment,ASG-004323,dept_id,D13,D23,④ 저수지 담당 = 농업기반팀
+duty_assignment,ASG-004323,owner_staff_id,SD13-1,SD23-1,④ 저수지 담당 = 농업기반팀
+duty_assignment,ASG-004323,deputy_staff_id,SD13-2,SD23-2,④ 저수지 담당 = 농업기반팀
+duty_assignment,ASG-004324,dept_id,D13,D23,④ 저수지 담당 = 농업기반팀
+duty_assignment,ASG-004324,owner_staff_id,SD13-1,SD23-1,④ 저수지 담당 = 농업기반팀
+duty_assignment,ASG-004324,deputy_staff_id,SD13-2,SD23-2,④ 저수지 담당 = 농업기반팀
+duty_assignment,ASG-004325,dept_id,D13,D23,④ 저수지 담당 = 농업기반팀
+duty_assignment,ASG-004325,owner_staff_id,SD13-1,SD23-1,④ 저수지 담당 = 농업기반팀
+duty_assignment,ASG-004325,deputy_staff_id,SD13-2,SD23-2,④ 저수지 담당 = 농업기반팀
+duty_assignment,ASG-004393,dept_id,D13,D23,④ 저수지 담당 = 농업기반팀
+duty_assignment,ASG-004393,owner_staff_id,SD13-1,SD23-1,④ 저수지 담당 = 농업기반팀
+duty_assignment,ASG-004393,deputy_staff_id,SD13-2,SD23-2,④ 저수지 담당 = 농업기반팀
+duty_assignment,ASG-004394,dept_id,D13,D23,④ 저수지 담당 = 농업기반팀
+duty_assignment,ASG-004394,owner_staff_id,SD13-1,SD23-1,④ 저수지 담당 = 농업기반팀
+duty_assignment,ASG-004394,deputy_staff_id,SD13-2,SD23-2,④ 저수지 담당 = 농업기반팀
+duty_assignment,ASG-004395,dept_id,D13,D23,④ 저수지 담당 = 농업기반팀
+duty_assignment,ASG-004395,owner_staff_id,SD13-1,SD23-1,④ 저수지 담당 = 농업기반팀
+duty_assignment,ASG-004395,deputy_staff_id,SD13-2,SD23-2,④ 저수지 담당 = 농업기반팀
+duty_assignment,ASG-004396,dept_id,D13,D23,④ 저수지 담당 = 농업기반팀
+duty_assignment,ASG-004396,owner_staff_id,SD13-1,SD23-1,④ 저수지 담당 = 농업기반팀
+duty_assignment,ASG-004396,deputy_staff_id,SD13-2,SD23-2,④ 저수지 담당 = 농업기반팀
+task_approval_patch,TSK-000120,head_ok_by,H13,H23,④
+task_approval_patch,TSK-000128,head_ok_by,H13,H23,④
+task_approval_patch,TSK-000136,head_ok_by,H13,H23,④
+task_approval_patch,TSK-000464,head_ok_by,H13,H23,④
+task_approval_patch,TSK-000468,head_ok_by,H13,H23,④
+task_approval_patch,TSK-000826,head_ok_by,H13,H23,④
+task_approval_patch,TSK-000830,head_ok_by,H13,H23,④
+task_approval_patch,TSK-001520,head_ok_by,H13,H23,④
+task_approval_patch,TSK-002096,head_ok_by,H13,H23,④
+task_approval_patch,TSK-002100,head_ok_by,H13,H23,④
+task_approval_patch,TSK-002104,head_ok_by,H13,H23,④
+compliance_task,TSK-000120,done_by,SD13-1,SD23-1,④
+compliance_task,TSK-000128,done_by,SD13-1,SD23-1,④
+compliance_task,TSK-000136,done_by,SD13-1,SD23-1,④
+compliance_task,TSK-000464,done_by,SD13-1,SD23-1,④
+compliance_task,TSK-000468,done_by,SD13-1,SD23-1,④
+compliance_task,TSK-000826,done_by,SD13-1,SD23-1,④
+compliance_task,TSK-000830,done_by,SD13-1,SD23-1,④
+compliance_task,TSK-001201,done_by,SD13-1,SD23-1,④
+compliance_task,TSK-001520,done_by,SD13-1,SD23-1,④
+compliance_task,TSK-002096,done_by,SD13-1,SD23-1,④
+compliance_task,TSK-002100,done_by,SD13-1,SD23-1,④
+compliance_task,TSK-002104,done_by,SD13-1,SD23-1,④
+asset,RS-YI-0001,(행),,관곡저수지,③ 저수지 추가
+asset,RS-YI-0002,(행),,동진저수지,③ 저수지 추가
+asset,RS-YI-0003,(행),,신기저수지,③ 저수지 추가
+asset,RS-YI-0004,(행),,장재미저수지,③ 저수지 추가
+asset,RS-YI-0005,(행),,지곡저수지,③ 저수지 추가
+asset,RS-YI-0006,(행),,성저저수지,③ 저수지 추가
+asset,RS-YI-0007,(행),,마가저수지,③ 저수지 추가
+asset,RS-YI-0008,(행),,소운저수지,③ 저수지 추가
+asset,RS-YI-0009,(행),,유실저수지,③ 저수지 추가
+asset,RS-YI-0010,(행),,신원저수지,③ 저수지 추가
+asset,RS-YI-0011,(행),,갈담저수지,③ 저수지 추가
+asset,RS-YI-0012,(행),,동산저수지,③ 저수지 추가
+asset,RS-YI-0013,(행),,삼마곡저수지,③ 저수지 추가
+asset,RS-YI-0014,(행),,북리저수지,③ 저수지 추가
+asset,RS-YI-0015,(행),,동막저수지,③ 저수지 추가
+asset,RS-YI-0016,(행),,통삼저수지,③ 저수지 추가
+asset,RS-YI-0017,(행),,방아(방축)저수지,③ 저수지 추가
+asset,RS-YI-0018,(행),,월곡1호저수지,③ 저수지 추가
+asset,RS-YI-0019,(행),,창리저수지,③ 저수지 추가
+asset,RS-YI-0020,(행),,아곡1호저수지,③ 저수지 추가
+asset,RS-YI-0021,(행),,완장1호저수지,③ 저수지 추가
+asset,RS-YI-0022,(행),,완장2호저수지,③ 저수지 추가
+asset,RS-YI-0023,(행),,상동저수지,③ 저수지 추가
+asset,RS-YI-0024,(행),,당아저수지,③ 저수지 추가
+asset,RS-YI-0025,(행),,월곡2호저수지,③ 저수지 추가
+asset,RS-YI-0026,(행),,요덕저수지,③ 저수지 추가
+asset,RS-YI-0027,(행),,수역저수지,③ 저수지 추가
+asset,RS-YI-0028,(행),,장율저수지,③ 저수지 추가
+asset,RS-YI-0029,(행),,중리저수지,③ 저수지 추가
+asset,RS-YI-0030,(행),,하리저수지,③ 저수지 추가
+asset,RS-YI-0031,(행),,요산저수지,③ 저수지 추가
+asset,RS-YI-0032,(행),,화산저수지,③ 저수지 추가
+asset,RS-YI-0033,(행),,안악골저수지,③ 저수지 추가
+asset,RS-YI-0034,(행),,시미곡저수지,③ 저수지 추가
+asset,RS-YI-0035,(행),,상덕저수지,③ 저수지 추가
+asset,RS-YI-0036,(행),,맹리저수지,③ 저수지 추가
+asset,RS-YI-0037,(행),,좌항1호저수지,③ 저수지 추가
+asset,RS-YI-0038,(행),,좌항2호저수지,③ 저수지 추가
+asset,RS-YI-0039,(행),,후동저수지,③ 저수지 추가
+asset,RS-YI-0040,(행),,학일1호저수지,③ 저수지 추가
+asset,RS-YI-0041,(행),,학일2호저수지,③ 저수지 추가
+asset,RS-YI-0042,(행),,아곡저수지,③ 저수지 추가
+asset,RS-YI-0043,(행),,가리산저수지,③ 저수지 추가
+asset,RS-YI-0044,(행),,구백암저수지,③ 저수지 추가
+asset,RS-YI-0045,(행),,남곡저수지,③ 저수지 추가
+asset,RS-YI-0046,(행),,평창저수지,③ 저수지 추가
+asset,RS-YI-0047,(행),,대대저수지,③ 저수지 추가
+asset,RS-YI-0048,(행),,정수리저수지,③ 저수지 추가

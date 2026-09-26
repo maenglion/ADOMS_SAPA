@@ -1,0 +1,16 @@
+﻿파일,행수,sha1
+01_schema.sql,0,5a93dee50c64
+02_views.sql,0,8156e590506b
+03_load.sql,0,c7e22df57546
+seed\action.csv,0,37f94af1f7b0
+seed\asset.csv,1026,fc8791a48978
+seed\asset_target_map.csv,2134,ab42e6c5090c
+seed\compliance_task.csv,2717,9f1914b3b84a
+seed\duty_assignment.csv,4652,f4091a1149fa
+seed\duty_class.csv,2876,98e0fe9a9023
+seed\evidence.csv,0,bb0379991b4c
+seed\form_template.csv,131,280544295b5d
+seed\inspection.csv,0,caf4e117e7ad
+seed\notification.csv,0,fdaecee4c408
+seed\org_dept.csv,15,4bb961f4855d
+seed\staff.csv,28,c21433d2fc9b

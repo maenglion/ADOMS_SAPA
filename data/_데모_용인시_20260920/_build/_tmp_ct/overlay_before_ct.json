@@ -1,0 +1,224 @@
+{
+  "taskPatch": {
+    "TSK-000157": {
+      "status": "이행완료",
+      "approval_status": "제출",
+      "submitted_at": "2026-09-20T18:12:59.790Z",
+      "submitted_by": "SD03-1",
+      "done_at": "2026-09-20",
+      "done_by": "SD03-1"
+    },
+    "TSK-000930": {
+      "status": "이행완료",
+      "approval_status": "제출",
+      "submitted_at": "2026-09-20T18:20:39.407Z",
+      "submitted_by": "SD03-1",
+      "done_at": "2026-09-20",
+      "done_by": "SD03-1"
+    },
+    "TSK-000058": {
+      "approval_status": "승인",
+      "status": "점검완료",
+      "approved_at": "2026-09-20T21:12:42.433Z",
+      "approved_by": "SD01-1"
+    },
+    "TSK-000014": {
+      "status": "이행완료",
+      "approval_status": "제출",
+      "submitted_at": "2026-09-20T21:32:55.097Z",
+      "submitted_by": "SD03-1",
+      "done_at": "2026-09-20",
+      "done_by": "SD03-1"
+    },
+    "TSK-000003": {
+      "status": "이행완료",
+      "approval_status": "제출",
+      "submitted_at": "2026-09-21T05:51:13.282Z",
+      "submitted_by": "SD03-1",
+      "done_at": "2026-09-21",
+      "done_by": "SD03-1"
+    }
+  },
+  "evidence": [
+    {
+      "evidence_id": "EVD-MUATUHKW1LE",
+      "task_id": "TSK-000003",
+      "evidence_kind": "사진",
+      "file_name": "점검 현장 사진 — 현장사진_2.png",
+      "file_url": "/api/file/20260921_v2os24_%ED%98%84%EC%9E%A5%EC%82%AC%EC%A7%84_2.png",
+      "form_id": "",
+      "uploaded_by": "SD03-1",
+      "uploaded_at": "2026-09-21",
+      "note": "",
+      "file_size": 441,
+      "file_type": "image/png"
+    },
+    {
+      "evidence_id": "EVD-MUATUHKSR6D",
+      "task_id": "TSK-000003",
+      "evidence_kind": "사진",
+      "file_name": "점검 현장 사진 — 현장사진_1.png",
+      "file_url": "/api/file/20260921_6iok9b_%ED%98%84%EC%9E%A5%EC%82%AC%EC%A7%84_1.png",
+      "form_id": "",
+      "uploaded_by": "SD03-1",
+      "uploaded_at": "2026-09-21",
+      "note": "",
+      "file_size": 441,
+      "file_type": "image/png"
+    },
+    {
+      "evidence_id": "EVD-MUATUHKMAC3",
+      "task_id": "TSK-000003",
+      "evidence_kind": "점검표",
+      "file_name": "2026년 하반기 도로 안전관리 점검 결과표",
+      "file_url": "",
+      "form_id": "",
+      "uploaded_by": "SD03-1",
+      "uploaded_at": "2026-09-21",
+      "note": "",
+      "file_size": "",
+      "file_type": ""
+    },
+    {
+      "evidence_id": "EVD-MUAC1NZR5GG",
+      "task_id": "TSK-000014",
+      "evidence_kind": "사진",
+      "file_name": "2026-09-21 02;30;46.PNG",
+      "file_url": "/api/file/20260920_jpqd09_2026-09-21%2002%3B30%3B46.PNG",
+      "form_id": "",
+      "uploaded_by": "SD03-1",
+      "uploaded_at": "2026-09-20",
+      "note": "현장에서 올림",
+      "file_size": 90054,
+      "file_type": "image/png"
+    },
+    {
+      "evidence_id": "EVD-MUAC1NZME3I",
+      "task_id": "TSK-000014",
+      "evidence_kind": "점검표",
+      "file_name": "상반기 점검 결과",
+      "file_url": "",
+      "form_id": "",
+      "uploaded_by": "SD03-1",
+      "uploaded_at": "2026-09-20",
+      "note": "이미지와 업무가 딱 맞지는 않음",
+      "file_size": "",
+      "file_type": ""
+    },
+    {
+      "evidence_id": "EVD-MUA56EZYPJE",
+      "task_id": "TSK-000930",
+      "evidence_kind": "사진",
+      "file_name": "17899284267288924611833593142725.jpg",
+      "file_url": "/api/file/20260920_cdvxtn_17899284267288924611833593142725.jpg",
+      "form_id": "",
+      "uploaded_by": "SD03-1",
+      "uploaded_at": "2026-09-20",
+      "note": "현장에서 올림",
+      "file_size": 3525830,
+      "file_type": "image/jpeg"
+    },
+    {
+      "evidence_id": "EVD-MUA4WKCT1JE",
+      "task_id": "TSK-000157",
+      "evidence_kind": "사진",
+      "file_name": "현장사진_양보차로_20260921.png",
+      "file_url": "/api/file/20260920_7fdg9l_%ED%98%84%EC%9E%A5%EC%82%AC%EC%A7%84_%EC%96%91%EB%B3%B4%EC%B0%A8%EB%A1%9C_20260921.png",
+      "form_id": "",
+      "uploaded_by": "SD03-1",
+      "uploaded_at": "2026-09-20",
+      "note": "현장에서 올림",
+      "file_size": 450,
+      "file_type": "image/png"
+    }
+  ],
+  "inspection": [],
+  "log": [
+    {
+      "at": "2026-09-21T05:51:13.283Z",
+      "action": "증빙 2줄 등록·제출",
+      "target": "TSK-000003",
+      "by": "SD03-1",
+      "note": "이행완료"
+    },
+    {
+      "at": "2026-09-21T05:51:13.281Z",
+      "action": "증빙 등록",
+      "target": "TSK-000003",
+      "by": "SD03-1",
+      "note": "점검 현장 사진 — 현장사진_2.png"
+    },
+    {
+      "at": "2026-09-21T05:51:13.276Z",
+      "action": "증빙 등록",
+      "target": "TSK-000003",
+      "by": "SD03-1",
+      "note": "점검 현장 사진 — 현장사진_1.png"
+    },
+    {
+      "at": "2026-09-21T05:51:13.271Z",
+      "action": "증빙 등록",
+      "target": "TSK-000003",
+      "by": "SD03-1",
+      "note": "2026년 하반기 도로 안전관리 점검 결과표"
+    },
+    {
+      "at": "2026-09-20T21:32:55.098Z",
+      "action": "증빙 등록·제출",
+      "target": "TSK-000014",
+      "by": "SD03-1",
+      "note": "이행완료"
+    },
+    {
+      "at": "2026-09-20T21:32:55.096Z",
+      "action": "증빙 등록",
+      "target": "TSK-000014",
+      "by": "SD03-1",
+      "note": "2026-09-21 02;30;46.PNG"
+    },
+    {
+      "at": "2026-09-20T21:32:55.091Z",
+      "action": "증빙 등록",
+      "target": "TSK-000014",
+      "by": "SD03-1",
+      "note": "상반기 점검 결과"
+    },
+    {
+      "at": "2026-09-20T21:12:42.434Z",
+      "action": "결재 승인",
+      "target": "TSK-000058",
+      "by": "SD01-1",
+      "note": "점검완료"
+    },
+    {
+      "at": "2026-09-20T18:20:39.408Z",
+      "action": "현장에서 증빙 등록",
+      "target": "TSK-000930",
+      "by": "SD03-1",
+      "note": "이행완료"
+    },
+    {
+      "at": "2026-09-20T18:20:39.406Z",
+      "action": "증빙 등록",
+      "target": "TSK-000930",
+      "by": "SD03-1",
+      "note": "17899284267288924611833593142725.jpg"
+    },
+    {
+      "at": "2026-09-20T18:12:59.791Z",
+      "action": "현장에서 증빙 등록",
+      "target": "TSK-000157",
+      "by": "SD03-1",
+      "note": "이행완료"
+    },
+    {
+      "at": "2026-09-20T18:12:59.789Z",
+      "action": "증빙 등록",
+      "target": "TSK-000157",
+      "by": "SD03-1",
+      "note": "현장사진_양보차로_20260921.png"
+    }
+  ],
+  "patches": {},
+  "tables": {}
+}

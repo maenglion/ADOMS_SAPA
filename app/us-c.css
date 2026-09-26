@@ -1,0 +1,103 @@
+/* [400] 묶음 C 전용 — 클래스 이름은 usc- 로 시작 (의무이행(실적증빙) 사업장 트랙 · SCR-036~056) */
+.usc-page{position:relative}
+.usc-page .us-head-meta{color:var(--us-g1);font-weight:800}
+.usc-dept{display:flex;gap:6px;align-items:center}
+.usc-dept select{border:1px solid #bbb;border-radius:6px;padding:4px 8px;font:inherit;font-size:.95rem;background:#fff}
+
+/* 표 */
+table.usc-tbl{margin-top:6px}
+table.usc-tbl td{vertical-align:middle}
+table.usc-tbl th.usc-x,table.us-tbl th.usc-x{width:44px}
+table.usc-tbl input.usc-date{width:100%;min-width:9.2rem}
+.usc-default{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
+.usc-hide{display:none}
+.usc-box{display:inline-block;min-width:8rem;border:1px solid #9aa196;border-radius:5px;padding:5px 10px;background:#fff;text-align:center;font-size:.95rem}
+.usc-box.grey{background:#dcdedb;border-color:#c3c7c1;color:#333}
+.usc-pill{display:inline-block;background:#dcdedb;border:1px solid #c3c7c1;border-radius:6px;padding:4px 10px;font-size:.92rem;line-height:1.35}
+.usc-pills{display:flex;flex-direction:column;gap:5px;align-items:flex-start}
+.usc-mark{font-size:.82rem;color:var(--us-mut);margin-top:4px}
+.usc-glabel{display:block;font-weight:600;margin-bottom:6px}
+.usc-note{display:flex;gap:6px;align-items:center}
+.usc-person{display:flex;gap:6px;align-items:center}
+.usc-person input{flex:1;min-width:5rem}
+.usc-search{white-space:nowrap;color:#1f6fd1 !important;font-weight:700;font-size:.92rem}
+tr.usc-locked td{background:#f3f4f2}
+tr.usc-locked.usc-top td{border-top:2px solid #444}
+tr.usc-locked input:disabled{background:#dcdedb}
+.usc-range{white-space:nowrap}
+.usc-range span{display:block;line-height:1.1;color:#555}
+
+/* 단추 */
+.usc-btns{display:flex;gap:8px;flex-wrap:wrap}
+.usc-save{min-width:6rem;justify-content:center}
+.usc-save:disabled,.us-btn:disabled{opacity:.45;cursor:not-allowed}
+.usc-blue{border-color:#2f6fce !important;color:#1f4f9c !important}
+.usc-plus{display:inline-flex;align-items:center;justify-content:center;width:1.6rem;height:1.6rem;margin-top:5px;border:1px solid #777;border-radius:4px;background:#fff;font-weight:800;cursor:pointer;line-height:1}
+.usc-plus:hover{border-color:var(--us-g1);color:var(--us-g1)}
+.usc-ico{background:#fff;border:1px solid #777;border-radius:4px;padding:1px 5px;cursor:pointer;font-size:.95rem;line-height:1.3}
+.usc-ico:hover{border-color:var(--us-red)}
+.usc-ico:disabled,.usc-plus:disabled{opacity:.4;cursor:not-allowed}
+.usc-del{background:#fff;border:1.5px solid var(--us-red);color:var(--us-red);border-radius:6px;padding:5px 22px;font:inherit;font-weight:700;cursor:pointer}
+.usc-off{opacity:.45;pointer-events:none}
+
+/* 증빙 칸 */
+.usc-ev{display:flex;flex-direction:column;gap:5px}
+.usc-ev-f{display:flex;gap:6px;align-items:center}
+.usc-ev-f .us-ev-name{color:#222 !important;background:#dcdedb;text-decoration:none}
+.usc-ev-f .us-ev-name:hover{text-decoration:underline}
+.usc-fc{display:flex;flex-direction:column;gap:5px;align-items:flex-start}
+.usc-fc-row{display:flex;gap:6px;align-items:center;width:100%}
+.usc-fc-row .us-ev-name{min-width:8rem}
+.usc-roster{display:flex;gap:6px;align-items:center;flex-wrap:wrap;margin-bottom:6px}
+.usc-roster .usc-fc{flex:1}
+
+/* 위탁 표시 */
+.usc-trust{display:inline-flex;align-items:center;gap:4px;margin-bottom:4px;font-size:.82rem;cursor:pointer}
+.usc-trust input{width:1rem;height:1rem;accent-color:var(--us-g1)}
+.usc-trust span{border:1px solid #777;border-radius:3px;padding:0 4px;background:#fff}
+.usc-trust.on span{background:var(--us-g3);border-color:var(--us-g2);color:var(--us-g1);font-weight:800}
+
+/* 소제목 줄(정기평가 · 산업안전보건위원회 구성 및 운영 …) */
+.usc-subh{display:flex;justify-content:space-between;align-items:flex-end;gap:12px;border-bottom:2px solid #555;padding:6px 2px 6px;margin-top:18px}
+.usc-subh b{font-size:1.12rem}
+.usc-subh label{display:flex;gap:8px;align-items:center;font-weight:600}
+.usc-subh input{border:1px solid #c9cfc6;border-radius:5px;padding:5px 8px;font:inherit}
+.usc-cnt{color:var(--us-mut);font-size:.9rem}
+.usc-sumline{text-align:right;color:#444;font-size:.92rem;margin-top:6px}
+
+/* 해당없음 체크 줄 */
+.usc-check{display:flex;align-items:center;gap:14px;border-bottom:1px solid #999;padding:8px 2px 10px;margin-bottom:12px}
+.usc-check a{color:#222 !important;display:inline-flex;align-items:center;gap:8px;font-size:1.02rem}
+.usc-check a:hover{text-decoration:none;color:var(--us-g1) !important}
+.usc-ck{display:inline-flex;align-items:center;justify-content:center;width:1.5rem;height:1.5rem;border:1.5px solid #999;border-radius:50%;color:#bbb;font-size:.9rem}
+.usc-check a.on .usc-ck{background:var(--us-g1);border-color:var(--us-g1);color:#fff}
+.usc-pending{color:var(--us-orange);font-weight:700;font-size:.9rem}
+.usc-dim{opacity:.5;filter:grayscale(1)}
+
+/* 재해 카드(반복 블록) */
+.usc-card{border:2px solid #2f3b52;border-radius:28px;padding:16px 18px 12px;margin-bottom:12px;background:#fff}
+.usc-card-h{display:flex;justify-content:space-between;gap:16px;margin-bottom:10px}
+.usc-card-h label{display:flex;gap:10px;align-items:center;font-weight:600}
+.usc-card-h input{border:1px solid #c9cfc6;border-radius:5px;padding:5px 8px;font:inherit;min-width:12rem}
+.usc-card-f{display:flex;justify-content:flex-end;margin-top:8px}
+
+/* 이미지 뷰어 보강 */
+.usc-vw-name{flex-direction:column;gap:8px;color:#555}
+.usc-vw-cap{font-weight:500;color:var(--us-mut);margin-left:8px}
+.usc-pdf{width:100%;height:560px;border:1px solid #ccc;background:#fff}
+
+/* 증빙자료 예시 — 명세 문구 줄 그대로 */
+.usc-ex-b+.usc-ex-b{margin-top:10px}
+.usc-ex-l{line-height:1.85}
+
+/* 모달 */
+.usc-modal{width:min(1100px,94vw)}
+.usc-modal .us-tbl{font-size:.93rem}
+.usc-close{color:#fff !important;font-weight:700}
+.usc-tabs{display:flex;gap:6px;margin-bottom:10px}
+.usc-tab{border:1px solid #9aa196;border-radius:18px;padding:5px 16px;color:#333 !important;font-weight:700}
+.usc-tab.on{background:var(--us-g1);border-color:var(--us-g1);color:#fff !important}
+.usc-tab:hover{text-decoration:none}
+table.usc-tbl select{min-width:6.6rem}
+.usc-card-h label:first-child input{min-width:24rem}
+.usc-pills .usc-pill{white-space:nowrap}

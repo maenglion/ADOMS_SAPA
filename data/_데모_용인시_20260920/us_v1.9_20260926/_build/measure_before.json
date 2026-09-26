@@ -1,0 +1,544 @@
+{
+ "at": "2026-09-26T07:40:24.261Z",
+ "source": "예시 자료 파일(CSV) · us_v1.9_20260926",
+ "check": {
+  "ws": {
+   "rounds": [
+    {
+     "round_id": "RWS-MUHSBRTJM5R",
+     "title": "2026년 하반기 이행점검(사업장)",
+     "status": "점검중",
+     "created_at": "2026-09-26T02:43:03.703Z",
+     "depts": 1,
+     "items": 12,
+     "cells": 12,
+     "이행완료": 3,
+     "보완필요": 8,
+     "미이행": 0,
+     "해당없음": 1,
+     "src": {
+      "judge": 1,
+      "record": 10,
+      "none": 1
+     },
+     "inherited": 1,
+     "cellRate": "27.2%",
+     "taskRate": "76.3%"
+    },
+    {
+     "round_id": "RWS-MUHOK8SGABM",
+     "title": "2026년 하반기 이행점검(사업장)",
+     "status": "점검중",
+     "created_at": "2026-09-26T00:57:40.480Z",
+     "depts": 18,
+     "items": 12,
+     "cells": 216,
+     "이행완료": 11,
+     "보완필요": 21,
+     "미이행": 1,
+     "해당없음": 183,
+     "src": {
+      "judge": 3,
+      "task": 7,
+      "none": 183,
+      "record": 22,
+      "old": 1
+     },
+     "inherited": 3,
+     "cellRate": "33.3%",
+     "taskRate": "79.8%"
+    },
+    {
+     "round_id": "RWS-MUHOJZRPIGT",
+     "title": "2026년 하반기 이행점검(사업장)",
+     "status": "점검중",
+     "created_at": "2026-09-26T00:57:28.789Z",
+     "depts": 18,
+     "items": 12,
+     "cells": 216,
+     "이행완료": 11,
+     "보완필요": 21,
+     "미이행": 1,
+     "해당없음": 183,
+     "src": {
+      "judge": 3,
+      "task": 7,
+      "none": 183,
+      "record": 22,
+      "old": 1
+     },
+     "inherited": 3,
+     "cellRate": "33.3%",
+     "taskRate": "79.8%"
+    },
+    {
+     "round_id": "RWS-MUHOJJ3REYP",
+     "title": "2026년 하반기 이행점검(사업장)",
+     "status": "점검중",
+     "created_at": "2026-09-26T00:57:07.191Z",
+     "depts": 18,
+     "items": 12,
+     "cells": 216,
+     "이행완료": 11,
+     "보완필요": 21,
+     "미이행": 1,
+     "해당없음": 183,
+     "src": {
+      "judge": 3,
+      "task": 7,
+      "none": 183,
+      "record": 22,
+      "old": 1
+     },
+     "inherited": 3,
+     "cellRate": "33.3%",
+     "taskRate": "79.8%"
+    },
+    {
+     "round_id": "RWS-MUHOJ3XWP9C",
+     "title": "2026년 하반기 이행점검(사업장)",
+     "status": "점검중",
+     "created_at": "2026-09-26T00:56:47.540Z",
+     "depts": 1,
+     "items": 12,
+     "cells": 12,
+     "이행완료": 3,
+     "보완필요": 8,
+     "미이행": 0,
+     "해당없음": 1,
+     "src": {
+      "judge": 1,
+      "record": 10,
+      "none": 1
+     },
+     "inherited": 1,
+     "cellRate": "27.2%",
+     "taskRate": "76.3%"
+    },
+    {
+     "round_id": "RWS-MUH59SPAOBK",
+     "title": "2026년 하반기 이행점검(사업장)",
+     "status": "점검중",
+     "created_at": "2026-09-25T15:57:40.367Z",
+     "depts": 4,
+     "items": 12,
+     "cells": 48,
+     "이행완료": 10,
+     "보완필요": 15,
+     "미이행": 1,
+     "해당없음": 22,
+     "src": {
+      "judge": 3,
+      "task": 7,
+      "none": 22,
+      "record": 15,
+      "old": 1
+     },
+     "inherited": 3,
+     "cellRate": "38.4%",
+     "taskRate": "82.3%"
+    },
+    {
+     "round_id": "RWS-2026H2",
+     "title": "2026년 하반기 이행점검(사업장)",
+     "status": "점검중",
+     "created_at": "2026-09-15T09:10:00+09:00",
+     "depts": 4,
+     "items": 12,
+     "cells": 48,
+     "이행완료": 10,
+     "보완필요": 15,
+     "미이행": 1,
+     "해당없음": 22,
+     "src": {
+      "judge": 3,
+      "task": 7,
+      "none": 22,
+      "record": 15,
+      "old": 1
+     },
+     "inherited": 0,
+     "cellRate": "38.4%",
+     "taskRate": "82.3%"
+    }
+   ],
+   "default_round": "RWS-MUHSBRTJM5R",
+   "period_H2": "goal:주기 없음 org:주기 없음 staff:주기 없음 risk:진행 중 budget:주기 없음 work:진행 중 opinion:진행 중 emergency:진행 중 recur:주기 없음 order:주기 없음 law:진행 중 edu:진행 중",
+   "period_H1": "goal:주기 없음 org:주기 없음 staff:주기 없음 risk:없음 budget:주기 없음 work:없음 opinion:없음 emergency:없음 recur:주기 없음 order:주기 없음 law:충족 edu:충족"
+  },
+  "fc": {
+   "rounds": [
+    {
+     "round_id": "RFC-MUHOL48FKG8",
+     "title": "2026년 하반기 이행점검(공중이용시설·공중교통수단)",
+     "status": "점검중",
+     "created_at": "2026-09-26T00:58:21.231Z",
+     "depts": 8,
+     "items": 8,
+     "cells": 64,
+     "이행완료": 17,
+     "보완필요": 27,
+     "미이행": 5,
+     "해당없음": 15,
+     "src": {
+      "task": 26,
+      "old": 13,
+      "record": 9,
+      "none": 15,
+      "judge": 1
+     },
+     "inherited": 1,
+     "cellRate": "34.6%",
+     "taskRate": "83.7%"
+    },
+    {
+     "round_id": "RFC-MUHOAYGY2IT",
+     "title": "2026년 하반기 이행점검(공중이용시설·공중교통수단)",
+     "status": "점검중",
+     "created_at": "2026-09-26T00:50:27.202Z",
+     "depts": 8,
+     "items": 8,
+     "cells": 64,
+     "이행완료": 17,
+     "보완필요": 27,
+     "미이행": 5,
+     "해당없음": 15,
+     "src": {
+      "task": 26,
+      "old": 13,
+      "record": 9,
+      "none": 15,
+      "judge": 1
+     },
+     "inherited": 1,
+     "cellRate": "34.6%",
+     "taskRate": "83.7%"
+    },
+    {
+     "round_id": "RFC-MUH4L8XBQLL",
+     "title": "2026년 하반기 이행점검(공중이용시설·공중교통수단)",
+     "status": "점검중",
+     "created_at": "2026-09-25T15:38:34.991Z",
+     "depts": 3,
+     "items": 8,
+     "cells": 24,
+     "이행완료": 4,
+     "보완필요": 14,
+     "미이행": 5,
+     "해당없음": 1,
+     "src": {
+      "old": 10,
+      "record": 6,
+      "task": 6,
+      "judge": 1,
+      "none": 1
+     },
+     "inherited": 1,
+     "cellRate": "17.3%",
+     "taskRate": "81.7%"
+    },
+    {
+     "round_id": "RFC-2026H2",
+     "title": "2026년 하반기 이행점검(공중이용시설·공중교통수단)",
+     "status": "점검중",
+     "created_at": "2026-09-15T09:20:00+09:00",
+     "depts": 3,
+     "items": 8,
+     "cells": 24,
+     "이행완료": 4,
+     "보완필요": 14,
+     "미이행": 5,
+     "해당없음": 1,
+     "src": {
+      "old": 10,
+      "record": 6,
+      "task": 6,
+      "judge": 1,
+      "none": 1
+     },
+     "inherited": 0,
+     "cellRate": "17.3%",
+     "taskRate": "81.7%"
+    }
+   ],
+   "default_round": "RFC-MUHOL48FKG8",
+   "period_H2": "staff:진행 중 budget:진행 중 inspect:진행 중 plan:진행 중 proc:주기 없음 recur:주기 없음 order:주기 없음 law:충족",
+   "period_H1": "staff:충족 budget:충족 inspect:충족 plan:충족 proc:주기 없음 recur:주기 없음 order:주기 없음 law:충족"
+  },
+  "mt": {
+   "rounds": [
+    {
+     "round_id": "RMT-MUHOB9Y99NO",
+     "title": "2026년 하반기 이행점검(원료·제조물)",
+     "status": "점검중",
+     "created_at": "2026-09-26T00:50:42.081Z",
+     "depts": 6,
+     "items": 6,
+     "cells": 36,
+     "이행완료": 5,
+     "보완필요": 10,
+     "미이행": 4,
+     "해당없음": 17,
+     "src": {
+      "record": 12,
+      "none": 17,
+      "old": 5,
+      "task": 2
+     },
+     "inherited": 0,
+     "cellRate": "26.3%",
+     "taskRate": "73.3%"
+    },
+    {
+     "round_id": "RMT-MUH4LN9OM4V",
+     "title": "2026년 하반기 이행점검(원료·제조물)",
+     "status": "점검중",
+     "created_at": "2026-09-25T15:38:53.580Z",
+     "depts": 3,
+     "items": 6,
+     "cells": 18,
+     "이행완료": 4,
+     "보완필요": 9,
+     "미이행": 3,
+     "해당없음": 2,
+     "src": {
+      "record": 12,
+      "old": 4,
+      "none": 2
+     },
+     "inherited": 0,
+     "cellRate": "25.0%",
+     "taskRate": "73.8%"
+    },
+    {
+     "round_id": "RMT-MUEVIBTYVVJ",
+     "title": "2026년 하반기 이행점검(원료·제조물)",
+     "status": "점검중",
+     "created_at": "2026-09-24T01:48:49.894Z",
+     "depts": 3,
+     "items": 6,
+     "cells": 18,
+     "이행완료": 4,
+     "보완필요": 9,
+     "미이행": 3,
+     "해당없음": 2,
+     "src": {
+      "record": 12,
+      "old": 4,
+      "none": 2
+     },
+     "inherited": 0,
+     "cellRate": "25.0%",
+     "taskRate": "73.8%"
+    },
+    {
+     "round_id": "RMT-MUERNW8FEJY",
+     "title": "2026년 하반기 이행점검(원료·제조물)",
+     "status": "점검중",
+     "created_at": "2026-09-24T00:01:11.152Z",
+     "depts": 3,
+     "items": 6,
+     "cells": 18,
+     "이행완료": 4,
+     "보완필요": 9,
+     "미이행": 3,
+     "해당없음": 2,
+     "src": {
+      "record": 12,
+      "old": 4,
+      "none": 2
+     },
+     "inherited": 0,
+     "cellRate": "25.0%",
+     "taskRate": "73.8%"
+    },
+    {
+     "round_id": "RMT-MUERMZEGH24",
+     "title": "2026년 이행점검(원료·제조물)",
+     "status": "결재완료",
+     "created_at": "2026-09-24T00:00:28.600Z",
+     "depts": 3,
+     "items": 6,
+     "cells": 18,
+     "이행완료": 4,
+     "보완필요": 9,
+     "미이행": 3,
+     "해당없음": 2,
+     "src": {
+      "record": 12,
+      "old": 4,
+      "none": 2
+     },
+     "inherited": 0,
+     "cellRate": "25.0%",
+     "taskRate": "73.8%"
+    },
+    {
+     "round_id": "RMT-2026H2",
+     "title": "2026년 하반기 이행점검(원료·제조물)",
+     "status": "점검중",
+     "created_at": "2026-09-15T09:30:00+09:00",
+     "depts": 3,
+     "items": 6,
+     "cells": 18,
+     "이행완료": 4,
+     "보완필요": 9,
+     "미이행": 3,
+     "해당없음": 2,
+     "src": {
+      "record": 12,
+      "old": 4,
+      "none": 2
+     },
+     "inherited": 0,
+     "cellRate": "25.0%",
+     "taskRate": "73.8%"
+    }
+   ],
+   "default_round": "RMT-MUHOB9Y99NO",
+   "period_H2": "staff:충족 budget:충족 proc:주기 없음 recur:주기 없음 order:주기 없음 law:충족",
+   "period_H1": "staff:없음 budget:없음 proc:주기 없음 recur:주기 없음 order:주기 없음 law:없음"
+  }
+ },
+ "actions": {
+  "batch": "BAT-003",
+  "taskRows": 23,
+  "checkRows": 11,
+  "closedByJudge": 0,
+  "steps": {
+   "요구 전": 10,
+   "요구": 6,
+   "조치중": 6,
+   "조치 완료": 12,
+   "보완 제출": 0,
+   "완료": 0
+  },
+  "checkByTrack": "ws:2 fc:1 mt:8",
+  "count": {
+   "total": 1411,
+   "적합": 46,
+   "보완필요": 17,
+   "부적합": 6,
+   "조치중": 23,
+   "판정대기": 236,
+   "재점검": 0,
+   "미제출": 1106,
+   "판정끝남": 69
+  }
+ },
+ "hazards": {
+  "total": 20,
+  "open": 2,
+  "seriousOpen": 2,
+  "waitCeo": 0,
+  "reportLate": 0,
+  "repeatGroups": 0,
+  "repeatRows": 0,
+  "late": 0,
+  "soon": 0,
+  "groups": {
+   "방지": 0,
+   "판단": 0,
+   "보고": 0,
+   "점검": 1,
+   "개선": 1,
+   "종결": 18
+  },
+  "stages": {
+   "경영책임자 보고": 1,
+   "개선 지시": 1,
+   "종결": 16,
+   "완료": 2
+  },
+  "accTypesNotInList": []
+ },
+ "recurrence": {
+  "incidents": 9,
+  "incOpen": 6,
+  "incLate": 3,
+  "incRepeat": 1,
+  "byStep": {
+   "1": 1,
+   "2": 1,
+   "3": 3,
+   "4": 1,
+   "5": 3
+  },
+  "byClass": {
+   "산업재해": 4,
+   "시민재해": 2,
+   "아차사고": 3
+  },
+  "serious": 0,
+  "orders": 15,
+  "advice": 2,
+  "ordOpen": 11,
+  "ordLate": 4,
+  "ordSoon": 1,
+  "ordByArea": {
+   "구분 전": 15
+  },
+  "nilCur": "4/23",
+  "nilPrevBlank": 11,
+  "nilStates": {
+   "2026-H1 재해 있음": 3,
+   "2026-H2 비어 있음": 16,
+   "2026-H1 확인함": 9,
+   "2026-H2 재해 있음": 2,
+   "2026-H1 비어 있음": 11,
+   "2026-H2 확인함": 4,
+   "2026-H2 확인 뒤 발생": 1
+  }
+ },
+ "dashboard": {
+  "I": {
+   "rows": 227,
+   "judgeRows": 2,
+   "all": "75.5%",
+   "H1": "93.1%",
+   "H2": "71.9%",
+   "cnt": {
+    "O": 127,
+    "T": 35,
+    "X": 6,
+    "N": 7,
+    "W": 52
+   }
+  },
+  "F": {
+   "rows": 1909,
+   "judgeRows": 1,
+   "all": "83.6%",
+   "H1": "89.4%",
+   "H2": "74.7%",
+   "cnt": {
+    "O": 761,
+    "T": 58,
+    "X": 91,
+    "N": 3,
+    "W": 996
+   }
+  },
+  "M": {
+   "rows": 517,
+   "judgeRows": 0,
+   "all": "73.3%",
+   "H1": "89.5%",
+   "H2": "69.0%",
+   "cnt": {
+    "O": 168,
+    "T": 18,
+    "X": 43,
+    "N": 3,
+    "W": 285
+   }
+  }
+ },
+ "statusBoard": {
+  "ws": "75.5%",
+  "fc": "83.7%",
+  "mt": "73.3%"
+ },
+ "itemApproved": 0,
+ "judgeKeys": 4
+}

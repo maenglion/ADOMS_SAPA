@@ -1,0 +1,376 @@
+{
+  "taskPatch": {
+    "TSK-000157": {
+      "status": "이행완료",
+      "approval_status": "제출",
+      "submitted_at": "2026-09-20T18:12:59.790Z",
+      "submitted_by": "SD03-1",
+      "done_at": "2026-09-20",
+      "done_by": "SD03-1"
+    },
+    "TSK-000930": {
+      "status": "이행완료",
+      "approval_status": "제출",
+      "submitted_at": "2026-09-20T18:20:39.407Z",
+      "submitted_by": "SD03-1",
+      "done_at": "2026-09-20",
+      "done_by": "SD03-1"
+    },
+    "TSK-000058": {
+      "approval_status": "승인",
+      "status": "점검완료",
+      "approved_at": "2026-09-20T21:12:42.433Z",
+      "approved_by": "SD01-1"
+    },
+    "TSK-000014": {
+      "status": "이행완료",
+      "approval_status": "제출",
+      "submitted_at": "2026-09-20T21:32:55.097Z",
+      "submitted_by": "SD03-1",
+      "done_at": "2026-09-20",
+      "done_by": "SD03-1"
+    },
+    "TSK-000003": {
+      "status": "이행완료",
+      "approval_status": "제출",
+      "submitted_at": "2026-09-21T05:51:13.282Z",
+      "submitted_by": "SD03-1",
+      "done_at": "2026-09-21",
+      "done_by": "SD03-1"
+    }
+  },
+  "evidence": [
+    {
+      "evidence_id": "EVD-MUATUHKW1LE",
+      "task_id": "TSK-000003",
+      "evidence_kind": "사진",
+      "file_name": "점검 현장 사진 — 현장사진_2.png",
+      "file_url": "/api/file/20260921_v2os24_%ED%98%84%EC%9E%A5%EC%82%AC%EC%A7%84_2.png",
+      "form_id": "",
+      "uploaded_by": "SD03-1",
+      "uploaded_at": "2026-09-21",
+      "note": "",
+      "file_size": 441,
+      "file_type": "image/png"
+    },
+    {
+      "evidence_id": "EVD-MUATUHKSR6D",
+      "task_id": "TSK-000003",
+      "evidence_kind": "사진",
+      "file_name": "점검 현장 사진 — 현장사진_1.png",
+      "file_url": "/api/file/20260921_6iok9b_%ED%98%84%EC%9E%A5%EC%82%AC%EC%A7%84_1.png",
+      "form_id": "",
+      "uploaded_by": "SD03-1",
+      "uploaded_at": "2026-09-21",
+      "note": "",
+      "file_size": 441,
+      "file_type": "image/png"
+    },
+    {
+      "evidence_id": "EVD-MUATUHKMAC3",
+      "task_id": "TSK-000003",
+      "evidence_kind": "점검표",
+      "file_name": "2026년 하반기 도로 안전관리 점검 결과표",
+      "file_url": "",
+      "form_id": "",
+      "uploaded_by": "SD03-1",
+      "uploaded_at": "2026-09-21",
+      "note": "",
+      "file_size": "",
+      "file_type": ""
+    },
+    {
+      "evidence_id": "EVD-MUAC1NZR5GG",
+      "task_id": "TSK-000014",
+      "evidence_kind": "사진",
+      "file_name": "2026-09-21 02;30;46.PNG",
+      "file_url": "/api/file/20260920_jpqd09_2026-09-21%2002%3B30%3B46.PNG",
+      "form_id": "",
+      "uploaded_by": "SD03-1",
+      "uploaded_at": "2026-09-20",
+      "note": "현장에서 올림",
+      "file_size": 90054,
+      "file_type": "image/png"
+    },
+    {
+      "evidence_id": "EVD-MUAC1NZME3I",
+      "task_id": "TSK-000014",
+      "evidence_kind": "점검표",
+      "file_name": "상반기 점검 결과",
+      "file_url": "",
+      "form_id": "",
+      "uploaded_by": "SD03-1",
+      "uploaded_at": "2026-09-20",
+      "note": "이미지와 업무가 딱 맞지는 않음",
+      "file_size": "",
+      "file_type": ""
+    },
+    {
+      "evidence_id": "EVD-MUA56EZYPJE",
+      "task_id": "TSK-000930",
+      "evidence_kind": "사진",
+      "file_name": "17899284267288924611833593142725.jpg",
+      "file_url": "/api/file/20260920_cdvxtn_17899284267288924611833593142725.jpg",
+      "form_id": "",
+      "uploaded_by": "SD03-1",
+      "uploaded_at": "2026-09-20",
+      "note": "현장에서 올림",
+      "file_size": 3525830,
+      "file_type": "image/jpeg"
+    },
+    {
+      "evidence_id": "EVD-MUA4WKCT1JE",
+      "task_id": "TSK-000157",
+      "evidence_kind": "사진",
+      "file_name": "현장사진_양보차로_20260921.png",
+      "file_url": "/api/file/20260920_7fdg9l_%ED%98%84%EC%9E%A5%EC%82%AC%EC%A7%84_%EC%96%91%EB%B3%B4%EC%B0%A8%EB%A1%9C_20260921.png",
+      "form_id": "",
+      "uploaded_by": "SD03-1",
+      "uploaded_at": "2026-09-20",
+      "note": "현장에서 올림",
+      "file_size": 450,
+      "file_type": "image/png"
+    }
+  ],
+  "inspection": [],
+  "log": [
+    {
+      "at": "2026-09-21T07:36:25.224Z",
+      "action": "교육 실시 반기 점검 기록",
+      "target": "training_check:TCK-MUAXLRWO026",
+      "by": "SD01-1",
+      "note": ""
+    },
+    {
+      "at": "2026-09-21T07:36:21.226Z",
+      "action": "교육 이수 등록",
+      "target": "training_record:TRN-MUAXLOTLPIJ",
+      "by": "SD01-1",
+      "note": ""
+    },
+    {
+      "at": "2026-09-21T07:36:10.871Z",
+      "action": "교육 이수 등록",
+      "target": "training_record:TRN-0066",
+      "by": "SD01-1",
+      "note": ""
+    },
+    {
+      "at": "2026-09-21T07:35:33.264Z",
+      "action": "교육 이행 지시 알림",
+      "target": "notification:NTF-MUAXKNTB0AW",
+      "by": "SD01-1",
+      "note": ""
+    },
+    {
+      "at": "2026-09-21T07:35:33.262Z",
+      "action": "교육 이행 지시",
+      "target": "training_record:TRN-0066",
+      "by": "SD01-1",
+      "note": ""
+    },
+    {
+      "at": "2026-09-21T07:35:06.501Z",
+      "action": "예산 편성 등록 — 유해·위험요인 개선비",
+      "target": "safety_budget:BUD-MUAXK35W2",
+      "by": "SD01-1",
+      "note": ""
+    },
+    {
+      "at": "2026-09-21T07:34:29.218Z",
+      "action": "예산 편성 등록 — 유해·위험요인 개선비",
+      "target": "safety_budget:BUD-MUAXJAE92",
+      "by": "SD01-1",
+      "note": ""
+    },
+    {
+      "at": "2026-09-21T07:34:29.216Z",
+      "action": "예산 편성·집행 수정",
+      "target": "safety_budget:BUD-0026",
+      "by": "SD01-1",
+      "note": ""
+    },
+    {
+      "at": "2026-09-21T05:51:13.283Z",
+      "action": "증빙 2줄 등록·제출",
+      "target": "TSK-000003",
+      "by": "SD03-1",
+      "note": "이행완료"
+    },
+    {
+      "at": "2026-09-21T05:51:13.281Z",
+      "action": "증빙 등록",
+      "target": "TSK-000003",
+      "by": "SD03-1",
+      "note": "점검 현장 사진 — 현장사진_2.png"
+    },
+    {
+      "at": "2026-09-21T05:51:13.276Z",
+      "action": "증빙 등록",
+      "target": "TSK-000003",
+      "by": "SD03-1",
+      "note": "점검 현장 사진 — 현장사진_1.png"
+    },
+    {
+      "at": "2026-09-21T05:51:13.271Z",
+      "action": "증빙 등록",
+      "target": "TSK-000003",
+      "by": "SD03-1",
+      "note": "2026년 하반기 도로 안전관리 점검 결과표"
+    },
+    {
+      "at": "2026-09-20T21:32:55.098Z",
+      "action": "증빙 등록·제출",
+      "target": "TSK-000014",
+      "by": "SD03-1",
+      "note": "이행완료"
+    },
+    {
+      "at": "2026-09-20T21:32:55.096Z",
+      "action": "증빙 등록",
+      "target": "TSK-000014",
+      "by": "SD03-1",
+      "note": "2026-09-21 02;30;46.PNG"
+    },
+    {
+      "at": "2026-09-20T21:32:55.091Z",
+      "action": "증빙 등록",
+      "target": "TSK-000014",
+      "by": "SD03-1",
+      "note": "상반기 점검 결과"
+    },
+    {
+      "at": "2026-09-20T21:12:42.434Z",
+      "action": "결재 승인",
+      "target": "TSK-000058",
+      "by": "SD01-1",
+      "note": "점검완료"
+    },
+    {
+      "at": "2026-09-20T18:20:39.408Z",
+      "action": "현장에서 증빙 등록",
+      "target": "TSK-000930",
+      "by": "SD03-1",
+      "note": "이행완료"
+    },
+    {
+      "at": "2026-09-20T18:20:39.406Z",
+      "action": "증빙 등록",
+      "target": "TSK-000930",
+      "by": "SD03-1",
+      "note": "17899284267288924611833593142725.jpg"
+    },
+    {
+      "at": "2026-09-20T18:12:59.791Z",
+      "action": "현장에서 증빙 등록",
+      "target": "TSK-000157",
+      "by": "SD03-1",
+      "note": "이행완료"
+    },
+    {
+      "at": "2026-09-20T18:12:59.789Z",
+      "action": "증빙 등록",
+      "target": "TSK-000157",
+      "by": "SD03-1",
+      "note": "현장사진_양보차로_20260921.png"
+    }
+  ],
+  "patches": {
+    "safety_budget": {
+      "BUD-0026": {
+        "executed_amount": "1100000000",
+        "updated_at": "2026-09-21"
+      }
+    },
+    "training_record": {
+      "TRN-0066": {
+        "instructed_at": "2026-09-21",
+        "instructed_by": "SD01-1",
+        "instruct_due": "2026-10-15",
+        "status": "이수",
+        "trained_at": "2026-09-21",
+        "hours": "16",
+        "certificate_file": "밀폐공간_특별교육_이수증.pdf",
+        "done_by": "SD01-1"
+      }
+    }
+  },
+  "tables": {
+    "safety_budget": [
+      {
+        "budget_id": "BUD-MUAXK35W2",
+        "fiscal_year": "2026",
+        "dept_id": "D06",
+        "target_code": "",
+        "budget_kind": "",
+        "budget_item": "유해·위험요인 개선비",
+        "budget_use": "나",
+        "use_basis": "시행령 제4조제4호나목",
+        "planned_amount": "30000000",
+        "executed_amount": "0",
+        "risk_item_id": "RSK-007-1",
+        "duty_key": "",
+        "updated_at": "2026-09-21",
+        "note": "화면에서 등록"
+      },
+      {
+        "budget_id": "BUD-MUAXJAE92",
+        "fiscal_year": "2026",
+        "dept_id": "D06",
+        "target_code": "",
+        "budget_kind": "",
+        "budget_item": "유해·위험요인 개선비",
+        "budget_use": "나",
+        "use_basis": "시행령 제4조제4호나목",
+        "planned_amount": "30000000",
+        "executed_amount": "0",
+        "risk_item_id": "RSK-007-1",
+        "duty_key": "",
+        "updated_at": "2026-09-21",
+        "note": "화면에서 등록"
+      }
+    ],
+    "notification": [
+      {
+        "notif_id": "NTF-MUAXKNTB0AW",
+        "task_id": "",
+        "notif_type": "교육 이행 지시",
+        "to_staff_id": "SD05-2",
+        "from_staff_id": "SD01-1",
+        "sent_at": "2026-09-21",
+        "message": "[교육 이행 지시] 특별교육 — 밀폐공간에서의 작업 — 2026-10-15까지 이수",
+        "read_at": "",
+        "note": "TRN-0066 · 시행령 제5조제2항제4호"
+      }
+    ],
+    "training_record": [
+      {
+        "training_id": "TRN-MUAXLOTLPIJ",
+        "staff_id": "SD06-1",
+        "dept_id": "D06",
+        "course_id": "TC03",
+        "course_name": "채용 시 교육",
+        "law": "산업안전보건법",
+        "hours": "8",
+        "period": "2026 하반기",
+        "due_date": "",
+        "trained_at": "2026-09-21",
+        "status": "이수",
+        "certificate_file": "채용시교육_결과보고.pdf",
+        "duty_key": "",
+        "note": "화면에서 등록"
+      }
+    ],
+    "training_check": [
+      {
+        "check_id": "TCK-MUAXLRWO026",
+        "half": "2026 하반기",
+        "checked_at": "2026-09-21",
+        "checked_by": "SD01-1",
+        "method": "직접 점검",
+        "summary": "적용 56칸 · 이수 39 · 미이수 12 · 기한 초과 5 · 기록 없음 0",
+        "note": "시행령 제5조제2항제3호 반기 점검"
+      }
+    ]
+  }
+}

@@ -1,0 +1,225 @@
+/* [400] 묶음 B1 전용 — 클래스 이름은 usb1- 로 시작
+ * 관리대상 현황(SCR-023 · 027~033). 명세 관측치: 회색 라운드 검색 패널 · 흰 둥근 칸 · ◌ 라벨 · 회색 라벨열 표 ·
+ * 저장 버튼(명세는 파랑 — 교육자료 버전 색 규칙에 따라 녹색) · 삭제처리 빨간 테두리 · 미이행 줄 연분홍. */
+
+/* ── 검색 패널(SCR-027) ── */
+.usb1-search{display:grid;grid-template-columns:170px 1fr;gap:14px 18px;align-items:center;background:#d9dde3;border-radius:16px;padding:22px 26px;margin:6px 0 20px}
+.usb1-srow-l{font-weight:800;font-size:1.05rem;text-align:center;color:#222}
+.usb1-sbox{background:#fff;border-radius:12px;padding:14px 22px;display:flex;gap:14px;align-items:center;flex-wrap:wrap;min-height:58px}
+.usb1-radios{gap:10px 30px}
+.usb1-radio{display:inline-flex;align-items:center;gap:8px;color:#222 !important;font-weight:700;font-size:1.02rem;text-decoration:none !important}
+.usb1-rdot{width:26px;height:26px;border-radius:50%;border:2px solid #888;display:inline-flex;align-items:center;justify-content:center;font-size:.85rem;color:#fff;background:#fff}
+.usb1-radio.on .usb1-rdot{background:var(--us-g1);border-color:var(--us-g1)}
+.usb1-radio.on{color:var(--us-g1) !important}
+.usb1-sel,.usb1-q{border:1px solid #9aa196;border-radius:6px;padding:7px 10px;font:inherit;background:#fff}
+.usb1-q{flex:1;min-width:240px}
+.usb1-split{padding:0;gap:0;flex-wrap:nowrap}
+.usb1-split a{flex:1;display:flex;align-items:baseline;justify-content:center;gap:18px;padding:16px 10px;color:#222 !important;text-decoration:none !important;border-radius:12px}
+.usb1-split a+a{border-left:1px solid #d5d8dc;border-radius:0 12px 12px 0}
+.usb1-split a span{font-weight:800;font-size:1.02rem}
+.usb1-split a b{font-size:1.8rem;font-weight:900;letter-spacing:-1px}
+.usb1-split a small{font-size:1rem;font-weight:700;margin-left:-14px}
+.usb1-split a.on{background:var(--us-g4);outline:2px solid var(--us-g2);outline-offset:-2px}
+.usb1-split a:hover{background:#f4f8f1}
+
+/* ── 버튼 ── */
+.usb1-btn-o{display:inline-flex;align-items:center;gap:6px;background:#fff;border:1px solid #7ea36c;color:#2f5f20 !important;border-radius:6px;padding:7px 16px;font:inherit;font-weight:700;cursor:pointer;text-decoration:none !important;white-space:nowrap}
+.usb1-btn-o:hover{background:var(--us-g4)}
+.usb1-btn-g{display:inline-flex;align-items:center;background:#fff;border:1px solid #9aa196;color:#444 !important;border-radius:6px;padding:7px 18px;font-weight:700;text-decoration:none !important}
+.usb1-btn-g:hover{border-color:var(--us-g1);color:var(--us-g1) !important}
+.usb1-btn-save{background:var(--us-g2);color:#fff;border:0;border-radius:6px;padding:12px 48px;font:inherit;font-weight:800;font-size:1.08rem;cursor:pointer}
+.usb1-btn-save:hover{background:var(--us-g1)}
+.usb1-btn-back{display:inline-flex;align-items:center;border:1px solid #9aa196;border-radius:6px;padding:11px 36px;color:#444 !important;font-weight:700;background:#fff;text-decoration:none !important}
+.usb1-btn-red{display:inline-flex;align-items:center;border:1px solid #e04848;color:#d23c3c !important;background:#fff;border-radius:6px;padding:11px 38px;font:inherit;font-weight:700;cursor:pointer;text-decoration:none !important}
+.usb1-btn-red:hover{background:#fdeeee}
+.usb1-btn-del{border:1px solid #e04848;color:#d23c3c;background:#fff;border-radius:5px;padding:6px 12px;font:inherit;font-size:.92rem;cursor:pointer;white-space:nowrap}
+.usb1-plus,.usb1-mini{width:30px;height:30px;border:1px solid #9aa196;background:#fff;border-radius:4px;font-size:1.1rem;line-height:1;cursor:pointer;color:#444;flex:none}
+.usb1-plus:hover,.usb1-mini:hover{border-color:var(--us-g1);color:var(--us-g1)}
+
+/* ── 목록 ── */
+.usb1-cnt{display:flex;justify-content:space-between;align-items:flex-end;margin:4px 0 6px;font-size:1rem}
+.usb1-cnt b,.usb1-blue-n{color:#1f6fd1;font-weight:800}
+table.usb1-list td a{color:#222;font-weight:700}
+table.usb1-list td a:hover{color:var(--us-g1)}
+table.usb1-list tbody tr:hover td{background:#f6faf3}
+.usb1-pager{display:flex;justify-content:center;gap:6px;margin:14px 0;flex-wrap:wrap}
+.usb1-pager a{display:inline-flex;min-width:34px;height:34px;align-items:center;justify-content:center;border:1px solid #ccd2c8;border-radius:4px;color:#333 !important;text-decoration:none !important;padding:0 6px}
+.usb1-pager a.on{background:#555;border-color:#555;color:#fff !important;font-weight:800}
+.usb1-pager em{padding:0 4px;color:#888}
+.usb1-sapa{display:inline-block;border-radius:5px;padding:1px 9px;font-weight:700;font-size:.88rem;border:1px solid}
+.usb1-sapa.y{color:#2f7a2f;background:#e9f5e3;border-color:#a8d29a}
+.usb1-sapa.q{color:#9a6a00;background:#fff6db;border-color:#f0d27a}
+.usb1-sapa.n{color:#666;background:#f1f1f1;border-color:#d0d0d0}
+
+/* ── 입력 폼(SCR-028·029·031) ── */
+.usb1-form{margin-top:6px}
+.usb1-ok{background:#e9f5e3;border:1px solid #a8d29a;color:#2f5f20;border-radius:8px;padding:9px 14px;font-weight:700;margin-bottom:10px}
+.usb1-ok-i{color:#2f7a2f;font-weight:800}
+.usb1-note{color:#6b5a1e;background:#fff9e6;border:1px solid #f0dfa6;border-radius:6px;padding:7px 12px;font-size:.93rem;margin:8px 0}
+.usb1-muted{color:var(--us-mut)}
+.usb1-req{color:#d23c3c;font-style:normal;font-weight:800;margin-left:3px}
+.usb1-datebar{display:flex;align-items:center;gap:16px;flex-wrap:wrap;background:#d9dde3;padding:14px 26px;margin-bottom:10px}
+.usb1-datebar>label{font-weight:800;font-size:1.1rem;min-width:110px;text-align:center}
+.usb1-datebar input[type=date]{border:1px solid #888;border-radius:5px;padding:6px 10px;font:inherit;font-size:1.05rem;background:#fff}
+.usb1-hist{display:flex;gap:8px;align-items:center;flex-wrap:wrap;font-weight:700;color:#444;margin-left:auto;font-size:.95rem}
+.usb1-hist a{border:1px solid #9aa196;background:#fff;border-radius:14px;padding:2px 12px;color:#333 !important;text-decoration:none !important;font-weight:600}
+.usb1-hist a.on{background:var(--us-g1);border-color:var(--us-g1);color:#fff !important}
+.usb1-sec{font-size:1.35rem;font-weight:800;margin:20px 0 0;padding-bottom:10px;border-bottom:2px solid #bbb;color:#111}
+.usb1-body{padding:12px 4px 6px}
+.usb1-f{display:grid;grid-template-columns:260px 1fr;gap:12px;align-items:center;margin:9px 0}
+.usb1-f.wide{align-items:start}
+.usb1-lab{font-weight:800;font-size:.97rem;color:#222;display:flex;align-items:center;gap:6px}
+.usb1-lab::before{content:"";width:11px;height:11px;border:2px solid #aaa;border-radius:50%;flex:none}
+.usb1-fv{min-width:0}
+.usb1-f input[type=text],.usb1-f select,.usb1-row2 input,.usb1-row2 select{width:100%;border:1px solid #c7ccc4;border-radius:5px;padding:9px 14px;font:inherit;background:#fff}
+.usb1-ro{background:#f0f1f2 !important;color:#888 !important}
+.usb1-blue{color:#1f6fd1}
+.usb1-row2{display:grid;grid-template-columns:260px 1fr 170px 1fr;gap:12px;align-items:center;margin:9px 0}
+.usb1-row4{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:0 20px}
+.usb1-row4 .usb1-f{grid-template-columns:130px 1fr}
+.usb1-types{margin:0;padding-left:18px;line-height:1.8}
+.usb1-types a{font-weight:800;color:var(--us-g1)}
+.usb1-basis-t{color:#555;font-size:.93rem}
+.usb1-need-t{color:#9a4b00;font-size:.93rem}
+
+/* 근무인원 매트릭스 */
+.usb1-hc-tot{display:flex;gap:40px;color:#444;font-weight:600;margin-bottom:14px}
+table.usb1-hc{width:100%;border-collapse:collapse}
+table.usb1-hc th{position:static;background:transparent;font-weight:800;font-size:.93rem;padding:6px 4px;border-bottom:2px solid #aaa;white-space:nowrap}
+table.usb1-hc td{padding:8px 5px;border-bottom:1px solid #e1e4de}
+table.usb1-hc input{width:100%;min-width:56px;text-align:center;border:1px solid #cfd4cc;border-radius:4px;padding:6px 4px;font:inherit;color:#1f6fd1}
+table.usb1-hc input.usb1-ro{color:#666 !important}
+.usb1-hc-row{font-weight:600;white-space:nowrap;color:#444}
+
+/* 세부정보 접기 */
+.usb1-det{margin-top:18px}
+.usb1-det>summary{list-style:none;display:flex;justify-content:space-between;align-items:center;font-size:1.3rem;font-weight:800;padding-bottom:10px;border-bottom:2px solid #bbb;cursor:pointer}
+.usb1-det>summary::-webkit-details-marker{display:none}
+.usb1-tog{width:32px;height:32px;border-radius:50%;background:#e9ebe8;display:inline-flex;align-items:center;justify-content:center;font-size:1rem;color:#666;transition:transform .15s}
+.usb1-det:not([open]) .usb1-tog{transform:rotate(180deg)}
+
+/* 업무 담당자 */
+.usb1-block{margin:10px 0 14px;border-bottom:1px solid #e1e4de;padding-bottom:10px}
+.usb1-block-h{display:flex;justify-content:space-between;align-items:center;gap:12px;margin:8px 0}
+.usb1-wrow{display:grid;grid-template-columns:auto minmax(200px,1.1fr) auto minmax(160px,1.4fr) auto minmax(160px,1fr) auto;gap:10px 12px;align-items:center;padding:10px 12px}
+.usb1-wrow input{border:1px solid #9aa196;border-radius:6px;padding:9px 12px;font:inherit;width:100%;background:#fff}
+.usb1-dot{color:#555;display:inline-flex;align-items:center;gap:6px;white-space:nowrap}
+.usb1-dot::before{content:"●";color:#bbb;font-size:.7em}
+.usb1-inbtn{position:relative;display:flex;align-items:center}
+.usb1-inbtn input{padding-right:88px !important}
+.usb1-srch{position:absolute;right:6px;top:50%;transform:translateY(-50%)}
+.usb1-srch-b{border:0;background:transparent;color:#1f6fd1;font:inherit;font-size:.92rem;cursor:pointer;white-space:nowrap}
+.usb1-srch-pop{position:absolute;right:0;top:130%;z-index:30;background:#fff;border:1px solid #bfc6bb;border-radius:8px;box-shadow:0 8px 22px #0002;min-width:280px;max-height:280px;overflow:auto;display:flex;flex-direction:column;padding:4px}
+.usb1-srch-pop button{border:0;background:#fff;text-align:left;padding:7px 10px;border-radius:5px;font:inherit;font-size:.93rem;cursor:pointer}
+.usb1-srch-pop button:hover{background:var(--us-g3)}
+.usb1-srch-pop em{padding:8px;color:#888}
+
+/* 관리감독자 · 첨부(회색 라벨열 2행) */
+.usb1-grid2{display:grid;grid-template-columns:190px 1fr;border-top:2px solid #aaa;border-bottom:2px solid #aaa;margin-top:12px}
+.usb1-gl{background:#eef0ed;font-weight:800;display:flex;align-items:center;justify-content:center;padding:12px;border-bottom:1px solid #dcdfd9}
+.usb1-gv{padding:10px 14px;border-bottom:1px solid #dcdfd9;min-width:0}
+.usb1-srow{display:flex;gap:8px;align-items:center;flex-wrap:wrap;padding:4px 0}
+.usb1-srow select{border:1px solid #9aa196;border-radius:5px;padding:7px 10px;font:inherit;color:#1f6fd1;min-width:110px}
+.usb1-srow input{border:1px solid #cfd4cc;border-radius:5px;padding:7px 10px;font:inherit;color:#1f6fd1;min-width:0}
+.usb1-srow .usb1-inbtn{width:190px}
+.usb1-srow input[name=s_phone]{width:150px}
+.usb1-w6{width:110px}
+.usb1-sl{color:#444;margin-left:6px;white-space:nowrap}
+.usb1-files{display:flex;flex-direction:column;gap:6px;align-items:flex-start}
+.usb1-frow{display:flex;gap:6px;align-items:center;width:100%;max-width:560px}
+.usb1-frow .us-ev-name{flex:1}
+.usb1-file{flex:1;font:inherit;font-size:.9rem}
+
+/* 시설물 제원 · 품목 세부 */
+.usb1-spec{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:10px 16px;margin:6px 0 16px}
+.usb1-spec-i{display:flex;flex-direction:column;gap:5px;font-weight:700;font-size:.95rem;color:#333}
+.usb1-spec-i input{border:1px solid #c7ccc4;border-radius:5px;padding:8px 12px;font:inherit;font-weight:500;color:#1f6fd1}
+.usb1-spec-i.need span{color:#9a4b00}
+.usb1-spec-i.need input{border:2px solid #f0b060;background:#fffaf1}
+.usb1-rel{display:flex;flex-direction:column;gap:6px;background:#f4f7f2;border:1px solid #dde4d8;border-radius:8px;padding:10px 14px;margin-bottom:12px}
+.usb1-rel span{display:flex;flex-wrap:wrap;gap:6px 12px}
+.usb1-rel a{color:var(--us-g1);font-weight:700}
+
+.usb1-actions{display:flex;justify-content:space-between;align-items:center;margin:26px 0 18px}
+.usb1-guide{background:#eef0ed;border-radius:12px;padding:18px 26px;margin-top:14px;line-height:1.9;font-size:.95rem}
+.usb1-guide>b{font-size:1.05rem;display:block;margin-bottom:6px}
+.usb1-guide ol{list-style:none;margin:0;padding:0}
+.usb1-guide li.sub{padding-left:6px}
+.usb1-guide p{margin:0}
+
+/* ── SCR-023 관리자 ── */
+.usb1-atitle{font-size:1.3rem;margin:2px 0 12px;border-bottom:1px solid #ddd;padding-bottom:10px;color:#222}
+.usb1-atitle b{font-size:1.65rem;font-weight:900;letter-spacing:-.6px}
+.usb1-deptpick{display:flex;gap:10px;align-items:center;margin-bottom:10px;font-weight:700}
+.usb1-deptpick select{border:1px solid #9aa196;border-radius:6px;padding:6px 10px;font:inherit}
+.usb1-aform{border:1px solid #e1e4de;border-radius:6px;padding:14px 20px}
+table.usb1-mgmt{width:100%;border-collapse:collapse;margin-top:28px;border-top:2px solid #999;border-bottom:2px solid #999}
+table.usb1-mgmt th{background:#eef0ed;width:190px;font-weight:800;font-size:.95rem;padding:12px;border-bottom:1px solid #dcdfd9;line-height:1.4}
+table.usb1-mgmt td{padding:9px 12px;border-bottom:1px solid #dcdfd9}
+table.usb1-mgmt select{width:100%;border:1px solid #c7ccc4;border-radius:5px;padding:8px 12px;font:inherit}
+.usb1-abtns{display:flex;justify-content:flex-end;gap:10px;margin-top:16px;align-items:center}
+
+/* ── SCR-030 도급 목록 검색 ── */
+.usb1-cs{display:grid;grid-template-columns:230px 1fr;align-items:center;background:#f0f1f2;border-radius:18px;padding:22px 24px;margin:8px 0 34px}
+.usb1-cs-l{font-weight:800;font-size:1.05rem;padding-left:30px}
+.usb1-cs-b{display:flex;gap:18px;align-items:center;background:#fff;border-radius:10px;padding:16px 22px}
+.usb1-cs-b label{font-weight:600;min-width:80px}
+.usb1-cs-b input{flex:1;border:1px solid #bbb;border-radius:4px;padding:10px 14px;font:inherit}
+
+/* ── SCR-031 계약 기본정보 ── */
+.usb1-anch{display:flex;gap:8px;margin:0 0 6px}
+.usb1-anch a{border:1px solid #c9d3c4;border-radius:16px;padding:4px 14px;color:#333 !important;font-weight:700;font-size:.93rem;text-decoration:none !important;background:#fff}
+.usb1-anch a:hover{border-color:var(--us-g1);color:var(--us-g1) !important}
+.usb1-cgrid{display:grid;grid-template-columns:200px minmax(0,1fr) 170px minmax(0,1fr);gap:12px 16px;align-items:center;padding:16px 4px}
+.usb1-cgrid .span3{grid-column:span 3}
+.usb1-cgrid input[type=text],.usb1-cgrid input[type=number],.usb1-cgrid input[type=date],.usb1-cgrid select{width:100%;border:1px solid #c7ccc4;border-radius:5px;padding:9px 12px;font:inherit;background:#fff}
+.usb1-cgrid input:focus,.usb1-cgrid select:focus{outline:2px solid var(--us-g2);outline-offset:0}
+.usb1-range{display:flex;gap:6px;align-items:center}
+.usb1-range input{flex:1}
+.usb1-gap{grid-column:1/-1;height:18px}
+.usb1-hr{grid-column:1/-1;border:0;border-top:1px solid #d9ddd6;margin:6px 0}
+
+/* ── SCR-032 위험장소·작업 ── */
+.usb1-s2,.usb1-s3{margin-top:22px}
+.usb1-wp{display:flex;gap:28px;align-items:center;background:#f0f1f2;border-radius:18px;padding:18px 30px;margin:14px 0}
+.usb1-wp label{font-weight:600;font-size:1.02rem}
+.usb1-wp input{width:min(480px,100%);border:1px solid #bbb;border-radius:4px;padding:11px 18px;font:inherit;background:#fff}
+.usb1-chips{display:flex;gap:10px;align-items:center;margin:10px 0}
+.usb1-chips-h{font-weight:800;white-space:nowrap}
+.usb1-chips-l{display:flex;gap:8px;flex-wrap:wrap;flex:1}
+.usb1-chip{display:inline-flex;align-items:center;gap:6px;background:#eef0ed;border-radius:4px;padding:5px 10px;font-size:.93rem}
+.usb1-chip button{border:0;background:transparent;color:#888;cursor:pointer;font-size:1rem}
+.usb1-plist{border-radius:14px;overflow:hidden;border:1px solid #e1e4de}
+.usb1-plist-h{background:#eef0ed;font-weight:800;padding:14px 22px}
+.usb1-pgrid{display:grid;grid-template-columns:1fr 1fr}
+.usb1-pitem{display:flex;justify-content:space-between;align-items:center;gap:12px;text-align:left;background:#fff;border:0;border-bottom:1px solid #e6e8e4;padding:12px 22px;font:inherit;font-size:.96rem;cursor:pointer;color:#333}
+.usb1-pitem:nth-child(odd){border-right:1px solid #e6e8e4}
+.usb1-pitem small{display:block;color:#666;font-size:.85rem;margin-top:2px}
+.usb1-pitem small.usb1-basis{color:#999;font-size:.8rem}
+.usb1-chk{flex:none;width:28px;height:28px;border-radius:50%;border:1.5px solid #ccc;color:#ccc;display:inline-flex;align-items:center;justify-content:center;font-size:.9rem}
+.usb1-pitem.on{color:#1f6fd1}
+.usb1-pitem.on .usb1-chk{background:#1f6fd1;border-color:#1f6fd1;color:#fff}
+.usb1-pitem.hint{outline:2px dashed #e0a948;outline-offset:-4px}
+.usb1-pitem:hover{background:#f7faf5}
+table.usb1-hz{margin-top:14px}
+
+/* ── SCR-033 관리의무 이행 ── */
+table.usb1-cd td{vertical-align:middle}
+.usb1-cdg{font-weight:700;padding:14px 12px !important}
+.usb1-cds{color:#444;line-height:1.4}
+.usb1-rad{white-space:nowrap}
+.usb1-r{display:inline-flex;align-items:center;gap:5px;margin-right:16px;cursor:pointer;color:#555}
+.usb1-r input{width:20px;height:20px;accent-color:#1f6fd1}
+.usb1-r.bad input{accent-color:#d23c3c}
+.usb1-r:has(input:checked){color:#1f6fd1;font-weight:700}
+.usb1-r.bad:has(input:checked){color:#d23c3c}
+table.usb1-cd tr.usb1-cdr:has(input[value="미이행"]:checked) td{background:#fdecef}
+.usb1-h3{font-size:1.12rem;font-weight:800;margin:24px 0 8px}
+
+@media(max-width:1100px){
+  .usb1-search,.usb1-cs{grid-template-columns:1fr}
+  .usb1-f,.usb1-row2,.usb1-cgrid{grid-template-columns:1fr}
+  .usb1-cgrid .span3{grid-column:auto}
+  .usb1-wrow{grid-template-columns:1fr}
+  .usb1-pgrid{grid-template-columns:1fr}
+}

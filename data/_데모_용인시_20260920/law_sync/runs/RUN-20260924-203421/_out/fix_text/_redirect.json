@@ -1,0 +1,37 @@
+{
+ "script": "C:\\1.업무\\7.ADOMS 구현\\30_데이터\\_수집작업\\ADOMS_DB_v1\\script\\fix_stale_law_text_20260920.py",
+ "argv": [
+  "--dry",
+  "--docs",
+  "DOC-000382,DOC-000458",
+  "--out",
+  "(점검)lawsync_원문대조.csv"
+ ],
+ "exit": 0,
+ "redirected_writes": {
+  "c:\\1.업무\\7.adoms 구현\\30_데이터\\_수집작업\\adoms_db_v1\\_정본미확보목록\\(점검)lawsync_원문대조.csv": "C:\\1.업무\\7.ADOMS 구현\\30_데이터\\_수집작업\\ADOMS_DB_v1\\_데모_용인시_20260920\\law_sync\\runs\\RUN-20260924-203421\\_out\\fix_text\\(점검)lawsync_원문대조.csv"
+ },
+ "mapped_reads": [
+  [
+   "C:\\1.업무\\7.ADOMS 구현\\30_데이터\\_수집작업\\ADOMS_DB_v1\\build\\doc_20260901_v2.1.csv",
+   "C:\\1.업무\\7.ADOMS 구현\\30_데이터\\_수집작업\\ADOMS_DB_v1\\_데모_용인시_20260920\\law_sync\\runs\\RUN-20260924-203421\\_out\\fix_mst\\doc_20260901_v2.1.csv"
+  ],
+  [
+   "C:\\1.업무\\7.ADOMS 구현\\30_데이터\\_수집작업\\lawxml_현행대조_20260920\\LAW_289913.xml",
+   "C:\\1.업무\\7.ADOMS 구현\\30_데이터\\_수집작업\\ADOMS_DB_v1\\_데모_용인시_20260920\\law_sync\\_cache\\lawxml\\law_289913.xml"
+  ],
+  [
+   "C:\\1.업무\\7.ADOMS 구현\\30_데이터\\_수집작업\\lawxml_현행대조_20260920\\LAW_289913.xml",
+   "C:\\1.업무\\7.ADOMS 구현\\30_데이터\\_수집작업\\ADOMS_DB_v1\\_데모_용인시_20260920\\law_sync\\_cache\\lawxml\\law_289913.xml"
+  ],
+  [
+   "C:\\1.업무\\7.ADOMS 구현\\30_데이터\\_수집작업\\lawxml_현행대조_20260920\\LAW_289799.xml",
+   "C:\\1.업무\\7.ADOMS 구현\\30_데이터\\_수집작업\\ADOMS_DB_v1\\_데모_용인시_20260920\\law_sync\\_cache\\lawxml\\law_289799.xml"
+  ],
+  [
+   "C:\\1.업무\\7.ADOMS 구현\\30_데이터\\_수집작업\\lawxml_현행대조_20260920\\LAW_289799.xml",
+   "C:\\1.업무\\7.ADOMS 구현\\30_데이터\\_수집작업\\ADOMS_DB_v1\\_데모_용인시_20260920\\law_sync\\_cache\\lawxml\\law_289799.xml"
+  ]
+ ],
+ "blocked": []
+}

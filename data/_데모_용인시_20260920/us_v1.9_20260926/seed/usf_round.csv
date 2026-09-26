@@ -1,0 +1,10 @@
+﻿round_id,track,title,dept_ids,item_keys,status,created_by,created_at,approved_by,approved_at,approve_note,insp_method,outsource_org,report_received_at
+RWS-2026H2,ws,2026년 하반기 이행점검(사업장),D01;D02;D03;D09,goal;org;staff;risk;budget;work;opinion;emergency;recur;order;law;edu,점검중,SD02-1,2026-09-15T09:10:00+09:00,,,,,,
+RFC-2026H2,fc,2026년 하반기 이행점검(공중이용시설·공중교통수단),D03;D04;D13,staff;budget;inspect;plan;proc;recur;order;law,점검중,SD02-1,2026-09-15T09:20:00+09:00,,,,,,
+RMT-2026H2,mt,2026년 하반기 이행점검(원료·제조물),D04;D07;D14,staff;budget;proc;recur;order;law,점검중,SD02-1,2026-09-15T09:30:00+09:00,,,,,,
+RWS-2026H1,ws,2026년 상반기 이행점검(사업장),D01;D02;D03;D07;D08;D09;D12;D13;D15,goal;org;staff;risk;budget;work;opinion;emergency;recur;order;law;edu,결재완료,SD01-1,2026-05-11T09:00:00+09:00,SD01-1,2026-06-24T16:30:00+09:00,상반기 점검 결과 확인 — 보완필요·미이행 부서는 하반기 1차 취합 때 재점검,직접 점검,,
+RWS-2026H2-1,ws,2026년 하반기 이행점검(사업장) 1차,D01;D02;D03;D07;D08;D09;D12;D13;D15;D10;D16;D19,goal;org;staff;risk;budget;work;opinion;emergency;recur;order;law;edu,점검중,SD01-1,2026-08-17T10:00:00+09:00,,,,,,
+RFC-2026H1,fc,2026년 상반기 이행점검(공중이용시설·공중교통수단),D02;D03;D04;D05;D09;D13;D16;D23,staff;budget;inspect;plan;proc;recur;order;law,결재완료,SD01-1,2026-05-11T09:20:00+09:00,SD01-1,2026-06-25T16:30:00+09:00,정기안전점검 결과와 대조 확인 — 명령·재해 관련 보완 사항 하반기 재점검,위탁 점검,시설물 안전진단 전문기관(점검 용역),2026-06-19
+RFC-2026H2-1,fc,2026년 하반기 이행점검(공중이용시설·공중교통수단) 1차,D02;D03;D04;D05;D09;D13;D16;D23,staff;budget;inspect;plan;proc;recur;order;law,점검중,SD01-1,2026-08-17T10:20:00+09:00,,,,,,
+RMT-2026H1,mt,2026년 상반기 이행점검(원료·제조물),D04;D07;D11;D14,staff;budget;proc;recur;order;law,결재완료,SD01-1,2026-05-11T09:40:00+09:00,SD01-1,2026-06-26T16:30:00+09:00,수돗물·급식 원료 관리 확인 — 보완 사항은 하반기 1차 취합 때 재점검,직접 점검,,
+RMT-2026H2-1,mt,2026년 하반기 이행점검(원료·제조물) 1차,D04;D07;D11;D14,staff;budget;proc;recur;order;law,점검중,SD01-1,2026-08-17T10:40:00+09:00,,,,,,

@@ -1,0 +1,10 @@
+{
+ "script": "C:\\1.업무\\7.ADOMS 구현\\30_데이터\\_수집작업\\ADOMS_DB_v1\\script\\audit_lesson_guard.py",
+ "argv": [],
+ "exit": 0,
+ "redirected_writes": {
+  "c:\\1.업무\\7.adoms 구현\\30_데이터\\_수집작업\\adoms_db_v1\\build\\_lesson_guard_20260924.csv": "C:\\1.업무\\7.ADOMS 구현\\30_데이터\\_수집작업\\ADOMS_DB_v1\\_데모_용인시_20260920\\law_sync\\runs\\RUN-20260924-210628\\_out\\lessons\\_lesson_guard_20260924.csv"
+ },
+ "mapped_reads": [],
+ "blocked": []
+}

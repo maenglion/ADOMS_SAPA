@@ -1,0 +1,41 @@
+.uses{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+@media(max-width:1100px){.uses{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:640px){.uses{grid-template-columns:1fr}}
+.use{display:flex;flex-direction:column;gap:6px}
+.dim{background:#fafbfc}
+.useHead{display:flex;justify-content:space-between;align-items:center;gap:8px}
+.useLabel{font-size:.84rem;color:var(--mut)}
+.useName{font-size:1.07rem;color:var(--navy)}
+.useText{font-size:.86rem;color:var(--mut);min-height:2.6em}
+.useNums{display:flex;gap:16px;margin:4px 0}
+.useNums span{display:block;font-size:.78rem;color:var(--mut)}
+.useNums b{font-size:1.25rem;color:var(--ink);font-variant-numeric:tabular-nums}
+.useNote{font-size:.82rem;color:#6d5a3a;background:#faf6ee;border-radius:6px;padding:6px 8px}
+.cardHead{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:8px}
+.hot td{background:#fbf5f4}
+.low td{background:#fcfaf5}
+.total td{font-weight:700;background:var(--surface-blush);color:var(--navy)}
+.money th:global(.c){text-align:center}
+.rate{display:flex;align-items:center;gap:8px}
+.rate>:first-child{flex:1;min-width:50px}
+.pick{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:12px}
+.pick select{min-width:220px}
+.fixed td{vertical-align:top}
+.amt{width:100%;max-width:160px;text-align:right;font:inherit;font-size:.95rem;padding:7px 9px;
+  border:1px solid var(--line);border-radius:var(--r-ctl);font-variant-numeric:tabular-nums;background:#fff}
+.memo{width:100%;margin-bottom:4px}
+.addRow td{background:#fcfcfd;font-size:.92rem}
+.emptyRow td{background:#fbf8f3}
+.warnLine{font-size:.84rem;color:var(--bad)}
+.saveBar{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-top:10px;flex-wrap:wrap}
+.foot{display:flex;gap:8px;flex-wrap:wrap;margin:16px 0 6px}
+/* [캡처 v2] K08 — 재해 구분 탭 · 고른 예산 줄 · 집행 기록 입력 */
+.tabs{display:flex;gap:6px;margin:14px 0 10px;border-bottom:1px solid var(--line);flex-wrap:wrap}
+.tabs a{padding:8px 16px;font-weight:600;color:var(--mut);border-bottom:3px solid transparent;margin-bottom:-1px;font-size:1rem}
+.tabs a:hover{text-decoration:none;color:var(--deep)}
+.tabs a.on{color:var(--deep);border-bottom-color:var(--deep)}
+.sel td{background:#eef4fb}
+.execForm{display:flex;gap:10px;align-items:flex-end;flex-wrap:wrap}
+.execForm label{display:flex;flex-direction:column;gap:4px;margin:0;font-size:.88rem;color:var(--mut)}
+.execForm input{font:inherit;padding:7px 9px;border:1px solid var(--line);border-radius:var(--r-ctl);background:#fff}
+.execForm label:nth-of-type(2){flex:1;min-width:220px}

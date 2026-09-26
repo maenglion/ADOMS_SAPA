@@ -1,0 +1,29 @@
+{
+ "script": "C:\\1.업무\\7.ADOMS 구현\\30_데이터\\_수집작업\\ADOMS_DB_v1\\script\\fix_stale_mst_20260920.py",
+ "argv": [
+  "--tag",
+  "lawsync"
+ ],
+ "exit": 0,
+ "redirected_writes": {
+  "c:\\1.업무\\7.adoms 구현\\30_데이터\\_수집작업\\adoms_db_v1\\_정본미확보목록\\(점검)판번호_갈아탐_20260920.csv": "C:\\1.업무\\7.ADOMS 구현\\30_데이터\\_수집작업\\ADOMS_DB_v1\\_데모_용인시_20260920\\law_sync\\runs\\RUN-20260924-203421\\_out\\fix_mst\\(점검)판번호_갈아탐_20260920.csv",
+  "c:\\1.업무\\7.adoms 구현\\30_데이터\\_수집작업\\adoms_db_v1\\build\\doc_20260901_v2.1_before_lawsync.csv": "C:\\1.업무\\7.ADOMS 구현\\30_데이터\\_수집작업\\ADOMS_DB_v1\\_데모_용인시_20260920\\law_sync\\runs\\RUN-20260924-203421\\_out\\fix_mst\\doc_20260901_v2.1_before_lawsync.csv",
+  "c:\\1.업무\\7.adoms 구현\\30_데이터\\_수집작업\\adoms_db_v1\\build\\doc_20260901_v2.1.csv.tmp": "C:\\1.업무\\7.ADOMS 구현\\30_데이터\\_수집작업\\ADOMS_DB_v1\\_데모_용인시_20260920\\law_sync\\runs\\RUN-20260924-203421\\_out\\fix_mst\\doc_20260901_v2.1.csv.tmp",
+  "c:\\1.업무\\7.adoms 구현\\30_데이터\\_수집작업\\adoms_db_v1\\build\\doc_20260901_v2.1.csv": "C:\\1.업무\\7.ADOMS 구현\\30_데이터\\_수집작업\\ADOMS_DB_v1\\_데모_용인시_20260920\\law_sync\\runs\\RUN-20260924-203421\\_out\\fix_mst\\doc_20260901_v2.1.csv",
+  "c:\\1.업무\\7.adoms 구현\\30_데이터\\_수집작업\\adoms_db_v1\\build\\law_20260901_v2.1_before_lawsync.csv": "C:\\1.업무\\7.ADOMS 구현\\30_데이터\\_수집작업\\ADOMS_DB_v1\\_데모_용인시_20260920\\law_sync\\runs\\RUN-20260924-203421\\_out\\fix_mst\\law_20260901_v2.1_before_lawsync.csv",
+  "c:\\1.업무\\7.adoms 구현\\30_데이터\\_수집작업\\adoms_db_v1\\build\\law_20260901_v2.1.csv.tmp": "C:\\1.업무\\7.ADOMS 구현\\30_데이터\\_수집작업\\ADOMS_DB_v1\\_데모_용인시_20260920\\law_sync\\runs\\RUN-20260924-203421\\_out\\fix_mst\\law_20260901_v2.1.csv.tmp",
+  "c:\\1.업무\\7.adoms 구현\\30_데이터\\_수집작업\\adoms_db_v1\\build\\law_20260901_v2.1.csv": "C:\\1.업무\\7.ADOMS 구현\\30_데이터\\_수집작업\\ADOMS_DB_v1\\_데모_용인시_20260920\\law_sync\\runs\\RUN-20260924-203421\\_out\\fix_mst\\law_20260901_v2.1.csv",
+  "c:\\1.업무\\7.adoms 구현\\30_데이터\\_수집작업\\adoms_db_v1\\build\\_changelog.md": "C:\\1.업무\\7.ADOMS 구현\\30_데이터\\_수집작업\\ADOMS_DB_v1\\_데모_용인시_20260920\\law_sync\\runs\\RUN-20260924-203421\\_out\\fix_mst\\_CHANGELOG.md"
+ },
+ "mapped_reads": [
+  [
+   "C:\\1.업무\\7.ADOMS 구현\\30_데이터\\_수집작업\\ADOMS_DB_v1\\build\\_RELEASE.json",
+   "C:\\1.업무\\7.ADOMS 구현\\30_데이터\\_수집작업\\ADOMS_DB_v1\\_데모_용인시_20260920\\law_sync\\runs\\RUN-20260924-203421\\in\\_RELEASE_writing.json"
+  ],
+  [
+   "C:\\1.업무\\7.ADOMS 구현\\30_데이터\\_수집작업\\ADOMS_DB_v1\\_정본미확보목록\\(점검)판겹침_법령_20260920.csv",
+   "C:\\1.업무\\7.ADOMS 구현\\30_데이터\\_수집작업\\ADOMS_DB_v1\\_데모_용인시_20260920\\law_sync\\runs\\RUN-20260924-203421\\in\\overlap_stale.csv"
+  ]
+ ],
+ "blocked": []
+}

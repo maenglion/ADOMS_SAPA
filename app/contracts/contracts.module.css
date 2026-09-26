@@ -1,0 +1,79 @@
+/* 도급·용역·위탁 화면 전용 — 공용 globals.css 는 건드리지 않는다. */
+
+.lead { margin: 4px 0 0; }
+
+/* 유해·위험요인 18항목 — 2열 × 9행 */
+.hzGrid { display: grid; grid-template-columns: 1fr 1fr; gap: 3px 14px; margin: 8px 0 10px; }
+.hzCell { display: flex; align-items: center; gap: 7px; padding: 4px 8px; border-radius: 6px; font-size: .92rem; }
+.hzOn { background: var(--surface-blush); color: var(--ink); font-weight: 600; }
+.hzOff { color: var(--mut); }
+.hzDot { width: 1.1em; text-align: center; }
+.hzOn .hzDot { color: var(--bad); }
+
+/* 관리의무 이행정보 */
+.ccRow td { vertical-align: top; }
+.ccBad td { background: #fbf1f0; }
+.ccNa td { color: var(--mut); }
+.stForm { display: flex; gap: 4px; flex-wrap: wrap; }
+.st { border: 1px solid var(--line); background: #fff; color: var(--mut); border-radius: 6px;
+      padding: 3px 9px; font-size: .84rem; cursor: pointer; font-family: inherit; white-space: nowrap; }
+.st:hover { border-color: #bcc8d6; }
+.stOk { background: var(--ok); border-color: var(--ok); color: #fff; font-weight: 600; }
+.stWarn { background: var(--warn); border-color: var(--warn); color: #fff; font-weight: 600; }
+.stBad { background: var(--bad); border-color: var(--bad); color: #fff; font-weight: 600; }
+.next { font-size: .84rem; color: var(--bad); margin-top: 5px; }
+.evForm { display: flex; gap: 4px; margin-top: 5px; }
+.evInput { flex: 1; min-width: 0; border: 1px solid var(--line); border-radius: 6px; padding: 3px 7px;
+           font-size: .84rem; font-family: inherit; }
+.evBtn { border: 1px solid var(--line); background: #fff; border-radius: 6px; padding: 3px 8px;
+         font-size: .84rem; cursor: pointer; font-family: inherit; white-space: nowrap; }
+
+/* 수급인 평가 입력 */
+.evalForm { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; margin-top: 8px; }
+.evalForm input { border: 1px solid var(--line); border-radius: 6px; padding: 4px 8px; font-family: inherit; }
+
+/* 도급 O/X 매트릭스 */
+.mx td, .mx th { text-align: center; }
+.mx td.left, .mx th.left { text-align: left; }
+.mxDept { background: var(--surface-blush); font-weight: 600; color: var(--navy); vertical-align: top !important; }
+.o { color: var(--ok); font-weight: 700; }
+.d { color: var(--warn); font-weight: 700; }
+.x { color: var(--bad); font-weight: 700; }
+.na { color: var(--mut); }
+.mxFoot td { background: var(--surface-soft); font-weight: 600; }
+.legend { display: flex; gap: 14px; flex-wrap: wrap; font-size: .88rem; margin: 6px 0 10px; }
+
+/* 저장 결과 알림 */
+.msgErr { border-left: 4px solid var(--bad); margin: 8px 0; }
+.msgOk { border-left: 4px solid var(--ok); margin: 8px 0; }
+
+/* 평가 합격선·가중치 설정 */
+.setBox { margin: 10px 0; }
+.setBox summary { cursor: pointer; }
+.setForm { display: flex; flex-wrap: wrap; gap: 8px 14px; align-items: center; margin-top: 6px; }
+.setForm input { width: 4.5rem; border: 1px solid var(--line); border-radius: 6px; padding: 3px 6px; font-family: inherit; }
+.wGrid { display: grid; grid-template-columns: repeat(auto-fill, minmax(15rem, 1fr)); gap: 4px 14px; width: 100%; font-size: .9rem; }
+.wGrid label { display: flex; align-items: center; gap: 6px; justify-content: space-between; }
+
+/* 적용 판단 */
+.chk { list-style: none; padding: 0; margin: 6px 0 4px; font-size: .9rem; }
+.chk li { margin: 2px 0; }
+.act { margin-top: 8px; }
+.act summary { cursor: pointer; font-size: .92rem; color: var(--navy); }
+.applyForm { display: grid; grid-template-columns: 1fr 1fr; gap: 8px 12px; margin-top: 8px; font-size: .92rem; }
+.applyForm label { display: flex; flex-direction: column; gap: 3px; }
+.applyForm input[type="text"], .applyForm select { border: 1px solid var(--line); border-radius: 6px; padding: 4px 8px; font-family: inherit; font-size: .92rem; }
+.wide { grid-column: 1 / -1; }
+.chkSet { border: 1px solid var(--line); border-radius: 6px; padding: 6px 10px; }
+.chkSet label { flex-direction: row !important; align-items: center; gap: 6px !important; margin: 2px 0; }
+.offNote { font-size: .9rem; background: var(--surface-soft); border-radius: 6px; padding: 6px 10px; margin: 0 0 8px; }
+
+/* 도급 5단계 */
+.stages { display: grid; grid-template-columns: repeat(5, 1fr); gap: 4px; margin: 6px 0; }
+.stg { border: 1px solid var(--line); border-radius: 6px; padding: 5px 7px; font-size: .88rem; color: var(--mut); }
+.stgDone { background: var(--surface-soft); color: var(--ink); }
+.stgCur { border-color: var(--navy); border-width: 2px; color: var(--ink); background: var(--surface-blush); }
+
+/* 평가 10항목 */
+.evTbl { margin-top: 6px; }
+.evTbl td, .evTbl th { padding-top: 3px; padding-bottom: 3px; }

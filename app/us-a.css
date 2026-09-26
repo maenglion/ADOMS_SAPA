@@ -1,0 +1,220 @@
+/* [400] 묶음 A 전용 — 클래스 이름은 usa- 로 시작
+ * 대시보드(SCR-006~009) · 이행현황(SCR-010~020). 색은 us.css 의 변수(--us-g1… )를 쓴다.
+ * 글자는 rem(기본 15px 기준). */
+
+/* ── 공통 ─────────────────────────────────────────── */
+.usa-mut{color:var(--us-mut,#6b7268);font-weight:500}
+.usa-flex{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.usa-right{display:flex;justify-content:flex-end;margin-top:14px;gap:10px;align-items:center}
+.usa-note{color:#555;font-size:.9rem;margin:10px 0 0;line-height:1.6}
+.usa-ok{background:#e9f5e3;border:1px solid #a8d29a;color:#2f7a2f;border-radius:8px;padding:8px 12px;font-weight:700}
+.usa-empty{padding:18px;color:#777;text-align:center}
+.usa-more{text-align:center;color:var(--us-g1);font-size:1.4rem;font-weight:900;line-height:1}
+.usa-pill{background:#fff;border:1px solid #b9c3b3;border-radius:14px;padding:1px 12px;font-size:.88rem;font-weight:700;margin-left:10px;color:#3f5b33}
+.usa-good{background:#dcebcd !important}
+.usa-mid{background:#fcefc4 !important}
+.usa-low{background:#f9dccf !important}
+
+/* ── 이행현황 좌측 메뉴(명세 02 공통 전제) ─────────────── */
+.usa-wrap{display:grid;grid-template-columns:300px 1fr;gap:28px;align-items:start}
+.usa-main{min-width:0;position:relative}
+.usa-side{background:var(--us-g3);border-radius:60px 0 60px 0;padding:56px 12px 60px;min-height:640px;display:flex;flex-direction:column;gap:34px}
+.usa-side-g{display:flex;flex-direction:column;gap:6px}
+.usa-side-h{background:#4a7a33;color:#fff;font-weight:800;font-size:1.35rem;padding:9px 16px;border-radius:2px;display:flex;justify-content:space-between;align-items:center;letter-spacing:-.5px}
+.usa-side-h span{font-size:1rem}
+.usa-side-a{display:block;padding:9px 20px;color:#222 !important;font-size:1.12rem;font-weight:600}
+.usa-side-a:hover{text-decoration:none;color:var(--us-g1) !important}
+.usa-side-a.on{font-weight:800;color:#1f2d1a !important}
+.usa-bullet{color:#2f4a22;margin-right:6px}
+
+/* ── SCR-010 · 014 · 018 취합 대상 설정 ───────────────── */
+.usa-title{font-size:1.2rem;font-weight:800;margin:10px 0 10px;color:#222}
+.usa-search{display:flex;gap:26px;align-items:center;background:#dcdfe3;border-radius:12px;padding:14px 26px;margin-bottom:16px;box-shadow:0 2px 4px #0001}
+.usa-search label{display:flex;align-items:center;gap:12px;font-weight:700;font-size:1.05rem;white-space:nowrap}
+.usa-search label.usa-grow{flex:1}
+.usa-search select,.usa-search input{border:1px solid #9aa0a6;border-radius:3px;padding:6px 10px;font:inherit;background:#fff;min-width:150px}
+.usa-search input{flex:1}
+.usa-sbtn{display:inline-flex;align-items:center;gap:4px;background:#fff;border:1px solid #6d8fc2;color:#1f5fb4 !important;border-radius:4px;padding:5px 14px;font:inherit;font-weight:700;cursor:pointer;white-space:nowrap}
+.usa-sbtn:hover{text-decoration:none;background:#eef4fc}
+.usa-sbtn.dim{border-color:#ccc;color:#aaa !important;cursor:default;background:#f6f6f6}
+.usa-pick2{display:grid;grid-template-columns:1fr 1fr;gap:34px}
+.usa-pbox{border:1px solid #b9bec4;background:#fff}
+.usa-pbox-h{display:flex;align-items:center;background:#d7dbe1;font-weight:800;font-size:1.12rem;padding:10px 16px;border-bottom:1px solid #b9bec4;position:relative}
+.usa-allt{margin-left:auto;width:34px;height:34px;border-radius:50%;border:2px solid #c8ccd2;background:#fff;color:#999 !important;display:flex;align-items:center;justify-content:center;font-weight:900}
+.usa-allt:hover{text-decoration:none;border-color:#2e4e8c;color:#2e4e8c !important}
+.usa-plist{max-height:560px;overflow-y:auto}
+.usa-prow{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:10px 16px;border-bottom:1px solid #d4d8dc;font-size:1.08rem;cursor:pointer}
+.usa-prow.tall{min-height:140px}
+.usa-prow input{display:none}
+.usa-dot{flex:none;width:36px;height:36px;border-radius:50%;border:2px solid #cfd3d8;color:#b8bcc2;background:#fff;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:1.1rem}
+.usa-prow input:checked + .usa-dot{background:#2e4e8c;border-color:#2e4e8c;color:#fff}
+.usa-prow:hover .usa-dot{border-color:#2e4e8c}
+.usa-gbtn{background:#eceeed;border:1px solid #777;border-radius:4px;padding:8px 20px;font:inherit;font-size:1.08rem;font-weight:600;cursor:pointer;color:#222}
+.usa-gbtn:hover{background:#dfe6da}
+
+/* ── SCR-011 · 012 · 015 · 016 이행 현황표 ─────────────── */
+.usa-bar{display:flex;justify-content:space-between;align-items:center;gap:12px;margin:6px 0 10px}
+.usa-year{display:flex;align-items:center;gap:12px}
+.usa-year b{font-size:1.5rem;font-weight:900}
+.usa-sel{border:1px solid #9aa0a6;border-radius:3px;padding:5px 10px;font:inherit;font-size:1.05rem;background:#fff;min-width:120px}
+.usa-xbtn{border:2px solid #7fbf5a;color:#4a9a26 !important;background:#fff;border-radius:4px;padding:4px 12px;font-weight:600}
+.usa-xbtn:hover{text-decoration:none;background:#f1f9ec}
+.usa-wbtn{display:inline-block;border:1px solid #555;color:#222 !important;background:#fff;border-radius:4px;padding:4px 12px;font:inherit;font-weight:600;cursor:pointer}
+.usa-wbtn:hover{text-decoration:none;background:#f3f3f3}
+.usa-wbtn.static{cursor:default;color:#888 !important;border-color:#999}
+.usa-back{color:#555 !important;font-size:.92rem;text-decoration:underline}
+.usa-scroll{overflow-x:auto;border-bottom:6px solid #d8d8d8;border-radius:0 0 3px 3px}
+table.usa-mx{border-collapse:collapse;width:100%;font-size:1rem;border-top:2px solid #555;background:#fff}
+table.usa-mx th{background:#e6e8ec;border:1px solid #c7cbd0;padding:6px 8px;font-weight:700;text-align:center;white-space:nowrap}
+table.usa-mx th.usa-th-item{min-width:360px}
+table.usa-mx th.usa-th-col{min-width:92px;white-space:normal;font-size:.92rem}
+table.usa-mx td{border:1px solid #d3d6da;padding:6px 8px;height:40px}
+table.usa-mx td.c{text-align:center}
+.usa-td-grp{font-size:1.08rem;font-weight:500;position:relative;padding-right:40px !important}
+.usa-td-item{padding-left:40px !important;font-size:.98rem}
+.usa-fold{position:absolute;right:14px;top:50%;transform:translateY(-50%);color:#333 !important;font-weight:900;font-size:1.1rem}
+.usa-fold:hover{text-decoration:none;color:var(--us-g1) !important}
+.usa-c-o{background:#bcd5ef}
+.usa-c-t{background:#fdf0c4}
+.usa-c-x{background:#f9dccf}
+.usa-c-n{background:#fff}
+.usa-c-w{background:#f1f1f1;color:#888;font-size:.85rem}
+tr.usa-total td{font-weight:700;border-top:1px solid #999;border-bottom:2px solid #555}
+.usa-foot{display:flex;justify-content:space-between;align-items:flex-end;margin-top:12px}
+.usa-msgbtn{display:inline-block;background:#eceeed;border:1px solid #777;border-radius:4px;padding:7px 20px;color:#222 !important;font-size:1.08rem;font-weight:600}
+.usa-msgbtn:hover{text-decoration:none;background:#dfe6da}
+.usa-legend{display:flex;border:1px solid #999}
+.usa-legend span{padding:4px 10px;text-align:center;font-weight:800;line-height:1.2;border-left:1px solid #bbb}
+.usa-legend span:first-child{border-left:0}
+.usa-legend small{font-weight:500;font-size:.82rem}
+
+/* ── SCR-013 · 017 조치 지시 모달 ─────────────────────── */
+.usa-modal{position:relative;background:#fff;border:14px solid #8c8c8c;outline:2px solid #1f3a73;min-width:900px;max-width:94vw;max-height:90vh;overflow:auto;padding:30px 40px}
+.usa-x{position:absolute;right:14px;top:10px;color:#333 !important;font-size:1.3rem;font-weight:900}
+.usa-x:hover{text-decoration:none;color:#c33 !important}
+.usa-mtop{display:flex;align-items:center;gap:30px;margin-bottom:10px}
+.usa-msearch{display:flex;gap:6px;align-items:center}
+.usa-msearch input{border:1px solid #bbb;border-radius:4px;padding:4px 8px;font:inherit;width:160px}
+.usa-msearch button{border:0;background:none;color:#1f5fb4;font:inherit;font-weight:700;cursor:pointer}
+.usa-transfer{display:grid;grid-template-columns:1fr 90px 1fr;gap:10px;align-items:start}
+.usa-arrow{font-size:3rem;color:#e8d400;text-shadow:0 0 1px #b19a00;text-align:center;margin-top:60px}
+table.usa-mt{border-collapse:collapse;width:100%;font-size:1rem}
+table.usa-mt th{background:#e6e8ec;padding:9px 8px;border-bottom:1px solid #c7cbd0;text-align:center}
+table.usa-mt td{padding:8px;border-bottom:1px solid #ddd}
+table.usa-mt td.c{text-align:center}
+.usa-msg{margin-top:40px;display:flex;flex-direction:column;gap:10px}
+.usa-msg .usa-wbtn.static{align-self:flex-start}
+.usa-msg textarea{border:1px solid #888;border-radius:8px;padding:12px 14px;font:inherit;font-size:1.05rem;resize:vertical;min-height:90px}
+
+/* ── SCR-019 · 020 도급·용역·위탁 ────────────────────── */
+.usa-ctwrap{position:relative}
+table.usa-ct{border-collapse:separate;border-spacing:6px 0;width:100%;font-size:1.02rem}
+table.usa-ct th{background:#d7dbe1;padding:10px 8px;text-align:center;font-weight:700;border-radius:18px 18px 0 0;line-height:1.35}
+table.usa-ct th.usa-ct-dept{min-width:220px;text-align:left;padding-left:16px}
+table.usa-ct th.usa-ct-name{min-width:360px}
+table.usa-ct td{border:1px solid #bbb;padding:10px 12px;background:#fff}
+table.usa-ct td.usa-ct-dept{vertical-align:top;font-size:1.05rem}
+table.usa-ct td.usa-ct-name a{color:#222 !important}
+table.usa-ct td.usa-ct-name a:hover{color:var(--us-g1) !important}
+table.usa-ct tr.on td.usa-ct-name{background:#eef5e8;font-weight:700}
+.usa-ox{font-size:1.1rem}
+.usa-ox.x{color:#b33}
+.usa-acc{display:flex;flex-direction:column;margin:0 6px}
+.usa-acc-row{display:flex;justify-content:space-between;border:1px solid #bbb;border-top:0;padding:12px 14px;background:#fff;color:#222 !important;font-size:1.05rem}
+.usa-acc-row:first-child{border-top:1px solid #bbb}
+.usa-acc-row:hover{text-decoration:none;background:#f4f8f0}
+.usa-card{position:absolute;top:0;right:6px;width:min(820px,62%);background:#fff;border:6px solid #9a9a9a;box-shadow:0 10px 30px #0003;padding:12px 18px 18px;z-index:5}
+.usa-card-h{font-weight:800;font-size:1.02rem;border-bottom:1px solid #ddd;padding-bottom:6px;margin-bottom:10px;display:flex;justify-content:space-between}
+.usa-x2{color:#333 !important;font-weight:900}
+.usa-fgrid{display:grid;grid-template-columns:1fr 1fr;gap:8px 18px}
+.usa-f{display:grid;grid-template-columns:150px 1fr;align-items:center;gap:8px}
+.usa-f.wide{grid-column:1 / -1}
+.usa-f-l{font-size:.86rem;font-weight:700;color:#333}
+.usa-f-l b{color:#d33}
+.usa-f-v{background:#cfd2d6;border-radius:3px;padding:5px 10px;font-size:.9rem;color:#333;text-align:center;min-height:28px}
+.usa-hr{grid-column:1 / -1;border:0;border-top:1px solid #ddd;margin:6px 0}
+.usa-file{display:inline-block;margin:2px 8px 2px 0;background:#e4e6e8;border-radius:3px;padding:1px 8px}
+
+/* ── SCR-006~009 대시보드 ──────────────────────────── */
+.usa-dash{display:grid;grid-template-columns:360px 1fr;gap:30px;align-items:start}
+.usa-d-h{font-size:1.45rem;font-weight:900;margin:0 0 12px;letter-spacing:-.6px;display:flex;align-items:center;gap:10px}
+.usa-d-h small{font-size:.9rem;font-weight:500}
+.usa-d-tbox{background:var(--us-g3);border-radius:26px;padding:26px 30px;box-shadow:0 3px 8px #2a3a2226}
+.usa-d-tbox.scroll{max-height:840px;overflow-y:auto}
+.usa-d-total{font-size:1.3rem;font-weight:700;margin-bottom:16px}
+.usa-d-total b{font-size:2.1rem;color:#3f6f2a;font-weight:900;margin:0 2px}
+.usa-d-grp{margin-bottom:18px}
+.usa-d-row{display:flex;justify-content:space-between;align-items:baseline;padding:6px 6px 6px 24px;font-size:1.1rem;color:#555}
+.usa-d-row b{font-size:1.5rem;font-weight:800;color:#8a8a8a;margin-right:2px}
+.usa-d-row.top{padding-left:0;color:#222;font-size:1.15rem}
+.usa-d-row.top b{color:#222}
+.usa-d-right{display:flex;flex-direction:column;gap:28px;min-width:0}
+.usa-d-top{display:grid;grid-template-columns:minmax(360px,1.2fr) minmax(200px,.6fr) minmax(300px,1.3fr);gap:24px;align-items:end}
+.usa-d-duebox{display:block;background:var(--us-g3);border-radius:26px;padding:22px 34px;box-shadow:0 3px 8px #2a3a2226;color:#222 !important}
+.usa-d-duebox:hover{text-decoration:none;box-shadow:0 3px 12px #2a3a2244}
+.usa-d-duebox .usa-d-row{padding-left:10px;color:#222}
+.usa-d-duebox .usa-d-row b{color:#222}
+.usa-d-duebox .usa-d-row.today{background:#f3f8ef;border-radius:6px}
+.usa-d-overbox{display:flex;flex-direction:column;justify-content:space-between;height:250px;background:#fff;border:3px solid #f39a9a;border-radius:26px;box-shadow:0 0 0 5px #fde5e5;padding:30px 30px 20px;color:#222 !important;font-size:1.2rem}
+.usa-d-overbox:hover{text-decoration:none}
+.usa-d-overn{text-align:right;font-size:1.25rem}
+.usa-d-overn b{color:#e02424;font-size:2.4rem;font-weight:900}
+.usa-d-alarm{align-self:start}
+.usa-plus{display:inline-flex;width:34px;height:34px;border:1px solid #666;border-radius:4px;align-items:center;justify-content:center;color:#222 !important;font-size:1.3rem;font-weight:500}
+.usa-plus:hover{text-decoration:none;background:#f1f1f1}
+.usa-d-notes{list-style:none;margin:0;padding:0;max-height:220px;overflow:hidden}
+.usa-d-notes.all{max-height:520px;overflow-y:auto}
+.usa-d-notes li{display:flex;justify-content:space-between;gap:20px;padding:8px 2px;font-size:1.05rem;border-bottom:1px solid #eee}
+.usa-d-date{flex:none;color:#333}
+.usa-d-bottom{display:grid;grid-template-columns:minmax(660px,2.3fr) minmax(340px,1fr);gap:34px;align-items:start}
+.usa-d-perfbox{display:grid;grid-template-columns:minmax(300px,360px) 1fr;gap:26px;background:#f3f4f3;border-radius:26px;padding:14px 18px;box-shadow:0 3px 8px #0001}
+.usa-d-rate{background:#fff;border-radius:26px;padding:22px 24px 14px}
+.usa-d-rateh{display:flex;justify-content:space-between;align-items:baseline;font-size:1.1rem;font-weight:700}
+.usa-d-ratev{font-size:2.2rem;color:#3f6f2a;font-weight:900}
+.usa-d-ratev small{font-size:1.1rem}
+.usa-d-bars{display:flex;justify-content:space-around;align-items:flex-end;border-bottom:1px solid #aaa;height:230px;margin-top:10px}
+.usa-d-barc{display:flex;flex-direction:column;align-items:center;width:110px;height:100%}
+.usa-d-bart{flex:1;width:100%;display:flex;align-items:flex-end}
+.usa-d-bar{width:100%;display:flex;justify-content:center;padding-top:10px;color:#fff;font-weight:800;font-size:1.1rem;min-height:40px}
+.usa-d-bar.usa-goodb{background:#70ad47}
+.usa-d-bar.usa-midb{background:#e7b820}
+.usa-d-bar.usa-lowb{background:#ed7d31}
+.usa-d-bar.b{background:#bbb}
+.usa-d-barl{margin-top:6px;color:#666;font-weight:700}
+.usa-d-filter{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px 16px;margin:4px 0 14px}
+.usa-d-filter label{display:flex;align-items:center;gap:8px;white-space:nowrap;min-width:0}
+.usa-d-filter b{font-size:1.4rem;font-weight:900}
+.usa-d-filter .usa-sel{min-width:0;max-width:210px;color:#555}
+table.usa-d-t{width:100%;border-collapse:collapse;background:#fff;font-size:1.08rem;border-top:2px solid #555;border-bottom:2px solid #555}
+table.usa-d-t th,table.usa-d-t td{border:1px solid #c9ccd0;padding:9px 8px;text-align:center}
+table.usa-d-t thead th{background:#e6e8ec;font-weight:800}
+table.usa-d-t tr.usa-d-rrow th{background:#f2f2f2;font-weight:800}
+table.usa-d-t tr.usa-d-rrow td{font-weight:800;font-size:1.15rem}
+table.usa-d-t tr.usa-d-sum th,table.usa-d-t tr.usa-d-sum td{font-weight:900}
+.usa-d-foot{display:flex;justify-content:space-between;margin-top:8px;font-size:.9rem}
+.usa-d-more{color:var(--us-g1) !important;font-weight:700}
+.usa-d-cards{display:grid;grid-template-columns:1fr 1fr;gap:26px 34px}
+.usa-d-card{display:flex;flex-direction:column;gap:10px;color:#222 !important;border-bottom:3px solid #ccc;padding-bottom:6px;min-height:230px}
+.usa-d-card:hover{text-decoration:none;border-bottom-color:var(--us-g2)}
+.usa-d-num{width:62px;height:62px;border-radius:50%;background:var(--us-g3);box-shadow:0 2px 5px #2a3a2230;display:flex;align-items:center;justify-content:center;font-size:1.6rem;font-weight:900}
+.usa-d-ct{font-size:1.15rem;font-weight:800;line-height:1.35;flex:1}
+.usa-d-cv{text-align:right;font-size:1.1rem}
+.usa-d-cv b{font-size:1.6rem;font-weight:900}
+
+@media(max-width:1300px){
+  .usa-dash{grid-template-columns:1fr}
+  .usa-d-top,.usa-d-bottom,.usa-d-perfbox{grid-template-columns:1fr}
+  .usa-wrap{grid-template-columns:1fr}
+  .usa-side{min-height:0;border-radius:24px;padding:20px}
+  .usa-pick2,.usa-transfer{grid-template-columns:1fr}
+  .usa-modal{min-width:0}
+  .usa-card{position:static;width:auto;margin-top:12px}
+}
+
+/* ── 메시지 보내기 — 발신 수단(09-24) ───────────────── */
+.usa-chan{display:flex;flex-wrap:wrap;align-items:center;gap:0.6rem 1.4rem;font-size:1.02rem}
+.usa-chan label{display:inline-flex;align-items:center;gap:0.3rem;cursor:pointer}
+.usa-chan label.off{color:#8a8f88}
+.usa-chan input[type=checkbox]{width:1.1rem;height:1.1rem}
+.usa-soon{margin-left:0.35rem;font-size:0.85rem;border:1px solid #c9ccc7;border-radius:999px;padding:0.05rem 0.5rem;background:#f3f4f2;color:#7a7f78}
+.usa-res{font-size:0.9rem;margin-top:0.2rem}

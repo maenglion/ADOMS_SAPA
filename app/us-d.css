@@ -1,0 +1,175 @@
+/* [400] 묶음 D 전용 — 클래스 이름은 usd- 로 시작
+ * 의무이행(실적증빙) 공중이용시설·공중교통수단 트랙(app/perform/fc). 참고 명세 SCR-057~074 관측치:
+ * 옅은 회색 단추 · 회색 표 머리 · 둥근 회색 카드(절차도) · 파란 테두리 재해 카드 · 연주황 없음(설계 주석은 그리지 않는다). */
+
+.usd-page{font-size:1rem}
+.usd-default{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
+.usd-h2{font-size:1.2rem;margin:18px 0 8px}
+.usd-h3{font-size:1.1rem;font-weight:800;margin:14px 0 8px;color:#111}
+.usd-mt{margin-top:12px}
+.usd-mt2{margin-top:28px}
+.usd-p{margin:2px 0 4px;line-height:1.7}
+.usd-muted{color:var(--us-mut)}
+.usd-note{background:#fffbe8;border:1px solid #f0dc9a;border-radius:8px;padding:8px 12px;margin:6px 0 10px;color:#6b5500;font-size:.95rem}
+.usd-msg{background:var(--us-g4);border:1px solid #b9d6a6;color:var(--us-g1);border-radius:8px;padding:8px 14px;margin:0 0 12px;font-weight:700}
+
+/* 대상 셀렉터 — 회색 필 모양 */
+.usd-target{display:flex;align-items:center;gap:10px;font-size:1.05rem}
+.usd-target b{font-weight:800}
+.usd-target-sel{background:#e3e5e2;border:1px solid #c6cac4;border-radius:6px;padding:7px 12px;font:inherit;font-size:1rem;min-width:220px;max-width:420px;color:#333}
+.usd-sechead{display:flex;justify-content:space-between;align-items:flex-end;gap:12px;margin-top:22px}
+.usd-sechead .usd-h2{margin:0 0 8px}
+
+/* 표 */
+table.usd-tbl td{padding:6px 6px}
+table.usd-tbl input[type=text],table.usd-tbl input[type=date],table.usd-tbl input[type=number]{min-width:0}
+table.usd-tbl.usd-tight input[type=number]{width:4.2rem;min-width:4.2rem;text-align:right}
+table.usd-tbl.usd-tight input[type=date]{width:9.6rem}
+table.usd-tbl.usd-tight input[type=text]{min-width:7.5rem}
+.usd-del-h{width:44px}
+.usd-name{display:flex;gap:6px;align-items:center}
+.usd-name input{flex:1;min-width:4rem}
+.usd-search{border:0;background:none;color:#1f6fd1;font:inherit;font-weight:700;cursor:pointer;white-space:nowrap;padding:2px 4px}
+.usd-search:hover{text-decoration:underline}
+.usd-ico-btn{border:1px solid #9aa196;background:#fff;border-radius:5px;cursor:pointer;font-size:.95rem;padding:2px 6px;line-height:1.2}
+.usd-ico-btn:hover{border-color:var(--us-red)}
+.usd-range{display:flex;flex-direction:column;align-items:stretch;gap:2px;text-align:center}
+.usd-range span{font-weight:700;line-height:1}
+.usd-item{vertical-align:top !important}
+.usd-item-box{display:block;border:1px solid #9aa196;border-radius:5px;padding:5px 6px;background:#fff;margin-bottom:6px;white-space:nowrap}
+.usd-okchk{display:inline-flex;cursor:pointer}
+.usd-okchk input{position:absolute;opacity:0;width:1px;height:1px}
+.usd-okchk span{width:2rem;height:2rem;border-radius:50%;border:2px solid #bbb;display:flex;align-items:center;justify-content:center;color:#ccc;font-weight:900;font-size:1.1rem;background:#fff}
+.usd-okchk input:checked+span{border-color:var(--us-g2);color:#fff;background:var(--us-g2)}
+.usd-okchk input:focus-visible+span{outline:3px solid #9cc4ec}
+.usd-mark{display:inline-block;font-size:.8rem;font-weight:800;border-radius:4px;padding:1px 6px;margin-top:3px;border:1px solid}
+.usd-mark.y{color:#2f7a2f;background:#e9f5e3;border-color:#a8d29a}
+.usd-mark.c{color:#8a6a00;background:#fff6db;border-color:#f0d27a}
+.usd-src summary{cursor:pointer;list-style:none;white-space:normal;display:block}
+table.usd-fixed{table-layout:fixed}
+table.usd-fixed td{overflow-wrap:anywhere;word-break:keep-all;white-space:normal !important;text-overflow:clip !important;overflow:visible !important;max-width:none !important}
+.usd-src summary::-webkit-details-marker{display:none}
+.usd-src summary:hover{color:#1f6fd1}
+.usd-src[open] summary{font-weight:700}
+.usd-src div{margin-top:6px;background:#f7f8f6;border:1px solid #e0e4dd;border-radius:6px;padding:8px 10px;font-size:.9rem;line-height:1.6;white-space:pre-wrap}
+
+/* 증빙 칸 */
+.usd-ev{display:flex;flex-direction:column;gap:4px}
+.usd-ev .us-ev-name{display:flex;flex-direction:column;gap:2px;white-space:normal}
+.usd-evlink{color:#1f4f8f !important;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.usd-picked{color:#9a6a00;font-size:.85rem}
+.usd-plus{align-self:flex-start;display:inline-flex;align-items:center;justify-content:center;width:1.6rem;height:1.6rem;border:1px solid #777;border-radius:4px;background:#fff;font-weight:900;cursor:pointer;line-height:1}
+.usd-plus:hover{border-color:var(--us-g1);color:var(--us-g1)}
+
+/* 표 아래 단추 줄 */
+.usd-foot{display:flex;justify-content:space-between;align-items:center;gap:10px;margin:8px 0 6px;flex-wrap:wrap}
+.usd-foot-l,.usd-foot-r{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.usd-foot-save{margin-top:4px}
+.usd-sum{color:#444;font-weight:700}
+.us-btn.usd-b{background:#eceeed;color:#222 !important;border:1px solid #b8bdb5;font-weight:700;padding:7px 22px}
+.us-btn.usd-b:hover{background:#dfe3dc;border-color:var(--us-g1)}
+.us-btn.usd-b-s{padding:4px 12px;font-size:.92rem}
+.usd-addbtn{display:inline-flex;align-items:center;gap:4px;background:#fff;border:1px solid #6f96c9;color:#1f3f6b;border-radius:5px;padding:6px 14px;font:inherit;font-weight:700;cursor:pointer}
+.usd-addbtn:hover{background:#eef4fb}
+.usd-item .usd-addbtn{padding:1px 8px;font-weight:900;border-color:#777;color:#222}
+
+/* 해당없음 체크 — 켜면 아래가 사라진다(명세 SCR-067·069) */
+.usd-na-line{display:flex;align-items:center;gap:10px;border-top:1px solid #555;border-bottom:1px solid #555;padding:10px 4px;margin:4px 0 12px;font-size:1.05rem;cursor:pointer}
+.usd-na-cb{position:absolute;opacity:0;width:1px;height:1px}
+.usd-na-mark{width:1.8rem;height:1.8rem;border-radius:50%;border:2px solid #bbb;display:flex;align-items:center;justify-content:center;color:#ccc;font-weight:900}
+.usd-na-cb:checked+.usd-na-mark{background:var(--us-g2);border-color:var(--us-g2);color:#fff}
+.usd-na-cb:focus-visible+.usd-na-mark{outline:3px solid #9cc4ec}
+.usd-na:has(.usd-na-cb:checked) .usd-na-body{display:none}
+
+/* 재해 카드 — 파란 테두리 둥근 상자(SCR-066) */
+.usd-card{border:2px solid #2d4f7c;border-radius:22px;padding:14px 16px 10px;margin:0 0 12px;background:#fff}
+.usd-card-h{display:flex;justify-content:space-between;gap:16px;margin-bottom:10px;flex-wrap:wrap}
+.usd-card-h label{display:flex;align-items:center;gap:10px;font-weight:700}
+.usd-card-h input{border:1px solid #c9cfc6;border-radius:5px;padding:6px 8px;font:inherit}
+.usd-card-f{display:flex;justify-content:flex-end;margin-top:8px}
+.usd-delcard{background:#fff;border:1px solid var(--us-red);color:var(--us-red);border-radius:5px;padding:5px 22px;font:inherit;font-weight:700;cursor:pointer}
+.usd-delcard:hover{background:#fdeaea}
+
+/* 절차도 카드 2종(SCR-065) */
+.usd-flows{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:24px}
+.usd-flow{background:#dfe3ea;border-radius:40px;padding:22px 24px 20px;display:flex;flex-direction:column;gap:8px}
+.usd-flow-h{display:flex;justify-content:space-between;align-items:center;gap:8px}
+.usd-flow-h b{font-size:1.05rem}
+.usd-flow-h .usd-addbtn{font-size:.85rem;padding:3px 10px}
+.usd-flow-sub{font-weight:800;margin-top:4px}
+.usd-flow-doc{font-weight:600;color:#333}
+.usd-flow-line{display:flex;align-items:center;gap:10px}
+.usd-flow-line>label{display:flex;align-items:center;gap:6px;font-weight:800;min-width:6rem}
+.usd-flow-line input[type=date]{border:1px solid #c9cfc6;border-radius:5px;padding:5px 8px;font:inherit;background:#fff}
+.usd-flow-line .usd-ev{flex:1}
+.usd-flow-view{background:#f1f1f1;border-radius:14px;min-height:300px;display:flex;flex-direction:column}
+.usd-flow-vh{padding:10px 16px;font-weight:700;font-size:1.05rem}
+.usd-flow-ph{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;color:#666}
+.usd-pdf{width:100%;min-height:480px;border:1px solid #ccc;background:#fff;border-radius:6px}
+.usd-flow .usd-pdf{min-height:300px}
+
+/* 뷰어 */
+.usd-viewer-name{font-weight:600;color:#555;font-size:.92rem}
+.usd-viewer-none{color:#666;text-align:center;line-height:1.7}
+
+/* 조직도(SCR-058) — 인력 표로 그린 것 */
+.usd-org{background:#fff;border:1px solid #ddd;padding:18px 20px;display:flex;flex-direction:column;align-items:center;min-width:min(760px,100%)}
+.usd-org-node{border:1.5px solid #222;padding:8px 18px;text-align:center;font-weight:700;background:#fff;min-width:11rem;line-height:1.5}
+.usd-org-node.top{font-size:1.1rem;border-width:2px}
+.usd-org-v{width:2px;height:18px;background:#333;margin:0 auto}
+.usd-org-row{display:flex;gap:18px;align-items:center;justify-content:center;border-top:2px solid #333;padding-top:16px;flex-wrap:nowrap}
+.usd-org-row .usd-org-node{min-width:9rem}
+.usd-org-tel{border-collapse:collapse;width:auto !important}
+.usd-org-tel th,.usd-org-tel td{border:1px solid #333;padding:4px 12px;font-size:.95rem}
+.usd-org-tel th{background:#fafafa}
+.usd-org-cap{margin-top:12px;color:#666;font-size:.88rem}
+
+/* ④ 관계 법령 */
+.usd-lawbar{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;background:#f4f6f3;border:1px solid #dfe4dc;border-radius:8px;padding:8px 12px;margin-bottom:8px;font-size:.95rem}
+.usd-chips{display:flex;gap:6px;flex-wrap:wrap}
+.usd-chip{border:1px solid #b8bdb5;border-radius:16px;padding:3px 12px;background:#fff;color:#333 !important;font-weight:700;font-size:.9rem}
+.usd-chip.on{background:var(--us-g1);border-color:var(--us-g1);color:#fff !important}
+.usd-chip:hover{text-decoration:none;border-color:var(--us-g1)}
+.usd-pager{display:flex;gap:4px;justify-content:center;margin:8px 0;flex-wrap:wrap}
+.usd-pager a{display:inline-block;min-width:2rem;text-align:center;border:1px solid #c9cfc6;border-radius:5px;padding:3px 8px;color:#333 !important;background:#fff}
+.usd-pager a.on{background:var(--us-g1);border-color:var(--us-g1);color:#fff !important;font-weight:800}
+.usd-gap{padding:0 4px;color:#888}
+
+/* 팝업 */
+.usd-modal{width:min(860px,94vw)}
+.usd-modal.wide{width:min(1180px,96vw)}
+.usd-x{color:#fff !important;font-weight:900;text-decoration:none !important}
+.usd-crumb{font-size:.82rem;color:#777;display:flex;gap:14px;margin-bottom:4px}
+.usd-mtitle{font-size:1.1rem;font-weight:800;margin:2px 0 10px}
+.usd-mpanel{border:1px solid #e1e4df;border-radius:14px;padding:12px 14px}
+.usd-mpanel-h{font-size:.9rem;font-weight:800;margin-bottom:8px}
+table.usd-mtbl{font-size:.92rem}
+table.usd-mtbl th{padding:7px 6px}
+.usd-ck{width:40px}
+.usd-empty{color:#666;padding:10px 8px !important}
+.usd-mfoot{display:flex;justify-content:flex-end;align-items:center;gap:10px;margin-top:12px}
+.usd-msearch{display:flex;gap:12px;align-items:center;flex-wrap:wrap;background:#f1f3f5;border-radius:12px;padding:12px 16px;margin-bottom:10px}
+.usd-msearch label{display:flex;gap:8px;align-items:center;font-weight:700;font-size:.95rem}
+.usd-msearch input:not([type=checkbox]){border:1px solid #c9cfc6;border-radius:5px;padding:6px 8px;font:inherit;font-size:.92rem;min-width:11rem}
+.usd-msearch .usd-mini{font-weight:600;font-size:.88rem}
+.usd-sbtn{background:#1f6fd1;color:#fff;border:0;border-radius:5px;padding:7px 16px;font:inherit;font-weight:700;cursor:pointer}
+.usd-sbtn:hover{background:#1858a8}
+.usd-mcount{color:#1f6fd1;font-weight:700;font-size:.9rem;margin:4px 0 6px}
+.usd-blue{color:#1f6fd1}
+.usd-linkbtn{border:0;background:none;padding:0;font:inherit;color:#1f3f6b;text-align:left;cursor:pointer;font-weight:600}
+.usd-linkbtn:hover{text-decoration:underline;color:#1f6fd1}
+table.usd-rowpick tbody tr:hover td{background:#eef4fb}
+
+/* 예산 안내표(SCR-059·068) */
+table.usd-guide{margin-top:14px;font-size:.88rem;table-layout:fixed}
+table.usd-guide td{vertical-align:top}
+table.usd-guide ul{margin:0;padding-left:16px;line-height:1.6}
+
+@media(max-width:1100px){
+  .usd-flows{grid-template-columns:1fr}
+  .usd-sechead{flex-direction:column;align-items:flex-start}
+  .usd-target-sel{min-width:0;max-width:100%}
+}
+
+/* 전역 table td(한 줄 · 말줄임) 를 이 트랙 표에서는 풀어 준다 — 법령 이름·내용이 잘리면 안 된다 */
+table.usd-tbl td,table.usd-mtbl td,table.usd-guide td,table.usd-org-tel td{white-space:normal;overflow:visible;text-overflow:clip;max-width:none}

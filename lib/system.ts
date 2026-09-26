@@ -1,0 +1,1036 @@
+import { batchListWithRounds } from "@/lib/check_merge";
+import {
+  readTable, depts, staff, budgets, riskAssessments, riskItems, voices, contracts, assets, tasks, type Row,
+} from "@/lib/data";
+import { batchList, loadCycle, splitList } from "@/lib/cycle";
+import { drillEvents, drillYearAgo, lastDrillAt, drillSubstitutes, LRT_KEY } from "@/lib/drill";
+import { idKo } from "@/lib/labels";
+import { ymd } from "@/lib/day";
+import { suggest, splitSemi, ACT_LABEL, b5State, b5Text } from "@/lib/material";
+
+/**
+ * ① 체계 수립 판정 — 중대재해처벌법 시행령 제4조 각 호가 서 있는가. (2026-09-21)
+ * 화면(/system)과 요약(대시보드·보고서·기관장 예방활동)이 **같은 계산**을 쓰게 여기 한 곳에 둔다.
+ */
+export type St = "ok" | "part" | "none" | "unk";
+export type Check = { label: string; st: St; basis: string; fix?: string; href?: string; hrefLabel?: string };
+export type Clause = {
+  no: number; name: string; text: string; checks: Check[]; go?: { href: string; label: string }[];
+  /** 카드 머리에 보일 조문 이름(없으면 「시행령 제4조제N호」) · 화면 안 이동용 이름(없으면 cN). */
+  ref?: string; anchor?: string;
+};
+
+export const ST_LABEL: Record<St, string> = { ok: "갖춰짐", part: "일부", none: "없음", unk: "확인 필요" };
+export const ST_TONE: Record<St, string> = { ok: "ok", part: "warn", none: "bad", unk: "none" };
+
+/** 호 전체 상태 — 「확인 필요」는 끌어내리지 않고 따로 드러낸다. */
+export function overall(cs: Check[]): St {
+  const known = cs.filter((c) => c.st !== "unk");
+  if (!known.length) return "unk";
+  if (known.every((c) => c.st === "ok")) return "ok";
+  if (known.every((c) => c.st === "none")) return "none";
+  return "part";
+}
+
+const TODAY = ymd();
+
+/* ── 반기 — 달력 고정(1.1~6.30 · 7.1~12.31). 시행령 제4조제3·5·7·8·9호 · 제10조제5호의 「반기 1회 이상」 (183일 창은 09-21 폐기) ── */
+export type Half = { y: string; h: 1 | 2; label: string; start: string; end: string };
+export function halfOf(d = TODAY): Half {
+  const y = d.slice(0, 4), h = (+d.slice(5, 7) <= 6 ? 1 : 2) as 1 | 2;
+  return { y, h, label: `${y} ${h === 1 ? "상반기" : "하반기"}`, start: `${y}-${h === 1 ? "01-01" : "07-01"}`, end: `${y}-${h === 1 ? "06-30" : "12-31"}` };
+}
+export function prevHalf(d = TODAY): Half {
+  const c = halfOf(d);
+  return c.h === 2 ? halfOf(`${c.y}-01-01`) : halfOf(`${+c.y - 1}-07-01`);
+}
+export const inHalf = (d: string | undefined, h: Half) => Boolean(d) && d! >= h.start && d! <= h.end;
+const lastOf = (ds: (string | undefined)[]) => ds.filter(Boolean).sort().pop() as string | undefined;
+
+/** 점검 기록 한 줄 — 날짜 · 경영책임자 보고받음 · 필요 조치가 남았는가. */
+type HalfRec = { date?: string; reported: boolean; open?: boolean };
+/**
+ * 반기 점검 판정 — 수사에서 보는 것은 「점검했는가」가 아니라 **보고받고 조치했는가**다.
+ * 이번 반기 기록 + 보고받음 + 남은 조치 없음 = 갖춰짐.
+ */
+function halfCheck(label: string, recs: HalfRec[], fix: string, href: string, hrefLabel: string): Check {
+  const cur = halfOf(), prev = prevHalf();
+  const inCur = recs.filter((r) => inHalf(r.date, cur));
+  const open = recs.filter((r) => r.open).length;
+  if (inCur.length) {
+    const last = lastOf(inCur.map((r) => r.date));
+    if (!inCur.some((r) => r.reported))
+      return { label, st: "part", basis: `${cur.label} 점검 ${last} · 경영책임자 보고 기록 없음`, fix: "점검 결과를 경영책임자에게 보고하고 「보고받음」을 표시합니다.", href, hrefLabel };
+    if (open)
+      return { label, st: "part", basis: `${cur.label} 점검 ${last} · 보고받음 · 필요 조치 ${open}건 남음`, fix: "점검에서 나온 필요 조치를 마치고 완료일을 남깁니다.", href, hrefLabel };
+    return { label, st: "ok", basis: `${cur.label} 점검 ${last} · 경영책임자 보고받음` };
+  }
+  const p = lastOf(recs.filter((r) => inHalf(r.date, prev)).map((r) => r.date));
+  if (p) return { label, st: "part", basis: `${prev.label} 점검 ${p}까지 · ${cur.label} 점검 없음(${cur.end}까지)${open ? ` · 필요 조치 ${open}건 남음` : ""}`, fix, href, hrefLabel };
+  return { label, st: "none", basis: "최근 두 반기에 점검 기록 없음", fix, href, hrefLabel };
+}
+/**
+ * 반기 점검(날짜만) — 보고 여부를 따로 보는 칸(제10조제5호)이나 보고 칸이 없는 기록(제4조제9호)에 쓴다.
+ * 달력 반기(1.1~6.30 · 7.1~12.31)로 센다 — 제4조 다른 호와 같은 규칙. 지난 반기에만 있으면 「일부」.
+ */
+function halfDateCheck(label: string, last: string | undefined, fix: string, href: string, hrefLabel: string, extra = ""): Check {
+  const cur = halfOf(), prev = prevHalf();
+  if (inHalf(last, cur)) return { label, st: "ok", basis: `${cur.label} 점검 ${last}${extra}` };
+  if (inHalf(last, prev)) return { label, st: "part", basis: `${prev.label} 점검 ${last}까지 · ${cur.label} 점검 없음(${cur.end}까지)${extra}`, fix, href, hrefLabel };
+  return { label, st: "none", basis: last ? `최근 ${last} — 최근 두 반기에 점검 기록 없음` : "점검 기록 없음", fix, href, hrefLabel };
+}
+
+/** 종사자 의견 처리 단계 — 칸이 비어 있던 옛 줄은 다른 칸으로 가린다. */
+export const VOICE_STAGES = ["접수", "검토", "개선방안", "이행", "종결"] as const;
+export const stageOf = (v: Row) => v.stage || (v.closed_at ? "종결" : v.review_result ? "검토" : "접수");
+
+/** 제5호 대상 — 산업안전보건법 제15조·제16조·제62조. */
+export const EVAL_ROLES = ["안전보건관리책임자", "관리감독자", "안전보건총괄책임자"] as const;
+
+export async function systemStatus(role = "gm") {
+  const q = (href: string) => `${href}${href.includes("?") ? "&" : "?"}role=${role}`;
+  const dl = (await depts()).filter((d: any) => d.dept_id !== "D99");
+  const deptName = new Map(dl.map((d: any) => [d.dept_id, d.dept_name]));
+  const st = await staff();
+  const staffName = new Map(st.map((x: any) => [x.staff_id, x.display_name]));
+  const policy = await readTable("safety_policy", "policy_id");
+  const orgRows = await readTable("safety_org_role", "role_id");
+  const manual = await readTable("safety_manual", "manual_id");
+  // 예산은 /budget 에서 편성·집행한 것까지 겹쳐 읽는다. 용도 칸(budget_use) = 가 · 나 · 다 · 밖(가·나목 밖).
+  // [캡처 v2] 중대산업재해 체계(시행령 제4조제4호)는 재해 구분이 산업(I)이거나 빈 줄만 센다 —
+  //   공중이용시설(F)·원료·제조물(M) 줄의 가·나목이 산업 가·나목에 더해지던 결함 정정(09-24 점검 K08 후속)
+  const buds = (await readTable("safety_budget", "budget_id")).filter((b: any) => ["", "I"].includes(String(b.area || "").trim()));
+  const ra = await riskAssessments();
+  const ri = await riskItems();
+  // 종사자 의견은 화면에서 접수·진행한 것까지 겹쳐 읽는다(voices() 는 예시 자료 파일만 읽는다).
+  const vocs = await readTable("worker_voice", "voice_id");
+  const ctr = await contracts();
+  const recs = await readTable("system_record", "record_id");
+  const crit = (await readTable("eval_criteria", "criteria_id")).filter((c: any) => c.active !== "N");
+  const cur = halfOf(), prev = prevHalf();
+  const recOf = (no: string, ...kinds: string[]) => recs.filter((r: any) => r.clause_no === no && (!kinds.length || kinds.includes(r.record_kind)));
+  const hr = (r: any): HalfRec => ({ date: r.done_at, reported: r.ceo_reported === "Y", open: Boolean(r.action_needed) && !r.action_done_at });
+  const recHref = (no: number) => q(`/system/record?clause=${no}`);
+
+  // 칸마다 가장 최근 줄(화면에서 등록한 줄이 앞에 온다)
+  const cell = new Map<string, any>();
+  for (const r of orgRows) {
+    const k = `${r.role_item}|${r.dept_id || ""}`;
+    if (!cell.has(k)) cell.set(k, r);
+  }
+  const got = (item: string, dept = "") => cell.get(`${item}|${dept}`);
+  const isOn = (item: string, dept = "") => got(item, dept)?.designated === "Y";
+  const deptCount = (item: string) => dl.filter((d: any) => isOn(item, d.dept_id)).length;
+  const deptMissing = (item: string) => dl.filter((d: any) => !isOn(item, d.dept_id)).map((d: any) => d.dept_name);
+
+  const who = (id?: string) => (id ? staffName.get(id) || id : "");
+  const man = (no: string) => manual.filter((m: any) => m.clause_no === no);
+
+  /* ── 호별 판정 ── */
+  const pol = policy.find((p: any) => p.policy_kind === "경영방침");
+  const goal = policy.find((p: any) => p.policy_kind === "안전보건 목표");
+  const hq = dl.find((d: any) => d.dept_role === "총괄");
+  const hqHead = st.find((x: any) => x.dept_id === hq?.dept_id && x.duty_role === "총괄과장");
+
+  const rProc = man("3")[0];
+  const openHigh = ri.filter((x: any) => x.risk_level === "높음" && !x.measure_done_at).length;
+  const raDone = ra.filter((x: any) => x.status === "완료").length;
+
+  const planned = buds.reduce((a: number, b: any) => a + Number(b.planned_amount || 0), 0);
+  const executed = buds.reduce((a: number, b: any) => a + Number(b.executed_amount || 0), 0);
+  // 용도 칸이 비어 있는 옛 줄은 종류로 가린다(인력·시설·장비 → 가목).
+  const useOf = (b: any) => b.budget_use || (["인력", "시설", "장비"].includes(b.budget_kind) ? "가" : "밖");
+  const budYr = buds.filter((b: any) => !b.fiscal_year || String(b.fiscal_year) === TODAY.slice(0, 4));
+  const budGa = budYr.filter((b: any) => useOf(b) === "가");
+  const budNa = budYr.filter((b: any) => useOf(b) === "나");
+  const budDa = budYr.filter((b: any) => useOf(b) === "다");
+  const budOut = budYr.filter((b: any) => useOf(b) === "밖");
+  const sumP = (rs: any[]) => rs.reduce((a: number, b: any) => a + Number(b.planned_amount || 0), 0);
+  const sumE = (rs: any[]) => rs.reduce((a: number, b: any) => a + Number(b.executed_amount || 0), 0);
+  const budDepts = new Set(budGa.map((b: any) => b.dept_id));
+  const noBud = dl.filter((d: any) => !budDepts.has(d.dept_id));
+  const naDepts = new Set(budNa.filter((b: any) => Number(b.planned_amount || 0) > 0).map((b: any) => b.dept_id));
+  const noNa = dl.filter((d: any) => !naDepts.has(d.dept_id));
+
+  /* 제1호 — 올해 목표 · 문서별 경영책임자 보고 */
+  const yr = TODAY.slice(0, 4);
+  const goalY = policy.find((p: any) => p.policy_kind === "안전보건 목표" && String(p.fiscal_year) === yr);
+  const repOf = (ref?: string) => recs.find((r: any) => ref && r.target_ref === ref && r.ceo_reported === "Y");
+  const polNote = (p: any) => {
+    const rp = repOf(p.policy_id);
+    return `${p.posted === "Y" ? ` · 게시(${p.posted_where || "장소 미기재"})` : " · 게시 안 됨"}${rp ? ` · 경영책임자 보고 ${rp.reported_at || rp.done_at}` : ""}`;
+  };
+
+  /* 제3호 — 반기 점검. 단서: 위험성평가 절차를 마련하고 실시 결과를 보고받으면 점검한 것으로 본다. */
+  const r3 = recOf("3", "반기 점검", "위험성평가 결과 보고").filter((r: any) => r.record_kind === "반기 점검" || rProc);
+  const r3half: HalfRec[] = [...r3.map(hr), ...(rProc?.last_check_at ? [{ date: rProc.last_check_at, reported: false }] : [])];
+
+  /* 제5호 — 가목 권한·예산 · 나목 기준·반기 평가. 사람이 바뀌어도 자리(역할·부서)로 잇는다. */
+  const grants = recOf("5", "권한·예산 부여");
+  const grantOf = (r: string) => grants.find((g: any) => g.target_role === r);
+  const critOf = (r: string) => crit.filter((c: any) => c.target_role === r);
+  const critSum = (r: string) => critOf(r).reduce((a: number, c: any) => a + Number(c.points || 0), 0);
+  const evalRecs = recOf("5", "반기 평가");
+  const evalTargets = [
+    ...(["안전보건관리책임자", "안전보건총괄책임자"] as const).filter((r) => isOn(r)).map((r) => ({ role: r, dept: "", name: r, row: got(r) })),
+    ...dl.filter((d: any) => isOn("관리감독자", d.dept_id)).map((d: any) => ({ role: "관리감독자", dept: d.dept_id, name: `관리감독자(${d.dept_name})`, row: got("관리감독자", d.dept_id) })),
+  ];
+  const evalRecsOf = (t: { role: string; dept: string }) => evalRecs.filter((r: any) => r.target_role === t.role && (r.dept_id || "") === t.dept);
+  const lastEval = (t: any) => lastOf([t.row?.last_eval_at, ...evalRecsOf(t).map((r: any) => r.done_at)]);
+  const evalRows = evalTargets.filter((t) => lastEval(t));
+  const evalCur = evalTargets.filter((t) => inHalf(lastEval(t), cur));
+  const evalPrev = evalTargets.filter((t) => inHalf(lastEval(t), prev));
+  const evalUnrep = evalRecs.filter((r: any) => inHalf(r.done_at, cur) && r.ceo_reported !== "Y").length;
+  const critDate = lastOf(crit.map((c: any) => c.enacted_at)) || "";
+  const evalDoc = man("5")[0] || (critOf("안전보건관리책임자").length && critOf("관리감독자").length
+    ? { title: "안전보건관리책임자등 업무수행 평가 기준표", enacted_at: critDate } : undefined);
+
+  /* 제7호 — 의견 청취(위원회·협의체 논의는 의견을 들은 것으로 봄) · 개선방안 이행 · 반기 점검 */
+  const voiceProc = man("7")[0];
+  const committee = got("산업안전보건위원회");
+  const cmtRecs = recOf("7", "위원회 논의");
+  const vPlan = vocs.filter((v: any) => ["개선방안", "이행"].includes(stageOf(v)));
+  const vLate = vPlan.filter((v: any) => v.plan_due && v.plan_due < TODAY);
+  const vWait = vocs.filter((v: any) => ["접수", "검토"].includes(stageOf(v)));
+  const r7half: HalfRec[] = [...recOf("7", "반기 점검").map(hr), ...(voiceProc?.last_check_at ? [{ date: voiceProc.last_check_at, reported: false }] : [])];
+
+  /* 제8호 — 매뉴얼마다 이번 반기에 점검(훈련)했는가 */
+  const m8 = man("8");
+  const m8covers = new Set(m8.flatMap((m: any) => String(m.covers).split("·")));
+  const r8 = recOf("8", "반기 점검");
+  const m8last = (m: any) => lastOf([m.last_check_at, ...r8.filter((r: any) => r.target_ref === m.manual_id).map((r: any) => r.done_at)]);
+  const m8notCur = m8.filter((m: any) => !inHalf(m8last(m), cur));
+  const r8half: HalfRec[] = [...r8.map(hr), ...m8.filter((m: any) => m.last_check_at).map((m: any) => ({ date: m.last_check_at, reported: false }))];
+
+  const m9 = man("9");
+  const m9covers = new Set(m9.flatMap((m: any) => String(m.covers).split("·")));
+  const m9check = m9.map((m: any) => m.last_check_at).filter(Boolean).sort().pop();
+  const noEval = ctr.filter((c: any) => c.evaluation_done !== "Y").length;
+
+  const mok = (set: Set<string>, k: string) => set.has(k);
+
+  const clauses: Clause[] = [
+    {
+      no: 1, name: "안전·보건 목표와 경영방침",
+      text: "사업 또는 사업장의 안전·보건에 관한 목표와 경영방침을 설정할 것",
+      checks: [
+        pol ? { label: "경영방침", st: "ok", basis: `${pol.title} · 제정 ${pol.enacted_at}${pol.revised_at ? ` · 개정 ${pol.revised_at}` : ""} · ${pol.approver_role} 결재${polNote(pol)}` }
+            : { label: "경영방침", st: "none", basis: "등록된 문서 없음", fix: "경영방침을 정하고 경영책임자 결재를 받아 등록합니다.", href: recHref(1), hrefLabel: "경영방침 등록" },
+        goalY ? { label: `올해(${yr}년) 안전·보건 목표`, st: "ok", basis: `${goalY.title} · 제정 ${goalY.enacted_at}${polNote(goalY)}` }
+          : goal ? { label: `올해(${yr}년) 안전·보건 목표`, st: "part", basis: `${goal.fiscal_year || "연도 미기재"}년 목표만 있음 — ${goal.title}`, fix: "올해 목표(수치·과제)를 정해 등록합니다.", href: recHref(1), hrefLabel: "목표 등록" }
+          : { label: `올해(${yr}년) 안전·보건 목표`, st: "none", basis: "등록된 문서 없음", fix: "올해 목표(수치·과제)를 정해 등록합니다.", href: recHref(1), hrefLabel: "목표 등록" },
+      ],
+      go: [{ href: recHref(1), label: "기록 입력" }, { href: "#policy", label: "문서 보기" }],
+    },
+    {
+      no: 2, name: "안전·보건 업무 전담 조직",
+      text: "산업안전보건법 제17조~제19조·제22조 인력이 총 3명 이상이고 상시근로자 500명 이상 등인 경우 전담 조직을 둘 것",
+      checks: [
+        hq ? { label: "전담 조직", st: "ok", basis: `${hq.dept_name}(총괄)${hqHead ? ` · 총괄 ${who(hqHead.staff_id)}` : ""}` }
+      // 09-26 사용자: 메뉴 밖 화면 합치기 — 조직·담당자는 관리자 › 담당자 권한지정으로(옛 /settings 는 법정 서식으로 넘어감)
+           : { label: "전담 조직", st: "none", basis: "총괄 부서 없음", fix: "안전·보건 업무를 총괄하는 부서를 지정합니다.", href: q("/admin/role?d=ind"), hrefLabel: "조직·담당자" },
+        { label: "적용 요건(인력 3명 이상 · 상시근로자 500명 이상 등)", st: "unk", basis: "기관의 상시근로자 수로 확인해야 합니다 — 이 화면에는 인원 자료가 없습니다." },
+      ],
+      go: [{ href: q("/admin/role?d=ind"), label: "조직·담당자" }],
+    },
+    {
+      no: 3, name: "유해·위험요인 확인·개선 업무절차",
+      text: "유해·위험요인을 확인·개선하는 업무절차를 마련하고 반기 1회 이상 점검할 것(위험성평가를 하면 점검한 것으로 봄)",
+      checks: [
+        rProc ? { label: "절차 문서", st: "ok", basis: `${rProc.title} · 제정 ${rProc.enacted_at}` }
+              : { label: "절차 문서", st: "none", basis: "등록된 절차 없음", fix: "위험성평가 실시 규정을 만듭니다.", href: recHref(3), hrefLabel: "절차 등록" },
+        ra.length ? { label: "위험성평가 실시", st: raDone === ra.length ? "ok" : "part", basis: `${ra.length}개 현장 · 완료 ${raDone}`,
+                      ...(raDone < ra.length ? { fix: `진행 중인 평가 ${ra.length - raDone}곳을 마칩니다.` } : {}) }
+                  : { label: "위험성평가 실시", st: "none", basis: "실시 기록 없음", fix: "현장별 위험성평가를 실시합니다." },
+        { label: "「높음」 위험요인 개선", st: openHigh ? "part" : "ok", basis: openHigh ? `조치가 끝나지 않은 「높음」 ${openHigh}건` : "모두 조치 완료",
+          ...(openHigh ? { fix: "조치 기한과 담당을 확인해 개선을 마칩니다." } : {}) },
+        halfCheck("반기 점검(또는 위험성평가 결과 보고)", r3half,
+          rProc ? "이번 반기 점검 기록을 남기거나, 위험성평가 실시 결과를 경영책임자에게 보고해 점검에 갈음합니다."
+                : "이번 반기 점검 기록을 남깁니다(위험성평가 절차가 없으면 결과 보고로 갈음할 수 없습니다).",
+          recHref(3), "점검 기록"),
+      ],
+      go: [{ href: recHref(3), label: "기록 입력" }],
+    },
+    {
+      no: 4, name: "인력·시설·장비 예산 편성·집행",
+      text: "가. 안전·보건 인력·시설·장비의 구비 나. 유해·위험요인의 개선 다. 고용노동부장관 고시 사항 — 예산을 편성하고 용도에 맞게 집행할 것",
+      checks: [
+        budGa.length ? { label: "가목 인력·시설·장비 예산 편성", st: noBud.length ? "part" : "ok",
+                        basis: `${budDepts.size}/${dl.length}개 부서 편성 · ${sumP(budGa).toLocaleString()}원`,
+                        ...(noBud.length ? { fix: `가목 예산이 없는 부서: ${noBud.map((d: any) => d.dept_name).join(", ")}`, href: q("/budget"), hrefLabel: "예산" } : {}) }
+                    : { label: "가목 인력·시설·장비 예산 편성", st: "none", basis: "가목 용도로 편성한 기록 없음", fix: "안전·보건 인력·시설·장비 예산을 부서별로 편성합니다.", href: q("/budget"), hrefLabel: "예산" },
+        budNa.length ? { label: "나목 유해·위험요인 개선 예산", st: noNa.length ? "part" : "ok",
+                         basis: `${dl.length - noNa.length}/${dl.length}개 부서 편성 · ${sumP(budNa).toLocaleString()}원 · 집행 ${sumE(budNa).toLocaleString()}원`,
+                         ...(noNa.length ? { fix: `나목 예산이 없는 부서: ${noNa.map((d: any) => d.dept_name).join(", ")} — 제3호에서 찾은 위험요인 개선에 쓸 예산을 편성합니다.`, href: q("/budget"), hrefLabel: "예산" } : {}) }
+                     : { label: "나목 유해·위험요인 개선 예산", st: "none", basis: "나목 용도로 편성한 기록 없음", fix: "위험성평가에서 나온 개선 과제에 쓸 예산을 나목 용도로 편성합니다.", href: q("/budget"), hrefLabel: "예산" },
+        budDa.length ? { label: "다목 고시 사항 예산", st: "ok", basis: `${sumP(budDa).toLocaleString()}원` }
+                     : { label: "다목 고시 사항 예산", st: "unk", basis: "고용노동부장관이 정하여 고시하는 사항 — 다목으로 편성한 예산이 없습니다. 고시 내용을 먼저 확인합니다." },
+        ...(budOut.length ? [{ label: "용도를 밝혀야 하는 편성액", st: "unk" as St, basis: `가·나목 밖 ${budOut.length}건 · ${sumP(budOut).toLocaleString()}원 — 어느 목의 용도인지 적혀 있지 않습니다.`, fix: "편성 문서에 용도(가·나목)를 적습니다.", href: q("/budget"), hrefLabel: "예산" }] : []),
+        { label: "용도에 맞게 집행", st: executed > 0 ? "ok" : "none", basis: `집행 ${executed.toLocaleString()}원 · ${Math.round((executed / (planned || 1)) * 100)}% (가목 ${Math.round((sumE(budGa) / (sumP(budGa) || 1)) * 100)}% · 나목 ${Math.round((sumE(budNa) / (sumP(budNa) || 1)) * 100)}%)`,
+          ...(executed > 0 ? {} : { fix: "편성한 용도대로 집행하고 기록합니다.", href: q("/budget"), hrefLabel: "예산" }) },
+      ],
+      go: [{ href: q("/budget"), label: "예산 편성·집행" }],
+    },
+    {
+      no: 5, name: "안전보건관리책임자등 권한·예산 부여와 평가",
+      text: "가. 안전보건관리책임자·관리감독자·안전보건총괄책임자에게 권한과 예산을 줄 것 나. 평가 기준을 마련해 반기 1회 이상 평가·관리할 것",
+      checks: [
+        ((): Check => {
+          const need = ["안전보건관리책임자", "관리감독자"];
+          const gotN = need.filter((r) => grantOf(r));
+          const basis = gotN.length
+            ? gotN.map((r) => { const g = grantOf(r); return `${r}: ${g.doc_name || g.title} (${g.done_at})`; }).join(" · ")
+            : "권한·예산을 정한 문서가 없습니다";
+          const miss = need.filter((r) => !grantOf(r));
+          return { label: "가목 권한·예산 부여", st: miss.length === 0 ? "ok" : gotN.length ? "part" : "none", basis,
+            ...(miss.length ? { fix: `${miss.join("·")}에게 줄 권한과 쓸 수 있는 예산을 문서로 정해 올립니다.`, href: recHref(5), hrefLabel: "권한·예산 등록" } : {}) };
+        })(),
+        grantOf("안전보건총괄책임자")
+          ? { label: "가목 안전보건총괄책임자 권한·예산", st: "ok", basis: `${grantOf("안전보건총괄책임자").doc_name || "문서"} (${grantOf("안전보건총괄책임자").done_at})` }
+          : isOn("안전보건총괄책임자")
+            ? { label: "가목 안전보건총괄책임자 권한·예산", st: "none", basis: "지정은 됐으나 권한·예산 문서가 없습니다", fix: "안전보건총괄책임자에게 줄 권한·예산을 문서로 정합니다.", href: recHref(5), hrefLabel: "권한·예산 등록" }
+            : { label: "가목 안전보건총괄책임자 권한·예산", st: "unk", basis: "도급인의 사업장에서 관계수급인 근로자가 작업하는 경우에 지정합니다(산업안전보건법 제62조) — 해당 여부를 먼저 확인합니다." },
+        critOf("안전보건관리책임자").length && critOf("관리감독자").length
+          ? { label: "나목 평가 기준", st: "ok", basis: EVAL_ROLES.filter((r) => critOf(r).length).map((r) => `${r} ${critOf(r).length}개 항목·${critSum(r)}점`).join(" · ") }
+          : evalDoc
+            ? { label: "나목 평가 기준", st: "ok", basis: `${evalDoc.title}${evalDoc.enacted_at ? ` · 제정 ${evalDoc.enacted_at}` : ""}` }
+            : { label: "나목 평가 기준", st: critOf("안전보건관리책임자").length || critOf("관리감독자").length ? "part" : "none", basis: "평가 기준(항목·배점)이 없거나 한쪽만 있습니다",
+                fix: "안전보건관리책임자·관리감독자 각각의 평가 항목과 배점을 정합니다.", href: recHref(5), hrefLabel: "평가 기준표" },
+        ((): Check => {
+          const total = evalTargets.length;
+          const lbl = "나목 반기 평가·관리";
+          if (!total) return { label: lbl, st: "unk", basis: "평가 대상(지정된 책임자·관리감독자)이 없습니다." };
+          const left = evalTargets.filter((t) => !evalCur.includes(t)).map((t) => t.name);
+          const fix = { fix: `${cur.label} 평가를 입력합니다 — 아직: ${left.slice(0, 4).join(", ")}${left.length > 4 ? ` 외 ${left.length - 4}명` : ""}`, href: recHref(5), hrefLabel: "평가 입력" };
+          if (evalCur.length === total)
+            return evalUnrep ? { label: lbl, st: "part", basis: `${cur.label} ${total}/${total}명 평가 · 보고 안 된 평가 ${evalUnrep}건`, fix: "평가 결과를 경영책임자에게 보고합니다.", href: recHref(5), hrefLabel: "평가 기록" }
+                             : { label: lbl, st: "ok", basis: `${cur.label} ${total}/${total}명 평가 · 경영책임자 보고받음` };
+          if (evalCur.length) return { label: lbl, st: "part", basis: `${cur.label} ${evalCur.length}/${total}명 평가`, ...fix };
+          if (evalPrev.length) return { label: lbl, st: "part", basis: `${prev.label} ${evalPrev.length}/${total}명 평가 · ${cur.label} 평가 없음(${cur.end}까지)`, ...fix };
+          return { label: lbl, st: "none", basis: `평가 기록이 없습니다 (대상 ${total}명)`, ...fix };
+        })(),
+      ],
+      go: [{ href: recHref(5), label: "기록 입력" }, { href: "#matrix", label: "지정 현황" }, { href: q("/budget"), label: "예산" }],
+    },
+    {
+      no: 6, name: "안전관리자·보건관리자 등 전문인력 배치",
+      text: "산업안전보건법 제17조~제19조·제22조에 따라 정해진 수 이상의 안전관리자·보건관리자·안전보건관리담당자·산업보건의를 배치할 것",
+      checks: [
+        ...(["안전관리자", "보건관리자"] as const).map((it): Check => {
+          const n = deptCount(it), miss = deptMissing(it);
+          return {
+            label: it, st: n === dl.length ? "ok" : n === 0 ? "none" : "part", basis: `${n}/${dl.length}개 부서`,
+            ...(miss.length ? { fix: `미선임: ${miss.join(", ")} — 선임(또는 전문기관 위탁)하고 아래에서 등록합니다.`, href: "#register", hrefLabel: "지정 등록" } : {}),
+          };
+        }),
+        isOn("산업보건의") ? { label: "산업보건의", st: "ok", basis: `위촉 ${got("산업보건의")?.designated_at}` }
+                          : { label: "산업보건의", st: "none", basis: "위촉 기록 없음",
+                              fix: "산업보건의를 위촉하거나, 두지 않아도 되는 사유(보건관리자가 의사인 경우 등)를 적어 둡니다.", href: "#register", hrefLabel: "지정 등록" },
+        { label: "안전보건관리담당자(제19조)", st: "unk", basis: "해당 사업장이 있는지 확인해야 합니다 — 선임·지정 7항목 밖입니다." },
+      ],
+      go: [{ href: "#matrix", label: "지정 현황" }],
+    },
+    {
+      no: 7, name: "종사자 의견 청취 절차",
+      text: "종사자 의견을 듣는 절차를 마련하고, 개선방안 이행을 반기 1회 이상 점검할 것(산업안전보건위원회 등에서 논의하면 들은 것으로 봄)",
+      checks: [
+        voiceProc ? { label: "절차 문서", st: "ok", basis: `${voiceProc.title} · 제정 ${voiceProc.enacted_at}` }
+                  : { label: "절차 문서", st: "none", basis: "등록된 절차 없음", fix: "의견 청취 경로·처리 기한을 정한 절차를 만듭니다.", href: recHref(7), hrefLabel: "절차 등록" },
+        vocs.length || cmtRecs.length
+          ? { label: "의견 청취", st: "ok", basis: `접수 ${vocs.length}건(${cur.label} ${vocs.filter((v: any) => inHalf(v.received_at, cur)).length}건) · 위원회·협의체 논의 ${cmtRecs.length}회(의견을 들은 것으로 봄)` }
+          : { label: "의견 청취", st: "none", basis: "접수·논의 기록 없음", fix: "종사자 의견을 받아 기록합니다.", href: recHref(7), hrefLabel: "의견 접수" },
+        vLate.length
+          ? { label: "개선방안 마련·이행", st: "part", basis: `개선방안 ${vPlan.length}건 진행 중 · 기한 넘김 ${vLate.length}건 · 검토 대기 ${vWait.length}건`,
+              fix: `기한을 넘긴 개선방안을 이행합니다 — ${vLate.map((v: any) => `${idKo(v.voice_id)}(${v.plan_due})`).join(", ")}`, href: recHref(7), hrefLabel: "의견 처리" }
+          : { label: "개선방안 마련·이행", st: vocs.length ? "ok" : "none", basis: `개선방안 ${vPlan.length}건 진행 중 · 종결 ${vocs.filter((v: any) => stageOf(v) === "종결").length}건 · 검토 대기 ${vWait.length}건` },
+        committee?.designated === "Y" ? { label: "산업안전보건위원회", st: "ok", basis: `구성 ${committee.designated_at}` }
+                                       : { label: "산업안전보건위원회", st: "none", basis: "구성 기록 없음", fix: "위원회를 구성하고 등록합니다.", href: "#register", hrefLabel: "지정 등록" },
+        halfCheck("반기 점검(개선방안 이행)", r7half, "개선방안이 이행되는지 점검하고 경영책임자에게 보고합니다(위원회 논의로는 이 점검을 갈음하지 않습니다).", recHref(7), "점검 기록"),
+      ],
+      go: [{ href: recHref(7), label: "기록 입력" }],
+    },
+    {
+      no: 8, name: "중대산업재해 발생 시 조치 매뉴얼",
+      text: "가. 작업 중지·근로자 대피·위험요인 제거 등 대응조치 나. 구호조치 다. 추가 피해방지 조치 — 매뉴얼을 마련하고 반기 1회 이상 점검할 것",
+      checks: [
+        ...([["가", "가목 대응조치(작업 중지·대피·위험요인 제거)"], ["나", "나목 구호조치"], ["다", "다목 추가 피해방지 조치"]] as const).map(([k, label]): Check =>
+          mok(m8covers, k) ? { label, st: "ok", basis: m8.filter((m: any) => String(m.covers).includes(k)).map((m: any) => m.title).join(" · ") }
+                           : { label, st: "none", basis: m8.length ? "매뉴얼에 이 절이 없습니다" : "매뉴얼 없음",
+                               fix: k === "다" ? "2차 사고 방지·현장 통제·주변 대피를 적은 절을 매뉴얼에 더합니다." : "매뉴얼에 이 조치를 적습니다.", href: recHref(8), hrefLabel: "매뉴얼 등록·개정" }),
+        m8.length && m8notCur.length && m8notCur.length < m8.length
+          ? { label: "반기 점검(훈련)", st: "part", basis: `${cur.label} 점검한 매뉴얼 ${m8.length - m8notCur.length}/${m8.length} · 아직: ${m8notCur.map((m: any) => `${m.title}(최근 ${m8last(m) || "없음"})`).join(", ")}`,
+              fix: "남은 매뉴얼도 이번 반기에 점검(훈련)하고 경영책임자에게 보고합니다.", href: recHref(8), hrefLabel: "점검 기록" }
+          : halfCheck("반기 점검(훈련)", r8half, "매뉴얼대로 조치하는지 점검(훈련)하고 경영책임자에게 보고합니다.", recHref(8), "점검 기록"),
+      ],
+      go: [{ href: recHref(8), label: "기록 입력" }, { href: "#manual", label: "매뉴얼 보기" }],
+    },
+    {
+      no: 9, name: "도급·용역·위탁 시 수급인 평가 기준·절차",
+      text: "가. 수급인의 산업재해 예방 능력·기술 평가기준·절차 나. 안전·보건 관리비용 기준 다. (건설업·조선업) 공사기간·건조기간 기준 — 마련하고 반기 1회 이상 점검할 것",
+      checks: [
+        mok(m9covers, "가") ? { label: "가목 평가기준·절차", st: "ok", basis: m9.filter((m: any) => String(m.covers).includes("가")).map((m: any) => m.title).join(" · ") }
+                             : { label: "가목 평가기준·절차", st: "none", basis: "문서 없음", fix: "수급인 평가 기준·절차를 만듭니다.", href: "#manual", hrefLabel: "절차·매뉴얼" },
+        mok(m9covers, "나") ? { label: "나목 관리비용 기준", st: "ok", basis: m9.filter((m: any) => String(m.covers).includes("나")).map((m: any) => m.title).join(" · ") }
+                             : { label: "나목 관리비용 기준", st: "none", basis: "문서 없음", fix: "안전·보건 관리비용 기준을 만듭니다.", href: "#manual", hrefLabel: "절차·매뉴얼" },
+        mok(m9covers, "다") ? { label: "다목 공사기간 기준", st: "ok", basis: "문서 있음" }
+                             : { label: "다목 공사기간 기준", st: "unk", basis: "문서 없음 — 건설업·조선업의 경우에 해당하는지부터 확인해야 합니다." },
+        { label: "기준에 따른 수급인 평가", st: noEval ? "part" : "ok", basis: `계약 ${ctr.length}건 중 평가 ${ctr.length - noEval}건`,
+          ...(noEval ? { fix: `평가를 하지 않은 계약 ${noEval}건의 수급인 평가를 합니다.`, href: q("/contracts"), hrefLabel: "도급·용역·위탁" } : {}) },
+        halfDateCheck("반기 점검", m9check, "이번 반기 안에 기준대로 계약이 이뤄지는지 점검합니다.", q("/contracts"), "도급·용역·위탁"),
+      ],
+      go: [{ href: q("/contracts"), label: "도급·용역·위탁" }],
+    },
+  ];
+
+  const sts = clauses.map((c) => overall(c.checks));
+  const cnt = (x: St) => sts.filter((v) => v === x).length;
+  const unkN = clauses.reduce((a, c) => a + c.checks.filter((k) => k.st === "unk").length, 0);
+  return { clauses, sts, cnt, unkN, dl, deptName, st, policy, manual, got, who, evalDoc, m9covers, mok };
+}
+
+/* ════════════════════════════════════════════════════════════════════
+ * 중대시민재해 — 공중이용시설·공중교통수단 (2026-09-21)
+ *   시행령 제10조(법 제9조제2항제1호) 제1호~제8호 · 제11조제2항(법 제9조제2항제4호) 제1호~제4호.
+ *   원문: 법령 조문 DOC-000005 a10 · a11 에서 문구를 확인했다(추정 아님).
+ *   주기가 산업재해와 다르다 — 제10조제5호는 반기 1회, 제10조제8호·제11조제2항제1호·제3호는 **연 1회**.
+ * ════════════════════════════════════════════════════════════════════ */
+
+export const FMS_PLAN = "시설물안전법 제6조 안전 및 유지관리계획";
+export const RAIL_PLAN = "철도안전법 제6조 연차별 시행계획";
+export const OWN_PLAN = "자체 안전계획";
+
+/** 시설 하나의 안전계획 상태(제4호). 갈음은 경영책임자 확인·보고가 있어야 성립한다(제4호 단서). */
+export type PlanState = "수립" | "갈음 인정" | "갈음 확인 없음" | "목 누락" | "작성 중" | "미수립";
+export const PLAN_TONE: Record<PlanState, string> = {
+  "수립": "ok", "갈음 인정": "ok", "갈음 확인 없음": "warn", "목 누락": "warn", "작성 중": "warn", "미수립": "bad",
+};
+export function planState(r: Row): PlanState {
+  if (r.plan_status === "미수립" || !r.plan_status) return "미수립";
+  if (r.plan_status === "작성중") return "작성 중";
+  if (r.plan_basis === FMS_PLAN || r.plan_basis === RAIL_PLAN) return r.ceo_confirmed === "Y" ? "갈음 인정" : "갈음 확인 없음";
+  return r.mok_ga === "Y" && r.mok_na === "Y" && r.mok_da === "Y" ? "수립" : "목 누락";
+}
+const PLAN_OK = (s: PlanState) => s === "수립" || s === "갈음 인정";
+
+export type PlanGroup = {
+  key: string; label: string; n: number; ok: number; replaced: number; noConfirm: number;
+  mokMiss: number; draft: number; none: number; planned: number; done: number; rows: Row[];
+};
+function groupPlans(rows: Row[], keyOf: (r: Row) => string, labelOf: (k: string) => string): PlanGroup[] {
+  const m = new Map<string, PlanGroup>();
+  for (const r of rows) {
+    const k = keyOf(r) || "—";
+    const g = m.get(k) || { key: k, label: labelOf(k), n: 0, ok: 0, replaced: 0, noConfirm: 0, mokMiss: 0, draft: 0, none: 0, planned: 0, done: 0, rows: [] };
+    const s = planState(r);
+    g.n++; g.rows.push(r);
+    if (s === "수립") g.ok++;
+    if (s === "갈음 인정") g.replaced++;
+    if (s === "갈음 확인 없음") g.noConfirm++;
+    if (s === "목 누락") g.mokMiss++;
+    if (s === "작성 중") g.draft++;
+    if (s === "미수립") g.none++;
+    if (r.plan_status === "수립") { g.planned += Number(r.items_planned || 0); g.done += Number(r.items_done || 0); }
+    m.set(k, g);
+  }
+  const ORDER: PlanState[] = ["미수립", "작성 중", "갈음 확인 없음", "목 누락", "갈음 인정", "수립"];
+  for (const g of m.values()) g.rows.sort((a, b) => ORDER.indexOf(planState(a)) - ORDER.indexOf(planState(b)));
+  return [...m.values()].sort((a, b) => b.n - a.n);
+}
+
+const yearOf = (d?: string) => String(d || "").slice(0, 4);
+/** 연 1회 — 올해 안에 했는가(달력 연도로 센다). */
+function yearly(label: string, last: string | undefined, year: string, fix: string, href: string, hrefLabel: string, extra = ""): Check {
+  if (last && yearOf(last) === year) return { label, st: "ok", basis: `올해 ${last}${extra}` };
+  if (last && Number(yearOf(last)) === Number(year) - 1)
+    return { label, st: "part", basis: `올해 기록 없음 — 지난해 ${last}${extra}`, fix, href, hrefLabel };
+  return { label, st: "none", basis: last ? `최근 ${last} — 1년이 넘었습니다` : "기록 없음", fix, href, hrefLabel };
+}
+const done = (t: Row) => t.status === "이행완료" || t.status === "점검완료";
+
+/* [캡처 v2] K02 — 시행령 제10조제5호 반기 점검의 호별 결과 칸(civil_record r1~r4 = 제1~4호). 화면·저장·판정이 이 이름을 같이 쓴다. */
+export const CIV_RESULT_KEYS = ["r1", "r2", "r3", "r4"] as const;
+export const CIV_RESULT_NAME: Record<string, string> = { r1: "제1호 인력", r2: "제2호 예산", r3: "제3호 안전점검", r4: "제4호 안전계획" };
+export const CIV_RESULTS = ["적정", "보완 필요", "미흡"] as const;
+export const CIV_RESULT_TONE: Record<string, string> = { 적정: "ok", "보완 필요": "warn", 미흡: "bad" };
+/** 제6호로 이어질 조치 종류 — 시행령 제10조제6호 「인력을 배치하거나 예산을 추가로 편성·집행하도록 하는 등」. */
+export const CIV_ACTIONS = ["인력 배치", "예산 추가 편성", "예산 집행", "안전계획 보완", "그 밖의 조치"] as const;
+/** 반기 점검 한 줄에서 보완이 필요한 호. */
+export const civWeak = (r: Row) => CIV_RESULT_KEYS.filter((k) => r[k] === "보완 필요" || r[k] === "미흡");
+const firstCode = (t: Row) => String(t.code36 || "").split(";")[0].trim();
+export async function civilStatus(role = "gm") {
+  const q = (href: string) => `${href}${href.includes("?") ? "&" : "?"}role=${role}`;
+  const now = new Date();
+  const today = ymd(now);
+  const year = today.slice(0, 4);
+  const pace = Math.round(((now.getMonth() + 1) / 12) * 100);          // 연중 진도(달 기준)
+
+  const allDepts = await depts();
+  const deptName = new Map<string, string>(allDepts.map((d: any) => [d.dept_id, d.dept_name]));
+  const st = await staff();
+  const staffName = new Map<string, string>(st.map((x: any) => [x.staff_id, x.display_name]));
+  const who = (id?: string) => (id ? staffName.get(id) || id : "");
+  const assetList = await assets({ limit: 100000 });
+  const assetById = new Map<string, Row>(assetList.map((a: any) => [a.asset_id, a]));
+
+  const allPlans = await readTable("civil_safety_plan", "plan_id");
+  const years = [...new Set(allPlans.map((r) => String(r.plan_year)))].sort();
+  const plans = allPlans.filter((r) => String(r.plan_year) === year);
+  const facPlans = plans.filter((r) => r.facility_kind === "공중이용시설");
+  const trnPlans = plans.filter((r) => r.facility_kind === "공중교통수단");
+  const manual = await readTable("civil_manual", "manual_id");
+  const docs = manual.filter((m) => !["대피훈련", "반기 점검", "교육 이수 점검"].includes(m.record_kind));
+  // [캡처 v2] K02 — 화면에서 등록한 체계 기록(civil_record · 시행령 제10조제4·5·7호)을 판정에 바로 겹친다(2026-09-24).
+  //   제5호 반기 점검 줄은 예시 자료(civil_manual 「반기 점검」)와 같은 모양으로 바꿔 한 목록에서 센다.
+  const civRecs = (await readTable("civil_record", "record_id")).sort((a, b) => (a.done_at < b.done_at ? 1 : -1));
+  const half5 = civRecs.filter((r) => r.clause_ref === "10-5");
+  const half5Rows: Row[] = half5.map((r) => ({
+    manual_id: r.record_id, clause_ref: "10-5", record_kind: "반기 점검", title: r.title, covers: CIV_RESULT_KEYS.filter((k) => r[k]).map((k) => k.slice(1)).join("·"),
+    missing: "", done_at: r.done_at, reported_at: r.ceo_reported === "Y" ? r.reported_at : "", owner_staff_id: r.checker_staff_id, evidence_name: r.evidence_name,
+  }));
+  const halfChecks = [...manual.filter((m) => m.record_kind === "반기 점검"), ...half5Rows].sort((a, b) => (a.done_at < b.done_at ? 1 : -1));
+  const civHref = (no: number, hash = "") => q(`/system/civil?clause=${no}`) + hash;
+  const eduChecks = manual.filter((m) => m.record_kind === "교육 이수 점검").sort((a, b) => (a.done_at < b.done_at ? 1 : -1));
+
+  // 공중이용시설 판정(해당 / 검토 중)
+  const verdictOf = (r: Row) => String(assetById.get(r.asset_id)?.sapa_l2_result || "");
+  const nYes = facPlans.filter((r) => verdictOf(r) === "해당").length;
+  const nReview = facPlans.filter((r) => verdictOf(r) === "검토필요").length;
+  const nExcluded = assetList.filter((a: any) => a.sapa_l2_result === "제외").length;
+
+  // 계획 상태 셈
+  const states = plans.map(planState);
+  const cntS = (s: PlanState) => states.filter((x) => x === s).length;
+  const okN = states.filter(PLAN_OK).length;
+  const repl = plans.filter((r) => r.plan_status === "수립" && (r.plan_basis === FMS_PLAN || r.plan_basis === RAIL_PLAN));
+  const replOk = repl.filter((r) => r.ceo_confirmed === "Y").length;
+  const own = plans.filter((r) => r.plan_basis === OWN_PLAN && r.plan_status === "수립");
+  const ownFull = own.filter((r) => r.mok_ga === "Y" && r.mok_na === "Y" && r.mok_da === "Y").length;
+  const set = plans.filter((r) => r.plan_status === "수립");
+  const planned = set.reduce((a, r) => a + Number(r.items_planned || 0), 0);
+  const doneN = set.reduce((a, r) => a + Number(r.items_done || 0), 0);
+  const rate = planned ? Math.round((doneN / planned) * 100) : 0;
+  const noGa = set.filter((r) => r.mok_ga !== "Y").length;
+
+  const byKind = groupPlans(plans, (r) => (r.facility_kind === "공중교통수단" ? "경전철(공중교통수단)" : r.asset_gbn), (k) => k);
+  const byDept = groupPlans(plans, (r) => r.dept_id, (k) => deptName.get(k) || k);
+
+  // 시설 관리 부서 · 담당
+  const facDepts = [...new Set(plans.map((r) => String(r.dept_id || "")).filter((d) => d && d !== "D99"))].sort();
+  const unassigned = plans.filter((r) => !r.dept_id || r.dept_id === "D99");
+  const deptsNoMain = facDepts.filter((d) => !st.some((x: any) => x.dept_id === d && x.duty_role === "정담당"));
+
+  // 예산(제2호) — 시설 관리 부서 몫. 재해 구분 칸이 있으면 그것을 쓴다.
+  // (2026-09-21) 예산 화면에서 넣은 줄까지 읽도록 readTable(데이터 + 화면 입력분)로 바꿨다 — budgets() 는 화면 입력분을 못 본다.
+  //   줄마다: 재해 구분(area)이 적힌 줄은 그 값으로(F = 시민-시설·교통), 빈 줄만 예전 추정(시설 관리 부서 × 인력·시설·장비·점검)으로 센다.
+  const buds = (await readTable("safety_budget", "budget_id")).filter((b: any) => !b.fiscal_year || String(b.fiscal_year) === year);
+  const areaOf = (b: any) => String(b.area || "").trim() || (String(b.disaster_type || "").includes("시민") ? "F" : "");
+  const guessCiv = (b: any) => facDepts.includes(b.dept_id) && ["인력", "시설", "장비", "점검"].includes(b.budget_kind);
+  const civBud = buds.filter((b: any) => (areaOf(b) ? areaOf(b) === "F" : guessCiv(b)));
+  const civGuessN = civBud.filter((b: any) => !areaOf(b)).length;
+  const hasArea = civGuessN === 0;
+  const budDepts = new Set(civBud.map((b: any) => b.dept_id));
+  const budNo = facDepts.filter((d) => !budDepts.has(d));
+  const bPlan = civBud.reduce((a: number, b: any) => a + Number(b.planned_amount || 0), 0);
+  const bExec = civBud.reduce((a: number, b: any) => a + Number(b.executed_amount || 0), 0);
+
+  // 과제(제3호 관계법령 안전점검 · 제6호 점검결과 조치)
+  const allT = await tasks({ limit: 100000 });
+  const tOf = (code: string) => allT.filter((t) => firstCode(t) === code && yearOf(t.due_date) === year);
+  const f03 = tOf("F03");
+  const f03due = f03.filter((t) => String(t.due_date) <= today);
+  const f03done = f03due.filter(done).length;
+  const f03over = f03.filter((t) => t.status === "기간초과").length;
+  const f06 = tOf("F06");
+  const f06done = f06.filter(done).length;
+  const f06over = f06.filter((t) => t.status === "기간초과").length;
+
+  // 제7호 문서(경전철 철도안전관리체계는 따로 — 제7호 단서)
+  const railDoc = docs.find((m) => String(m.basis || "").includes("철도안전법"));
+  const facDocs = docs.filter((m) => m.clause_ref === "10-7" && m !== railDoc);
+  const covers7 = new Set(facDocs.flatMap((m) => String(m.covers || "").split("·")));
+  const doc8 = docs.filter((m) => m.clause_ref === "10-8");
+  const covers8 = new Set(doc8.flatMap((m) => String(m.covers || "").split("·")));
+  const last8 = doc8.map((m) => String(m.last_check_at || "")).filter(Boolean).sort().pop();
+
+  // 제7호 라목 대피훈련 — 1종시설물 + 공중교통수단
+  const classOf = (r: Row) => String(r.asset_class || assetById.get(r.asset_id)?.asset_class || "");
+  const hasClass = facPlans.some((r) => classOf(r));
+  const drillTargets = [...facPlans.filter((r) => classOf(r) === "1종"), ...trnPlans];
+  // 훈련 기록은 lib/drill.ts 한 곳에서 읽는다(civil_manual + drill_plan 합침 — /drills 와 같은 숫자).
+  const drillEv = await drillEvents(today);
+  const yearAgo = drillYearAgo(now);
+  const lastDrill = (r: Row) => lastDrillAt(drillEv, r);
+  const drillRows: Row[] = drillTargets.map((r) => ({ ...r, last_drill: lastDrill(r) }));
+  const drillOk = drillRows.filter((r) => r.last_drill && r.last_drill >= yearAgo).length;
+  const drill1ReviewN = drillTargets.filter((r) => r.facility_kind === "공중이용시설" && verdictOf(r) === "검토필요").length;
+  // 제7호 단서(철도안전관리체계 갈음) — /drills · /exec 와 같은 함수(lib/drill.ts drillSubstitutes).
+  const substs = [...(await drillSubstitutes()).values()];
+  const lrtSubst = substs.find((x) => x.key === LRT_KEY) || null;
+
+  // 계약(제8호) — 공중이용시설 자산에 걸린 계약 + 시설 관리 부서의 운영 위탁
+  const ctr = await contracts();
+  const planAssets = new Set(facPlans.map((r) => r.asset_id));
+  const civCtr = ctr.filter((c: any) => (c.asset_id && planAssets.has(c.asset_id)) || (c.contract_type === "위탁" && facDepts.includes(c.dept_id)));
+  const civNoEval = civCtr.filter((c: any) => c.evaluation_done !== "Y").length;
+
+  // 제11조 — 점검 회차(③)에서 읽는다(읽기만)
+  const batches = await batchList();
+  const yb = batches.filter((b) => String(b.period_year) === year);
+  const withCode = (code: string) => yb.filter((b) => splitList(b.code36_list).includes(code));
+  const closed = (bs: Row[]) => bs.filter((b) => b.status === "결재완료");
+  const b11 = withCode("F11"), b11c = closed(b11);
+  const b12 = withCode("F12"), b12c = closed(b12);
+  const cycleFor = async (bs: Row[], code: string) => {
+    const b = bs[bs.length - 1];
+    if (!b) return null;
+    const cy = await loadCycle(b.batch_id);
+    const rows = cy.rows.filter((r) => firstCode(r) === code);
+    return { batch: b, n: rows.length, ok: rows.filter((r) => r.state === "적합").length, fixing: rows.filter((r) => r.state === "조치중").length };
+  };
+  const c11 = await cycleFor(b11c, "F11");
+  const c12 = await cycleFor(b12c, "F12");
+  const bLabel = (b: Row) => `${b.title}(${idKo(b.batch_id)}) ${b.status === "결재완료" ? "결재 완료" : b.status}`;
+  const NOTICE = "「공중이용시설 및 공중교통수단의 재해예방에 필요한 인력 및 예산 편성 지침」(국토교통부 고시 제2022-55호)";
+
+  const lastHalf = halfChecks[0];
+  const eduLast = eduChecks[0];
+  const halfLastAt = lastHalf ? String(lastHalf.done_at || "") : "";
+
+  const MOK7 = [
+    ["가", "가목 유해·위험요인 확인·점검"],
+    ["나", "나목 발견 시 신고·이용 제한·보수보강"],
+    ["다", "다목 발생 시 긴급구호·추가 피해방지·신고·원인조사"],
+    ["라", "라목 대피훈련"],
+  ] as const;
+
+  const clauses: Clause[] = [
+    {
+      no: 1, ref: "시행령 제10조제1호", anchor: "f1", name: "중대시민재해 예방 인력",
+      text: "가. 관계 법령에 따른 안전관리 업무의 수행 나. 제4호 안전계획의 이행 다. 국토교통부장관 고시 사항 — 이를 이행하는 데 필요한 인력을 갖추어 업무를 수행하도록 할 것",
+      checks: [
+        !deptsNoMain.length && !unassigned.length
+          ? { label: "가목 시설 관리 부서 담당", st: "ok", basis: `시설 관리 부서 ${facDepts.length}곳 모두 정·부 담당 지정` }
+          : { label: "가목 시설 관리 부서 담당", st: "part",
+              basis: `시설 관리 부서 ${facDepts.length}곳${deptsNoMain.length ? ` · 정담당 없음 ${deptsNoMain.map((d) => deptName.get(d)).join(", ")}` : ""}${unassigned.length ? ` · 관리 부서가 정해지지 않은 시설 ${unassigned.length}곳` : ""}`,
+              fix: "관리 부서가 없는 시설의 관리 부서와 담당을 정합니다.", href: "#plan", hrefLabel: "시설별 안전계획" },
+        { label: "관계 법령상 안전관리 인력(시설물 관리자·책임기술자 등)", st: "unk",
+          basis: "법령마다 정한 자격·인원을 시설별로 대조해야 합니다 — 인력 명부가 아직 연결되지 않았습니다." },
+        noGa ? { label: "나목 안전계획 이행 인력", st: "part", basis: `안전계획 ${set.length}건 중 인력 확보 사항(제4호 가목)이 빠진 계획 ${noGa}건`,
+                 fix: "빠진 계획에 인력 확보 사항을 넣습니다.", href: "#plan", hrefLabel: "시설별 안전계획" }
+             : { label: "나목 안전계획 이행 인력", st: "ok", basis: `안전계획 ${set.length}건 모두 인력 확보 사항 포함` },
+        { label: "다목 국토교통부 고시 인력 기준", st: "unk", basis: `${NOTICE}의 기준과 대조해야 합니다.` },
+      ],
+      go: [{ href: q("/admin/role?d=ind"), label: "조직·담당자" }, { href: "#plan", label: "시설별 안전계획" }],
+    },
+    {
+      no: 2, ref: "시행령 제10조제2호", anchor: "f2", name: "중대시민재해 예방 예산 편성·집행",
+      text: "가. 관계 법령에 따른 인력·시설 및 장비 등의 확보·유지와 안전점검 등의 실시 나. 제4호 안전계획의 이행 다. 국토교통부장관 고시 사항 — 필요한 예산을 편성·집행할 것",
+      checks: [
+        civBud.length
+          ? { label: "가목 시설 관리 부서 인력·시설·장비·점검 예산", st: budNo.length ? "part" : "ok",
+              basis: `시설 관리 부서 ${facDepts.length - budNo.length}/${facDepts.length}곳 편성${budDepts.size > facDepts.length - budNo.length ? ` · 그 밖의 부서 ${budDepts.size - (facDepts.length - budNo.length)}곳 중대시민재해 몫 있음` : ""} · ${bPlan.toLocaleString()}원 · 집행 ${Math.round((bExec / (bPlan || 1)) * 100)}%`,
+              ...(budNo.length ? { fix: `예산이 없는 시설 관리 부서: ${budNo.map((d) => deptName.get(d) || d).join(", ")}`, href: q("/budget"), hrefLabel: "예산" } : {}) }
+          : { label: "가목 시설 관리 부서 인력·시설·장비·점검 예산", st: "none", basis: "편성 기록 없음", fix: "시설 관리 부서의 안전 예산을 편성합니다.", href: q("/budget"), hrefLabel: "예산" },
+        ...(hasArea ? [] : [{ label: "중대시민재해 몫 구분", st: "unk" as St,
+          basis: `위 금액 중 ${civGuessN}줄은 재해 구분(중대산업재해·중대시민재해) 칸이 비어 있어 부서·항목으로 추정해 넣었습니다 — 중대산업재해 예산과 겹칠 수 있습니다.`,
+          fix: "예산 화면에서 그 줄의 재해 구분을 고릅니다.", href: q("/budget"), hrefLabel: "예산" }]),
+        { label: "나목 안전계획 이행 예산", st: "unk", basis: "안전계획 항목과 예산 과목이 이어져 있지 않습니다 — 계획마다 소요 예산을 적어야 확인됩니다." },
+        { label: "다목 국토교통부 고시 예산 기준", st: "unk", basis: `${NOTICE}의 기준과 대조해야 합니다.` },
+      ],
+      go: [{ href: q("/budget"), label: "안전보건 예산" }],
+    },
+    {
+      no: 3, ref: "시행령 제10조제3호", anchor: "f3", name: "관계 법령에 따른 안전점검 계획·수행",
+      text: "공중이용시설 또는 공중교통수단에 대한 관계 법령에 따른 안전점검 등을 계획하여 수행되도록 할 것",
+      checks: [
+        f03.length
+          ? { label: `${year}년 안전점검 과제(관계법령 안전점검계획·수행)`, st: f03over || f03done < f03due.length ? "part" : "ok",
+              basis: `올해 ${f03.length}건 · 기한이 지난 ${f03due.length}건 중 완료 ${f03done}건${f03over ? ` · 기간초과 ${f03over}건` : ""}`,
+              ...(f03over ? { fix: `기간을 넘긴 안전점검 ${f03over}건을 마치고 증빙을 올립니다.`, href: q("/tasks"), hrefLabel: "내 업무" } : {}) }
+          : { label: `${year}년 안전점검 과제`, st: "unk", basis: "올해 배정된 안전점검 과제가 없습니다 — 의무 배정을 확인합니다." },
+      ],
+      go: [{ href: q("/duties"), label: "② 의무 확인" }, { href: q("/tasks"), label: "내 업무" }],
+    },
+    {
+      no: 4, ref: "시행령 제10조제4호", anchor: "f4", name: "연 1회 이상 안전계획 수립·이행",
+      text: "연 1회 이상 가. 안전과 유지관리를 위한 인력 확보 나. 안전점검·정밀안전진단(공중교통수단은 점검·정비와 장비 확보) 다. 보수·보강 등 유지관리 — 가 포함된 안전계획을 수립하게 하고 충실히 이행하도록 할 것. 단서: 시설물안전법 제6조 안전 및 유지관리계획 또는 철도안전법 제6조 연차별 시행계획을 수립·시행하고, 경영책임자등이 그 수립 여부와 내용을 직접 확인하거나 보고받았으면 안전계획을 수립·이행한 것으로 봄",
+      checks: [
+        { label: `${year}년 안전계획`, st: okN === plans.length ? "ok" : okN === 0 ? "none" : "part",
+          basis: `대상 ${plans.length}곳 · 갖춰짐 ${okN} · 갈음 확인 없음 ${cntS("갈음 확인 없음")} · 목 누락 ${cntS("목 누락")} · 작성 중 ${cntS("작성 중")} · 미수립 ${cntS("미수립")}`,
+          ...(okN < plans.length ? { fix: "미수립·작성 중인 시설부터 계획을 세우고, 갈음하는 계획은 경영책임자에게 보고합니다.", href: civHref(4), hrefLabel: "안전계획 등록" } : {}) },
+        repl.length
+          ? { label: "갈음 요건 — 경영책임자등 확인·보고", st: replOk === repl.length ? "ok" : "part",
+              basis: `시설물안전법·철도안전법 계획으로 갈음 ${repl.length}곳 중 확인·보고 기록 ${replOk}곳`,
+              ...(replOk < repl.length ? { fix: `확인·보고 기록이 없는 ${repl.length - replOk}곳은 갈음이 인정되지 않습니다 — 경영책임자에게 보고하고 날짜를 남깁니다.`, href: "#plan", hrefLabel: "시설별 안전계획" } : {}) }
+          : { label: "갈음 요건 — 경영책임자등 확인·보고", st: "unk", basis: "갈음하는 계획이 없습니다." },
+        own.length
+          ? { label: "가·나·다목 포함(자체 안전계획)", st: ownFull === own.length ? "ok" : "part", basis: `자체 안전계획 ${own.length}건 중 세 목을 모두 담은 것 ${ownFull}건`,
+              ...(ownFull < own.length ? { fix: "빠진 목(인력·점검·보수보강)을 계획에 더합니다.", href: civHref(4), hrefLabel: "안전계획 등록" } : {}) }
+          : { label: "가·나·다목 포함(자체 안전계획)", st: "unk", basis: "자체 안전계획이 없습니다." },
+        { label: "이행률", st: rate >= pace - 10 ? "ok" : "part", basis: `계획 항목 ${planned.toLocaleString()}개 중 ${doneN.toLocaleString()}개 이행 · ${rate}% (연중 진도 약 ${pace}%)`,
+          ...(rate < pace - 10 ? { fix: "이행이 늦은 시설을 펼쳐 보고 부서에 독려합니다.", href: "#plan", hrefLabel: "시설별 안전계획" } : {}) },
+        { label: "공중이용시설 해당 판정", st: "unk",
+          basis: `대상 ${facPlans.length}곳 중 해당 ${nYes} · 검토 중 ${nReview}(규모·용도 자료 필요) — 판정이 끝나면 대상이 줄 수 있습니다. 제외 ${nExcluded}곳은 대상에서 뺐습니다.` },
+      ],
+      go: [{ href: civHref(4), label: "안전계획 등록" }, { href: "#plan", label: "시설별 안전계획" }, { href: q("/targets"), label: "관리대상" }],
+    },
+    {
+      no: 5, ref: "시행령 제10조제5호", anchor: "f5", name: "제1호~제4호 반기 점검",
+      text: "제1호부터 제4호까지에서 규정한 사항을 반기 1회 이상 점검하고, 직접 점검하지 않은 경우에는 점검이 끝난 후 지체 없이 점검 결과를 보고받을 것",
+      checks: [
+        halfDateCheck("반기 점검", halfLastAt || undefined, "이번 반기 안에 제1호~제4호 이행을 점검하고 날짜를 남깁니다.", civHref(5), "점검 등록",
+          lastHalf ? ` · ${lastHalf.title}` : ""),
+        // [캡처 v2] K02 — 가장 최근 점검이 제1~4호를 모두 다뤘는가(예시 자료는 담은 호 「1·2·3·4」, 화면 등록분은 호별 결과 칸).
+        ((): Check => {
+          if (!lastHalf) return { label: "제1~4호 모두 점검", st: "none", basis: "점검 기록 없음", fix: "제1~4호별 점검 결과를 남깁니다.", href: civHref(5), hrefLabel: "점검 등록" };
+          const got = new Set(String(lastHalf.covers || "").split("·").filter(Boolean));
+          const miss = [1, 2, 3, 4].filter((n) => !got.has(String(n)));
+          return miss.length
+            ? { label: "제1~4호 모두 점검", st: "part", basis: `${lastHalf.done_at} 점검에 빠진 호: ${miss.map((n) => `제${n}호`).join("·")}`, fix: "빠진 호의 점검 결과를 남깁니다.", href: civHref(5), hrefLabel: "점검 등록" }
+            : { label: "제1~4호 모두 점검", st: "ok", basis: `${lastHalf.done_at} 점검 · 제1~4호` };
+        })(),
+        lastHalf?.reported_at
+          ? { label: "경영책임자 보고", st: "ok", basis: `보고 ${lastHalf.reported_at}` }
+          : { label: "경영책임자 보고", st: "none", basis: "보고 기록 없음", fix: "점검 결과를 경영책임자에게 보고합니다.", href: civHref(5), hrefLabel: "보고받음" },
+      ],
+      go: [{ href: civHref(5), label: "점검 등록" }],
+    },
+    {
+      no: 6, ref: "시행령 제10조제6호", anchor: "f6", name: "점검 결과에 따른 인력·예산 조치",
+      text: "제5호에 따른 점검 또는 보고 결과에 따라 인력을 배치하거나 예산을 추가로 편성·집행하도록 하는 등 중대시민재해 예방에 필요한 조치를 할 것",
+      checks: [
+        f06.length
+          ? { label: "점검결과 조치 과제", st: f06over || f06done < f06.length ? "part" : "ok",
+              basis: `올해 ${f06.length}건 · 완료 ${f06done}${f06over ? ` · 기간초과 ${f06over}` : ""}`,
+              ...(f06over || f06done < f06.length ? { fix: "남은 조치를 마칩니다.", href: q("/tasks"), hrefLabel: "내 업무" } : {}) }
+          : { label: "점검결과 조치 과제", st: "unk", basis: "올해 배정된 조치 과제가 없습니다." },
+        // [캡처 v2] K02 — 제5호 점검 등록의 「보완 필요·미흡」과 제6호 조치 과제를 잇는다.
+        ((): Check => {
+          const lbl = "반기 점검에서 나온 조치";
+          if (!half5.length) return { label: lbl, st: "unk", basis: "호별 결과를 남긴 반기 점검이 없습니다 — 제5호 점검 등록에서 결과를 남기면 이어집니다.", fix: "제5호 점검을 호별 결과로 등록합니다.", href: civHref(5), hrefLabel: "점검 등록" };
+          const needs = half5.filter((r) => civWeak(r).length || r.action_needed);
+          const noTask = needs.filter((r) => !r.action_needed);
+          const open = needs.filter((r) => r.action_needed && !r.action_done_at);
+          const late = open.filter((r) => r.action_due && r.action_due < today);
+          if (!needs.length) return { label: lbl, st: "ok", basis: `반기 점검 ${half5.length}건 모두 적정 — 조치 요구 없음` };
+          if (noTask.length || open.length)
+            return { label: lbl, st: "part",
+              basis: `조치가 필요한 점검 ${needs.length}건 · 남은 조치 ${open.length}${late.length ? ` · 기한 넘김 ${late.length}` : ""}${noTask.length ? ` · 조치 과제 없음 ${noTask.length}` : ""}`,
+              fix: "인력 배치·예산 추가 편성 등 조치를 마치고 완료일을 남깁니다.", href: civHref(5, "#act"), hrefLabel: "조치 완료" };
+          return { label: lbl, st: "ok", basis: `조치 ${needs.length}건 모두 완료` };
+        })(),
+      ],
+      go: [{ href: civHref(5, "#act"), label: "조치 과제" }, { href: q("/actions"), label: "⑥ 조치·재점검" }],
+    },
+    {
+      no: 7, ref: "시행령 제10조제7호", anchor: "f7", name: "중대시민재해 예방 업무처리절차",
+      text: "가. 유해·위험요인의 확인·점검 나. 발견 시 신고·조치요구, 이용 제한, 보수·보강 등 개선 다. 발생 시 긴급구호, 긴급안전점검, 위험표지 설치 등 추가 피해방지, 관계 행정기관 신고와 원인조사에 따른 개선 라. 공중교통수단·제1종시설물의 비상·위급상황 대피훈련 — 이 포함된 업무처리절차를 마련하여 이행할 것. 단서: 철도안전법 제7조 비상대응계획을 포함한 철도안전관리체계 등을 경영책임자등이 점검하거나 보고받은 경우 마련·이행한 것으로 봄",
+      checks: [
+        ...MOK7.map(([k, label]): Check =>
+          covers7.has(k) ? { label, st: "ok", basis: facDocs.filter((m) => String(m.covers).includes(k)).map((m) => m.title).join(" · ") }
+                         : { label, st: "none", basis: facDocs.length ? "절차에 이 사항이 없습니다" : "절차 없음", fix: "절차에 이 사항을 적습니다.", href: civHref(7), hrefLabel: "절차 등록" }),
+        !hasClass
+          ? { label: "대피훈련 실시(1종시설물·경전철)", st: "unk", basis: "자산에 종별 칸이 없어 대상을 셀 수 없습니다." }
+          : { label: "대피훈련 실시(1종시설물·경전철)", st: drillOk === drillRows.length ? "ok" : drillOk ? "part" : "none",
+              basis: `대상 ${drillRows.length}곳(1종시설물 ${drillRows.length - trnPlans.length} · 경전철 ${trnPlans.length}) 중 최근 1년 안 훈련 ${drillOk}곳${drill1ReviewN ? ` · 1종 중 공중이용시설 검토 중 ${drill1ReviewN}곳 포함` : ""}`,
+              ...(drillOk < drillRows.length ? { fix: `최근 1년 안 훈련 기록이 없는 ${drillRows.length - drillOk}곳의 훈련 일정을 잡습니다.`, href: "#drill", hrefLabel: "대피훈련 대상" } : {}) },
+        lrtSubst
+          ? { label: "경전철 — 철도안전관리체계(단서)", st: lrtSubst.state === "갈음 인정" ? "ok" : "part",
+              basis: `${lrtSubst.plan.title} · ${lrtSubst.state} — ${lrtSubst.where}`,
+              ...(lrtSubst.state === "갈음 인정" ? {} : { fix: "경영책임자가 철도안전관리체계를 점검하거나 보고받은 기록을 남깁니다.", href: "#subst", hrefLabel: "대피훈련 갈음" }) }
+          : { label: "경전철 — 철도안전관리체계(단서)", st: "unk", basis: "철도안전관리체계 문서가 등록되지 않았습니다." },
+      ],
+      go: [{ href: civHref(7), label: "절차 등록" }, { href: "#drill", label: "대피훈련 대상" }],
+    },
+    {
+      no: 8, ref: "시행령 제10조제8호", anchor: "f8", name: "운영·관리 도급·용역·위탁 기준·절차",
+      text: "가. 조치능력·안전관리능력 평가기준·절차 나. 업무 수행 시 필요한 비용 기준 — 기준과 절차를 마련하고, 그에 따라 도급, 용역, 위탁 등이 이루어지는지를 연 1회 이상 점검(직접 점검하지 않으면 결과를 보고받을 것)",
+      checks: [
+        covers8.has("가") ? { label: "가목 평가기준·절차", st: "ok", basis: doc8.filter((m) => String(m.covers).includes("가")).map((m) => m.title).join(" · ") }
+                         : { label: "가목 평가기준·절차", st: "none", basis: "문서 없음", fix: "수탁자 안전관리능력 평가 기준·절차를 만듭니다.", href: "#records", hrefLabel: "절차·기록" },
+        covers8.has("나") ? { label: "나목 비용 기준", st: "ok", basis: doc8.filter((m) => String(m.covers).includes("나")).map((m) => m.title).join(" · ") }
+                         : { label: "나목 비용 기준", st: "none", basis: "문서 없음", fix: "위탁 업무에 드는 안전 비용 기준을 만듭니다.", href: "#records", hrefLabel: "절차·기록" },
+        yearly("연 1회 점검", last8, year, "올해 안에 기준대로 계약이 이뤄지는지 점검하고 보고받습니다.", "#records", "절차·기록"),
+        civCtr.length
+          ? { label: "대상 계약 수탁자 평가", st: civNoEval ? "part" : "ok", basis: `공중이용시설 관련 계약 ${civCtr.length}건 중 평가 ${civCtr.length - civNoEval}건`,
+              ...(civNoEval ? { fix: `평가하지 않은 ${civNoEval}건을 평가합니다.`, href: q("/contracts"), hrefLabel: "도급·용역·위탁" } : {}) }
+          : { label: "대상 계약 수탁자 평가", st: "unk", basis: "공중이용시설과 이어진 계약이 없습니다." },
+      ],
+      go: [{ href: q("/contracts"), label: "도급·용역·위탁" }],
+    },
+    {
+      no: 11, ref: "시행령 제11조제2항제1호", anchor: "f11-1", name: "관계 법령 의무이행 연 1회 점검",
+      text: "안전·보건 관계 법령에 따른 의무를 이행했는지를 연 1회 이상 점검(지정 기관 위탁 점검 포함)하고, 직접 점검하지 않은 경우 결과를 보고받을 것",
+      checks: [
+        b11c.length ? { label: `${year}년 점검 회차(관계법령 의무이행)`, st: "ok", basis: b11c.map(bLabel).join(" · ") }
+          : b11.length ? { label: `${year}년 점검 회차(관계법령 의무이행)`, st: "part", basis: `${b11.map(bLabel).join(" · ")} — 결재 전`, fix: "회차를 마치고 결재합니다.", href: q("/inspections"), hrefLabel: "③ 점검 계획" }
+          : { label: `${year}년 점검 회차(관계법령 의무이행)`, st: "none", basis: "올해 회차에 관계법령 의무이행(F11)이 없습니다", fix: "점검 회차에 F11을 넣습니다.", href: q("/inspections"), hrefLabel: "③ 점검 계획" },
+      ],
+      go: [{ href: q("/inspections"), label: "③ 점검 계획" }],
+    },
+    {
+      no: 12, ref: "시행령 제11조제2항제2호", anchor: "f11-2", name: "미이행 시 인력·예산 조치",
+      text: "제1호의 점검 또는 보고 결과 의무가 이행되지 않은 사실이 확인되면 인력 배치·예산 추가 편성·집행 등 이행에 필요한 조치를 할 것",
+      checks: [
+        c11 ? { label: "미이행 조치", st: c11.fixing ? "part" : "ok", basis: `${idKo(c11.batch.batch_id)} 관계법령 의무이행 ${c11.n}건 · 적합 ${c11.ok} · 조치 중 ${c11.fixing}`,
+                ...(c11.fixing ? { fix: `조치 중인 ${c11.fixing}건을 마칩니다.`, href: q("/actions"), hrefLabel: "⑥ 조치·재점검" } : {}) }
+            : { label: "미이행 조치", st: "unk", basis: "결재가 끝난 올해 점검 회차가 없어 셀 수 없습니다." },
+      ],
+      go: [{ href: q("/actions"), label: "⑥ 조치·재점검" }],
+    },
+    {
+      no: 13, ref: "시행령 제11조제2항제3호", anchor: "f11-3", name: "법정 교육 이수 연 1회 점검",
+      text: "공중이용시설의 안전을 관리하는 자나 공중교통수단의 시설·설비를 정비·점검하는 종사자가 의무적으로 이수해야 하는 교육을 이수했는지 연 1회 이상 점검하고, 직접 점검하지 않은 경우 결과를 보고받을 것",
+      checks: [
+        b12c.length ? { label: `${year}년 점검 회차(관계법령 교육이수)`, st: "ok", basis: b12c.map(bLabel).join(" · ") }
+          : b12.length ? { label: `${year}년 점검 회차(관계법령 교육이수)`, st: "part", basis: `${b12.map(bLabel).join(" · ")} — 결재 전`, fix: "회차를 마치고 결재합니다.", href: q("/inspections"), hrefLabel: "③ 점검 계획" }
+          : { label: `${year}년 점검 회차(관계법령 교육이수)`, st: "none", basis: "올해 회차에 교육이수(F12)가 없습니다", fix: "점검 회차에 F12를 넣습니다.", href: q("/inspections"), hrefLabel: "③ 점검 계획" },
+        yearly("이수 대상자 명단 점검(시설 안전관리자·경전철 정비 종사자)", eduLast ? String(eduLast.done_at || "") : undefined, year,
+          "올해 이수 대상자 명단을 뽑아 이수 여부를 점검하고 보고받습니다.", "#records", "절차·기록",
+          eduLast?.reported_at ? ` · 보고 ${eduLast.reported_at}` : ""),
+      ],
+      go: [{ href: q("/inspections"), label: "③ 점검 계획" }],
+    },
+    {
+      no: 14, ref: "시행령 제11조제2항제4호", anchor: "f11-4", name: "미이수 교육 이행 지시",
+      text: "제3호의 점검 또는 보고 결과 실시되지 않은 교육에 대해서는 지체 없이 그 이행의 지시 등 교육 실시에 필요한 조치를 할 것",
+      checks: [
+        c12 ? { label: "미이수 이행 지시", st: c12.fixing ? "part" : "ok", basis: `${idKo(c12.batch.batch_id)} 교육이수 ${c12.n}건 · 적합 ${c12.ok} · 조치 중 ${c12.fixing}`,
+                ...(c12.fixing ? { fix: `조치 중인 ${c12.fixing}건의 교육을 마치게 합니다.`, href: q("/actions"), hrefLabel: "⑥ 조치·재점검" } : {}) }
+            : { label: "미이수 이행 지시", st: "unk", basis: "결재가 끝난 올해 점검 회차가 없어 셀 수 없습니다." },
+      ],
+      go: [{ href: q("/actions"), label: "⑥ 조치·재점검" }],
+    },
+  ];
+
+  const sts = clauses.map((c) => overall(c.checks));
+  const cnt = (x: St) => sts.filter((v) => v === x).length;
+  const unkN = clauses.reduce((a, c) => a + c.checks.filter((k) => k.st === "unk").length, 0);
+  return {
+    clauses, sts, cnt, unkN, year, years, plans, byKind, byDept, drillRows, yearAgo, substs, lrtSubst, docs, halfChecks, eduChecks,
+    nYes, nReview, nExcluded, rate, pace, deptName, who, verdictOf, civRecs, facDocs, railDoc, st,
+  };
+}
+
+/* ════════════════════════════════════════════════════════════════════
+ * 중대시민재해 — 원료·제조물 (2026-09-21)
+ *   시행령 제8조(법 제9조제1항제1호) 제1호~제5호 · 제9조제2항(법 제9조제1항제4호) 제1호~제4호. 주기는 반기 1회.
+ *   용인시가 원료·제조물을 생산·제조·판매·유통하는지부터 판단해야 한다 — 대부분 「확인 필요」로 둔다.
+ * ════════════════════════════════════════════════════════════════════ */
+export async function materialStatus(role = "gm") {
+  const q = (href: string) => `${href}${href.includes("?") ? "&" : "?"}role=${role}`;
+  const year = ymd().slice(0, 4);
+  const deptName = new Map<string, string>((await depts()).map((d: any) => [d.dept_id, d.dept_name]));
+  const staffName = new Map<string, string>((await staff()).map((x: any) => [x.staff_id, x.display_name]));
+  const who = (id?: string) => (id ? staffName.get(id) || id : "");
+  const assetList = await assets({ limit: 100000 });
+  const water = assetList.filter((a: any) => a.asset_kind === "지방상수도").length;
+
+  const allT = await tasks({ limit: 100000 });
+  const mT = allT.filter((t) => firstCode(t).startsWith("M") && yearOf(t.due_date) === year);
+  const mByDept = new Map<string, number>();
+  mT.forEach((t) => mByDept.set(t.dept_id, (mByDept.get(t.dept_id) || 0) + 1));
+  const mDeptText = [...mByDept.entries()].sort((a, b) => b[1] - a[1]).map(([d, n]) => `${deptName.get(d) || d} ${n}`).join(" · ");
+  const mCode = (c: string) => mT.filter((t) => firstCode(t) === c);
+
+  const batches = (await batchListWithRounds()).filter((b) => String(b.period_year) === year);   // 09-26 사용자: 옛 점검 화면 합치기 — 이행점검 회차도 함께
+  const mBatch = (code: string) => batches.filter((b) => splitList(b.code36_list).includes(code));
+  const NOTICE = "「원료 및 제조물로 인한 중대시민재해 예방에 필요한 인력 및 예산 편성 지침」(기후에너지환경부 고시 제2025-165호)";
+  const GATE = "원료·제조물 해당 여부가 판단되지 않았습니다 — 해당으로 판단되면 이 항목을 갖춥니다.";
+  const taskNote = (c: string, name: string) => {
+    const ts = mCode(c);
+    return ts.length ? ` 관계 법령 쪽 「${name}」 과제 ${ts.length}건은 이미 배정돼 있습니다(완료 ${ts.filter(done).length}).` : "";
+  };
+  const m08 = mBatch("M08");
+  const m09 = mBatch("M09");
+
+  /* ── 원료·제조물 대장(material_item, 2026-09-22) — 판단은 사람이 정한 것만 센다. 행위에서 나온 제안은 판정에 쓰지 않는다 ── */
+  const items = (await readTable("material_item", "item_id"))
+    .filter((r: any, i: number, a: any[]) => a.findIndex((x: any) => x.item_id === r.item_id) === i);
+  const yes = items.filter((r: any) => r.verdict === "해당");
+  const no = items.filter((r: any) => r.verdict === "비해당");
+  const pending = items.filter((r: any) => r.verdict !== "해당" && r.verdict !== "비해당");
+  const ceoWait = [...yes, ...no].filter((r: any) => !r.ceo_confirmed_at);
+  const anyYes = yes.length > 0;
+  /** 해당 없음 — 품목이 있고 모두 사람이 「비해당」으로 정했을 때만(판단 전 품목이 남으면 아니다). */
+  const allNo = items.length > 0 && no.length === items.length;
+  const b5Yes = yes.filter((r: any) => b5State(r.byeolpyo5) === "yes");
+  const b5Unk = yes.filter((r: any) => b5State(r.byeolpyo5) === "unk");
+  const nameList = (rs: any[]) => rs.map((r: any) => r.item_name).join(" · ");
+  const pendNote = pending.length ? ` 판단 전 품목 ${pending.length}개(${nameList(pending)})가 남아 있어 더 늘 수 있습니다.` : "";
+  const matHref = q("/system?area=M#mat");
+  const NA_BASIS = `해당 없음 — 대장의 품목 ${items.length}개를 모두 「비해당」으로 판단했습니다(사유 ${no.filter((r: any) => String(r.reason || "").trim()).length}건).`;
+  const naCheck = (label: string): Check => ({ label, st: "unk", basis: NA_BASIS });
+
+  const itemCheck = (r: any): Check => {
+    const sug = suggest(splitSemi(r.acts));
+    const acts = splitSemi(r.acts).map((a) => ACT_LABEL[a] || a).join(" · ") || "행위 미선택";
+    const dept = deptName.get(r.dept_id) || r.dept_id || "부서 미정";
+    if (r.verdict === "해당" || r.verdict === "비해당") {
+      const ceo = r.ceo_confirmed_at ? ` · 경영책임자 확인 ${r.ceo_confirmed_at}${r.ceo_proxy === "Y" ? "(총괄 대리 기록)" : ""}` : " · 경영책임자 확인 대기";
+      return {
+        label: `${r.item_name}(${dept}) — ${r.verdict}`, st: "ok",
+        basis: `${acts} · 사유: ${r.reason} · 근거: ${r.basis_ref || "—"} · 판단 ${who(r.judged_by)} ${r.judged_at || ""}${ceo}`,
+        ...(r.ceo_confirmed_at ? {} : { fix: "경영책임자 확인을 받습니다.", href: matHref, hrefLabel: "원료·제조물 대장" }),
+      };
+    }
+    return {
+      label: `${r.item_name}(${dept}) — 확인 필요`, st: "unk",
+      basis: `${acts} · 제안: ${sug.tag} · ${r.reason || "사유 없음"}`,
+    };
+  };
+
+  /** 별표 5 품목의 담당 부서 과제로 센다 — 없음 · 일부 · 갖춰짐. */
+  //   제3·4호는 별표 5 품목의 담당 부서만 센다(별표 5 밖 품목 부서의 과제로 채우지 않는다).
+  const taskCheck = (label: string, code: string, name: string, fix: string): Check => {
+    const b5Depts = new Set(b5Yes.map((r: any) => r.dept_id));
+    const ts = mCode(code).filter((t) => b5Depts.has(t.dept_id));
+    const d = ts.filter(done).length;
+    if (!ts.length) return { label, st: "none", basis: `별표 5 품목 부서에 「${name}」 과제가 없습니다.`, fix, href: q("/tasks"), hrefLabel: "과제" };
+    if (d === ts.length) return { label, st: "ok", basis: `별표 5 품목 부서 「${name}」 과제 ${ts.length}건 모두 완료` };
+    return { label, st: d ? "part" : "none", basis: `별표 5 품목 부서 「${name}」 과제 ${ts.length}건 중 완료 ${d}`, fix, href: q("/tasks"), hrefLabel: "과제" };
+  };
+
+  // 제1호 인력 — 해당 품목마다 담당 부서·담당자가 정해졌는가
+  const staffed = yes.filter((r: any) => r.dept_id && r.owner_staff_id);
+  const staffCheck: Check = !staffed.length
+    ? { label: "해당 품목 담당자 지정", st: "none", basis: `해당 품목 ${yes.length}개에 담당자가 없습니다.`, fix: "품목마다 담당 부서와 담당자를 정합니다.", href: matHref, hrefLabel: "원료·제조물 대장" }
+    : staffed.length < yes.length
+      ? { label: "해당 품목 담당자 지정", st: "part", basis: `해당 품목 ${yes.length}개 중 ${staffed.length}개 담당자 지정 · 빠짐: ${nameList(yes.filter((r: any) => !r.owner_staff_id))}`, fix: "빠진 품목의 담당자를 정합니다.", href: matHref, hrefLabel: "원료·제조물 대장" }
+      : { label: "해당 품목 담당자 지정", st: "ok", basis: yes.map((r: any) => `${r.item_name} — ${deptName.get(r.dept_id) || r.dept_id} ${who(r.owner_staff_id)}`).join(" · ") };
+
+  // 제2호 예산 — 예산 화면에서 재해 구분을 「원료·제조물(M)」로 고른 올해 줄
+  const buds = (await readTable("safety_budget", "budget_id")).filter((b: any) => String(b.fiscal_year) === year && String(b.area || "").trim() === "M");
+  const plan = buds.reduce((a: number, b: any) => a + (Number(b.planned_amount) || 0), 0);
+  const exec = buds.reduce((a: number, b: any) => a + (Number(b.executed_amount) || 0), 0);
+  const budCheck: Check = !buds.length
+    ? { label: "원료·제조물 몫 예산", st: "none", basis: `${year}년 예산에 재해 구분 「원료·제조물」 줄이 없습니다.`, fix: "예산 화면에서 원료·제조물 몫을 편성하고 재해 구분을 고릅니다.", href: q("/budget"), hrefLabel: "예산" }
+    : { label: "원료·제조물 몫 예산", st: exec > 0 ? "ok" : "part", basis: `${year}년 ${buds.length}줄 · 편성 ${plan.toLocaleString()}원 · 집행 ${exec.toLocaleString()}원`, ...(exec > 0 ? {} : { fix: "편성한 예산을 집행하고 집행액을 적습니다.", href: q("/budget"), hrefLabel: "예산" }) };
+
+  // 제5호 반기 점검 — 체계 기록(system_record)의 원료·제조물 제5호 줄(clause_no M8-5)
+  const m5recs = (await readTable("system_record", "record_id")).filter((r: any) => r.clause_no === "M8-5")
+    .map((r: any): HalfRec => ({ date: r.done_at, reported: r.ceo_reported === "Y", open: Boolean(r.action_needed) && !r.action_done_at }));
+  const halfBatch = (bs: Row[], code: string, name: string): Check => bs.length
+    ? { label: `${year}년 점검 회차(${name})`, st: "ok", basis: `${bs.map((b) => idKo(b.batch_id)).join(" · ")}에 들어 있습니다.` }
+    : { label: `${year}년 점검 회차(${name})`, st: "none", basis: `올해 점검 회차에 ${name}(${code})이 없습니다 — 반기마다 회차에 넣어야 합니다.`, fix: "점검 회차를 만들 때 이 의무조항을 넣습니다.", href: q("/inspections"), hrefLabel: "③ 점검 계획" };
+
+  /** 별표 5 쪽(제3·4호) — 해당 품목 중 별표 5가 있으면 판정, 모두 「별표 5 아님」이면 해당 없음, 모르면 확인 필요. */
+  const b5Gate = (fallback: Check[], real: () => Check[]): { checks: Check[]; na: boolean } => {
+    if (allNo) return { checks: [naCheck("별표 5 품목")], na: true };
+    if (!anyYes) return { checks: fallback, na: false };
+    if (b5Yes.length) return { checks: [{ label: "별표 5 품목", st: "ok", basis: b5Yes.map((r: any) => `${r.item_name} — ${b5Text(r.byeolpyo5)}`).join(" · ") }, ...real()], na: false };
+    if (b5Unk.length) return { checks: [{ label: "별표 5 해당 여부", st: "unk", basis: `해당 품목 중 별표 5 여부를 정하지 않은 것: ${nameList(b5Unk)}`, fix: "대장에서 별표 5 해당 여부를 고릅니다.", href: matHref, hrefLabel: "원료·제조물 대장" }], na: false };
+    return { checks: [{ label: "별표 5 품목", st: "unk", basis: `해당 품목(${nameList(yes)})이 모두 별표 5가 아닙니다 — 제3호·제4호는 해당 없음. 제1·2·5호와 제9조는 별표 5 밖에도 걸립니다.` }], na: true };
+  };
+  /** 제1·2·5호 · 제9조 — 해당 품목이 하나라도 있으면 판정, 모두 비해당이면 해당 없음, 아니면 확인 필요(판단 전). */
+  const gate = (fallback: Check[], real: () => Check[]): { checks: Check[]; na: boolean } =>
+    allNo ? { checks: [naCheck("해당 여부")], na: true } : anyYes ? { checks: real(), na: false } : { checks: fallback, na: false };
+
+  const g1 = gate(
+    [
+      { label: "가목·나목 인력", st: "unk", basis: GATE + taskNote("M01", "인력배치") },
+      { label: "다목 고시 인력 기준", st: "unk", basis: `${NOTICE}의 기준과 대조해야 합니다.` },
+    ],
+    () => [
+      { ...staffCheck, label: "가목·나목 인력 — 해당 품목 담당자 지정" },
+      { label: "다목 고시 인력 기준", st: "unk", basis: `${NOTICE}의 기준과 대조해야 합니다.${pendNote}` },
+    ],
+  );
+  const g2 = gate(
+    [
+      { label: "가목·나목 예산", st: "unk", basis: GATE + taskNote("M02", "예산 편성·집행") },
+      { label: "다목 고시 예산 기준", st: "unk", basis: `${NOTICE}의 기준과 대조해야 합니다.` },
+    ],
+    () => [
+      { ...budCheck, label: "가목·나목 예산 — 원료·제조물 몫" },
+      { label: "다목 고시 예산 기준", st: "unk", basis: `${NOTICE}의 기준과 대조해야 합니다.` },
+    ],
+  );
+  const g3 = b5Gate(
+    [{ label: "별표 5 품목 해당 여부", st: "unk",
+       basis: "다루는 원료·제조물이 별표 5 목록에 드는지 먼저 가려야 합니다. 별표 5는 추가 조치 대상이고, 제1호·제2호·제5호는 원료·제조물 전반에 적용됩니다." + taskNote("M03", "별표5 대상 재해예방 조치") }],
+    () => [taskCheck("가목~라목 조치(주기 점검·신고·재해 대응·원인조사 개선)", "M03", "별표5 대상 재해예방 조치", "업무처리절차에 따라 주기 점검·신고·조치를 하고 기록을 남깁니다.")],
+  );
+  const g4 = b5Gate(
+    [{ label: "업무처리절차", st: "unk", basis: GATE + taskNote("M04", "재해예방 업무처리절차 마련·이행") }],
+    () => [taskCheck("업무처리절차(제3호 가목~라목 포함)", "M04", "재해예방 업무처리절차 마련·이행", "제3호 가목~라목을 담은 업무처리절차를 마련합니다.")],
+  );
+  const g5 = gate(
+    [{ label: "반기 점검", st: "unk", basis: GATE }],
+    () => [halfCheck("제1호·제2호 반기 점검(경영책임자 보고받음)", m5recs, "제1호 인력·제2호 예산을 이번 반기에 점검하고 경영책임자에게 보고합니다.", q("/system?area=M#m5rec"), "반기 점검 기록")],
+  );
+  const g6 = gate(
+    [{ label: `${year}년 점검 회차(원료·제조물 관계법령 의무이행)`, st: "unk",
+       basis: (m08.length ? `${m08.map((b) => idKo(b.batch_id)).join(" · ")}에 들어 있습니다. ` : "올해 점검 회차에 원료·제조물 관계법령 의무이행(M08)이 없습니다. ")
+         + "해당으로 판단되면 반기마다 회차에 넣어야 합니다." + taskNote("M08", "관계법령 의무이행") }],
+    () => [halfBatch(m08, "M08", "원료·제조물 관계법령 의무이행")],
+  );
+  const g7 = gate(
+    [{ label: "교육 실시 점검", st: "unk", basis: GATE + taskNote("M09", "관계법령 교육이수") }],
+    () => [{ ...halfBatch(m09, "M09", "관계법령 교육이수"), basis: halfBatch(m09, "M09", "관계법령 교육이수").basis + " 관계 법령에 법정교육이 없는 품목에는 새 교육 점검을 만들지 않습니다(환경부 해설서 53·136쪽)." }],
+  );
+
+  const gateChecks: Check[] = items.length ? items.map(itemCheck) : [
+    { label: `수돗물(상수도사업소 · 지방상수도 ${water}곳)`, st: "unk", basis: "정수장·배수지 등은 공중이용시설 쪽에서 빠지는 경우가 있어 원료·제조물 쪽에서 걸릴 수 있습니다 — 판단이 필요합니다." },
+    { label: "직영 급식(집단급식소)", st: "unk", basis: "시가 직접 운영하는 급식이 있는지 확인해야 합니다." },
+    { label: "예방접종·의약품 투여(보건소)", st: "unk", basis: "보관·관리 결함으로 변질된 의약품을 투여하면 해당될 수 있다는 해석이 있습니다 — 판단이 필요합니다." },
+    { label: "부산물비료 등 생산·배부(농업기술센터)", st: "unk", basis: "생산해 농가에 배부하는 제품이 있는지 확인해야 합니다." },
+  ];
+
+  const clauses: Clause[] = [
+    {
+      no: 0, ref: "먼저 — 해당 여부 판단", anchor: "m0", name: "용인시가 원료·제조물을 생산·제조·판매·유통하는가",
+      text: "법 제9조제1항은 실질적으로 지배·운영·관리하는 사업장에서 생산·제조·판매·유통 중인 원료나 제조물에 적용됩니다. 환경부 해설서는 최종 사용자가 사서 쓰는 경우만 적용 대상이 아니라고 보고(20·131쪽), 제조물의 구성성분이 아니어도 자기 생산 공정에 투입하는 원료는 포함한다고 봅니다(108쪽 — 발전소가 탱크에 저장해 쓰는 황산·암모니아). 주민 등에게 무상 제공·투여·배부하는 것이 해당되는지는 ADOMS 해석이며 확인이 필요합니다(해설서의 병원 의약품 사례는 별표 5 의약품 취급과 관리상 결함을 근거로 들었습니다, 131쪽). 해설서는 행정 해석이라 법원을 구속하지 않습니다.",
+      checks: gateChecks,
+      go: [{ href: matHref, label: "원료·제조물 대장" }, { href: q("/targets"), label: "관리대상" }, { href: q("/duties"), label: "② 의무 확인" }],
+    },
+    {
+      no: 1, ref: "시행령 제8조제1호", anchor: "m1", name: "원료·제조물 재해예방 인력",
+      text: "가. 관계 법령에 따른 안전·보건 관리 업무의 수행 나. 유해·위험요인의 점검과 위험징후 발생 시 대응 다. 기후에너지환경부장관 고시 사항 — 이를 이행하는 데 필요한 인력을 갖추어 업무를 수행하도록 할 것",
+      checks: g1.checks,
+    },
+    {
+      no: 2, ref: "시행령 제8조제2호", anchor: "m2", name: "원료·제조물 재해예방 예산",
+      text: "가. 관계 법령에 따른 인력·시설 및 장비 등의 확보·유지 나. 유해·위험요인의 점검과 위험징후 발생 시 대응 다. 기후에너지환경부장관 고시 사항 — 필요한 예산을 편성·집행할 것",
+      checks: g2.checks,
+      go: [{ href: q("/budget"), label: "예산" }],
+    },
+    {
+      no: 3, ref: "시행령 제8조제3호", anchor: "m3", name: "별표 5 원료·제조물 추가 조치",
+      text: "별표 5에서 정하는 원료 또는 제조물로 인한 중대시민재해를 예방하기 위해 가. 유해·위험요인의 주기적인 점검 나. 발견된 유해·위험요인의 신고 및 조치 다. 발생 시 보고, 신고 및 조치 라. 원인조사에 따른 개선조치를 할 것",
+      checks: g3.checks,
+    },
+    {
+      no: 4, ref: "시행령 제8조제4호", anchor: "m4", name: "업무처리절차 마련",
+      text: "제3호 각 목의 조치를 포함한 업무처리절차의 마련(소상공인은 제외)",
+      checks: g4.checks,
+    },
+    {
+      no: 5, ref: "시행령 제8조제5호", anchor: "m5", name: "제1호·제2호 반기 점검과 조치",
+      text: "제1호 및 제2호의 사항을 반기 1회 이상 점검하고, 점검 결과에 따라 인력을 배치하거나 예산을 추가로 편성·집행하는 등 필요한 조치를 할 것",
+      checks: g5.checks,
+    },
+    {
+      no: 6, ref: "시행령 제9조제2항제1호·제2호", anchor: "m9-1", name: "관계 법령 의무이행 반기 점검·미이행 조치",
+      text: "관계 법령에 따른 의무를 이행했는지를 반기 1회 이상 점검(위탁 점검 포함)하고 결과를 보고받을 것 · 미이행이 확인되면 인력 배치·예산 추가 편성 등 필요한 조치를 할 것",
+      checks: g6.checks,
+      go: [{ href: q("/inspections"), label: "③ 점검 계획" }],
+    },
+    {
+      no: 7, ref: "시행령 제9조제2항제3호·제4호", anchor: "m9-3", name: "법정 교육 실시 반기 점검·미실시 조치",
+      text: "관계 법령에 따라 의무적으로 실시해야 하는 교육이 실시되는지 반기 1회 이상 점검하고 결과를 보고받을 것 · 실시되지 않은 교육은 지체 없이 이행 지시·예산 확보 등 조치를 할 것",
+      checks: g7.checks,
+    },
+  ];
+  /** 해당 없음 칸 — 상태 칸(St)에는 「확인 필요」 자리를 두고, 개수에서는 뺀다. 화면은 na 로 「해당 없음」을 보인다. */
+  const na = [false, g1.na, g2.na, g3.na, g4.na, g5.na, g6.na, g7.na];
+  // 「먼저 — 해당 여부 판단」은 판단 전 품목이 하나라도 남으면 확인 필요다(끌어내리지 않고 드러낸다).
+  const sts: St[] = clauses.map((c, i) => (i === 0 ? (gateChecks.some((k) => k.st === "unk") ? "unk" : "ok") : overall(c.checks)));
+  const cnt = (x: St) => sts.filter((v, i) => v === x && !na[i]).length;
+  const unkN = clauses.reduce((a, c, i) => a + (na[i] ? 0 : c.checks.filter((k) => k.st === "unk").length), 0);
+  const naN = na.filter(Boolean).length;
+  return {
+    clauses, sts, cnt, unkN, year, mTaskN: mT.length, mDeptText,
+    na, naN, items, yesN: yes.length, noN: no.length, pendingN: pending.length, ceoWait, allNo,
+  };
+}

@@ -1,0 +1,199 @@
+﻿table,key,col,old,new,why
+asset,UR2005-0000013,(새 행),,강남대지하차도,634 대조 B · 터널
+asset,UR2018-0000010,(새 행),,공세지하차도,634 대조 B · 터널
+asset,TU2004-0000147,(새 행),,금어리터널,634 대조 B · 터널
+asset,UR1999-0000007,(새 행),,농서지하차도,634 대조 B · 터널
+asset,TU2002-0000027,(새 행),,능원터널,634 대조 B · 터널
+asset,UR2006-0000030,(새 행),,동백지하차도(지하차도 #1),634 대조 B · 터널
+asset,UR2006-0000018,(새 행),,삼막곡 제1지하차도,634 대조 B · 터널
+asset,UR2005-0000055,(새 행),,삼막곡제2지하차도,634 대조 B · 터널
+asset,UR2008-0000048,(새 행),,삼막곡터널,634 대조 B · 터널
+asset,UR2017-0000003,(새 행),,상현지하차도,634 대조 B · 터널
+asset,UR2012-0000009,(새 행),,서천지하차도,634 대조 B · 터널
+asset,UR2013-0000010,(새 행),,성복지하차도,634 대조 B · 터널
+asset,UR2006-0000036,(새 행),,성산지하차도(지하차도#3),634 대조 B · 터널
+asset,UR2006-0000031,(새 행),,수성지하차도(지하차도 #2),634 대조 B · 터널
+asset,TU2008-0000224,(새 행),,신갈터널,634 대조 B · 터널
+asset,UR2012-0000054,(새 행),,신대지하차도,634 대조 B · 터널
+asset,UR2006-0000017,(새 행),,신일지하차도,634 대조 B · 터널
+asset,TU2007-0000145,(새 행),,여수곡터널,634 대조 B · 터널
+asset,TU2012-0000181,(새 행),,영덕1터널,634 대조 B · 터널
+asset,UR2006-0000037,(새 행),,은목지하차도(지하차도#4),634 대조 B · 터널
+asset,TU1980-0000032,(새 행),,주북리터널,634 대조 B · 터널
+asset,UR2009-0000011,(새 행),,죽전지하차도,634 대조 B · 터널
+asset,UR2008-0000045,(새 행),,청덕지하차도,634 대조 B · 터널
+asset,UR2006-0000038,(새 행),,초당지하차도(지하차도#5),634 대조 B · 터널
+asset,TU2002-0000025,(새 행),,학고개터널,634 대조 B · 터널
+asset,UR2010-0000038,(새 행),,흥덕지하차도,634 대조 B · 터널
+asset,UR2012-0000052,(편입 안 함),,하동IC램프2,B 타기관 의심 — 고속국도 방향·나들목 표기 — 한국도로공사 소관일 수 있음
+asset,RW2021-0000131,(새 행),,상미 다목적구장 옹벽,634 대조 A · 옹벽
+asset,AR2012-0000804,(새 행),,수지문화복지타운,634 대조 A · 건축물
+asset,AR2013-0001894,(새 행),,용인포은아트홀,634 대조 B · 건축물
+asset,IQ-YI-0001,(새 행),,구갈희망누리도서관,634 대조 B · 도서관
+asset,IQ-YI-0002,(새 행),,구성도서관,634 대조 B · 도서관
+asset,IQ-YI-0003,(새 행),,기흥도서관,634 대조 B · 도서관
+asset,IQ-YI-0004,(새 행),,남사도서관,634 대조 B · 도서관
+asset,IQ-YI-0005,(새 행),,동백도서관,634 대조 B · 도서관
+asset,IQ-YI-0006,(새 행),,동천도서관,634 대조 B · 도서관
+asset,IQ-YI-0007,(새 행),,모현도서관,634 대조 B · 도서관
+asset,IQ-YI-0008,(새 행),,보라도서관,634 대조 B · 도서관
+asset,IQ-YI-0009,(새 행),,보정도서관,634 대조 B · 도서관
+asset,IQ-YI-0010,(새 행),,상현도서관,634 대조 B · 도서관
+asset,IQ-YI-0011,(새 행),,서농도서관,634 대조 B · 도서관
+asset,IQ-YI-0012,(새 행),,성복도서관,634 대조 B · 도서관
+asset,IQ-YI-0013,(새 행),,수지도서관,634 대조 B · 도서관
+asset,IQ-YI-0014,(새 행),,양지해밀도서관,634 대조 B · 도서관
+asset,IQ-YI-0015,(새 행),,영덕도서관,634 대조 B · 도서관
+asset,IQ-YI-0016,(새 행),,용인중앙도서관,634 대조 B · 도서관
+asset,IQ-YI-0017,(새 행),,이동꿈틀도서관,634 대조 B · 도서관
+asset,IQ-YI-0018,(새 행),,죽전도서관,634 대조 B · 도서관
+asset,IQ-YI-0019,(새 행),,청덕도서관,634 대조 B · 도서관
+asset,IQ-YI-0020,(새 행),,포곡도서관,634 대조 B · 도서관
+asset,IQ-YI-0021,(새 행),,흥덕도서관,634 대조 B · 도서관
+asset,AR2008-0004738,(새 행),,구갈동 행정복지센터,634 대조 B · 업무시설
+asset,AR1996-0002570,(새 행),,구성동 행정복지센터,634 대조 B · 업무시설
+asset,IQ-YI-0022,(새 행),,기흥구보건소,634 대조 B · 업무시설
+asset,AR2003-0009584,(새 행),,기흥구청,634 대조 B · 업무시설
+asset,IQ-YI-0023,(새 행),,기흥동 행정복지센터,634 대조 B · 업무시설
+asset,AR2001-0002157,(새 행),,남사읍 행정복지센터,634 대조 B · 업무시설
+asset,AR1999-0003538,(새 행),,농업기술센터,634 대조 B · 업무시설
+asset,IQ-YI-0024,(새 행),,동백1동 행정복지센터,634 대조 B · 업무시설
+asset,IQ-YI-0025,(새 행),,동백2동 행정복지센터,634 대조 B · 업무시설
+asset,IQ-YI-0026,(새 행),,동백3동 행정복지센터,634 대조 B · 업무시설
+asset,AR2002-0001743,(새 행),,동부동 행정복지센터,634 대조 B · 업무시설
+asset,AR2006-0004246,(새 행),,동천동 행정복지센터,634 대조 B · 업무시설
+asset,IQ-YI-0027,(새 행),,마북동 행정복지센터,634 대조 B · 업무시설
+asset,AR2006-0004258,(새 행),,모현읍 행정복지센터,634 대조 B · 업무시설
+asset,AR1990-0000745,(새 행),,백암면 행정복지센터,634 대조 B · 업무시설
+asset,IQ-YI-0028,(새 행),,보라동 행정복지센터,634 대조 B · 업무시설
+asset,IQ-YI-0029,(새 행),,보정동 행정복지센터,634 대조 B · 업무시설
+asset,IQ-YI-0030,(새 행),,삼가동 행정복지센터,634 대조 B · 업무시설
+asset,AR2009-0003439,(새 행),,상갈동 행정복지센터,634 대조 B · 업무시설
+asset,IQ-YI-0031,(새 행),,상하동 행정복지센터,634 대조 B · 업무시설
+asset,AR2003-0009544,(새 행),,상현1동 행정복지센터,634 대조 B · 업무시설
+asset,IQ-YI-0032,(새 행),,상현2동 행정복지센터,634 대조 B · 업무시설
+asset,IQ-YI-0033,(새 행),,상현3동 행정복지센터,634 대조 B · 업무시설
+asset,IQ-YI-0034,(새 행),,서농동 행정복지센터,634 대조 B · 업무시설
+asset,AR2009-0003440,(새 행),,성복동 행정복지센터,634 대조 B · 업무시설
+asset,IQ-YI-0035,(새 행),,신갈동 행정복지센터,634 대조 B · 업무시설
+asset,AR2008-0004135,(새 행),,신봉동 행정복지센터,634 대조 B · 업무시설
+asset,AR1993-0002067,(새 행),,양지읍 행정복지센터,634 대조 B · 업무시설
+asset,IQ-YI-0036,(새 행),,역북동 행정복지센터,634 대조 B · 업무시설
+asset,IQ-YI-0037,(새 행),,영덕1동 행정복지센터,634 대조 B · 업무시설
+asset,IQ-YI-0038,(새 행),,영덕2동 행정복지센터,634 대조 B · 업무시설
+asset,AR2005-0003907,(새 행),,용인특례시의회(의회청사),634 대조 B · 업무시설
+asset,AR2004-0006390,(새 행),,원삼면 행정복지센터,634 대조 B · 업무시설
+asset,IQ-YI-0039,(새 행),,유림1동 행정복지센터,634 대조 B · 업무시설
+asset,IQ-YI-0040,(새 행),,유림2동 행정복지센터,634 대조 B · 업무시설
+asset,AR1999-0003651,(새 행),,유림동주민센터,634 대조 B · 업무시설
+asset,AR1993-0002013,(새 행),,이동읍 행정복지센터,634 대조 B · 업무시설
+asset,AR2005-0004883,(새 행),,죽전1동 행정복지센터,634 대조 B · 업무시설
+asset,IQ-YI-0041,(새 행),,죽전2동 행정복지센터,634 대조 B · 업무시설
+asset,IQ-YI-0042,(새 행),,죽전3동 행정복지센터,634 대조 B · 업무시설
+asset,IQ-YI-0043,(새 행),,중앙동 행정복지센터,634 대조 B · 업무시설
+asset,AR2005-0003906,(새 행),,처인구보건소,634 대조 B · 업무시설
+asset,AR1982-0000084,(새 행),,처인구청,634 대조 B · 업무시설
+asset,AR1990-0000202,(새 행),,처인구청(별관 1),634 대조 B · 업무시설
+asset,AR2001-0002365,(새 행),,처인구청(별관2),634 대조 B · 업무시설
+asset,AR2002-0001653,(새 행),,포곡읍 행정복지센터,634 대조 B · 업무시설
+asset,AR2003-0009551,(새 행),,풍덕천1동 행정복지센터,634 대조 B · 업무시설
+asset,AR2003-0009575,(새 행),,풍덕천2동 행정복지센터,634 대조 B · 업무시설
+asset,IQ-YI-0044,(새 행),,용인평온의숲(장례식장 여부·위치),634 대조 B · 지하 장례식장
+asset,AR1989-0000718,(새 행),,용인시문예회관,634 대조 B · 실내공연장
+asset_target_map,BR0000-0000002,target_code,TG25,(뗌),3종 교량 — 제1·2종 시설물 코드 잘못 붙임(us_v1.6) 정정
+asset_target_map,BR1900-0000009,target_code,TG25,(뗌),3종 교량 — 제1·2종 시설물 코드 잘못 붙임(us_v1.6) 정정
+asset_target_map,BR1968-0000035,target_code,TG25,(뗌),3종 교량 — 제1·2종 시설물 코드 잘못 붙임(us_v1.6) 정정
+asset_target_map,BR1974-0000037,target_code,TG25,(뗌),3종 교량 — 제1·2종 시설물 코드 잘못 붙임(us_v1.6) 정정
+asset_target_map,BR1979-0000106,target_code,TG25,(뗌),3종 교량 — 제1·2종 시설물 코드 잘못 붙임(us_v1.6) 정정
+asset_target_map,BR1984-0000143,target_code,TG25,(뗌),3종 교량 — 제1·2종 시설물 코드 잘못 붙임(us_v1.6) 정정
+asset_target_map,BR1984-0000148,target_code,TG25,(뗌),3종 교량 — 제1·2종 시설물 코드 잘못 붙임(us_v1.6) 정정
+asset_target_map,BR1986-0000243,target_code,TG25,(뗌),3종 교량 — 제1·2종 시설물 코드 잘못 붙임(us_v1.6) 정정
+asset_target_map,BR1987-0000200,target_code,TG25,(뗌),3종 교량 — 제1·2종 시설물 코드 잘못 붙임(us_v1.6) 정정
+asset_target_map,BR1987-0000420,target_code,TG25,(뗌),3종 교량 — 제1·2종 시설물 코드 잘못 붙임(us_v1.6) 정정
+asset_target_map,BR1987-0000421,target_code,TG25,(뗌),3종 교량 — 제1·2종 시설물 코드 잘못 붙임(us_v1.6) 정정
+asset_target_map,BR1988-0000418,target_code,TG25,(뗌),3종 교량 — 제1·2종 시설물 코드 잘못 붙임(us_v1.6) 정정
+asset_target_map,BR1989-0000314,target_code,TG25,(뗌),3종 교량 — 제1·2종 시설물 코드 잘못 붙임(us_v1.6) 정정
+asset_target_map,BR1990-0000234,target_code,TG25,(뗌),3종 교량 — 제1·2종 시설물 코드 잘못 붙임(us_v1.6) 정정
+asset_target_map,BR1990-0000453,target_code,TG25,(뗌),3종 교량 — 제1·2종 시설물 코드 잘못 붙임(us_v1.6) 정정
+asset_target_map,BR1991-0000430,target_code,TG25,(뗌),3종 교량 — 제1·2종 시설물 코드 잘못 붙임(us_v1.6) 정정
+asset_target_map,BR1992-0000280,target_code,TG25,(뗌),3종 교량 — 제1·2종 시설물 코드 잘못 붙임(us_v1.6) 정정
+asset_target_map,BR1992-0000499,target_code,TG25,(뗌),3종 교량 — 제1·2종 시설물 코드 잘못 붙임(us_v1.6) 정정
+asset_target_map,BR1993-0000744,target_code,TG25,(뗌),3종 교량 — 제1·2종 시설물 코드 잘못 붙임(us_v1.6) 정정
+asset_target_map,BR1995-0000589,target_code,TG25,(뗌),3종 교량 — 제1·2종 시설물 코드 잘못 붙임(us_v1.6) 정정
+asset_target_map,BR1995-0000820,target_code,TG25,(뗌),3종 교량 — 제1·2종 시설물 코드 잘못 붙임(us_v1.6) 정정
+asset_target_map,BR1996-0000392,target_code,TG25,(뗌),3종 교량 — 제1·2종 시설물 코드 잘못 붙임(us_v1.6) 정정
+asset_target_map,BR1996-0000753,target_code,TG25,(뗌),3종 교량 — 제1·2종 시설물 코드 잘못 붙임(us_v1.6) 정정
+asset_target_map,BR1996-0000899,target_code,TG25,(뗌),3종 교량 — 제1·2종 시설물 코드 잘못 붙임(us_v1.6) 정정
+asset_target_map,BR1996-0001054,target_code,TG25,(뗌),3종 교량 — 제1·2종 시설물 코드 잘못 붙임(us_v1.6) 정정
+asset_target_map,BR1997-0000360,target_code,TG25,(뗌),3종 교량 — 제1·2종 시설물 코드 잘못 붙임(us_v1.6) 정정
+asset_target_map,BR1997-0000727,target_code,TG25,(뗌),3종 교량 — 제1·2종 시설물 코드 잘못 붙임(us_v1.6) 정정
+asset_target_map,BR1997-0000747,target_code,TG25,(뗌),3종 교량 — 제1·2종 시설물 코드 잘못 붙임(us_v1.6) 정정
+asset_target_map,BR1998-0000697,target_code,TG25,(뗌),3종 교량 — 제1·2종 시설물 코드 잘못 붙임(us_v1.6) 정정
+asset_target_map,BR1999-0000734,target_code,TG25,(뗌),3종 교량 — 제1·2종 시설물 코드 잘못 붙임(us_v1.6) 정정
+asset_target_map,BR1999-0000735,target_code,TG25,(뗌),3종 교량 — 제1·2종 시설물 코드 잘못 붙임(us_v1.6) 정정
+asset_target_map,BR1999-0000737,target_code,TG25,(뗌),3종 교량 — 제1·2종 시설물 코드 잘못 붙임(us_v1.6) 정정
+asset_target_map,BR1999-0000738,target_code,TG25,(뗌),3종 교량 — 제1·2종 시설물 코드 잘못 붙임(us_v1.6) 정정
+asset_target_map,BR1999-0000747,target_code,TG25,(뗌),3종 교량 — 제1·2종 시설물 코드 잘못 붙임(us_v1.6) 정정
+asset_target_map,BR1999-0000748,target_code,TG25,(뗌),3종 교량 — 제1·2종 시설물 코드 잘못 붙임(us_v1.6) 정정
+asset_target_map,BR2000-0000638,target_code,TG25,(뗌),3종 교량 — 제1·2종 시설물 코드 잘못 붙임(us_v1.6) 정정
+asset_target_map,BR2000-0000640,target_code,TG25,(뗌),3종 교량 — 제1·2종 시설물 코드 잘못 붙임(us_v1.6) 정정
+asset_target_map,BR2000-0000641,target_code,TG25,(뗌),3종 교량 — 제1·2종 시설물 코드 잘못 붙임(us_v1.6) 정정
+asset_target_map,BR2000-0000642,target_code,TG25,(뗌),3종 교량 — 제1·2종 시설물 코드 잘못 붙임(us_v1.6) 정정
+asset_target_map,BR2000-0000730,target_code,TG25,(뗌),3종 교량 — 제1·2종 시설물 코드 잘못 붙임(us_v1.6) 정정
+asset_target_map,BR2000-0000741,target_code,TG25,(뗌),3종 교량 — 제1·2종 시설물 코드 잘못 붙임(us_v1.6) 정정
+asset_target_map,BR2000-0000766,target_code,TG25,(뗌),3종 교량 — 제1·2종 시설물 코드 잘못 붙임(us_v1.6) 정정
+asset_target_map,BR2000-0000771,target_code,TG25,(뗌),3종 교량 — 제1·2종 시설물 코드 잘못 붙임(us_v1.6) 정정
+asset_target_map,BR2001-0001306,target_code,TG25,(뗌),3종 교량 — 제1·2종 시설물 코드 잘못 붙임(us_v1.6) 정정
+asset_target_map,BR2001-0001307,target_code,TG25,(뗌),3종 교량 — 제1·2종 시설물 코드 잘못 붙임(us_v1.6) 정정
+asset_target_map,BR2001-0001308,target_code,TG25,(뗌),3종 교량 — 제1·2종 시설물 코드 잘못 붙임(us_v1.6) 정정
+asset_target_map,BR2002-0000636,target_code,TG25,(뗌),3종 교량 — 제1·2종 시설물 코드 잘못 붙임(us_v1.6) 정정
+asset_target_map,BR2002-0000682,target_code,TG25,(뗌),3종 교량 — 제1·2종 시설물 코드 잘못 붙임(us_v1.6) 정정
+asset_target_map,BR2003-0003366,target_code,TG25,(뗌),3종 교량 — 제1·2종 시설물 코드 잘못 붙임(us_v1.6) 정정
+asset_target_map,BR2003-0003431,target_code,TG25,(뗌),3종 교량 — 제1·2종 시설물 코드 잘못 붙임(us_v1.6) 정정
+asset_target_map,BR2003-0003434,target_code,TG25,(뗌),3종 교량 — 제1·2종 시설물 코드 잘못 붙임(us_v1.6) 정정
+asset_target_map,BR2003-0003497,target_code,TG25,(뗌),3종 교량 — 제1·2종 시설물 코드 잘못 붙임(us_v1.6) 정정
+asset_target_map,BR2003-0003498,target_code,TG25,(뗌),3종 교량 — 제1·2종 시설물 코드 잘못 붙임(us_v1.6) 정정
+asset_target_map,BR2004-0002545,target_code,TG25,(뗌),3종 교량 — 제1·2종 시설물 코드 잘못 붙임(us_v1.6) 정정
+asset_target_map,BR2004-0002546,target_code,TG25,(뗌),3종 교량 — 제1·2종 시설물 코드 잘못 붙임(us_v1.6) 정정
+asset_target_map,BR2004-0002548,target_code,TG25,(뗌),3종 교량 — 제1·2종 시설물 코드 잘못 붙임(us_v1.6) 정정
+asset_target_map,BR2004-0002549,target_code,TG25,(뗌),3종 교량 — 제1·2종 시설물 코드 잘못 붙임(us_v1.6) 정정
+asset_target_map,BR2004-0002551,target_code,TG25,(뗌),3종 교량 — 제1·2종 시설물 코드 잘못 붙임(us_v1.6) 정정
+asset_target_map,BR2004-0002621,target_code,TG25,(뗌),3종 교량 — 제1·2종 시설물 코드 잘못 붙임(us_v1.6) 정정
+asset_target_map,BR2004-0002622,target_code,TG25,(뗌),3종 교량 — 제1·2종 시설물 코드 잘못 붙임(us_v1.6) 정정
+asset_target_map,BR2004-0002625,target_code,TG25,(뗌),3종 교량 — 제1·2종 시설물 코드 잘못 붙임(us_v1.6) 정정
+asset_target_map,BR2004-0002653,target_code,TG25,(뗌),3종 교량 — 제1·2종 시설물 코드 잘못 붙임(us_v1.6) 정정
+asset_target_map,BR2004-0002657,target_code,TG25,(뗌),3종 교량 — 제1·2종 시설물 코드 잘못 붙임(us_v1.6) 정정
+asset_target_map,BR2004-0002658,target_code,TG25,(뗌),3종 교량 — 제1·2종 시설물 코드 잘못 붙임(us_v1.6) 정정
+asset_target_map,BR2004-0002662,target_code,TG25,(뗌),3종 교량 — 제1·2종 시설물 코드 잘못 붙임(us_v1.6) 정정
+asset_target_map,BR2005-0001933,target_code,TG25,(뗌),3종 교량 — 제1·2종 시설물 코드 잘못 붙임(us_v1.6) 정정
+asset_target_map,BR2005-0001936,target_code,TG25,(뗌),3종 교량 — 제1·2종 시설물 코드 잘못 붙임(us_v1.6) 정정
+asset_target_map,BR2005-0001937,target_code,TG25,(뗌),3종 교량 — 제1·2종 시설물 코드 잘못 붙임(us_v1.6) 정정
+asset_target_map,BR2005-0001939,target_code,TG25,(뗌),3종 교량 — 제1·2종 시설물 코드 잘못 붙임(us_v1.6) 정정
+asset_target_map,BR2005-0001940,target_code,TG25,(뗌),3종 교량 — 제1·2종 시설물 코드 잘못 붙임(us_v1.6) 정정
+asset_target_map,BR2005-0001942,target_code,TG25,(뗌),3종 교량 — 제1·2종 시설물 코드 잘못 붙임(us_v1.6) 정정
+asset_target_map,BR2005-0002043,target_code,TG25,(뗌),3종 교량 — 제1·2종 시설물 코드 잘못 붙임(us_v1.6) 정정
+asset_target_map,BR2006-0001914,target_code,TG25,(뗌),3종 교량 — 제1·2종 시설물 코드 잘못 붙임(us_v1.6) 정정
+asset_target_map,BR2007-0001446,target_code,TG25,(뗌),3종 교량 — 제1·2종 시설물 코드 잘못 붙임(us_v1.6) 정정
+asset_target_map,BR2007-0001447,target_code,TG25,(뗌),3종 교량 — 제1·2종 시설물 코드 잘못 붙임(us_v1.6) 정정
+asset_target_map,BR2007-0001448,target_code,TG25,(뗌),3종 교량 — 제1·2종 시설물 코드 잘못 붙임(us_v1.6) 정정
+asset_target_map,BR2007-0001449,target_code,TG25,(뗌),3종 교량 — 제1·2종 시설물 코드 잘못 붙임(us_v1.6) 정정
+asset_target_map,BR2007-0001450,target_code,TG25,(뗌),3종 교량 — 제1·2종 시설물 코드 잘못 붙임(us_v1.6) 정정
+asset_target_map,BR2007-0001451,target_code,TG25,(뗌),3종 교량 — 제1·2종 시설물 코드 잘못 붙임(us_v1.6) 정정
+asset_target_map,BR2008-0001350,target_code,TG25,(뗌),3종 교량 — 제1·2종 시설물 코드 잘못 붙임(us_v1.6) 정정
+asset_target_map,BR2008-0001351,target_code,TG25,(뗌),3종 교량 — 제1·2종 시설물 코드 잘못 붙임(us_v1.6) 정정
+asset_target_map,BR2008-0001352,target_code,TG25,(뗌),3종 교량 — 제1·2종 시설물 코드 잘못 붙임(us_v1.6) 정정
+asset_target_map,BR2008-0001353,target_code,TG25,(뗌),3종 교량 — 제1·2종 시설물 코드 잘못 붙임(us_v1.6) 정정
+asset_target_map,BR2008-0001355,target_code,TG25,(뗌),3종 교량 — 제1·2종 시설물 코드 잘못 붙임(us_v1.6) 정정
+asset_target_map,BR2008-0001356,target_code,TG25,(뗌),3종 교량 — 제1·2종 시설물 코드 잘못 붙임(us_v1.6) 정정
+asset_target_map,BR2009-0001235,target_code,TG25,(뗌),3종 교량 — 제1·2종 시설물 코드 잘못 붙임(us_v1.6) 정정
+asset_target_map,BR2009-0001236,target_code,TG25,(뗌),3종 교량 — 제1·2종 시설물 코드 잘못 붙임(us_v1.6) 정정
+asset_target_map,BR2009-0001238,target_code,TG25,(뗌),3종 교량 — 제1·2종 시설물 코드 잘못 붙임(us_v1.6) 정정
+asset_target_map,BR2009-0001240,target_code,TG25,(뗌),3종 교량 — 제1·2종 시설물 코드 잘못 붙임(us_v1.6) 정정
+asset_target_map,BR2009-0001469,target_code,TG25,(뗌),3종 교량 — 제1·2종 시설물 코드 잘못 붙임(us_v1.6) 정정
+asset_target_map,BR2009-0001470,target_code,TG25,(뗌),3종 교량 — 제1·2종 시설물 코드 잘못 붙임(us_v1.6) 정정
+asset_target_map,BR2009-0001471,target_code,TG25,(뗌),3종 교량 — 제1·2종 시설물 코드 잘못 붙임(us_v1.6) 정정
+asset_target_map,BR2009-0001472,target_code,TG25,(뗌),3종 교량 — 제1·2종 시설물 코드 잘못 붙임(us_v1.6) 정정
+asset_target_map,BR2010-0001215,target_code,TG25,(뗌),3종 교량 — 제1·2종 시설물 코드 잘못 붙임(us_v1.6) 정정
+asset_target_map,BR2010-0001218,target_code,TG25,(뗌),3종 교량 — 제1·2종 시설물 코드 잘못 붙임(us_v1.6) 정정
+asset_target_map,BR2011-0001346,target_code,TG25,(뗌),3종 교량 — 제1·2종 시설물 코드 잘못 붙임(us_v1.6) 정정
+asset_target_map,BR2011-0001351,target_code,TG25,(뗌),3종 교량 — 제1·2종 시설물 코드 잘못 붙임(us_v1.6) 정정

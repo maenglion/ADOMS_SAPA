@@ -1,0 +1,29 @@
+# ── 의존성·빌드 결과 ──────────────────────────
+node_modules/
+.next/
+.next-prod/
+out/
+*.tsbuildinfo
+next-env.d.ts.bak
+
+# ── 비밀값 — 값이 든 env 파일은 절대 올리지 않는다(이름만 적은 .env.example 만 올린다) ──
+.env
+.env.*
+!.env.example
+
+# ── 화면에서 입력한 값(.data/overlay.json)·올린 파일(.data/uploads/) — 09-26 결정: 예시 운영 기록이라 함께 올린다 ──
+.data/overlay.bak.json
+.data/*.tmp
+
+# ── 데이터 판(CSV·원문 JSON) — 09-26 결정: 저장소 data/ 에 함께 올린다(동결 목록 data/FREEZE_MANIFEST.csv) ──
+
+# ── 로컬 실행 표지·기록(윈도 운영 모드 아이콘이 만든다) ──
+.prod-400.json
+.prod-400.log
+.build-400.log
+*.log
+
+# ── 운영체제 찌꺼기 ──
+.DS_Store
+Thumbs.db
+desktop.ini

@@ -1,0 +1,33 @@
+staff_id,display_name,dept_id,duty_role,email,phone,note
+SD01-1,김민준 주무관,D01,정담당,d01.main@demo.yongin.go.kr,,가상 인물(시연용)
+SD01-2,이준호 주무관,D01,부담당,d01.sub@demo.yongin.go.kr,,가상 인물(시연용)
+SD02-1,박우진 주무관,D02,정담당,d02.main@demo.yongin.go.kr,,가상 인물(시연용)
+SD02-2,최미르 주무관,D02,부담당,d02.sub@demo.yongin.go.kr,,가상 인물(시연용)
+SD03-1,정민준 주무관,D03,정담당,d03.main@demo.yongin.go.kr,,가상 인물(시연용)
+SD03-2,강준호 주무관,D03,부담당,d03.sub@demo.yongin.go.kr,,가상 인물(시연용)
+SD04-1,조우진 주무관,D04,정담당,d04.main@demo.yongin.go.kr,,가상 인물(시연용)
+SD04-2,윤미르 주무관,D04,부담당,d04.sub@demo.yongin.go.kr,,가상 인물(시연용)
+SD05-1,장민준 주무관,D05,정담당,d05.main@demo.yongin.go.kr,,가상 인물(시연용)
+SD05-2,임준호 주무관,D05,부담당,d05.sub@demo.yongin.go.kr,,가상 인물(시연용)
+SD06-1,한우진 주무관,D06,정담당,d06.main@demo.yongin.go.kr,,가상 인물(시연용)
+SD06-2,오미르 주무관,D06,부담당,d06.sub@demo.yongin.go.kr,,가상 인물(시연용)
+SD07-1,서민준 주무관,D07,정담당,d07.main@demo.yongin.go.kr,,가상 인물(시연용)
+SD07-2,신준호 주무관,D07,부담당,d07.sub@demo.yongin.go.kr,,가상 인물(시연용)
+SD08-1,권우진 주무관,D08,정담당,d08.main@demo.yongin.go.kr,,가상 인물(시연용)
+SD08-2,김미르 주무관,D08,부담당,d08.sub@demo.yongin.go.kr,,가상 인물(시연용)
+SD09-1,이민준 주무관,D09,정담당,d09.main@demo.yongin.go.kr,,가상 인물(시연용)
+SD09-2,박준호 주무관,D09,부담당,d09.sub@demo.yongin.go.kr,,가상 인물(시연용)
+SD10-1,최우진 주무관,D10,정담당,d10.main@demo.yongin.go.kr,,가상 인물(시연용)
+SD10-2,정미르 주무관,D10,부담당,d10.sub@demo.yongin.go.kr,,가상 인물(시연용)
+SD11-1,강민준 주무관,D11,정담당,d11.main@demo.yongin.go.kr,,가상 인물(시연용)
+SD11-2,조준호 주무관,D11,부담당,d11.sub@demo.yongin.go.kr,,가상 인물(시연용)
+SD12-1,윤우진 주무관,D12,정담당,d12.main@demo.yongin.go.kr,,가상 인물(시연용)
+SD12-2,장미르 주무관,D12,부담당,d12.sub@demo.yongin.go.kr,,가상 인물(시연용)
+SD13-1,임민준 주무관,D13,정담당,d13.main@demo.yongin.go.kr,,가상 인물(시연용)
+SD13-2,한준호 주무관,D13,부담당,d13.sub@demo.yongin.go.kr,,가상 인물(시연용)
+SD14-1,오우진 주무관,D14,정담당,d14.main@demo.yongin.go.kr,,가상 인물(시연용)
+SD14-2,서미르 주무관,D14,부담당,d14.sub@demo.yongin.go.kr,,가상 인물(시연용)
+SM01-1,한서연 과장,D01,총괄과장,sm01.1@demo.yongin.go.kr,,가상 인물(시연용) · 점검반
+SM02-1,오지훈 과장,D02,점검총괄,sm02.1@demo.yongin.go.kr,,가상 인물(시연용) · 점검반
+SM02-2,서다혜 팀장,D02,점검팀장,sm02.2@demo.yongin.go.kr,,가상 인물(시연용) · 점검반
+SM02-3,권성민 팀장,D02,점검팀장,sm02.3@demo.yongin.go.kr,,가상 인물(시연용) · 점검반

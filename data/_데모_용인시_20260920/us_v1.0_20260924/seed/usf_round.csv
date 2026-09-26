@@ -1,0 +1,4 @@
+﻿round_id,track,title,dept_ids,item_keys,status,created_by,created_at,approved_by,approved_at,approve_note
+RWS-2026H2,ws,2026년 하반기 이행점검(사업장),D01;D02;D03;D09,goal;org;staff;risk;budget;work;opinion;emergency;recur;order;law;edu,점검중,SD02-1,2026-09-15T09:10:00+09:00,,,
+RFC-2026H2,fc,2026년 하반기 이행점검(공중이용시설·공중교통수단),D03;D04;D13,staff;budget;inspect;plan;proc;recur;order;law,점검중,SD02-1,2026-09-15T09:20:00+09:00,,,
+RMT-2026H2,mt,2026년 하반기 이행점검(원료·제조물),D04;D07;D14,staff;budget;proc;recur;order;law,점검중,SD02-1,2026-09-15T09:30:00+09:00,,,

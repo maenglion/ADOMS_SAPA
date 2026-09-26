@@ -1,0 +1,671 @@
+{
+  "taskPatch": {
+    "TSK-000157": {
+      "status": "이행완료",
+      "approval_status": "제출",
+      "submitted_at": "2026-09-20T18:12:59.790Z",
+      "submitted_by": "SD03-1",
+      "done_at": "2026-09-20",
+      "done_by": "SD03-1"
+    },
+    "TSK-000930": {
+      "status": "이행완료",
+      "approval_status": "제출",
+      "submitted_at": "2026-09-20T18:20:39.407Z",
+      "submitted_by": "SD03-1",
+      "done_at": "2026-09-20",
+      "done_by": "SD03-1"
+    },
+    "TSK-000058": {
+      "approval_status": "승인",
+      "status": "점검완료",
+      "approved_at": "2026-09-20T21:12:42.433Z",
+      "approved_by": "SD01-1"
+    },
+    "TSK-000014": {
+      "status": "이행완료",
+      "approval_status": "제출",
+      "submitted_at": "2026-09-20T21:32:55.097Z",
+      "submitted_by": "SD03-1",
+      "done_at": "2026-09-20",
+      "done_by": "SD03-1"
+    },
+    "TSK-000003": {
+      "status": "이행완료",
+      "approval_status": "제출",
+      "submitted_at": "2026-09-21T05:51:13.282Z",
+      "submitted_by": "SD03-1",
+      "done_at": "2026-09-21",
+      "done_by": "SD03-1"
+    },
+    "TSK-001268": {
+      "status": "점검완료",
+      "approval_status": "승인",
+      "submitted_at": "2026-09-21T12:48:59.247Z",
+      "submitted_by": "SD03-1",
+      "done_at": "2026-09-21",
+      "done_by": "SD03-1",
+      "check_result": "이행완료",
+      "reject_reason": "[대본점검] 표지 1개 훼손 — 교체 예산 필요",
+      "rejected_at": "2026-09-21T12:48:44.746Z",
+      "resubmit_round": 2,
+      "resubmit_note": "[대본점검] 추경 편성 후 표지 교체",
+      "approved_at": "2026-09-21T12:49:03.332Z",
+      "approved_by": "SD02-1"
+    },
+    "TSK-002158": {
+      "status": "조치필요",
+      "approval_status": "반려",
+      "check_result": "보완필요",
+      "reject_reason": "[대본점검] 대책 이행 증빙 일부 누락",
+      "rejected_at": "2026-09-21T12:49:14.086Z"
+    }
+  },
+  "evidence": [
+    {
+      "evidence_id": "EVD-MUB8R9BT1Z7",
+      "task_id": "TSK-001268",
+      "evidence_kind": "사진",
+      "file_name": "대본점검_위험표지.png",
+      "file_url": "/api/file/20260921_j9hqb9_%EB%8C%80%EB%B3%B8%EC%A0%90%EA%B2%80_%EC%9C%84%ED%97%98%ED%91%9C%EC%A7%80.png",
+      "form_id": "",
+      "uploaded_by": "SD03-1",
+      "uploaded_at": "2026-09-21",
+      "note": "현장에서 올림",
+      "file_size": 229,
+      "file_type": "image/png"
+    },
+    {
+      "evidence_id": "EVD-MUATUHKW1LE",
+      "task_id": "TSK-000003",
+      "evidence_kind": "사진",
+      "file_name": "점검 현장 사진 — 현장사진_2.png",
+      "file_url": "/api/file/20260921_v2os24_%ED%98%84%EC%9E%A5%EC%82%AC%EC%A7%84_2.png",
+      "form_id": "",
+      "uploaded_by": "SD03-1",
+      "uploaded_at": "2026-09-21",
+      "note": "",
+      "file_size": 441,
+      "file_type": "image/png"
+    },
+    {
+      "evidence_id": "EVD-MUATUHKSR6D",
+      "task_id": "TSK-000003",
+      "evidence_kind": "사진",
+      "file_name": "점검 현장 사진 — 현장사진_1.png",
+      "file_url": "/api/file/20260921_6iok9b_%ED%98%84%EC%9E%A5%EC%82%AC%EC%A7%84_1.png",
+      "form_id": "",
+      "uploaded_by": "SD03-1",
+      "uploaded_at": "2026-09-21",
+      "note": "",
+      "file_size": 441,
+      "file_type": "image/png"
+    },
+    {
+      "evidence_id": "EVD-MUATUHKMAC3",
+      "task_id": "TSK-000003",
+      "evidence_kind": "점검표",
+      "file_name": "2026년 하반기 도로 안전관리 점검 결과표",
+      "file_url": "",
+      "form_id": "",
+      "uploaded_by": "SD03-1",
+      "uploaded_at": "2026-09-21",
+      "note": "",
+      "file_size": "",
+      "file_type": ""
+    },
+    {
+      "evidence_id": "EVD-MUAC1NZR5GG",
+      "task_id": "TSK-000014",
+      "evidence_kind": "사진",
+      "file_name": "2026-09-21 02;30;46.PNG",
+      "file_url": "/api/file/20260920_jpqd09_2026-09-21%2002%3B30%3B46.PNG",
+      "form_id": "",
+      "uploaded_by": "SD03-1",
+      "uploaded_at": "2026-09-20",
+      "note": "현장에서 올림",
+      "file_size": 90054,
+      "file_type": "image/png"
+    },
+    {
+      "evidence_id": "EVD-MUAC1NZME3I",
+      "task_id": "TSK-000014",
+      "evidence_kind": "점검표",
+      "file_name": "상반기 점검 결과",
+      "file_url": "",
+      "form_id": "",
+      "uploaded_by": "SD03-1",
+      "uploaded_at": "2026-09-20",
+      "note": "이미지와 업무가 딱 맞지는 않음",
+      "file_size": "",
+      "file_type": ""
+    },
+    {
+      "evidence_id": "EVD-MUA56EZYPJE",
+      "task_id": "TSK-000930",
+      "evidence_kind": "사진",
+      "file_name": "17899284267288924611833593142725.jpg",
+      "file_url": "/api/file/20260920_cdvxtn_17899284267288924611833593142725.jpg",
+      "form_id": "",
+      "uploaded_by": "SD03-1",
+      "uploaded_at": "2026-09-20",
+      "note": "현장에서 올림",
+      "file_size": 3525830,
+      "file_type": "image/jpeg"
+    },
+    {
+      "evidence_id": "EVD-MUA4WKCT1JE",
+      "task_id": "TSK-000157",
+      "evidence_kind": "사진",
+      "file_name": "현장사진_양보차로_20260921.png",
+      "file_url": "/api/file/20260920_7fdg9l_%ED%98%84%EC%9E%A5%EC%82%AC%EC%A7%84_%EC%96%91%EB%B3%B4%EC%B0%A8%EB%A1%9C_20260921.png",
+      "form_id": "",
+      "uploaded_by": "SD03-1",
+      "uploaded_at": "2026-09-20",
+      "note": "현장에서 올림",
+      "file_size": 450,
+      "file_type": "image/png"
+    }
+  ],
+  "inspection": [
+    {
+      "insp_id": "INS-MUB8S21W",
+      "task_id": "TSK-002158",
+      "inspector_staff_id": "SD02-1",
+      "insp_date": "2026-09-21",
+      "result": "보완필요",
+      "finding": "[대본점검] 대책 이행 증빙 일부 누락",
+      "note": "화면에서 판정"
+    },
+    {
+      "insp_id": "INS-MUB8RTR6",
+      "task_id": "TSK-001268",
+      "inspector_staff_id": "SD02-1",
+      "insp_date": "2026-09-21",
+      "result": "적합",
+      "finding": "",
+      "note": "화면에서 판정"
+    },
+    {
+      "insp_id": "INS-MUB8RFEX",
+      "task_id": "TSK-001268",
+      "inspector_staff_id": "SD02-1",
+      "insp_date": "2026-09-21",
+      "result": "보완필요",
+      "finding": "[대본점검] 표지 1개 훼손 — 교체 예산 필요",
+      "note": "화면에서 판정"
+    }
+  ],
+  "log": [
+    {
+      "at": "2026-09-21T12:54:03.551Z",
+      "action": "유해·위험요인 경영책임자 보고",
+      "target": "hazard_step:HZS-MUB8Y9EMI9",
+      "by": "경영책임자(시장)",
+      "note": ""
+    },
+    {
+      "at": "2026-09-21T12:54:03.549Z",
+      "action": "유해·위험요인 경영책임자 보고",
+      "target": "hazard_report:HZR-0037",
+      "by": "경영책임자(시장)",
+      "note": ""
+    },
+    {
+      "at": "2026-09-21T12:49:35.638Z",
+      "action": "점검 결재 확정",
+      "target": "inspection_batch:BAT-004",
+      "by": "경영책임자",
+      "note": ""
+    },
+    {
+      "at": "2026-09-21T12:49:24.433Z",
+      "action": "점검 결재 상신",
+      "target": "inspection_batch:BAT-004",
+      "by": "SD01-1",
+      "note": ""
+    },
+    {
+      "at": "2026-09-21T12:49:21.117Z",
+      "action": "위탁 점검 결과 보고받음 기록",
+      "target": "inspection_batch:BAT-004",
+      "by": "SD01-1",
+      "note": ""
+    },
+    {
+      "at": "2026-09-21T12:49:17.621Z",
+      "action": "위탁 점검으로 표시",
+      "target": "inspection_batch:BAT-004",
+      "by": "SD01-1",
+      "note": ""
+    },
+    {
+      "at": "2026-09-21T12:49:14.089Z",
+      "action": "판정 차수 1차",
+      "target": "inspection:INS-MUB8S21W",
+      "by": "SD02-1",
+      "note": ""
+    },
+    {
+      "at": "2026-09-21T12:49:14.087Z",
+      "action": "점검 판정 보완필요",
+      "target": "TSK-002158",
+      "by": "SD02-1",
+      "note": "[대본점검] 대책 이행 증빙 일부 누락"
+    },
+    {
+      "at": "2026-09-21T12:49:14.085Z",
+      "action": "점검 판정 — 보완필요",
+      "target": "TSK-002158",
+      "by": "SD02-1",
+      "note": "[대본점검] 대책 이행 증빙 일부 누락"
+    },
+    {
+      "at": "2026-09-21T12:49:03.338Z",
+      "action": "재판정 적합",
+      "target": "action:ACT-MUB8RLC9D0M",
+      "by": "SD02-1",
+      "note": ""
+    },
+    {
+      "at": "2026-09-21T12:49:03.335Z",
+      "action": "판정 차수 2차",
+      "target": "inspection:INS-MUB8RTR6",
+      "by": "SD02-1",
+      "note": ""
+    },
+    {
+      "at": "2026-09-21T12:49:03.333Z",
+      "action": "점검 판정 적합",
+      "target": "TSK-001268",
+      "by": "SD02-1",
+      "note": "점검완료"
+    },
+    {
+      "at": "2026-09-21T12:49:03.331Z",
+      "action": "점검 판정 — 적합",
+      "target": "TSK-001268",
+      "by": "SD02-1",
+      "note": ""
+    },
+    {
+      "at": "2026-09-21T12:48:59.250Z",
+      "action": "알림 보냄 — 재점검요청",
+      "target": "notification:NTF-MUB8RQLTSKI",
+      "by": "SD03-1",
+      "note": ""
+    },
+    {
+      "at": "2026-09-21T12:48:59.248Z",
+      "action": "보완 제출",
+      "target": "TSK-001268",
+      "by": "SD03-1",
+      "note": "이행완료"
+    },
+    {
+      "at": "2026-09-21T12:48:59.246Z",
+      "action": "보완 제출",
+      "target": "action:ACT-MUB8RLC9D0M",
+      "by": "SD03-1",
+      "note": ""
+    },
+    {
+      "at": "2026-09-21T12:48:55.958Z",
+      "action": "조치 시작",
+      "target": "action:ACT-MUB8RLC9D0M",
+      "by": "SD03-1",
+      "note": ""
+    },
+    {
+      "at": "2026-09-21T12:48:52.428Z",
+      "action": "알림 보냄 — 조치요구",
+      "target": "notification:NTF-MUB8RLCBO2F",
+      "by": "SD01-1",
+      "note": ""
+    },
+    {
+      "at": "2026-09-21T12:48:52.426Z",
+      "action": "조치 요구 — 예산 추가 편성·집행",
+      "target": "action:ACT-MUB8RLC9D0M",
+      "by": "SD01-1",
+      "note": ""
+    },
+    {
+      "at": "2026-09-21T12:48:44.748Z",
+      "action": "판정 차수 1차",
+      "target": "inspection:INS-MUB8RFEX",
+      "by": "SD02-1",
+      "note": ""
+    },
+    {
+      "at": "2026-09-21T12:48:44.747Z",
+      "action": "점검 판정 보완필요",
+      "target": "TSK-001268",
+      "by": "SD02-1",
+      "note": "[대본점검] 표지 1개 훼손 — 교체 예산 필요"
+    },
+    {
+      "at": "2026-09-21T12:48:44.745Z",
+      "action": "점검 판정 — 보완필요",
+      "target": "TSK-001268",
+      "by": "SD02-1",
+      "note": "[대본점검] 표지 1개 훼손 — 교체 예산 필요"
+    },
+    {
+      "at": "2026-09-21T12:48:36.859Z",
+      "action": "현장에서 증빙 등록",
+      "target": "TSK-001268",
+      "by": "SD03-1",
+      "note": "이행완료"
+    },
+    {
+      "at": "2026-09-21T12:48:36.858Z",
+      "action": "증빙 등록",
+      "target": "TSK-001268",
+      "by": "SD03-1",
+      "note": "대본점검_위험표지.png"
+    },
+    {
+      "at": "2026-09-21T12:48:24.968Z",
+      "action": "점검 취합 시작",
+      "target": "inspection_batch:BAT-004",
+      "by": "SD01-1",
+      "note": ""
+    },
+    {
+      "at": "2026-09-21T12:47:42.966Z",
+      "action": "안전계획 갈음 — 경영책임자 보고받음 기록",
+      "target": "civil_safety_plan:CSP-2026-0692",
+      "by": "SM01-1",
+      "note": ""
+    },
+    {
+      "at": "2026-09-21T12:47:24.048Z",
+      "action": "경영책임자 보고받음",
+      "target": "system_record:SYR-MUB8PMP6EE",
+      "by": "SM01-1",
+      "note": ""
+    },
+    {
+      "at": "2026-09-21T12:47:20.876Z",
+      "action": "최근 점검일",
+      "target": "safety_manual:MAN-002",
+      "by": "SD01-1",
+      "note": ""
+    },
+    {
+      "at": "2026-09-21T12:47:20.875Z",
+      "action": "제7호 반기 점검",
+      "target": "system_record:SYR-MUB8PMP6EE",
+      "by": "SD01-1",
+      "note": ""
+    },
+    {
+      "at": "2026-09-21T05:51:13.283Z",
+      "action": "증빙 2줄 등록·제출",
+      "target": "TSK-000003",
+      "by": "SD03-1",
+      "note": "이행완료"
+    },
+    {
+      "at": "2026-09-21T05:51:13.281Z",
+      "action": "증빙 등록",
+      "target": "TSK-000003",
+      "by": "SD03-1",
+      "note": "점검 현장 사진 — 현장사진_2.png"
+    },
+    {
+      "at": "2026-09-21T05:51:13.276Z",
+      "action": "증빙 등록",
+      "target": "TSK-000003",
+      "by": "SD03-1",
+      "note": "점검 현장 사진 — 현장사진_1.png"
+    },
+    {
+      "at": "2026-09-21T05:51:13.271Z",
+      "action": "증빙 등록",
+      "target": "TSK-000003",
+      "by": "SD03-1",
+      "note": "2026년 하반기 도로 안전관리 점검 결과표"
+    },
+    {
+      "at": "2026-09-20T21:32:55.098Z",
+      "action": "증빙 등록·제출",
+      "target": "TSK-000014",
+      "by": "SD03-1",
+      "note": "이행완료"
+    },
+    {
+      "at": "2026-09-20T21:32:55.096Z",
+      "action": "증빙 등록",
+      "target": "TSK-000014",
+      "by": "SD03-1",
+      "note": "2026-09-21 02;30;46.PNG"
+    },
+    {
+      "at": "2026-09-20T21:32:55.091Z",
+      "action": "증빙 등록",
+      "target": "TSK-000014",
+      "by": "SD03-1",
+      "note": "상반기 점검 결과"
+    },
+    {
+      "at": "2026-09-20T21:12:42.434Z",
+      "action": "결재 승인",
+      "target": "TSK-000058",
+      "by": "SD01-1",
+      "note": "점검완료"
+    },
+    {
+      "at": "2026-09-20T18:20:39.408Z",
+      "action": "현장에서 증빙 등록",
+      "target": "TSK-000930",
+      "by": "SD03-1",
+      "note": "이행완료"
+    },
+    {
+      "at": "2026-09-20T18:20:39.406Z",
+      "action": "증빙 등록",
+      "target": "TSK-000930",
+      "by": "SD03-1",
+      "note": "17899284267288924611833593142725.jpg"
+    },
+    {
+      "at": "2026-09-20T18:12:59.791Z",
+      "action": "현장에서 증빙 등록",
+      "target": "TSK-000157",
+      "by": "SD03-1",
+      "note": "이행완료"
+    },
+    {
+      "at": "2026-09-20T18:12:59.789Z",
+      "action": "증빙 등록",
+      "target": "TSK-000157",
+      "by": "SD03-1",
+      "note": "현장사진_양보차로_20260921.png"
+    }
+  ],
+  "patches": {
+    "safety_manual": {
+      "MAN-002": {
+        "last_check_at": "2026-09-21"
+      }
+    },
+    "system_record": {
+      "SYR-MUB8PMP6EE": {
+        "ceo_reported": "Y",
+        "reported_at": "2026-09-21",
+        "report_method": "대면 보고",
+        "report_proxy": ""
+      }
+    },
+    "civil_safety_plan": {
+      "CSP-2026-0692": {
+        "ceo_confirmed": "Y",
+        "confirmed_at": "2026-09-21",
+        "confirm_proxy": "",
+        "confirmed_by": ""
+      }
+    },
+    "inspection": {
+      "INS-MUB8RFEX": {
+        "round_no": 1,
+        "action_need": "예산 추가 편성·집행"
+      },
+      "INS-MUB8RTR6": {
+        "round_no": 2
+      },
+      "INS-MUB8S21W": {
+        "round_no": 1,
+        "action_need": "인력 배치"
+      }
+    },
+    "action": {
+      "ACT-MUB8RLC9D0M": {
+        "result": "완료",
+        "started_at": "2026-09-21",
+        "done_at": "2026-09-21",
+        "resubmit_note": "[대본점검] 추경 편성 후 표지 교체",
+        "resubmitted_by": "SD03-1",
+        "rejudged_insp_id": "INS-MUB8RTR6"
+      }
+    },
+    "inspection_batch": {
+      "BAT-004": {
+        "insp_method": "위탁 점검",
+        "outsource_org": "[대본점검] 위탁 점검기관",
+        "report_received_at": "2026-09-21",
+        "report_received_by": "[대본점검] 오지훈 과장",
+        "report_recorded_by": "SD01-1",
+        "report_proxy": "Y",
+        "open_reason": "[대본점검] 담당 인력 1명 추가 배치 요청 중",
+        "open_kind": "예산·인력 조치 필요(경영책임자 결정 사항)",
+        "status": "결재완료",
+        "requested_by": "SD01-1",
+        "requested_at": "2026-09-21T12:49:24.432Z",
+        "n_total": 3,
+        "n_ok": 0,
+        "n_fix": 1,
+        "n_bad": 0,
+        "n_open": 1,
+        "n_unsubmitted": 2,
+        "return_reason": "",
+        "approved_by": "경영책임자",
+        "approved_at": "2026-09-21T12:49:35.635Z",
+        "approve_note": ""
+      }
+    },
+    "hazard_report": {
+      "HZR-0037": {
+        "ceo_reported_at": "2026-09-21 21:54",
+        "ceo_report_mode": "구두 선보고 후 서면",
+        "ceo_reported_by": "경영책임자(시장)",
+        "ceo_instruction": "[대본점검] 즉시 긴급안전점검"
+      }
+    }
+  },
+  "tables": {
+    "system_record": [
+      {
+        "record_id": "SYR-MUB8PMP6EE",
+        "clause_no": "7",
+        "mok": "",
+        "record_kind": "반기 점검",
+        "title": "2026 하반기 반기 점검",
+        "target_role": "",
+        "target_ref": "MAN-002",
+        "target_staff_id": "",
+        "dept_id": "",
+        "done_at": "2026-09-21",
+        "half": "2026 하반기",
+        "checker_staff_id": "SD01-1",
+        "content": "[대본점검] 2026 하반기 개선방안 이행 점검",
+        "action_needed": "",
+        "action_done_at": "",
+        "covers": "",
+        "score": "",
+        "item_scores": "",
+        "substitute": "",
+        "budget_amount": "",
+        "doc_name": "",
+        "ceo_reported": "",
+        "reported_at": "",
+        "report_method": "",
+        "report_proxy": "",
+        "created_by": "SD01-1",
+        "note": "화면에서 등록"
+      }
+    ],
+    "inspection_batch": [
+      {
+        "batch_id": "BAT-004",
+        "title": "[대본점검] 2026년 하반기 재발방지·개선명령 이행 점검",
+        "period_year": "2026",
+        "half_year": "하반기",
+        "scope_dept_id": "D02",
+        "target_dept_ids": "D02,D05,D09",
+        "code36_list": "F10,I10,M07",
+        "rule_basis": "법정 주기 없음 3개",
+        "status": "진행중",
+        "started_by": "SD01-1",
+        "started_at": "2026-09-21",
+        "approved_by": "",
+        "note": "화면에서 연 점검"
+      }
+    ],
+    "action": [
+      {
+        "action_id": "ACT-MUB8RLC9D0M",
+        "insp_id": "INS-MUB8RFEX",
+        "task_id": "TSK-001268",
+        "action_type": "예산 추가 편성·집행",
+        "action_basis": "시행령 제11조제2항제2호",
+        "due_date": "2026-10-05",
+        "done_at": "",
+        "result": "요구",
+        "requested_by": "SD01-1",
+        "requested_at": "2026-09-21",
+        "batch_id": "BAT-003",
+        "note": "조치 요구"
+      }
+    ],
+    "notification": [
+      {
+        "notif_id": "NTF-MUB8RQLTSKI",
+        "task_id": "TSK-001268",
+        "notif_type": "재점검요청",
+        "to_staff_id": "SD02-1",
+        "from_staff_id": "SD03-1",
+        "sent_at": "2026-09-21",
+        "message": "[재점검요청] 위험표지의 설치 — 보완 제출(2차 판정 대기): [대본점검] 추경 편성 후 표지 교체",
+        "read_at": "",
+        "batch_id": "BAT-003",
+        "note": ""
+      },
+      {
+        "notif_id": "NTF-MUB8RLCBO2F",
+        "task_id": "TSK-001268",
+        "notif_type": "조치요구",
+        "to_staff_id": "SD03-1",
+        "from_staff_id": "SD01-1",
+        "sent_at": "2026-09-21",
+        "message": "[조치요구 · 예산 추가 편성·집행] 위험표지의 설치 — 보완필요: [대본점검] 표지 1개 훼손 — 교체 예산 필요 · 기한 2026-10-05 · 시행령 제11조제2항제2호",
+        "read_at": "",
+        "action_id": "ACT-MUB8RLC9D0M",
+        "batch_id": "BAT-003",
+        "note": ""
+      }
+    ],
+    "hazard_step": [
+      {
+        "step_id": "HZS-MUB8Y9EMI9",
+        "hz_id": "HZR-0037",
+        "step": "경영책임자 보고",
+        "at": "2026-09-21 21:54",
+        "by": "경영책임자(시장)",
+        "memo": "구두 선보고 후 서면 · 지시: [대본점검] 즉시 긴급안전점검",
+        "note": ""
+      }
+    ]
+  }
+}

@@ -1,0 +1,1328 @@
+﻿table,key,col,old,new,why
+asset,DA2008-0000007,sapa_l2_result,검토필요,제외,③ 저수지 관리주체 확인
+asset,DA2008-0000007,sapa_basis,시행령 별표3 제4호,관리주체 한국농어촌공사 평택지사 — 용인시는 관리주체 아님(용인시민신문 2021-11-30 · 국제뉴스 2025-03-25),③ 저수지 관리주체 확인
+asset,DA2008-0000007,need_data,총저수용량·댐 종류,,③ 저수지 관리주체 확인
+asset,DA2008-0000007,verified,N,Y,③ 저수지 관리주체 확인
+asset,DA2008-0000154,sapa_l2_result,검토필요,제외,③ 저수지 관리주체 확인
+asset,DA2008-0000154,sapa_basis,시행령 별표3 제4호,관리주체 한국농어촌공사 평택지사 — 용인시는 관리주체 아님(용인시민신문 2021-11-30 · 국제뉴스 2025-03-25),③ 저수지 관리주체 확인
+asset,DA2008-0000154,need_data,총저수용량·댐 종류,,③ 저수지 관리주체 확인
+asset,DA2008-0000154,verified,N,Y,③ 저수지 관리주체 확인
+asset,DA2008-0000165,sapa_l2_result,검토필요,제외,③ 저수지 관리주체 확인
+asset,DA2008-0000165,sapa_basis,시행령 별표3 제4호,관리주체 한국농어촌공사 안성지사 — 용인시는 관리주체 아님(용인시민신문 2021-11-30 · 국제뉴스 2025-03-25),③ 저수지 관리주체 확인
+asset,DA2008-0000165,need_data,총저수용량·댐 종류,,③ 저수지 관리주체 확인
+asset,DA2008-0000165,verified,N,Y,③ 저수지 관리주체 확인
+asset,DA2008-0000170,sapa_l2_result,검토필요,제외,③ 저수지 관리주체 확인
+asset,DA2008-0000170,sapa_basis,시행령 별표3 제4호,관리주체 한국농어촌공사 안성지사 — 용인시는 관리주체 아님(용인시민신문 2021-11-30 · 국제뉴스 2025-03-25),③ 저수지 관리주체 확인
+asset,DA2008-0000170,need_data,총저수용량·댐 종류,,③ 저수지 관리주체 확인
+asset,DA2008-0000170,verified,N,Y,③ 저수지 관리주체 확인
+duty_assignment,ASG-000040,applicability,확인필요,비해당,①
+duty_assignment,ASG-000040,applicability_note,시설 판정 「제외」(관리주체 아님) — 해당 여부 확인 필요(09-24 정합성 검수),관리주체 아님(시설 판정 「제외」) — 비해당으로 닫음(09-24 결정),①
+duty_assignment,ASG-000040,decided_by,,G01,①
+duty_assignment,ASG-000040,decided_at,,2026-09-24,①
+duty_assignment,ASG-000041,applicability,확인필요,비해당,①
+duty_assignment,ASG-000041,applicability_note,시설 판정 「제외」(관리주체 아님) — 해당 여부 확인 필요(09-24 정합성 검수),관리주체 아님(시설 판정 「제외」) — 비해당으로 닫음(09-24 결정),①
+duty_assignment,ASG-000041,decided_by,,G01,①
+duty_assignment,ASG-000041,decided_at,,2026-09-24,①
+duty_assignment,ASG-000042,applicability,확인필요,비해당,①
+duty_assignment,ASG-000042,applicability_note,시설 판정 「제외」(관리주체 아님) — 해당 여부 확인 필요(09-24 정합성 검수),관리주체 아님(시설 판정 「제외」) — 비해당으로 닫음(09-24 결정),①
+duty_assignment,ASG-000042,decided_by,,G01,①
+duty_assignment,ASG-000042,decided_at,,2026-09-24,①
+duty_assignment,ASG-000046,applicability,확인필요,비해당,①
+duty_assignment,ASG-000046,applicability_note,시설 판정 「제외」(관리주체 아님) — 해당 여부 확인 필요(09-24 정합성 검수),관리주체 아님(시설 판정 「제외」) — 비해당으로 닫음(09-24 결정),①
+duty_assignment,ASG-000046,decided_by,,G01,①
+duty_assignment,ASG-000046,decided_at,,2026-09-24,①
+duty_assignment,ASG-000047,applicability,확인필요,비해당,①
+duty_assignment,ASG-000047,applicability_note,시설 판정 「제외」(관리주체 아님) — 해당 여부 확인 필요(09-24 정합성 검수),관리주체 아님(시설 판정 「제외」) — 비해당으로 닫음(09-24 결정),①
+duty_assignment,ASG-000047,decided_by,,G01,①
+duty_assignment,ASG-000047,decided_at,,2026-09-24,①
+duty_assignment,ASG-000048,applicability,확인필요,비해당,①
+duty_assignment,ASG-000048,applicability_note,시설 판정 「제외」(관리주체 아님) — 해당 여부 확인 필요(09-24 정합성 검수),관리주체 아님(시설 판정 「제외」) — 비해당으로 닫음(09-24 결정),①
+duty_assignment,ASG-000048,decided_by,,G01,①
+duty_assignment,ASG-000048,decided_at,,2026-09-24,①
+duty_assignment,ASG-000052,applicability,확인필요,비해당,①
+duty_assignment,ASG-000052,applicability_note,시설 판정 「제외」(관리주체 아님) — 해당 여부 확인 필요(09-24 정합성 검수),관리주체 아님(시설 판정 「제외」) — 비해당으로 닫음(09-24 결정),①
+duty_assignment,ASG-000052,decided_by,,G01,①
+duty_assignment,ASG-000052,decided_at,,2026-09-24,①
+duty_assignment,ASG-000053,applicability,확인필요,비해당,①
+duty_assignment,ASG-000053,applicability_note,시설 판정 「제외」(관리주체 아님) — 해당 여부 확인 필요(09-24 정합성 검수),관리주체 아님(시설 판정 「제외」) — 비해당으로 닫음(09-24 결정),①
+duty_assignment,ASG-000053,decided_by,,G01,①
+duty_assignment,ASG-000053,decided_at,,2026-09-24,①
+duty_assignment,ASG-000054,applicability,확인필요,비해당,①
+duty_assignment,ASG-000054,applicability_note,시설 판정 「제외」(관리주체 아님) — 해당 여부 확인 필요(09-24 정합성 검수),관리주체 아님(시설 판정 「제외」) — 비해당으로 닫음(09-24 결정),①
+duty_assignment,ASG-000054,decided_by,,G01,①
+duty_assignment,ASG-000054,decided_at,,2026-09-24,①
+duty_assignment,ASG-000060,applicability,확인필요,비해당,①
+duty_assignment,ASG-000060,applicability_note,시설 판정 「제외」(관리주체 아님) — 해당 여부 확인 필요(09-24 정합성 검수),관리주체 아님(시설 판정 「제외」) — 비해당으로 닫음(09-24 결정),①
+duty_assignment,ASG-000060,decided_by,,G01,①
+duty_assignment,ASG-000060,decided_at,,2026-09-24,①
+duty_assignment,ASG-000061,applicability,확인필요,비해당,①
+duty_assignment,ASG-000061,applicability_note,시설 판정 「제외」(관리주체 아님) — 해당 여부 확인 필요(09-24 정합성 검수),관리주체 아님(시설 판정 「제외」) — 비해당으로 닫음(09-24 결정),①
+duty_assignment,ASG-000061,decided_by,,G01,①
+duty_assignment,ASG-000061,decided_at,,2026-09-24,①
+duty_assignment,ASG-000062,applicability,확인필요,비해당,①
+duty_assignment,ASG-000062,applicability_note,시설 판정 「제외」(관리주체 아님) — 해당 여부 확인 필요(09-24 정합성 검수),관리주체 아님(시설 판정 「제외」) — 비해당으로 닫음(09-24 결정),①
+duty_assignment,ASG-000062,decided_by,,G01,①
+duty_assignment,ASG-000062,decided_at,,2026-09-24,①
+duty_assignment,ASG-000064,applicability,확인필요,비해당,①
+duty_assignment,ASG-000064,applicability_note,시설 판정 「제외」(관리주체 아님) — 해당 여부 확인 필요(09-24 정합성 검수),관리주체 아님(시설 판정 「제외」) — 비해당으로 닫음(09-24 결정),①
+duty_assignment,ASG-000064,decided_by,,G01,①
+duty_assignment,ASG-000064,decided_at,,2026-09-24,①
+duty_assignment,ASG-000065,applicability,확인필요,비해당,①
+duty_assignment,ASG-000065,applicability_note,시설 판정 「제외」(관리주체 아님) — 해당 여부 확인 필요(09-24 정합성 검수),관리주체 아님(시설 판정 「제외」) — 비해당으로 닫음(09-24 결정),①
+duty_assignment,ASG-000065,decided_by,,G01,①
+duty_assignment,ASG-000065,decided_at,,2026-09-24,①
+duty_assignment,ASG-000066,applicability,확인필요,비해당,①
+duty_assignment,ASG-000066,applicability_note,시설 판정 「제외」(관리주체 아님) — 해당 여부 확인 필요(09-24 정합성 검수),관리주체 아님(시설 판정 「제외」) — 비해당으로 닫음(09-24 결정),①
+duty_assignment,ASG-000066,decided_by,,G01,①
+duty_assignment,ASG-000066,decided_at,,2026-09-24,①
+duty_assignment,ASG-000072,applicability,확인필요,비해당,①
+duty_assignment,ASG-000072,applicability_note,시설 판정 「제외」(관리주체 아님) — 해당 여부 확인 필요(09-24 정합성 검수),관리주체 아님(시설 판정 「제외」) — 비해당으로 닫음(09-24 결정),①
+duty_assignment,ASG-000072,decided_by,,G01,①
+duty_assignment,ASG-000072,decided_at,,2026-09-24,①
+duty_assignment,ASG-000073,applicability,확인필요,비해당,①
+duty_assignment,ASG-000073,applicability_note,시설 판정 「제외」(관리주체 아님) — 해당 여부 확인 필요(09-24 정합성 검수),관리주체 아님(시설 판정 「제외」) — 비해당으로 닫음(09-24 결정),①
+duty_assignment,ASG-000073,decided_by,,G01,①
+duty_assignment,ASG-000073,decided_at,,2026-09-24,①
+duty_assignment,ASG-000074,applicability,확인필요,비해당,①
+duty_assignment,ASG-000074,applicability_note,시설 판정 「제외」(관리주체 아님) — 해당 여부 확인 필요(09-24 정합성 검수),관리주체 아님(시설 판정 「제외」) — 비해당으로 닫음(09-24 결정),①
+duty_assignment,ASG-000074,decided_by,,G01,①
+duty_assignment,ASG-000074,decided_at,,2026-09-24,①
+duty_assignment,ASG-000076,applicability,확인필요,비해당,①
+duty_assignment,ASG-000076,applicability_note,시설 판정 「제외」(관리주체 아님) — 해당 여부 확인 필요(09-24 정합성 검수),관리주체 아님(시설 판정 「제외」) — 비해당으로 닫음(09-24 결정),①
+duty_assignment,ASG-000076,decided_by,,G01,①
+duty_assignment,ASG-000076,decided_at,,2026-09-24,①
+duty_assignment,ASG-000077,applicability,확인필요,비해당,①
+duty_assignment,ASG-000077,applicability_note,시설 판정 「제외」(관리주체 아님) — 해당 여부 확인 필요(09-24 정합성 검수),관리주체 아님(시설 판정 「제외」) — 비해당으로 닫음(09-24 결정),①
+duty_assignment,ASG-000077,decided_by,,G01,①
+duty_assignment,ASG-000077,decided_at,,2026-09-24,①
+duty_assignment,ASG-000078,applicability,확인필요,비해당,①
+duty_assignment,ASG-000078,applicability_note,시설 판정 「제외」(관리주체 아님) — 해당 여부 확인 필요(09-24 정합성 검수),관리주체 아님(시설 판정 「제외」) — 비해당으로 닫음(09-24 결정),①
+duty_assignment,ASG-000078,decided_by,,G01,①
+duty_assignment,ASG-000078,decided_at,,2026-09-24,①
+duty_assignment,ASG-000179,applicability,해당,비해당,③
+duty_assignment,ASG-000179,applicability_note,,관리주체 한국농어촌공사 평택지사 — 용인시 관리 시설 아님(용인시민신문 2021-11-30 · 국제뉴스 2025-03-25),③
+duty_assignment,ASG-000179,decided_by,,G01,③
+duty_assignment,ASG-000179,decided_at,,2026-09-24,③
+duty_assignment,ASG-000180,applicability,해당,비해당,③
+duty_assignment,ASG-000180,applicability_note,,관리주체 한국농어촌공사 평택지사 — 용인시 관리 시설 아님(용인시민신문 2021-11-30 · 국제뉴스 2025-03-25),③
+duty_assignment,ASG-000180,decided_by,,G01,③
+duty_assignment,ASG-000180,decided_at,,2026-09-24,③
+duty_assignment,ASG-000181,applicability,해당,비해당,③
+duty_assignment,ASG-000181,applicability_note,,관리주체 한국농어촌공사 안성지사 — 용인시 관리 시설 아님(용인시민신문 2021-11-30 · 국제뉴스 2025-03-25),③
+duty_assignment,ASG-000181,decided_by,,G01,③
+duty_assignment,ASG-000181,decided_at,,2026-09-24,③
+duty_assignment,ASG-000183,applicability,해당,비해당,③
+duty_assignment,ASG-000183,applicability_note,,관리주체 한국농어촌공사 평택지사 — 용인시 관리 시설 아님(용인시민신문 2021-11-30 · 국제뉴스 2025-03-25),③
+duty_assignment,ASG-000183,decided_by,,G01,③
+duty_assignment,ASG-000183,decided_at,,2026-09-24,③
+duty_assignment,ASG-000184,applicability,해당,비해당,③
+duty_assignment,ASG-000184,applicability_note,,관리주체 한국농어촌공사 평택지사 — 용인시 관리 시설 아님(용인시민신문 2021-11-30 · 국제뉴스 2025-03-25),③
+duty_assignment,ASG-000184,decided_by,,G01,③
+duty_assignment,ASG-000184,decided_at,,2026-09-24,③
+duty_assignment,ASG-000185,applicability,해당,비해당,③
+duty_assignment,ASG-000185,applicability_note,,관리주체 한국농어촌공사 안성지사 — 용인시 관리 시설 아님(용인시민신문 2021-11-30 · 국제뉴스 2025-03-25),③
+duty_assignment,ASG-000185,decided_by,,G01,③
+duty_assignment,ASG-000185,decided_at,,2026-09-24,③
+duty_assignment,ASG-000206,applicability,해당,비해당,③
+duty_assignment,ASG-000206,applicability_note,,관리주체 한국농어촌공사 평택지사 — 용인시 관리 시설 아님(용인시민신문 2021-11-30 · 국제뉴스 2025-03-25),③
+duty_assignment,ASG-000206,decided_by,,G01,③
+duty_assignment,ASG-000206,decided_at,,2026-09-24,③
+duty_assignment,ASG-000207,applicability,해당,비해당,③
+duty_assignment,ASG-000207,applicability_note,,관리주체 한국농어촌공사 평택지사 — 용인시 관리 시설 아님(용인시민신문 2021-11-30 · 국제뉴스 2025-03-25),③
+duty_assignment,ASG-000207,decided_by,,G01,③
+duty_assignment,ASG-000207,decided_at,,2026-09-24,③
+duty_assignment,ASG-000208,applicability,해당,비해당,③
+duty_assignment,ASG-000208,applicability_note,,관리주체 한국농어촌공사 안성지사 — 용인시 관리 시설 아님(용인시민신문 2021-11-30 · 국제뉴스 2025-03-25),③
+duty_assignment,ASG-000208,decided_by,,G01,③
+duty_assignment,ASG-000208,decided_at,,2026-09-24,③
+duty_assignment,ASG-000210,applicability,해당,비해당,③
+duty_assignment,ASG-000210,applicability_note,,관리주체 한국농어촌공사 평택지사 — 용인시 관리 시설 아님(용인시민신문 2021-11-30 · 국제뉴스 2025-03-25),③
+duty_assignment,ASG-000210,decided_by,,G01,③
+duty_assignment,ASG-000210,decided_at,,2026-09-24,③
+duty_assignment,ASG-000211,applicability,해당,비해당,③
+duty_assignment,ASG-000211,applicability_note,,관리주체 한국농어촌공사 평택지사 — 용인시 관리 시설 아님(용인시민신문 2021-11-30 · 국제뉴스 2025-03-25),③
+duty_assignment,ASG-000211,decided_by,,G01,③
+duty_assignment,ASG-000211,decided_at,,2026-09-24,③
+duty_assignment,ASG-000212,applicability,해당,비해당,③
+duty_assignment,ASG-000212,applicability_note,,관리주체 한국농어촌공사 안성지사 — 용인시 관리 시설 아님(용인시민신문 2021-11-30 · 국제뉴스 2025-03-25),③
+duty_assignment,ASG-000212,decided_by,,G01,③
+duty_assignment,ASG-000212,decided_at,,2026-09-24,③
+duty_assignment,ASG-000214,applicability,해당,비해당,③
+duty_assignment,ASG-000214,applicability_note,,관리주체 한국농어촌공사 평택지사 — 용인시 관리 시설 아님(용인시민신문 2021-11-30 · 국제뉴스 2025-03-25),③
+duty_assignment,ASG-000214,decided_by,,G01,③
+duty_assignment,ASG-000214,decided_at,,2026-09-24,③
+duty_assignment,ASG-000215,applicability,해당,비해당,③
+duty_assignment,ASG-000215,applicability_note,,관리주체 한국농어촌공사 평택지사 — 용인시 관리 시설 아님(용인시민신문 2021-11-30 · 국제뉴스 2025-03-25),③
+duty_assignment,ASG-000215,decided_by,,G01,③
+duty_assignment,ASG-000215,decided_at,,2026-09-24,③
+duty_assignment,ASG-000216,applicability,해당,비해당,③
+duty_assignment,ASG-000216,applicability_note,,관리주체 한국농어촌공사 안성지사 — 용인시 관리 시설 아님(용인시민신문 2021-11-30 · 국제뉴스 2025-03-25),③
+duty_assignment,ASG-000216,decided_by,,G01,③
+duty_assignment,ASG-000216,decided_at,,2026-09-24,③
+duty_assignment,ASG-000458,applicability,확인필요,비해당,①
+duty_assignment,ASG-000458,applicability_note,시설 판정 「제외」(관리주체 아님) — 해당 여부 확인 필요(09-24 정합성 검수),관리주체 아님(시설 판정 「제외」) — 비해당으로 닫음(09-24 결정),①
+duty_assignment,ASG-000458,decided_by,,G01,①
+duty_assignment,ASG-000458,decided_at,,2026-09-24,①
+duty_assignment,ASG-000459,applicability,확인필요,비해당,①
+duty_assignment,ASG-000459,applicability_note,시설 판정 「제외」(관리주체 아님) — 해당 여부 확인 필요(09-24 정합성 검수),관리주체 아님(시설 판정 「제외」) — 비해당으로 닫음(09-24 결정),①
+duty_assignment,ASG-000459,decided_by,,G01,①
+duty_assignment,ASG-000459,decided_at,,2026-09-24,①
+duty_assignment,ASG-000460,applicability,확인필요,비해당,①
+duty_assignment,ASG-000460,applicability_note,시설 판정 「제외」(관리주체 아님) — 해당 여부 확인 필요(09-24 정합성 검수),관리주체 아님(시설 판정 「제외」) — 비해당으로 닫음(09-24 결정),①
+duty_assignment,ASG-000460,decided_by,,G01,①
+duty_assignment,ASG-000460,decided_at,,2026-09-24,①
+duty_assignment,ASG-000462,applicability,확인필요,비해당,①
+duty_assignment,ASG-000462,applicability_note,시설 판정 「제외」(관리주체 아님) — 해당 여부 확인 필요(09-24 정합성 검수),관리주체 아님(시설 판정 「제외」) — 비해당으로 닫음(09-24 결정),①
+duty_assignment,ASG-000462,decided_by,,G01,①
+duty_assignment,ASG-000462,decided_at,,2026-09-24,①
+duty_assignment,ASG-000463,applicability,확인필요,비해당,①
+duty_assignment,ASG-000463,applicability_note,시설 판정 「제외」(관리주체 아님) — 해당 여부 확인 필요(09-24 정합성 검수),관리주체 아님(시설 판정 「제외」) — 비해당으로 닫음(09-24 결정),①
+duty_assignment,ASG-000463,decided_by,,G01,①
+duty_assignment,ASG-000463,decided_at,,2026-09-24,①
+duty_assignment,ASG-000464,applicability,확인필요,비해당,①
+duty_assignment,ASG-000464,applicability_note,시설 판정 「제외」(관리주체 아님) — 해당 여부 확인 필요(09-24 정합성 검수),관리주체 아님(시설 판정 「제외」) — 비해당으로 닫음(09-24 결정),①
+duty_assignment,ASG-000464,decided_by,,G01,①
+duty_assignment,ASG-000464,decided_at,,2026-09-24,①
+duty_assignment,ASG-000470,applicability,확인필요,비해당,①
+duty_assignment,ASG-000470,applicability_note,시설 판정 「제외」(관리주체 아님) — 해당 여부 확인 필요(09-24 정합성 검수),관리주체 아님(시설 판정 「제외」) — 비해당으로 닫음(09-24 결정),①
+duty_assignment,ASG-000470,decided_by,,G01,①
+duty_assignment,ASG-000470,decided_at,,2026-09-24,①
+duty_assignment,ASG-000471,applicability,확인필요,비해당,①
+duty_assignment,ASG-000471,applicability_note,시설 판정 「제외」(관리주체 아님) — 해당 여부 확인 필요(09-24 정합성 검수),관리주체 아님(시설 판정 「제외」) — 비해당으로 닫음(09-24 결정),①
+duty_assignment,ASG-000471,decided_by,,G01,①
+duty_assignment,ASG-000471,decided_at,,2026-09-24,①
+duty_assignment,ASG-000472,applicability,확인필요,비해당,①
+duty_assignment,ASG-000472,applicability_note,시설 판정 「제외」(관리주체 아님) — 해당 여부 확인 필요(09-24 정합성 검수),관리주체 아님(시설 판정 「제외」) — 비해당으로 닫음(09-24 결정),①
+duty_assignment,ASG-000472,decided_by,,G01,①
+duty_assignment,ASG-000472,decided_at,,2026-09-24,①
+duty_assignment,ASG-000474,applicability,확인필요,비해당,①
+duty_assignment,ASG-000474,applicability_note,시설 판정 「제외」(관리주체 아님) — 해당 여부 확인 필요(09-24 정합성 검수),관리주체 아님(시설 판정 「제외」) — 비해당으로 닫음(09-24 결정),①
+duty_assignment,ASG-000474,decided_by,,G01,①
+duty_assignment,ASG-000474,decided_at,,2026-09-24,①
+duty_assignment,ASG-000475,applicability,확인필요,비해당,①
+duty_assignment,ASG-000475,applicability_note,시설 판정 「제외」(관리주체 아님) — 해당 여부 확인 필요(09-24 정합성 검수),관리주체 아님(시설 판정 「제외」) — 비해당으로 닫음(09-24 결정),①
+duty_assignment,ASG-000475,decided_by,,G01,①
+duty_assignment,ASG-000475,decided_at,,2026-09-24,①
+duty_assignment,ASG-000476,applicability,확인필요,비해당,①
+duty_assignment,ASG-000476,applicability_note,시설 판정 「제외」(관리주체 아님) — 해당 여부 확인 필요(09-24 정합성 검수),관리주체 아님(시설 판정 「제외」) — 비해당으로 닫음(09-24 결정),①
+duty_assignment,ASG-000476,decided_by,,G01,①
+duty_assignment,ASG-000476,decided_at,,2026-09-24,①
+duty_assignment,ASG-000478,applicability,확인필요,비해당,①
+duty_assignment,ASG-000478,applicability_note,시설 판정 「제외」(관리주체 아님) — 해당 여부 확인 필요(09-24 정합성 검수),관리주체 아님(시설 판정 「제외」) — 비해당으로 닫음(09-24 결정),①
+duty_assignment,ASG-000478,decided_by,,G01,①
+duty_assignment,ASG-000478,decided_at,,2026-09-24,①
+duty_assignment,ASG-000479,applicability,확인필요,비해당,①
+duty_assignment,ASG-000479,applicability_note,시설 판정 「제외」(관리주체 아님) — 해당 여부 확인 필요(09-24 정합성 검수),관리주체 아님(시설 판정 「제외」) — 비해당으로 닫음(09-24 결정),①
+duty_assignment,ASG-000479,decided_by,,G01,①
+duty_assignment,ASG-000479,decided_at,,2026-09-24,①
+duty_assignment,ASG-000480,applicability,확인필요,비해당,①
+duty_assignment,ASG-000480,applicability_note,시설 판정 「제외」(관리주체 아님) — 해당 여부 확인 필요(09-24 정합성 검수),관리주체 아님(시설 판정 「제외」) — 비해당으로 닫음(09-24 결정),①
+duty_assignment,ASG-000480,decided_by,,G01,①
+duty_assignment,ASG-000480,decided_at,,2026-09-24,①
+duty_assignment,ASG-000566,applicability,확인필요,비해당,①
+duty_assignment,ASG-000566,applicability_note,시설 판정 「제외」(관리주체 아님) — 해당 여부 확인 필요(09-24 정합성 검수),관리주체 아님(시설 판정 「제외」) — 비해당으로 닫음(09-24 결정),①
+duty_assignment,ASG-000566,decided_by,,G01,①
+duty_assignment,ASG-000566,decided_at,,2026-09-24,①
+duty_assignment,ASG-000567,applicability,확인필요,비해당,①
+duty_assignment,ASG-000567,applicability_note,시설 판정 「제외」(관리주체 아님) — 해당 여부 확인 필요(09-24 정합성 검수),관리주체 아님(시설 판정 「제외」) — 비해당으로 닫음(09-24 결정),①
+duty_assignment,ASG-000567,decided_by,,G01,①
+duty_assignment,ASG-000567,decided_at,,2026-09-24,①
+duty_assignment,ASG-000568,applicability,확인필요,비해당,①
+duty_assignment,ASG-000568,applicability_note,시설 판정 「제외」(관리주체 아님) — 해당 여부 확인 필요(09-24 정합성 검수),관리주체 아님(시설 판정 「제외」) — 비해당으로 닫음(09-24 결정),①
+duty_assignment,ASG-000568,decided_by,,G01,①
+duty_assignment,ASG-000568,decided_at,,2026-09-24,①
+duty_assignment,ASG-000629,applicability,해당,비해당,③
+duty_assignment,ASG-000629,applicability_note,,관리주체 한국농어촌공사 평택지사 — 용인시 관리 시설 아님(용인시민신문 2021-11-30 · 국제뉴스 2025-03-25),③
+duty_assignment,ASG-000629,decided_by,,G01,③
+duty_assignment,ASG-000629,decided_at,,2026-09-24,③
+duty_assignment,ASG-000630,applicability,해당,비해당,③
+duty_assignment,ASG-000630,applicability_note,,관리주체 한국농어촌공사 평택지사 — 용인시 관리 시설 아님(용인시민신문 2021-11-30 · 국제뉴스 2025-03-25),③
+duty_assignment,ASG-000630,decided_by,,G01,③
+duty_assignment,ASG-000630,decided_at,,2026-09-24,③
+duty_assignment,ASG-000631,applicability,해당,비해당,③
+duty_assignment,ASG-000631,applicability_note,,관리주체 한국농어촌공사 안성지사 — 용인시 관리 시설 아님(용인시민신문 2021-11-30 · 국제뉴스 2025-03-25),③
+duty_assignment,ASG-000631,decided_by,,G01,③
+duty_assignment,ASG-000631,decided_at,,2026-09-24,③
+duty_assignment,ASG-000633,applicability,해당,비해당,③
+duty_assignment,ASG-000633,applicability_note,,관리주체 한국농어촌공사 평택지사 — 용인시 관리 시설 아님(용인시민신문 2021-11-30 · 국제뉴스 2025-03-25),③
+duty_assignment,ASG-000633,decided_by,,G01,③
+duty_assignment,ASG-000633,decided_at,,2026-09-24,③
+duty_assignment,ASG-000634,applicability,해당,비해당,③
+duty_assignment,ASG-000634,applicability_note,,관리주체 한국농어촌공사 평택지사 — 용인시 관리 시설 아님(용인시민신문 2021-11-30 · 국제뉴스 2025-03-25),③
+duty_assignment,ASG-000634,decided_by,,G01,③
+duty_assignment,ASG-000634,decided_at,,2026-09-24,③
+duty_assignment,ASG-000635,applicability,해당,비해당,③
+duty_assignment,ASG-000635,applicability_note,,관리주체 한국농어촌공사 안성지사 — 용인시 관리 시설 아님(용인시민신문 2021-11-30 · 국제뉴스 2025-03-25),③
+duty_assignment,ASG-000635,decided_by,,G01,③
+duty_assignment,ASG-000635,decided_at,,2026-09-24,③
+duty_assignment,ASG-000637,applicability,해당,비해당,③
+duty_assignment,ASG-000637,applicability_note,,관리주체 한국농어촌공사 평택지사 — 용인시 관리 시설 아님(용인시민신문 2021-11-30 · 국제뉴스 2025-03-25),③
+duty_assignment,ASG-000637,decided_by,,G01,③
+duty_assignment,ASG-000637,decided_at,,2026-09-24,③
+duty_assignment,ASG-000638,applicability,해당,비해당,③
+duty_assignment,ASG-000638,applicability_note,,관리주체 한국농어촌공사 평택지사 — 용인시 관리 시설 아님(용인시민신문 2021-11-30 · 국제뉴스 2025-03-25),③
+duty_assignment,ASG-000638,decided_by,,G01,③
+duty_assignment,ASG-000638,decided_at,,2026-09-24,③
+duty_assignment,ASG-000639,applicability,해당,비해당,③
+duty_assignment,ASG-000639,applicability_note,,관리주체 한국농어촌공사 안성지사 — 용인시 관리 시설 아님(용인시민신문 2021-11-30 · 국제뉴스 2025-03-25),③
+duty_assignment,ASG-000639,decided_by,,G01,③
+duty_assignment,ASG-000639,decided_at,,2026-09-24,③
+duty_assignment,ASG-000641,applicability,해당,비해당,③
+duty_assignment,ASG-000641,applicability_note,,관리주체 한국농어촌공사 평택지사 — 용인시 관리 시설 아님(용인시민신문 2021-11-30 · 국제뉴스 2025-03-25),③
+duty_assignment,ASG-000641,decided_by,,G01,③
+duty_assignment,ASG-000641,decided_at,,2026-09-24,③
+duty_assignment,ASG-000642,applicability,해당,비해당,③
+duty_assignment,ASG-000642,applicability_note,,관리주체 한국농어촌공사 평택지사 — 용인시 관리 시설 아님(용인시민신문 2021-11-30 · 국제뉴스 2025-03-25),③
+duty_assignment,ASG-000642,decided_by,,G01,③
+duty_assignment,ASG-000642,decided_at,,2026-09-24,③
+duty_assignment,ASG-000643,applicability,해당,비해당,③
+duty_assignment,ASG-000643,applicability_note,,관리주체 한국농어촌공사 안성지사 — 용인시 관리 시설 아님(용인시민신문 2021-11-30 · 국제뉴스 2025-03-25),③
+duty_assignment,ASG-000643,decided_by,,G01,③
+duty_assignment,ASG-000643,decided_at,,2026-09-24,③
+duty_assignment,ASG-000645,applicability,해당,비해당,③
+duty_assignment,ASG-000645,applicability_note,,관리주체 한국농어촌공사 평택지사 — 용인시 관리 시설 아님(용인시민신문 2021-11-30 · 국제뉴스 2025-03-25),③
+duty_assignment,ASG-000645,decided_by,,G01,③
+duty_assignment,ASG-000645,decided_at,,2026-09-24,③
+duty_assignment,ASG-000646,applicability,해당,비해당,③
+duty_assignment,ASG-000646,applicability_note,,관리주체 한국농어촌공사 평택지사 — 용인시 관리 시설 아님(용인시민신문 2021-11-30 · 국제뉴스 2025-03-25),③
+duty_assignment,ASG-000646,decided_by,,G01,③
+duty_assignment,ASG-000646,decided_at,,2026-09-24,③
+duty_assignment,ASG-000647,applicability,해당,비해당,③
+duty_assignment,ASG-000647,applicability_note,,관리주체 한국농어촌공사 안성지사 — 용인시 관리 시설 아님(용인시민신문 2021-11-30 · 국제뉴스 2025-03-25),③
+duty_assignment,ASG-000647,decided_by,,G01,③
+duty_assignment,ASG-000647,decided_at,,2026-09-24,③
+duty_assignment,ASG-000649,applicability,해당,비해당,③
+duty_assignment,ASG-000649,applicability_note,,관리주체 한국농어촌공사 평택지사 — 용인시 관리 시설 아님(용인시민신문 2021-11-30 · 국제뉴스 2025-03-25),③
+duty_assignment,ASG-000649,decided_by,,G01,③
+duty_assignment,ASG-000649,decided_at,,2026-09-24,③
+duty_assignment,ASG-000650,applicability,해당,비해당,③
+duty_assignment,ASG-000650,applicability_note,,관리주체 한국농어촌공사 평택지사 — 용인시 관리 시설 아님(용인시민신문 2021-11-30 · 국제뉴스 2025-03-25),③
+duty_assignment,ASG-000650,decided_by,,G01,③
+duty_assignment,ASG-000650,decided_at,,2026-09-24,③
+duty_assignment,ASG-000651,applicability,해당,비해당,③
+duty_assignment,ASG-000651,applicability_note,,관리주체 한국농어촌공사 안성지사 — 용인시 관리 시설 아님(용인시민신문 2021-11-30 · 국제뉴스 2025-03-25),③
+duty_assignment,ASG-000651,decided_by,,G01,③
+duty_assignment,ASG-000651,decided_at,,2026-09-24,③
+duty_assignment,ASG-000653,applicability,해당,비해당,③
+duty_assignment,ASG-000653,applicability_note,,관리주체 한국농어촌공사 평택지사 — 용인시 관리 시설 아님(용인시민신문 2021-11-30 · 국제뉴스 2025-03-25),③
+duty_assignment,ASG-000653,decided_by,,G01,③
+duty_assignment,ASG-000653,decided_at,,2026-09-24,③
+duty_assignment,ASG-000654,applicability,해당,비해당,③
+duty_assignment,ASG-000654,applicability_note,,관리주체 한국농어촌공사 평택지사 — 용인시 관리 시설 아님(용인시민신문 2021-11-30 · 국제뉴스 2025-03-25),③
+duty_assignment,ASG-000654,decided_by,,G01,③
+duty_assignment,ASG-000654,decided_at,,2026-09-24,③
+duty_assignment,ASG-000655,applicability,해당,비해당,③
+duty_assignment,ASG-000655,applicability_note,,관리주체 한국농어촌공사 안성지사 — 용인시 관리 시설 아님(용인시민신문 2021-11-30 · 국제뉴스 2025-03-25),③
+duty_assignment,ASG-000655,decided_by,,G01,③
+duty_assignment,ASG-000655,decided_at,,2026-09-24,③
+duty_assignment,ASG-000882,applicability,확인필요,비해당,①
+duty_assignment,ASG-000882,applicability_note,시설 판정 「제외」(관리주체 아님) — 해당 여부 확인 필요(09-24 정합성 검수),관리주체 아님(시설 판정 「제외」) — 비해당으로 닫음(09-24 결정),①
+duty_assignment,ASG-000882,decided_by,,G01,①
+duty_assignment,ASG-000882,decided_at,,2026-09-24,①
+duty_assignment,ASG-000883,applicability,확인필요,비해당,①
+duty_assignment,ASG-000883,applicability_note,시설 판정 「제외」(관리주체 아님) — 해당 여부 확인 필요(09-24 정합성 검수),관리주체 아님(시설 판정 「제외」) — 비해당으로 닫음(09-24 결정),①
+duty_assignment,ASG-000883,decided_by,,G01,①
+duty_assignment,ASG-000883,decided_at,,2026-09-24,①
+duty_assignment,ASG-000884,applicability,확인필요,비해당,①
+duty_assignment,ASG-000884,applicability_note,시설 판정 「제외」(관리주체 아님) — 해당 여부 확인 필요(09-24 정합성 검수),관리주체 아님(시설 판정 「제외」) — 비해당으로 닫음(09-24 결정),①
+duty_assignment,ASG-000884,decided_by,,G01,①
+duty_assignment,ASG-000884,decided_at,,2026-09-24,①
+duty_assignment,ASG-000892,applicability,확인필요,비해당,①
+duty_assignment,ASG-000892,applicability_note,시설 판정 「제외」(관리주체 아님) — 해당 여부 확인 필요(09-24 정합성 검수),관리주체 아님(시설 판정 「제외」) — 비해당으로 닫음(09-24 결정),①
+duty_assignment,ASG-000892,decided_by,,G01,①
+duty_assignment,ASG-000892,decided_at,,2026-09-24,①
+duty_assignment,ASG-000893,applicability,확인필요,비해당,①
+duty_assignment,ASG-000893,applicability_note,시설 판정 「제외」(관리주체 아님) — 해당 여부 확인 필요(09-24 정합성 검수),관리주체 아님(시설 판정 「제외」) — 비해당으로 닫음(09-24 결정),①
+duty_assignment,ASG-000893,decided_by,,G01,①
+duty_assignment,ASG-000893,decided_at,,2026-09-24,①
+duty_assignment,ASG-000894,applicability,확인필요,비해당,①
+duty_assignment,ASG-000894,applicability_note,시설 판정 「제외」(관리주체 아님) — 해당 여부 확인 필요(09-24 정합성 검수),관리주체 아님(시설 판정 「제외」) — 비해당으로 닫음(09-24 결정),①
+duty_assignment,ASG-000894,decided_by,,G01,①
+duty_assignment,ASG-000894,decided_at,,2026-09-24,①
+duty_assignment,ASG-000896,applicability,확인필요,비해당,①
+duty_assignment,ASG-000896,applicability_note,시설 판정 「제외」(관리주체 아님) — 해당 여부 확인 필요(09-24 정합성 검수),관리주체 아님(시설 판정 「제외」) — 비해당으로 닫음(09-24 결정),①
+duty_assignment,ASG-000896,decided_by,,G01,①
+duty_assignment,ASG-000896,decided_at,,2026-09-24,①
+duty_assignment,ASG-000897,applicability,확인필요,비해당,①
+duty_assignment,ASG-000897,applicability_note,시설 판정 「제외」(관리주체 아님) — 해당 여부 확인 필요(09-24 정합성 검수),관리주체 아님(시설 판정 「제외」) — 비해당으로 닫음(09-24 결정),①
+duty_assignment,ASG-000897,decided_by,,G01,①
+duty_assignment,ASG-000897,decided_at,,2026-09-24,①
+duty_assignment,ASG-000898,applicability,확인필요,비해당,①
+duty_assignment,ASG-000898,applicability_note,시설 판정 「제외」(관리주체 아님) — 해당 여부 확인 필요(09-24 정합성 검수),관리주체 아님(시설 판정 「제외」) — 비해당으로 닫음(09-24 결정),①
+duty_assignment,ASG-000898,decided_by,,G01,①
+duty_assignment,ASG-000898,decided_at,,2026-09-24,①
+duty_assignment,ASG-000900,applicability,확인필요,비해당,①
+duty_assignment,ASG-000900,applicability_note,시설 판정 「제외」(관리주체 아님) — 해당 여부 확인 필요(09-24 정합성 검수),관리주체 아님(시설 판정 「제외」) — 비해당으로 닫음(09-24 결정),①
+duty_assignment,ASG-000900,decided_by,,G01,①
+duty_assignment,ASG-000900,decided_at,,2026-09-24,①
+duty_assignment,ASG-000901,applicability,확인필요,비해당,①
+duty_assignment,ASG-000901,applicability_note,시설 판정 「제외」(관리주체 아님) — 해당 여부 확인 필요(09-24 정합성 검수),관리주체 아님(시설 판정 「제외」) — 비해당으로 닫음(09-24 결정),①
+duty_assignment,ASG-000901,decided_by,,G01,①
+duty_assignment,ASG-000901,decided_at,,2026-09-24,①
+duty_assignment,ASG-000902,applicability,확인필요,비해당,①
+duty_assignment,ASG-000902,applicability_note,시설 판정 「제외」(관리주체 아님) — 해당 여부 확인 필요(09-24 정합성 검수),관리주체 아님(시설 판정 「제외」) — 비해당으로 닫음(09-24 결정),①
+duty_assignment,ASG-000902,decided_by,,G01,①
+duty_assignment,ASG-000902,decided_at,,2026-09-24,①
+duty_assignment,ASG-000904,applicability,확인필요,비해당,①
+duty_assignment,ASG-000904,applicability_note,시설 판정 「제외」(관리주체 아님) — 해당 여부 확인 필요(09-24 정합성 검수),관리주체 아님(시설 판정 「제외」) — 비해당으로 닫음(09-24 결정),①
+duty_assignment,ASG-000904,decided_by,,G01,①
+duty_assignment,ASG-000904,decided_at,,2026-09-24,①
+duty_assignment,ASG-000905,applicability,확인필요,비해당,①
+duty_assignment,ASG-000905,applicability_note,시설 판정 「제외」(관리주체 아님) — 해당 여부 확인 필요(09-24 정합성 검수),관리주체 아님(시설 판정 「제외」) — 비해당으로 닫음(09-24 결정),①
+duty_assignment,ASG-000905,decided_by,,G01,①
+duty_assignment,ASG-000905,decided_at,,2026-09-24,①
+duty_assignment,ASG-000906,applicability,확인필요,비해당,①
+duty_assignment,ASG-000906,applicability_note,시설 판정 「제외」(관리주체 아님) — 해당 여부 확인 필요(09-24 정합성 검수),관리주체 아님(시설 판정 「제외」) — 비해당으로 닫음(09-24 결정),①
+duty_assignment,ASG-000906,decided_by,,G01,①
+duty_assignment,ASG-000906,decided_at,,2026-09-24,①
+duty_assignment,ASG-000908,applicability,확인필요,비해당,①
+duty_assignment,ASG-000908,applicability_note,시설 판정 「제외」(관리주체 아님) — 해당 여부 확인 필요(09-24 정합성 검수),관리주체 아님(시설 판정 「제외」) — 비해당으로 닫음(09-24 결정),①
+duty_assignment,ASG-000908,decided_by,,G01,①
+duty_assignment,ASG-000908,decided_at,,2026-09-24,①
+duty_assignment,ASG-000909,applicability,확인필요,비해당,①
+duty_assignment,ASG-000909,applicability_note,시설 판정 「제외」(관리주체 아님) — 해당 여부 확인 필요(09-24 정합성 검수),관리주체 아님(시설 판정 「제외」) — 비해당으로 닫음(09-24 결정),①
+duty_assignment,ASG-000909,decided_by,,G01,①
+duty_assignment,ASG-000909,decided_at,,2026-09-24,①
+duty_assignment,ASG-000910,applicability,확인필요,비해당,①
+duty_assignment,ASG-000910,applicability_note,시설 판정 「제외」(관리주체 아님) — 해당 여부 확인 필요(09-24 정합성 검수),관리주체 아님(시설 판정 「제외」) — 비해당으로 닫음(09-24 결정),①
+duty_assignment,ASG-000910,decided_by,,G01,①
+duty_assignment,ASG-000910,decided_at,,2026-09-24,①
+duty_assignment,ASG-000912,applicability,확인필요,비해당,①
+duty_assignment,ASG-000912,applicability_note,시설 판정 「제외」(관리주체 아님) — 해당 여부 확인 필요(09-24 정합성 검수),관리주체 아님(시설 판정 「제외」) — 비해당으로 닫음(09-24 결정),①
+duty_assignment,ASG-000912,decided_by,,G01,①
+duty_assignment,ASG-000912,decided_at,,2026-09-24,①
+duty_assignment,ASG-000913,applicability,확인필요,비해당,①
+duty_assignment,ASG-000913,applicability_note,시설 판정 「제외」(관리주체 아님) — 해당 여부 확인 필요(09-24 정합성 검수),관리주체 아님(시설 판정 「제외」) — 비해당으로 닫음(09-24 결정),①
+duty_assignment,ASG-000913,decided_by,,G01,①
+duty_assignment,ASG-000913,decided_at,,2026-09-24,①
+duty_assignment,ASG-000914,applicability,확인필요,비해당,①
+duty_assignment,ASG-000914,applicability_note,시설 판정 「제외」(관리주체 아님) — 해당 여부 확인 필요(09-24 정합성 검수),관리주체 아님(시설 판정 「제외」) — 비해당으로 닫음(09-24 결정),①
+duty_assignment,ASG-000914,decided_by,,G01,①
+duty_assignment,ASG-000914,decided_at,,2026-09-24,①
+duty_assignment,ASG-000916,applicability,확인필요,비해당,①
+duty_assignment,ASG-000916,applicability_note,시설 판정 「제외」(관리주체 아님) — 해당 여부 확인 필요(09-24 정합성 검수),관리주체 아님(시설 판정 「제외」) — 비해당으로 닫음(09-24 결정),①
+duty_assignment,ASG-000916,decided_by,,G01,①
+duty_assignment,ASG-000916,decided_at,,2026-09-24,①
+duty_assignment,ASG-000917,applicability,확인필요,비해당,①
+duty_assignment,ASG-000917,applicability_note,시설 판정 「제외」(관리주체 아님) — 해당 여부 확인 필요(09-24 정합성 검수),관리주체 아님(시설 판정 「제외」) — 비해당으로 닫음(09-24 결정),①
+duty_assignment,ASG-000917,decided_by,,G01,①
+duty_assignment,ASG-000917,decided_at,,2026-09-24,①
+duty_assignment,ASG-000918,applicability,확인필요,비해당,①
+duty_assignment,ASG-000918,applicability_note,시설 판정 「제외」(관리주체 아님) — 해당 여부 확인 필요(09-24 정합성 검수),관리주체 아님(시설 판정 「제외」) — 비해당으로 닫음(09-24 결정),①
+duty_assignment,ASG-000918,decided_by,,G01,①
+duty_assignment,ASG-000918,decided_at,,2026-09-24,①
+duty_assignment,ASG-000920,applicability,확인필요,비해당,①
+duty_assignment,ASG-000920,applicability_note,시설 판정 「제외」(관리주체 아님) — 해당 여부 확인 필요(09-24 정합성 검수),관리주체 아님(시설 판정 「제외」) — 비해당으로 닫음(09-24 결정),①
+duty_assignment,ASG-000920,decided_by,,G01,①
+duty_assignment,ASG-000920,decided_at,,2026-09-24,①
+duty_assignment,ASG-000921,applicability,확인필요,비해당,①
+duty_assignment,ASG-000921,applicability_note,시설 판정 「제외」(관리주체 아님) — 해당 여부 확인 필요(09-24 정합성 검수),관리주체 아님(시설 판정 「제외」) — 비해당으로 닫음(09-24 결정),①
+duty_assignment,ASG-000921,decided_by,,G01,①
+duty_assignment,ASG-000921,decided_at,,2026-09-24,①
+duty_assignment,ASG-000922,applicability,확인필요,비해당,①
+duty_assignment,ASG-000922,applicability_note,시설 판정 「제외」(관리주체 아님) — 해당 여부 확인 필요(09-24 정합성 검수),관리주체 아님(시설 판정 「제외」) — 비해당으로 닫음(09-24 결정),①
+duty_assignment,ASG-000922,decided_by,,G01,①
+duty_assignment,ASG-000922,decided_at,,2026-09-24,①
+duty_assignment,ASG-000924,applicability,확인필요,비해당,①
+duty_assignment,ASG-000924,applicability_note,시설 판정 「제외」(관리주체 아님) — 해당 여부 확인 필요(09-24 정합성 검수),관리주체 아님(시설 판정 「제외」) — 비해당으로 닫음(09-24 결정),①
+duty_assignment,ASG-000924,decided_by,,G01,①
+duty_assignment,ASG-000924,decided_at,,2026-09-24,①
+duty_assignment,ASG-000925,applicability,확인필요,비해당,①
+duty_assignment,ASG-000925,applicability_note,시설 판정 「제외」(관리주체 아님) — 해당 여부 확인 필요(09-24 정합성 검수),관리주체 아님(시설 판정 「제외」) — 비해당으로 닫음(09-24 결정),①
+duty_assignment,ASG-000925,decided_by,,G01,①
+duty_assignment,ASG-000925,decided_at,,2026-09-24,①
+duty_assignment,ASG-000926,applicability,확인필요,비해당,①
+duty_assignment,ASG-000926,applicability_note,시설 판정 「제외」(관리주체 아님) — 해당 여부 확인 필요(09-24 정합성 검수),관리주체 아님(시설 판정 「제외」) — 비해당으로 닫음(09-24 결정),①
+duty_assignment,ASG-000926,decided_by,,G01,①
+duty_assignment,ASG-000926,decided_at,,2026-09-24,①
+duty_assignment,ASG-000928,applicability,확인필요,비해당,①
+duty_assignment,ASG-000928,applicability_note,시설 판정 「제외」(관리주체 아님) — 해당 여부 확인 필요(09-24 정합성 검수),관리주체 아님(시설 판정 「제외」) — 비해당으로 닫음(09-24 결정),①
+duty_assignment,ASG-000928,decided_by,,G01,①
+duty_assignment,ASG-000928,decided_at,,2026-09-24,①
+duty_assignment,ASG-000929,applicability,확인필요,비해당,①
+duty_assignment,ASG-000929,applicability_note,시설 판정 「제외」(관리주체 아님) — 해당 여부 확인 필요(09-24 정합성 검수),관리주체 아님(시설 판정 「제외」) — 비해당으로 닫음(09-24 결정),①
+duty_assignment,ASG-000929,decided_by,,G01,①
+duty_assignment,ASG-000929,decided_at,,2026-09-24,①
+duty_assignment,ASG-000930,applicability,확인필요,비해당,①
+duty_assignment,ASG-000930,applicability_note,시설 판정 「제외」(관리주체 아님) — 해당 여부 확인 필요(09-24 정합성 검수),관리주체 아님(시설 판정 「제외」) — 비해당으로 닫음(09-24 결정),①
+duty_assignment,ASG-000930,decided_by,,G01,①
+duty_assignment,ASG-000930,decided_at,,2026-09-24,①
+duty_assignment,ASG-000932,applicability,확인필요,비해당,①
+duty_assignment,ASG-000932,applicability_note,시설 판정 「제외」(관리주체 아님) — 해당 여부 확인 필요(09-24 정합성 검수),관리주체 아님(시설 판정 「제외」) — 비해당으로 닫음(09-24 결정),①
+duty_assignment,ASG-000932,decided_by,,G01,①
+duty_assignment,ASG-000932,decided_at,,2026-09-24,①
+duty_assignment,ASG-000933,applicability,확인필요,비해당,①
+duty_assignment,ASG-000933,applicability_note,시설 판정 「제외」(관리주체 아님) — 해당 여부 확인 필요(09-24 정합성 검수),관리주체 아님(시설 판정 「제외」) — 비해당으로 닫음(09-24 결정),①
+duty_assignment,ASG-000933,decided_by,,G01,①
+duty_assignment,ASG-000933,decided_at,,2026-09-24,①
+duty_assignment,ASG-000934,applicability,확인필요,비해당,①
+duty_assignment,ASG-000934,applicability_note,시설 판정 「제외」(관리주체 아님) — 해당 여부 확인 필요(09-24 정합성 검수),관리주체 아님(시설 판정 「제외」) — 비해당으로 닫음(09-24 결정),①
+duty_assignment,ASG-000934,decided_by,,G01,①
+duty_assignment,ASG-000934,decided_at,,2026-09-24,①
+duty_assignment,ASG-000936,applicability,확인필요,비해당,①
+duty_assignment,ASG-000936,applicability_note,시설 판정 「제외」(관리주체 아님) — 해당 여부 확인 필요(09-24 정합성 검수),관리주체 아님(시설 판정 「제외」) — 비해당으로 닫음(09-24 결정),①
+duty_assignment,ASG-000936,decided_by,,G01,①
+duty_assignment,ASG-000936,decided_at,,2026-09-24,①
+duty_assignment,ASG-000937,applicability,확인필요,비해당,①
+duty_assignment,ASG-000937,applicability_note,시설 판정 「제외」(관리주체 아님) — 해당 여부 확인 필요(09-24 정합성 검수),관리주체 아님(시설 판정 「제외」) — 비해당으로 닫음(09-24 결정),①
+duty_assignment,ASG-000937,decided_by,,G01,①
+duty_assignment,ASG-000937,decided_at,,2026-09-24,①
+duty_assignment,ASG-000938,applicability,확인필요,비해당,①
+duty_assignment,ASG-000938,applicability_note,시설 판정 「제외」(관리주체 아님) — 해당 여부 확인 필요(09-24 정합성 검수),관리주체 아님(시설 판정 「제외」) — 비해당으로 닫음(09-24 결정),①
+duty_assignment,ASG-000938,decided_by,,G01,①
+duty_assignment,ASG-000938,decided_at,,2026-09-24,①
+duty_assignment,ASG-000940,applicability,확인필요,비해당,①
+duty_assignment,ASG-000940,applicability_note,시설 판정 「제외」(관리주체 아님) — 해당 여부 확인 필요(09-24 정합성 검수),관리주체 아님(시설 판정 「제외」) — 비해당으로 닫음(09-24 결정),①
+duty_assignment,ASG-000940,decided_by,,G01,①
+duty_assignment,ASG-000940,decided_at,,2026-09-24,①
+duty_assignment,ASG-000941,applicability,확인필요,비해당,①
+duty_assignment,ASG-000941,applicability_note,시설 판정 「제외」(관리주체 아님) — 해당 여부 확인 필요(09-24 정합성 검수),관리주체 아님(시설 판정 「제외」) — 비해당으로 닫음(09-24 결정),①
+duty_assignment,ASG-000941,decided_by,,G01,①
+duty_assignment,ASG-000941,decided_at,,2026-09-24,①
+duty_assignment,ASG-000942,applicability,확인필요,비해당,①
+duty_assignment,ASG-000942,applicability_note,시설 판정 「제외」(관리주체 아님) — 해당 여부 확인 필요(09-24 정합성 검수),관리주체 아님(시설 판정 「제외」) — 비해당으로 닫음(09-24 결정),①
+duty_assignment,ASG-000942,decided_by,,G01,①
+duty_assignment,ASG-000942,decided_at,,2026-09-24,①
+duty_assignment,ASG-000952,applicability,확인필요,비해당,①
+duty_assignment,ASG-000952,applicability_note,시설 판정 「제외」(관리주체 아님) — 해당 여부 확인 필요(09-24 정합성 검수),관리주체 아님(시설 판정 「제외」) — 비해당으로 닫음(09-24 결정),①
+duty_assignment,ASG-000952,decided_by,,G01,①
+duty_assignment,ASG-000952,decided_at,,2026-09-24,①
+duty_assignment,ASG-000953,applicability,확인필요,비해당,①
+duty_assignment,ASG-000953,applicability_note,시설 판정 「제외」(관리주체 아님) — 해당 여부 확인 필요(09-24 정합성 검수),관리주체 아님(시설 판정 「제외」) — 비해당으로 닫음(09-24 결정),①
+duty_assignment,ASG-000953,decided_by,,G01,①
+duty_assignment,ASG-000953,decided_at,,2026-09-24,①
+duty_assignment,ASG-000954,applicability,확인필요,비해당,①
+duty_assignment,ASG-000954,applicability_note,시설 판정 「제외」(관리주체 아님) — 해당 여부 확인 필요(09-24 정합성 검수),관리주체 아님(시설 판정 「제외」) — 비해당으로 닫음(09-24 결정),①
+duty_assignment,ASG-000954,decided_by,,G01,①
+duty_assignment,ASG-000954,decided_at,,2026-09-24,①
+duty_assignment,ASG-000956,applicability,확인필요,비해당,①
+duty_assignment,ASG-000956,applicability_note,시설 판정 「제외」(관리주체 아님) — 해당 여부 확인 필요(09-24 정합성 검수),관리주체 아님(시설 판정 「제외」) — 비해당으로 닫음(09-24 결정),①
+duty_assignment,ASG-000956,decided_by,,G01,①
+duty_assignment,ASG-000956,decided_at,,2026-09-24,①
+duty_assignment,ASG-000957,applicability,확인필요,비해당,①
+duty_assignment,ASG-000957,applicability_note,시설 판정 「제외」(관리주체 아님) — 해당 여부 확인 필요(09-24 정합성 검수),관리주체 아님(시설 판정 「제외」) — 비해당으로 닫음(09-24 결정),①
+duty_assignment,ASG-000957,decided_by,,G01,①
+duty_assignment,ASG-000957,decided_at,,2026-09-24,①
+duty_assignment,ASG-000958,applicability,확인필요,비해당,①
+duty_assignment,ASG-000958,applicability_note,시설 판정 「제외」(관리주체 아님) — 해당 여부 확인 필요(09-24 정합성 검수),관리주체 아님(시설 판정 「제외」) — 비해당으로 닫음(09-24 결정),①
+duty_assignment,ASG-000958,decided_by,,G01,①
+duty_assignment,ASG-000958,decided_at,,2026-09-24,①
+duty_assignment,ASG-000960,applicability,확인필요,비해당,①
+duty_assignment,ASG-000960,applicability_note,시설 판정 「제외」(관리주체 아님) — 해당 여부 확인 필요(09-24 정합성 검수),관리주체 아님(시설 판정 「제외」) — 비해당으로 닫음(09-24 결정),①
+duty_assignment,ASG-000960,decided_by,,G01,①
+duty_assignment,ASG-000960,decided_at,,2026-09-24,①
+duty_assignment,ASG-000961,applicability,확인필요,비해당,①
+duty_assignment,ASG-000961,applicability_note,시설 판정 「제외」(관리주체 아님) — 해당 여부 확인 필요(09-24 정합성 검수),관리주체 아님(시설 판정 「제외」) — 비해당으로 닫음(09-24 결정),①
+duty_assignment,ASG-000961,decided_by,,G01,①
+duty_assignment,ASG-000961,decided_at,,2026-09-24,①
+duty_assignment,ASG-000962,applicability,확인필요,비해당,①
+duty_assignment,ASG-000962,applicability_note,시설 판정 「제외」(관리주체 아님) — 해당 여부 확인 필요(09-24 정합성 검수),관리주체 아님(시설 판정 「제외」) — 비해당으로 닫음(09-24 결정),①
+duty_assignment,ASG-000962,decided_by,,G01,①
+duty_assignment,ASG-000962,decided_at,,2026-09-24,①
+duty_assignment,ASG-000964,applicability,확인필요,비해당,①
+duty_assignment,ASG-000964,applicability_note,시설 판정 「제외」(관리주체 아님) — 해당 여부 확인 필요(09-24 정합성 검수),관리주체 아님(시설 판정 「제외」) — 비해당으로 닫음(09-24 결정),①
+duty_assignment,ASG-000964,decided_by,,G01,①
+duty_assignment,ASG-000964,decided_at,,2026-09-24,①
+duty_assignment,ASG-000965,applicability,확인필요,비해당,①
+duty_assignment,ASG-000965,applicability_note,시설 판정 「제외」(관리주체 아님) — 해당 여부 확인 필요(09-24 정합성 검수),관리주체 아님(시설 판정 「제외」) — 비해당으로 닫음(09-24 결정),①
+duty_assignment,ASG-000965,decided_by,,G01,①
+duty_assignment,ASG-000965,decided_at,,2026-09-24,①
+duty_assignment,ASG-000966,applicability,확인필요,비해당,①
+duty_assignment,ASG-000966,applicability_note,시설 판정 「제외」(관리주체 아님) — 해당 여부 확인 필요(09-24 정합성 검수),관리주체 아님(시설 판정 「제외」) — 비해당으로 닫음(09-24 결정),①
+duty_assignment,ASG-000966,decided_by,,G01,①
+duty_assignment,ASG-000966,decided_at,,2026-09-24,①
+duty_assignment,ASG-000968,applicability,확인필요,비해당,①
+duty_assignment,ASG-000968,applicability_note,시설 판정 「제외」(관리주체 아님) — 해당 여부 확인 필요(09-24 정합성 검수),관리주체 아님(시설 판정 「제외」) — 비해당으로 닫음(09-24 결정),①
+duty_assignment,ASG-000968,decided_by,,G01,①
+duty_assignment,ASG-000968,decided_at,,2026-09-24,①
+duty_assignment,ASG-000969,applicability,확인필요,비해당,①
+duty_assignment,ASG-000969,applicability_note,시설 판정 「제외」(관리주체 아님) — 해당 여부 확인 필요(09-24 정합성 검수),관리주체 아님(시설 판정 「제외」) — 비해당으로 닫음(09-24 결정),①
+duty_assignment,ASG-000969,decided_by,,G01,①
+duty_assignment,ASG-000969,decided_at,,2026-09-24,①
+duty_assignment,ASG-000970,applicability,확인필요,비해당,①
+duty_assignment,ASG-000970,applicability_note,시설 판정 「제외」(관리주체 아님) — 해당 여부 확인 필요(09-24 정합성 검수),관리주체 아님(시설 판정 「제외」) — 비해당으로 닫음(09-24 결정),①
+duty_assignment,ASG-000970,decided_by,,G01,①
+duty_assignment,ASG-000970,decided_at,,2026-09-24,①
+duty_assignment,ASG-000972,applicability,확인필요,비해당,①
+duty_assignment,ASG-000972,applicability_note,시설 판정 「제외」(관리주체 아님) — 해당 여부 확인 필요(09-24 정합성 검수),관리주체 아님(시설 판정 「제외」) — 비해당으로 닫음(09-24 결정),①
+duty_assignment,ASG-000972,decided_by,,G01,①
+duty_assignment,ASG-000972,decided_at,,2026-09-24,①
+duty_assignment,ASG-000973,applicability,확인필요,비해당,①
+duty_assignment,ASG-000973,applicability_note,시설 판정 「제외」(관리주체 아님) — 해당 여부 확인 필요(09-24 정합성 검수),관리주체 아님(시설 판정 「제외」) — 비해당으로 닫음(09-24 결정),①
+duty_assignment,ASG-000973,decided_by,,G01,①
+duty_assignment,ASG-000973,decided_at,,2026-09-24,①
+duty_assignment,ASG-000974,applicability,확인필요,비해당,①
+duty_assignment,ASG-000974,applicability_note,시설 판정 「제외」(관리주체 아님) — 해당 여부 확인 필요(09-24 정합성 검수),관리주체 아님(시설 판정 「제외」) — 비해당으로 닫음(09-24 결정),①
+duty_assignment,ASG-000974,decided_by,,G01,①
+duty_assignment,ASG-000974,decided_at,,2026-09-24,①
+duty_assignment,ASG-000976,applicability,확인필요,비해당,①
+duty_assignment,ASG-000976,applicability_note,시설 판정 「제외」(관리주체 아님) — 해당 여부 확인 필요(09-24 정합성 검수),관리주체 아님(시설 판정 「제외」) — 비해당으로 닫음(09-24 결정),①
+duty_assignment,ASG-000976,decided_by,,G01,①
+duty_assignment,ASG-000976,decided_at,,2026-09-24,①
+duty_assignment,ASG-000977,applicability,확인필요,비해당,①
+duty_assignment,ASG-000977,applicability_note,시설 판정 「제외」(관리주체 아님) — 해당 여부 확인 필요(09-24 정합성 검수),관리주체 아님(시설 판정 「제외」) — 비해당으로 닫음(09-24 결정),①
+duty_assignment,ASG-000977,decided_by,,G01,①
+duty_assignment,ASG-000977,decided_at,,2026-09-24,①
+duty_assignment,ASG-000978,applicability,확인필요,비해당,①
+duty_assignment,ASG-000978,applicability_note,시설 판정 「제외」(관리주체 아님) — 해당 여부 확인 필요(09-24 정합성 검수),관리주체 아님(시설 판정 「제외」) — 비해당으로 닫음(09-24 결정),①
+duty_assignment,ASG-000978,decided_by,,G01,①
+duty_assignment,ASG-000978,decided_at,,2026-09-24,①
+duty_assignment,ASG-000980,applicability,확인필요,비해당,①
+duty_assignment,ASG-000980,applicability_note,시설 판정 「제외」(관리주체 아님) — 해당 여부 확인 필요(09-24 정합성 검수),관리주체 아님(시설 판정 「제외」) — 비해당으로 닫음(09-24 결정),①
+duty_assignment,ASG-000980,decided_by,,G01,①
+duty_assignment,ASG-000980,decided_at,,2026-09-24,①
+duty_assignment,ASG-000981,applicability,확인필요,비해당,①
+duty_assignment,ASG-000981,applicability_note,시설 판정 「제외」(관리주체 아님) — 해당 여부 확인 필요(09-24 정합성 검수),관리주체 아님(시설 판정 「제외」) — 비해당으로 닫음(09-24 결정),①
+duty_assignment,ASG-000981,decided_by,,G01,①
+duty_assignment,ASG-000981,decided_at,,2026-09-24,①
+duty_assignment,ASG-000982,applicability,확인필요,비해당,①
+duty_assignment,ASG-000982,applicability_note,시설 판정 「제외」(관리주체 아님) — 해당 여부 확인 필요(09-24 정합성 검수),관리주체 아님(시설 판정 「제외」) — 비해당으로 닫음(09-24 결정),①
+duty_assignment,ASG-000982,decided_by,,G01,①
+duty_assignment,ASG-000982,decided_at,,2026-09-24,①
+duty_assignment,ASG-001083,applicability,해당,비해당,③
+duty_assignment,ASG-001083,applicability_note,,관리주체 한국농어촌공사 평택지사 — 용인시 관리 시설 아님(용인시민신문 2021-11-30 · 국제뉴스 2025-03-25),③
+duty_assignment,ASG-001083,decided_by,,G01,③
+duty_assignment,ASG-001083,decided_at,,2026-09-24,③
+duty_assignment,ASG-001084,applicability,해당,비해당,③
+duty_assignment,ASG-001084,applicability_note,,관리주체 한국농어촌공사 평택지사 — 용인시 관리 시설 아님(용인시민신문 2021-11-30 · 국제뉴스 2025-03-25),③
+duty_assignment,ASG-001084,decided_by,,G01,③
+duty_assignment,ASG-001084,decided_at,,2026-09-24,③
+duty_assignment,ASG-001085,applicability,해당,비해당,③
+duty_assignment,ASG-001085,applicability_note,,관리주체 한국농어촌공사 안성지사 — 용인시 관리 시설 아님(용인시민신문 2021-11-30 · 국제뉴스 2025-03-25),③
+duty_assignment,ASG-001085,decided_by,,G01,③
+duty_assignment,ASG-001085,decided_at,,2026-09-24,③
+duty_assignment,ASG-001087,applicability,해당,비해당,③
+duty_assignment,ASG-001087,applicability_note,,관리주체 한국농어촌공사 평택지사 — 용인시 관리 시설 아님(용인시민신문 2021-11-30 · 국제뉴스 2025-03-25),③
+duty_assignment,ASG-001087,decided_by,,G01,③
+duty_assignment,ASG-001087,decided_at,,2026-09-24,③
+duty_assignment,ASG-001088,applicability,해당,비해당,③
+duty_assignment,ASG-001088,applicability_note,,관리주체 한국농어촌공사 평택지사 — 용인시 관리 시설 아님(용인시민신문 2021-11-30 · 국제뉴스 2025-03-25),③
+duty_assignment,ASG-001088,decided_by,,G01,③
+duty_assignment,ASG-001088,decided_at,,2026-09-24,③
+duty_assignment,ASG-001089,applicability,해당,비해당,③
+duty_assignment,ASG-001089,applicability_note,,관리주체 한국농어촌공사 안성지사 — 용인시 관리 시설 아님(용인시민신문 2021-11-30 · 국제뉴스 2025-03-25),③
+duty_assignment,ASG-001089,decided_by,,G01,③
+duty_assignment,ASG-001089,decided_at,,2026-09-24,③
+duty_assignment,ASG-001091,applicability,해당,비해당,③
+duty_assignment,ASG-001091,applicability_note,,관리주체 한국농어촌공사 평택지사 — 용인시 관리 시설 아님(용인시민신문 2021-11-30 · 국제뉴스 2025-03-25),③
+duty_assignment,ASG-001091,decided_by,,G01,③
+duty_assignment,ASG-001091,decided_at,,2026-09-24,③
+duty_assignment,ASG-001092,applicability,해당,비해당,③
+duty_assignment,ASG-001092,applicability_note,,관리주체 한국농어촌공사 평택지사 — 용인시 관리 시설 아님(용인시민신문 2021-11-30 · 국제뉴스 2025-03-25),③
+duty_assignment,ASG-001092,decided_by,,G01,③
+duty_assignment,ASG-001092,decided_at,,2026-09-24,③
+duty_assignment,ASG-001093,applicability,해당,비해당,③
+duty_assignment,ASG-001093,applicability_note,,관리주체 한국농어촌공사 안성지사 — 용인시 관리 시설 아님(용인시민신문 2021-11-30 · 국제뉴스 2025-03-25),③
+duty_assignment,ASG-001093,decided_by,,G01,③
+duty_assignment,ASG-001093,decided_at,,2026-09-24,③
+duty_assignment,ASG-001095,applicability,해당,비해당,③
+duty_assignment,ASG-001095,applicability_note,,관리주체 한국농어촌공사 평택지사 — 용인시 관리 시설 아님(용인시민신문 2021-11-30 · 국제뉴스 2025-03-25),③
+duty_assignment,ASG-001095,decided_by,,G01,③
+duty_assignment,ASG-001095,decided_at,,2026-09-24,③
+duty_assignment,ASG-001096,applicability,해당,비해당,③
+duty_assignment,ASG-001096,applicability_note,,관리주체 한국농어촌공사 평택지사 — 용인시 관리 시설 아님(용인시민신문 2021-11-30 · 국제뉴스 2025-03-25),③
+duty_assignment,ASG-001096,decided_by,,G01,③
+duty_assignment,ASG-001096,decided_at,,2026-09-24,③
+duty_assignment,ASG-001097,applicability,해당,비해당,③
+duty_assignment,ASG-001097,applicability_note,,관리주체 한국농어촌공사 안성지사 — 용인시 관리 시설 아님(용인시민신문 2021-11-30 · 국제뉴스 2025-03-25),③
+duty_assignment,ASG-001097,decided_by,,G01,③
+duty_assignment,ASG-001097,decided_at,,2026-09-24,③
+duty_assignment,ASG-001099,applicability,해당,비해당,③
+duty_assignment,ASG-001099,applicability_note,,관리주체 한국농어촌공사 평택지사 — 용인시 관리 시설 아님(용인시민신문 2021-11-30 · 국제뉴스 2025-03-25),③
+duty_assignment,ASG-001099,decided_by,,G01,③
+duty_assignment,ASG-001099,decided_at,,2026-09-24,③
+duty_assignment,ASG-001100,applicability,해당,비해당,③
+duty_assignment,ASG-001100,applicability_note,,관리주체 한국농어촌공사 평택지사 — 용인시 관리 시설 아님(용인시민신문 2021-11-30 · 국제뉴스 2025-03-25),③
+duty_assignment,ASG-001100,decided_by,,G01,③
+duty_assignment,ASG-001100,decided_at,,2026-09-24,③
+duty_assignment,ASG-001101,applicability,해당,비해당,③
+duty_assignment,ASG-001101,applicability_note,,관리주체 한국농어촌공사 안성지사 — 용인시 관리 시설 아님(용인시민신문 2021-11-30 · 국제뉴스 2025-03-25),③
+duty_assignment,ASG-001101,decided_by,,G01,③
+duty_assignment,ASG-001101,decided_at,,2026-09-24,③
+duty_assignment,ASG-001134,applicability,확인필요,비해당,①
+duty_assignment,ASG-001134,applicability_note,시설 판정 「제외」(관리주체 아님) — 해당 여부 확인 필요(09-24 정합성 검수),관리주체 아님(시설 판정 「제외」) — 비해당으로 닫음(09-24 결정),①
+duty_assignment,ASG-001134,decided_by,,G01,①
+duty_assignment,ASG-001134,decided_at,,2026-09-24,①
+duty_assignment,ASG-001135,applicability,확인필요,비해당,①
+duty_assignment,ASG-001135,applicability_note,시설 판정 「제외」(관리주체 아님) — 해당 여부 확인 필요(09-24 정합성 검수),관리주체 아님(시설 판정 「제외」) — 비해당으로 닫음(09-24 결정),①
+duty_assignment,ASG-001135,decided_by,,G01,①
+duty_assignment,ASG-001135,decided_at,,2026-09-24,①
+duty_assignment,ASG-001136,applicability,확인필요,비해당,①
+duty_assignment,ASG-001136,applicability_note,시설 판정 「제외」(관리주체 아님) — 해당 여부 확인 필요(09-24 정합성 검수),관리주체 아님(시설 판정 「제외」) — 비해당으로 닫음(09-24 결정),①
+duty_assignment,ASG-001136,decided_by,,G01,①
+duty_assignment,ASG-001136,decided_at,,2026-09-24,①
+duty_assignment,ASG-001138,applicability,확인필요,비해당,①
+duty_assignment,ASG-001138,applicability_note,시설 판정 「제외」(관리주체 아님) — 해당 여부 확인 필요(09-24 정합성 검수),관리주체 아님(시설 판정 「제외」) — 비해당으로 닫음(09-24 결정),①
+duty_assignment,ASG-001138,decided_by,,G01,①
+duty_assignment,ASG-001138,decided_at,,2026-09-24,①
+duty_assignment,ASG-001139,applicability,확인필요,비해당,①
+duty_assignment,ASG-001139,applicability_note,시설 판정 「제외」(관리주체 아님) — 해당 여부 확인 필요(09-24 정합성 검수),관리주체 아님(시설 판정 「제외」) — 비해당으로 닫음(09-24 결정),①
+duty_assignment,ASG-001139,decided_by,,G01,①
+duty_assignment,ASG-001139,decided_at,,2026-09-24,①
+duty_assignment,ASG-001140,applicability,확인필요,비해당,①
+duty_assignment,ASG-001140,applicability_note,시설 판정 「제외」(관리주체 아님) — 해당 여부 확인 필요(09-24 정합성 검수),관리주체 아님(시설 판정 「제외」) — 비해당으로 닫음(09-24 결정),①
+duty_assignment,ASG-001140,decided_by,,G01,①
+duty_assignment,ASG-001140,decided_at,,2026-09-24,①
+duty_assignment,ASG-001142,applicability,확인필요,비해당,①
+duty_assignment,ASG-001142,applicability_note,시설 판정 「제외」(관리주체 아님) — 해당 여부 확인 필요(09-24 정합성 검수),관리주체 아님(시설 판정 「제외」) — 비해당으로 닫음(09-24 결정),①
+duty_assignment,ASG-001142,decided_by,,G01,①
+duty_assignment,ASG-001142,decided_at,,2026-09-24,①
+duty_assignment,ASG-001143,applicability,확인필요,비해당,①
+duty_assignment,ASG-001143,applicability_note,시설 판정 「제외」(관리주체 아님) — 해당 여부 확인 필요(09-24 정합성 검수),관리주체 아님(시설 판정 「제외」) — 비해당으로 닫음(09-24 결정),①
+duty_assignment,ASG-001143,decided_by,,G01,①
+duty_assignment,ASG-001143,decided_at,,2026-09-24,①
+duty_assignment,ASG-001144,applicability,확인필요,비해당,①
+duty_assignment,ASG-001144,applicability_note,시설 판정 「제외」(관리주체 아님) — 해당 여부 확인 필요(09-24 정합성 검수),관리주체 아님(시설 판정 「제외」) — 비해당으로 닫음(09-24 결정),①
+duty_assignment,ASG-001144,decided_by,,G01,①
+duty_assignment,ASG-001144,decided_at,,2026-09-24,①
+duty_assignment,ASG-001146,applicability,확인필요,비해당,①
+duty_assignment,ASG-001146,applicability_note,시설 판정 「제외」(관리주체 아님) — 해당 여부 확인 필요(09-24 정합성 검수),관리주체 아님(시설 판정 「제외」) — 비해당으로 닫음(09-24 결정),①
+duty_assignment,ASG-001146,decided_by,,G01,①
+duty_assignment,ASG-001146,decided_at,,2026-09-24,①
+duty_assignment,ASG-001147,applicability,확인필요,비해당,①
+duty_assignment,ASG-001147,applicability_note,시설 판정 「제외」(관리주체 아님) — 해당 여부 확인 필요(09-24 정합성 검수),관리주체 아님(시설 판정 「제외」) — 비해당으로 닫음(09-24 결정),①
+duty_assignment,ASG-001147,decided_by,,G01,①
+duty_assignment,ASG-001147,decided_at,,2026-09-24,①
+duty_assignment,ASG-001148,applicability,확인필요,비해당,①
+duty_assignment,ASG-001148,applicability_note,시설 판정 「제외」(관리주체 아님) — 해당 여부 확인 필요(09-24 정합성 검수),관리주체 아님(시설 판정 「제외」) — 비해당으로 닫음(09-24 결정),①
+duty_assignment,ASG-001148,decided_by,,G01,①
+duty_assignment,ASG-001148,decided_at,,2026-09-24,①
+duty_assignment,ASG-001150,applicability,확인필요,비해당,①
+duty_assignment,ASG-001150,applicability_note,시설 판정 「제외」(관리주체 아님) — 해당 여부 확인 필요(09-24 정합성 검수),관리주체 아님(시설 판정 「제외」) — 비해당으로 닫음(09-24 결정),①
+duty_assignment,ASG-001150,decided_by,,G01,①
+duty_assignment,ASG-001150,decided_at,,2026-09-24,①
+duty_assignment,ASG-001151,applicability,확인필요,비해당,①
+duty_assignment,ASG-001151,applicability_note,시설 판정 「제외」(관리주체 아님) — 해당 여부 확인 필요(09-24 정합성 검수),관리주체 아님(시설 판정 「제외」) — 비해당으로 닫음(09-24 결정),①
+duty_assignment,ASG-001151,decided_by,,G01,①
+duty_assignment,ASG-001151,decided_at,,2026-09-24,①
+duty_assignment,ASG-001152,applicability,확인필요,비해당,①
+duty_assignment,ASG-001152,applicability_note,시설 판정 「제외」(관리주체 아님) — 해당 여부 확인 필요(09-24 정합성 검수),관리주체 아님(시설 판정 「제외」) — 비해당으로 닫음(09-24 결정),①
+duty_assignment,ASG-001152,decided_by,,G01,①
+duty_assignment,ASG-001152,decided_at,,2026-09-24,①
+duty_assignment,ASG-001445,applicability,확인필요,비해당,①
+duty_assignment,ASG-001445,applicability_note,시설 판정 「제외」(관리주체 아님) — 해당 여부 확인 필요(09-24 정합성 검수),관리주체 아님(시설 판정 「제외」) — 비해당으로 닫음(09-24 결정),①
+duty_assignment,ASG-001445,decided_by,,G01,①
+duty_assignment,ASG-001445,decided_at,,2026-09-24,①
+duty_assignment,ASG-001446,applicability,확인필요,비해당,①
+duty_assignment,ASG-001446,applicability_note,시설 판정 「제외」(관리주체 아님) — 해당 여부 확인 필요(09-24 정합성 검수),관리주체 아님(시설 판정 「제외」) — 비해당으로 닫음(09-24 결정),①
+duty_assignment,ASG-001446,decided_by,,G01,①
+duty_assignment,ASG-001446,decided_at,,2026-09-24,①
+duty_assignment,ASG-001447,applicability,확인필요,비해당,①
+duty_assignment,ASG-001447,applicability_note,시설 판정 「제외」(관리주체 아님) — 해당 여부 확인 필요(09-24 정합성 검수),관리주체 아님(시설 판정 「제외」) — 비해당으로 닫음(09-24 결정),①
+duty_assignment,ASG-001447,decided_by,,G01,①
+duty_assignment,ASG-001447,decided_at,,2026-09-24,①
+duty_assignment,ASG-001449,applicability,확인필요,비해당,①
+duty_assignment,ASG-001449,applicability_note,시설 판정 「제외」(관리주체 아님) — 해당 여부 확인 필요(09-24 정합성 검수),관리주체 아님(시설 판정 「제외」) — 비해당으로 닫음(09-24 결정),①
+duty_assignment,ASG-001449,decided_by,,G01,①
+duty_assignment,ASG-001449,decided_at,,2026-09-24,①
+duty_assignment,ASG-001450,applicability,확인필요,비해당,①
+duty_assignment,ASG-001450,applicability_note,시설 판정 「제외」(관리주체 아님) — 해당 여부 확인 필요(09-24 정합성 검수),관리주체 아님(시설 판정 「제외」) — 비해당으로 닫음(09-24 결정),①
+duty_assignment,ASG-001450,decided_by,,G01,①
+duty_assignment,ASG-001450,decided_at,,2026-09-24,①
+duty_assignment,ASG-001451,applicability,확인필요,비해당,①
+duty_assignment,ASG-001451,applicability_note,시설 판정 「제외」(관리주체 아님) — 해당 여부 확인 필요(09-24 정합성 검수),관리주체 아님(시설 판정 「제외」) — 비해당으로 닫음(09-24 결정),①
+duty_assignment,ASG-001451,decided_by,,G01,①
+duty_assignment,ASG-001451,decided_at,,2026-09-24,①
+duty_assignment,ASG-001453,applicability,확인필요,비해당,①
+duty_assignment,ASG-001453,applicability_note,시설 판정 「제외」(관리주체 아님) — 해당 여부 확인 필요(09-24 정합성 검수),관리주체 아님(시설 판정 「제외」) — 비해당으로 닫음(09-24 결정),①
+duty_assignment,ASG-001453,decided_by,,G01,①
+duty_assignment,ASG-001453,decided_at,,2026-09-24,①
+duty_assignment,ASG-001454,applicability,확인필요,비해당,①
+duty_assignment,ASG-001454,applicability_note,시설 판정 「제외」(관리주체 아님) — 해당 여부 확인 필요(09-24 정합성 검수),관리주체 아님(시설 판정 「제외」) — 비해당으로 닫음(09-24 결정),①
+duty_assignment,ASG-001454,decided_by,,G01,①
+duty_assignment,ASG-001454,decided_at,,2026-09-24,①
+duty_assignment,ASG-001455,applicability,확인필요,비해당,①
+duty_assignment,ASG-001455,applicability_note,시설 판정 「제외」(관리주체 아님) — 해당 여부 확인 필요(09-24 정합성 검수),관리주체 아님(시설 판정 「제외」) — 비해당으로 닫음(09-24 결정),①
+duty_assignment,ASG-001455,decided_by,,G01,①
+duty_assignment,ASG-001455,decided_at,,2026-09-24,①
+duty_assignment,ASG-001457,applicability,확인필요,비해당,①
+duty_assignment,ASG-001457,applicability_note,시설 판정 「제외」(관리주체 아님) — 해당 여부 확인 필요(09-24 정합성 검수),관리주체 아님(시설 판정 「제외」) — 비해당으로 닫음(09-24 결정),①
+duty_assignment,ASG-001457,decided_by,,G01,①
+duty_assignment,ASG-001457,decided_at,,2026-09-24,①
+duty_assignment,ASG-001458,applicability,확인필요,비해당,①
+duty_assignment,ASG-001458,applicability_note,시설 판정 「제외」(관리주체 아님) — 해당 여부 확인 필요(09-24 정합성 검수),관리주체 아님(시설 판정 「제외」) — 비해당으로 닫음(09-24 결정),①
+duty_assignment,ASG-001458,decided_by,,G01,①
+duty_assignment,ASG-001458,decided_at,,2026-09-24,①
+duty_assignment,ASG-001459,applicability,확인필요,비해당,①
+duty_assignment,ASG-001459,applicability_note,시설 판정 「제외」(관리주체 아님) — 해당 여부 확인 필요(09-24 정합성 검수),관리주체 아님(시설 판정 「제외」) — 비해당으로 닫음(09-24 결정),①
+duty_assignment,ASG-001459,decided_by,,G01,①
+duty_assignment,ASG-001459,decided_at,,2026-09-24,①
+duty_assignment,ASG-001461,applicability,확인필요,비해당,①
+duty_assignment,ASG-001461,applicability_note,시설 판정 「제외」(관리주체 아님) — 해당 여부 확인 필요(09-24 정합성 검수),관리주체 아님(시설 판정 「제외」) — 비해당으로 닫음(09-24 결정),①
+duty_assignment,ASG-001461,decided_by,,G01,①
+duty_assignment,ASG-001461,decided_at,,2026-09-24,①
+duty_assignment,ASG-001462,applicability,확인필요,비해당,①
+duty_assignment,ASG-001462,applicability_note,시설 판정 「제외」(관리주체 아님) — 해당 여부 확인 필요(09-24 정합성 검수),관리주체 아님(시설 판정 「제외」) — 비해당으로 닫음(09-24 결정),①
+duty_assignment,ASG-001462,decided_by,,G01,①
+duty_assignment,ASG-001462,decided_at,,2026-09-24,①
+duty_assignment,ASG-001463,applicability,확인필요,비해당,①
+duty_assignment,ASG-001463,applicability_note,시설 판정 「제외」(관리주체 아님) — 해당 여부 확인 필요(09-24 정합성 검수),관리주체 아님(시설 판정 「제외」) — 비해당으로 닫음(09-24 결정),①
+duty_assignment,ASG-001463,decided_by,,G01,①
+duty_assignment,ASG-001463,decided_at,,2026-09-24,①
+duty_assignment,ASG-001465,applicability,확인필요,비해당,①
+duty_assignment,ASG-001465,applicability_note,시설 판정 「제외」(관리주체 아님) — 해당 여부 확인 필요(09-24 정합성 검수),관리주체 아님(시설 판정 「제외」) — 비해당으로 닫음(09-24 결정),①
+duty_assignment,ASG-001465,decided_by,,G01,①
+duty_assignment,ASG-001465,decided_at,,2026-09-24,①
+duty_assignment,ASG-001466,applicability,확인필요,비해당,①
+duty_assignment,ASG-001466,applicability_note,시설 판정 「제외」(관리주체 아님) — 해당 여부 확인 필요(09-24 정합성 검수),관리주체 아님(시설 판정 「제외」) — 비해당으로 닫음(09-24 결정),①
+duty_assignment,ASG-001466,decided_by,,G01,①
+duty_assignment,ASG-001466,decided_at,,2026-09-24,①
+duty_assignment,ASG-001467,applicability,확인필요,비해당,①
+duty_assignment,ASG-001467,applicability_note,시설 판정 「제외」(관리주체 아님) — 해당 여부 확인 필요(09-24 정합성 검수),관리주체 아님(시설 판정 「제외」) — 비해당으로 닫음(09-24 결정),①
+duty_assignment,ASG-001467,decided_by,,G01,①
+duty_assignment,ASG-001467,decided_at,,2026-09-24,①
+duty_assignment,ASG-001469,applicability,확인필요,비해당,①
+duty_assignment,ASG-001469,applicability_note,시설 판정 「제외」(관리주체 아님) — 해당 여부 확인 필요(09-24 정합성 검수),관리주체 아님(시설 판정 「제외」) — 비해당으로 닫음(09-24 결정),①
+duty_assignment,ASG-001469,decided_by,,G01,①
+duty_assignment,ASG-001469,decided_at,,2026-09-24,①
+duty_assignment,ASG-001470,applicability,확인필요,비해당,①
+duty_assignment,ASG-001470,applicability_note,시설 판정 「제외」(관리주체 아님) — 해당 여부 확인 필요(09-24 정합성 검수),관리주체 아님(시설 판정 「제외」) — 비해당으로 닫음(09-24 결정),①
+duty_assignment,ASG-001470,decided_by,,G01,①
+duty_assignment,ASG-001470,decided_at,,2026-09-24,①
+duty_assignment,ASG-001471,applicability,확인필요,비해당,①
+duty_assignment,ASG-001471,applicability_note,시설 판정 「제외」(관리주체 아님) — 해당 여부 확인 필요(09-24 정합성 검수),관리주체 아님(시설 판정 「제외」) — 비해당으로 닫음(09-24 결정),①
+duty_assignment,ASG-001471,decided_by,,G01,①
+duty_assignment,ASG-001471,decided_at,,2026-09-24,①
+duty_assignment,ASG-001473,applicability,확인필요,비해당,①
+duty_assignment,ASG-001473,applicability_note,시설 판정 「제외」(관리주체 아님) — 해당 여부 확인 필요(09-24 정합성 검수),관리주체 아님(시설 판정 「제외」) — 비해당으로 닫음(09-24 결정),①
+duty_assignment,ASG-001473,decided_by,,G01,①
+duty_assignment,ASG-001473,decided_at,,2026-09-24,①
+duty_assignment,ASG-001474,applicability,확인필요,비해당,①
+duty_assignment,ASG-001474,applicability_note,시설 판정 「제외」(관리주체 아님) — 해당 여부 확인 필요(09-24 정합성 검수),관리주체 아님(시설 판정 「제외」) — 비해당으로 닫음(09-24 결정),①
+duty_assignment,ASG-001474,decided_by,,G01,①
+duty_assignment,ASG-001474,decided_at,,2026-09-24,①
+duty_assignment,ASG-001475,applicability,확인필요,비해당,①
+duty_assignment,ASG-001475,applicability_note,시설 판정 「제외」(관리주체 아님) — 해당 여부 확인 필요(09-24 정합성 검수),관리주체 아님(시설 판정 「제외」) — 비해당으로 닫음(09-24 결정),①
+duty_assignment,ASG-001475,decided_by,,G01,①
+duty_assignment,ASG-001475,decided_at,,2026-09-24,①
+duty_assignment,ASG-001477,applicability,확인필요,비해당,①
+duty_assignment,ASG-001477,applicability_note,시설 판정 「제외」(관리주체 아님) — 해당 여부 확인 필요(09-24 정합성 검수),관리주체 아님(시설 판정 「제외」) — 비해당으로 닫음(09-24 결정),①
+duty_assignment,ASG-001477,decided_by,,G01,①
+duty_assignment,ASG-001477,decided_at,,2026-09-24,①
+duty_assignment,ASG-001478,applicability,확인필요,비해당,①
+duty_assignment,ASG-001478,applicability_note,시설 판정 「제외」(관리주체 아님) — 해당 여부 확인 필요(09-24 정합성 검수),관리주체 아님(시설 판정 「제외」) — 비해당으로 닫음(09-24 결정),①
+duty_assignment,ASG-001478,decided_by,,G01,①
+duty_assignment,ASG-001478,decided_at,,2026-09-24,①
+duty_assignment,ASG-001479,applicability,확인필요,비해당,①
+duty_assignment,ASG-001479,applicability_note,시설 판정 「제외」(관리주체 아님) — 해당 여부 확인 필요(09-24 정합성 검수),관리주체 아님(시설 판정 「제외」) — 비해당으로 닫음(09-24 결정),①
+duty_assignment,ASG-001479,decided_by,,G01,①
+duty_assignment,ASG-001479,decided_at,,2026-09-24,①
+duty_assignment,ASG-001481,applicability,확인필요,비해당,①
+duty_assignment,ASG-001481,applicability_note,시설 판정 「제외」(관리주체 아님) — 해당 여부 확인 필요(09-24 정합성 검수),관리주체 아님(시설 판정 「제외」) — 비해당으로 닫음(09-24 결정),①
+duty_assignment,ASG-001481,decided_by,,G01,①
+duty_assignment,ASG-001481,decided_at,,2026-09-24,①
+duty_assignment,ASG-001482,applicability,확인필요,비해당,①
+duty_assignment,ASG-001482,applicability_note,시설 판정 「제외」(관리주체 아님) — 해당 여부 확인 필요(09-24 정합성 검수),관리주체 아님(시설 판정 「제외」) — 비해당으로 닫음(09-24 결정),①
+duty_assignment,ASG-001482,decided_by,,G01,①
+duty_assignment,ASG-001482,decided_at,,2026-09-24,①
+duty_assignment,ASG-001483,applicability,확인필요,비해당,①
+duty_assignment,ASG-001483,applicability_note,시설 판정 「제외」(관리주체 아님) — 해당 여부 확인 필요(09-24 정합성 검수),관리주체 아님(시설 판정 「제외」) — 비해당으로 닫음(09-24 결정),①
+duty_assignment,ASG-001483,decided_by,,G01,①
+duty_assignment,ASG-001483,decided_at,,2026-09-24,①
+duty_assignment,ASG-001485,applicability,확인필요,비해당,①
+duty_assignment,ASG-001485,applicability_note,시설 판정 「제외」(관리주체 아님) — 해당 여부 확인 필요(09-24 정합성 검수),관리주체 아님(시설 판정 「제외」) — 비해당으로 닫음(09-24 결정),①
+duty_assignment,ASG-001485,decided_by,,G01,①
+duty_assignment,ASG-001485,decided_at,,2026-09-24,①
+duty_assignment,ASG-001486,applicability,확인필요,비해당,①
+duty_assignment,ASG-001486,applicability_note,시설 판정 「제외」(관리주체 아님) — 해당 여부 확인 필요(09-24 정합성 검수),관리주체 아님(시설 판정 「제외」) — 비해당으로 닫음(09-24 결정),①
+duty_assignment,ASG-001486,decided_by,,G01,①
+duty_assignment,ASG-001486,decided_at,,2026-09-24,①
+duty_assignment,ASG-001487,applicability,확인필요,비해당,①
+duty_assignment,ASG-001487,applicability_note,시설 판정 「제외」(관리주체 아님) — 해당 여부 확인 필요(09-24 정합성 검수),관리주체 아님(시설 판정 「제외」) — 비해당으로 닫음(09-24 결정),①
+duty_assignment,ASG-001487,decided_by,,G01,①
+duty_assignment,ASG-001487,decided_at,,2026-09-24,①
+duty_assignment,ASG-001489,applicability,확인필요,비해당,①
+duty_assignment,ASG-001489,applicability_note,시설 판정 「제외」(관리주체 아님) — 해당 여부 확인 필요(09-24 정합성 검수),관리주체 아님(시설 판정 「제외」) — 비해당으로 닫음(09-24 결정),①
+duty_assignment,ASG-001489,decided_by,,G01,①
+duty_assignment,ASG-001489,decided_at,,2026-09-24,①
+duty_assignment,ASG-001490,applicability,확인필요,비해당,①
+duty_assignment,ASG-001490,applicability_note,시설 판정 「제외」(관리주체 아님) — 해당 여부 확인 필요(09-24 정합성 검수),관리주체 아님(시설 판정 「제외」) — 비해당으로 닫음(09-24 결정),①
+duty_assignment,ASG-001490,decided_by,,G01,①
+duty_assignment,ASG-001490,decided_at,,2026-09-24,①
+duty_assignment,ASG-001491,applicability,확인필요,비해당,①
+duty_assignment,ASG-001491,applicability_note,시설 판정 「제외」(관리주체 아님) — 해당 여부 확인 필요(09-24 정합성 검수),관리주체 아님(시설 판정 「제외」) — 비해당으로 닫음(09-24 결정),①
+duty_assignment,ASG-001491,decided_by,,G01,①
+duty_assignment,ASG-001491,decided_at,,2026-09-24,①
+duty_assignment,ASG-001493,applicability,확인필요,비해당,①
+duty_assignment,ASG-001493,applicability_note,시설 판정 「제외」(관리주체 아님) — 해당 여부 확인 필요(09-24 정합성 검수),관리주체 아님(시설 판정 「제외」) — 비해당으로 닫음(09-24 결정),①
+duty_assignment,ASG-001493,decided_by,,G01,①
+duty_assignment,ASG-001493,decided_at,,2026-09-24,①
+duty_assignment,ASG-001494,applicability,확인필요,비해당,①
+duty_assignment,ASG-001494,applicability_note,시설 판정 「제외」(관리주체 아님) — 해당 여부 확인 필요(09-24 정합성 검수),관리주체 아님(시설 판정 「제외」) — 비해당으로 닫음(09-24 결정),①
+duty_assignment,ASG-001494,decided_by,,G01,①
+duty_assignment,ASG-001494,decided_at,,2026-09-24,①
+duty_assignment,ASG-001495,applicability,확인필요,비해당,①
+duty_assignment,ASG-001495,applicability_note,시설 판정 「제외」(관리주체 아님) — 해당 여부 확인 필요(09-24 정합성 검수),관리주체 아님(시설 판정 「제외」) — 비해당으로 닫음(09-24 결정),①
+duty_assignment,ASG-001495,decided_by,,G01,①
+duty_assignment,ASG-001495,decided_at,,2026-09-24,①
+duty_assignment,ASG-001497,applicability,확인필요,비해당,①
+duty_assignment,ASG-001497,applicability_note,시설 판정 「제외」(관리주체 아님) — 해당 여부 확인 필요(09-24 정합성 검수),관리주체 아님(시설 판정 「제외」) — 비해당으로 닫음(09-24 결정),①
+duty_assignment,ASG-001497,decided_by,,G01,①
+duty_assignment,ASG-001497,decided_at,,2026-09-24,①
+duty_assignment,ASG-001498,applicability,확인필요,비해당,①
+duty_assignment,ASG-001498,applicability_note,시설 판정 「제외」(관리주체 아님) — 해당 여부 확인 필요(09-24 정합성 검수),관리주체 아님(시설 판정 「제외」) — 비해당으로 닫음(09-24 결정),①
+duty_assignment,ASG-001498,decided_by,,G01,①
+duty_assignment,ASG-001498,decided_at,,2026-09-24,①
+duty_assignment,ASG-001499,applicability,확인필요,비해당,①
+duty_assignment,ASG-001499,applicability_note,시설 판정 「제외」(관리주체 아님) — 해당 여부 확인 필요(09-24 정합성 검수),관리주체 아님(시설 판정 「제외」) — 비해당으로 닫음(09-24 결정),①
+duty_assignment,ASG-001499,decided_by,,G01,①
+duty_assignment,ASG-001499,decided_at,,2026-09-24,①
+duty_assignment,ASG-001501,applicability,확인필요,비해당,①
+duty_assignment,ASG-001501,applicability_note,시설 판정 「제외」(관리주체 아님) — 해당 여부 확인 필요(09-24 정합성 검수),관리주체 아님(시설 판정 「제외」) — 비해당으로 닫음(09-24 결정),①
+duty_assignment,ASG-001501,decided_by,,G01,①
+duty_assignment,ASG-001501,decided_at,,2026-09-24,①
+duty_assignment,ASG-001502,applicability,확인필요,비해당,①
+duty_assignment,ASG-001502,applicability_note,시설 판정 「제외」(관리주체 아님) — 해당 여부 확인 필요(09-24 정합성 검수),관리주체 아님(시설 판정 「제외」) — 비해당으로 닫음(09-24 결정),①
+duty_assignment,ASG-001502,decided_by,,G01,①
+duty_assignment,ASG-001502,decided_at,,2026-09-24,①
+duty_assignment,ASG-001503,applicability,확인필요,비해당,①
+duty_assignment,ASG-001503,applicability_note,시설 판정 「제외」(관리주체 아님) — 해당 여부 확인 필요(09-24 정합성 검수),관리주체 아님(시설 판정 「제외」) — 비해당으로 닫음(09-24 결정),①
+duty_assignment,ASG-001503,decided_by,,G01,①
+duty_assignment,ASG-001503,decided_at,,2026-09-24,①
+duty_assignment,ASG-001505,applicability,확인필요,비해당,①
+duty_assignment,ASG-001505,applicability_note,시설 판정 「제외」(관리주체 아님) — 해당 여부 확인 필요(09-24 정합성 검수),관리주체 아님(시설 판정 「제외」) — 비해당으로 닫음(09-24 결정),①
+duty_assignment,ASG-001505,decided_by,,G01,①
+duty_assignment,ASG-001505,decided_at,,2026-09-24,①
+duty_assignment,ASG-001506,applicability,확인필요,비해당,①
+duty_assignment,ASG-001506,applicability_note,시설 판정 「제외」(관리주체 아님) — 해당 여부 확인 필요(09-24 정합성 검수),관리주체 아님(시설 판정 「제외」) — 비해당으로 닫음(09-24 결정),①
+duty_assignment,ASG-001506,decided_by,,G01,①
+duty_assignment,ASG-001506,decided_at,,2026-09-24,①
+duty_assignment,ASG-001507,applicability,확인필요,비해당,①
+duty_assignment,ASG-001507,applicability_note,시설 판정 「제외」(관리주체 아님) — 해당 여부 확인 필요(09-24 정합성 검수),관리주체 아님(시설 판정 「제외」) — 비해당으로 닫음(09-24 결정),①
+duty_assignment,ASG-001507,decided_by,,G01,①
+duty_assignment,ASG-001507,decided_at,,2026-09-24,①
+duty_assignment,ASG-001509,applicability,확인필요,비해당,①
+duty_assignment,ASG-001509,applicability_note,시설 판정 「제외」(관리주체 아님) — 해당 여부 확인 필요(09-24 정합성 검수),관리주체 아님(시설 판정 「제외」) — 비해당으로 닫음(09-24 결정),①
+duty_assignment,ASG-001509,decided_by,,G01,①
+duty_assignment,ASG-001509,decided_at,,2026-09-24,①
+duty_assignment,ASG-001510,applicability,확인필요,비해당,①
+duty_assignment,ASG-001510,applicability_note,시설 판정 「제외」(관리주체 아님) — 해당 여부 확인 필요(09-24 정합성 검수),관리주체 아님(시설 판정 「제외」) — 비해당으로 닫음(09-24 결정),①
+duty_assignment,ASG-001510,decided_by,,G01,①
+duty_assignment,ASG-001510,decided_at,,2026-09-24,①
+duty_assignment,ASG-001511,applicability,확인필요,비해당,①
+duty_assignment,ASG-001511,applicability_note,시설 판정 「제외」(관리주체 아님) — 해당 여부 확인 필요(09-24 정합성 검수),관리주체 아님(시설 판정 「제외」) — 비해당으로 닫음(09-24 결정),①
+duty_assignment,ASG-001511,decided_by,,G01,①
+duty_assignment,ASG-001511,decided_at,,2026-09-24,①
+duty_assignment,ASG-001513,applicability,확인필요,비해당,①
+duty_assignment,ASG-001513,applicability_note,시설 판정 「제외」(관리주체 아님) — 해당 여부 확인 필요(09-24 정합성 검수),관리주체 아님(시설 판정 「제외」) — 비해당으로 닫음(09-24 결정),①
+duty_assignment,ASG-001513,decided_by,,G01,①
+duty_assignment,ASG-001513,decided_at,,2026-09-24,①
+duty_assignment,ASG-001514,applicability,확인필요,비해당,①
+duty_assignment,ASG-001514,applicability_note,시설 판정 「제외」(관리주체 아님) — 해당 여부 확인 필요(09-24 정합성 검수),관리주체 아님(시설 판정 「제외」) — 비해당으로 닫음(09-24 결정),①
+duty_assignment,ASG-001514,decided_by,,G01,①
+duty_assignment,ASG-001514,decided_at,,2026-09-24,①
+duty_assignment,ASG-001515,applicability,확인필요,비해당,①
+duty_assignment,ASG-001515,applicability_note,시설 판정 「제외」(관리주체 아님) — 해당 여부 확인 필요(09-24 정합성 검수),관리주체 아님(시설 판정 「제외」) — 비해당으로 닫음(09-24 결정),①
+duty_assignment,ASG-001515,decided_by,,G01,①
+duty_assignment,ASG-001515,decided_at,,2026-09-24,①
+duty_assignment,ASG-001517,applicability,확인필요,비해당,①
+duty_assignment,ASG-001517,applicability_note,시설 판정 「제외」(관리주체 아님) — 해당 여부 확인 필요(09-24 정합성 검수),관리주체 아님(시설 판정 「제외」) — 비해당으로 닫음(09-24 결정),①
+duty_assignment,ASG-001517,decided_by,,G01,①
+duty_assignment,ASG-001517,decided_at,,2026-09-24,①
+duty_assignment,ASG-001518,applicability,확인필요,비해당,①
+duty_assignment,ASG-001518,applicability_note,시설 판정 「제외」(관리주체 아님) — 해당 여부 확인 필요(09-24 정합성 검수),관리주체 아님(시설 판정 「제외」) — 비해당으로 닫음(09-24 결정),①
+duty_assignment,ASG-001518,decided_by,,G01,①
+duty_assignment,ASG-001518,decided_at,,2026-09-24,①
+duty_assignment,ASG-001519,applicability,확인필요,비해당,①
+duty_assignment,ASG-001519,applicability_note,시설 판정 「제외」(관리주체 아님) — 해당 여부 확인 필요(09-24 정합성 검수),관리주체 아님(시설 판정 「제외」) — 비해당으로 닫음(09-24 결정),①
+duty_assignment,ASG-001519,decided_by,,G01,①
+duty_assignment,ASG-001519,decided_at,,2026-09-24,①
+duty_assignment,ASG-001521,applicability,확인필요,비해당,①
+duty_assignment,ASG-001521,applicability_note,시설 판정 「제외」(관리주체 아님) — 해당 여부 확인 필요(09-24 정합성 검수),관리주체 아님(시설 판정 「제외」) — 비해당으로 닫음(09-24 결정),①
+duty_assignment,ASG-001521,decided_by,,G01,①
+duty_assignment,ASG-001521,decided_at,,2026-09-24,①
+duty_assignment,ASG-001522,applicability,확인필요,비해당,①
+duty_assignment,ASG-001522,applicability_note,시설 판정 「제외」(관리주체 아님) — 해당 여부 확인 필요(09-24 정합성 검수),관리주체 아님(시설 판정 「제외」) — 비해당으로 닫음(09-24 결정),①
+duty_assignment,ASG-001522,decided_by,,G01,①
+duty_assignment,ASG-001522,decided_at,,2026-09-24,①
+duty_assignment,ASG-001523,applicability,확인필요,비해당,①
+duty_assignment,ASG-001523,applicability_note,시설 판정 「제외」(관리주체 아님) — 해당 여부 확인 필요(09-24 정합성 검수),관리주체 아님(시설 판정 「제외」) — 비해당으로 닫음(09-24 결정),①
+duty_assignment,ASG-001523,decided_by,,G01,①
+duty_assignment,ASG-001523,decided_at,,2026-09-24,①
+duty_assignment,ASG-001525,applicability,확인필요,비해당,①
+duty_assignment,ASG-001525,applicability_note,시설 판정 「제외」(관리주체 아님) — 해당 여부 확인 필요(09-24 정합성 검수),관리주체 아님(시설 판정 「제외」) — 비해당으로 닫음(09-24 결정),①
+duty_assignment,ASG-001525,decided_by,,G01,①
+duty_assignment,ASG-001525,decided_at,,2026-09-24,①
+duty_assignment,ASG-001526,applicability,확인필요,비해당,①
+duty_assignment,ASG-001526,applicability_note,시설 판정 「제외」(관리주체 아님) — 해당 여부 확인 필요(09-24 정합성 검수),관리주체 아님(시설 판정 「제외」) — 비해당으로 닫음(09-24 결정),①
+duty_assignment,ASG-001526,decided_by,,G01,①
+duty_assignment,ASG-001526,decided_at,,2026-09-24,①
+duty_assignment,ASG-001527,applicability,확인필요,비해당,①
+duty_assignment,ASG-001527,applicability_note,시설 판정 「제외」(관리주체 아님) — 해당 여부 확인 필요(09-24 정합성 검수),관리주체 아님(시설 판정 「제외」) — 비해당으로 닫음(09-24 결정),①
+duty_assignment,ASG-001527,decided_by,,G01,①
+duty_assignment,ASG-001527,decided_at,,2026-09-24,①
+duty_assignment,ASG-001529,applicability,확인필요,비해당,①
+duty_assignment,ASG-001529,applicability_note,시설 판정 「제외」(관리주체 아님) — 해당 여부 확인 필요(09-24 정합성 검수),관리주체 아님(시설 판정 「제외」) — 비해당으로 닫음(09-24 결정),①
+duty_assignment,ASG-001529,decided_by,,G01,①
+duty_assignment,ASG-001529,decided_at,,2026-09-24,①
+duty_assignment,ASG-001530,applicability,확인필요,비해당,①
+duty_assignment,ASG-001530,applicability_note,시설 판정 「제외」(관리주체 아님) — 해당 여부 확인 필요(09-24 정합성 검수),관리주체 아님(시설 판정 「제외」) — 비해당으로 닫음(09-24 결정),①
+duty_assignment,ASG-001530,decided_by,,G01,①
+duty_assignment,ASG-001530,decided_at,,2026-09-24,①
+duty_assignment,ASG-001531,applicability,확인필요,비해당,①
+duty_assignment,ASG-001531,applicability_note,시설 판정 「제외」(관리주체 아님) — 해당 여부 확인 필요(09-24 정합성 검수),관리주체 아님(시설 판정 「제외」) — 비해당으로 닫음(09-24 결정),①
+duty_assignment,ASG-001531,decided_by,,G01,①
+duty_assignment,ASG-001531,decided_at,,2026-09-24,①
+duty_assignment,ASG-001597,applicability,해당,비해당,③
+duty_assignment,ASG-001597,applicability_note,,관리주체 한국농어촌공사 평택지사 — 용인시 관리 시설 아님(용인시민신문 2021-11-30 · 국제뉴스 2025-03-25),③
+duty_assignment,ASG-001597,decided_by,,G01,③
+duty_assignment,ASG-001597,decided_at,,2026-09-24,③
+duty_assignment,ASG-001598,applicability,해당,비해당,③
+duty_assignment,ASG-001598,applicability_note,,관리주체 한국농어촌공사 평택지사 — 용인시 관리 시설 아님(용인시민신문 2021-11-30 · 국제뉴스 2025-03-25),③
+duty_assignment,ASG-001598,decided_by,,G01,③
+duty_assignment,ASG-001598,decided_at,,2026-09-24,③
+duty_assignment,ASG-001599,applicability,해당,비해당,③
+duty_assignment,ASG-001599,applicability_note,,관리주체 한국농어촌공사 안성지사 — 용인시 관리 시설 아님(용인시민신문 2021-11-30 · 국제뉴스 2025-03-25),③
+duty_assignment,ASG-001599,decided_by,,G01,③
+duty_assignment,ASG-001599,decided_at,,2026-09-24,③
+duty_assignment,ASG-001601,applicability,해당,비해당,③
+duty_assignment,ASG-001601,applicability_note,,관리주체 한국농어촌공사 평택지사 — 용인시 관리 시설 아님(용인시민신문 2021-11-30 · 국제뉴스 2025-03-25),③
+duty_assignment,ASG-001601,decided_by,,G01,③
+duty_assignment,ASG-001601,decided_at,,2026-09-24,③
+duty_assignment,ASG-001602,applicability,해당,비해당,③
+duty_assignment,ASG-001602,applicability_note,,관리주체 한국농어촌공사 평택지사 — 용인시 관리 시설 아님(용인시민신문 2021-11-30 · 국제뉴스 2025-03-25),③
+duty_assignment,ASG-001602,decided_by,,G01,③
+duty_assignment,ASG-001602,decided_at,,2026-09-24,③
+duty_assignment,ASG-001603,applicability,해당,비해당,③
+duty_assignment,ASG-001603,applicability_note,,관리주체 한국농어촌공사 안성지사 — 용인시 관리 시설 아님(용인시민신문 2021-11-30 · 국제뉴스 2025-03-25),③
+duty_assignment,ASG-001603,decided_by,,G01,③
+duty_assignment,ASG-001603,decided_at,,2026-09-24,③
+duty_assignment,ASG-001605,applicability,해당,비해당,③
+duty_assignment,ASG-001605,applicability_note,,관리주체 한국농어촌공사 평택지사 — 용인시 관리 시설 아님(용인시민신문 2021-11-30 · 국제뉴스 2025-03-25),③
+duty_assignment,ASG-001605,decided_by,,G01,③
+duty_assignment,ASG-001605,decided_at,,2026-09-24,③
+duty_assignment,ASG-001606,applicability,해당,비해당,③
+duty_assignment,ASG-001606,applicability_note,,관리주체 한국농어촌공사 평택지사 — 용인시 관리 시설 아님(용인시민신문 2021-11-30 · 국제뉴스 2025-03-25),③
+duty_assignment,ASG-001606,decided_by,,G01,③
+duty_assignment,ASG-001606,decided_at,,2026-09-24,③
+duty_assignment,ASG-001607,applicability,해당,비해당,③
+duty_assignment,ASG-001607,applicability_note,,관리주체 한국농어촌공사 안성지사 — 용인시 관리 시설 아님(용인시민신문 2021-11-30 · 국제뉴스 2025-03-25),③
+duty_assignment,ASG-001607,decided_by,,G01,③
+duty_assignment,ASG-001607,decided_at,,2026-09-24,③
+duty_assignment,ASG-001662,applicability,해당,비해당,③
+duty_assignment,ASG-001662,applicability_note,,관리주체 한국농어촌공사 평택지사 — 용인시 관리 시설 아님(용인시민신문 2021-11-30 · 국제뉴스 2025-03-25),③
+duty_assignment,ASG-001662,decided_by,,G01,③
+duty_assignment,ASG-001662,decided_at,,2026-09-24,③
+duty_assignment,ASG-001663,applicability,해당,비해당,③
+duty_assignment,ASG-001663,applicability_note,,관리주체 한국농어촌공사 평택지사 — 용인시 관리 시설 아님(용인시민신문 2021-11-30 · 국제뉴스 2025-03-25),③
+duty_assignment,ASG-001663,decided_by,,G01,③
+duty_assignment,ASG-001663,decided_at,,2026-09-24,③
+duty_assignment,ASG-001664,applicability,해당,비해당,③
+duty_assignment,ASG-001664,applicability_note,,관리주체 한국농어촌공사 안성지사 — 용인시 관리 시설 아님(용인시민신문 2021-11-30 · 국제뉴스 2025-03-25),③
+duty_assignment,ASG-001664,decided_by,,G01,③
+duty_assignment,ASG-001664,decided_at,,2026-09-24,③
+duty_assignment,ASG-001734,applicability,확인필요,비해당,①
+duty_assignment,ASG-001734,applicability_note,시설 판정 「제외」(관리주체 아님) — 해당 여부 확인 필요(09-24 정합성 검수),관리주체 아님(시설 판정 「제외」) — 비해당으로 닫음(09-24 결정),①
+duty_assignment,ASG-001734,decided_by,,G01,①
+duty_assignment,ASG-001734,decided_at,,2026-09-24,①
+duty_assignment,ASG-001735,applicability,확인필요,비해당,①
+duty_assignment,ASG-001735,applicability_note,시설 판정 「제외」(관리주체 아님) — 해당 여부 확인 필요(09-24 정합성 검수),관리주체 아님(시설 판정 「제외」) — 비해당으로 닫음(09-24 결정),①
+duty_assignment,ASG-001735,decided_by,,G01,①
+duty_assignment,ASG-001735,decided_at,,2026-09-24,①
+duty_assignment,ASG-001736,applicability,확인필요,비해당,①
+duty_assignment,ASG-001736,applicability_note,시설 판정 「제외」(관리주체 아님) — 해당 여부 확인 필요(09-24 정합성 검수),관리주체 아님(시설 판정 「제외」) — 비해당으로 닫음(09-24 결정),①
+duty_assignment,ASG-001736,decided_by,,G01,①
+duty_assignment,ASG-001736,decided_at,,2026-09-24,①
+duty_assignment,ASG-001738,applicability,확인필요,비해당,①
+duty_assignment,ASG-001738,applicability_note,시설 판정 「제외」(관리주체 아님) — 해당 여부 확인 필요(09-24 정합성 검수),관리주체 아님(시설 판정 「제외」) — 비해당으로 닫음(09-24 결정),①
+duty_assignment,ASG-001738,decided_by,,G01,①
+duty_assignment,ASG-001738,decided_at,,2026-09-24,①
+duty_assignment,ASG-001739,applicability,확인필요,비해당,①
+duty_assignment,ASG-001739,applicability_note,시설 판정 「제외」(관리주체 아님) — 해당 여부 확인 필요(09-24 정합성 검수),관리주체 아님(시설 판정 「제외」) — 비해당으로 닫음(09-24 결정),①
+duty_assignment,ASG-001739,decided_by,,G01,①
+duty_assignment,ASG-001739,decided_at,,2026-09-24,①
+duty_assignment,ASG-001740,applicability,확인필요,비해당,①
+duty_assignment,ASG-001740,applicability_note,시설 판정 「제외」(관리주체 아님) — 해당 여부 확인 필요(09-24 정합성 검수),관리주체 아님(시설 판정 「제외」) — 비해당으로 닫음(09-24 결정),①
+duty_assignment,ASG-001740,decided_by,,G01,①
+duty_assignment,ASG-001740,decided_at,,2026-09-24,①
+duty_assignment,ASG-001742,applicability,확인필요,비해당,①
+duty_assignment,ASG-001742,applicability_note,시설 판정 「제외」(관리주체 아님) — 해당 여부 확인 필요(09-24 정합성 검수),관리주체 아님(시설 판정 「제외」) — 비해당으로 닫음(09-24 결정),①
+duty_assignment,ASG-001742,decided_by,,G01,①
+duty_assignment,ASG-001742,decided_at,,2026-09-24,①
+duty_assignment,ASG-001743,applicability,확인필요,비해당,①
+duty_assignment,ASG-001743,applicability_note,시설 판정 「제외」(관리주체 아님) — 해당 여부 확인 필요(09-24 정합성 검수),관리주체 아님(시설 판정 「제외」) — 비해당으로 닫음(09-24 결정),①
+duty_assignment,ASG-001743,decided_by,,G01,①
+duty_assignment,ASG-001743,decided_at,,2026-09-24,①
+duty_assignment,ASG-001744,applicability,확인필요,비해당,①
+duty_assignment,ASG-001744,applicability_note,시설 판정 「제외」(관리주체 아님) — 해당 여부 확인 필요(09-24 정합성 검수),관리주체 아님(시설 판정 「제외」) — 비해당으로 닫음(09-24 결정),①
+duty_assignment,ASG-001744,decided_by,,G01,①
+duty_assignment,ASG-001744,decided_at,,2026-09-24,①
+duty_assignment,ASG-001971,applicability,확인필요,비해당,①
+duty_assignment,ASG-001971,applicability_note,시설 판정 「제외」(관리주체 아님) — 해당 여부 확인 필요(09-24 정합성 검수),관리주체 아님(시설 판정 「제외」) — 비해당으로 닫음(09-24 결정),①
+duty_assignment,ASG-001971,decided_by,,G01,①
+duty_assignment,ASG-001971,decided_at,,2026-09-24,①
+duty_assignment,ASG-001972,applicability,확인필요,비해당,①
+duty_assignment,ASG-001972,applicability_note,시설 판정 「제외」(관리주체 아님) — 해당 여부 확인 필요(09-24 정합성 검수),관리주체 아님(시설 판정 「제외」) — 비해당으로 닫음(09-24 결정),①
+duty_assignment,ASG-001972,decided_by,,G01,①
+duty_assignment,ASG-001972,decided_at,,2026-09-24,①
+duty_assignment,ASG-001973,applicability,확인필요,비해당,①
+duty_assignment,ASG-001973,applicability_note,시설 판정 「제외」(관리주체 아님) — 해당 여부 확인 필요(09-24 정합성 검수),관리주체 아님(시설 판정 「제외」) — 비해당으로 닫음(09-24 결정),①
+duty_assignment,ASG-001973,decided_by,,G01,①
+duty_assignment,ASG-001973,decided_at,,2026-09-24,①
+duty_assignment,ASG-001975,applicability,확인필요,비해당,①
+duty_assignment,ASG-001975,applicability_note,시설 판정 「제외」(관리주체 아님) — 해당 여부 확인 필요(09-24 정합성 검수),관리주체 아님(시설 판정 「제외」) — 비해당으로 닫음(09-24 결정),①
+duty_assignment,ASG-001975,decided_by,,G01,①
+duty_assignment,ASG-001975,decided_at,,2026-09-24,①
+duty_assignment,ASG-001976,applicability,확인필요,비해당,①
+duty_assignment,ASG-001976,applicability_note,시설 판정 「제외」(관리주체 아님) — 해당 여부 확인 필요(09-24 정합성 검수),관리주체 아님(시설 판정 「제외」) — 비해당으로 닫음(09-24 결정),①
+duty_assignment,ASG-001976,decided_by,,G01,①
+duty_assignment,ASG-001976,decided_at,,2026-09-24,①
+duty_assignment,ASG-001977,applicability,확인필요,비해당,①
+duty_assignment,ASG-001977,applicability_note,시설 판정 「제외」(관리주체 아님) — 해당 여부 확인 필요(09-24 정합성 검수),관리주체 아님(시설 판정 「제외」) — 비해당으로 닫음(09-24 결정),①
+duty_assignment,ASG-001977,decided_by,,G01,①
+duty_assignment,ASG-001977,decided_at,,2026-09-24,①
+duty_assignment,ASG-001979,applicability,확인필요,비해당,①
+duty_assignment,ASG-001979,applicability_note,시설 판정 「제외」(관리주체 아님) — 해당 여부 확인 필요(09-24 정합성 검수),관리주체 아님(시설 판정 「제외」) — 비해당으로 닫음(09-24 결정),①
+duty_assignment,ASG-001979,decided_by,,G01,①
+duty_assignment,ASG-001979,decided_at,,2026-09-24,①
+duty_assignment,ASG-001980,applicability,확인필요,비해당,①
+duty_assignment,ASG-001980,applicability_note,시설 판정 「제외」(관리주체 아님) — 해당 여부 확인 필요(09-24 정합성 검수),관리주체 아님(시설 판정 「제외」) — 비해당으로 닫음(09-24 결정),①
+duty_assignment,ASG-001980,decided_by,,G01,①
+duty_assignment,ASG-001980,decided_at,,2026-09-24,①
+duty_assignment,ASG-001981,applicability,확인필요,비해당,①
+duty_assignment,ASG-001981,applicability_note,시설 판정 「제외」(관리주체 아님) — 해당 여부 확인 필요(09-24 정합성 검수),관리주체 아님(시설 판정 「제외」) — 비해당으로 닫음(09-24 결정),①
+duty_assignment,ASG-001981,decided_by,,G01,①
+duty_assignment,ASG-001981,decided_at,,2026-09-24,①
+duty_assignment,ASG-001984,applicability,확인필요,비해당,①
+duty_assignment,ASG-001984,applicability_note,시설 판정 「제외」(관리주체 아님) — 해당 여부 확인 필요(09-24 정합성 검수),관리주체 아님(시설 판정 「제외」) — 비해당으로 닫음(09-24 결정),①
+duty_assignment,ASG-001984,decided_by,,G01,①
+duty_assignment,ASG-001984,decided_at,,2026-09-24,①
+duty_assignment,ASG-001985,applicability,확인필요,비해당,①
+duty_assignment,ASG-001985,applicability_note,시설 판정 「제외」(관리주체 아님) — 해당 여부 확인 필요(09-24 정합성 검수),관리주체 아님(시설 판정 「제외」) — 비해당으로 닫음(09-24 결정),①
+duty_assignment,ASG-001985,decided_by,,G01,①
+duty_assignment,ASG-001985,decided_at,,2026-09-24,①
+duty_assignment,ASG-001986,applicability,확인필요,비해당,①
+duty_assignment,ASG-001986,applicability_note,시설 판정 「제외」(관리주체 아님) — 해당 여부 확인 필요(09-24 정합성 검수),관리주체 아님(시설 판정 「제외」) — 비해당으로 닫음(09-24 결정),①
+duty_assignment,ASG-001986,decided_by,,G01,①
+duty_assignment,ASG-001986,decided_at,,2026-09-24,①
+duty_assignment,ASG-002173,applicability,해당,비해당,③
+duty_assignment,ASG-002173,applicability_note,,관리주체 한국농어촌공사 평택지사 — 용인시 관리 시설 아님(용인시민신문 2021-11-30 · 국제뉴스 2025-03-25),③
+duty_assignment,ASG-002173,decided_by,,G01,③
+duty_assignment,ASG-002173,decided_at,,2026-09-24,③
+duty_assignment,ASG-002174,applicability,해당,비해당,③
+duty_assignment,ASG-002174,applicability_note,,관리주체 한국농어촌공사 평택지사 — 용인시 관리 시설 아님(용인시민신문 2021-11-30 · 국제뉴스 2025-03-25),③
+duty_assignment,ASG-002174,decided_by,,G01,③
+duty_assignment,ASG-002174,decided_at,,2026-09-24,③
+duty_assignment,ASG-002175,applicability,해당,비해당,③
+duty_assignment,ASG-002175,applicability_note,,관리주체 한국농어촌공사 안성지사 — 용인시 관리 시설 아님(용인시민신문 2021-11-30 · 국제뉴스 2025-03-25),③
+duty_assignment,ASG-002175,decided_by,,G01,③
+duty_assignment,ASG-002175,decided_at,,2026-09-24,③
+duty_assignment,ASG-002232,applicability,확인필요,비해당,①
+duty_assignment,ASG-002232,applicability_note,시설 판정 「제외」(관리주체 아님) — 해당 여부 확인 필요(09-24 정합성 검수),관리주체 아님(시설 판정 「제외」) — 비해당으로 닫음(09-24 결정),①
+duty_assignment,ASG-002232,decided_by,,G01,①
+duty_assignment,ASG-002232,decided_at,,2026-09-24,①
+duty_assignment,ASG-002233,applicability,확인필요,비해당,①
+duty_assignment,ASG-002233,applicability_note,시설 판정 「제외」(관리주체 아님) — 해당 여부 확인 필요(09-24 정합성 검수),관리주체 아님(시설 판정 「제외」) — 비해당으로 닫음(09-24 결정),①
+duty_assignment,ASG-002233,decided_by,,G01,①
+duty_assignment,ASG-002233,decided_at,,2026-09-24,①
+duty_assignment,ASG-002234,applicability,확인필요,비해당,①
+duty_assignment,ASG-002234,applicability_note,시설 판정 「제외」(관리주체 아님) — 해당 여부 확인 필요(09-24 정합성 검수),관리주체 아님(시설 판정 「제외」) — 비해당으로 닫음(09-24 결정),①
+duty_assignment,ASG-002234,decided_by,,G01,①
+duty_assignment,ASG-002234,decided_at,,2026-09-24,①
+duty_assignment,ASG-002247,applicability,확인필요,비해당,①
+duty_assignment,ASG-002247,applicability_note,시설 판정 「제외」(관리주체 아님) — 해당 여부 확인 필요(09-24 정합성 검수),관리주체 아님(시설 판정 「제외」) — 비해당으로 닫음(09-24 결정),①
+duty_assignment,ASG-002247,decided_by,,G01,①
+duty_assignment,ASG-002247,decided_at,,2026-09-24,①
+duty_assignment,ASG-002248,applicability,확인필요,비해당,①
+duty_assignment,ASG-002248,applicability_note,시설 판정 「제외」(관리주체 아님) — 해당 여부 확인 필요(09-24 정합성 검수),관리주체 아님(시설 판정 「제외」) — 비해당으로 닫음(09-24 결정),①
+duty_assignment,ASG-002248,decided_by,,G01,①
+duty_assignment,ASG-002248,decided_at,,2026-09-24,①
+duty_assignment,ASG-002249,applicability,확인필요,비해당,①
+duty_assignment,ASG-002249,applicability_note,시설 판정 「제외」(관리주체 아님) — 해당 여부 확인 필요(09-24 정합성 검수),관리주체 아님(시설 판정 「제외」) — 비해당으로 닫음(09-24 결정),①
+duty_assignment,ASG-002249,decided_by,,G01,①
+duty_assignment,ASG-002249,decided_at,,2026-09-24,①
+duty_assignment,ASG-002251,applicability,확인필요,비해당,①
+duty_assignment,ASG-002251,applicability_note,시설 판정 「제외」(관리주체 아님) — 해당 여부 확인 필요(09-24 정합성 검수),관리주체 아님(시설 판정 「제외」) — 비해당으로 닫음(09-24 결정),①
+duty_assignment,ASG-002251,decided_by,,G01,①
+duty_assignment,ASG-002251,decided_at,,2026-09-24,①
+duty_assignment,ASG-002252,applicability,확인필요,비해당,①
+duty_assignment,ASG-002252,applicability_note,시설 판정 「제외」(관리주체 아님) — 해당 여부 확인 필요(09-24 정합성 검수),관리주체 아님(시설 판정 「제외」) — 비해당으로 닫음(09-24 결정),①
+duty_assignment,ASG-002252,decided_by,,G01,①
+duty_assignment,ASG-002252,decided_at,,2026-09-24,①
+duty_assignment,ASG-002253,applicability,확인필요,비해당,①
+duty_assignment,ASG-002253,applicability_note,시설 판정 「제외」(관리주체 아님) — 해당 여부 확인 필요(09-24 정합성 검수),관리주체 아님(시설 판정 「제외」) — 비해당으로 닫음(09-24 결정),①
+duty_assignment,ASG-002253,decided_by,,G01,①
+duty_assignment,ASG-002253,decided_at,,2026-09-24,①
+duty_assignment,ASG-002255,applicability,확인필요,비해당,①
+duty_assignment,ASG-002255,applicability_note,시설 판정 「제외」(관리주체 아님) — 해당 여부 확인 필요(09-24 정합성 검수),관리주체 아님(시설 판정 「제외」) — 비해당으로 닫음(09-24 결정),①
+duty_assignment,ASG-002255,decided_by,,G01,①
+duty_assignment,ASG-002255,decided_at,,2026-09-24,①
+duty_assignment,ASG-002256,applicability,확인필요,비해당,①
+duty_assignment,ASG-002256,applicability_note,시설 판정 「제외」(관리주체 아님) — 해당 여부 확인 필요(09-24 정합성 검수),관리주체 아님(시설 판정 「제외」) — 비해당으로 닫음(09-24 결정),①
+duty_assignment,ASG-002256,decided_by,,G01,①
+duty_assignment,ASG-002256,decided_at,,2026-09-24,①
+duty_assignment,ASG-002257,applicability,확인필요,비해당,①
+duty_assignment,ASG-002257,applicability_note,시설 판정 「제외」(관리주체 아님) — 해당 여부 확인 필요(09-24 정합성 검수),관리주체 아님(시설 판정 「제외」) — 비해당으로 닫음(09-24 결정),①
+duty_assignment,ASG-002257,decided_by,,G01,①
+duty_assignment,ASG-002257,decided_at,,2026-09-24,①
+duty_assignment,ASG-002707,applicability,확인필요,비해당,①
+duty_assignment,ASG-002707,applicability_note,시설 판정 「제외」(관리주체 아님) — 해당 여부 확인 필요(09-24 정합성 검수),관리주체 아님(시설 판정 「제외」) — 비해당으로 닫음(09-24 결정),①
+duty_assignment,ASG-002707,decided_by,,G01,①
+duty_assignment,ASG-002707,decided_at,,2026-09-24,①
+duty_assignment,ASG-002708,applicability,확인필요,비해당,①
+duty_assignment,ASG-002708,applicability_note,시설 판정 「제외」(관리주체 아님) — 해당 여부 확인 필요(09-24 정합성 검수),관리주체 아님(시설 판정 「제외」) — 비해당으로 닫음(09-24 결정),①
+duty_assignment,ASG-002708,decided_by,,G01,①
+duty_assignment,ASG-002708,decided_at,,2026-09-24,①
+duty_assignment,ASG-002709,applicability,확인필요,비해당,①
+duty_assignment,ASG-002709,applicability_note,시설 판정 「제외」(관리주체 아님) — 해당 여부 확인 필요(09-24 정합성 검수),관리주체 아님(시설 판정 「제외」) — 비해당으로 닫음(09-24 결정),①
+duty_assignment,ASG-002709,decided_by,,G01,①
+duty_assignment,ASG-002709,decided_at,,2026-09-24,①
+duty_assignment,ASG-002721,applicability,확인필요,비해당,①
+duty_assignment,ASG-002721,applicability_note,시설 판정 「제외」(관리주체 아님) — 해당 여부 확인 필요(09-24 정합성 검수),관리주체 아님(시설 판정 「제외」) — 비해당으로 닫음(09-24 결정),①
+duty_assignment,ASG-002721,decided_by,,G01,①
+duty_assignment,ASG-002721,decided_at,,2026-09-24,①
+duty_assignment,ASG-002722,applicability,확인필요,비해당,①
+duty_assignment,ASG-002722,applicability_note,시설 판정 「제외」(관리주체 아님) — 해당 여부 확인 필요(09-24 정합성 검수),관리주체 아님(시설 판정 「제외」) — 비해당으로 닫음(09-24 결정),①
+duty_assignment,ASG-002722,decided_by,,G01,①
+duty_assignment,ASG-002722,decided_at,,2026-09-24,①
+duty_assignment,ASG-002723,applicability,확인필요,비해당,①
+duty_assignment,ASG-002723,applicability_note,시설 판정 「제외」(관리주체 아님) — 해당 여부 확인 필요(09-24 정합성 검수),관리주체 아님(시설 판정 「제외」) — 비해당으로 닫음(09-24 결정),①
+duty_assignment,ASG-002723,decided_by,,G01,①
+duty_assignment,ASG-002723,decided_at,,2026-09-24,①
+duty_assignment,ASG-002725,applicability,확인필요,비해당,①
+duty_assignment,ASG-002725,applicability_note,시설 판정 「제외」(관리주체 아님) — 해당 여부 확인 필요(09-24 정합성 검수),관리주체 아님(시설 판정 「제외」) — 비해당으로 닫음(09-24 결정),①
+duty_assignment,ASG-002725,decided_by,,G01,①
+duty_assignment,ASG-002725,decided_at,,2026-09-24,①
+duty_assignment,ASG-002726,applicability,확인필요,비해당,①
+duty_assignment,ASG-002726,applicability_note,시설 판정 「제외」(관리주체 아님) — 해당 여부 확인 필요(09-24 정합성 검수),관리주체 아님(시설 판정 「제외」) — 비해당으로 닫음(09-24 결정),①
+duty_assignment,ASG-002726,decided_by,,G01,①
+duty_assignment,ASG-002726,decided_at,,2026-09-24,①
+duty_assignment,ASG-002727,applicability,확인필요,비해당,①
+duty_assignment,ASG-002727,applicability_note,시설 판정 「제외」(관리주체 아님) — 해당 여부 확인 필요(09-24 정합성 검수),관리주체 아님(시설 판정 「제외」) — 비해당으로 닫음(09-24 결정),①
+duty_assignment,ASG-002727,decided_by,,G01,①
+duty_assignment,ASG-002727,decided_at,,2026-09-24,①
+duty_assignment,ASG-002729,applicability,확인필요,비해당,①
+duty_assignment,ASG-002729,applicability_note,시설 판정 「제외」(관리주체 아님) — 해당 여부 확인 필요(09-24 정합성 검수),관리주체 아님(시설 판정 「제외」) — 비해당으로 닫음(09-24 결정),①
+duty_assignment,ASG-002729,decided_by,,G01,①
+duty_assignment,ASG-002729,decided_at,,2026-09-24,①
+duty_assignment,ASG-002730,applicability,확인필요,비해당,①
+duty_assignment,ASG-002730,applicability_note,시설 판정 「제외」(관리주체 아님) — 해당 여부 확인 필요(09-24 정합성 검수),관리주체 아님(시설 판정 「제외」) — 비해당으로 닫음(09-24 결정),①
+duty_assignment,ASG-002730,decided_by,,G01,①
+duty_assignment,ASG-002730,decided_at,,2026-09-24,①
+duty_assignment,ASG-002731,applicability,확인필요,비해당,①
+duty_assignment,ASG-002731,applicability_note,시설 판정 「제외」(관리주체 아님) — 해당 여부 확인 필요(09-24 정합성 검수),관리주체 아님(시설 판정 「제외」) — 비해당으로 닫음(09-24 결정),①
+duty_assignment,ASG-002731,decided_by,,G01,①
+duty_assignment,ASG-002731,decided_at,,2026-09-24,①
+duty_assignment,ASG-002947,applicability,해당,비해당,③
+duty_assignment,ASG-002947,applicability_note,,관리주체 한국농어촌공사 평택지사 — 용인시 관리 시설 아님(용인시민신문 2021-11-30 · 국제뉴스 2025-03-25),③
+duty_assignment,ASG-002947,decided_by,,G01,③
+duty_assignment,ASG-002947,decided_at,,2026-09-24,③
+duty_assignment,ASG-002948,applicability,해당,비해당,③
+duty_assignment,ASG-002948,applicability_note,,관리주체 한국농어촌공사 평택지사 — 용인시 관리 시설 아님(용인시민신문 2021-11-30 · 국제뉴스 2025-03-25),③
+duty_assignment,ASG-002948,decided_by,,G01,③
+duty_assignment,ASG-002948,decided_at,,2026-09-24,③
+duty_assignment,ASG-002949,applicability,해당,비해당,③
+duty_assignment,ASG-002949,applicability_note,,관리주체 한국농어촌공사 안성지사 — 용인시 관리 시설 아님(용인시민신문 2021-11-30 · 국제뉴스 2025-03-25),③
+duty_assignment,ASG-002949,decided_by,,G01,③
+duty_assignment,ASG-002949,decided_at,,2026-09-24,③
+duty_assignment,ASG-003027,applicability,해당,비해당,③
+duty_assignment,ASG-003027,applicability_note,,관리주체 한국농어촌공사 평택지사 — 용인시 관리 시설 아님(용인시민신문 2021-11-30 · 국제뉴스 2025-03-25),③
+duty_assignment,ASG-003027,decided_by,,G01,③
+duty_assignment,ASG-003027,decided_at,,2026-09-24,③
+duty_assignment,ASG-003028,applicability,해당,비해당,③
+duty_assignment,ASG-003028,applicability_note,,관리주체 한국농어촌공사 평택지사 — 용인시 관리 시설 아님(용인시민신문 2021-11-30 · 국제뉴스 2025-03-25),③
+duty_assignment,ASG-003028,decided_by,,G01,③
+duty_assignment,ASG-003028,decided_at,,2026-09-24,③
+duty_assignment,ASG-003029,applicability,해당,비해당,③
+duty_assignment,ASG-003029,applicability_note,,관리주체 한국농어촌공사 안성지사 — 용인시 관리 시설 아님(용인시민신문 2021-11-30 · 국제뉴스 2025-03-25),③
+duty_assignment,ASG-003029,decided_by,,G01,③
+duty_assignment,ASG-003029,decided_at,,2026-09-24,③
+duty_assignment,ASG-003031,applicability,해당,비해당,③
+duty_assignment,ASG-003031,applicability_note,,관리주체 한국농어촌공사 평택지사 — 용인시 관리 시설 아님(용인시민신문 2021-11-30 · 국제뉴스 2025-03-25),③
+duty_assignment,ASG-003031,decided_by,,G01,③
+duty_assignment,ASG-003031,decided_at,,2026-09-24,③
+duty_assignment,ASG-003032,applicability,해당,비해당,③
+duty_assignment,ASG-003032,applicability_note,,관리주체 한국농어촌공사 평택지사 — 용인시 관리 시설 아님(용인시민신문 2021-11-30 · 국제뉴스 2025-03-25),③
+duty_assignment,ASG-003032,decided_by,,G01,③
+duty_assignment,ASG-003032,decided_at,,2026-09-24,③
+duty_assignment,ASG-003033,applicability,해당,비해당,③
+duty_assignment,ASG-003033,applicability_note,,관리주체 한국농어촌공사 안성지사 — 용인시 관리 시설 아님(용인시민신문 2021-11-30 · 국제뉴스 2025-03-25),③
+duty_assignment,ASG-003033,decided_by,,G01,③
+duty_assignment,ASG-003033,decided_at,,2026-09-24,③
+duty_assignment,ASG-003035,applicability,해당,비해당,③
+duty_assignment,ASG-003035,applicability_note,,관리주체 한국농어촌공사 평택지사 — 용인시 관리 시설 아님(용인시민신문 2021-11-30 · 국제뉴스 2025-03-25),③
+duty_assignment,ASG-003035,decided_by,,G01,③
+duty_assignment,ASG-003035,decided_at,,2026-09-24,③
+duty_assignment,ASG-003036,applicability,해당,비해당,③
+duty_assignment,ASG-003036,applicability_note,,관리주체 한국농어촌공사 평택지사 — 용인시 관리 시설 아님(용인시민신문 2021-11-30 · 국제뉴스 2025-03-25),③
+duty_assignment,ASG-003036,decided_by,,G01,③
+duty_assignment,ASG-003036,decided_at,,2026-09-24,③
+duty_assignment,ASG-003037,applicability,해당,비해당,③
+duty_assignment,ASG-003037,applicability_note,,관리주체 한국농어촌공사 안성지사 — 용인시 관리 시설 아님(용인시민신문 2021-11-30 · 국제뉴스 2025-03-25),③
+duty_assignment,ASG-003037,decided_by,,G01,③
+duty_assignment,ASG-003037,decided_at,,2026-09-24,③
+duty_assignment,ASG-003094,applicability,확인필요,비해당,①
+duty_assignment,ASG-003094,applicability_note,시설 판정 「제외」(관리주체 아님) — 해당 여부 확인 필요(09-24 정합성 검수),관리주체 아님(시설 판정 「제외」) — 비해당으로 닫음(09-24 결정),①
+duty_assignment,ASG-003094,decided_by,,G01,①
+duty_assignment,ASG-003094,decided_at,,2026-09-24,①
+duty_assignment,ASG-003095,applicability,확인필요,비해당,①
+duty_assignment,ASG-003095,applicability_note,시설 판정 「제외」(관리주체 아님) — 해당 여부 확인 필요(09-24 정합성 검수),관리주체 아님(시설 판정 「제외」) — 비해당으로 닫음(09-24 결정),①
+duty_assignment,ASG-003095,decided_by,,G01,①
+duty_assignment,ASG-003095,decided_at,,2026-09-24,①
+duty_assignment,ASG-003096,applicability,확인필요,비해당,①
+duty_assignment,ASG-003096,applicability_note,시설 판정 「제외」(관리주체 아님) — 해당 여부 확인 필요(09-24 정합성 검수),관리주체 아님(시설 판정 「제외」) — 비해당으로 닫음(09-24 결정),①
+duty_assignment,ASG-003096,decided_by,,G01,①
+duty_assignment,ASG-003096,decided_at,,2026-09-24,①
+duty_assignment,ASG-003100,applicability,확인필요,비해당,①
+duty_assignment,ASG-003100,applicability_note,시설 판정 「제외」(관리주체 아님) — 해당 여부 확인 필요(09-24 정합성 검수),관리주체 아님(시설 판정 「제외」) — 비해당으로 닫음(09-24 결정),①
+duty_assignment,ASG-003100,decided_by,,G01,①
+duty_assignment,ASG-003100,decided_at,,2026-09-24,①
+duty_assignment,ASG-003101,applicability,확인필요,비해당,①
+duty_assignment,ASG-003101,applicability_note,시설 판정 「제외」(관리주체 아님) — 해당 여부 확인 필요(09-24 정합성 검수),관리주체 아님(시설 판정 「제외」) — 비해당으로 닫음(09-24 결정),①
+duty_assignment,ASG-003101,decided_by,,G01,①
+duty_assignment,ASG-003101,decided_at,,2026-09-24,①
+duty_assignment,ASG-003102,applicability,확인필요,비해당,①
+duty_assignment,ASG-003102,applicability_note,시설 판정 「제외」(관리주체 아님) — 해당 여부 확인 필요(09-24 정합성 검수),관리주체 아님(시설 판정 「제외」) — 비해당으로 닫음(09-24 결정),①
+duty_assignment,ASG-003102,decided_by,,G01,①
+duty_assignment,ASG-003102,decided_at,,2026-09-24,①
+duty_assignment,ASG-003108,applicability,확인필요,비해당,①
+duty_assignment,ASG-003108,applicability_note,시설 판정 「제외」(관리주체 아님) — 해당 여부 확인 필요(09-24 정합성 검수),관리주체 아님(시설 판정 「제외」) — 비해당으로 닫음(09-24 결정),①
+duty_assignment,ASG-003108,decided_by,,G01,①
+duty_assignment,ASG-003108,decided_at,,2026-09-24,①
+duty_assignment,ASG-003109,applicability,확인필요,비해당,①
+duty_assignment,ASG-003109,applicability_note,시설 판정 「제외」(관리주체 아님) — 해당 여부 확인 필요(09-24 정합성 검수),관리주체 아님(시설 판정 「제외」) — 비해당으로 닫음(09-24 결정),①
+duty_assignment,ASG-003109,decided_by,,G01,①
+duty_assignment,ASG-003109,decided_at,,2026-09-24,①
+duty_assignment,ASG-003110,applicability,확인필요,비해당,①
+duty_assignment,ASG-003110,applicability_note,시설 판정 「제외」(관리주체 아님) — 해당 여부 확인 필요(09-24 정합성 검수),관리주체 아님(시설 판정 「제외」) — 비해당으로 닫음(09-24 결정),①
+duty_assignment,ASG-003110,decided_by,,G01,①
+duty_assignment,ASG-003110,decided_at,,2026-09-24,①
+duty_assignment,ASG-003248,applicability,확인필요,비해당,①
+duty_assignment,ASG-003248,applicability_note,시설 판정 「제외」(관리주체 아님) — 해당 여부 확인 필요(09-24 정합성 검수),관리주체 아님(시설 판정 「제외」) — 비해당으로 닫음(09-24 결정),①
+duty_assignment,ASG-003248,decided_by,,G01,①
+duty_assignment,ASG-003248,decided_at,,2026-09-24,①
+duty_assignment,ASG-003249,applicability,확인필요,비해당,①
+duty_assignment,ASG-003249,applicability_note,시설 판정 「제외」(관리주체 아님) — 해당 여부 확인 필요(09-24 정합성 검수),관리주체 아님(시설 판정 「제외」) — 비해당으로 닫음(09-24 결정),①
+duty_assignment,ASG-003249,decided_by,,G01,①
+duty_assignment,ASG-003249,decided_at,,2026-09-24,①
+duty_assignment,ASG-003250,applicability,확인필요,비해당,①
+duty_assignment,ASG-003250,applicability_note,시설 판정 「제외」(관리주체 아님) — 해당 여부 확인 필요(09-24 정합성 검수),관리주체 아님(시설 판정 「제외」) — 비해당으로 닫음(09-24 결정),①
+duty_assignment,ASG-003250,decided_by,,G01,①
+duty_assignment,ASG-003250,decided_at,,2026-09-24,①
+civil_safety_plan,CSP-2025-0545,(행),기흥저수지,새 판에서 뺌,③ 관리주체 아닌 시설의 예시 기록
+civil_safety_plan,CSP-2025-0546,(행),이동저수지,새 판에서 뺌,③ 관리주체 아닌 시설의 예시 기록
+civil_safety_plan,CSP-2025-0547,(행),용담저수지,새 판에서 뺌,③ 관리주체 아닌 시설의 예시 기록
+civil_safety_plan,CSP-2025-0548,(행),두창저수지,새 판에서 뺌,③ 관리주체 아닌 시설의 예시 기록
+civil_safety_plan,CSP-2026-0545,(행),기흥저수지,새 판에서 뺌,③ 관리주체 아닌 시설의 예시 기록
+civil_safety_plan,CSP-2026-0546,(행),이동저수지,새 판에서 뺌,③ 관리주체 아닌 시설의 예시 기록
+civil_safety_plan,CSP-2026-0547,(행),용담저수지,새 판에서 뺌,③ 관리주체 아닌 시설의 예시 기록
+civil_safety_plan,CSP-2026-0548,(행),두창저수지,새 판에서 뺌,③ 관리주체 아닌 시설의 예시 기록
+civil_manual,CMN-D059,(행),기흥저수지,새 판에서 뺌,③ 관리주체 아닌 시설의 예시 기록
+civil_manual,CMN-D060,(행),이동저수지,새 판에서 뺌,③ 관리주체 아닌 시설의 예시 기록
+org_dept,D07,dept_name,보육정책과,아동보육과,조직도 대조(09-24)
+org_dept,D07,org_path,(누리집 부서 목록에서 확인 못 함 — 확인 필요),제1부시장 › 사회복지국 › 아동보육과(보육정책팀 · 보육지원팀),조직도 대조(09-24)
+org_dept,D07,duties,국공립어린이집 시설 안전·급식(원료·제조물 — 급식 식자재),시립어린이집 중대재해처벌법 관련 업무 · 국공립·시립어린이집 위탁·개보수(보육정책팀) · 어린이집 지도점검·안전점검(급식·위생·놀이시설·통학차량 — 보육지원팀),조직도 대조(09-24)
+org_dept,D07,related_note,누리집 조회(2026-09-24) 본청 목록에 없음 — 소속 국·이름 확인 필요,구청 가정복지과(보육지원팀·보육지도팀)가 어린이집 인가·지도를 권역별로 맡는다 — 유관,조직도 대조(09-24)
+org_dept,D07,web_checked,N,Y,조직도 대조(09-24)
+org_dept,D08,org_path,(누리집 부서 목록에서 확인 못 함 — 확인 필요),제1부시장 › 문화체육관광국 › 체육진흥과(체육시설팀 · 체육시설운영팀),조직도 대조(09-24)
+org_dept,D08,duties,공공체육시설(실내수영장 등) 안전관리,"공공체육시설 확충·유지보수(체육시설팀) · 시설 운영·위탁관리, 체육시설 안전점검 및 중대재해(체육시설운영팀)",조직도 대조(09-24)
+org_dept,D08,related_note,누리집 조회 본청 목록에 없음 — 소속 국·이름 확인 필요,구청 자치행정과 문화체육팀이 공공체육시설 안전점검을 권역별로 맡는다 — 유관,조직도 대조(09-24)
+org_dept,D08,web_checked,N,Y,조직도 대조(09-24)
+org_dept,D11,org_path,처인구보건소 › 보건정책과(감염병대응팀 · 보건행정팀),처인구보건소 › 보건정책과(감염병대응팀 · 보건행정팀) — 기흥구·수지구보건소는 보건행정과,조직도 대조(09-24)
+org_dept,D12,org_path,(누리집 부서 목록에서 확인 못 함 — 확인 필요),제2부시장 › 기후환경위생국 › 자원순환과(자원시설운영팀 · 자원시설팀 · 음식물자원팀),조직도 대조(09-24)
+org_dept,D12,duties,재활용 선별장·폐기물 처리시설 작업 안전,"용인환경센터·수지환경센터 운영, 매립지 사후관리(자원시설운영팀) · 그린에코파크 조성·적환장 개선(자원시설팀) · 용인에코타운 운영(음식물자원팀)",조직도 대조(09-24)
+org_dept,D12,related_note,누리집 조회 본청 목록에 없음 — 소속 국·이름 확인 필요,,조직도 대조(09-24)
+org_dept,D12,web_checked,N,Y,조직도 대조(09-24)
+org_dept,D18,org_path,제2부시장 › 농림축산국 › 산림과(산림정책팀 등),제1부시장 › 농림축산국 › 산림과(산림정책팀 등),조직도 대조(09-24)
+staff,H07,display_name,문성희 보육정책과장,문성희 아동보육과장,D07 이름 바로잡음
+staff,H07,position,보육정책과장,아동보육과장,D07 이름 바로잡음

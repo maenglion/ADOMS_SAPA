@@ -1,0 +1,182 @@
+/* [400] 묶음 G 전용 — 클래스 이름은 usg- 로 시작 (통계 및 사례 SCR-091~102) */
+
+/* 사이드바 — 카드 3개 사이를 명세처럼 넉넉히 */
+.usg-side{gap:34px}
+.usg-panel a{font-size:1.02rem}
+
+/* 알림 */
+.usg-ok{background:#eef7e8;border:1px solid #b9d9a6;color:#2f6a1f;border-radius:8px;padding:8px 14px;margin:0 0 12px;font-weight:700}
+.usg-err{background:#fdeeee;border:1px solid #f0b4b4;color:#b33;border-radius:8px;padding:8px 14px;margin:0 0 12px;font-weight:700}
+.usg-note{color:var(--us-mut);font-size:.88rem;margin:8px 2px 0;line-height:1.5}
+.usg-empty{color:#888;padding:22px !important}
+.usg-nowrap{white-space:nowrap}
+.usg-x{color:#fff !important;font-weight:800;text-decoration:none !important}
+
+/* 버튼(명세: 흰 바탕 테두리 단추 · 파란 채움 검색) */
+.usg-btn-o{display:inline-flex;align-items:center;background:#fff;border:1px solid #777;border-radius:4px;padding:4px 14px;color:#222 !important;font-weight:600;font-size:.95rem;cursor:pointer}
+.usg-btn-o:hover{border-color:var(--us-g1);color:var(--us-g1) !important;text-decoration:none}
+.usg-btn-blue{display:inline-flex;align-items:center;gap:6px;background:#4472c4;color:#fff;border:1px solid #2f5597;border-radius:4px;padding:6px 26px;font:inherit;font-weight:700;cursor:pointer}
+.usg-btn-blue:hover{background:#2f5597}
+
+/* ── SCR-091 거르기 바 ── */
+.usg-fbar-wrap{margin:4px 0 6px}
+.usg-fbar{background:#d6dce4;border-radius:18px;padding:14px 22px 10px}
+.usg-frow{display:flex;flex-wrap:wrap;gap:10px 26px;align-items:center}
+.usg-frow label{display:flex;align-items:center;gap:8px;font-size:1.05rem;font-weight:600;color:#222}
+.usg-frow select{min-width:8.4rem;border:1px solid #888;border-radius:4px;padding:5px 8px;font:inherit;font-size:.92rem;background:#fff;color:#444}
+.usg-req{color:#e03030;font-style:normal;font-weight:800;margin-left:-4px}
+.usg-fnote{font-size:.85rem;color:#333;margin-top:10px}
+.usg-fright{display:flex;justify-content:flex-end;align-items:center;gap:6px;margin-top:10px}
+.usg-base{display:flex;align-items:center;gap:8px;font-weight:600;margin-right:4px}
+.usg-base input{border:1px solid #888;border-radius:4px;padding:3px 8px;font:inherit;font-size:.92rem}
+.usg-count{font-size:.98rem;margin:4px 2px 8px;display:inline-block}
+.usg-count b{color:#2f5597;font-size:1.1rem}
+
+/* SCR-092 — 20칸 단일 표 · 가로·세로 스크롤 하나 · 연도별·연번 고정 */
+.usg-grid-scroll{max-height:32rem;overflow:auto;border:1px solid #bbb;background:#fff}
+table.usg-occ{min-width:150rem;border-top:0;font-size:.93rem}
+table.usg-occ thead th{position:sticky;top:0;z-index:2;background:#e7e9ec;white-space:nowrap;line-height:1.35}
+table.usg-occ td{white-space:nowrap}
+table.usg-occ td.usg-wide{white-space:normal;min-width:26rem}
+table.usg-occ .usg-fz0{position:sticky;left:0;z-index:1;background:#fff;min-width:4.6rem}
+table.usg-occ .usg-fz1{position:sticky;left:4.6rem;z-index:1;background:#fff;min-width:3.6rem;box-shadow:2px 0 0 #bbb}
+table.usg-occ thead .usg-fz0,table.usg-occ thead .usg-fz1{z-index:3;background:#e7e9ec}
+
+/* ── SCR-093 차트 대시보드(2×2) ── */
+.usg-dash{display:grid;grid-template-columns:1fr 1fr;gap:26px 34px;margin-top:26px}
+.usg-chart{position:relative;min-width:0}
+.usg-chart.card{background:#d6dce4;border-radius:34px;padding:16px 22px 22px}
+.usg-chart-h{display:flex;justify-content:space-between;align-items:center;margin-bottom:6px}
+.usg-chart-h b{font-size:1rem;color:#111}
+.usg-chart-h.plain{justify-content:flex-end}
+.usg-chart-h.plain.left{justify-content:flex-start}
+.usg-tools{display:inline-flex;border:1px solid #6d8fcf;border-radius:3px;overflow:hidden;background:#fff}
+.usg-tools button{display:flex;align-items:center;justify-content:center;width:1.9rem;height:1.55rem;border:0;border-right:1px solid #b6c6e6;background:#fff;color:#8a9ab8;cursor:pointer;padding:0}
+.usg-tools button:last-child{border-right:0}
+.usg-tools button.on{background:#dfe8f8;color:#2f5597}
+.usg-tools button:hover{color:#2f5597}
+.usg-plotbox{position:relative;background:#fff;padding:22px 6px 4px}
+.usg-chart.plain .usg-plotbox{padding-top:26px}
+.usg-dl{position:absolute;right:8px;top:4px;border:1px solid #999;background:#fff;border-radius:2px;width:1.45rem;height:1.45rem;line-height:1;font-size:.95rem;cursor:pointer;color:#333;padding:0}
+.usg-dl:hover{border-color:#2f5597;color:#2f5597}
+.usg-plot{display:block;width:100%;height:auto}
+
+/* SCR-094 · 096 「Export to」 팝업 */
+.usg-export-bg{position:fixed;inset:0;z-index:40}
+.usg-export{position:absolute;right:14px;top:30px;z-index:41;width:11.5rem;background:#fff;border:8px solid #8f8f8f;box-shadow:0 10px 26px #0004}
+.usg-export-h{background:#f2f2f2;padding:9px 12px;font-size:.9rem;color:#222}
+.usg-export-b{display:grid;grid-template-columns:1fr 1fr;gap:4px;padding:10px 8px 12px}
+.usg-export-b a,.usg-export-b button{display:block;text-align:center;padding:9px 0;border:0;background:none;font:inherit;font-size:.92rem;color:#1f3f7a !important;cursor:pointer;border-radius:4px}
+.usg-export-b a:hover,.usg-export-b button:hover{background:#eef3fb;text-decoration:none}
+.usg-export-b b{color:#222}
+
+/* ── SCR-095 대상통계 3열 ── */
+.usg-tri{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px;margin-top:6px}
+.usg-tcard{background:#d6dce4;border-radius:22px;padding:14px 16px 10px;margin-bottom:10px}
+.usg-tcard label{display:grid;grid-template-columns:5.6rem 1fr;align-items:center;gap:6px;margin-bottom:8px;font-weight:600;font-size:1.02rem}
+.usg-tcard select{border:1px solid #888;border-radius:4px;padding:5px 8px;font:inherit;font-size:.9rem;background:#fff;color:#666;min-width:0}
+.usg-tcard select.sel{color:#1f4ea3}
+.usg-tsum{display:flex;justify-content:space-between;align-items:flex-end;border-top:1px solid #aab3bf;padding-top:8px;margin-top:4px}
+.usg-tsum span{font-size:.95rem}
+.usg-tsum b{font-size:1.55rem;font-weight:700;color:#111;letter-spacing:-.5px}
+.usg-tsum small{font-size:1rem;font-weight:600;margin-left:1px}
+
+/* ── SCR-097 사고사례 목록 ── */
+.usg-search{display:flex;align-items:center;gap:22px 60px;flex-wrap:wrap;background:#d6dce4;border-radius:18px;padding:22px 44px;margin:4px 0 12px}
+.usg-search label{display:flex;align-items:center;gap:10px;font-size:1.05rem;font-weight:600}
+.usg-search input{border:1px solid #888;border-radius:4px;padding:5px 10px;font:inherit;font-size:.92rem;width:11rem;background:#fff}
+.usg-listbar{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:6px}
+.usg-listbar .usg-count{margin:0}
+table.usg-board td a{color:#222 !important;display:block}
+table.usg-board tr.usg-row:hover td{background:#f3f7ef;cursor:pointer}
+table.usg-board tr.usg-row:hover a{text-decoration:none}
+.usg-pager{display:flex;justify-content:center;gap:4px;margin:12px 0 4px}
+.usg-pager a{min-width:1.6rem;text-align:center;padding:2px 6px;border-radius:3px;color:#333 !important;font-size:1.02rem}
+.usg-pager a.on{background:#777;color:#fff !important}
+.usg-pager a:hover{text-decoration:none;background:#e6e6e6}
+.usg-pager a.on:hover{background:#666}
+
+/* SCR-098·099 상세·수정 팝업(회색 두꺼운 테두리 대형 모달) */
+.usg-case-bg{background:#0003;align-items:flex-start;padding-top:3vh}
+.usg-case{background:#fff;border:14px solid #9a9a9a;width:min(62rem,94vw);max-height:92vh;overflow:auto;padding:18px 26px 18px;box-shadow:0 16px 40px #0004}
+.usg-case-crumb{font-size:1rem;line-height:1.5;margin-bottom:14px}
+.usg-case-crumb b{font-weight:600;font-size:1.08rem}
+.usg-cf-row{display:grid;grid-template-columns:6.4rem 1fr;align-items:center;gap:10px;margin-bottom:10px}
+.usg-cf-row.two{grid-template-columns:6.4rem minmax(0,20rem) 1fr auto}
+.usg-cf-row.two .usg-lb:nth-of-type(2){justify-self:end}
+.usg-cf-row.top{align-items:start}
+.usg-lb{font-weight:600;white-space:nowrap}
+.usg-in{display:block;width:100%;border:1px solid #888;border-radius:3px;padding:5px 10px;font:inherit;font-size:.95rem;background:#fff;min-height:2rem}
+.usg-in.ro{background:#f3f3f3}
+.usg-in.ro.gray{background:#eee}
+.usg-date{font-size:.95rem}
+.usg-body{display:block;width:100%;min-height:16rem;border:1px solid #777;border-radius:34px;padding:26px 30px;font:inherit;font-size:.95rem;line-height:1.9;background:#f1f1f1;white-space:pre-wrap;resize:vertical}
+textarea.usg-body{background:#fff}
+.usg-files{min-height:3rem}
+.usg-filelist{list-style:none;margin:4px 0 8px;padding:0;line-height:1.8}
+.usg-slots{display:flex;flex-direction:column;gap:5px}
+.usg-slot{display:flex;align-items:center;gap:8px}
+.usg-slot.dim{opacity:.45}
+.usg-clip{font-size:.95rem}
+.usg-slot-name{width:16rem;border:1px solid #888;border-radius:3px;padding:3px 8px;font-size:.88rem;overflow:hidden;white-space:nowrap;text-overflow:ellipsis}
+.usg-slot-name.empty{color:#999}
+.usg-slot-note{margin:6px 0 0 1.6rem;font-size:.95rem}
+.usg-case-btns{display:flex;justify-content:flex-end;gap:6px;margin-top:14px}
+.usg-b{display:inline-flex;align-items:center;justify-content:center;min-width:4.6rem;padding:4px 16px;border:1px solid #333;border-radius:3px;background:#fff;color:#222 !important;font:inherit;font-size:1rem;cursor:pointer}
+.usg-b.blue{border-color:#2f5597;color:#2f5597 !important}
+.usg-b.red{border-color:#c00000;color:#e00 !important}
+.usg-b:hover{text-decoration:none;background:#f6f6f6}
+
+/* SCR-100·101 확인 팝업 — 큰 파란 「?」 + 시스템명 + 메시지 + 확인(파랑)/취소(빨강) */
+.usg-cf-bg{position:fixed;inset:0;z-index:200;display:flex;align-items:center;justify-content:center;background:#0002}
+.usg-cf{background:#fff;border:12px solid #999;width:min(32rem,90vw);padding:22px 20px 26px;text-align:center;box-shadow:0 14px 40px #0005}
+.usg-cf-q{font-size:5.4rem;line-height:1;color:#2f5597;font-weight:300}
+.usg-cf-t{font-size:1.5rem;font-weight:800;margin:14px 0 18px;letter-spacing:-.5px}
+.usg-cf-m{font-size:1.3rem;margin-bottom:18px}
+.usg-cf-b{display:flex;justify-content:center;gap:12px}
+.usg-cf-b button{min-width:6.2rem;padding:8px 18px;border:0;border-radius:6px;color:#fff;font:inherit;font-size:1.3rem;cursor:pointer}
+.usg-cf-b .ok{background:#4472c4}
+.usg-cf-b .no{background:#ff0000}
+.usg-cf-b .ok:hover{background:#2f5597}
+.usg-cf-b .no:hover{background:#d00}
+
+/* 업로드 팝업 */
+.usg-up{width:min(40rem,92vw)}
+.usg-up p{line-height:1.7;margin:0 0 12px}
+.usg-up-row{display:flex;align-items:center;gap:12px;margin-bottom:14px}
+.usg-up-btns{display:flex;justify-content:flex-end;gap:8px}
+
+/* ── SCR-102 안전·보건 관계 법령 ── */
+.usg-two{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:34px;margin-top:6px}
+.usg-lcard{background:#d6dce4;border-radius:34px;padding:16px 20px 22px;min-width:0}
+.usg-lcard-h{font-weight:700;font-size:1rem;margin:0 0 10px 4px}
+.usg-radios{display:flex;flex-wrap:wrap;gap:6px 18px;background:#fff;border:1px solid #3c5fa8;border-radius:8px;padding:9px 14px;margin-bottom:10px}
+.usg-radio{display:inline-flex;align-items:center;gap:6px;color:#222 !important;font-size:.95rem}
+.usg-radio:hover{text-decoration:none;color:#2f5597 !important}
+.usg-radio i{display:inline-block;width:1.05rem;height:1.05rem;border-radius:50%;border:1.5px solid #3c5fa8;background:#fff;position:relative}
+.usg-radio.on i{background:#3c5fa8}
+.usg-radio.on i::after{content:"✓";position:absolute;inset:0;color:#fff;font-size:.72rem;font-weight:900;display:flex;align-items:center;justify-content:center;font-style:normal}
+table.usg-vtbl{width:100%;border-collapse:collapse;background:#fff;margin-bottom:12px;font-size:.98rem}
+table.usg-vtbl th,table.usg-vtbl td{border:1px solid #c7c7c7;padding:3px 10px;text-align:center}
+table.usg-vtbl thead th{background:#fff;color:#555;font-weight:600;font-size:.88rem}
+table.usg-vtbl tbody th{background:#e8e8e8;width:34%;font-weight:800}
+table.usg-vtbl tr.on th,table.usg-vtbl tr.on td{background:#dfe8f8}
+.usg-htbl-wrap{overflow-x:auto;margin-bottom:12px}
+table.usg-htbl{width:100%;border-collapse:collapse;background:#fff;font-size:.95rem}
+table.usg-htbl th,table.usg-htbl td{border:1px solid #c7c7c7;padding:4px 6px;text-align:center;white-space:nowrap}
+table.usg-htbl thead th{background:#eee;font-weight:800}
+table.usg-htbl tbody th{background:#eee;font-weight:700}
+table.usg-htbl .on{background:#dfe8f8}
+.usg-lcard .usg-chart.plain{background:#fff;border:1px solid #3c5fa8;border-radius:12px;padding:6px 8px 8px}
+.usg-lcard .usg-chart-h.plain{margin-bottom:0}
+.usg-lcard .usg-plotbox{padding-top:24px}
+.usg-lawsec{margin-top:10px}
+.usg-lawsec h2 small{font-size:.9rem;font-weight:600;margin-left:8px}
+.usg-lawscroll{max-height:26rem;overflow:auto;border:1px solid #ccc}
+table.usg-lawtbl{border-top:0}
+table.usg-lawtbl thead th{position:sticky;top:0;z-index:1}
+.usg-drill{width:min(76rem,95vw)}
+.usg-drill .us-modal-h{position:sticky;top:0;z-index:2}
+
+@media(max-width:1200px){.usg-tri{grid-template-columns:1fr}.usg-two{grid-template-columns:1fr}}
+@media(max-width:900px){.usg-dash{grid-template-columns:1fr}.usg-cf-row.two{grid-template-columns:6.4rem 1fr}}

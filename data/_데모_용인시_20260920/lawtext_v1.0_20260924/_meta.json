@@ -1,0 +1,12 @@
+{
+ "version": "lawtext_v1.0_20260924",
+ "canon_release": "R-20260920-10",
+ "canon_published_at": "2026-09-20 22:16:21",
+ "built_at": "2026-09-24 23:10",
+ "docs": 674,
+ "docs_wanted": 674,
+ "units": 148390,
+ "schedules": 131,
+ "schedules_wanted": 131,
+ "update_rule": "앱이 법령 개정 자동 확인(CoCo)에서 반영한 실행의 items.csv 새 본문을 이 판 위에 얹는다 — 시행일이 오늘 이후면 「시행 예정」으로 따로 보인다."
+}

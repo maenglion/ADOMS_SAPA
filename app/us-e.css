@@ -1,0 +1,146 @@
+/* [400] 묶음 E 전용 — 클래스 이름은 use- 로 시작 (의무이행 · 원료·제조물 SCR-075~087) */
+
+/* 사업장 고르기(본문 머리 오른쪽) */
+.use-sitepick{display:flex;gap:8px;align-items:center}
+.use-sitepick label{display:flex;gap:8px;align-items:center;font-weight:700;font-size:.95rem;white-space:nowrap}
+.use-sitepick select{border:1px solid #bbb;border-radius:6px;padding:5px 8px;font:inherit;font-size:.92rem;max-width:18rem}
+.us-head:has(.use-sitepick) .us-h1{font-size:1.45rem}
+
+/* 입력 표 */
+table.use-tbl td{vertical-align:middle}
+table.use-tbl th.use-x{width:2.6rem;background:#fff;border-color:#fff #fff var(--us-line) var(--us-line)}
+table.use-tbl input[type=date]{min-width:8.6rem}
+table.use-tbl input[type=text]{min-width:7rem}
+table.use-tbl td:first-child input[type=text]{min-width:9rem}
+.use-num{text-align:right}
+.use-name{display:flex;gap:6px;align-items:center}
+.use-name input{flex:1;min-width:0}
+.use-search{white-space:nowrap;color:#1f6fd1 !important;font-weight:700;font-size:.92rem}
+.use-plus{display:inline-flex;align-items:center;justify-content:center;width:1.65rem;height:1.65rem;margin-top:4px;border:1px solid #777;border-radius:4px;background:#fff;
+  font-weight:800;font-size:1rem;line-height:1;cursor:pointer;color:#222}
+.use-plus:hover{border-color:var(--us-g1);color:var(--us-g1)}
+.use-ico{display:inline-flex;align-items:center;justify-content:center;min-width:1.7rem;height:1.7rem;border:1px solid #888;border-radius:4px;background:#fff;
+  font-size:.95rem;cursor:pointer;color:#333 !important;text-decoration:none !important;padding:0 3px}
+.use-ico.dim{opacity:.4;cursor:default}
+.use-ico:hover:not(.dim){border-color:var(--us-g1)}
+
+/* 증빙 칸 */
+.use-ev{display:flex;flex-direction:column;gap:4px;min-width:11rem;max-width:17rem}
+.use-ev-line{display:flex;gap:5px;align-items:center}
+.use-ev-line .us-ev-name{min-width:5rem;max-width:12rem;font-size:.85rem}
+a.use-ev-link{color:#1f5fb4 !important;text-decoration:underline}
+.use-pick{display:inline-flex;gap:5px;align-items:center;min-width:0}
+.use-pick .us-ev-name{min-width:5rem;max-width:9rem;font-size:.85rem}
+.use-picked{font-size:.85rem;color:var(--us-g1);font-weight:700;max-width:12rem;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+
+/* 버튼 — 명세의 파란 테두리 버튼 · 회색 저장 버튼 */
+.use-bbtn{display:inline-flex;align-items:center;gap:4px;border:1px solid #3d7fb3;background:#fff;color:#222 !important;border-radius:4px;padding:6px 14px;
+  font:inherit;font-size:1rem;cursor:pointer;white-space:nowrap;text-decoration:none !important}
+.use-bbtn:hover{background:#eef5fb}
+.use-bbtn.sm{font-size:.85rem;padding:3px 10px}
+.use-save{border:1px solid #777;background:#e4e6e3;color:#222;border-radius:4px;padding:6px 26px;font:inherit;font-size:1rem;cursor:pointer}
+.use-save:hover{background:#d4d8d2}
+.use-del{border:1px solid #e04848;background:#fff;color:#222;border-radius:4px;padding:5px 24px;font:inherit;cursor:pointer}
+.use-btnrow{display:flex;justify-content:space-between;align-items:flex-start;gap:10px;margin-top:8px}
+.use-btnrow-l{display:flex;gap:8px;flex-wrap:wrap}
+.use-defbtn{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
+
+/* 소제목 */
+.use-sec2{font-weight:800;font-size:1.08rem;margin:14px 0 8px}
+.use-sec2 small{font-weight:600;color:var(--us-mut);font-size:.85rem;margin-left:8px}
+.use-sum{background:#f4f7f1;border:1px solid #dfe6da;border-radius:8px;padding:9px 14px;font-size:.93rem;color:#333;line-height:1.6;margin:0 0 6px}
+.use-p{margin:2px 0 8px;line-height:1.7}
+.use-note{font-size:.88rem;color:var(--us-mut);margin:6px 2px}
+.use-mut{color:var(--us-mut)}
+
+/* 없을 경우 체크 — 체크하면 아래 입력 영역이 사라진다(명세 SCR-083 · 085 「아래 부분 사라짐」) */
+.use-nil{display:flex;gap:10px;align-items:center;padding:10px 4px;border-bottom:1px solid #999;margin-bottom:12px;cursor:pointer;font-size:1rem}
+.use-nil input{position:absolute;opacity:0;width:1px;height:1px}
+.use-nil-mark{display:inline-flex;align-items:center;justify-content:center;width:1.6rem;height:1.6rem;border:1.5px solid #9aa;border-radius:50%;color:#bbb;font-weight:800}
+.use-nil:has(input:checked) .use-nil-mark{background:var(--us-g2);border-color:var(--us-g2);color:#fff}
+.use-nil:has(input:focus-visible) .use-nil-mark{outline:2px solid #1f6fd1}
+.use-nilwrap:has(.use-nil input:checked) .use-hide{display:none}
+
+/* 재해 카드(SCR-082) */
+.use-dcard{border:2px solid #34506e;border-radius:18px;padding:14px 16px 10px;margin-bottom:12px}
+.use-dcard-h{display:flex;justify-content:space-between;gap:16px;margin-bottom:10px;flex-wrap:wrap}
+.use-dcard-h label{display:flex;gap:10px;align-items:center;font-size:1rem}
+.use-dcard-h input{border:1px solid #c9cfc6;border-radius:5px;padding:6px 8px;font:inherit}
+.use-dcard-h label:first-child{flex:1}
+.use-dcard-h input[type=text]{flex:1;min-width:18rem}
+.use-dcard-f{display:flex;justify-content:flex-end;margin-top:8px;min-height:1rem}
+
+/* 조치기간(시작 ~ 끝, 세로) */
+.use-period{text-align:center}
+.use-period input{display:block}
+.use-period span{display:block;line-height:1.1}
+
+/* 예산 표 */
+.use-bitem{text-align:center;min-width:8rem}
+.use-box{display:block;border:1px solid #999;border-radius:4px;padding:6px 8px;background:#fff}
+table.use-budget tbody.use-bgroup{border-bottom:1px solid #999}
+table.use-guide{margin-top:14px;font-size:.84rem;table-layout:fixed}
+table.use-guide th{font-size:1rem}
+table.use-guide td{vertical-align:top}
+table.use-guide ul{margin:0;padding-left:1rem;line-height:1.5}
+
+/* 절차도 두 장(SCR-081) */
+.use-pcards{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:22px}
+.use-pcard{background:#dfe3ec;border-radius:36px;padding:18px 20px 16px;position:relative}
+.use-pcard-h{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-bottom:10px}
+.use-pcard-h b{font-size:1.02rem}
+.use-pcard-sub{font-weight:800;margin:6px 0 8px}
+.use-pline{display:flex;gap:6px;align-items:center;margin:6px 0;flex-wrap:wrap}
+.use-pline .us-ev-name{flex:1;min-width:7rem;background:#eee}
+.use-radio{display:inline-flex;gap:6px;align-items:center;font-weight:800;min-width:5.6rem}
+.use-date{border:1px solid #c9cfc6;border-radius:5px;padding:5px 8px;font:inherit}
+.use-pdfbox{background:#f2f2f2;border-radius:14px;margin:8px 0;min-height:260px;display:flex;flex-direction:column}
+.use-pdfbox-h{padding:10px 14px;font-size:1.05rem}
+.use-pdfbox-b{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;color:#666}
+iframe.use-pdf{width:100%;min-height:360px;border:0;border-radius:0 0 12px 12px;background:#fff}
+
+/* 관계 법령(SCR-086 · 087) — 셀 안 2단 · 태그 */
+.use-stack{display:flex;flex-direction:column;gap:4px;align-items:stretch}
+.use-tag{display:inline-block;background:#e3e4e2;border:1px solid #bfc2bd;border-radius:4px;padding:3px 8px;font-size:.88rem;line-height:1.35}
+.use-tag.blue{color:#1f5fb4}
+.use-tag.mark{background:#e6f1db;border-color:#a8d29a;color:#2f6a22;font-size:.78rem;margin-top:4px}
+.use-tag.cond{background:#fff6db;border-color:#f0d27a;color:#8a6200;font-size:.78rem;margin-top:4px}
+.use-lawtext{background:#eceeeb;border:1px solid #cfd3cc;border-radius:4px;padding:5px 8px;font-size:.92rem}
+table.use-law td:nth-child(1),table.use-law td:nth-child(2){min-width:8rem;max-width:12rem}
+table.use-law .use-tag{overflow-wrap:anywhere}
+table.use-law td:nth-child(3){min-width:10rem}
+.use-wide{overflow-x:auto}
+.use-stsel{min-width:6.5rem}
+.use-stsel.st-이행완료{background:#e9f5e3 !important}
+.use-stsel.st-보완필요{background:#fff6db !important}
+.use-stsel.st-미이행{background:#fdeaea !important}
+table.use-edu td:first-child{min-width:10rem}
+
+/* 불러오기 창 */
+.use-modal{min-width:min(760px,92vw)}
+.use-modal.wide{width:min(1180px,94vw)}
+.use-close{color:#fff !important;text-decoration:none !important;font-weight:800}
+.use-crumb{font-size:.8rem;color:#666;white-space:pre;margin-bottom:6px}
+.use-sec{display:flex;justify-content:space-between;font-size:.9rem;font-weight:700;margin:10px 0 6px}
+.use-sec span{font-weight:500;color:#555}
+table.use-mtbl{font-size:.9rem}
+table.use-mtbl th.use-chk{width:2.4rem}
+.use-mfoot{display:flex;justify-content:flex-end;margin-top:12px}
+
+@media(max-width:1100px){.use-pcards{grid-template-columns:1fr}.use-dcard-h input[type=text]{min-width:0}}
+
+/* 관계 법령 표 — 8칸이 본문 폭에 들어가게 */
+table.use-law,table.use-edu{font-size:.92rem}
+table.use-law .use-ev,table.use-edu .use-ev{min-width:9rem;max-width:13rem}
+table.use-law td:nth-child(2){max-width:10rem}
+table.use-law input[type=date],table.use-edu input[type=date]{min-width:7.8rem}
+table.use-law input[type=text],table.use-edu input[type=text]{min-width:5.5rem}
+table.use-guide td{overflow-wrap:anywhere}
+table.use-law,table.use-edu{table-layout:fixed}
+table.use-law input,table.use-law select,table.use-edu input,table.use-edu select{min-width:0 !important}
+table.use-law .use-ev,table.use-edu .use-ev{min-width:0;max-width:none}
+table.use-law td,table.use-edu td{max-width:none !important;min-width:0 !important;overflow-wrap:anywhere}
+table.use-law .us-ev-name,table.use-edu .us-ev-name{min-width:0;flex:1}
+table.use-edu .use-ev-line{flex-wrap:wrap}
+.use-stack>*{min-width:0;max-width:100%;white-space:normal;word-break:break-all}
+.use-lawtext{word-break:keep-all;overflow-wrap:anywhere}

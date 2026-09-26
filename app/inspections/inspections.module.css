@@ -1,0 +1,26 @@
+.two { display: grid; grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr); gap: 16px; }
+.colhead { font-weight: 700; color: var(--navy); margin-bottom: 6px; }
+.pick { border: 1px solid var(--line); border-radius: 8px; padding: 8px 10px; max-height: 360px; overflow: auto; background: #fff; }
+.axis { padding: 6px 0; border-bottom: 1px dashed var(--line); }
+.axis:last-child { border-bottom: 0; }
+.codes { display: flex; flex-wrap: wrap; gap: 2px 14px; padding: 4px 0 0 22px; }
+.ck { display: inline-flex; align-items: center; gap: 6px; margin: 2px 0; color: var(--ink); font-size: .9rem; cursor: pointer; }
+.preview { margin-top: 14px; padding: 12px 14px; border-radius: 8px; background: var(--surface-blush); border: 1px solid var(--line); }
+.big { font-size: 1.4rem; color: var(--navy); }
+.row { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
+.btns { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 10px; }
+.counts { display: flex; gap: 5px; flex-wrap: wrap; margin: 6px 0; }
+.made { border-left: 4px solid var(--ok); margin-bottom: 14px; }
+.cond { margin: 8px 0 0; padding-left: 20px; line-height: 1.8; }
+.sign { display: flex; gap: 0; margin-top: 10px; }
+.sign > div { border: 1px solid var(--line); padding: 6px 12px; min-width: 150px; text-align: center; background: #fff; }
+.sign > div + div { border-left: 0; }
+.sign small { display: block; color: var(--mut); font-size: .78rem; }
+.basis { font-size: .85rem; color: var(--navy); margin: 4px 0; line-height: 1.5; }
+.rules { list-style: none; margin: 6px 0 0; padding: 0; }
+.rules li { padding: 6px 0; border-bottom: 1px dashed var(--line); line-height: 1.6; }
+.rules li:last-child { border-bottom: 0; }
+.cyc { font-size: .75rem; color: var(--mut); margin-left: 4px; }
+@media (max-width: 900px) {
+  .two { grid-template-columns: 1fr; }
+}

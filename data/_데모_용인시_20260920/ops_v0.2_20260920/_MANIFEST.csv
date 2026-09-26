@@ -1,0 +1,13 @@
+﻿파일,행수,sha1
+seed\ceo_activity.csv,12,13cde5a21c97
+seed\contract.csv,24,9c528ae99d18
+seed\contract_duty.csv,72,13b2581c99b4
+seed\contract_hazard.csv,48,d5642a4f4d20
+seed\incident.csv,2,4030c9acb7d0
+seed\inspection_batch.csv,3,c0ec435211a8
+seed\law_change.csv,3,a29c18527e74
+seed\order_received.csv,6,787ca7467a9d
+seed\safety_budget.csv,70,b20e95ec0272
+seed\task_approval_patch.csv,2717,9fd0e4c5648e
+seed\training_record.csv,28,43f1008f5a1f
+seed\worker_voice.csv,5,0cd85202d020

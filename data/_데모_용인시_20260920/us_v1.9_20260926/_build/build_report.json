@@ -1,0 +1,107 @@
+{
+ "usf_round": {
+  "from": "us_v1.0_20260924",
+  "old": 3,
+  "new": 6,
+  "total": 9,
+  "new_cols": [
+   "insp_method",
+   "outsource_org",
+   "report_received_at"
+  ]
+ },
+ "usf_judge": {
+  "from": "us_v1.0_20260924",
+  "old": 3,
+  "new": 390,
+  "total": 393,
+  "new_cols": []
+ },
+ "notification": {
+  "from": "ops_v2.2_20260924",
+  "old": 311,
+  "new": 87,
+  "total": 398,
+  "new_cols": [
+   "from_staff_id",
+   "action_id",
+   "batch_id"
+  ]
+ },
+ "hazard_report": {
+  "from": "ops_v1.9_20260924",
+  "old": 20,
+  "new": 14,
+  "total": 34,
+  "new_cols": []
+ },
+ "hazard_step": {
+  "from": "ops_v0.6_20260921",
+  "old": 167,
+  "new": 57,
+  "total": 224,
+  "new_cols": []
+ },
+ "incident": {
+  "from": "ops_v1.9_20260924",
+  "old": 9,
+  "new": 5,
+  "total": 14,
+  "new_cols": []
+ },
+ "order_received": {
+  "from": "ops_v1.9_20260924",
+  "old": 17,
+  "new": 8,
+  "total": 25,
+  "new_cols": [
+   "order_area"
+  ]
+ },
+ "incident_nil_check": {
+  "from": "ops_v0.6_20260921",
+  "old": 14,
+  "new": 14,
+  "total": 28,
+  "new_cols": []
+ },
+ "incident_report": {
+  "from": "ops_v0.8_20260922",
+  "old": 9,
+  "new": 7,
+  "total": 16,
+  "new_cols": []
+ },
+ "incident_response": {
+  "from": "ops_v0.8_20260922",
+  "old": 28,
+  "new": 29,
+  "total": 57,
+  "new_cols": []
+ },
+ "inspection": {
+  "from": "ops_v2.2_20260924",
+  "old": 192,
+  "new": 7,
+  "total": 199,
+  "new_cols": [
+   "action_need"
+  ]
+ },
+ "action": {
+  "from": "ops_v0.3_20260921",
+  "old": 43,
+  "new": 7,
+  "total": 50,
+  "new_cols": [
+   "task_id",
+   "action_basis",
+   "requested_by",
+   "requested_at",
+   "batch_id",
+   "resubmit_note",
+   "resubmitted_by",
+   "started_at"
+  ]
+ }
+}

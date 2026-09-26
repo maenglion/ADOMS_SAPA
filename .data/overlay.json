@@ -1,0 +1,3657 @@
+{
+ "taskPatch": {
+  "TSK-000157": {
+   "status": "이행완료",
+   "approval_status": "제출",
+   "submitted_at": "2026-09-20T18:12:59.790Z",
+   "submitted_by": "SD03-1",
+   "done_at": "2026-09-20",
+   "done_by": "SD03-1"
+  },
+  "TSK-000930": {
+   "status": "조치필요",
+   "approval_status": "반려",
+   "submitted_at": "2026-09-20T18:20:39.407Z",
+   "submitted_by": "SD03-1",
+   "done_at": "2026-09-20",
+   "done_by": "SD03-1",
+   "check_result": "보완필요",
+   "reject_reason": "보완필요",
+   "rejected_at": "2026-09-22T00:14:39.324Z"
+  },
+  "TSK-000058": {
+   "approval_status": "승인",
+   "status": "점검완료",
+   "approved_at": "2026-09-20T21:12:42.433Z",
+   "approved_by": "SD01-1"
+  },
+  "TSK-000014": {
+   "status": "조치필요",
+   "approval_status": "반려",
+   "submitted_at": "2026-09-20T21:32:55.097Z",
+   "submitted_by": "SD03-1",
+   "done_at": "2026-09-20",
+   "done_by": "SD03-1",
+   "check_result": "보완필요",
+   "reject_reason": "증빙 보완 필요",
+   "rejected_at": "2026-09-21T21:05:57.940Z"
+  },
+  "TSK-000003": {
+   "status": "이행완료",
+   "approval_status": "제출",
+   "submitted_at": "2026-09-21T05:51:13.282Z",
+   "submitted_by": "SD03-1",
+   "done_at": "2026-09-21",
+   "done_by": "SD03-1"
+  },
+  "TSK-000182": {
+   "status": "조치필요",
+   "approval_status": "반려",
+   "check_result": "보완필요",
+   "reject_reason": "보완필요",
+   "rejected_at": "2026-09-22T00:14:42.523Z"
+  },
+  "TSK-000282": {
+   "status": "조치필요",
+   "approval_status": "반려",
+   "check_result": "보완필요",
+   "reject_reason": "보완필요",
+   "rejected_at": "2026-09-22T00:14:43.157Z"
+  },
+  "TSK-000582": {
+   "status": "조치필요",
+   "approval_status": "반려",
+   "check_result": "보완필요",
+   "reject_reason": "보완필요",
+   "rejected_at": "2026-09-22T00:14:44.870Z"
+  },
+  "TSK-000682": {
+   "status": "조치필요",
+   "approval_status": "반려",
+   "check_result": "보완필요",
+   "reject_reason": "보완필요",
+   "rejected_at": "2026-09-22T00:14:46.350Z"
+  },
+  "TSK-000782": {
+   "status": "조치필요",
+   "approval_status": "반려",
+   "check_result": "보완필요",
+   "reject_reason": "보완필요",
+   "rejected_at": "2026-09-22T00:14:48.189Z"
+  },
+  "TSK-000882": {
+   "status": "조치필요",
+   "approval_status": "반려",
+   "check_result": "보완필요",
+   "reject_reason": "보완필요",
+   "rejected_at": "2026-09-22T00:14:50.477Z"
+  },
+  "TSK-000982": {
+   "status": "조치필요",
+   "approval_status": "반려",
+   "check_result": "보완필요",
+   "reject_reason": "보완필요",
+   "rejected_at": "2026-09-22T00:14:51.808Z"
+  },
+  "TSK-001282": {
+   "status": "점검완료",
+   "approval_status": "승인",
+   "check_result": "이행완료",
+   "approved_at": "2026-09-22T07:18:33.251Z",
+   "approved_by": "CEO-1"
+  }
+ },
+ "evidence": [
+  {
+   "evidence_id": "EVD-MUATUHKW1LE",
+   "task_id": "TSK-000003",
+   "evidence_kind": "사진",
+   "file_name": "점검 현장 사진 — 현장사진_2.png",
+   "file_url": "/api/file/20260921_v2os24_%ED%98%84%EC%9E%A5%EC%82%AC%EC%A7%84_2.png",
+   "form_id": "",
+   "uploaded_by": "SD03-1",
+   "uploaded_at": "2026-09-21",
+   "note": "",
+   "file_size": 441,
+   "file_type": "image/png"
+  },
+  {
+   "evidence_id": "EVD-MUATUHKSR6D",
+   "task_id": "TSK-000003",
+   "evidence_kind": "사진",
+   "file_name": "점검 현장 사진 — 현장사진_1.png",
+   "file_url": "/api/file/20260921_6iok9b_%ED%98%84%EC%9E%A5%EC%82%AC%EC%A7%84_1.png",
+   "form_id": "",
+   "uploaded_by": "SD03-1",
+   "uploaded_at": "2026-09-21",
+   "note": "",
+   "file_size": 441,
+   "file_type": "image/png"
+  },
+  {
+   "evidence_id": "EVD-MUATUHKMAC3",
+   "task_id": "TSK-000003",
+   "evidence_kind": "점검표",
+   "file_name": "2026년 하반기 도로 안전관리 점검 결과표",
+   "file_url": "",
+   "form_id": "",
+   "uploaded_by": "SD03-1",
+   "uploaded_at": "2026-09-21",
+   "note": "",
+   "file_size": "",
+   "file_type": ""
+  },
+  {
+   "evidence_id": "EVD-MUAC1NZR5GG",
+   "task_id": "TSK-000014",
+   "evidence_kind": "사진",
+   "file_name": "2026-09-21 02;30;46.PNG",
+   "file_url": "/api/file/20260920_jpqd09_2026-09-21%2002%3B30%3B46.PNG",
+   "form_id": "",
+   "uploaded_by": "SD03-1",
+   "uploaded_at": "2026-09-20",
+   "note": "현장에서 올림",
+   "file_size": 90054,
+   "file_type": "image/png"
+  },
+  {
+   "evidence_id": "EVD-MUAC1NZME3I",
+   "task_id": "TSK-000014",
+   "evidence_kind": "점검표",
+   "file_name": "상반기 점검 결과",
+   "file_url": "",
+   "form_id": "",
+   "uploaded_by": "SD03-1",
+   "uploaded_at": "2026-09-20",
+   "note": "이미지와 업무가 딱 맞지는 않음",
+   "file_size": "",
+   "file_type": ""
+  },
+  {
+   "evidence_id": "EVD-MUA56EZYPJE",
+   "task_id": "TSK-000930",
+   "evidence_kind": "사진",
+   "file_name": "17899284267288924611833593142725.jpg",
+   "file_url": "/api/file/20260920_cdvxtn_17899284267288924611833593142725.jpg",
+   "form_id": "",
+   "uploaded_by": "SD03-1",
+   "uploaded_at": "2026-09-20",
+   "note": "현장에서 올림",
+   "file_size": 3525830,
+   "file_type": "image/jpeg"
+  },
+  {
+   "evidence_id": "EVD-MUA4WKCT1JE",
+   "task_id": "TSK-000157",
+   "evidence_kind": "사진",
+   "file_name": "현장사진_양보차로_20260921.png",
+   "file_url": "/api/file/20260920_7fdg9l_%ED%98%84%EC%9E%A5%EC%82%AC%EC%A7%84_%EC%96%91%EB%B3%B4%EC%B0%A8%EB%A1%9C_20260921.png",
+   "form_id": "",
+   "uploaded_by": "SD03-1",
+   "uploaded_at": "2026-09-20",
+   "note": "현장에서 올림",
+   "file_size": 450,
+   "file_type": "image/png"
+  }
+ ],
+ "inspection": [
+  {
+   "insp_id": "INS-MUCCENFK",
+   "task_id": "TSK-001282",
+   "inspector_staff_id": "CEO-1",
+   "insp_date": "2026-09-22",
+   "result": "적합",
+   "finding": "",
+   "note": "화면에서 판정"
+  },
+  {
+   "insp_id": "INS-MUBX9S4E",
+   "task_id": "TSK-000982",
+   "inspector_staff_id": "SD02-1",
+   "insp_date": "2026-09-22",
+   "result": "보완필요",
+   "finding": "",
+   "note": "화면에서 판정"
+  },
+  {
+   "insp_id": "INS-MUBX9R3G",
+   "task_id": "TSK-000882",
+   "inspector_staff_id": "SD02-1",
+   "insp_date": "2026-09-22",
+   "result": "보완필요",
+   "finding": "",
+   "note": "화면에서 판정"
+  },
+  {
+   "insp_id": "INS-MUBX9PBW",
+   "task_id": "TSK-000782",
+   "inspector_staff_id": "SD02-1",
+   "insp_date": "2026-09-22",
+   "result": "보완필요",
+   "finding": "",
+   "note": "화면에서 판정"
+  },
+  {
+   "insp_id": "INS-MUBX9NWT",
+   "task_id": "TSK-000682",
+   "inspector_staff_id": "SD02-1",
+   "insp_date": "2026-09-22",
+   "result": "보완필요",
+   "finding": "",
+   "note": "화면에서 판정"
+  },
+  {
+   "insp_id": "INS-MUBX9MRP",
+   "task_id": "TSK-000582",
+   "inspector_staff_id": "SD02-1",
+   "insp_date": "2026-09-22",
+   "result": "보완필요",
+   "finding": "",
+   "note": "화면에서 판정"
+  },
+  {
+   "insp_id": "INS-MUBX9LG4",
+   "task_id": "TSK-000282",
+   "inspector_staff_id": "SD02-1",
+   "insp_date": "2026-09-22",
+   "result": "보완필요",
+   "finding": "",
+   "note": "화면에서 판정"
+  },
+  {
+   "insp_id": "INS-MUBX9KYI",
+   "task_id": "TSK-000182",
+   "inspector_staff_id": "SD02-1",
+   "insp_date": "2026-09-22",
+   "result": "보완필요",
+   "finding": "",
+   "note": "화면에서 판정"
+  },
+  {
+   "insp_id": "INS-MUBX9IHN",
+   "task_id": "TSK-000930",
+   "inspector_staff_id": "SD02-1",
+   "insp_date": "2026-09-22",
+   "result": "보완필요",
+   "finding": "",
+   "note": "화면에서 판정"
+  },
+  {
+   "insp_id": "INS-MUBQIUUQ",
+   "task_id": "TSK-000014",
+   "inspector_staff_id": "SD01-1",
+   "insp_date": "2026-09-22",
+   "result": "보완필요",
+   "finding": "증빙 보완 필요",
+   "note": "화면에서 판정"
+  }
+ ],
+ "log": [
+  {
+   "at": "2026-09-26T07:06:17.600Z",
+   "action": "사고사례 조회",
+   "target": "usg_case:30",
+   "by": "SD01-1",
+   "note": ""
+  },
+  {
+   "at": "2026-09-26T02:43:03.705Z",
+   "action": "이행점검 취합 시작 — 사업장",
+   "target": "usf_round:RWS-MUHSBRTJM5R",
+   "by": "H03",
+   "note": ""
+  },
+  {
+   "at": "2026-09-26T00:58:21.233Z",
+   "action": "이행점검 취합 시작 — 공중이용시설·공중교통수단",
+   "target": "usf_round:RFC-MUHOL48FKG8",
+   "by": "CEO-1",
+   "note": ""
+  },
+  {
+   "at": "2026-09-26T00:57:40.484Z",
+   "action": "이행점검 취합 시작 — 사업장",
+   "target": "usf_round:RWS-MUHOK8SGABM",
+   "by": "CEO-1",
+   "note": ""
+  },
+  {
+   "at": "2026-09-26T00:57:28.791Z",
+   "action": "이행점검 취합 시작 — 사업장",
+   "target": "usf_round:RWS-MUHOJZRPIGT",
+   "by": "SD01-1",
+   "note": ""
+  },
+  {
+   "at": "2026-09-26T00:57:07.193Z",
+   "action": "이행점검 취합 시작 — 사업장",
+   "target": "usf_round:RWS-MUHOJJ3REYP",
+   "by": "H03",
+   "note": ""
+  },
+  {
+   "at": "2026-09-26T00:56:47.544Z",
+   "action": "이행점검 취합 시작 — 사업장",
+   "target": "usf_round:RWS-MUHOJ3XWP9C",
+   "by": "H03",
+   "note": ""
+  },
+  {
+   "at": "2026-09-26T00:50:42.082Z",
+   "action": "이행점검 취합 시작 — 원료·제조물",
+   "target": "usf_round:RMT-MUHOB9Y99NO",
+   "by": "H03",
+   "note": ""
+  },
+  {
+   "at": "2026-09-26T00:50:27.205Z",
+   "action": "이행점검 취합 시작 — 공중이용시설·공중교통수단",
+   "target": "usf_round:RFC-MUHOAYGY2IT",
+   "by": "H03",
+   "note": ""
+  },
+  {
+   "at": "2026-09-25T15:57:40.370Z",
+   "action": "이행점검 취합 시작 — 사업장",
+   "target": "usf_round:RWS-MUH59SPAOBK",
+   "by": "SD01-1",
+   "note": ""
+  },
+  {
+   "at": "2026-09-25T15:38:53.581Z",
+   "action": "이행점검 취합 시작 — 원료·제조물",
+   "target": "usf_round:RMT-MUH4LN9OM4V",
+   "by": "SD01-1",
+   "note": ""
+  },
+  {
+   "at": "2026-09-25T15:38:34.993Z",
+   "action": "이행점검 취합 시작 — 공중이용시설·공중교통수단",
+   "target": "usf_round:RFC-MUH4L8XBQLL",
+   "by": "SD01-1",
+   "note": ""
+  },
+  {
+   "at": "2026-09-25T15:14:55.485Z",
+   "action": "사고사례 조회",
+   "target": "usg_case:32",
+   "by": "SD01-1",
+   "note": ""
+  },
+  {
+   "at": "2026-09-25T15:11:41.321Z",
+   "action": "법 의무사항 이행 시기 저장",
+   "target": "usb2_timing:T-mt-MAT-001-muh3mnt4",
+   "by": "SD01-1",
+   "note": ""
+  },
+  {
+   "at": "2026-09-25T13:18:03.793Z",
+   "action": "조치 지시 발신",
+   "target": "usa_order:USAO-MUGZKJC73KM",
+   "by": "SD01-1",
+   "note": ""
+  },
+  {
+   "at": "2026-09-25T13:18:03.786Z",
+   "action": "조치 지시 알림",
+   "target": "notification:NTF-MUGZKJD4GNO",
+   "by": "SD01-1",
+   "note": ""
+  },
+  {
+   "at": "2026-09-25T13:18:03.779Z",
+   "action": "조치 지시 알림",
+   "target": "notification:NTF-MUGZKJCXTE1",
+   "by": "SD01-1",
+   "note": ""
+  },
+  {
+   "at": "2026-09-25T13:18:03.771Z",
+   "action": "조치 지시 알림",
+   "target": "notification:NTF-MUGZKJCN5L8",
+   "by": "SD01-1",
+   "note": ""
+  },
+  {
+   "at": "2026-09-25T13:18:03.756Z",
+   "action": "조치 지시 알림",
+   "target": "notification:NTF-MUGZKJC7CW5",
+   "by": "SD01-1",
+   "note": ""
+  },
+  {
+   "at": "2026-09-25T13:17:30.975Z",
+   "action": "조치 지시 발신",
+   "target": "usa_order:USAO-MUGZJU07AFU",
+   "by": "SD01-1",
+   "note": ""
+  },
+  {
+   "at": "2026-09-25T13:17:30.962Z",
+   "action": "조치 지시 알림",
+   "target": "notification:NTF-MUGZJU1CH57",
+   "by": "SD01-1",
+   "note": ""
+  },
+  {
+   "at": "2026-09-25T13:17:30.949Z",
+   "action": "조치 지시 알림",
+   "target": "notification:NTF-MUGZJU0YOXU",
+   "by": "SD01-1",
+   "note": ""
+  },
+  {
+   "at": "2026-09-25T13:17:30.939Z",
+   "action": "조치 지시 알림",
+   "target": "notification:NTF-MUGZJU0PLQ7",
+   "by": "SD01-1",
+   "note": ""
+  },
+  {
+   "at": "2026-09-25T13:17:30.923Z",
+   "action": "조치 지시 알림",
+   "target": "notification:NTF-MUGZJU07DD5",
+   "by": "SD01-1",
+   "note": ""
+  },
+  {
+   "at": "2026-09-25T13:17:03.474Z",
+   "action": "조치 지시 발신",
+   "target": "usa_order:USAO-MUGZJ8TC89N",
+   "by": "SD01-1",
+   "note": ""
+  },
+  {
+   "at": "2026-09-25T13:17:03.467Z",
+   "action": "조치 지시 알림",
+   "target": "notification:NTF-MUGZJ8TL50Q",
+   "by": "SD01-1",
+   "note": ""
+  },
+  {
+   "at": "2026-09-25T13:17:03.457Z",
+   "action": "조치 지시 알림",
+   "target": "notification:NTF-MUGZJ8TCLJR",
+   "by": "SD01-1",
+   "note": ""
+  },
+  {
+   "at": "2026-09-24T22:10:32.245Z",
+   "action": "의무이행 실적 등록",
+   "target": "usc_record:USC-D03-2026-order-nil",
+   "by": "SD01-1",
+   "note": ""
+  },
+  {
+   "at": "2026-09-24T13:58:51.150Z",
+   "action": "사고사례 조회",
+   "target": "usg_case:32",
+   "by": "SD01-1",
+   "note": ""
+  },
+  {
+   "at": "2026-09-24T13:58:45.745Z",
+   "action": "사고사례 수정",
+   "target": "usg_case:32",
+   "by": "SD01-1",
+   "note": ""
+  },
+  {
+   "at": "2026-09-24T13:57:22.363Z",
+   "action": "사고사례 수정",
+   "target": "usg_case:32",
+   "by": "SD01-1",
+   "note": ""
+  },
+  {
+   "at": "2026-09-24T13:57:15.791Z",
+   "action": "사고사례 수정",
+   "target": "usg_case:32",
+   "by": "SD01-1",
+   "note": ""
+  },
+  {
+   "at": "2026-09-24T13:55:14.264Z",
+   "action": "사고사례 조회",
+   "target": "usg_case:32",
+   "by": "SD01-1",
+   "note": ""
+  },
+  {
+   "at": "2026-09-24T12:16:56.781Z",
+   "action": "법령 개정 반영",
+   "target": "law_sync_applied:RUN-20260924-211650",
+   "by": "CoCo",
+   "note": ""
+  },
+  {
+   "at": "2026-09-24T12:06:34.638Z",
+   "action": "법령 개정 반영",
+   "target": "law_sync_applied:RUN-20260924-210628",
+   "by": "CoCo",
+   "note": ""
+  },
+  {
+   "at": "2026-09-24T11:57:47.764Z",
+   "action": "사고사례 조회",
+   "target": "usg_case:32",
+   "by": "SD01-1",
+   "note": ""
+  },
+  {
+   "at": "2026-09-24T11:48:04.762Z",
+   "action": "담당자 관리대상 지정",
+   "target": "usb2_assign:ind|SM01-1",
+   "by": "SD01-1",
+   "note": ""
+  },
+  {
+   "at": "2026-09-24T11:34:53.388Z",
+   "action": "법령 개정 반영",
+   "target": "law_sync_applied:RUN-20260924-203421",
+   "by": "CoCo",
+   "note": ""
+  },
+  {
+   "at": "2026-09-24T11:34:53.383Z",
+   "action": "법령 개정 알림",
+   "target": "notification:NTF-LS-20260924-203421-D01",
+   "by": "CoCo",
+   "note": ""
+  },
+  {
+   "at": "2026-09-24T11:34:53.378Z",
+   "action": "법령 개정 확인",
+   "target": "law_change:LCH-20260924-203421-31",
+   "by": "CoCo",
+   "note": ""
+  },
+  {
+   "at": "2026-09-24T11:34:53.375Z",
+   "action": "법령 개정 확인",
+   "target": "law_change:LCH-20260924-203421-30",
+   "by": "CoCo",
+   "note": ""
+  },
+  {
+   "at": "2026-09-24T11:34:53.372Z",
+   "action": "법령 개정 확인",
+   "target": "law_change:LCH-20260924-203421-29",
+   "by": "CoCo",
+   "note": ""
+  },
+  {
+   "at": "2026-09-24T11:34:53.368Z",
+   "action": "법령 개정 확인",
+   "target": "law_change:LCH-20260924-203421-28",
+   "by": "CoCo",
+   "note": ""
+  },
+  {
+   "at": "2026-09-24T11:34:53.365Z",
+   "action": "법령 개정 확인",
+   "target": "law_change:LCH-20260924-203421-27",
+   "by": "CoCo",
+   "note": ""
+  },
+  {
+   "at": "2026-09-24T11:34:53.361Z",
+   "action": "법령 개정 확인",
+   "target": "law_change:LCH-20260924-203421-26",
+   "by": "CoCo",
+   "note": ""
+  },
+  {
+   "at": "2026-09-24T11:34:53.358Z",
+   "action": "법령 개정 확인",
+   "target": "law_change:LCH-20260924-203421-25",
+   "by": "CoCo",
+   "note": ""
+  },
+  {
+   "at": "2026-09-24T11:34:53.354Z",
+   "action": "법령 개정 확인",
+   "target": "law_change:LCH-20260924-203421-24",
+   "by": "CoCo",
+   "note": ""
+  },
+  {
+   "at": "2026-09-24T11:34:53.351Z",
+   "action": "법령 개정 확인",
+   "target": "law_change:LCH-20260924-203421-23",
+   "by": "CoCo",
+   "note": ""
+  },
+  {
+   "at": "2026-09-24T11:34:53.348Z",
+   "action": "법령 개정 확인",
+   "target": "law_change:LCH-20260924-203421-22",
+   "by": "CoCo",
+   "note": ""
+  },
+  {
+   "at": "2026-09-24T11:34:53.345Z",
+   "action": "법령 개정 확인",
+   "target": "law_change:LCH-20260924-203421-21",
+   "by": "CoCo",
+   "note": ""
+  },
+  {
+   "at": "2026-09-24T11:34:53.341Z",
+   "action": "법령 개정 확인",
+   "target": "law_change:LCH-20260924-203421-20",
+   "by": "CoCo",
+   "note": ""
+  },
+  {
+   "at": "2026-09-24T11:34:53.338Z",
+   "action": "법령 개정 확인",
+   "target": "law_change:LCH-20260924-203421-19",
+   "by": "CoCo",
+   "note": ""
+  },
+  {
+   "at": "2026-09-24T11:34:53.335Z",
+   "action": "법령 개정 확인",
+   "target": "law_change:LCH-20260924-203421-18",
+   "by": "CoCo",
+   "note": ""
+  },
+  {
+   "at": "2026-09-24T11:34:53.330Z",
+   "action": "법령 개정 확인",
+   "target": "law_change:LCH-20260924-203421-17",
+   "by": "CoCo",
+   "note": ""
+  },
+  {
+   "at": "2026-09-24T11:34:53.326Z",
+   "action": "법령 개정 확인",
+   "target": "law_change:LCH-20260924-203421-16",
+   "by": "CoCo",
+   "note": ""
+  },
+  {
+   "at": "2026-09-24T11:34:53.322Z",
+   "action": "법령 개정 확인",
+   "target": "law_change:LCH-20260924-203421-15",
+   "by": "CoCo",
+   "note": ""
+  },
+  {
+   "at": "2026-09-24T11:34:53.319Z",
+   "action": "법령 개정 확인",
+   "target": "law_change:LCH-20260924-203421-14",
+   "by": "CoCo",
+   "note": ""
+  },
+  {
+   "at": "2026-09-24T11:34:53.315Z",
+   "action": "법령 개정 확인",
+   "target": "law_change:LCH-20260924-203421-13",
+   "by": "CoCo",
+   "note": ""
+  },
+  {
+   "at": "2026-09-24T11:34:53.312Z",
+   "action": "법령 개정 확인",
+   "target": "law_change:LCH-20260924-203421-12",
+   "by": "CoCo",
+   "note": ""
+  },
+  {
+   "at": "2026-09-24T11:34:53.309Z",
+   "action": "법령 개정 확인",
+   "target": "law_change:LCH-20260924-203421-11",
+   "by": "CoCo",
+   "note": ""
+  },
+  {
+   "at": "2026-09-24T11:34:53.305Z",
+   "action": "법령 개정 확인",
+   "target": "law_change:LCH-20260924-203421-10",
+   "by": "CoCo",
+   "note": ""
+  },
+  {
+   "at": "2026-09-24T11:34:53.301Z",
+   "action": "법령 개정 확인",
+   "target": "law_change:LCH-20260924-203421-09",
+   "by": "CoCo",
+   "note": ""
+  },
+  {
+   "at": "2026-09-24T11:34:53.298Z",
+   "action": "법령 개정 확인",
+   "target": "law_change:LCH-20260924-203421-08",
+   "by": "CoCo",
+   "note": ""
+  },
+  {
+   "at": "2026-09-24T11:34:53.294Z",
+   "action": "법령 개정 확인",
+   "target": "law_change:LCH-20260924-203421-07",
+   "by": "CoCo",
+   "note": ""
+  },
+  {
+   "at": "2026-09-24T11:34:53.289Z",
+   "action": "법령 개정 확인",
+   "target": "law_change:LCH-20260924-203421-06",
+   "by": "CoCo",
+   "note": ""
+  },
+  {
+   "at": "2026-09-24T11:34:53.285Z",
+   "action": "법령 개정 확인",
+   "target": "law_change:LCH-20260924-203421-05",
+   "by": "CoCo",
+   "note": ""
+  },
+  {
+   "at": "2026-09-24T11:34:53.280Z",
+   "action": "법령 개정 확인",
+   "target": "law_change:LCH-20260924-203421-04",
+   "by": "CoCo",
+   "note": ""
+  },
+  {
+   "at": "2026-09-24T11:34:53.276Z",
+   "action": "법령 개정 확인",
+   "target": "law_change:LCH-20260924-203421-03",
+   "by": "CoCo",
+   "note": ""
+  },
+  {
+   "at": "2026-09-24T11:34:53.270Z",
+   "action": "법령 개정 확인",
+   "target": "law_change:LCH-20260924-203421-02",
+   "by": "CoCo",
+   "note": ""
+  },
+  {
+   "at": "2026-09-24T11:34:53.266Z",
+   "action": "법령 개정 확인",
+   "target": "law_change:LCH-20260924-203421-01",
+   "by": "CoCo",
+   "note": ""
+  },
+  {
+   "at": "2026-09-24T11:32:18.161Z",
+   "action": "법령 개정 반영",
+   "target": "law_sync_applied:RUN-20260924-203146",
+   "by": "CoCo",
+   "note": ""
+  },
+  {
+   "at": "2026-09-24T11:32:18.152Z",
+   "action": "법령 개정 확인",
+   "target": "law_change:LCH-20260924-203146-31",
+   "by": "CoCo",
+   "note": ""
+  },
+  {
+   "at": "2026-09-24T11:32:18.143Z",
+   "action": "법령 개정 확인",
+   "target": "law_change:LCH-20260924-203146-30",
+   "by": "CoCo",
+   "note": ""
+  },
+  {
+   "at": "2026-09-24T11:32:18.135Z",
+   "action": "법령 개정 확인",
+   "target": "law_change:LCH-20260924-203146-29",
+   "by": "CoCo",
+   "note": ""
+  },
+  {
+   "at": "2026-09-24T11:32:18.126Z",
+   "action": "법령 개정 확인",
+   "target": "law_change:LCH-20260924-203146-28",
+   "by": "CoCo",
+   "note": ""
+  },
+  {
+   "at": "2026-09-24T11:32:18.120Z",
+   "action": "법령 개정 확인",
+   "target": "law_change:LCH-20260924-203146-27",
+   "by": "CoCo",
+   "note": ""
+  },
+  {
+   "at": "2026-09-24T11:32:18.113Z",
+   "action": "법령 개정 확인",
+   "target": "law_change:LCH-20260924-203146-26",
+   "by": "CoCo",
+   "note": ""
+  },
+  {
+   "at": "2026-09-24T11:32:18.106Z",
+   "action": "법령 개정 확인",
+   "target": "law_change:LCH-20260924-203146-25",
+   "by": "CoCo",
+   "note": ""
+  },
+  {
+   "at": "2026-09-24T11:32:18.100Z",
+   "action": "법령 개정 확인",
+   "target": "law_change:LCH-20260924-203146-24",
+   "by": "CoCo",
+   "note": ""
+  },
+  {
+   "at": "2026-09-24T11:32:18.093Z",
+   "action": "법령 개정 확인",
+   "target": "law_change:LCH-20260924-203146-23",
+   "by": "CoCo",
+   "note": ""
+  },
+  {
+   "at": "2026-09-24T11:32:18.080Z",
+   "action": "법령 개정 확인",
+   "target": "law_change:LCH-20260924-203146-22",
+   "by": "CoCo",
+   "note": ""
+  },
+  {
+   "at": "2026-09-24T11:32:18.064Z",
+   "action": "법령 개정 확인",
+   "target": "law_change:LCH-20260924-203146-21",
+   "by": "CoCo",
+   "note": ""
+  },
+  {
+   "at": "2026-09-24T11:32:18.051Z",
+   "action": "법령 개정 확인",
+   "target": "law_change:LCH-20260924-203146-20",
+   "by": "CoCo",
+   "note": ""
+  },
+  {
+   "at": "2026-09-24T11:32:18.033Z",
+   "action": "법령 개정 확인",
+   "target": "law_change:LCH-20260924-203146-19",
+   "by": "CoCo",
+   "note": ""
+  },
+  {
+   "at": "2026-09-24T11:32:18.020Z",
+   "action": "법령 개정 확인",
+   "target": "law_change:LCH-20260924-203146-18",
+   "by": "CoCo",
+   "note": ""
+  },
+  {
+   "at": "2026-09-24T11:32:18.008Z",
+   "action": "법령 개정 확인",
+   "target": "law_change:LCH-20260924-203146-17",
+   "by": "CoCo",
+   "note": ""
+  },
+  {
+   "at": "2026-09-24T11:32:17.998Z",
+   "action": "법령 개정 확인",
+   "target": "law_change:LCH-20260924-203146-16",
+   "by": "CoCo",
+   "note": ""
+  },
+  {
+   "at": "2026-09-24T11:32:17.988Z",
+   "action": "법령 개정 확인",
+   "target": "law_change:LCH-20260924-203146-15",
+   "by": "CoCo",
+   "note": ""
+  },
+  {
+   "at": "2026-09-24T11:32:17.981Z",
+   "action": "법령 개정 확인",
+   "target": "law_change:LCH-20260924-203146-14",
+   "by": "CoCo",
+   "note": ""
+  },
+  {
+   "at": "2026-09-24T11:32:17.975Z",
+   "action": "법령 개정 확인",
+   "target": "law_change:LCH-20260924-203146-13",
+   "by": "CoCo",
+   "note": ""
+  },
+  {
+   "at": "2026-09-24T11:32:17.969Z",
+   "action": "법령 개정 확인",
+   "target": "law_change:LCH-20260924-203146-12",
+   "by": "CoCo",
+   "note": ""
+  },
+  {
+   "at": "2026-09-24T11:32:17.961Z",
+   "action": "법령 개정 확인",
+   "target": "law_change:LCH-20260924-203146-11",
+   "by": "CoCo",
+   "note": ""
+  },
+  {
+   "at": "2026-09-24T11:32:17.955Z",
+   "action": "법령 개정 확인",
+   "target": "law_change:LCH-20260924-203146-10",
+   "by": "CoCo",
+   "note": ""
+  },
+  {
+   "at": "2026-09-24T11:32:17.948Z",
+   "action": "법령 개정 확인",
+   "target": "law_change:LCH-20260924-203146-09",
+   "by": "CoCo",
+   "note": ""
+  },
+  {
+   "at": "2026-09-24T11:32:17.940Z",
+   "action": "법령 개정 확인",
+   "target": "law_change:LCH-20260924-203146-08",
+   "by": "CoCo",
+   "note": ""
+  },
+  {
+   "at": "2026-09-24T11:32:17.929Z",
+   "action": "법령 개정 확인",
+   "target": "law_change:LCH-20260924-203146-07",
+   "by": "CoCo",
+   "note": ""
+  },
+  {
+   "at": "2026-09-24T11:32:17.919Z",
+   "action": "법령 개정 확인",
+   "target": "law_change:LCH-20260924-203146-06",
+   "by": "CoCo",
+   "note": ""
+  },
+  {
+   "at": "2026-09-24T11:32:17.911Z",
+   "action": "법령 개정 확인",
+   "target": "law_change:LCH-20260924-203146-05",
+   "by": "CoCo",
+   "note": ""
+  },
+  {
+   "at": "2026-09-24T11:32:17.905Z",
+   "action": "법령 개정 확인",
+   "target": "law_change:LCH-20260924-203146-04",
+   "by": "CoCo",
+   "note": ""
+  },
+  {
+   "at": "2026-09-24T11:32:17.898Z",
+   "action": "법령 개정 확인",
+   "target": "law_change:LCH-20260924-203146-03",
+   "by": "CoCo",
+   "note": ""
+  },
+  {
+   "at": "2026-09-24T11:32:17.891Z",
+   "action": "법령 개정 확인",
+   "target": "law_change:LCH-20260924-203146-02",
+   "by": "CoCo",
+   "note": ""
+  },
+  {
+   "at": "2026-09-24T11:32:17.883Z",
+   "action": "법령 개정 확인",
+   "target": "law_change:LCH-20260924-203146-01",
+   "by": "CoCo",
+   "note": ""
+  },
+  {
+   "at": "2026-09-24T01:48:49.895Z",
+   "action": "이행점검 취합 시작 — 원료·제조물",
+   "target": "usf_round:RMT-MUEVIBTYVVJ",
+   "by": "SD03-1",
+   "note": ""
+  },
+  {
+   "at": "2026-09-24T00:17:02.706Z",
+   "action": "의무이행 수정",
+   "target": "usd_record:USD-MUES7R2H05K1",
+   "by": "SD03-1",
+   "note": ""
+  },
+  {
+   "at": "2026-09-24T00:16:37.578Z",
+   "action": "의무이행(공중이용시설·공중교통수단) proc 등록",
+   "target": "usd_record:USD-MUES7R2H05K1",
+   "by": "SD03-1",
+   "note": ""
+  },
+  {
+   "at": "2026-09-24T00:16:37.574Z",
+   "action": "불러오기로 교체",
+   "target": "usd_record:USD-MUES5F0Z0EO3",
+   "by": "SD03-1",
+   "note": ""
+  },
+  {
+   "at": "2026-09-24T00:16:25.369Z",
+   "action": "의무이행 행 삭제",
+   "target": "usd_record:USD-MUES5OGI99Z8O",
+   "by": "SD04-1",
+   "note": ""
+  },
+  {
+   "at": "2026-09-24T00:16:13.177Z",
+   "action": "의무이행 행 삭제",
+   "target": "usd_record:USD-MUES4LOD06OB",
+   "by": "SD04-1",
+   "note": ""
+  },
+  {
+   "at": "2026-09-24T00:16:07.166Z",
+   "action": "의무이행 행 삭제",
+   "target": "usd_record:USD-MUES46QZ0P1O",
+   "by": "SD04-1",
+   "note": ""
+  },
+  {
+   "at": "2026-09-24T00:16:07.162Z",
+   "action": "의무이행 수정",
+   "target": "usd_record:USD-MUES4LOD06OB",
+   "by": "SD04-1",
+   "note": ""
+  },
+  {
+   "at": "2026-09-24T00:15:54.878Z",
+   "action": "증빙 파일 비움",
+   "target": "usd_record:USD-S0025",
+   "by": "SD04-1",
+   "note": ""
+  },
+  {
+   "at": "2026-09-24T00:15:54.875Z",
+   "action": "의무이행 수정",
+   "target": "usd_record:USD-S0025",
+   "by": "SD04-1",
+   "note": ""
+  },
+  {
+   "at": "2026-09-24T00:15:42.700Z",
+   "action": "의무이행 행 삭제",
+   "target": "usd_record:USD-MUES0WV30HAR",
+   "by": "SD04-1",
+   "note": ""
+  },
+  {
+   "at": "2026-09-24T00:15:36.682Z",
+   "action": "의무이행 행 삭제",
+   "target": "usd_record:USD-MUES0IXJ99L8K",
+   "by": "SD04-1",
+   "note": ""
+  },
+  {
+   "at": "2026-09-24T00:15:00.883Z",
+   "action": "의무이행(공중이용시설·공중교통수단) budget 등록",
+   "target": "usd_record:USD-MUES5OGI99Z8O",
+   "by": "SD04-1",
+   "note": ""
+  },
+  {
+   "at": "2026-09-24T00:14:48.660Z",
+   "action": "의무이행(공중이용시설·공중교통수단) proc 등록",
+   "target": "usd_record:USD-MUES5F0Z0EO3",
+   "by": "SD03-1",
+   "note": ""
+  },
+  {
+   "at": "2026-09-24T00:14:48.655Z",
+   "action": "불러오기로 교체",
+   "target": "usd_record:USD-S0019",
+   "by": "SD03-1",
+   "note": ""
+  },
+  {
+   "at": "2026-09-24T00:14:10.622Z",
+   "action": "의무이행(공중이용시설·공중교통수단) law 등록",
+   "target": "usd_record:USD-MUES4LOD06OB",
+   "by": "SD04-1",
+   "note": ""
+  },
+  {
+   "at": "2026-09-24T00:13:51.276Z",
+   "action": "의무이행(공중이용시설·공중교통수단) law 등록",
+   "target": "usd_record:USD-MUES46QZ0P1O",
+   "by": "SD04-1",
+   "note": ""
+  },
+  {
+   "at": "2026-09-24T00:13:06.611Z",
+   "action": "해당없음 표시",
+   "target": "usd_record:USD-S0039",
+   "by": "SD04-1",
+   "note": ""
+  },
+  {
+   "at": "2026-09-24T00:13:00.585Z",
+   "action": "해당없음 표시",
+   "target": "usd_record:USD-S0039",
+   "by": "SD04-1",
+   "note": ""
+  },
+  {
+   "at": "2026-09-24T00:12:41.697Z",
+   "action": "의무이행(공중이용시설·공중교통수단) staff 등록",
+   "target": "usd_record:USD-MUES2P2802YF",
+   "by": "SD04-1",
+   "note": ""
+  },
+  {
+   "at": "2026-09-24T00:12:35.691Z",
+   "action": "직원 검색으로 입력",
+   "target": "usd_record:USD-S0025",
+   "by": "SD04-1",
+   "note": ""
+  },
+  {
+   "at": "2026-09-24T00:12:22.668Z",
+   "action": "의무이행 수정",
+   "target": "usd_record:USD-S0025",
+   "by": "SD04-1",
+   "note": ""
+  },
+  {
+   "at": "2026-09-24T00:11:18.496Z",
+   "action": "의무이행(공중이용시설·공중교통수단) plan 등록",
+   "target": "usd_record:USD-MUES0WV30HAR",
+   "by": "SD04-1",
+   "note": ""
+  },
+  {
+   "at": "2026-09-24T00:11:06.446Z",
+   "action": "의무이행 수정",
+   "target": "usd_record:USD-MUES0IXJ99L8K",
+   "by": "SD04-1",
+   "note": ""
+  },
+  {
+   "at": "2026-09-24T00:11:00.440Z",
+   "action": "의무이행(공중이용시설·공중교통수단) plan 등록",
+   "target": "usd_record:USD-MUES0IXJ99L8K",
+   "by": "SD04-1",
+   "note": ""
+  },
+  {
+   "at": "2026-09-24T00:08:41.865Z",
+   "action": "법 의무사항 이행 시기 저장",
+   "target": "usb2_timing:T-fc-BR1968-0000035-muerxk08",
+   "by": "SD01-1",
+   "note": ""
+  },
+  {
+   "at": "2026-09-24T00:08:28.009Z",
+   "action": "법 의무사항 항목 되살림",
+   "target": "usb2_timing:T-fc-BR1968-0000035-muerx9bc",
+   "by": "SD01-1",
+   "note": ""
+  },
+  {
+   "at": "2026-09-24T00:08:20.889Z",
+   "action": "담당자 관리대상 지정",
+   "target": "usb2_assign:ind|SM02-1",
+   "by": "SD01-1",
+   "note": ""
+  },
+  {
+   "at": "2026-09-24T00:08:17.109Z",
+   "action": "담당자 권한 제외",
+   "target": "usb2_role:ind|SD01-1",
+   "by": "SD01-1",
+   "note": ""
+  },
+  {
+   "at": "2026-09-24T00:08:09.271Z",
+   "action": "관계 법령 목록에서 제외",
+   "target": "usb2_law:F|TG03|어린이놀이시설 안전관리법",
+   "by": "SD01-1",
+   "note": ""
+  },
+  {
+   "at": "2026-09-24T00:07:41.650Z",
+   "action": "사업장 기본정보 수정",
+   "target": "usb2_basic:D06",
+   "by": "SD01-1",
+   "note": ""
+  },
+  {
+   "at": "2026-09-24T00:07:26.143Z",
+   "action": "관계 법령 등록",
+   "target": "usb2_law:F|TG03|어린이놀이시설 안전관리법",
+   "by": "SD01-1",
+   "note": ""
+  },
+  {
+   "at": "2026-09-24T00:07:16.134Z",
+   "action": "기관장 서한문 수신 확인",
+   "target": "usf_letter_read:LRD-MUERVPUS6GF",
+   "by": "SD04-1",
+   "note": ""
+  },
+  {
+   "at": "2026-09-24T00:06:58.328Z",
+   "action": "사업장 기본정보 수정",
+   "target": "usb2_basic:D06",
+   "by": "SD01-1",
+   "note": ""
+  },
+  {
+   "at": "2026-09-24T00:06:40.786Z",
+   "action": "담당자 관리대상 지정",
+   "target": "usb2_assign:ind|SM02-1",
+   "by": "SD01-1",
+   "note": ""
+  },
+  {
+   "at": "2026-09-24T00:06:35.498Z",
+   "action": "담당자 권한 지정",
+   "target": "usb2_role:ind|SD01-1",
+   "by": "SD01-1",
+   "note": ""
+  },
+  {
+   "at": "2026-09-24T00:06:25.085Z",
+   "action": "의무이행(원료·제조물) 등록",
+   "target": "use_record:USE-MUERUMGSEXA",
+   "by": "SD01-1",
+   "note": ""
+  },
+  {
+   "at": "2026-09-24T00:06:15.244Z",
+   "action": "경영책임자 활동기록",
+   "target": "usf_ceo_log:CLOG-MUERUEVAU3S",
+   "by": "CEO-1",
+   "note": ""
+  },
+  {
+   "at": "2026-09-24T00:06:00.181Z",
+   "action": "불러오기",
+   "target": "use_record:USE-MUERU390UC0",
+   "by": "SD01-1",
+   "note": ""
+  },
+  {
+   "at": "2026-09-24T00:05:38.466Z",
+   "action": "불러오기",
+   "target": "use_record:USE-B023",
+   "by": "SD01-1",
+   "note": ""
+  },
+  {
+   "at": "2026-09-24T00:05:38.463Z",
+   "action": "불러오기",
+   "target": "use_record:USE-B022",
+   "by": "SD01-1",
+   "note": ""
+  },
+  {
+   "at": "2026-09-24T00:05:38.460Z",
+   "action": "불러오기",
+   "target": "use_record:USE-B021",
+   "by": "SD01-1",
+   "note": ""
+  },
+  {
+   "at": "2026-09-24T00:05:38.457Z",
+   "action": "불러오기",
+   "target": "use_record:USE-B020",
+   "by": "SD01-1",
+   "note": ""
+  },
+  {
+   "at": "2026-09-24T00:04:53.438Z",
+   "action": "의무이행(원료·제조물) 수정",
+   "target": "use_record:USE-MUERSA3T4BH",
+   "by": "SD04-1",
+   "note": ""
+  },
+  {
+   "at": "2026-09-24T00:04:35.754Z",
+   "action": "의무이행(원료·제조물) 줄 추가",
+   "target": "use_record:USE-MUERSA3T4BH",
+   "by": "SD04-1",
+   "note": ""
+  },
+  {
+   "at": "2026-09-24T00:04:33.979Z",
+   "action": "법 의무사항 이행 시기 저장",
+   "target": "usb2_timing:T-fc-BR1968-0000035-muers8qi",
+   "by": "SD01-1",
+   "note": ""
+  },
+  {
+   "at": "2026-09-24T00:04:09.457Z",
+   "action": "도급 관리의무 이행정보 저장",
+   "target": "usb1_contract_duty:CTR-0001:C3B",
+   "by": "SD01-1",
+   "note": ""
+  },
+  {
+   "at": "2026-09-24T00:04:09.454Z",
+   "action": "도급 관리의무 이행정보 저장",
+   "target": "usb1_contract_duty:CTR-0001:C3A",
+   "by": "SD01-1",
+   "note": ""
+  },
+  {
+   "at": "2026-09-24T00:04:09.451Z",
+   "action": "도급 관리의무 이행정보 저장",
+   "target": "usb1_contract_duty:CTR-0001:C2",
+   "by": "SD01-1",
+   "note": ""
+  },
+  {
+   "at": "2026-09-24T00:04:09.448Z",
+   "action": "도급 관리의무 이행정보 저장",
+   "target": "usb1_contract_duty:CTR-0001:C1",
+   "by": "SD01-1",
+   "note": ""
+  },
+  {
+   "at": "2026-09-24T00:04:09.445Z",
+   "action": "도급·용역·위탁 수정",
+   "target": "usb1_contract:CTR-0001",
+   "by": "SD01-1",
+   "note": ""
+  },
+  {
+   "at": "2026-09-24T00:04:08.456Z",
+   "action": "행 삭제",
+   "target": "usc_record:USC-MUERPAY7ORD9",
+   "by": "SD01-1",
+   "note": ""
+  },
+  {
+   "at": "2026-09-24T00:04:08.414Z",
+   "action": "행 삭제",
+   "target": "usc_record:USC-MUERPAY692SW",
+   "by": "SD01-1",
+   "note": ""
+  },
+  {
+   "at": "2026-09-24T00:04:08.356Z",
+   "action": "행 삭제",
+   "target": "usc_record:USC-MUERPABFJCAL",
+   "by": "SD01-1",
+   "note": ""
+  },
+  {
+   "at": "2026-09-24T00:04:08.314Z",
+   "action": "행 삭제",
+   "target": "usc_record:USC-D05-2026-order-nil",
+   "by": "SD01-1",
+   "note": ""
+  },
+  {
+   "at": "2026-09-24T00:04:08.258Z",
+   "action": "행 삭제",
+   "target": "usc_record:USC-INC-NMUERP9D5-r1",
+   "by": "SD01-1",
+   "note": ""
+  },
+  {
+   "at": "2026-09-24T00:04:08.208Z",
+   "action": "행 삭제",
+   "target": "usc_record:USC-INC-NMUERP9D5",
+   "by": "SD01-1",
+   "note": ""
+  },
+  {
+   "at": "2026-09-24T00:04:08.159Z",
+   "action": "행 삭제",
+   "target": "usc_record:USC-D05-2026-recur-nil",
+   "by": "SD01-1",
+   "note": ""
+  },
+  {
+   "at": "2026-09-24T00:04:08.106Z",
+   "action": "행 삭제",
+   "target": "usc_record:USC-D05-2026-budget-1",
+   "by": "SD01-1",
+   "note": ""
+  },
+  {
+   "at": "2026-09-24T00:04:08.040Z",
+   "action": "행 삭제",
+   "target": "usc_record:USC-MUERORZQA7S5",
+   "by": "SD01-1",
+   "note": ""
+  },
+  {
+   "at": "2026-09-24T00:04:07.988Z",
+   "action": "행 삭제",
+   "target": "usc_record:USC-D05-2026-risk-hdr",
+   "by": "SD01-1",
+   "note": ""
+  },
+  {
+   "at": "2026-09-24T00:04:07.941Z",
+   "action": "행 삭제",
+   "target": "usc_record:USC-MUERORFP3H9A",
+   "by": "SD01-1",
+   "note": ""
+  },
+  {
+   "at": "2026-09-24T00:04:07.898Z",
+   "action": "행 삭제",
+   "target": "usc_record:USC-MUEROR4RK9H9",
+   "by": "SD01-1",
+   "note": ""
+  },
+  {
+   "at": "2026-09-24T00:04:05.212Z",
+   "action": "의무이행(원료·제조물) 줄 추가",
+   "target": "use_record:USE-MUERRMJFS8S",
+   "by": "SD01-1",
+   "note": ""
+  },
+  {
+   "at": "2026-09-24T00:03:59.149Z",
+   "action": "행 삭제",
+   "target": "usc_record:USC-MUERPAY692SW",
+   "by": "SD01-1",
+   "note": ""
+  },
+  {
+   "at": "2026-09-24T00:03:21.413Z",
+   "action": "법 의무사항 항목 삭제",
+   "target": "usb2_timing:T-fc-BR1968-0000035-muerqoqs",
+   "by": "SD01-1",
+   "note": ""
+  },
+  {
+   "at": "2026-09-24T00:02:34.102Z",
+   "action": "증빙 파일 빼기",
+   "target": "usc_record:USC-MUEROR4RK9H9",
+   "by": "SD01-1",
+   "note": ""
+  },
+  {
+   "at": "2026-09-24T00:02:33.684Z",
+   "action": "직원 선택",
+   "target": "usc_record:USC-MUERORFP3H9A",
+   "by": "SD01-1",
+   "note": ""
+  },
+  {
+   "at": "2026-09-24T00:02:16.880Z",
+   "action": "불러오기",
+   "target": "usc_record:USC-MUERPAY7ORD9",
+   "by": "SD01-1",
+   "note": ""
+  },
+  {
+   "at": "2026-09-24T00:02:16.879Z",
+   "action": "불러오기",
+   "target": "usc_record:USC-MUERPAY692SW",
+   "by": "SD01-1",
+   "note": ""
+  },
+  {
+   "at": "2026-09-24T00:02:16.060Z",
+   "action": "행 추가",
+   "target": "usc_record:USC-MUERPABFJCAL",
+   "by": "SD01-1",
+   "note": ""
+  },
+  {
+   "at": "2026-09-24T00:02:16.059Z",
+   "action": "의무이행 실적 등록",
+   "target": "usc_record:USC-D05-2026-order-nil",
+   "by": "SD01-1",
+   "note": ""
+  },
+  {
+   "at": "2026-09-24T00:02:15.089Z",
+   "action": "의무이행 실적 등록",
+   "target": "usc_record:USC-INC-NMUERP9D5-r1",
+   "by": "SD01-1",
+   "note": ""
+  },
+  {
+   "at": "2026-09-24T00:02:15.088Z",
+   "action": "의무이행 실적 등록",
+   "target": "usc_record:USC-INC-NMUERP9D5",
+   "by": "SD01-1",
+   "note": ""
+  },
+  {
+   "at": "2026-09-24T00:02:15.086Z",
+   "action": "의무이행 실적 수정",
+   "target": "usc_record:USC-D05-2026-recur-nil",
+   "by": "SD01-1",
+   "note": ""
+  },
+  {
+   "at": "2026-09-24T00:02:14.113Z",
+   "action": "의무이행 실적 등록",
+   "target": "usc_record:USC-D05-2026-recur-nil",
+   "by": "SD01-1",
+   "note": ""
+  },
+  {
+   "at": "2026-09-24T00:02:11.226Z",
+   "action": "관리대상 기본정보 저장(ws)",
+   "target": "usb1_basic:ws:D03:2026-01-01",
+   "by": "SD01-1",
+   "note": ""
+  },
+  {
+   "at": "2026-09-24T00:01:53.795Z",
+   "action": "의무이행 실적 등록",
+   "target": "usc_record:USC-D05-2026-budget-1",
+   "by": "SD01-1",
+   "note": ""
+  },
+  {
+   "at": "2026-09-24T00:01:52.311Z",
+   "action": "의무이행 실적 등록",
+   "target": "usc_record:USC-MUERORZQA7S5",
+   "by": "SD01-1",
+   "note": ""
+  },
+  {
+   "at": "2026-09-24T00:01:52.309Z",
+   "action": "의무이행 실적 등록",
+   "target": "usc_record:USC-D05-2026-risk-hdr",
+   "by": "SD01-1",
+   "note": ""
+  },
+  {
+   "at": "2026-09-24T00:01:51.590Z",
+   "action": "같은 구분 행 추가",
+   "target": "usc_record:USC-MUERORFP3H9A",
+   "by": "SD01-1",
+   "note": ""
+  },
+  {
+   "at": "2026-09-24T00:01:51.196Z",
+   "action": "의무이행 실적 등록",
+   "target": "usc_record:USC-MUEROR4RK9H9",
+   "by": "SD01-1",
+   "note": ""
+  },
+  {
+   "at": "2026-09-24T00:01:30.362Z",
+   "action": "행 삭제",
+   "target": "usc_record:USC-MUERNOW8V6XT",
+   "by": "SD01-1",
+   "note": ""
+  },
+  {
+   "at": "2026-09-24T00:01:11.152Z",
+   "action": "이행점검 취합 시작 — 원료·제조물",
+   "target": "usf_round:RMT-MUERNW8FEJY",
+   "by": "SD02-1",
+   "note": ""
+  },
+  {
+   "at": "2026-09-24T00:01:01.641Z",
+   "action": "의무이행 실적 등록",
+   "target": "usc_record:USC-MUERNOW8V6XT",
+   "by": "SD01-1",
+   "note": ""
+  },
+  {
+   "at": "2026-09-24T00:00:45.763Z",
+   "action": "알림 보냄 — 이행점검 결재 조치요구",
+   "target": "notification:NTF-MUERNCN6OCL",
+   "by": "SD01-1",
+   "note": ""
+  },
+  {
+   "at": "2026-09-24T00:00:45.747Z",
+   "action": "알림 보냄 — 이행점검 결재 조치요구",
+   "target": "notification:NTF-MUERNCMQ80D",
+   "by": "SD01-1",
+   "note": ""
+  },
+  {
+   "at": "2026-09-24T00:00:45.739Z",
+   "action": "알림 보냄 — 이행점검 결재 조치요구",
+   "target": "notification:NTF-MUERNCMITRI",
+   "by": "SD01-1",
+   "note": ""
+  },
+  {
+   "at": "2026-09-24T00:00:45.736Z",
+   "action": "이행점검 결재 — 원료·제조물",
+   "target": "usf_round:RMT-MUERMZEGH24",
+   "by": "SD01-1",
+   "note": ""
+  },
+  {
+   "at": "2026-09-24T00:00:28.600Z",
+   "action": "이행점검 취합 시작 — 원료·제조물",
+   "target": "usf_round:RMT-MUERMZEGH24",
+   "by": "SD01-1",
+   "note": ""
+  },
+  {
+   "at": "2026-09-23T23:59:07.231Z",
+   "action": "알림 보냄 — 이행점검 조치요구",
+   "target": "notification:NTF-MUERL8M5NXY",
+   "by": "SD02-1",
+   "note": ""
+  },
+  {
+   "at": "2026-09-23T23:59:07.228Z",
+   "action": "이행점검 판정 — 미이행",
+   "target": "usf_judge:JDG-MUERL8M28K1",
+   "by": "SD02-1",
+   "note": ""
+  },
+  {
+   "at": "2026-09-23T23:59:01.565Z",
+   "action": "조치 지시 알림",
+   "target": "notification:NTF-MUERL48SVQQ",
+   "by": "SD01-1",
+   "note": ""
+  },
+  {
+   "at": "2026-09-23T23:59:01.564Z",
+   "action": "조치 지시 알림",
+   "target": "notification:NTF-MUERL48Q83Z",
+   "by": "SD01-1",
+   "note": ""
+  },
+  {
+   "at": "2026-09-23T23:59:01.562Z",
+   "action": "조치 지시 발신",
+   "target": "usa_order:USAO-MUERL48PNUJ",
+   "by": "SD01-1",
+   "note": ""
+  },
+  {
+   "at": "2026-09-23T14:06:16.533Z",
+   "action": "조치 구분 변경 — 보완 → 시정",
+   "target": "action:ACT-000006",
+   "by": "SD01-1",
+   "note": ""
+  },
+  {
+   "at": "2026-09-22T07:18:33.254Z",
+   "action": "판정 차수 1차",
+   "target": "inspection:INS-MUCCENFK",
+   "by": "CEO-1",
+   "note": ""
+  },
+  {
+   "at": "2026-09-22T07:18:33.252Z",
+   "action": "점검 판정 적합",
+   "target": "TSK-001282",
+   "by": "CEO-1",
+   "note": "점검완료"
+  },
+  {
+   "at": "2026-09-22T07:18:33.248Z",
+   "action": "점검 판정 — 적합",
+   "target": "TSK-001282",
+   "by": "CEO-1",
+   "note": ""
+  },
+  {
+   "at": "2026-09-22T00:14:51.810Z",
+   "action": "판정 차수 1차",
+   "target": "inspection:INS-MUBX9S4E",
+   "by": "SD02-1",
+   "note": ""
+  },
+  {
+   "at": "2026-09-22T00:14:51.809Z",
+   "action": "점검 판정 보완필요",
+   "target": "TSK-000982",
+   "by": "SD02-1",
+   "note": "보완필요"
+  },
+  {
+   "at": "2026-09-22T00:14:51.807Z",
+   "action": "점검 판정 — 보완필요",
+   "target": "TSK-000982",
+   "by": "SD02-1",
+   "note": ""
+  },
+  {
+   "at": "2026-09-22T00:14:50.479Z",
+   "action": "판정 차수 1차",
+   "target": "inspection:INS-MUBX9R3G",
+   "by": "SD02-1",
+   "note": ""
+  },
+  {
+   "at": "2026-09-22T00:14:50.478Z",
+   "action": "점검 판정 보완필요",
+   "target": "TSK-000882",
+   "by": "SD02-1",
+   "note": "보완필요"
+  },
+  {
+   "at": "2026-09-22T00:14:50.477Z",
+   "action": "점검 판정 — 보완필요",
+   "target": "TSK-000882",
+   "by": "SD02-1",
+   "note": ""
+  },
+  {
+   "at": "2026-09-22T00:14:48.191Z",
+   "action": "판정 차수 1차",
+   "target": "inspection:INS-MUBX9PBW",
+   "by": "SD02-1",
+   "note": ""
+  },
+  {
+   "at": "2026-09-22T00:14:48.190Z",
+   "action": "점검 판정 보완필요",
+   "target": "TSK-000782",
+   "by": "SD02-1",
+   "note": "보완필요"
+  },
+  {
+   "at": "2026-09-22T00:14:48.189Z",
+   "action": "점검 판정 — 보완필요",
+   "target": "TSK-000782",
+   "by": "SD02-1",
+   "note": ""
+  },
+  {
+   "at": "2026-09-22T00:14:46.352Z",
+   "action": "판정 차수 1차",
+   "target": "inspection:INS-MUBX9NWT",
+   "by": "SD02-1",
+   "note": ""
+  },
+  {
+   "at": "2026-09-22T00:14:46.351Z",
+   "action": "점검 판정 보완필요",
+   "target": "TSK-000682",
+   "by": "SD02-1",
+   "note": "보완필요"
+  },
+  {
+   "at": "2026-09-22T00:14:46.349Z",
+   "action": "점검 판정 — 보완필요",
+   "target": "TSK-000682",
+   "by": "SD02-1",
+   "note": ""
+  },
+  {
+   "at": "2026-09-22T00:14:44.872Z",
+   "action": "판정 차수 1차",
+   "target": "inspection:INS-MUBX9MRP",
+   "by": "SD02-1",
+   "note": ""
+  },
+  {
+   "at": "2026-09-22T00:14:44.871Z",
+   "action": "점검 판정 보완필요",
+   "target": "TSK-000582",
+   "by": "SD02-1",
+   "note": "보완필요"
+  },
+  {
+   "at": "2026-09-22T00:14:44.869Z",
+   "action": "점검 판정 — 보완필요",
+   "target": "TSK-000582",
+   "by": "SD02-1",
+   "note": ""
+  },
+  {
+   "at": "2026-09-22T00:14:43.159Z",
+   "action": "판정 차수 1차",
+   "target": "inspection:INS-MUBX9LG4",
+   "by": "SD02-1",
+   "note": ""
+  },
+  {
+   "at": "2026-09-22T00:14:43.158Z",
+   "action": "점검 판정 보완필요",
+   "target": "TSK-000282",
+   "by": "SD02-1",
+   "note": "보완필요"
+  },
+  {
+   "at": "2026-09-22T00:14:43.157Z",
+   "action": "점검 판정 — 보완필요",
+   "target": "TSK-000282",
+   "by": "SD02-1",
+   "note": ""
+  },
+  {
+   "at": "2026-09-22T00:14:42.526Z",
+   "action": "판정 차수 1차",
+   "target": "inspection:INS-MUBX9KYI",
+   "by": "SD02-1",
+   "note": ""
+  },
+  {
+   "at": "2026-09-22T00:14:42.524Z",
+   "action": "점검 판정 보완필요",
+   "target": "TSK-000182",
+   "by": "SD02-1",
+   "note": "보완필요"
+  },
+  {
+   "at": "2026-09-22T00:14:42.522Z",
+   "action": "점검 판정 — 보완필요",
+   "target": "TSK-000182",
+   "by": "SD02-1",
+   "note": ""
+  },
+  {
+   "at": "2026-09-22T00:14:39.326Z",
+   "action": "판정 차수 1차",
+   "target": "inspection:INS-MUBX9IHN",
+   "by": "SD02-1",
+   "note": ""
+  },
+  {
+   "at": "2026-09-22T00:14:39.325Z",
+   "action": "점검 판정 보완필요",
+   "target": "TSK-000930",
+   "by": "SD02-1",
+   "note": "보완필요"
+  },
+  {
+   "at": "2026-09-22T00:14:39.323Z",
+   "action": "점검 판정 — 보완필요",
+   "target": "TSK-000930",
+   "by": "SD02-1",
+   "note": ""
+  },
+  {
+   "at": "2026-09-21T21:05:57.942Z",
+   "action": "판정 차수 1차",
+   "target": "inspection:INS-MUBQIUUQ",
+   "by": "SD01-1",
+   "note": ""
+  },
+  {
+   "at": "2026-09-21T21:05:57.941Z",
+   "action": "점검 판정 보완필요",
+   "target": "TSK-000014",
+   "by": "SD01-1",
+   "note": "증빙 보완 필요"
+  },
+  {
+   "at": "2026-09-21T21:05:57.939Z",
+   "action": "점검 판정 — 보완필요",
+   "target": "TSK-000014",
+   "by": "SD01-1",
+   "note": "증빙 보완 필요"
+  },
+  {
+   "at": "2026-09-21T05:51:13.283Z",
+   "action": "증빙 2줄 등록·제출",
+   "target": "TSK-000003",
+   "by": "SD03-1",
+   "note": "이행완료"
+  },
+  {
+   "at": "2026-09-21T05:51:13.281Z",
+   "action": "증빙 등록",
+   "target": "TSK-000003",
+   "by": "SD03-1",
+   "note": "점검 현장 사진 — 현장사진_2.png"
+  },
+  {
+   "at": "2026-09-21T05:51:13.276Z",
+   "action": "증빙 등록",
+   "target": "TSK-000003",
+   "by": "SD03-1",
+   "note": "점검 현장 사진 — 현장사진_1.png"
+  },
+  {
+   "at": "2026-09-21T05:51:13.271Z",
+   "action": "증빙 등록",
+   "target": "TSK-000003",
+   "by": "SD03-1",
+   "note": "2026년 하반기 도로 안전관리 점검 결과표"
+  },
+  {
+   "at": "2026-09-20T21:32:55.098Z",
+   "action": "증빙 등록·제출",
+   "target": "TSK-000014",
+   "by": "SD03-1",
+   "note": "이행완료"
+  },
+  {
+   "at": "2026-09-20T21:32:55.096Z",
+   "action": "증빙 등록",
+   "target": "TSK-000014",
+   "by": "SD03-1",
+   "note": "2026-09-21 02;30;46.PNG"
+  },
+  {
+   "at": "2026-09-20T21:32:55.091Z",
+   "action": "증빙 등록",
+   "target": "TSK-000014",
+   "by": "SD03-1",
+   "note": "상반기 점검 결과"
+  },
+  {
+   "at": "2026-09-20T21:12:42.434Z",
+   "action": "결재 승인",
+   "target": "TSK-000058",
+   "by": "SD01-1",
+   "note": "점검완료"
+  },
+  {
+   "at": "2026-09-20T18:20:39.408Z",
+   "action": "현장에서 증빙 등록",
+   "target": "TSK-000930",
+   "by": "SD03-1",
+   "note": "이행완료"
+  },
+  {
+   "at": "2026-09-20T18:20:39.406Z",
+   "action": "증빙 등록",
+   "target": "TSK-000930",
+   "by": "SD03-1",
+   "note": "17899284267288924611833593142725.jpg"
+  },
+  {
+   "at": "2026-09-20T18:12:59.791Z",
+   "action": "현장에서 증빙 등록",
+   "target": "TSK-000157",
+   "by": "SD03-1",
+   "note": "이행완료"
+  },
+  {
+   "at": "2026-09-20T18:12:59.789Z",
+   "action": "증빙 등록",
+   "target": "TSK-000157",
+   "by": "SD03-1",
+   "note": "현장사진_양보차로_20260921.png"
+  },
+  {
+   "at": "2026-09-26",
+   "by": "관리(메인)",
+   "what": "09-26 사용자 지시: 화면 시험 회차 14개와 딸린 판정·알림 지움(원본 04_앱/_백업_시험회차삭제_20260926/overlay.json)"
+  }
+ ],
+ "patches": {
+  "inspection": {
+   "INS-MUBQIUUQ": {
+    "round_no": 1,
+    "action_need": "보완"
+   },
+   "INS-MUBX9IHN": {
+    "round_no": 1,
+    "action_need": "보완"
+   },
+   "INS-MUBX9KYI": {
+    "round_no": 1,
+    "action_need": "보완"
+   },
+   "INS-MUBX9LG4": {
+    "round_no": 1,
+    "action_need": "보완"
+   },
+   "INS-MUBX9MRP": {
+    "round_no": 1,
+    "action_need": "보완"
+   },
+   "INS-MUBX9NWT": {
+    "round_no": 1,
+    "action_need": "보완"
+   },
+   "INS-MUBX9PBW": {
+    "round_no": 1,
+    "action_need": "보완"
+   },
+   "INS-MUBX9R3G": {
+    "round_no": 1,
+    "action_need": "보완"
+   },
+   "INS-MUBX9S4E": {
+    "round_no": 1,
+    "action_need": "보완"
+   },
+   "INS-MUCCENFK": {
+    "round_no": 1
+   }
+  },
+  "action": {
+   "ACT-000006": {
+    "action_type": "시정",
+    "prev_action_type": "보완",
+    "action_basis": ""
+   }
+  },
+  "usf_round": {},
+  "usc_record": {
+   "USC-MUERNOW8V6XT": {
+    "deleted": "Y",
+    "updated_at": "2026-09-24",
+    "updated_by": "SD01-1"
+   },
+   "USC-D05-2026-recur-nil": {
+    "data": "{\"nil\":\"N\"}",
+    "files": "[]",
+    "status": "-",
+    "updated_at": "2026-09-24",
+    "updated_by": "SD01-1",
+    "deleted": "Y"
+   },
+   "USC-MUERORFP3H9A": {
+    "data": "{\"rank\":\"안전관리자\",\"name\":\"임준호 주무관\",\"org\":\"하수도과\"}",
+    "files": "[]",
+    "status": "보완필요",
+    "updated_at": "2026-09-24",
+    "updated_by": "SD01-1",
+    "deleted": "Y"
+   },
+   "USC-MUEROR4RK9H9": {
+    "data": "{\"rank\":\"안전관리자\",\"trust\":\"Y\",\"date\":\"2026-03-01\",\"name\":\"장민준 주무관\",\"org\":\"하수도과\"}",
+    "files": "[]",
+    "status": "보완필요",
+    "updated_at": "2026-09-24",
+    "updated_by": "SD01-1",
+    "deleted": "Y"
+   },
+   "USC-MUERPAY692SW": {
+    "deleted": "Y",
+    "updated_at": "2026-09-24",
+    "updated_by": "SD01-1"
+   },
+   "USC-D05-2026-risk-hdr": {
+    "deleted": "Y",
+    "updated_at": "2026-09-24",
+    "updated_by": "SD01-1"
+   },
+   "USC-MUERORZQA7S5": {
+    "deleted": "Y",
+    "updated_at": "2026-09-24",
+    "updated_by": "SD01-1"
+   },
+   "USC-D05-2026-budget-1": {
+    "deleted": "Y",
+    "updated_at": "2026-09-24",
+    "updated_by": "SD01-1"
+   },
+   "USC-INC-NMUERP9D5": {
+    "deleted": "Y",
+    "updated_at": "2026-09-24",
+    "updated_by": "SD01-1"
+   },
+   "USC-INC-NMUERP9D5-r1": {
+    "deleted": "Y",
+    "updated_at": "2026-09-24",
+    "updated_by": "SD01-1"
+   },
+   "USC-D05-2026-order-nil": {
+    "deleted": "Y",
+    "updated_at": "2026-09-24",
+    "updated_by": "SD01-1"
+   },
+   "USC-MUERPABFJCAL": {
+    "deleted": "Y",
+    "updated_at": "2026-09-24",
+    "updated_by": "SD01-1"
+   },
+   "USC-MUERPAY7ORD9": {
+    "deleted": "Y",
+    "updated_at": "2026-09-24",
+    "updated_by": "SD01-1"
+   }
+  },
+  "usb1_basic": {
+   "ws:D03:2026-01-01": {
+    "basic_id": "ws:D03:2026-01-01",
+    "track": "ws",
+    "target_id": "D03",
+    "base_date": "2026-01-01",
+    "addr": "경기도 용인시 처인구 중부대로 1199",
+    "ind_class": "공공행정",
+    "ind_code": "84113",
+    "headcount": "{\"현원\":[31,12,0,6,0,4,0,0],\"현업업무종사자\":[5,12,0,6,0,4,0,0]}",
+    "workers": "[{\"name\":\"정민준\",\"org\":\"도로과(교량·터널)\",\"phone\":\"031-324-2030\"},{\"name\":\"강준호\",\"org\":\"도로과(교량·터널)\",\"phone\":\"031-324-2031\"}]",
+    "sups": "[{\"state\":\"지정\",\"name\":\"정민준\",\"phone\":\"031-324-2030\",\"pos\":\"주무관\",\"from\":\"2025-01-08\",\"to\":\"\"}]",
+    "files": "[{\"name\":\"관리감독자 지정 문서.pdf\",\"url\":\"\"}]",
+    "spec": "{}",
+    "extra": "{}",
+    "state": "입력",
+    "saved_at": "2026-09-24",
+    "saved_by": "SD01-1"
+   }
+  },
+  "use_record": {},
+  "usd_record": {
+   "USD-MUES0IXJ99L8K": {
+    "data": "{\"item\":\"검증용 계획 항목\",\"date\":\"2026-09-24\",\"text\":\"검증 이행내역\",\"note\":\"\"}",
+    "files": "{}",
+    "status": "보완필요",
+    "updated_at": "2026-09-24",
+    "updated_by": "SD04-1",
+    "deleted": "Y"
+   },
+   "USD-S0025": {
+    "data": "{\"rank\":\"팀장\",\"date\":\"2026-01-02\",\"name\":\"권성민\",\"dept\":\"안전총괄과\",\"note\":\"점검팀장(겸임)\"}",
+    "files": "{\"ev\":[]}",
+    "status": "보완필요",
+    "updated_at": "2026-09-24",
+    "updated_by": "SD04-1"
+   },
+   "USD-S0039": {
+    "data": "{\"na\":\"Y\"}",
+    "status": "해당없음",
+    "updated_at": "2026-09-24",
+    "updated_by": "SD04-1"
+   },
+   "USD-S0019": {
+    "deleted": "Y"
+   },
+   "USD-MUES0WV30HAR": {
+    "deleted": "Y",
+    "updated_at": "2026-09-24",
+    "updated_by": "SD04-1"
+   },
+   "USD-MUES4LOD06OB": {
+    "data": "{\"duty_key\":\"DTY-00223\",\"date\":\"\",\"note\":\"\"}",
+    "files": "{}",
+    "status": "미이행",
+    "updated_at": "2026-09-24",
+    "updated_by": "SD04-1",
+    "deleted": "Y"
+   },
+   "USD-MUES46QZ0P1O": {
+    "deleted": "Y",
+    "updated_at": "2026-09-24",
+    "updated_by": "SD04-1"
+   },
+   "USD-MUES5OGI99Z8O": {
+    "deleted": "Y",
+    "updated_at": "2026-09-24",
+    "updated_by": "SD04-1"
+   },
+   "USD-MUES5F0Z0EO3": {
+    "deleted": "Y"
+   },
+   "USD-MUES7R2H05K1": {
+    "data": "{\"mode\":\"pdf\",\"date\":\"2024-12-02\",\"doc\":\"중대시민재해 발생 시 긴급대응 매뉴얼(공중이용시설)\"}",
+    "files": "{\"pdf\":[{\"name\":\"중대시민재해_대응조치_절차도.pdf\",\"url\":\"\",\"at\":\"2026-01-01T00:00:00\"}]}",
+    "status": "이행완료",
+    "updated_at": "2026-09-24",
+    "updated_by": "SD03-1"
+   }
+  },
+  "usg_case": {
+   "30": {
+    "views": "11"
+   },
+   "32": {
+    "views": "10",
+    "title": "중대재해 예방을 위한 사고사례 공유('26.6.22.~7.6.)",
+    "content": "'26.6.22.~7.6. 발생한 중대재해처벌법 적용 주요 사고사례를 공유하오니,\r\n\r\n우리시 유사 사업장에서는 사고유형별 안전수칙을 철저히 준수해주시고,\r\n\r\n사고사례를 소관 사업장 근로자 1인까지 전파하여 사고에 대한 경각심을 갖도록 해주시기 바랍니다.\r\n\r\n〈주요 사고 유형〉\r\n1. (서비스업) 고소작업대에서 간판 보수 중 떨어짐 — 작업대 과상승 방지장치 미작동\r\n2. (건설업) 이동식 크레인으로 자재를 옮기던 중 달기구가 풀려 자재에 맞음 — 달기구 점검 미실시\r\n3. (제조업) 컨베이어 정비 중 회전부에 끼임 — 전원 차단·잠금 절차 미실시\r\n\r\n※ 근로자들의 가독성을 높이기 위하여 사고사례를 카드뉴스 형태로 배포하오니 근로자 게시판에 게시하는 등 전 근로자에 배포 조치",
+    "files": "",
+    "updated_at": "2026-09-24 22:58",
+    "updated_by": "SD01-1"
+   }
+  }
+ },
+ "tables": {
+  "usa_order": [
+   {
+    "order_id": "USAO-MUGZKJC73KM",
+    "sent_at": "2026-09-25T13:18:03.791Z",
+    "from_staff_id": "SD01-1",
+    "from_name": "김민준 주무관",
+    "track": "ws",
+    "to_dept_ids": "D06,D12,D01,D09",
+    "to_names": "중대재해예방팀, 푸른공원사업소, 건축과, 자원순환과",
+    "to_owners": "중대재해예방팀:김민준 주무관 · 푸른공원사업소:한우진 주무관 · 건축과:이민준 주무관 · 자원순환과:윤우진 주무관",
+    "rates": "중대재해예방팀 33.3% · 푸른공원사업소 28.6% · 건축과 63.6% · 자원순환과 20.0%",
+    "message": "중대재해예방팀, 푸른공원사업소, 건축과, 자원순환과 는 이행률 개선 조치 바람",
+    "channels": "app",
+    "results": "{\"app\":\"발송 4건\"}"
+   },
+   {
+    "order_id": "USAO-MUGZJU07AFU",
+    "sent_at": "2026-09-25T13:17:30.970Z",
+    "from_staff_id": "SD01-1",
+    "from_name": "김민준 주무관",
+    "track": "mt",
+    "to_dept_ids": "D05,D07,D11,D14",
+    "to_names": "하수도사업소, 아동보육과, 보건소, 농업기술센터",
+    "to_owners": "하수도사업소:장민준 주무관 · 아동보육과:서민준 주무관 · 보건소:강민준 주무관 · 농업기술센터:오우진 주무관",
+    "rates": "하수도사업소 0.0% · 아동보육과 33.3% · 보건소 0.0% · 농업기술센터 50.0%",
+    "message": "하수도사업소, 아동보육과, 보건소, 농업기술센터 는 이행률 개선 조치 바람",
+    "channels": "app",
+    "results": "{\"app\":\"발송 4건\"}"
+   },
+   {
+    "order_id": "USAO-MUGZJ8TC89N",
+    "sent_at": "2026-09-25T13:17:03.472Z",
+    "from_staff_id": "SD01-1",
+    "from_name": "김민준 주무관",
+    "track": "fc",
+    "to_dept_ids": "D05,D16",
+    "to_names": "하수도사업소, 도시철도과",
+    "to_owners": "하수도사업소:장민준 주무관 · 도시철도과:박지호 주무관",
+    "rates": "하수도사업소 70.0% · 도시철도과 50.0%",
+    "message": "하수도사업소, 도시철도과 는 이행률 개선 조치 바람",
+    "channels": "app",
+    "results": "{\"app\":\"발송 2건\"}"
+   },
+   {
+    "order_id": "USAO-MUERL48PNUJ",
+    "sent_at": "2026-09-23T23:59:01.561Z",
+    "from_staff_id": "SD01-1",
+    "from_name": "김민준 주무관",
+    "track": "ws",
+    "to_dept_ids": "D03,D05",
+    "to_names": "도로과(교량·터널), 하수도과",
+    "to_owners": "도로과(교량·터널):정민준 주무관 · 하수도과:장민준 주무관",
+    "rates": "도로과(교량·터널) 45.45% · 하수도과 100.00%",
+    "message": "도로과(교량·터널), 하수도과 는 이행률 개선 조치 바람"
+   }
+  ],
+  "notification": [
+   {
+    "notif_id": "NTF-MUGZKJD4GNO",
+    "task_id": "",
+    "notif_type": "조치 지시",
+    "to_staff_id": "SD09-1",
+    "from_staff_id": "SD01-1",
+    "sent_at": "2026-09-25",
+    "message": "[조치 지시] 중대재해예방팀, 푸른공원사업소, 건축과, 자원순환과 는 이행률 개선 조치 바람",
+    "read_at": "",
+    "note": "이행현황 조치 지시 USAO-MUGZKJC73KM"
+   },
+   {
+    "notif_id": "NTF-MUGZKJCXTE1",
+    "task_id": "",
+    "notif_type": "조치 지시",
+    "to_staff_id": "SD01-1",
+    "from_staff_id": "SD01-1",
+    "sent_at": "2026-09-25",
+    "message": "[조치 지시] 중대재해예방팀, 푸른공원사업소, 건축과, 자원순환과 는 이행률 개선 조치 바람",
+    "read_at": "",
+    "note": "이행현황 조치 지시 USAO-MUGZKJC73KM"
+   },
+   {
+    "notif_id": "NTF-MUGZKJCN5L8",
+    "task_id": "",
+    "notif_type": "조치 지시",
+    "to_staff_id": "SD12-1",
+    "from_staff_id": "SD01-1",
+    "sent_at": "2026-09-25",
+    "message": "[조치 지시] 중대재해예방팀, 푸른공원사업소, 건축과, 자원순환과 는 이행률 개선 조치 바람",
+    "read_at": "",
+    "note": "이행현황 조치 지시 USAO-MUGZKJC73KM"
+   },
+   {
+    "notif_id": "NTF-MUGZKJC7CW5",
+    "task_id": "",
+    "notif_type": "조치 지시",
+    "to_staff_id": "SD06-1",
+    "from_staff_id": "SD01-1",
+    "sent_at": "2026-09-25",
+    "message": "[조치 지시] 중대재해예방팀, 푸른공원사업소, 건축과, 자원순환과 는 이행률 개선 조치 바람",
+    "read_at": "",
+    "note": "이행현황 조치 지시 USAO-MUGZKJC73KM"
+   },
+   {
+    "notif_id": "NTF-MUGZJU1CH57",
+    "task_id": "",
+    "notif_type": "조치 지시",
+    "to_staff_id": "SD14-1",
+    "from_staff_id": "SD01-1",
+    "sent_at": "2026-09-25",
+    "message": "[조치 지시] 하수도사업소, 아동보육과, 보건소, 농업기술센터 는 이행률 개선 조치 바람",
+    "read_at": "",
+    "note": "이행현황 조치 지시 USAO-MUGZJU07AFU"
+   },
+   {
+    "notif_id": "NTF-MUGZJU0YOXU",
+    "task_id": "",
+    "notif_type": "조치 지시",
+    "to_staff_id": "SD11-1",
+    "from_staff_id": "SD01-1",
+    "sent_at": "2026-09-25",
+    "message": "[조치 지시] 하수도사업소, 아동보육과, 보건소, 농업기술센터 는 이행률 개선 조치 바람",
+    "read_at": "",
+    "note": "이행현황 조치 지시 USAO-MUGZJU07AFU"
+   },
+   {
+    "notif_id": "NTF-MUGZJU0PLQ7",
+    "task_id": "",
+    "notif_type": "조치 지시",
+    "to_staff_id": "SD07-1",
+    "from_staff_id": "SD01-1",
+    "sent_at": "2026-09-25",
+    "message": "[조치 지시] 하수도사업소, 아동보육과, 보건소, 농업기술센터 는 이행률 개선 조치 바람",
+    "read_at": "",
+    "note": "이행현황 조치 지시 USAO-MUGZJU07AFU"
+   },
+   {
+    "notif_id": "NTF-MUGZJU07DD5",
+    "task_id": "",
+    "notif_type": "조치 지시",
+    "to_staff_id": "SD05-1",
+    "from_staff_id": "SD01-1",
+    "sent_at": "2026-09-25",
+    "message": "[조치 지시] 하수도사업소, 아동보육과, 보건소, 농업기술센터 는 이행률 개선 조치 바람",
+    "read_at": "",
+    "note": "이행현황 조치 지시 USAO-MUGZJU07AFU"
+   },
+   {
+    "notif_id": "NTF-MUGZJ8TL50Q",
+    "task_id": "",
+    "notif_type": "조치 지시",
+    "to_staff_id": "SD16-1",
+    "from_staff_id": "SD01-1",
+    "sent_at": "2026-09-25",
+    "message": "[조치 지시] 하수도사업소, 도시철도과 는 이행률 개선 조치 바람",
+    "read_at": "",
+    "note": "이행현황 조치 지시 USAO-MUGZJ8TC89N"
+   },
+   {
+    "notif_id": "NTF-MUGZJ8TCLJR",
+    "task_id": "",
+    "notif_type": "조치 지시",
+    "to_staff_id": "SD05-1",
+    "from_staff_id": "SD01-1",
+    "sent_at": "2026-09-25",
+    "message": "[조치 지시] 하수도사업소, 도시철도과 는 이행률 개선 조치 바람",
+    "read_at": "",
+    "note": "이행현황 조치 지시 USAO-MUGZJ8TC89N"
+   },
+   {
+    "notif_id": "NTF-LS-20260924-203421-D01",
+    "task_id": "",
+    "notif_type": "법령 개정",
+    "to_staff_id": "SD01-1",
+    "sent_at": "2026-09-24",
+    "message": "[법령 개정] 건축물관리법 시행령 · 재난 및 안전관리 기본법 외 28건 — 조문 30곳 확인 요청",
+    "read_at": "",
+    "note": "법령 개정 확인 RUN-20260924-203421"
+   },
+   {
+    "notif_id": "NTF-MUERL8M5NXY",
+    "task_id": "",
+    "notif_type": "조치요구",
+    "to_staff_id": "SD01-1",
+    "from_staff_id": "SD02-1",
+    "sent_at": "2026-09-24",
+    "message": "[이행점검 조치요구 · 사업장] 1. 안전·보건 목표 및 경영방침 설정 — 미이행: 이행 여부 확인 및 안전보건 경영방침 첨부 필요",
+    "read_at": "",
+    "action_id": "",
+    "batch_id": "RWS-2026H2",
+    "note": "이행점검"
+   },
+   {
+    "notif_id": "NTF-MUERL48SVQQ",
+    "task_id": "",
+    "notif_type": "조치 지시",
+    "to_staff_id": "SD05-1",
+    "sent_at": "2026-09-24",
+    "message": "[조치 지시] 도로과(교량·터널), 하수도과 는 이행률 개선 조치 바람",
+    "read_at": "",
+    "note": "이행현황 조치 지시 USAO-MUERL48PNUJ"
+   },
+   {
+    "notif_id": "NTF-MUERL48Q83Z",
+    "task_id": "",
+    "notif_type": "조치 지시",
+    "to_staff_id": "SD03-1",
+    "sent_at": "2026-09-24",
+    "message": "[조치 지시] 도로과(교량·터널), 하수도과 는 이행률 개선 조치 바람",
+    "read_at": "",
+    "note": "이행현황 조치 지시 USAO-MUERL48PNUJ"
+   }
+  ],
+  "usf_judge": [
+   {
+    "judge_id": "JDG-MUERL8M28K1",
+    "round_id": "RWS-2026H2",
+    "track": "ws",
+    "item_key": "goal",
+    "dept_id": "D01",
+    "status": "미이행",
+    "comment": "이행 여부 확인 및 안전보건 경영방침 첨부 필요",
+    "proposed": "해당없음",
+    "basis": "배정된 과제 없음",
+    "judged_by": "SD02-1",
+    "judged_at": "2026-09-23T23:59:07.226Z"
+   }
+  ],
+  "usf_round": [],
+  "usc_record": [
+   {
+    "rec_id": "USC-D03-2026-order-nil",
+    "dept_id": "D03",
+    "year": "2026",
+    "step": "order",
+    "section": "nil",
+    "parent_id": "",
+    "ord": "4",
+    "locked": "",
+    "deleted": "",
+    "status": "-",
+    "data": "{\"nil\":\"N\"}",
+    "files": "[]",
+    "updated_at": "2026-09-25",
+    "updated_by": "SD01-1"
+   },
+   {
+    "rec_id": "USC-MUERPAY7ORD9",
+    "dept_id": "D05",
+    "year": "2026",
+    "step": "law",
+    "section": "law",
+    "parent_id": "",
+    "ord": "1790208137",
+    "locked": "",
+    "deleted": "",
+    "status": "미이행",
+    "data": "{\"duty_key\":\"DTY-01660\",\"date\":\"\",\"st\":\"미이행\",\"note\":\"\"}",
+    "files": "[]",
+    "updated_at": "2026-09-24",
+    "updated_by": "SD01-1"
+   },
+   {
+    "rec_id": "USC-MUERPAY692SW",
+    "dept_id": "D05",
+    "year": "2026",
+    "step": "law",
+    "section": "law",
+    "parent_id": "",
+    "ord": "1790208136",
+    "locked": "",
+    "deleted": "",
+    "status": "미이행",
+    "data": "{\"duty_key\":\"DTY-01659\",\"date\":\"\",\"st\":\"미이행\",\"note\":\"\"}",
+    "files": "[]",
+    "updated_at": "2026-09-24",
+    "updated_by": "SD01-1"
+   },
+   {
+    "rec_id": "USC-MUERPABFJCAL",
+    "dept_id": "D05",
+    "year": "2026",
+    "step": "order",
+    "section": "main",
+    "parent_id": "",
+    "ord": "1790208136",
+    "locked": "",
+    "deleted": "",
+    "status": "미이행",
+    "data": "{}",
+    "files": "[]",
+    "updated_at": "2026-09-24",
+    "updated_by": "SD01-1"
+   },
+   {
+    "rec_id": "USC-D05-2026-order-nil",
+    "dept_id": "D05",
+    "year": "2026",
+    "step": "order",
+    "section": "nil",
+    "parent_id": "",
+    "ord": "2",
+    "locked": "",
+    "deleted": "",
+    "status": "-",
+    "data": "{}",
+    "files": "[]",
+    "updated_at": "2026-09-24",
+    "updated_by": "SD01-1"
+   },
+   {
+    "rec_id": "USC-INC-NMUERP9D5-r1",
+    "dept_id": "D05",
+    "year": "2026",
+    "step": "recur",
+    "section": "incrow",
+    "parent_id": "USC-INC-NMUERP9D5",
+    "ord": "2",
+    "locked": "",
+    "deleted": "",
+    "status": "보완필요",
+    "data": "{\"item\":\"1\",\"date\":\"2026-08-01\",\"content\":\"상황 보고\"}",
+    "files": "[]",
+    "updated_at": "2026-09-24",
+    "updated_by": "SD01-1"
+   },
+   {
+    "rec_id": "USC-INC-NMUERP9D5",
+    "dept_id": "D05",
+    "year": "2026",
+    "step": "recur",
+    "section": "inc",
+    "parent_id": "",
+    "ord": "2",
+    "locked": "",
+    "deleted": "",
+    "status": "-",
+    "data": "{\"name\":\"맨홀 작업 중 넘어짐\",\"date\":\"2026-08-01\"}",
+    "files": "[]",
+    "updated_at": "2026-09-24",
+    "updated_by": "SD01-1"
+   },
+   {
+    "rec_id": "USC-D05-2026-recur-nil",
+    "dept_id": "D05",
+    "year": "2026",
+    "step": "recur",
+    "section": "nil",
+    "parent_id": "",
+    "ord": "1",
+    "locked": "",
+    "deleted": "",
+    "status": "해당없음",
+    "data": "{\"nil\":\"Y\"}",
+    "files": "[]",
+    "updated_at": "2026-09-24",
+    "updated_by": "SD01-1"
+   },
+   {
+    "rec_id": "USC-D05-2026-budget-1",
+    "dept_id": "D05",
+    "year": "2026",
+    "step": "budget",
+    "section": "main",
+    "parent_id": "",
+    "ord": "1",
+    "locked": "",
+    "deleted": "",
+    "status": "보완필요",
+    "data": "{\"item\":\"안전·보건 인력비\",\"plan\":\"1200\"}",
+    "files": "[]",
+    "updated_at": "2026-09-24",
+    "updated_by": "SD01-1"
+   },
+   {
+    "rec_id": "USC-MUERORZQA7S5",
+    "dept_id": "D05",
+    "year": "2026",
+    "step": "risk",
+    "section": "main",
+    "parent_id": "",
+    "ord": "1790208112",
+    "locked": "",
+    "deleted": "",
+    "status": "보완필요",
+    "data": "{\"date\":\"2026-03-20\",\"gbn\":\"위험성평가 교육\",\"fixed\":\"Y\"}",
+    "files": "[]",
+    "updated_at": "2026-09-24",
+    "updated_by": "SD01-1"
+   },
+   {
+    "rec_id": "USC-D05-2026-risk-hdr",
+    "dept_id": "D05",
+    "year": "2026",
+    "step": "risk",
+    "section": "hdr",
+    "parent_id": "",
+    "ord": "1",
+    "locked": "",
+    "deleted": "",
+    "status": "-",
+    "data": "{\"date\":\"2026-04-01\"}",
+    "files": "[]",
+    "updated_at": "2026-09-24",
+    "updated_by": "SD01-1"
+   },
+   {
+    "rec_id": "USC-MUERORFP3H9A",
+    "dept_id": "D05",
+    "year": "2026",
+    "step": "staff",
+    "section": "main",
+    "parent_id": "",
+    "ord": "1790208111.5",
+    "locked": "",
+    "deleted": "",
+    "status": "미이행",
+    "data": "{\"rank\":\"안전관리자\"}",
+    "files": "[]",
+    "updated_at": "2026-09-24",
+    "updated_by": "SD01-1"
+   },
+   {
+    "rec_id": "USC-MUEROR4RK9H9",
+    "dept_id": "D05",
+    "year": "2026",
+    "step": "staff",
+    "section": "main",
+    "parent_id": "",
+    "ord": "1790208111",
+    "locked": "",
+    "deleted": "",
+    "status": "이행완료",
+    "data": "{\"rank\":\"안전관리자\",\"trust\":\"Y\",\"date\":\"2026-03-01\",\"name\":\"장민준 주무관\",\"org\":\"하수도과\"}",
+    "files": "[{\"name\":\"선임서.png\",\"url\":\"/api/file/20260924_9fe07l_%EC%84%A0%EC%9E%84%EC%84%9C.png\",\"at\":\"2026-09-24T00:01:51\"}]",
+    "updated_at": "2026-09-24",
+    "updated_by": "SD01-1"
+   },
+   {
+    "rec_id": "USC-MUERNOW8V6XT",
+    "dept_id": "D05",
+    "year": "2026",
+    "step": "goal",
+    "section": "main",
+    "parent_id": "",
+    "ord": "1790208061",
+    "locked": "",
+    "deleted": "",
+    "status": "이행완료",
+    "data": "{\"date\":\"2026-02-03\",\"note\":\"���� ����\"}",
+    "files": "[{\"name\":\"�濵��ħ_����.png\",\"url\":\"/api/file/20260924_klmofp_%EF%BF%BD%E6%BF%B5%EF%BF%BD%EF%BF%BD%C4%A7_%EF%BF%BD%EF%BF%BD%EF%BF%BD%EF%BF%BD.png\",\"at\":\"2026-09-24T00:01:01\"}]",
+    "updated_at": "2026-09-24",
+    "updated_by": "SD01-1"
+   }
+  ],
+  "usb2_timing": [
+   {
+    "rec_id": "T-mt-MAT-001-muh3mnt4",
+    "track": "mt",
+    "target_id": "MAT-001",
+    "saved_at": "2026-09-26 00:11",
+    "by": "SD01-1",
+    "vals": "{\"m1\":\"2026-02\",\"m2\":\"2026-02\",\"m3a\":\"2026-06\",\"m3b\":\"2026-12\",\"m3c\":\"2026-01\",\"m3d\":\"2026-10\",\"m4\":\"상반기\",\"m5\":\"상반기\",\"m6a\":\"2026-06\",\"m6b\":\"2026-09\"}",
+    "laws": "{\"수도법\":{\"on\":true,\"when\":\"\"},\"먹는물관리법\":{\"on\":true,\"when\":\"\"}}",
+    "hidden": ""
+   },
+   {
+    "rec_id": "T-fc-BR1968-0000035-muerxk08",
+    "track": "fc",
+    "target_id": "BR1968-0000035",
+    "saved_at": "2026-09-24 09:08",
+    "by": "SD01-1",
+    "vals": "{\"f1\":\"2026-02\",\"f2\":\"2026-02\",\"f3a\":\"2026-03\",\"f3b\":\"2026-09\",\"f3c\":\"2026-07\",\"f3d\":\"2026-07\",\"f3e\":\"2026-07\",\"f3f\":\"하반기\",\"f4a\":\"2026-02\",\"f4b\":\"2026-05\"}",
+    "laws": "{\"도로법\":{\"on\":true,\"when\":\"\"},\"시설물의 안전 및 유지관리에 관한 특별법\":{\"on\":true,\"when\":\"\"},\"보행안전 및 편의증진에 관한 법률\":{\"on\":true,\"when\":\"\"},\"교통안전법\":{\"on\":true,\"when\":\"\"},\"소규모 공공시설 안전관리 등에 관한 법률\":{\"on\":true,\"when\":\"\"},\"농어촌도로 정비법\":{\"on\":true,\"when\":\"\"},\"장애인복지법\":{\"on\":true,\"when\":\"\"},\"체육시설의 설치ㆍ이용에 관한 법률\":{\"on\":false,\"when\":\"\"},\"영유아보육법\":{\"on\":false,\"when\":\"\"}}",
+    "hidden": ""
+   },
+   {
+    "rec_id": "T-fc-BR1968-0000035-muerx9bc",
+    "track": "fc",
+    "target_id": "BR1968-0000035",
+    "saved_at": "2026-09-24 09:08",
+    "by": "SD01-1",
+    "vals": "{\"f1\":\"2026-03\",\"f2\":\"2026-02\",\"f3a\":\"2026-03\",\"f3b\":\"2026-09\",\"f3c\":\"2026-07\",\"f3d\":\"2026-07\",\"f3e\":\"2026-07\",\"f3f\":\"하반기\",\"f4a\":\"2026-02\",\"f4b\":\"2026-05\"}",
+    "laws": "{\"도로법\":{\"on\":false,\"when\":\"2026-08\"},\"시설물의 안전 및 유지관리에 관한 특별법\":{\"on\":true,\"when\":\"\"},\"보행안전 및 편의증진에 관한 법률\":{\"on\":true,\"when\":\"\"},\"교통안전법\":{\"on\":true,\"when\":\"\"},\"소규모 공공시설 안전관리 등에 관한 법률\":{\"on\":true,\"when\":\"\"},\"농어촌도로 정비법\":{\"on\":true,\"when\":\"\"},\"장애인복지법\":{\"on\":true,\"when\":\"\"},\"체육시설의 설치ㆍ이용에 관한 법률\":{\"on\":false,\"when\":\"\"},\"영유아보육법\":{\"on\":false,\"when\":\"\"}}",
+    "hidden": ""
+   },
+   {
+    "rec_id": "T-fc-BR1968-0000035-muers8qi",
+    "track": "fc",
+    "target_id": "BR1968-0000035",
+    "saved_at": "2026-09-24 09:04",
+    "by": "SD01-1",
+    "vals": "{\"f1\":\"2026-03\",\"f2\":\"2026-02\",\"f3a\":\"2026-03\",\"f3b\":\"2026-09\",\"f3c\":\"2026-07\",\"f3d\":\"2026-07\",\"f3e\":\"2026-07\",\"f3f\":\"하반기\",\"f4a\":\"2026-02\",\"f4b\":\"2026-05\"}",
+    "laws": "{\"도로법\":{\"on\":false,\"when\":\"2026-08\"},\"시설물의 안전 및 유지관리에 관한 특별법\":{\"on\":true,\"when\":\"\"},\"보행안전 및 편의증진에 관한 법률\":{\"on\":true,\"when\":\"\"},\"교통안전법\":{\"on\":true,\"when\":\"\"},\"소규모 공공시설 안전관리 등에 관한 법률\":{\"on\":true,\"when\":\"\"},\"농어촌도로 정비법\":{\"on\":true,\"when\":\"\"},\"장애인복지법\":{\"on\":true,\"when\":\"\"},\"체육시설의 설치ㆍ이용에 관한 법률\":{\"on\":false,\"when\":\"\"},\"영유아보육법\":{\"on\":false,\"when\":\"\"}}",
+    "hidden": "f5d"
+   },
+   {
+    "rec_id": "T-fc-BR1968-0000035-muerqoqs",
+    "track": "fc",
+    "target_id": "BR1968-0000035",
+    "saved_at": "2026-09-24 09:03",
+    "by": "SD01-1",
+    "vals": "{\"f1\":\"2026-02\",\"f2\":\"2026-02\",\"f3a\":\"2026-03\",\"f3b\":\"2026-09\",\"f3c\":\"2026-07\",\"f3d\":\"2026-07\",\"f3e\":\"2026-07\",\"f3f\":\"하반기\",\"f4a\":\"2026-02\",\"f4b\":\"2026-05\"}",
+    "laws": "{\"도로법\":{\"on\":true,\"when\":\"\"},\"시설물의 안전 및 유지관리에 관한 특별법\":{\"on\":true,\"when\":\"\"},\"보행안전 및 편의증진에 관한 법률\":{\"on\":true,\"when\":\"\"},\"교통안전법\":{\"on\":true,\"when\":\"\"},\"소규모 공공시설 안전관리 등에 관한 법률\":{\"on\":true,\"when\":\"\"},\"농어촌도로 정비법\":{\"on\":true,\"when\":\"\"},\"장애인복지법\":{\"on\":true,\"when\":\"\"},\"체육시설의 설치ㆍ이용에 관한 법률\":{\"on\":false,\"when\":\"\"},\"영유아보육법\":{\"on\":false,\"when\":\"\"}}",
+    "hidden": "f5d"
+   }
+  ],
+  "use_record": [],
+  "usb1_contract": [
+   {
+    "contract_id": "CTR-0001",
+    "contract_name": "2026년 시도 포장보수 공사(처인구)",
+    "counterpart": "모현건설(주)",
+    "asset_id": "",
+    "dept_id": "D03",
+    "contract_type": "도급",
+    "start_date": "2026-07-08",
+    "end_date": "2027-06-03",
+    "amount": "1280000000",
+    "safety_clause": "안전보건 확보 조항 있음",
+    "evaluation_done": "Y",
+    "contract_method": "수의계약(2인견적)",
+    "trade": "토목",
+    "safety_cost": "28844876",
+    "worker_cnt": "24",
+    "subcontract": "Y",
+    "eval_score": "69",
+    "eval_date": "2026-08-04",
+    "manager_staff_id": "SD03-1",
+    "manager_phone": "031-324-2030",
+    "work_start_date": "2026-07-12",
+    "main_task": "파손 포장 절삭·덧씌우기 및 포트홀 보수",
+    "work_place": "처인구 관내 시도 구간",
+    "vendor_rep_role": "현장대리인",
+    "vendor_safety_role": "안전담당(현장대리인 겸직)",
+    "vendor_contact_on_file": "Y",
+    "vendor_doc_status": "제출됨",
+    "regular_workers": "70",
+    "attachments": "계약서 · 설계서·내역서 · 안전관리계획서 · 산업안전보건관리비 사용계획서",
+    "entrust_type": "도급",
+    "apply_frame": "산업",
+    "civil_scope": "확인 필요",
+    "civil_basis": "시설 관련 업무이나 계약에 시설이 특정되지 않음 — 공중이용시설(시행령 별표2·3) 해당 여부를 확인해야 합니다",
+    "ctl_own": "Y",
+    "ctl_lease": "N",
+    "ctl_repair": "Y",
+    "ctl_command": "Y",
+    "ctl_vendor_site": "N",
+    "control_result": "해당",
+    "control_basis": "시 소유 시설(처인구 관내 시도 구간)에서 수행 · 보수·보강은 시 예산 · 작업 중지·시정 지시 가능",
+    "control_confirmed_at": "",
+    "control_confirmed_by": "",
+    "work_risk": "위험장소",
+    "eval_pass_mark": "75",
+    "eval_detail": "",
+    "proc_stage": "이행",
+    "order_at": "2026-05-27",
+    "contract_at": "",
+    "completed_at": "",
+    "settled_at": "",
+    "cost_planned": "28844876",
+    "cost_settled": "",
+    "note": "",
+    "order_dept": "도로과(교량·터널)",
+    "manager_name": "정민준",
+    "vendor_manager": "",
+    "vendor_phone": "",
+    "biz_no": "",
+    "place_codes": "",
+    "attach": "[{\"name\":\"계약서\",\"url\":\"\"},{\"name\":\"설계서\",\"url\":\"\"},{\"name\":\"내역서\",\"url\":\"\"},{\"name\":\"안전관리계획서\",\"url\":\"\"},{\"name\":\"산업안전보건관리비 사용계획서\",\"url\":\"\"}]",
+    "updated_at": "2026-09-24",
+    "updated_by": "SD01-1"
+   }
+  ],
+  "usb1_contract_duty": [
+   {
+    "cd_id": "CTR-0001:C3B",
+    "contract_id": "CTR-0001",
+    "item_code": "C3B",
+    "status": "",
+    "files": "[]",
+    "basis": "중대재해 처벌 등에 관한 법률 시행령 제4조제9호",
+    "updated_at": "2026-09-24",
+    "updated_by": "SD01-1"
+   },
+   {
+    "cd_id": "CTR-0001:C3A",
+    "contract_id": "CTR-0001",
+    "item_code": "C3A",
+    "status": "이행완료",
+    "files": "[]",
+    "basis": "중대재해 처벌 등에 관한 법률 시행령 제4조제9호",
+    "updated_at": "2026-09-24",
+    "updated_by": "SD01-1"
+   },
+   {
+    "cd_id": "CTR-0001:C2",
+    "contract_id": "CTR-0001",
+    "item_code": "C2",
+    "status": "이행완료",
+    "files": "[{\"name\":\"산업안전보건관리비 계상 내역서.xlsx\",\"url\":\"\"}]",
+    "basis": "중대재해 처벌 등에 관한 법률 시행령 제4조제9호나목",
+    "updated_at": "2026-09-24",
+    "updated_by": "SD01-1"
+   },
+   {
+    "cd_id": "CTR-0001:C1",
+    "contract_id": "CTR-0001",
+    "item_code": "C1",
+    "status": "보완필요",
+    "files": "[{\"name\":\"수급인 안전보건 수준 평가표(2026-08-04).pdf\",\"url\":\"\"}]",
+    "basis": "중대재해 처벌 등에 관한 법률 시행령 제4조제9호가목",
+    "updated_at": "2026-09-24",
+    "updated_by": "SD01-1"
+   }
+  ],
+  "usf_ceo_log": [
+   {
+    "log_id": "CLOG-MUERUEVAU3S",
+    "at": "2026-09-24T00:06:15.238Z",
+    "activity": "이행률 조회(사업장)",
+    "detail": "이행점검 및 조치 › 이행점검(사업장) 점검 총괄표 조회",
+    "by": "CEO-1"
+   }
+  ],
+  "usb2_role": [
+   {
+    "rid": "ind|SD01-1",
+    "disaster": "ind",
+    "staff_id": "SD01-1",
+    "level": 1000,
+    "kind": "정",
+    "state": "off",
+    "at": "2026-09-24 09:08",
+    "by": "SD01-1"
+   },
+   {
+    "rid": "ind|SD01-1",
+    "disaster": "ind",
+    "staff_id": "SD01-1",
+    "level": 1000,
+    "kind": "정",
+    "state": "on",
+    "at": "2026-09-24 09:06",
+    "by": "SD01-1"
+   }
+  ],
+  "usb2_assign": [
+   {
+    "map_id": "ind|SM01-1",
+    "disaster": "ind",
+    "staff_id": "SM01-1",
+    "targets": "D01;D02;D03;D04;D05;D06;D07;D08;D09;D10;D11;D12;D13;D14;D15;D17;D18;D19;D20;D21;D22",
+    "at": "2026-09-24 20:48",
+    "by": "SD01-1"
+   },
+   {
+    "map_id": "ind|SM02-1",
+    "disaster": "ind",
+    "staff_id": "SM02-1",
+    "targets": "D01;D02;D03;D04;D06;D07;D08;D09;D10;D11;D12;D13;D14;D05",
+    "at": "2026-09-24 09:08",
+    "by": "SD01-1"
+   },
+   {
+    "map_id": "ind|SM02-1",
+    "disaster": "ind",
+    "staff_id": "SM02-1",
+    "targets": "D01;D02;D03;D04;D06;D07;D08;D09;D10;D11;D12;D13;D14",
+    "at": "2026-09-24 09:06",
+    "by": "SD01-1"
+   }
+  ],
+  "usb2_basic": [
+   {
+    "dept_id": "D06",
+    "site_name": "용인시청 본청",
+    "addr": "경기도 용인시 처인구 중부대로 1199",
+    "ind_class": "공공행정",
+    "ind_code": "84113",
+    "deleted": "",
+    "at": "2026-09-24 09:07",
+    "by": "SD01-1",
+    "rule": "제정",
+    "chief": "",
+    "safety_mgr": "",
+    "health_mgr": "",
+    "doctor": "",
+    "committee": "",
+    "supervisor": "지정"
+   },
+   {
+    "dept_id": "D06",
+    "site_name": "용인시청 본청",
+    "addr": "경기도 용인시 처인구 중부대로 1199",
+    "ind_class": "공공행정",
+    "ind_code": "84113",
+    "deleted": "",
+    "at": "2026-09-24 09:06",
+    "by": "SD01-1",
+    "rule": "제정",
+    "chief": "",
+    "safety_mgr": "",
+    "health_mgr": "",
+    "doctor": "",
+    "committee": "",
+    "supervisor": "지정"
+   }
+  ],
+  "usf_letter_read": [
+   {
+    "read_id": "LRD-MUERVPUS6GF",
+    "letter_id": "LTR-2026-003",
+    "dept_id": "D04",
+    "staff_id": "SD04-1",
+    "read_at": "2026-09-24T00:07:16.132Z"
+   }
+  ],
+  "usb2_law": [
+   {
+    "law_rid": "F|TG03|어린이놀이시설 안전관리법",
+    "disaster": "civ",
+    "area": "F",
+    "target_code": "TG03",
+    "target_name": "교량·터널·도로",
+    "doc": "어린이놀이시설 안전관리법",
+    "law": "어린이놀이시설 안전관리법",
+    "layer": "법률",
+    "n": 0,
+    "y": 0,
+    "apply": "중대재해처벌법 의무사항",
+    "state": "off",
+    "at": "2026-09-24 09:08",
+    "by": "SD01-1"
+   },
+   {
+    "law_rid": "F|TG03|어린이놀이시설 안전관리법",
+    "disaster": "civ",
+    "area": "F",
+    "target_code": "TG03",
+    "target_name": "교량·터널·도로",
+    "doc": "어린이놀이시설 안전관리법",
+    "law": "어린이놀이시설 안전관리법",
+    "layer": "법률",
+    "n": 0,
+    "y": 0,
+    "apply": "중대재해처벌법 의무사항",
+    "state": "on",
+    "at": "2026-09-24 09:07",
+    "by": "SD01-1"
+   }
+  ],
+  "usd_record": [
+   {
+    "rec_id": "USD-MUES7R2H05K1",
+    "scope": "TU2009-0000102",
+    "dept_id": "D03",
+    "year": "2026",
+    "step": "proc",
+    "block": "flow2",
+    "ord": "1790208997577",
+    "deleted": "",
+    "status": "이행완료",
+    "data": "{\"mode\":\"date\",\"date\":\"2024-12-02\",\"doc\":\"중대시민재해 발생 시 긴급대응 매뉴얼(공중이용시설)\"}",
+    "files": "{\"pdf\":[{\"name\":\"중대시민재해_대응조치_절차도.pdf\",\"url\":\"\",\"at\":\"2026-01-01T00:00:00\"}]}",
+    "updated_at": "2026-09-24",
+    "updated_by": "SD03-1"
+   },
+   {
+    "rec_id": "USD-MUES5OGI99Z8O",
+    "scope": "WS2003-0000053",
+    "dept_id": "D04",
+    "year": "2026",
+    "step": "budget",
+    "block": "budget",
+    "ord": "1790208900981",
+    "deleted": "",
+    "status": "미이행",
+    "data": "{\"item\":\"안전점검비\"}",
+    "files": "{}",
+    "updated_at": "2026-09-24",
+    "updated_by": "SD04-1"
+   },
+   {
+    "rec_id": "USD-MUES5F0Z0EO3",
+    "scope": "TU2009-0000102",
+    "dept_id": "D03",
+    "year": "2026",
+    "step": "proc",
+    "block": "flow2",
+    "ord": "1790208888659",
+    "deleted": "",
+    "status": "이행완료",
+    "data": "{\"mode\":\"date\",\"date\":\"2025-11-20\",\"doc\":\"공중이용시설 유해·위험요인 확인·점검 및 개선 절차\"}",
+    "files": "{\"pdf\":[{\"name\":\"중대시민재해_대응조치_절차도.pdf\",\"url\":\"\",\"at\":\"2026-01-01T00:00:00\"}]}",
+    "updated_at": "2026-09-24",
+    "updated_by": "SD03-1"
+   },
+   {
+    "rec_id": "USD-MUES4LOD06OB",
+    "scope": "WS2003-0000053",
+    "dept_id": "D04",
+    "year": "2026",
+    "step": "law",
+    "block": "lawA",
+    "ord": "1790208850622",
+    "deleted": "",
+    "status": "미이행",
+    "data": "{\"duty_key\":\"DTY-00223\"}",
+    "files": "{}",
+    "updated_at": "2026-09-24",
+    "updated_by": "SD04-1"
+   },
+   {
+    "rec_id": "USD-MUES46QZ0P1O",
+    "scope": "WS2003-0000053",
+    "dept_id": "D04",
+    "year": "2026",
+    "step": "law",
+    "block": "lawA",
+    "ord": "1790208831275",
+    "deleted": "",
+    "status": "보완필요",
+    "data": "{\"date\":\"2026-09-01\",\"note\":\"\",\"duty_key\":\"DTY-01283\"}",
+    "files": "{}",
+    "updated_at": "2026-09-24",
+    "updated_by": "SD04-1"
+   },
+   {
+    "rec_id": "USD-MUES2P2802YF",
+    "scope": "ALL:D04",
+    "dept_id": "D04",
+    "year": "2026",
+    "step": "staff",
+    "block": "org",
+    "ord": "1790208761696",
+    "deleted": "",
+    "status": "이행완료",
+    "data": "{\"date\":\"2026-01-02\",\"note\":\"\"}",
+    "files": "{\"ev\":[{\"name\":\"용인시 지방상수도 안전 및 유지관리 조직도.PDF\",\"url\":\"\",\"at\":\"2026-01-01T00:00:00\"}]}",
+    "updated_at": "2026-09-24",
+    "updated_by": "SD04-1"
+   },
+   {
+    "rec_id": "USD-MUES0WV30HAR",
+    "scope": "WS2003-0000053",
+    "dept_id": "D04",
+    "year": "2026",
+    "step": "plan",
+    "block": "plan",
+    "ord": "1790208678495",
+    "deleted": "",
+    "status": "보완필요",
+    "data": "{\"item\":\"2026년 용인시 지방상수도 안전계획(시설물안전법 제6조 안전 및 유지관리계획)\",\"date\":\"\",\"text\":\"계획 9건 · 이행 8건 · 경영책임자 확인\",\"note\":\"\"}",
+    "files": "{}",
+    "updated_at": "2026-09-24",
+    "updated_by": "SD04-1"
+   },
+   {
+    "rec_id": "USD-MUES0IXJ99L8K",
+    "scope": "WS2003-0000053",
+    "dept_id": "D04",
+    "year": "2026",
+    "step": "plan",
+    "block": "plan",
+    "ord": "1790208660538",
+    "deleted": "",
+    "status": "미이행",
+    "data": "{}",
+    "files": "{}",
+    "updated_at": "2026-09-24",
+    "updated_by": "SD04-1"
+   }
+  ],
+  "law_change": [
+   {
+    "change_id": "LCH-20260924-203421-31",
+    "law": "환경보건법",
+    "doc": "환경보건법 시행규칙",
+    "changed_kind": "판 겹침",
+    "promulgated_at": "2024-12-24",
+    "effective_at": "",
+    "affected_duty_cnt": "0",
+    "notice_sent_at": "2026-09-24",
+    "note": "법제처 확인 2026-09-24",
+    "run_id": "RUN-20260924-203421",
+    "status": "담당 확인 중",
+    "new_mst": "",
+    "changed_units": "0",
+    "new_units": "0",
+    "removed_units": "0",
+    "human_items": "1"
+   },
+   {
+    "change_id": "LCH-20260924-203421-30",
+    "law": "환경보건법",
+    "doc": "환경보건법",
+    "changed_kind": "판 겹침",
+    "promulgated_at": "2025-11-11",
+    "effective_at": "",
+    "affected_duty_cnt": "0",
+    "notice_sent_at": "2026-09-24",
+    "note": "법제처 확인 2026-09-24",
+    "run_id": "RUN-20260924-203421",
+    "status": "담당 확인 중",
+    "new_mst": "",
+    "changed_units": "0",
+    "new_units": "0",
+    "removed_units": "0",
+    "human_items": "1"
+   },
+   {
+    "change_id": "LCH-20260924-203421-29",
+    "law": "체육시설의 설치ㆍ이용에 관한 법률",
+    "doc": "체육시설의 설치ㆍ이용에 관한 법률 시행령",
+    "changed_kind": "판 겹침",
+    "promulgated_at": "2025-03-25",
+    "effective_at": "",
+    "affected_duty_cnt": "0",
+    "notice_sent_at": "2026-09-24",
+    "note": "법제처 확인 2026-09-24",
+    "run_id": "RUN-20260924-203421",
+    "status": "담당 확인 중",
+    "new_mst": "",
+    "changed_units": "0",
+    "new_units": "0",
+    "removed_units": "0",
+    "human_items": "1"
+   },
+   {
+    "change_id": "LCH-20260924-203421-28",
+    "law": "체육시설의 설치ㆍ이용에 관한 법률",
+    "doc": "체육시설의 설치ㆍ이용에 관한 법률 시행규칙",
+    "changed_kind": "판 겹침",
+    "promulgated_at": "2024-08-28",
+    "effective_at": "",
+    "affected_duty_cnt": "0",
+    "notice_sent_at": "2026-09-24",
+    "note": "법제처 확인 2026-09-24",
+    "run_id": "RUN-20260924-203421",
+    "status": "담당 확인 중",
+    "new_mst": "",
+    "changed_units": "0",
+    "new_units": "0",
+    "removed_units": "0",
+    "human_items": "1"
+   },
+   {
+    "change_id": "LCH-20260924-203421-27",
+    "law": "재난 및 안전관리 기본법",
+    "doc": "재난 및 안전관리 기본법",
+    "changed_kind": "판 겹침",
+    "promulgated_at": "2026-01-21",
+    "effective_at": "",
+    "affected_duty_cnt": "0",
+    "notice_sent_at": "2026-09-24",
+    "note": "법제처 확인 2026-09-24",
+    "run_id": "RUN-20260924-203421",
+    "status": "담당 확인 중",
+    "new_mst": "",
+    "changed_units": "0",
+    "new_units": "0",
+    "removed_units": "0",
+    "human_items": "1"
+   },
+   {
+    "change_id": "LCH-20260924-203421-26",
+    "law": "장사 등에 관한 법률",
+    "doc": "장사 등에 관한 법률",
+    "changed_kind": "판 겹침",
+    "promulgated_at": "2024-01-23",
+    "effective_at": "",
+    "affected_duty_cnt": "0",
+    "notice_sent_at": "2026-09-24",
+    "note": "법제처 확인 2026-09-24",
+    "run_id": "RUN-20260924-203421",
+    "status": "담당 확인 중",
+    "new_mst": "",
+    "changed_units": "0",
+    "new_units": "0",
+    "removed_units": "0",
+    "human_items": "1"
+   },
+   {
+    "change_id": "LCH-20260924-203421-25",
+    "law": "자연재해대책법",
+    "doc": "자연재해대책법 시행령",
+    "changed_kind": "판 겹침",
+    "promulgated_at": "2025-09-23",
+    "effective_at": "",
+    "affected_duty_cnt": "0",
+    "notice_sent_at": "2026-09-24",
+    "note": "법제처 확인 2026-09-24",
+    "run_id": "RUN-20260924-203421",
+    "status": "담당 확인 중",
+    "new_mst": "",
+    "changed_units": "0",
+    "new_units": "0",
+    "removed_units": "0",
+    "human_items": "1"
+   },
+   {
+    "change_id": "LCH-20260924-203421-24",
+    "law": "의료법",
+    "doc": "의료법",
+    "changed_kind": "판 겹침",
+    "promulgated_at": "2026-03-10",
+    "effective_at": "",
+    "affected_duty_cnt": "0",
+    "notice_sent_at": "2026-09-24",
+    "note": "법제처 확인 2026-09-24",
+    "run_id": "RUN-20260924-203421",
+    "status": "담당 확인 중",
+    "new_mst": "",
+    "changed_units": "0",
+    "new_units": "0",
+    "removed_units": "0",
+    "human_items": "1"
+   },
+   {
+    "change_id": "LCH-20260924-203421-23",
+    "law": "응급의료에 관한 법률",
+    "doc": "응급의료에 관한 법률",
+    "changed_kind": "판 겹침",
+    "promulgated_at": "2025-12-23",
+    "effective_at": "",
+    "affected_duty_cnt": "0",
+    "notice_sent_at": "2026-09-24",
+    "note": "법제처 확인 2026-09-24",
+    "run_id": "RUN-20260924-203421",
+    "status": "담당 확인 중",
+    "new_mst": "",
+    "changed_units": "0",
+    "new_units": "0",
+    "removed_units": "0",
+    "human_items": "1"
+   },
+   {
+    "change_id": "LCH-20260924-203421-22",
+    "law": "위험물안전관리법",
+    "doc": "위험물안전관리법",
+    "changed_kind": "판 겹침",
+    "promulgated_at": "2024-02-06",
+    "effective_at": "",
+    "affected_duty_cnt": "0",
+    "notice_sent_at": "2026-09-24",
+    "note": "법제처 확인 2026-09-24",
+    "run_id": "RUN-20260924-203421",
+    "status": "담당 확인 중",
+    "new_mst": "",
+    "changed_units": "0",
+    "new_units": "0",
+    "removed_units": "0",
+    "human_items": "1"
+   },
+   {
+    "change_id": "LCH-20260924-203421-21",
+    "law": "에너지이용 합리화법",
+    "doc": "에너지이용 합리화법",
+    "changed_kind": "판 겹침",
+    "promulgated_at": "2025-10-01",
+    "effective_at": "",
+    "affected_duty_cnt": "0",
+    "notice_sent_at": "2026-09-24",
+    "note": "법제처 확인 2026-09-24",
+    "run_id": "RUN-20260924-203421",
+    "status": "담당 확인 중",
+    "new_mst": "",
+    "changed_units": "0",
+    "new_units": "0",
+    "removed_units": "0",
+    "human_items": "1"
+   },
+   {
+    "change_id": "LCH-20260924-203421-20",
+    "law": "어린이안전관리에 관한 법률",
+    "doc": "어린이안전관리에 관한 법률",
+    "changed_kind": "판 겹침",
+    "promulgated_at": "2024-02-27",
+    "effective_at": "",
+    "affected_duty_cnt": "0",
+    "notice_sent_at": "2026-09-24",
+    "note": "법제처 확인 2026-09-24",
+    "run_id": "RUN-20260924-203421",
+    "status": "담당 확인 중",
+    "new_mst": "",
+    "changed_units": "0",
+    "new_units": "0",
+    "removed_units": "0",
+    "human_items": "1"
+   },
+   {
+    "change_id": "LCH-20260924-203421-19",
+    "law": "식품안전기본법",
+    "doc": "식품안전기본법",
+    "changed_kind": "판 겹침",
+    "promulgated_at": "2025-03-18",
+    "effective_at": "",
+    "affected_duty_cnt": "0",
+    "notice_sent_at": "2026-09-24",
+    "note": "법제처 확인 2026-09-24",
+    "run_id": "RUN-20260924-203421",
+    "status": "담당 확인 중",
+    "new_mst": "",
+    "changed_units": "0",
+    "new_units": "0",
+    "removed_units": "0",
+    "human_items": "1"
+   },
+   {
+    "change_id": "LCH-20260924-203421-18",
+    "law": "소방시설 설치 및 관리에 관한 법률",
+    "doc": "소방시설 설치 및 관리에 관한 법률",
+    "changed_kind": "판 겹침",
+    "promulgated_at": "2021-11-30",
+    "effective_at": "",
+    "affected_duty_cnt": "0",
+    "notice_sent_at": "2026-09-24",
+    "note": "법제처 확인 2026-09-24",
+    "run_id": "RUN-20260924-203421",
+    "status": "담당 확인 중",
+    "new_mst": "",
+    "changed_units": "0",
+    "new_units": "0",
+    "removed_units": "0",
+    "human_items": "1"
+   },
+   {
+    "change_id": "LCH-20260924-203421-17",
+    "law": "산지관리법",
+    "doc": "산지관리법",
+    "changed_kind": "개정",
+    "promulgated_at": "2026-09-22",
+    "effective_at": "2026-09-22",
+    "affected_duty_cnt": "0",
+    "notice_sent_at": "2026-09-24",
+    "note": "법제처 확인 2026-09-24",
+    "run_id": "RUN-20260924-203421",
+    "status": "반영됨",
+    "new_mst": "289913",
+    "changed_units": "25",
+    "new_units": "18",
+    "removed_units": "0",
+    "human_items": "0"
+   },
+   {
+    "change_id": "LCH-20260924-203421-16",
+    "law": "산업안전보건법",
+    "doc": "산업안전보건법",
+    "changed_kind": "판 겹침",
+    "promulgated_at": "2026-02-19",
+    "effective_at": "",
+    "affected_duty_cnt": "0",
+    "notice_sent_at": "2026-09-24",
+    "note": "법제처 확인 2026-09-24",
+    "run_id": "RUN-20260924-203421",
+    "status": "담당 확인 중",
+    "new_mst": "",
+    "changed_units": "0",
+    "new_units": "0",
+    "removed_units": "0",
+    "human_items": "1"
+   },
+   {
+    "change_id": "LCH-20260924-203421-15",
+    "law": "산업안전보건법",
+    "doc": "산업안전보건기준에 관한 규칙",
+    "changed_kind": "판 겹침",
+    "promulgated_at": "2025-09-01",
+    "effective_at": "",
+    "affected_duty_cnt": "0",
+    "notice_sent_at": "2026-09-24",
+    "note": "법제처 확인 2026-09-24",
+    "run_id": "RUN-20260924-203421",
+    "status": "담당 확인 중",
+    "new_mst": "",
+    "changed_units": "0",
+    "new_units": "0",
+    "removed_units": "0",
+    "human_items": "1"
+   },
+   {
+    "change_id": "LCH-20260924-203421-14",
+    "law": "박물관 및 미술관 진흥법",
+    "doc": "박물관 및 미술관 진흥법",
+    "changed_kind": "판 겹침",
+    "promulgated_at": "2026-03-05",
+    "effective_at": "",
+    "affected_duty_cnt": "0",
+    "notice_sent_at": "2026-09-24",
+    "note": "법제처 확인 2026-09-24",
+    "run_id": "RUN-20260924-203421",
+    "status": "담당 확인 중",
+    "new_mst": "",
+    "changed_units": "0",
+    "new_units": "0",
+    "removed_units": "0",
+    "human_items": "1"
+   },
+   {
+    "change_id": "LCH-20260924-203421-13",
+    "law": "민방위기본법",
+    "doc": "민방위기본법",
+    "changed_kind": "판 겹침",
+    "promulgated_at": "2024-12-03",
+    "effective_at": "",
+    "affected_duty_cnt": "0",
+    "notice_sent_at": "2026-09-24",
+    "note": "법제처 확인 2026-09-24",
+    "run_id": "RUN-20260924-203421",
+    "status": "담당 확인 중",
+    "new_mst": "",
+    "changed_units": "0",
+    "new_units": "0",
+    "removed_units": "0",
+    "human_items": "1"
+   },
+   {
+    "change_id": "LCH-20260924-203421-12",
+    "law": "문화유산의 보존 및 활용에 관한 법률",
+    "doc": "문화유산의 보존 및 활용에 관한 법률",
+    "changed_kind": "판 겹침",
+    "promulgated_at": "2026-02-10",
+    "effective_at": "",
+    "affected_duty_cnt": "0",
+    "notice_sent_at": "2026-09-24",
+    "note": "법제처 확인 2026-09-24",
+    "run_id": "RUN-20260924-203421",
+    "status": "담당 확인 중",
+    "new_mst": "",
+    "changed_units": "0",
+    "new_units": "0",
+    "removed_units": "0",
+    "human_items": "1"
+   },
+   {
+    "change_id": "LCH-20260924-203421-11",
+    "law": "도시공원 및 녹지 등에 관한 법률",
+    "doc": "도시공원 및 녹지 등에 관한 법률 시행령",
+    "changed_kind": "판 겹침",
+    "promulgated_at": "2026-08-18",
+    "effective_at": "",
+    "affected_duty_cnt": "0",
+    "notice_sent_at": "2026-09-24",
+    "note": "법제처 확인 2026-09-24",
+    "run_id": "RUN-20260924-203421",
+    "status": "담당 확인 중",
+    "new_mst": "",
+    "changed_units": "0",
+    "new_units": "0",
+    "removed_units": "0",
+    "human_items": "1"
+   },
+   {
+    "change_id": "LCH-20260924-203421-10",
+    "law": "도시공원 및 녹지 등에 관한 법률",
+    "doc": "도시공원 및 녹지 등에 관한 법률",
+    "changed_kind": "판 겹침",
+    "promulgated_at": "2025-08-26",
+    "effective_at": "",
+    "affected_duty_cnt": "0",
+    "notice_sent_at": "2026-09-24",
+    "note": "법제처 확인 2026-09-24",
+    "run_id": "RUN-20260924-203421",
+    "status": "담당 확인 중",
+    "new_mst": "",
+    "changed_units": "0",
+    "new_units": "0",
+    "removed_units": "0",
+    "human_items": "1"
+   },
+   {
+    "change_id": "LCH-20260924-203421-09",
+    "law": "도로법",
+    "doc": "도로법 시행령",
+    "changed_kind": "판 겹침",
+    "promulgated_at": "2026-08-18",
+    "effective_at": "",
+    "affected_duty_cnt": "0",
+    "notice_sent_at": "2026-09-24",
+    "note": "법제처 확인 2026-09-24",
+    "run_id": "RUN-20260924-203421",
+    "status": "담당 확인 중",
+    "new_mst": "",
+    "changed_units": "0",
+    "new_units": "0",
+    "removed_units": "0",
+    "human_items": "1"
+   },
+   {
+    "change_id": "LCH-20260924-203421-08",
+    "law": "도로법",
+    "doc": "도로법",
+    "changed_kind": "판 겹침",
+    "promulgated_at": "2026-03-17",
+    "effective_at": "",
+    "affected_duty_cnt": "0",
+    "notice_sent_at": "2026-09-24",
+    "note": "법제처 확인 2026-09-24",
+    "run_id": "RUN-20260924-203421",
+    "status": "담당 확인 중",
+    "new_mst": "",
+    "changed_units": "0",
+    "new_units": "0",
+    "removed_units": "0",
+    "human_items": "1"
+   },
+   {
+    "change_id": "LCH-20260924-203421-07",
+    "law": "도로교통법",
+    "doc": "도로교통법 시행령",
+    "changed_kind": "판 겹침",
+    "promulgated_at": "2026-02-19",
+    "effective_at": "",
+    "affected_duty_cnt": "0",
+    "notice_sent_at": "2026-09-24",
+    "note": "법제처 확인 2026-09-24",
+    "run_id": "RUN-20260924-203421",
+    "status": "담당 확인 중",
+    "new_mst": "",
+    "changed_units": "0",
+    "new_units": "0",
+    "removed_units": "0",
+    "human_items": "1"
+   },
+   {
+    "change_id": "LCH-20260924-203421-06",
+    "law": "대기환경보전법",
+    "doc": "대기환경보전법",
+    "changed_kind": "판 겹침",
+    "promulgated_at": "2026-03-17",
+    "effective_at": "",
+    "affected_duty_cnt": "0",
+    "notice_sent_at": "2026-09-24",
+    "note": "법제처 확인 2026-09-24",
+    "run_id": "RUN-20260924-203421",
+    "status": "담당 확인 중",
+    "new_mst": "",
+    "changed_units": "0",
+    "new_units": "0",
+    "removed_units": "0",
+    "human_items": "1"
+   },
+   {
+    "change_id": "LCH-20260924-203421-05",
+    "law": "농어촌정비법",
+    "doc": "농어촌정비법 시행령",
+    "changed_kind": "판 겹침",
+    "promulgated_at": "2026-08-18",
+    "effective_at": "",
+    "affected_duty_cnt": "0",
+    "notice_sent_at": "2026-09-24",
+    "note": "법제처 확인 2026-09-24",
+    "run_id": "RUN-20260924-203421",
+    "status": "담당 확인 중",
+    "new_mst": "",
+    "changed_units": "0",
+    "new_units": "0",
+    "removed_units": "0",
+    "human_items": "1"
+   },
+   {
+    "change_id": "LCH-20260924-203421-04",
+    "law": "교통안전법",
+    "doc": "교통안전법",
+    "changed_kind": "판 겹침",
+    "promulgated_at": "2023-08-16",
+    "effective_at": "",
+    "affected_duty_cnt": "0",
+    "notice_sent_at": "2026-09-24",
+    "note": "법제처 확인 2026-09-24",
+    "run_id": "RUN-20260924-203421",
+    "status": "담당 확인 중",
+    "new_mst": "",
+    "changed_units": "0",
+    "new_units": "0",
+    "removed_units": "0",
+    "human_items": "1"
+   },
+   {
+    "change_id": "LCH-20260924-203421-03",
+    "law": "건축법",
+    "doc": "건축법",
+    "changed_kind": "판 겹침",
+    "promulgated_at": "2025-08-26",
+    "effective_at": "",
+    "affected_duty_cnt": "0",
+    "notice_sent_at": "2026-09-24",
+    "note": "법제처 확인 2026-09-24",
+    "run_id": "RUN-20260924-203421",
+    "status": "담당 확인 중",
+    "new_mst": "",
+    "changed_units": "0",
+    "new_units": "0",
+    "removed_units": "0",
+    "human_items": "1"
+   },
+   {
+    "change_id": "LCH-20260924-203421-02",
+    "law": "건축물관리법",
+    "doc": "건축물관리법 시행령",
+    "changed_kind": "개정",
+    "promulgated_at": "2026-09-22",
+    "effective_at": "2026-09-22",
+    "affected_duty_cnt": "0",
+    "notice_sent_at": "2026-09-24",
+    "note": "법제처 확인 2026-09-24",
+    "run_id": "RUN-20260924-203421",
+    "status": "담당 확인 중",
+    "new_mst": "289799",
+    "changed_units": "4",
+    "new_units": "5",
+    "removed_units": "0",
+    "human_items": "1"
+   },
+   {
+    "change_id": "LCH-20260924-203421-01",
+    "law": "가축전염병 예방법",
+    "doc": "가축전염병 예방법",
+    "changed_kind": "판 겹침",
+    "promulgated_at": "2025-07-22",
+    "effective_at": "",
+    "affected_duty_cnt": "0",
+    "notice_sent_at": "2026-09-24",
+    "note": "법제처 확인 2026-09-24",
+    "run_id": "RUN-20260924-203421",
+    "status": "담당 확인 중",
+    "new_mst": "",
+    "changed_units": "0",
+    "new_units": "0",
+    "removed_units": "0",
+    "human_items": "1"
+   }
+  ],
+  "law_sync_applied": [
+   {
+    "run_id": "RUN-20260924-211650",
+    "applied_at": "2026-09-24T12:16:56.780Z",
+    "by": "CoCo",
+    "law_change_n": 0,
+    "duty_marked_n": 0,
+    "notified_n": 0
+   },
+   {
+    "run_id": "RUN-20260924-210628",
+    "applied_at": "2026-09-24T12:06:34.630Z",
+    "by": "CoCo",
+    "law_change_n": 0,
+    "duty_marked_n": 0,
+    "notified_n": 0
+   },
+   {
+    "run_id": "RUN-20260924-203421",
+    "applied_at": "2026-09-24T11:34:53.386Z",
+    "by": "CoCo",
+    "law_change_n": 31,
+    "duty_marked_n": 0,
+    "notified_n": 1
+   }
+  ],
+  "law_sync_decision": []
+ }
+}

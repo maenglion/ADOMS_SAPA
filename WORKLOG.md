@@ -312,3 +312,25 @@
 - 검증: CSV 50/50, PostgreSQL 50/50 HTTP 200이다. 기능 준공 수치는 기존 통과 상태를 유지한다. Production 환경값은 `csv`로 독립 확인했다. Preview 복구 배포는 별도 branch deploy로 실행했다. 상세 raw·요약 수치는 `READ_PERFORMANCE_VERIFY.md`와 `db/read-shadow/read_performance_compare.csv`에 기록했다.
 - 관련 파일: `app/page.tsx`, `app/actions/page.tsx`, `app/duties/list/page.tsx`, `app/evidence/page.tsx`, `app/tasks/page.tsx`, `lib/db.ts`, `READ_PERFORMANCE_VERIFY.md`, `READ_CUTOVER_VERIFY.md`, `db/read-shadow/read_performance_compare.csv`, `WORKLOG.md`
 - 관련 commit: pending
+
+### [29] 시연판 내부 구현 보존 규칙 완화
+- 상태: 결정
+- 배경: PostgreSQL READ 기능 호환성은 완료됐지만 대표 경로 성능이 CSV 대비 2.46~4.11배 느려 Production cutover가 차단됐다. 기존 READ/materialization 내부 구조를 그대로 유지하는 해석은 결과와 무관한 반복 계산 제거까지 제약할 수 있었다.
+- 결정: 시연판에서는 명시적으로 발행된 앱·데이터 판의 결과 계약이 동일하면 성능을 위해 내부 구현을 변경할 수 있다. request-scoped memoization, 반복 filter/sort/merge 제거, materialization 재구성, SQL batch·병렬화, preload와 Map/Set lookup을 허용한다. 기준은 “최신판을 맞춘다”가 아니라 “명시적으로 발행된 판에 맞춘다”로 고정한다.
+- 이유: 시연판의 목적은 기존 내부 구현 보존이 아니라 검증된 사용자 가시 결과를 허용 가능한 속도로 안정적으로 제공하는 것이다. 앱 commit과 데이터 판이 명시된 릴리스 계약을 기준으로 해야 임의의 최신 자료 유입과 구현 차이를 혼동하지 않는다.
+- 영향 범위: PostgreSQL READ 내부 구조와 성능 최적화 선택, 릴리스·golden 판정 기준. 화면 결과, 역할별 노출, 숫자, 정렬·필터·limit, golden, metrics, crosscheck는 계속 필수 계약이다.
+- 실제 변경: 이번 결정에 따라 `/actions`의 동일 입력 semantic READ 결과를 한 HTTP request 안에서 재사용할 수 있도록 허용했다. 전역 cache나 요청 간 stale cache는 허용하지 않았다.
+- 검증: 변경 대상 경로를 우선 검증하고 성능 목표 확인 뒤 명시적으로 발행된 기준시점의 전체 golden regression을 최종 gate로 수행하는 절차를 유지한다.
+- 관련 파일: `lib/db.ts`, `READ_PERFORMANCE_VERIFY.md`, `READ_CUTOVER_VERIFY.md`, `WORKLOG.md`
+- 관련 commit: pending
+
+### [30] PostgreSQL READ 성능 최적화 1차
+- 상태: 완료
+- 배경: `/actions`는 물리 SQL이 16회로 줄었지만 270회의 logical READ 뒤에서 같은 normalized result, filter, sort, merge와 판정 결과를 반복 계산해 PostgreSQL warm 중앙값이 14.625초였다. 공통 경로도 CSV보다 느려 DB 접근 비용과 특수 CPU 병목을 분리할 필요가 있었다.
+- 결정: `/actions` request 안에서만 동일 함수·동일 인자의 최종 contract 결과를 재사용하고 호출자마다 복제본을 반환한다. SQL tuple cache와 semantic result cache를 분리하며 요청이 끝나면 모두 폐기한다. Production은 계속 `csv`로 유지한다.
+- 이유: SQL tuple은 이미 16개뿐이었고 잔여 약 9.983초는 DB 외 materialization 재계산이었다. 동일 입력의 최종 결과를 request 범위에서 재사용하면 freshness와 반환 의미를 바꾸지 않고 반복 작업만 제거할 수 있다.
+- 영향 범위: PostgreSQL `/actions` READ 실행, READ 성능 측정과 진단. CSV backend, WRITE, DB schema/data/index, UI, role logic, seed, golden에는 영향이 없다.
+- 실제 변경: 공통 READ 계층에 request-scoped semantic result cache와 겹치는 DB 구간을 합산하는 wall-clock 측정을 추가했다. `/actions`에 한정해 `tasks`, `staff`, approval/evidence/inspection 계열과 round/cell/check 파생 결과를 exact argument key로 재사용한다. 실행 함수는 `us-east-2`, PostgreSQL은 Singapore여서 공통 cross-region 비용을 별도 병목으로 기록했다.
+- 검증: `/actions`의 SQL-result 계층 logical call은 270회에서 18회로 감소했고 SQL은 16회로 유지됐다. `CheckFlag[]`는 30행, SHA-256 `5c5189aee2610e7b74c0474481a8b9b91b8657284ddb0efa80911682a0d07bc1`로 동일하다. warm 중앙값은 14.625초에서 5.477초로 62.6% 감소했고 비DB server 구간은 약 9.983초에서 1.894초로 줄었다. 명시적으로 발행된 기준시점 회귀는 HTTP 137/137, golden 7,373/7,373, 안정값 mismatch 0, expected-only/extra 0/0, metrics 159/159, crosscheck 68/68로 통과했고 `/exec` raw 4건은 기존 시각 의존 분류를 유지했다. 검증용 시간 고정 설정은 완료 뒤 제거했다. 다만 PostgreSQL은 CSV보다 dashboard 2.41배, `/actions` 1.54배, `/duties/list` 2.60배, `/evidence` 2.99배, `/tasks` 3.07배 느려 Production cutover는 계속 보류한다. TypeScript 검사와 production build는 통과했다.
+- 관련 파일: `lib/db.ts`, `instrumentation.ts`, `next.config.ts`, `scripts/freeze_time.cjs`, `db/read-shadow/read_performance_optimization.csv`, `READ_PERFORMANCE_VERIFY.md`, `READ_CUTOVER_VERIFY.md`, `WORKLOG.md`
+- 관련 commit: `f663bea`~`e2e8824` (최종 기록 commit은 pending)

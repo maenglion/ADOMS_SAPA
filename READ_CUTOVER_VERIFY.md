@@ -209,3 +209,15 @@ After compatibility reached stable mismatch 0, five representative routes were m
 PostgreSQL warm medians were slower on every route: dashboard 2.46×, `/actions` 4.11×, `/duties/list` 2.47×, `/evidence` 3.13×, and `/tasks` 3.03×. `/actions` measured 14.625 seconds at the warm median versus 3.555 seconds on CSV. Its 16 SQL calls accounted for 3.514 seconds of cumulative DB work while server data rendering took 13.481 seconds, leaving approximately 9.983 seconds in non-DB server construction and calculation. The SQL calls are partly concurrent, so cumulative DB timings are not an exact wall-clock partition.
 
 The performance gate failed and Production READ cutover remains blocked. The Preview branch was restored to `postgres` after A/B measurement; Production was independently confirmed as `csv`. No compatibility contract, database/schema/data, WRITE path, UI, seed, or golden file changed. Full measurements and interpretation are recorded in `READ_PERFORMANCE_VERIFY.md` and `db/read-shadow/read_performance_compare.csv`.
+
+## PostgreSQL READ optimization pass 1 — 2026-09-27
+
+The compatibility target is the result contract of an explicitly published app/data release. It is not defined as the latest available data and does not require preservation of the old internal materialization structure. Request-local memoization, preload, batch/parallel SQL, and Map/Set lookup are permitted when all visible contract gates remain unchanged.
+
+`/actions` final-result memoization reduced its PostgreSQL warm median from 14.625 seconds to 5.477 seconds. SQL stayed at 16 unique queries, while calls reaching the SQL-result layer fell from 270 to 18 and estimated non-DB server time fell from about 9.983 seconds to about 1.894 seconds. Its canonical 30-row `CheckFlag[]` SHA-256 stayed `5c5189aee2610e7b74c0474481a8b9b91b8657284ddb0efa80911682a0d07bc1`.
+
+The other four routes did not materially improve because this pass was scoped to `/actions`. Optimized PostgreSQL warm medians remain 1.54× to 3.07× slower than CSV. The remaining blocker is common PostgreSQL overhead, especially cross-region access between the `us-east-2` function and the Singapore database plus transfer and normalization of roughly 18k–20k raw rows on light routes.
+
+The published-golden regression after optimization passed HTTP 137/137, 7,373/7,373 values, stable mismatch 0, expected-only/extra 0/0, metrics 159/159, and crosscheck 68/68. Four `/exec` elapsed-time raw cells remain separately classified. Verification-only clock settings were removed after the run.
+
+Production remains `ADOMS_DATA_BACKEND=csv`; Preview remains `postgres`. No WRITE, schema, DB data, seed, UI, role logic, or golden value was changed. Production READ cutover remains on hold pending a common-overhead optimization pass.

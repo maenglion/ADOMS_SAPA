@@ -63,3 +63,76 @@ Production READ cutover remains blocked. The next task should profile and reduce
 After the A/B measurement, the branch override was restored to `postgres` and a new branch deploy was requested. Production was independently confirmed as `ADOMS_DATA_BACKEND=csv`.
 
 Raw comparison data is in `db/read-shadow/read_performance_compare.csv`.
+
+## PostgreSQL READ optimization pass 1 — 2026-09-27
+
+### Contract and release rule
+
+The optimization target is the result contract of the explicitly published frozen release, not whichever dataset happens to be newest. The published CSV runtime remains the compatibility oracle. Internal READ implementation may change for performance as long as visible values, role scope, filtering, ordering, limits, golden values, metrics, and crosschecks remain identical.
+
+The semantic result cache is request-scoped and enabled only inside an `/actions` render. It stores the final contract result for an exact function-and-argument key, returns a clone to each caller, and is discarded when the request ends. It does not create cross-request staleness or alter the CSV path.
+
+### Runtime location and common PostgreSQL overhead
+
+- Netlify function region: `us-east-2`
+- Railway PostgreSQL region: Singapore
+
+The application function and database are cross-region. On light representative routes, PostgreSQL query wall time dominates the server render. Query wall includes database execution, cross-region transfer, and driver row decoding; the current boundary cannot split those components without changing the query protocol. Raw result sizes were about 18,380 to 20,365 rows on the light routes, so latency and row transfer/materialization remain common costs.
+
+The new wall-clock counters use the union of overlapping intervals. They must not be confused with cumulative SQL work, which double-counts concurrent overlap.
+
+### `/actions` semantic READ profile
+
+Before final-result memoization, `/actions` executed 270 logical READs over 16 SQL tuples. The repeated work was not primarily new SQL. The same normalized arrays, filters, sorts, merges, and `CheckFlag[]` inputs were rebuilt inside the request.
+
+| Semantic READ | Calls | Unique args | Cache hits after | Contract calculations after |
+| --- | ---: | ---: | ---: | ---: |
+| `staff` | 17 | 1 | 16 | 1 |
+| `roundsOf` | 12 | 3 | 9 | 3 |
+| `cellsOfRound` | 9 | 9 | 0 | 9 |
+| `buildCells` | 9 | 7 | 2 | 7 |
+| `tasks` | 9 | 2 | 7 | 2 |
+| `allTasks` | 9 | 1 | 8 | 1 |
+| `inspectionsByTask` | 9 | 1 | 8 | 1 |
+| `actionsByInsp` | 9 | 1 | 8 | 1 |
+| `evidences` | 7 | 1 | 6 | 1 |
+| `judgesOf` | 9 | 9 | 0 | 9 |
+| `oldAggOf` | 9 | 9 | 0 | 9 |
+
+The logical domain calls still express the same page behavior, but only 18 calls now reach the SQL-result layer and 16 execute SQL. Canonical `CheckFlag[]` remains 30 rows with SHA-256 `5c5189aee2610e7b74c0474481a8b9b91b8657284ddb0efa80911682a0d07bc1`.
+
+### Client-observed before/after result
+
+All 50 optimized PostgreSQL requests returned HTTP 200. Each route was requested sequentially with one cold request and nine warm requests.
+
+| Route | CSV warm median | PostgreSQL before | PostgreSQL after | After / CSV | After / before |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| dashboard | 1.731 s | 4.261 s | 4.176 s | 2.41× | 0.98× |
+| `/actions` | 3.555 s | 14.625 s | 5.477 s | 1.54× | **0.37×** |
+| `/duties/list` | 1.165 s | 2.879 s | 3.023 s | 2.60× | 1.05× |
+| `/evidence` | 1.151 s | 3.600 s | 3.436 s | 2.99× | 0.95× |
+| `/tasks` | 1.131 s | 3.425 s | 3.471 s | 3.07× | 1.01× |
+
+The optimization is scoped to `/actions`; changes of roughly five percent on the other routes are treated as run-to-run noise.
+
+### `/actions` wall-clock decomposition after optimization
+
+- logical calls reaching the SQL-result layer: 18
+- physical SQL: 16
+- cumulative DB work: about 3.288 s
+- DB interval union wall time: about 2.410 s
+- connection acquisition interval union: about 0.395 s
+- query interval union: about 2.020 s
+- server render: about 4.304 s
+- non-DB server interval: about 1.894 s
+- client warm median: 5.477 s
+
+The former estimated non-DB portion of 9.983 seconds fell to about 1.894 seconds. `/actions` warm median improved by 62.6%, from 14.625 seconds to 5.477 seconds. The remaining gap is mainly common PostgreSQL access and cross-region row transfer rather than repeated semantic materialization.
+
+### Verification and decision
+
+The full read-only regression was evaluated against the previously published golden capture time; a run at the current date was not accepted as a replacement release. It passed HTTP 137/137, 7,373/7,373 extracted values, stable mismatch 0, expected-only/extra 0/0, metrics 159/159 with mismatch 0, crosscheck 68/68, and unchanged `CheckFlag[]` SHA. The four `/exec` elapsed-time cells remain the already classified raw time-dependent category. The verification-only clock variables were removed after the run so the branch Preview returned to normal current-time behavior.
+
+Optimization pass 1 succeeds for `/actions`, but Production cutover remains blocked. PostgreSQL is still 1.54× to 3.07× slower than CSV at the warm median across the five routes. The next pass should address common PostgreSQL access overhead, cross-region placement, and oversized full-table row transfer without changing the published result contract. Production remains `csv`; Preview remains the PostgreSQL comparison environment.
+
+Detailed before/after measurements are in `db/read-shadow/read_performance_optimization.csv`.

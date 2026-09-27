@@ -1,0 +1,16 @@
+route,path,backend_or_stage,http_ok,cold_ms,warm_min_ms,warm_median_ms,warm_max_ms,warm_p95_ms,ratio_to_csv,ratio_to_before_pg,logical_read_count,physical_sql_count,db_cumulative_ms,db_wall_ms,acquire_wall_ms,query_wall_ms,server_render_ms,non_db_wall_ms
+dashboard,/?role=gm,csv_baseline,10,9699.46,1235.23,1730.89,2338.10,2338.10,1.00,,0,0,0,0,0,0,418.23,
+dashboard,/?role=gm,postgres_before,10,9084.51,3641.91,4260.94,4754.53,4754.53,2.46,1.00,49,16,6920.41,,,,4371.19,
+dashboard,/?role=gm,postgres_semantic_cache,10,9148.12,3673.94,4175.94,4871.63,4871.63,2.41,0.98,49,16,2989.00,1825.00,85.00,1780.00,3150.00,1325.00
+actions,/actions?role=gm,csv_baseline,10,3952.03,3123.37,3555.35,4277.96,4277.96,1.00,,0,0,0,0,0,0,2064.95,
+actions,/actions?role=gm,postgres_before,10,14245.52,14146.79,14624.82,16509.92,16509.92,4.11,1.00,270,16,3514.00,,,,13481.30,9983.00
+actions,/actions?role=gm,postgres_semantic_cache,10,5949.83,5196.20,5476.63,5589.20,5589.20,1.54,0.37,18,16,3288.00,2410.00,395.00,2020.00,4304.00,1894.00
+duties_list,/duties/list?role=gm,csv_baseline,10,1747.59,1140.05,1164.52,2616.76,2616.76,1.00,,0,0,0,0,0,0,348.60,
+duties_list,/duties/list?role=gm,postgres_before,10,3228.74,2421.34,2879.43,3384.58,3384.58,2.47,1.00,6,5,1261.23,,,,1832.35,
+duties_list,/duties/list?role=gm,postgres_semantic_cache,10,2982.61,2470.92,3022.58,3471.61,3471.61,2.60,1.05,6,5,1276.00,1335.00,20.00,1315.00,1908.00,573.00
+evidence,/evidence?role=gm,csv_baseline,10,1252.22,916.45,1150.65,1554.66,1554.66,1.00,,0,0,0,0,0,0,147.13,
+evidence,/evidence?role=gm,postgres_before,10,4814.31,3336.71,3600.28,3931.05,3931.05,3.13,1.00,18,11,2459.94,,,,2500.38,
+evidence,/evidence?role=gm,postgres_semantic_cache,10,4341.88,3019.80,3435.93,4542.39,4542.39,2.99,0.95,18,11,2458.00,2130.00,310.00,1820.00,2469.00,339.00
+tasks,/tasks?role=gm,csv_baseline,10,1366.35,923.44,1130.93,1421.69,1421.69,1.00,,0,0,0,0,0,0,146.41,
+tasks,/tasks?role=gm,postgres_before,10,3220.06,2911.96,3424.74,3723.93,3723.93,3.03,1.00,16,9,2281.61,,,,2324.44,
+tasks,/tasks?role=gm,postgres_semantic_cache,10,3816.32,3043.73,3470.73,4070.21,4070.21,3.07,1.01,16,9,2193.00,1825.00,294.00,1530.00,2195.00,370.00

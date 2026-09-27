@@ -59,7 +59,7 @@ export async function allTasks(): Promise<Row[]> {
     const all = await tasks({ limit: 5000 });
     const ap = new Map((await approvals()).map((a: any) => [a.task_id, a]));
     return all.map((t: any) => ({ ...t, ...(ap.get(t.task_id) || {}) }));
-  }, { work: { merge: 2 } });
+  }, { memo: true, work: { merge: 2 } });
 }
 
 /** 과제가 이 점검의 대상인가 — 대상 산정은 여기 하나뿐이다. */
@@ -90,7 +90,7 @@ export async function inspectionsByTask(): Promise<Map<string, Row[]>> {
     list.forEach((x, i) => { if (!x.round_no) x.round_no = n - i; });
   }
   return m;
-  }, { work: { normalization: 1, merge: 2 } });
+  }, { memo: true, work: { normalization: 1, merge: 2 } });
 }
 
 /** 조치 기록 — 판정 번호(insp_id)로 찾는다. 화면에서 만든 것과 상태 변경까지 겹친다. */
@@ -99,7 +99,7 @@ export async function actionsByInsp(): Promise<Map<string, Row>> {
     const m = new Map<string, Row>();
     (await readTable("action", "action_id")).forEach((a) => { if (!m.has(a.insp_id)) m.set(a.insp_id, a); });
     return m;
-  }, { work: { merge: 1 } });
+  }, { memo: true, work: { merge: 1 } });
 }
 
 export type CycleRow = Row & {

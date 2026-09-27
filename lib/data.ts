@@ -258,6 +258,7 @@ async function tasksInner(filter: { dept?: string; staff?: string; status?: stri
 
 export async function tasks(filter: { dept?: string; staff?: string; status?: string; limit?: number } = {}): Promise<Row[]> {
   return withReadOperation("tasks", filter, () => tasksInner(filter), {
+    memo: true,
     work: { normalization: 1, filter: 4, merge: 5 },
   });
 }
@@ -272,7 +273,7 @@ export async function staff() {
   return withReadOperation("staff", {}, async () => {
     const rows = useDb ? await readTable("staff", "staff_id") : seed("staff");
     return rows.some((r: Row) => r.staff_id === CEO_ROW.staff_id) ? rows : [...rows, CEO_ROW];
-  }, { work: { filter: 1, merge: 1 } });
+  }, { memo: true, work: { filter: 1, merge: 1 } });
 }
 export async function forms() {
   if (useDb) return readTable("form_template", "form_id");
@@ -310,7 +311,7 @@ export async function approvals() {
     //   규칙·스위치는 lib/check_merge.ts(applyItemApproval · ITEM_APPROVAL_ON). 순환 참조를 피하려고 부를 때 불러온다.
     const { applyItemApproval } = await import("./check_merge");
     return applyItemApproval(rows);
-  }, { work: { normalization: 1, merge: 2 } });
+  }, { memo: true, work: { normalization: 1, merge: 2 } });
 }
 export async function contractDuties() {
   if (useDb) return readTable("contract_duty", "cduty_id");
@@ -341,7 +342,7 @@ export async function evidences() {
   return withReadOperation("evidences", {}, async () => {
     if (useDb) return liveTable("evidence");
     return [...readOverlay().evidence, ...seed("evidence")];
-  }, { work: { merge: 1 } });
+  }, { memo: true, work: { merge: 1 } });
 }
 /** 시연 중 일어난 일(덮개 기록) — 감사로그 자리. */
 export async function activityLog() {
@@ -352,7 +353,7 @@ export async function inspections() {
   return withReadOperation("inspections", {}, async () => {
     if (useDb) return liveTable("inspection");
     return [...readOverlay().inspection, ...seed("inspection")];
-  }, { work: { merge: 1 } });
+  }, { memo: true, work: { merge: 1 } });
 }
 
 /**
@@ -459,7 +460,7 @@ export async function readTable(table: string, keyCol?: string): Promise<Row[]> 
       rows = rows.map((r) => (patches[r[keyCol]] ? { ...r, ...patches[r[keyCol]] } : r));
     }
     return rows;
-  }, { work: { normalization: 1, merge: 1 } });
+  }, { memo: true, work: { normalization: 1, merge: 1 } });
 }
 
 /** 원천 표시 — 화면 하단에 PostgreSQL인지 예시 자료 파일(CSV)인지 밝힌다. 화면 말에 「판」을 쓰지 않는다. */

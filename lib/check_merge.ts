@@ -73,7 +73,7 @@ export type CheckFlag = {
 export async function checkFlagged(year: string, role: string): Promise<CheckFlag[]> {
   const rows = await withReadOperation("checkFlagged", { year, role }, () =>
     withDbReadScope("checkFlagged", () => checkFlaggedInner(year, role)),
-    { work: { filter: 8, merge: 7 } },
+    { memo: true, work: { filter: 8, merge: 7 } },
   );
   if (process.env.ADOMS_DATA_BACKEND === "postgres" || process.env.ADOMS_READ_VERIFY === "1") {
     console.info("[adoms-check-flagged]", JSON.stringify({ year, role, rows: rows.length, sha256: checkFlaggedDigest(rows) }));

@@ -119,7 +119,7 @@ export async function roundsOf(t: TrackKey): Promise<Row[]> {
   return withReadOperation("roundsOf", { t }, async () => {
     const rows = await readTable("usf_round", "round_id");
     return rows.filter((r) => r.track === t).sort((a, b) => String(b.created_at).localeCompare(String(a.created_at)));
-  }, { work: { filter: 1, sort: 1 } });
+  }, { memo: true, work: { filter: 1, sort: 1 } });
 }
 export async function roundOf(t: TrackKey, id?: string): Promise<Row | null> {
   const rs = await roundsOf(t);
@@ -134,7 +134,7 @@ export async function judgesOf(roundId: string): Promise<Map<string, Row>> {
     const m = new Map<string, Row>();
     for (const r of rows) { const k = `${r.item_key}|${r.dept_id}`; if (!m.has(k)) m.set(k, r); }
     return m;
-  }, { work: { filter: 1, sort: 1, merge: 1 } });
+  }, { memo: true, work: { filter: 1, sort: 1, merge: 1 } });
 }
 
 /* ── 칸 계산 ───────────────────────────────────────────── */
@@ -249,7 +249,7 @@ export async function oldAggOf(t: TrackKey, deptIds: string[], itemKeys: string[
     }
   }
   return out;
-  }, { work: { filter: 2 + itemKeys.length * deptIds.length, sort: itemKeys.length * deptIds.length, merge: 3 } });
+  }, { memo: true, work: { filter: 2 + itemKeys.length * deptIds.length, sort: itemKeys.length * deptIds.length, merge: 3 } });
 }
 export const oldResultSt = OLD_RESULT_ST;
 
@@ -336,7 +336,7 @@ export async function buildCells(t: TrackKey, deptIds: string[], itemKeys: strin
     }
   }
   return { items, cells };
-  }, { work: { normalization: 1, filter: 4 + itemKeys.length * deptIds.length * 4, sort: itemKeys.length * deptIds.length * 3, merge: 3 } });
+  }, { memo: true, work: { normalization: 1, filter: 4 + itemKeys.length * deptIds.length * 4, sort: itemKeys.length * deptIds.length * 3, merge: 3 } });
 }
 
 /** 판정을 겹친 칸. */
@@ -370,7 +370,7 @@ export async function cellsOfRound(t: TrackKey, round: Row) {
     }
   }
   return { items, deptIds, cells, period: per };
-  }, { work: { merge: 4 } });
+  }, { memo: true, work: { merge: 4 } });
 }
 
 /* ── 09-26 사용자: 옛 점검 화면 합치기 2차 — 지난 회차 판정 물려받기 ─────────────────────

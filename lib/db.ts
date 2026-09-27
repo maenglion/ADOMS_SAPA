@@ -9,6 +9,7 @@ type QueryTupleMetric = {
   query: string;
   logicalCalls: number;
   sqlCalls: number;
+  rawRows: number;
   dbMs: number;
   acquireMs: number;
   sqlMs: number;
@@ -23,6 +24,10 @@ type DbReadTrace = {
   dbMs: number;
   acquireMs: number;
   sqlMs: number;
+  rawRows: number;
+  dbIntervals: Array<[number, number]>;
+  acquireIntervals: Array<[number, number]>;
+  queryIntervals: Array<[number, number]>;
   cache: Map<string, Promise<DbRow[]>>;
   tuples: Map<string, QueryTupleMetric>;
   scopes: Map<string, { logicalCalls: number; sqlCalls: number; cacheHits: number; dbMs: number; tuples: Set<string> }>;
@@ -30,6 +35,7 @@ type DbReadTrace = {
     calls: number;
     cacheHits: number;
     wallMs: number;
+    cloneMs: number;
     returnedRows: number;
     args: Set<string>;
     normalization: number;
@@ -42,9 +48,23 @@ type DbReadTrace = {
 
 const dbReadTrace = new AsyncLocalStorage<DbReadTrace>();
 const dbReadScope = new AsyncLocalStorage<string>();
+const semanticMemoEnabled = process.env.ADOMS_READ_SEMANTIC_CACHE !== "0";
 
 const roundMs = (value: number) => Math.round(value * 100) / 100;
 const cloneRows = (rows: DbRow[]) => rows.map((row) => ({ ...row }));
+
+function intervalWallMs(intervals: Array<[number, number]>): number {
+  if (!intervals.length) return 0;
+  const sorted = [...intervals].sort((a, b) => a[0] - b[0]);
+  let total = 0;
+  let [start, end] = sorted[0];
+  for (let i = 1; i < sorted.length; i++) {
+    const [nextStart, nextEnd] = sorted[i];
+    if (nextStart <= end) end = Math.max(end, nextEnd);
+    else { total += end - start; start = nextStart; end = nextEnd; }
+  }
+  return total + end - start;
+}
 
 type ReadWork = Partial<Record<"normalization" | "filter" | "sort" | "merge", number>>;
 
@@ -74,36 +94,44 @@ export async function withReadOperation<T>(
   const argKey = JSON.stringify(args);
   const cacheKey = `${name}\u0000${argKey}`;
   const metric = trace.semantic.get(name) || {
-    calls: 0, cacheHits: 0, wallMs: 0, returnedRows: 0, args: new Set<string>(),
+    calls: 0, cacheHits: 0, wallMs: 0, cloneMs: 0, returnedRows: 0, args: new Set<string>(),
     normalization: 0, filter: 0, sort: 0, merge: 0,
   };
   metric.calls++;
   metric.args.add(argKey);
-  for (const key of ["normalization", "filter", "sort", "merge"] as const) {
-    metric[key] += options.work?.[key] || 0;
-  }
   trace.semantic.set(name, metric);
 
-  if (options.memo) {
+  if (options.memo && semanticMemoEnabled) {
     const cached = trace.semanticCache.get(cacheKey);
     if (cached) {
       metric.cacheHits++;
       const value = await cached as T;
       metric.returnedRows += resultSize(value);
-      return cloneSemantic(value);
+      const cloneStartedAt = performance.now();
+      const cloned = cloneSemantic(value);
+      metric.cloneMs += performance.now() - cloneStartedAt;
+      return cloned;
     }
+  }
+
+  for (const key of ["normalization", "filter", "sort", "merge"] as const) {
+    metric[key] += options.work?.[key] || 0;
   }
 
   const startedAt = performance.now();
   const pending = run();
-  if (options.memo) trace.semanticCache.set(cacheKey, pending);
+  if (options.memo && semanticMemoEnabled) trace.semanticCache.set(cacheKey, pending);
   try {
     const value = await pending;
     metric.wallMs += performance.now() - startedAt;
     metric.returnedRows += resultSize(value);
-    return options.memo ? cloneSemantic(value) : value;
+    if (!options.memo || !semanticMemoEnabled) return value;
+    const cloneStartedAt = performance.now();
+    const cloned = cloneSemantic(value);
+    metric.cloneMs += performance.now() - cloneStartedAt;
+    return cloned;
   } catch (error) {
-    if (options.memo) trace.semanticCache.delete(cacheKey);
+    if (options.memo && semanticMemoEnabled) trace.semanticCache.delete(cacheKey);
     throw error;
   }
 }
@@ -123,6 +151,10 @@ export async function withDbReadTrace<T>(label: string, run: () => Promise<T>): 
     dbMs: 0,
     acquireMs: 0,
     sqlMs: 0,
+    rawRows: 0,
+    dbIntervals: [],
+    acquireIntervals: [],
+    queryIntervals: [],
     cache: new Map(),
     tuples: new Map(),
     scopes: new Map(),
@@ -153,37 +185,39 @@ export async function withDbReadTrace<T>(label: string, run: () => Promise<T>): 
         cacheHits: item.cacheHits,
         returnedRows: item.returnedRows,
         wallMs: roundMs(item.wallMs),
+        cloneMs: roundMs(item.cloneMs),
         normalization: item.normalization,
         filter: item.filter,
         sort: item.sort,
         merge: item.merge,
       }]));
-      const compactSemantic = Object.entries(semantic).map(([name, item]) => ({
-        name,
-        calls: item.calls,
-        uniqueArgs: item.uniqueArgs,
-        cacheHits: item.cacheHits,
-        returnedRows: item.returnedRows,
-        wallMs: item.wallMs,
-        normalization: item.normalization,
-        filter: item.filter,
-        sort: item.sort,
-        merge: item.merge,
-      }));
+      const compactSemantic = Object.entries(semantic).map(([name, item]) => [
+        name, item.calls, item.uniqueArgs, item.cacheHits, item.returnedRows,
+        item.wallMs, item.cloneMs, item.normalization, item.filter, item.sort, item.merge,
+      ]);
+      const renderMs = performance.now() - trace.startedAt;
+      const dbWallMs = intervalWallMs(trace.dbIntervals);
+      const acquireWallMs = intervalWallMs(trace.acquireIntervals);
+      const queryWallMs = intervalWallMs(trace.queryIntervals);
       console.info("[adoms-read-metrics]", JSON.stringify({
-        label: trace.label,
-        logicalCalls: trace.logicalCalls,
-        distinctTuples: trace.tuples.size,
-        duplicateCalls: trace.logicalCalls - trace.tuples.size,
-        sqlCalls: trace.sqlCalls,
-        cacheHits: trace.cacheHits,
-        dbMs: roundMs(trace.dbMs),
-        acquireMs: roundMs(trace.acquireMs),
-        sqlMs: roundMs(trace.sqlMs),
-        dataRenderMs: roundMs(performance.now() - trace.startedAt),
-        serverComputeMs: roundMs(performance.now() - trace.startedAt - trace.dbMs),
-        scopes,
-        semantic: compactSemantic,
+        l: trace.label,
+        lc: trace.logicalCalls,
+        dt: trace.tuples.size,
+        dc: trace.logicalCalls - trace.tuples.size,
+        sc: trace.sqlCalls,
+        ch: trace.cacheHits,
+        db: roundMs(trace.dbMs),
+        acq: roundMs(trace.acquireMs),
+        q: roundMs(trace.sqlMs),
+        raw: trace.rawRows,
+        dbWall: roundMs(dbWallMs),
+        acqWall: roundMs(acquireWallMs),
+        qWall: roundMs(queryWallMs),
+        render: roundMs(renderMs),
+        nonDbWall: roundMs(Math.max(0, renderMs - dbWallMs)),
+        scope: Object.entries(scopes).map(([name, item]) => [name, item.logicalCalls, item.distinctTuples, item.sqlCalls, item.cacheHits, item.dbMs]),
+        sem: compactSemantic,
+        tuple: tuples.map((item) => [item.relation, item.logicalCalls, item.sqlCalls, item.rawRows, item.dbMs, item.acquireMs, item.sqlMs]),
       }));
     }
   });
@@ -276,6 +310,7 @@ export async function queryRows(relation: string, queryString: string): Promise<
       query: queryString,
       logicalCalls: 0,
       sqlCalls: 0,
+      rawRows: 0,
       dbMs: 0,
       acquireMs: 0,
       sqlMs: 0,
@@ -374,11 +409,16 @@ export async function queryRows(relation: string, queryString: string): Promise<
     const elapsed = finishedAt - startedAt;
     if (trace) {
       trace.sqlCalls++;
+      trace.rawRows += result.rows.length;
       trace.dbMs += elapsed;
       trace.acquireMs += acquireElapsed;
       trace.sqlMs += sqlElapsed;
+      trace.dbIntervals.push([startedAt, finishedAt]);
+      trace.acquireIntervals.push([startedAt, acquiredAt]);
+      trace.queryIntervals.push([acquiredAt, finishedAt]);
       const tuple = trace.tuples.get(tupleKey)!;
       tuple.sqlCalls++;
+      tuple.rawRows += result.rows.length;
       tuple.dbMs += elapsed;
       tuple.acquireMs += acquireElapsed;
       tuple.sqlMs += sqlElapsed;
@@ -410,7 +450,7 @@ export async function queryAuditLog(): Promise<DbRow[]> {
     trace.logicalCalls++;
     const tuple = trace.tuples.get(tupleKey) || {
       relation: "audit_log", query: "compat-all-import-order", logicalCalls: 0,
-      sqlCalls: 0, dbMs: 0, acquireMs: 0, sqlMs: 0,
+      sqlCalls: 0, rawRows: 0, dbMs: 0, acquireMs: 0, sqlMs: 0,
     };
     tuple.logicalCalls++;
     trace.tuples.set(tupleKey, tuple);
@@ -446,11 +486,16 @@ export async function queryAuditLog(): Promise<DbRow[]> {
       const sqlElapsed = finishedAt - acquiredAt;
       const elapsed = finishedAt - startedAt;
       trace.sqlCalls++;
+      trace.rawRows += result.rows.length;
       trace.dbMs += elapsed;
       trace.acquireMs += acquireElapsed;
       trace.sqlMs += sqlElapsed;
+      trace.dbIntervals.push([startedAt, finishedAt]);
+      trace.acquireIntervals.push([startedAt, acquiredAt]);
+      trace.queryIntervals.push([acquiredAt, finishedAt]);
       const tuple = trace.tuples.get(tupleKey)!;
       tuple.sqlCalls++;
+      tuple.rawRows += result.rows.length;
       tuple.dbMs += elapsed;
       tuple.acquireMs += acquireElapsed;
       tuple.sqlMs += sqlElapsed;

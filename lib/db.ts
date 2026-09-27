@@ -200,7 +200,7 @@ export async function withDbReadTrace<T>(label: string, run: () => Promise<T>): 
       const dbWallMs = intervalWallMs(trace.dbIntervals);
       const acquireWallMs = intervalWallMs(trace.acquireIntervals);
       const queryWallMs = intervalWallMs(trace.queryIntervals);
-      console.info("[adoms-read-metrics]", JSON.stringify({
+      const summary: Record<string, unknown> = {
         l: trace.label,
         lc: trace.logicalCalls,
         dt: trace.tuples.size,
@@ -217,8 +217,9 @@ export async function withDbReadTrace<T>(label: string, run: () => Promise<T>): 
         render: roundMs(renderMs),
         nonDbWall: roundMs(Math.max(0, renderMs - dbWallMs)),
         scope: Object.entries(scopes).map(([name, item]) => [name, item.logicalCalls, item.distinctTuples, item.sqlCalls, item.cacheHits, item.dbMs]),
-        sem: compactSemantic,
-      }));
+      };
+      if (process.env.ADOMS_READ_SEMANTIC_DETAILS === "1") summary.sem = compactSemantic;
+      console.info("[adoms-read-metrics]", JSON.stringify(summary));
     }
   });
 }

@@ -43,6 +43,7 @@ const nextConfig: NextConfig = {
     "/*": [
       ...seedTrace.selected,
       "./data/_데모_용인시_20260920/ops_*/forms/**/*",
+      "./scripts/freeze_time.cjs",
     ],
   },
   outputFileTracingExcludes: {

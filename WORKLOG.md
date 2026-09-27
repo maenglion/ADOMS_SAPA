@@ -556,4 +556,4 @@
 - 실제 변경: 상단 grid item의 stretch를 제거하고 세 카드의 접힌 높이를 250px로 고정했다. 전체 알림 상태에서는 알림 목록에만 기존 520px 최대 높이와 세로 scroll을 적용한다. 토글에 회색 배경·24px 크기와 펼침 상태 접근성 속성을 추가했다.
 - 검증: 접힘과 펼침 상태에서 시기도래·기한 초과 카드의 높이와 기한 초과 건수 위치가 동일하며, 알림 목록만 아래로 확장되는지 확인했다. TypeScript 정적 검사와 Next.js production build를 통과했다.
 - 관련 파일: `app/page.tsx`, `app/us-lsx.css`, `WORKLOG.md`
-- 관련 commit: pending
+- 관련 commit: `8748006`

@@ -334,3 +334,14 @@
 - 검증: `/actions`의 SQL-result 계층 logical call은 270회에서 18회로 감소했고 SQL은 16회로 유지됐다. `CheckFlag[]`는 30행, SHA-256 `5c5189aee2610e7b74c0474481a8b9b91b8657284ddb0efa80911682a0d07bc1`로 동일하다. warm 중앙값은 14.625초에서 5.477초로 62.6% 감소했고 비DB server 구간은 약 9.983초에서 1.894초로 줄었다. 명시적으로 발행된 기준시점 회귀는 HTTP 137/137, golden 7,373/7,373, 안정값 mismatch 0, expected-only/extra 0/0, metrics 159/159, crosscheck 68/68로 통과했고 `/exec` raw 4건은 기존 시각 의존 분류를 유지했다. 검증용 시간 고정 설정은 완료 뒤 제거했다. 다만 PostgreSQL은 CSV보다 dashboard 2.41배, `/actions` 1.54배, `/duties/list` 2.60배, `/evidence` 2.99배, `/tasks` 3.07배 느려 Production cutover는 계속 보류한다. TypeScript 검사와 production build는 통과했다.
 - 관련 파일: `lib/db.ts`, `instrumentation.ts`, `next.config.ts`, `scripts/freeze_time.cjs`, `db/read-shadow/read_performance_optimization.csv`, `READ_PERFORMANCE_VERIFY.md`, `READ_CUTOVER_VERIFY.md`, `WORKLOG.md`
 - 관련 commit: `f663bea`~`f05c9c2`
+
+### [31] 3400 시연판 PostgreSQL 이관 검증 규칙 완화
+- 상태: 결정
+- 배경: 원본 작업 측 요청에 따라 3400 시연판 PostgreSQL 이관의 완료 기준과 반복 최적화 단계의 검증 범위를 재정의할 필요가 생겼다. 정본·GraphDB와 현재 시연판은 서로 다른 릴리스 계보와 목적을 가지며, 매 최적화 단계마다 전체 전수 검증을 반복하면 성능 개선의 반복 속도가 과도하게 느려진다.
+- 결정: 정본·GraphDB 검증은 이번 PostgreSQL 이관 작업 범위에서 제외한다. 동일 입력과 동일 기준일에서의 사용자 가시 결과 동등성을 완료 기준으로 삼는다. 내부 데이터 접근, 계산, materialization 구조는 결과 계약을 유지하는 한 성능 개선을 위해 변경할 수 있다. 반복 최적화 단계에서는 핵심 지표 159개와 계산 JSON 6개를 기준으로 검증하고 전체 전수 검증은 매 단계 반복하지 않는다. 성능 작업은 `서버 계산 중복 제거 → 공통 PostgreSQL overhead 확인 → 대표 5경로 재측정 → Production READ 전환` 순서로 진행한다.
+- 이유: 이번 작업의 목적은 최신 정본이나 GraphDB의 관계형 복제본을 만드는 것이 아니라, 명시적으로 발행된 3400 시연판 입력과 기준일의 결과를 PostgreSQL에서 같은 의미와 허용 가능한 속도로 재현하는 것이다. 결과 계약을 지키면서 내부 구조 변경을 허용하고 단계별 검증 비용을 줄여야 실제 병목 개선을 신속하게 반복할 수 있다.
+- 영향 범위: PostgreSQL READ 성능 최적화, 단계별 회귀검증 범위, Production READ 전환 순서. 정본·GraphDB 자산, PostgreSQL baseline 데이터, WRITE 경로, 사용자 가시 결과 계약에는 변경이 없다.
+- 실제 변경: 검증 및 최적화 운영 원칙만 확정했다. 앱 코드, DB schema/data, 배포 환경, golden 자료는 변경하지 않았다.
+- 검증: 후속 반복 최적화는 동일 입력·동일 기준일에서 핵심 지표 159개와 계산 JSON 6개를 우선 gate로 사용한다. 대표 경로 성능 목표를 달성한 뒤 필요한 최종 전수 검증과 Production READ 전환 여부를 별도로 판정한다.
+- 관련 파일: `WORKLOG.md`
+- 관련 commit: pending

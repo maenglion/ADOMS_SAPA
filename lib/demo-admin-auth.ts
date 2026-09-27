@@ -1,7 +1,8 @@
 import "server-only";
 import { createHmac, randomBytes, timingSafeEqual } from "node:crypto";
 
-export const DEMO_ADMIN_COOKIE = "adoms-demo-admin";
+/** QA/service 관리자 인증. ADOMS 사용자 역할(adoms-role)과 완전히 별개다. */
+export const SERVICE_ADMIN_COOKIE = "adoms-service-admin";
 const SESSION_SECONDS = 3 * 60 * 60;
 
 function safeEqual(left: string, right: string): boolean {

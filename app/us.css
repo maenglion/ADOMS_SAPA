@@ -46,18 +46,17 @@ body:has(.us-app){overflow-x:auto;background:#eef1ed}
 .us-logo-sys{font-size:1.12rem;font-weight:800;line-height:1;letter-spacing:.08em}
 .us-gnb{display:flex;flex:1;justify-content:space-between;gap:0;align-items:stretch;min-width:max-content;flex-wrap:nowrap}
 .us-gnb-g{position:relative;display:flex;justify-content:center;flex:0 0 auto;min-width:max-content}
-.us-gnb-h{height:100%;display:flex;align-items:center;justify-content:center;padding:0 10px;color:#111 !important;
-  font-size:1.24rem;font-weight:700;line-height:1.2;text-decoration:none !important;white-space:nowrap;letter-spacing:-.5px}
+.us-gnb-h{height:100%;display:flex;align-items:center;justify-content:center;padding:0 10px;border:0;background:transparent;color:#111 !important;
+  font-family:inherit;font-size:1.24rem;font-weight:700;line-height:1.2;text-decoration:none !important;white-space:nowrap;letter-spacing:-.5px;cursor:pointer}
 .us-gnb-g:last-child{align-items:center}
 .us-gnb-g:last-child>.us-gnb-h{height:34px;padding:0 20px;border-radius:17px;background:#f0f2f3;font-size:1rem;font-weight:600}
 .us-gnb-g.on>.us-gnb-h,.us-gnb-h:hover{color:var(--us-g1) !important}
-.us-gnb-g.on>.us-gnb-h{border-bottom:3px solid var(--us-g2)}
 .us-gnb-m{display:none;position:absolute;left:50%;transform:translateX(-50%);top:100%;z-index:50;min-width:220px;background:#fff;
-  border:1px solid var(--us-line);border-top:3px solid var(--us-g2);border-radius:0 0 10px 10px;box-shadow:0 8px 20px #1f2d1a22;padding:8px}
+  border:1px solid var(--us-line);border-top:4px solid var(--us-g2);border-radius:0 0 10px 10px;box-shadow:0 8px 20px #1f2d1a22;padding:8px}
 .us-gnb-g.open .us-gnb-m{display:block}
 .us-gnb-m a{display:block;padding:8px 12px;border-radius:6px;color:#222 !important;font-size:1rem;font-weight:600;white-space:nowrap}
 .us-gnb-m a:hover,.us-gnb-m a.on{background:var(--us-g3);color:var(--us-g1) !important;text-decoration:none}
-.us-gnb-sub{font-size:.82rem;color:var(--us-mut);font-weight:800;padding:8px 12px 2px;border-top:1px solid #e5eae2;margin-top:4px}
+.us-gnb-sub{font-size:.82rem;color:color-mix(in srgb,var(--us-mut) 80%,white 20%);font-weight:700;padding:8px 12px 2px;border-top:1px solid #e5eae2;margin-top:4px;cursor:default}
 .us-gnb-sub:first-child{border-top:0;margin-top:0}
 .us-user{display:flex;flex-direction:column;align-items:flex-end;gap:6px;flex:none}
 .us-user .userme{color:#333}

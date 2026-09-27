@@ -1,11 +1,11 @@
 import { NextRequest, NextResponse } from "next/server";
-import { DEMO_ADMIN_COOKIE, validAdminSession } from "@/lib/demo-admin-auth";
+import { SERVICE_ADMIN_COOKIE, validAdminSession } from "@/lib/demo-admin-auth";
 import { callReadServer } from "@/lib/read-server-admin";
 
 export const dynamic = "force-dynamic";
 
 export async function POST(request: NextRequest) {
-  if (!validAdminSession(request.cookies.get(DEMO_ADMIN_COOKIE)?.value)) {
+  if (!validAdminSession(request.cookies.get(SERVICE_ADMIN_COOKIE)?.value)) {
     return NextResponse.json({ ok: false, error: "관리자 로그인이 필요합니다." }, { status: 401 });
   }
   try {

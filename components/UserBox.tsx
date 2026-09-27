@@ -3,6 +3,7 @@ import { useRouter, useSearchParams } from "next/navigation";
 import { Suspense, useState } from "react";
 import { ROLES } from "./RoleSwitch";
 import { ROLE_LABEL } from "@/lib/roles";
+import { canAccess, normRole } from "@/lib/perm";
 
 /**
  * 로그인 사용자 — 이용자 고르기.
@@ -15,30 +16,34 @@ export type Who = { dept: string; name: string; duty: string };
 function Inner({ who }: { who: Record<string, Who> }) {
   const router = useRouter();
   const sp = useSearchParams();
-  const role = sp?.get("role") || "gm";
-  const w = who[role];
+  const adomsRole = normRole(sp?.get("role"));
+  const w = who[adomsRole];
   const [changedRole, setChangedRole] = useState<string | null>(null);
 
   return (
     <>
       <span className="userme">
         <select
-          value={role}
+          value={adomsRole}
           aria-label="이용자 바꾸기"
           title={w ? `${w.dept} ${w.name}${w.duty ? " " + w.duty : ""}` : ""}
           onChange={(e) => {
             const nextRole = e.target.value;
-            if (nextRole === role) return;
+            if (nextRole === adomsRole) return;
+            window.dispatchEvent(new Event("adoms-role-change"));
             setChangedRole(nextRole);
             void fetch("/api/demo-admin/event", {
               method: "POST",
               headers: { "content-type": "application/json" },
-              body: JSON.stringify({ eventType: "role_change", from: role, to: nextRole, role: nextRole, route: location.pathname }),
+              body: JSON.stringify({ eventType: "role_change", from: adomsRole, to: nextRole, role: nextRole, route: location.pathname }),
               keepalive: true,
             });
-            const p = new URLSearchParams(Array.from(sp?.entries() || []));
+            const keepCurrentPath = canAccess(nextRole, location.pathname);
+            const p = keepCurrentPath
+              ? new URLSearchParams(Array.from(sp?.entries() || []))
+              : new URLSearchParams();
             p.set("role", nextRole);
-            router.push(`?${p.toString()}`);
+            router.push(`${keepCurrentPath ? location.pathname : "/"}?${p.toString()}`);
           }}
         >
           {ROLES.map((r) => (
@@ -51,7 +56,7 @@ function Inner({ who }: { who: Record<string, Who> }) {
           <section className="us-modal us-role-change-modal" role="dialog" aria-modal="true" aria-labelledby="role-change-title">
             <div className="us-modal-h" id="role-change-title">사용자 유형 변경</div>
             <div className="us-modal-b us-role-change-body">
-              <p>사용자가 <strong>{ROLE_LABEL[changedRole] || changedRole}</strong>으로 변경되었습니다.</p>
+              <p>사용자 유형이 <strong>{ROLE_LABEL[changedRole] || changedRole}</strong>로 변경되었습니다.</p>
               <p className="us-muted">해당 사용자 권한에 맞춰 메뉴와 화면이 표시됩니다.</p>
               <button type="button" className="us-btn g" onClick={() => setChangedRole(null)}>확인</button>
             </div>

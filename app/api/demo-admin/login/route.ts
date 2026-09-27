@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import {
-  DEMO_ADMIN_COOKIE,
+  SERVICE_ADMIN_COOKIE,
   adminAuthConfigured,
   adminCookieOptions,
   createAdminSession,
@@ -28,6 +28,6 @@ export async function POST(request: NextRequest) {
   }
   await logLogin(true);
   const response = NextResponse.json({ ok: true });
-  response.cookies.set(DEMO_ADMIN_COOKIE, createAdminSession(), adminCookieOptions());
+  response.cookies.set(SERVICE_ADMIN_COOKIE, createAdminSession(), adminCookieOptions());
   return response;
 }

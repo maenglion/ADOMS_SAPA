@@ -49,6 +49,10 @@ export type Rule = {
 
 /** 막는 규칙 — 주소가 긴 것이 먼저(가장 길게 맞는 규칙 하나만 쓴다). */
 export const RULES: Rule[] = [
+  { prefix: "/law/changes", roles: ["gm"], menu: "법령 개정 현황",
+    basis: "09-27 사용자 지시 — 법 의무사항의 법령 개정은 총괄만" },
+  { prefix: "/duties", roles: ["gm"], menu: "의무 목록",
+    basis: "09-27 사용자 지시 — 법 의무사항의 의무 목록은 총괄만" },
   { prefix: "/admin/system", roles: ["gm"], menu: "시스템 관리",
     basis: "SCR-003 시스템 관리자 — 중대재해 담당부서만" },
   { prefix: "/admin/role", roles: ["gm"], menu: "담당자 권한지정",

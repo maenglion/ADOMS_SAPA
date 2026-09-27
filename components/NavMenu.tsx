@@ -59,32 +59,40 @@ function UsGnb({ path, search, show }: { path: string; search: string; show: (m:
   const css = useSideCss();
   const cur = groups.find((g) => groupHas(g.items, path, search))
     || (path === "/" ? groups.find((g) => g.key === "이행현황") || groups[0] : undefined);
-  const [openKey, setOpenKey] = useState<string | null>(null);
-  useEffect(() => setOpenKey(null), [path, search]);
+  // current route(cur)와 열린 드롭다운(openMenuKey)은 서로 다른 상태다.
+  // 실제 표시 여부는 이 값 하나만 결정한다.
+  const [openMenuKey, setOpenMenuKey] = useState<string | null>(null);
+  useEffect(() => setOpenMenuKey(null), [path, search]);
   useEffect(() => {
-    const close = (event: KeyboardEvent) => event.key === "Escape" && setOpenKey(null);
+    const close = (event: KeyboardEvent) => event.key === "Escape" && setOpenMenuKey(null);
+    const closeForRoleChange = () => setOpenMenuKey(null);
     document.addEventListener("keydown", close);
-    return () => document.removeEventListener("keydown", close);
+    window.addEventListener("adoms-role-change", closeForRoleChange);
+    return () => {
+      document.removeEventListener("keydown", close);
+      window.removeEventListener("adoms-role-change", closeForRoleChange);
+    };
   }, []);
   return (
-    <nav className="us-gnb">
+    <nav className="us-gnb" onMouseLeave={() => setOpenMenuKey(null)}>
       {/* 좌측 공용 메뉴의 권한 없는·숨긴 링크를 가린다(lib/menu.ts sideHideCss) */}
       {css && <style>{css}</style>}
       {groups.map((g) => {
         const key = g.key || g.label;
         return (
-        <div key={key} className={`us-gnb-g${g === cur ? " on" : ""}${openKey === key ? " open" : ""}`}
-          onMouseEnter={() => setOpenKey(key)} onMouseLeave={() => setOpenKey(null)}
-          onFocusCapture={() => setOpenKey(key)}
-          onBlurCapture={(event) => { if (!event.currentTarget.contains(event.relatedTarget as Node | null)) setOpenKey(null); }}>
-          <Link href={(g.items.find((m) => m.href) as MenuItem).href} className="us-gnb-h" onClick={() => setOpenKey(null)}>
+        <div key={key} className={`us-gnb-g${g === cur ? " on" : ""}${openMenuKey === key ? " open" : ""}`}
+          onMouseEnter={() => setOpenMenuKey(key)}
+          onFocusCapture={() => setOpenMenuKey(key)}
+          onBlurCapture={(event) => { if (!event.currentTarget.contains(event.relatedTarget as Node | null)) setOpenMenuKey(null); }}>
+          <button type="button" className="us-gnb-h" aria-expanded={openMenuKey === key}
+            onClick={() => setOpenMenuKey(key)}>
             {displayGnbLabel(g.key || g.label)}
-          </Link>
-          <div className="us-gnb-m">
+          </button>
+          {openMenuKey === key && <div className="us-gnb-m">
             {g.items.map((m, i) => m.heading
               ? <div key={"h" + i} className="us-gnb-sub">{m.label}</div>
-              : <Link key={m.href} href={m.href} className={m.href === best(g.items) ? "on" : ""} onClick={() => setOpenKey(null)}><SubLabel text={m.label} /></Link>)}
-          </div>
+              : <Link key={m.href} href={m.href} className={m.href === best(g.items) ? "on" : ""} onClick={() => setOpenMenuKey(null)}><SubLabel text={m.label} /></Link>)}
+          </div>}
         </div>
       )})}
     </nav>

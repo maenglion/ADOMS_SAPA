@@ -93,6 +93,7 @@ export async function withReadOperation<T>(
   if (!trace) return run();
   const argKey = JSON.stringify(args);
   const cacheKey = `${name}\u0000${argKey}`;
+  const memoActive = options.memo && semanticMemoEnabled && trace.label.startsWith("/actions");
   const metric = trace.semantic.get(name) || {
     calls: 0, cacheHits: 0, wallMs: 0, cloneMs: 0, returnedRows: 0, args: new Set<string>(),
     normalization: 0, filter: 0, sort: 0, merge: 0,
@@ -101,7 +102,7 @@ export async function withReadOperation<T>(
   metric.args.add(argKey);
   trace.semantic.set(name, metric);
 
-  if (options.memo && semanticMemoEnabled) {
+  if (memoActive) {
     const cached = trace.semanticCache.get(cacheKey);
     if (cached) {
       metric.cacheHits++;
@@ -120,18 +121,18 @@ export async function withReadOperation<T>(
 
   const startedAt = performance.now();
   const pending = run();
-  if (options.memo && semanticMemoEnabled) trace.semanticCache.set(cacheKey, pending);
+  if (memoActive) trace.semanticCache.set(cacheKey, pending);
   try {
     const value = await pending;
     metric.wallMs += performance.now() - startedAt;
     metric.returnedRows += resultSize(value);
-    if (!options.memo || !semanticMemoEnabled) return value;
+    if (!memoActive) return value;
     const cloneStartedAt = performance.now();
     const cloned = cloneSemantic(value);
     metric.cloneMs += performance.now() - cloneStartedAt;
     return cloned;
   } catch (error) {
-    if (options.memo && semanticMemoEnabled) trace.semanticCache.delete(cacheKey);
+    if (memoActive) trace.semanticCache.delete(cacheKey);
     throw error;
   }
 }

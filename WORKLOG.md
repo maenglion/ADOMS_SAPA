@@ -436,3 +436,14 @@
 - 검증: TypeScript 정적 검사와 Next.js production build를 통과했다. branch deploy와 Production에서 일반 GNB 1.02rem, `시연참고` 0.88rem 및 최신 commit 반영을 확인했다.
 - 관련 파일: `app/us.css`, `WORKLOG.md`
 - 관련 commit: pending
+
+### [40] Production READ server 인증 토큰 scope 복구
+- 상태: 완료
+- 배경: 최신 UI를 Production에 통합한 뒤 `READ server token is not configured.` 오류로 화면이 표시되지 않았다. Railway READ server에는 인증 토큰이 존재했지만 Netlify의 `ADOMS_READ_SERVER_TOKEN`은 Deploy Preview와 Branch deploy에만 값이 있고 Production 컨텍스트는 비어 있었다.
+- 결정: Railway READ server와 동일한 인증 토큰을 Netlify Production의 서버 전용 환경변수에 설정하고 기존 `cc23aee` Production 소스를 재배포한다. 토큰은 화면·로그·저장소에 기록하지 않는다.
+- 이유: Production만 인증정보를 주입받지 못해 server-side READ proxy가 요청을 시작하기 전에 503을 반환한 것이 직접 원인이며, 코드·DB·READ server 로직 변경 없이 배포 컨텍스트 설정을 바로잡는 것이 최소 수정이다.
+- 영향 범위: Netlify Production 환경변수와 Production 재배포. PostgreSQL schema/data, Railway READ server 데이터, WRITE, UI 코드에는 영향이 없다.
+- 실제 변경: `ADOMS_READ_SERVER_TOKEN` Production 값을 Railway READ server와 일치시켰고 Production을 재배포했다. Deploy Preview와 Branch deploy의 기존 값은 유지했다.
+- 검증: Production dashboard, `/actions`, `/duties/list`, `/evidence`, `/tasks`가 모두 정상 표시됐고 토큰 누락 오류가 재현되지 않았다. dashboard에서 PostgreSQL baseline 기반 관리대상 383개와 시기도래 1,322건을 확인했다. `/actions`, `/duties/list`, `/evidence`, `/tasks`의 단일 요청은 각각 약 1.471초, 0.503초, 0.507초, 0.437초였다.
+- 관련 파일: `WORKLOG.md`
+- 관련 commit: pending

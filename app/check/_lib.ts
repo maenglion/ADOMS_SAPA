@@ -451,7 +451,7 @@ export async function createActionCheckReadContext(
         buildCellsCalculations: 0, oldAggCalculations: 0, cellsCalculations: 0,
       },
     };
-  }, { work: { normalization: 1, merge: 9 } });
+  }, { memo: true, work: { normalization: 1, merge: 9 } });
 }
 
 function taskRowsFromContext(

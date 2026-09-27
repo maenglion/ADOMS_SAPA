@@ -106,8 +106,11 @@ export async function withReadOperation<T>(
   const trace = dbReadTrace.getStore();
   if (!trace) return run();
   const argKey = JSON.stringify(args);
-  const cacheKey = `${name}\u0000${argKey}`;
-  const memoActive = options.memo && semanticMemoEnabled && trace.label.startsWith("/actions");
+  const basisDate = new Intl.DateTimeFormat("en-CA", { timeZone: "Asia/Seoul" }).format(new Date());
+  const cacheKey = `${basisDate}\u0000${name}\u0000${argKey}`;
+  const memoActive = options.memo && semanticMemoEnabled;
+  const serviceCache = memoActive ? readServerSemanticCache() : undefined;
+  const serviceStats = globalThis.__adomsReadServerSemanticStats ||= { hits: 0, misses: 0 };
   const metric = trace.semantic.get(name) || {
     calls: 0, cacheHits: 0, wallMs: 0, cloneMs: 0, returnedRows: 0, args: new Set<string>(),
     normalization: 0, filter: 0, sort: 0, merge: 0,
@@ -127,6 +130,18 @@ export async function withReadOperation<T>(
       metric.cloneMs += performance.now() - cloneStartedAt;
       return cloned;
     }
+    const serviceCached = serviceCache?.get(cacheKey);
+    if (serviceCached) {
+      serviceStats.hits++;
+      metric.cacheHits++;
+      const value = await serviceCached as T;
+      metric.returnedRows += resultSize(value);
+      const cloneStartedAt = performance.now();
+      const cloned = cloneSemantic(value);
+      metric.cloneMs += performance.now() - cloneStartedAt;
+      trace.semanticCache.set(cacheKey, serviceCached);
+      return cloned;
+    }
   }
 
   for (const key of ["normalization", "filter", "sort", "merge"] as const) {
@@ -135,7 +150,13 @@ export async function withReadOperation<T>(
 
   const startedAt = performance.now();
   const pending = run();
-  if (memoActive) trace.semanticCache.set(cacheKey, pending);
+  if (memoActive) {
+    trace.semanticCache.set(cacheKey, pending);
+    if (serviceCache) {
+      serviceStats.misses++;
+      serviceCache.set(cacheKey, pending);
+    }
+  }
   try {
     const value = await pending;
     metric.wallMs += performance.now() - startedAt;
@@ -146,7 +167,10 @@ export async function withReadOperation<T>(
     metric.cloneMs += performance.now() - cloneStartedAt;
     return cloned;
   } catch (error) {
-    if (memoActive) trace.semanticCache.delete(cacheKey);
+    if (memoActive) {
+      trace.semanticCache.delete(cacheKey);
+      serviceCache?.delete(cacheKey);
+    }
     throw error;
   }
 }
@@ -248,6 +272,11 @@ export async function withDbReadTrace<T>(label: string, run: () => Promise<T>): 
           max: 5,
           keepAlive: true,
         },
+        semanticProcess: {
+          size: globalThis.__adomsReadServerSemanticCache?.size || 0,
+          hits: globalThis.__adomsReadServerSemanticStats?.hits || 0,
+          misses: globalThis.__adomsReadServerSemanticStats?.misses || 0,
+        },
         scope: Object.entries(scopes).map(([name, item]) => [name, item.logicalCalls, item.distinctTuples, item.sqlCalls, item.cacheHits, item.dbMs]),
       };
       if (process.env.ADOMS_READ_SEMANTIC_DETAILS === "1") summary.sem = compactSemantic;
@@ -314,11 +343,20 @@ declare global {
   var __adomsPgPoolStats: { connections: number } | undefined;
   // eslint-disable-next-line no-var
   var __adomsReadServerQueryCache: Map<string, Promise<DbRow[]>> | undefined;
+  // eslint-disable-next-line no-var
+  var __adomsReadServerSemanticCache: Map<string, Promise<unknown>> | undefined;
+  // eslint-disable-next-line no-var
+  var __adomsReadServerSemanticStats: { hits: number; misses: number } | undefined;
 }
 
 function readServerQueryCache(): Map<string, Promise<DbRow[]>> | undefined {
   if (process.env.ADOMS_READ_SERVER_SERVICE !== "1") return undefined;
   return globalThis.__adomsReadServerQueryCache ||= new Map();
+}
+
+function readServerSemanticCache(): Map<string, Promise<unknown>> | undefined {
+  if (process.env.ADOMS_READ_SERVER_SERVICE !== "1") return undefined;
+  return globalThis.__adomsReadServerSemanticCache ||= new Map();
 }
 
 export function postgresPool(): Pool {

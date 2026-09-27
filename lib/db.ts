@@ -158,12 +158,18 @@ export async function withDbReadTrace<T>(label: string, run: () => Promise<T>): 
         sort: item.sort,
         merge: item.merge,
       }]));
-      for (const [name, item] of Object.entries(semantic)) {
-        console.info("[adoms-read-semantic]", JSON.stringify({ label: trace.label, name, ...item }));
-      }
-      for (const item of tuples) {
-        console.info("[adoms-read-tuple]", JSON.stringify({ label: trace.label, ...item }));
-      }
+      const compactSemantic = Object.entries(semantic).map(([name, item]) => ({
+        name,
+        calls: item.calls,
+        uniqueArgs: item.uniqueArgs,
+        cacheHits: item.cacheHits,
+        returnedRows: item.returnedRows,
+        wallMs: item.wallMs,
+        normalization: item.normalization,
+        filter: item.filter,
+        sort: item.sort,
+        merge: item.merge,
+      }));
       console.info("[adoms-read-metrics]", JSON.stringify({
         label: trace.label,
         logicalCalls: trace.logicalCalls,
@@ -177,6 +183,7 @@ export async function withDbReadTrace<T>(label: string, run: () => Promise<T>): 
         dataRenderMs: roundMs(performance.now() - trace.startedAt),
         serverComputeMs: roundMs(performance.now() - trace.startedAt - trace.dbMs),
         scopes,
+        semantic: compactSemantic,
       }));
     }
   });

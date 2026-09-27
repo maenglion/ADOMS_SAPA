@@ -1,6 +1,4 @@
 export async function register() {
-  if (process.env.NEXT_RUNTIME !== "nodejs") return;
-
   const fixed = process.env.ADOMS_VERIFY_NOW;
   if (!fixed) return;
 

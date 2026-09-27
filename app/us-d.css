@@ -165,11 +165,5 @@ table.usd-guide{margin-top:14px;font-size:.88rem;table-layout:fixed}
 table.usd-guide td{vertical-align:top}
 table.usd-guide ul{margin:0;padding-left:16px;line-height:1.6}
 
-@media(max-width:1100px){
-  .usd-flows{grid-template-columns:1fr}
-  .usd-sechead{flex-direction:column;align-items:flex-start}
-  .usd-target-sel{min-width:0;max-width:100%}
-}
-
 /* 전역 table td(한 줄 · 말줄임) 를 이 트랙 표에서는 풀어 준다 — 법령 이름·내용이 잘리면 안 된다 */
 table.usd-tbl td,table.usd-mtbl td,table.usd-guide td,table.usd-org-tel td{white-space:normal;overflow:visible;text-overflow:clip;max-width:none}

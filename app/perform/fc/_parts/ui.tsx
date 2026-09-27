@@ -101,7 +101,7 @@ export function Viewer({ title = "이미지 뷰어", url, name, fallback }: { ti
       <div className="us-viewer-b">
         {img ? <img src={url} alt={name || "증빙"} />
           : pdf ? <iframe className="usd-pdf" src={url} title={name || "PDF"} />
-          : url ? <a href={url} target="_blank">{name || "첨부 파일 열기"} ⤓</a>
+          : url ? <a href={url} target="_blank">{name || "첨부 파일 다운로드"}</a>
           : fallback || (name ? <span className="usd-viewer-none">「{name}」 — 미리보기할 원본 파일이 없습니다(파일 이름만 등록됨). 파일을 다시 올리면 여기에서 볼 수 있습니다.</span> : <span className="us-ph">🖼</span>)}
       </div>
     </div>

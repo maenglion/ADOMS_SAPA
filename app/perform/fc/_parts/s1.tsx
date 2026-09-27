@@ -35,7 +35,7 @@ export function StaffScreen({ ctx }: { ctx: Ctx }) {
                 <td>
                   <div className="usd-name">
                     <In rid={r.rid} k="name" v={r.data.name} />
-                    <button className="usd-search" name="intent" value={`modal:staff|${r.rid}`}>🔍 검색</button>
+                    <button className="usd-search us-search-btn" name="intent" value={`modal:staff|${r.rid}`}>검색</button>
                   </div>
                 </td>
                 <td><In rid={r.rid} k="dept" v={r.data.dept} /></td>

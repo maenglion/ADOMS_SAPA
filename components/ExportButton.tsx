@@ -3,5 +3,5 @@ export default function ExportButton({ what, half, label = "엑셀 내려받기"
   { what: "tasks" | "status" | "duties" | "contracts"; half?: string; label?: string; extra?: Record<string, string> }) {
   // [캡처 v2] extra — 지금 보는 표 그대로 받기(재해 구분·연도·보기 등, 09-24)
   const q = new URLSearchParams({ what, ...(half ? { half } : {}), ...(extra || {}) });
-  return <a className="btn ghost sm" href={`/api/export?${q.toString()}`}>⬇ {label}</a>;
+  return <a className="btn ghost sm" href={`/api/export?${q.toString()}`}>{label}</a>;
 }

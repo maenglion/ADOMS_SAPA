@@ -56,7 +56,7 @@ export default async function AdminForms({ searchParams }: { searchParams: Promi
             </select>
           </label>
           <label>서식명 · 법령<input type="text" name="q" defaultValue={q} placeholder="서식 이름이나 법령 이름을 입력하세요" /></label>
-          <button className="usb2-ibtn" type="submit" title="검색">🔍</button>
+          <button className="usb2-ibtn us-search-btn" type="submit">검색</button>
         </form>
       </SearchBox>
 

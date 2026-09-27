@@ -95,7 +95,7 @@ export default function ChartCard({ title, labels, values, unit = "건", type = 
       )}
       {variant === "plain" && <div className={`usg-chart-h plain${toolsLeft ? " left" : ""}`}>{tools}</div>}
       <div className="usg-plotbox">
-        <button type="button" className="usg-dl" title="다운로드" onClick={() => setOpen(true)}>⤓</button>
+        <button type="button" className="usg-dl" onClick={() => setOpen(true)}>다운로드</button>
         <div dangerouslySetInnerHTML={{ __html: svg }} />
         {open && (
           <>

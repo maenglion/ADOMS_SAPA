@@ -33,7 +33,7 @@ export default function StaffPicker({ name, staff, defaultValue = "", label = "�
       <span className="spick">
         <span className="spick-cur">{cur ? <><b>{cur.display_name}</b> <span className="muted">{cur.dept_name} · {cur.duty_role}</span></>
                                          : <span className="muted">지정 안 됨</span>}</span>
-        <button type="button" className="btn ghost sm" onClick={() => { setQ(""); setOpen(true); }}>🔍 {label} 찾기</button>
+        <button type="button" className="btn ghost sm us-search-btn" onClick={() => { setQ(""); setOpen(true); }}>{label} 찾기</button>
       </span>
 
       {open && (

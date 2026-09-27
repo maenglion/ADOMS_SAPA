@@ -49,7 +49,7 @@ export async function StaffStep({ v, recs, people, plans }: {
                   <td>
                     <div className="use-name">
                       <input type="text" name={`${rid}__name`} defaultValue={nameOf(r)} />
-                      {r && <Link className="use-search" href={v.href(`&modal=person&row=${r.rec_id}`)} scroll={false}>🔍 검색</Link>}
+                      {r && <Link className="use-search us-search-btn" href={v.href(`&modal=person&row=${r.rec_id}`)} scroll={false}>검색</Link>}
                     </div>
                   </td>
                   <td><input type="text" name={`${rid}__dept`} defaultValue={d(r, "dept")} /></td>
@@ -104,7 +104,7 @@ export async function StaffStep({ v, recs, people, plans }: {
             <input type="hidden" name="role" value={v.role} /><input type="hidden" name="site" value={v.site.site_id} />
             <input type="hidden" name="modal" value="person" /><input type="hidden" name="row" value={v.sp.row} />
             <label>이름·부서 <input type="text" name="pq" defaultValue={v.sp.pq || ""} placeholder="이름 또는 부서명을 입력하세요" /></label>
-            <button className="use-bbtn">🔍 검색</button>
+            <button className="use-bbtn us-search-btn">검색</button>
           </form>
           <table className="us-tbl use-mtbl">
             <thead><tr><th>이름</th><th>소속(부서)</th><th>담당</th><th></th></tr></thead>
@@ -239,7 +239,7 @@ function ProcCard({ v, rec, card, title }: { v: View; rec?: Rec; card: string; t
         {pdf && rec ? <DelFile rid={rid} idx={all.indexOf(pdf)} /> : <span className="use-ico dim">🗑</span>}
         <FilePick name={`${rid}__file_pdf`} kind="btn" label="찾아보기" />
         <SaveBtn />
-        {pdf?.url ? <a className="use-ico" href={pdf.url} download title="내려받기">⤓</a> : <span className="use-ico dim">⤓</span>}
+        {pdf?.url ? <a className="use-ico" href={pdf.url} download>다운로드</a> : <span className="use-ico dim">-</span>}
       </div>
       <div className="use-pdfbox">
         <div className="use-pdfbox-h">PDF 뷰어</div>

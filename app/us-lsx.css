@@ -39,7 +39,6 @@
 .lsx-log{border:1px solid var(--us-line);border-radius:6px;background:#1f2622;color:#dfe8dc;font-family:Consolas,'D2Coding',monospace;font-size:.84rem;max-height:32rem;overflow:auto;padding:6px 8px}
 .lsx-l{display:grid;grid-template-columns:5.5em 9em 5.5em 1fr;gap:6px;padding:1px 0;border-bottom:1px solid #2c342f}
 .lsx-l .a{color:#9fd08a}.lsx-l .v{color:#9aa}.lsx-l.bad .m,.lsx-l.bad .v{color:#ff8a80}.lsx-l.warn .v{color:#ffd180}.lsx-l.find .v,.lsx-l.find .m{color:#80d8ff}.lsx-l.ok .v{color:#b9f6ca}
-@media (max-width:900px){.lsx-runs{grid-template-columns:1fr}.lsx-diff{grid-template-columns:1fr}}
 
 /* 대시보드 — 기관장 예방활동 상자(09-24) */
 .usa-d-ceo{grid-column:1}
@@ -47,7 +46,6 @@
 .usa-d-ceobox:hover{text-decoration:none;box-shadow:0 3px 12px #2a3a2233}
 .usa-d-ceolast{margin-top:6px;font-size:.9rem;color:var(--us-mut);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .usa-dash > .usa-d-right{grid-column:2;grid-row:1 / span 2}
-@media (max-width:1300px){.usa-dash > .usa-d-right{grid-column:auto;grid-row:auto}.usa-d-ceo{grid-column:auto}}
 
 /* 관리대상 현황 — 관리 근거 법령 · 관계법령 관리시설 표시(09-24) */
 .usb1-laws{font-size:.88rem}
@@ -68,7 +66,6 @@
 .dg-sub{font-weight:700;color:var(--us-g1);font-size:.9rem;margin-bottom:2px}
 .dg-basis{margin-top:8px;background:#f5f8fb;border-left:4px solid #9fb3c8;border-radius:6px;padding:6px 12px;font-size:.92rem}
 .dg-caution{margin-top:8px;background:#fdeeee;border-left:4px solid #e08a8a;border-radius:6px;padding:6px 12px;font-size:.92rem}.dg-caution ul{margin:2px 0 0 1.2em;padding:0}
-@media (max-width:900px){.dg-grid{grid-template-columns:1fr}}
 @media print{.dg-sc{break-inside:avoid}}
 
 /* 대시보드 「담당 중대재해 대상」 목록 — 간격을 좁히고 숫자를 가지런히(09-24 사용자 · 되돌리려면 이 묶음만 지운다) */
@@ -389,7 +386,6 @@ table.usb1-wplist td:nth-child(1){white-space:nowrap}
 .usg-occ-dl dt{font-size:.84rem;color:#6b776c;margin-bottom:2px}
 .usg-occ-dl dd{margin:0;font-weight:500;line-height:1.55;white-space:pre-wrap;word-break:keep-all}
 .usg-occ-dl>div.wide dd{font-weight:400;background:#fff;border:1px solid #e3e9e0;border-radius:6px;padding:8px 10px}
-@media (max-width:900px){.usg-occ-dl{grid-template-columns:repeat(2,minmax(0,1fr))}}
 
 /* 의무이행 좌측 — 대상 3개 묶음 · 꺽쇠로 접기(09-25 사용자 · 되돌리기 = Parts.tsx SIDE_GROUPED=false) */
 .us-tgrp{background:var(--us-g3);border-radius:14px;overflow:hidden;box-shadow:0 2px 6px #2a3a2212}
@@ -468,7 +464,6 @@ table.usb1-wplist td:nth-child(1){white-space:nowrap}
 .sysml-cfg th{width:10rem;text-align:left;background:var(--us-head)}
 .sysml-how{line-height:1.8;margin:.6rem 0 0 1.2rem}
 .sysml-pre{background:#f4f5f3;border:1px solid var(--us-line);border-radius:6px;padding:.7rem .9rem;font-size:.9rem;white-space:pre;overflow-x:auto}
-@media (max-width:900px){.sysc-wrap{flex-direction:column}.sysc-sets{width:100%}}
 /* 09-26 몫 C — 메뉴 밖 화면 합치기: 옛 점검 화면 제목 줄(← 이행점검으로) · 이행점검 대상 화면의 옛 점검 진입 줄 */
 .c26-title{display:flex;align-items:center;gap:1rem;flex-wrap:wrap;margin-bottom:.4rem}
 .c26-title h1.v2h{margin:0}

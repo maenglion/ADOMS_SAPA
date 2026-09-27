@@ -285,6 +285,7 @@ export function usGroupsFor(role: string, set: MenuSettings = {}): MenuGroup[] {
         if (isLocked(m.href)) return canAccess(role, m.href);
         if (s.hide) return false;
         if (PERM_ENFORCE && (s.off || []).includes(role)) return false;
+        if (role !== "gm" && (m.href.startsWith("/duties") || m.href === "/law/changes")) return false;
         return m.heading || canAccess(role, m.href);
       })
       .sort((a, b) => (a.s.order ?? (a.i + 1) * 10) - (b.s.order ?? (b.i + 1) * 10) || a.i - b.i)

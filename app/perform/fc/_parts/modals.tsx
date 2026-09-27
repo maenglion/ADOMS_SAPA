@@ -70,7 +70,7 @@ export async function Modals({ ctx }: { ctx: Ctx }) {
         <form method="get" action={ctx.href({})} className="usd-msearch">
           {Object.entries({ ...ctx.sp, q: undefined, msg: undefined }).filter(([, v]) => v).map(([k, v]) => <input key={k} type="hidden" name={k} value={String(v)} />)}
           <label>이름·부서 <input name="q" defaultValue={q} placeholder="이름 또는 부서를 입력하세요" /></label>
-          <button className="usd-sbtn">🔍 검색</button>
+          <button className="usd-sbtn us-search-btn">검색</button>
         </form>
         <form action={pickStaff}>
           <Hidden ctx={ctx} block="people" />
@@ -219,7 +219,7 @@ export async function Modals({ ctx }: { ctx: Ctx }) {
           <label>법령명 <input name="ln" defaultValue={ln} placeholder="법령명을 입력하세요" /></label>
           <label>요약내용 <input name="lq" defaultValue={lq} placeholder="요약내용을 입력하세요" /></label>
           <label className="usd-mini"><input type="checkbox" name="lw" value="1" defaultChecked={wide} /> 다른 관리대상 포함</label>
-          <button className="usd-sbtn">🔍 검색</button>
+          <button className="usd-sbtn us-search-btn">검색</button>
         </form>
         <div className="usd-mcount">총 {rows.length.toLocaleString()}건{rows.length > shown.length ? ` (앞 ${shown.length}건 표시 — 검색어로 좁히세요)` : ""}</div>
         <form action={importRows}>

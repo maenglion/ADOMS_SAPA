@@ -136,5 +136,3 @@ table.usb2-mgmt select{width:100%;border:1px solid #c9cfc6;border-radius:6px;pad
 .usb2-form{display:flex;flex-direction:column;gap:12px;min-width:30rem}
 .usb2-form label{display:flex;flex-direction:column;gap:6px;font-weight:700}
 .usb2-form select{border:1px solid #c9cfc6;border-radius:6px;padding:8px 10px;font:inherit}
-
-@media(max-width:1100px){.usb2-two,.usb2-two-a{grid-template-columns:1fr}.usb2-prow,.usb2-lawbox{grid-template-columns:1fr}.usb2-frow2{grid-template-columns:13rem 1fr}}

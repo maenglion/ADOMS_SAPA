@@ -447,3 +447,14 @@
 - 검증: Production dashboard, `/actions`, `/duties/list`, `/evidence`, `/tasks`가 모두 정상 표시됐고 토큰 누락 오류가 재현되지 않았다. dashboard에서 PostgreSQL baseline 기반 관리대상 383개와 시기도래 1,322건을 확인했다. `/actions`, `/duties/list`, `/evidence`, `/tasks`의 단일 요청은 각각 약 1.471초, 0.503초, 0.507초, 0.437초였다.
 - 관련 파일: `WORKLOG.md`
 - 관련 commit: pending
+
+### [41] PC 고정 캔버스 전환 및 공통 UI 수정사항 반영
+- 상태: 완료
+- 배경: 1440px 미만에서 공통 헤더와 화면별 카드·그리드가 viewport에 맞춰 축소·재배치되어 태블릿 가로 화면에서 PC 시연판의 비율과 정보 밀도가 달라졌다. 별도 수정사항 문서에는 역할별 법 메뉴 제한, 단일 GNB dropdown, 검색 규격 통일, 이미지형 다운로드·검색 아이콘 제거가 추가로 명시돼 있었다.
+- 결정: 앱 캔버스는 최소 1440px, 최대 1600px로 고정한다. 1440px 미만에서는 내부 UI를 축소·재배치하지 않고 body 가로 scrollbar로 이동하며, 1600px보다 넓은 화면에서는 1600px 앱을 중앙 배치하고 바깥 영역을 배경색으로 남긴다. 일반 GNB 대메뉴는 동일한 1.24rem을 사용하고 `시연참고`만 작은 보조 메뉴 크기를 유지한다.
+- 이유: 시연판은 PC 레이아웃을 일관되게 보존해야 하며, viewport별 font·GNB·card·grid 축소가 메뉴 겹침과 화면별 비율 차이를 만들었다. 수정사항 문서의 기능 요구도 공통 Shell과 표시 컴포넌트에서 일관되게 처리할 필요가 있었다.
+- 영향 범위: 공통 앱 폭과 가로 overflow, 화면별 반응형 CSS, GNB 표시·dropdown 상태, 역할별 법 메뉴 노출, 검색 입력·버튼 규격, 다운로드·검색 버튼 문구. 데이터, DB schema, READ server, WRITE, 계산 결과에는 영향이 없다.
+- 실제 변경: `.us-app`을 1440~1600px 고정 캔버스로 변경하고 1439px 이하 공통 축소 규칙과 화면별 max-width 축소 규칙을 제거했다. GNB 항목을 content 폭 고정·nowrap으로 바꾸고 일반 메뉴 글자를 1.24rem으로 통일했다. dropdown open 상태를 하나의 request-independent client state로 관리해 다른 메뉴를 열면 이전 메뉴가 닫히도록 했다. 총괄(`gm`)만 `법 의무사항`의 의무목록·법령 개정 항목을 보도록 제한했다. 검색 버튼은 아이콘 없이 `검색` 텍스트, 84×40px 이상 규격으로 통일하고 같은 form의 input/select 높이를 40px로 맞췄다. 다운로드·뷰어 등 불필요한 기호형 아이콘은 텍스트 버튼으로 교체했다.
+- 검증: 1920, 1600, 1440, 1366, 1280, 1024px viewport에서 실제 브라우저로 확인했다. 1920px에서 앱 폭은 1600px로 중앙 배치됐고, 1440px에서 앱 폭 1440px, 1366/1280/1024px에서 앱 폭 1440px와 horizontal scrollbar가 유지됐다. 모든 폭에서 일반 GNB 글자 18.6px, `시연참고` 15px, GNB wrap 0건이었다. keyboard focus로 연속 메뉴를 이동했을 때 열린 dropdown은 항상 1개였다. 총괄은 의무목록·법령 개정 링크 6개를 보고 경영책임자는 0개를 보며, 게시판 검색 input과 버튼 높이는 모두 40px였다. TypeScript 검사와 Next.js production build를 통과했다.
+- 관련 파일: `app/us.css`, 화면별 CSS, `components/NavMenu.tsx`, `lib/menu.ts`, 검색·다운로드 표시 컴포넌트, `WORKLOG.md`
+- 관련 commit: pending

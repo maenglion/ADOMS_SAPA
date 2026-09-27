@@ -174,7 +174,7 @@ export default async function PerformWsStep({ params, searchParams }: { params: 
     const person = (v: VRow) => (
       <div className="usc-person">
         <In v={v} k="name" />
-        <Link className="usc-search" href={url({ modal: "staff", row: v.rec_id, sec: "main" })} scroll={false}>🔍 검색</Link>
+        <Link className="usc-search us-search-btn" href={url({ modal: "staff", row: v.rec_id, sec: "main" })} scroll={false}>검색</Link>
       </div>
     );
     body = (
@@ -803,7 +803,7 @@ export default async function PerformWsStep({ params, searchParams }: { params: 
               <select name="mark" defaultValue={mk}><option value="">전체</option><option value="Y">용인 확정</option><option value="조건부">조건부</option></select>
             </label>
             <label>검색어 <input type="text" name="q" defaultValue={q} placeholder="법령명·조문 제목·의무" /></label>
-            <button className="us-btn" type="submit">검색</button>
+            <button className="us-btn us-search-btn" type="submit">검색</button>
             <span className="us-muted">{rows.length.toLocaleString()}건{rows.length > 100 ? " · 앞 100건 표시" : ""}</span>
           </form>
           <form action={importRows}>
@@ -899,7 +899,7 @@ export default async function PerformWsStep({ params, searchParams }: { params: 
           <input type="hidden" name="row" value={sp.row || ""} />
           <input type="hidden" name="sec" value={sp.sec || "main"} />
           <label>이름·부서 <input type="text" name="q" defaultValue={q} /></label>
-          <button className="us-btn" type="submit">검색</button>
+          <button className="us-btn us-search-btn" type="submit">검색</button>
         </form>
         <table className="us-tbl">
           <thead><tr><th>소속(부서)</th><th>이름</th><th>담당</th><th className="usc-x"><CheckAll name="keys" /></th></tr></thead>

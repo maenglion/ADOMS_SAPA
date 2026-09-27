@@ -21,6 +21,3 @@
 .rules li { padding: 6px 0; border-bottom: 1px dashed var(--line); line-height: 1.6; }
 .rules li:last-child { border-bottom: 0; }
 .cyc { font-size: .75rem; color: var(--mut); margin-left: 4px; }
-@media (max-width: 900px) {
-  .two { grid-template-columns: 1fr; }
-}

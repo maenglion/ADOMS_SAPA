@@ -1,6 +1,4 @@
 .uses{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
-@media(max-width:1100px){.uses{grid-template-columns:repeat(2,1fr)}}
-@media(max-width:640px){.uses{grid-template-columns:1fr}}
 .use{display:flex;flex-direction:column;gap:6px}
 .dim{background:#fafbfc}
 .useHead{display:flex;justify-content:space-between;align-items:center;gap:8px}

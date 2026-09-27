@@ -73,7 +73,7 @@ export default async function ContractStatus({ searchParams }: { searchParams: P
             <label className="usa-grow">사업장명
               <input name="q" defaultValue={q} placeholder="사업장 또는 부서명을 입력하세요" />
             </label>
-            <button className="usa-sbtn" type="submit">🔍검색</button>
+            <button className="usa-sbtn us-search-btn" type="submit">검색</button>
           </form>
           <form method="get" action={base}>
             <input type="hidden" name="role" value={role} />
@@ -204,7 +204,7 @@ async function ContractCard({ c, close }: { c: Row; close: string }) {
         <F label="상시 근로자 수" v={c.regular_workers ? `${c.regular_workers}명` : ""} /><F label="사업참여 인력수" v={c.worker_cnt ? `${c.worker_cnt}명` : ""} />
         <div className="usa-f wide">
           <span className="usa-f-l">○ 첨부파일</span>
-          <span className="usa-f-v">{files.length ? files.map((f) => <span key={f} className="usa-file">{f} ⤓ 🔍</span>) : "-"}</span>
+          <span className="usa-f-v">{files.length ? files.map((f) => <span key={f} className="usa-file">{f}</span>) : "-"}</span>
         </div>
       </div>
     </div>

@@ -19,5 +19,4 @@
 .form{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;align-items:end}
 .form select,.form input{width:100%}
 .full{grid-column:1/-1}
-@media(max-width:900px){.form{grid-template-columns:1fr}}
 .foot{display:flex;gap:8px;flex-wrap:wrap;margin:16px 0 6px}

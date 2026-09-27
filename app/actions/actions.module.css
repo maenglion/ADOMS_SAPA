@@ -4,6 +4,3 @@
 .inl { display: inline-flex; align-items: center; gap: 6px; margin: 0; }
 .rowform { display: flex; gap: 5px; flex-wrap: wrap; align-items: center; margin: 2px 0; }
 .rowform input[type=text] { width: 100%; }
-@media (max-width: 900px) {
-  .stats { grid-template-columns: repeat(3, 1fr) !important; }
-}

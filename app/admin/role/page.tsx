@@ -51,7 +51,7 @@ export default async function RolePage({ searchParams }: { searchParams: Promise
               <input type="hidden" name="o2" value={rq1} /><input type="hidden" name="n2" value={rq2} />
               <label>소속<input type="text" name="o1" defaultValue={lq1} placeholder="소속 부서 입력" /></label>
               <label>사용자명<input type="text" name="n1" defaultValue={lq2} /></label>
-              <button className="usb2-ibtn" type="submit" title="검색">🔍</button>
+              <button className="usb2-ibtn us-search-btn" type="submit">검색</button>
               <Link className="usb2-obtn" href={qs("/admin/role", { ...keep, modal: "handover" })}>권한인계</Link>
             </form>
           </SearchBox>
@@ -95,7 +95,7 @@ export default async function RolePage({ searchParams }: { searchParams: Promise
               <input type="hidden" name="o1" value={lq1} /><input type="hidden" name="n1" value={lq2} />
               <label>소속<input type="text" name="o2" defaultValue={rq1} placeholder="소속 부서 입력" /></label>
               <label>사용자명<input type="text" name="n2" defaultValue={rq2} /></label>
-              <button className="usb2-ibtn" type="submit" title="검색">🔍</button>
+              <button className="usb2-ibtn us-search-btn" type="submit">검색</button>
             </form>
           </SearchBox>
           <Count n={fin.length} unit="명" />

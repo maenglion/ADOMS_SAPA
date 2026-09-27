@@ -72,7 +72,7 @@ export default async function CheckSetup({ params, searchParams }: {
         <label className="usf-grow">사업장명
           <input type="text" name="q" defaultValue={q} placeholder="사업장 또는 부서명을 입력하세요" />
         </label>
-        <button className="usf-sbtn" type="submit">🔍검색</button>
+        <button className="usf-sbtn us-search-btn" type="submit">검색</button>
       </form>
 
       {sp.err && <p className="usf-err">{sp.err === "dept" ? "사업장·부서를 하나 이상 고르세요." : "항목을 하나 이상 고르세요."}</p>}

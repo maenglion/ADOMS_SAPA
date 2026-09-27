@@ -225,7 +225,7 @@ export default async function BasicList({ searchParams }: { searchParams: Promis
           <select name="qs" defaultValue={qs} className="usb1-sel">{qsOpts.map((o) => <option key={o}>{o}</option>)}</select>
           <input type="text" name="q" defaultValue={q} placeholder={ph} className="usb1-q" />
           {extraFilter}
-          <button className="usb1-btn-o" type="submit">🔍 검색</button>
+          <button className="usb1-btn-o us-search-btn" type="submit">검색</button>
         </div>
         <div className="usb1-srow-l">입력현황</div>
         <div className="usb1-sbox usb1-split">

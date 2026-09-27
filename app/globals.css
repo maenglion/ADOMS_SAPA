@@ -70,8 +70,6 @@ b,strong{font-weight:700}
 .grid{display:grid;gap:14px}
 .g2{grid-template-columns:repeat(2,1fr)} .g3{grid-template-columns:repeat(3,1fr)}
 .g4{grid-template-columns:repeat(4,1fr)} .g5{grid-template-columns:repeat(5,1fr)} .g6{grid-template-columns:repeat(6,1fr)}
-@media(max-width:1400px){.g5,.g6{grid-template-columns:repeat(3,1fr)}}
-@media(max-width:1000px){.g2,.g3,.g4,.g5,.g6{grid-template-columns:repeat(2,1fr)}}
 
 h1{font-size:1.75rem;margin:6px 0 12px;color:var(--deep);letter-spacing:-.5px;font-weight:700;line-height:1.3}
 h2{font-size:1.32rem;margin:26px 0 10px;color:var(--navy);font-weight:700;line-height:1.35}
@@ -272,7 +270,6 @@ td .muted a{color:var(--blue2);font-weight:500}   /* 부제목 줄의 링크는 
 .whyquote{margin:7px 0 4px;padding:9px 13px;background:#f6f9fc;border-left:3px solid #22456e;
   color:#2c3a4d;font-size:.9rem;line-height:1.7;border-radius:0 6px 6px 0}
 .whybasis{color:var(--mut);font-size:.88rem;margin-top:4px;line-height:1.65}
-@media(max-width:800px){.whylist>li{grid-template-columns:1fr}.whylist>li::before{display:none}}
 
 
 /* ── 흐름 막대 — 한 바퀴의 몇 번째인가 (2026-09-21) ──────────────────
@@ -340,7 +337,6 @@ td .muted a{color:var(--blue2);font-weight:500}   /* 부제목 줄의 링크는 
 .asg-form label{display:block;font-weight:600;font-size:.88rem;margin-bottom:4px}
 .asg-form .asg-app{grid-column:span 2}
 .asg-form .asg-note{grid-column:span 3}
-@media (max-width:900px){.asg-form{grid-template-columns:1fr 1fr}.asg-form .asg-note{grid-column:span 2}}
 
 /* 2계층 메뉴(lib/menu.ts MENU_MODE="group") — 묶음에 마우스를 올리면 펼친다 (2026-09-22) */
 .gnb2{display:flex;gap:2px;align-items:stretch}
@@ -384,7 +380,6 @@ td .muted a{color:var(--blue2);font-weight:500}   /* 부제목 줄의 링크는 
 .d36-code{font-size:.8rem;color:#5b6675;font-variant-numeric:tabular-nums;min-width:2.6em}
 .d36-n{font-size:1.15rem;font-weight:700;color:var(--blue)}
 .d36-basis{font-size:.78rem;margin-top:2px}
-@media (max-width:1100px){.d36{grid-template-columns:1fr}}
 
 .gnb2 .grp-m .grp-sub{font-size:.82rem;color:#5b6675;font-weight:700;padding:8px 12px 3px;border-top:1px solid #e3e8ef;margin-top:4px}
 .gnb2 .grp-m .grp-sub:first-child{border-top:0;margin-top:0}
@@ -498,4 +493,3 @@ a.flink{text-decoration:underline;text-underline-offset:2px}
 .th-bar .badge.ok{color:#0aa3a8} .th-bar .badge.warn{color:#e5661a}
 .th-bar .badge.none{color:#8a8f96} .th-bar .badge.bad{color:#cf4436}
 @media print{.nb{display:none !important}}
-@media(max-width:760px){.nb-top a,.nb-sub a,.nb-sec a{padding-left:14px;padding-right:14px}}

@@ -1,7 +1,6 @@
 /* 재발방지·개선명령 — 전역 클래스(card·badge·btn·chips)를 쓰고 이 화면에만 필요한 것만 둔다. 크기는 rem. */
 .law{display:flex;flex-direction:column;gap:6px;margin-top:10px;font-size:.95rem;background:var(--surface-blush)}
 .lawNo{display:inline-block;min-width:21rem;color:var(--mut);font-size:.86rem;font-weight:600;margin-right:8px}
-@media(max-width:900px){.lawNo{display:block;min-width:0}}
 
 .ceo{margin-top:12px;font-size:1.02rem;border-left:5px solid var(--ok)}
 .ceoOk{border-left-color:var(--ok)}
@@ -18,7 +17,6 @@
 
 /* 사고 카드 */
 .cards{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
-@media(max-width:1100px){.cards{grid-template-columns:1fr}}
 .inc{display:flex;flex-direction:column;gap:6px}
 .incLate{border-color:#e2c7c2}
 .incHead{display:flex;justify-content:space-between;align-items:flex-start;gap:8px;flex-wrap:wrap}
@@ -54,10 +52,8 @@
 .newbox{margin-top:14px}
 .newbox>summary{cursor:pointer}
 .form{display:grid;grid-template-columns:repeat(3,1fr);gap:10px 14px;align-items:start;margin-top:12px}
-@media(max-width:1000px){.form{grid-template-columns:1fr}}
 .form select,.form input[type=text],.form input[type=date]{width:100%}
 .span2{grid-column:span 2}
-@media(max-width:1000px){.span2{grid-column:auto}}
 .hint{font-size:.84rem;color:var(--mut);margin-top:3px;line-height:1.4}
 
 /* 무재해 확인 */
@@ -79,13 +75,11 @@
 .respSub{font-weight:700;margin-top:10px;font-size:.95rem}
 .respSub :global(.muted){font-weight:400;font-size:.84rem}
 .rsteps{list-style:none;margin:4px 0;padding:0;display:grid;grid-template-columns:repeat(3,1fr);gap:6px}
-@media(max-width:700px){.rsteps{grid-template-columns:1fr}}
 .rsteps li{border-top:4px solid var(--line);padding:4px;display:flex;flex-direction:column;gap:2px;font-size:.88rem;min-width:0;overflow-wrap:anywhere}
 .rsteps li.done{border-top-color:#8fb3a6}
 .rdet>summary{cursor:pointer;color:var(--blue)}
 .rtable td{font-size:.88rem;vertical-align:top}
 .respForm{display:grid;grid-template-columns:repeat(2,1fr);gap:6px 10px;margin-top:6px;font-size:.9rem}
-@media(max-width:700px){.respForm{grid-template-columns:1fr}}
 .respForm label{margin:0;display:flex;flex-direction:column;gap:3px}
 .respForm input[type=text],.respForm input[type=datetime-local],.respForm input[type=date],.respForm select{width:100%}
 .respForm :global(.btn){align-self:flex-start}

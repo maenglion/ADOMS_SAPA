@@ -56,7 +56,7 @@ export default async function CasesPage({ searchParams }: { searchParams: Promis
         <input type="hidden" name="role" value={role} />
         <label>작성자 <input name="w" defaultValue={w} placeholder="검색어를 입력하세요" /></label>
         <label>제목 <input name="t" defaultValue={t} placeholder="검색어를 입력하세요" /></label>
-        <button type="submit" className="usg-btn-blue">🔍 검색</button>
+        <button type="submit" className="usg-btn-blue us-search-btn">검색</button>
       </form>
 
       <div className="usg-listbar">

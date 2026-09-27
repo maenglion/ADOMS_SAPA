@@ -200,7 +200,7 @@ export function EvidenceCell({ name = "evidence_file", fileName, url }: { name?:
     <div className="us-ev">
       <span className={`us-ev-name${fileName ? "" : " empty"}`}>{fileName || "선택된 파일 없음"}</span>
       <label className="us-btn-s">파일선택<input type="file" name={name} hidden /></label>
-      {url ? <a className="us-ico" href={url} target="_blank" title="내려받기">⤓</a> : <span className="us-ico dim">⤓</span>}
+      {url ? <a className="us-ico" href={url} target="_blank">다운로드</a> : <span className="us-ico dim">-</span>}
       <span className="us-ico dim" title="삭제">🗑</span>
     </div>
   );

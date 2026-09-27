@@ -42,7 +42,7 @@ export function AssetPicker({ assets, defaultId = "" }: { assets: AssetOpt[]; de
         <span className="spick-cur">{cur
           ? <><b>{cur.asset_name}</b> <span className="muted">{cur.asset_gbn} · {cur.asset_class || "종별 없음"} · {cur.dept_name}</span></>
           : <span className="muted">시설을 고르지 않았습니다</span>}</span>
-        <button type="button" className="btn ghost sm" onClick={() => { setQ(""); setOpen(true); }}>🔍 시설 찾기</button>
+        <button type="button" className="btn ghost sm us-search-btn" onClick={() => { setQ(""); setOpen(true); }}>시설 찾기</button>
       </span>
       {open && (
         <div className="lbox" onClick={() => setOpen(false)} role="dialog" aria-label="시설 찾기">

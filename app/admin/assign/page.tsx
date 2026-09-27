@@ -51,7 +51,7 @@ export default async function AssignPage({ searchParams }: { searchParams: Promi
               <input type="hidden" name="d" value={d} />
               <label>소속<input type="text" name="o1" defaultValue={lq1} placeholder="소속 부서 입력" /></label>
               <label>사용자명<input type="text" name="n1" defaultValue={lq2} /></label>
-              <button className="usb2-ibtn" type="submit" title="검색">🔍</button>
+              <button className="usb2-ibtn us-search-btn" type="submit">검색</button>
             </form>
           </SearchBox>
           <Count n={users.length} unit="명" />
@@ -84,7 +84,7 @@ export default async function AssignPage({ searchParams }: { searchParams: Promi
                 </select>
               </label>
               <label>{civ ? "시설물명" : "부서명"}<input type="text" name="q" defaultValue={q} placeholder={civ ? "시설물명을 입력하세요" : "부서명을 입력하세요"} /></label>
-              <button className="usb2-ibtn" type="submit" title="검색">🔍</button>
+              <button className="usb2-ibtn us-search-btn" type="submit">검색</button>
             </form>
           </SearchBox>
           <div className="usb2-cntrow">

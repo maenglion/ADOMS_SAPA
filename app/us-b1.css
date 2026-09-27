@@ -215,11 +215,3 @@ table.usb1-cd td{vertical-align:middle}
 .usb1-r.bad:has(input:checked){color:#d23c3c}
 table.usb1-cd tr.usb1-cdr:has(input[value="미이행"]:checked) td{background:#fdecef}
 .usb1-h3{font-size:1.12rem;font-weight:800;margin:24px 0 8px}
-
-@media(max-width:1100px){
-  .usb1-search,.usb1-cs{grid-template-columns:1fr}
-  .usb1-f,.usb1-row2,.usb1-cgrid{grid-template-columns:1fr}
-  .usb1-cgrid .span3{grid-column:auto}
-  .usb1-wrow{grid-template-columns:1fr}
-  .usb1-pgrid{grid-template-columns:1fr}
-}

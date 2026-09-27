@@ -214,7 +214,7 @@ function EduEv({ v, rid, r }: { v: View; rid: string; r?: Rec }) {
       {roster.map((f) => (
         <div className="use-ev-line" key={`${f.name}-${files.indexOf(f)}`}>
           <span className="us-ev-name">{f.name}</span>
-          {f.url ? <a className="use-ico" href={f.url} download>⤓</a> : <span className="use-ico dim">⤓</span>}
+          {f.url ? <a className="use-ico" href={f.url} download>다운로드</a> : <span className="use-ico dim">-</span>}
           {r && <button className="use-ico" formAction={act.bind(null, "delfile", `${rid}|${files.indexOf(f)}`)} title="삭제">🗑</button>}
         </div>
       ))}
@@ -250,7 +250,7 @@ function DutyModal({ v, kind, pool, have }: { v: View; kind: string; pool: Row[]
         <label>요약내용 <input type="text" name="ls" defaultValue={sp.ls || ""} placeholder="요약내용을 입력하세요" size={14} /></label>
         <label>용인 표시 <select name="mk" defaultValue={sp.mk || ""}><option value="">전체</option><option value="Y">용인 확정</option><option value="조건부">조건부</option></select></label>
         <label><input type="checkbox" name="ta" value="1" defaultChecked={all} /> 다른 관리대상 의무도 보기</label>
-        <button className="use-bbtn">🔍 검색</button>
+        <button className="use-bbtn us-search-btn">검색</button>
       </form>
       <form action={loadPlan.bind(null, kind)}>
         <CtxHidden v={v} />

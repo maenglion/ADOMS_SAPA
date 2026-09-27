@@ -57,7 +57,7 @@ table.usg-occ thead .usg-fz0,table.usg-occ thead .usg-fz1{z-index:3;background:#
 .usg-tools button:hover{color:#2f5597}
 .usg-plotbox{position:relative;background:#fff;padding:22px 6px 4px}
 .usg-chart.plain .usg-plotbox{padding-top:26px}
-.usg-dl{position:absolute;right:8px;top:4px;border:1px solid #999;background:#fff;border-radius:2px;width:1.45rem;height:1.45rem;line-height:1;font-size:.95rem;cursor:pointer;color:#333;padding:0}
+.usg-dl{position:absolute;right:8px;top:4px;border:1px solid #999;background:#fff;border-radius:4px;height:1.8rem;line-height:1;font-size:.82rem;font-weight:700;cursor:pointer;color:#333;padding:0 9px}
 .usg-dl:hover{border-color:#2f5597;color:#2f5597}
 .usg-plot{display:block;width:100%;height:auto}
 
@@ -177,6 +177,3 @@ table.usg-lawtbl{border-top:0}
 table.usg-lawtbl thead th{position:sticky;top:0;z-index:1}
 .usg-drill{width:min(76rem,95vw)}
 .usg-drill .us-modal-h{position:sticky;top:0;z-index:2}
-
-@media(max-width:1200px){.usg-tri{grid-template-columns:1fr}.usg-two{grid-template-columns:1fr}}
-@media(max-width:900px){.usg-dash{grid-template-columns:1fr}.usg-cf-row.two{grid-template-columns:6.4rem 1fr}}

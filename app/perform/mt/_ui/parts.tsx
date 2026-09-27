@@ -62,7 +62,7 @@ export function EvCell({ v, rid, files, all, slot = "", variant = "a" }: {
             {f.url
               ? <Link className="us-ev-name use-ev-link" href={v.href(`&view=${encodeURIComponent(f.url)}&vn=${encodeURIComponent(f.name)}`)} scroll={false}>{f.name}</Link>
               : <span className="us-ev-name">{f.name}</span>}
-            {f.url ? <a className="use-ico" href={f.url} download title="내려받기">⤓</a> : <span className="use-ico dim" title="내려받기">⤓</span>}
+            {f.url ? <a className="use-ico" href={f.url} download>다운로드</a> : <span className="use-ico dim">-</span>}
             {!rid.startsWith("NEW~") && <button className="use-ico" formAction={act_("delfile", `${rid}|${idx}`)} title="삭제">🗑</button>}
           </div>
         );
@@ -70,13 +70,13 @@ export function EvCell({ v, rid, files, all, slot = "", variant = "a" }: {
       {variant === "b" && (
         <div className="use-ev-line">
           <FilePick name={field} />
-          {!mine.length && <><span className="use-ico dim">⤓</span><span className="use-ico dim">🗑</span></>}
+          {!mine.length && <span className="use-ico dim">-</span>}
         </div>
       )}
       {variant === "a" && !mine.length && (
         <div className="use-ev-line">
           <span className="us-ev-name empty">선택 파일 없음</span>
-          <span className="use-ico dim">⤓</span><span className="use-ico dim">🗑</span>
+          <span className="use-ico dim">-</span>
         </div>
       )}
       <FilePick name={variant === "a" ? field : `${field}~2`} kind="plus" />

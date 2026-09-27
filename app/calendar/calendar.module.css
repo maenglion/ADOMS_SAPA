@@ -27,13 +27,3 @@
 .mlist li { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; padding: 5px 2px; border-bottom: 1px dashed var(--line); line-height: 1.5; font-size: .92rem; }
 .mlist li:last-child { border-bottom: 0; }
 .day { color: var(--mut); font-size: .85rem; font-variant-numeric: tabular-nums; }
-
-@media (max-width: 1200px) { .months { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
-@media (max-width: 900px)  { .months { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
-@media (max-width: 600px)  {
-  .months { grid-template-columns: 1fr; }
-  .item { grid-template-columns: 1fr; gap: 2px; }
-}
-
-/* 09-26 사용자: 메뉴 밖 화면 합치기 — 좌측 메뉴가 붙어 본문이 좁아졌으니 좁은 화면에서는 달 칸 3줄 */
-@media (max-width: 1400px) { .months { grid-template-columns: repeat(3, minmax(0, 1fr)); } }

@@ -96,7 +96,7 @@ export default async function StatusPage({ track, sp }: { track: "ws" | "fc" | "
             <label className="usa-grow">{L.name}
               <input name="q" defaultValue={q} placeholder="사업장 또는 부서명을 입력하세요" />
             </label>
-            <button className="usa-sbtn" type="submit">🔍검색</button>
+            <button className="usa-sbtn us-search-btn" type="submit">검색</button>
           </form>
 
           <form method="get" action={base}>
@@ -286,7 +286,7 @@ async function OrderModal({ role, track, civil, colLabel, cols, rates, sp, href 
             <input type="hidden" name="modal" value="order" />
             <input type="hidden" name="pick" value={pick.join(",")} />
             <input name="mq" defaultValue={mq} placeholder={`${colLabel} 이름`} />
-            <button type="submit">🔍 검색</button>
+            <button type="submit" className="us-search-btn">검색</button>
           </form>
         </div>
         <div className="usa-transfer">

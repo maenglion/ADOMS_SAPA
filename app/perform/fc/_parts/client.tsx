@@ -70,7 +70,7 @@ export function FileBox({ name, files, clearIntent, pickLabel = "파일선택", 
           </label>
         )}
         {extra}
-        {first ? <a className="us-ico" href={first.url} target="_blank" title="내려받기">⤓</a> : <span className="us-ico dim">⤓</span>}
+        {first ? <a className="us-ico" href={first.url} target="_blank">다운로드</a> : <span className="us-ico dim">-</span>}
         {!extra && trash}
       </div>
       {plus && (

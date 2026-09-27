@@ -38,7 +38,7 @@ export default async function LetterList({ searchParams }: { searchParams: Promi
           </select>
         </label>
         <label>검색어 <input type="text" name="q" defaultValue={q} placeholder="제목 또는 내용" /></label>
-        <button className="us-btn" type="submit">🔍 검색</button>
+        <button className="us-btn us-search-btn" type="submit">검색</button>
       </form>
 
       <table className="us-tbl">

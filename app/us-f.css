@@ -53,7 +53,7 @@ input.usf-ro,table.us-tbl input.usf-ro{background:#d4d4d4;border:1px solid #bbb;
 .usf-auto{display:block;font-size:.8rem;color:var(--us-mut);margin-top:4px}
 .usf-evc{display:flex;align-items:center;gap:6px}
 .usf-evc input{flex:1;min-width:0}
-.usf-dl{flex:none;display:inline-flex;align-items:center;justify-content:center;width:1.9rem;height:1.9rem;border:1px solid #777;border-radius:4px;background:#fff;color:#333 !important;text-decoration:none !important}
+.usf-dl{flex:none;display:inline-flex;align-items:center;justify-content:center;min-width:1.9rem;height:1.9rem;padding:0 9px;border:1px solid #777;border-radius:4px;background:#fff;color:#333 !important;text-decoration:none !important}
 .usf-dl.dim{opacity:.45}
 .usf-view{flex:none;color:#1f6fd1 !important;font-weight:700;white-space:nowrap}
 .usf-save{display:flex;justify-content:flex-end;gap:8px;margin-top:10px}
@@ -130,5 +130,4 @@ table.us-tbl td.usf-title a:hover{color:var(--us-g1) !important}
 .usf-view-files{padding:12px 6px;display:flex;gap:10px;align-items:center;border-bottom:1px solid #ccc}
 .usf-actions{display:flex;justify-content:flex-end;gap:8px;margin-top:14px}
 
-@media(max-width:1100px){.usf-pick{grid-template-columns:1fr}.usf-search{flex-wrap:wrap}.usf-letter{padding:22px}.usf-logtop{flex-wrap:wrap}}
 @media print{.usf-actions,.usf-roundbar{display:none !important}}

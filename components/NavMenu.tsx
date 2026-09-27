@@ -2,7 +2,7 @@
 import Link from "next/link";
 import SubLabel from "./us/SubLabel";
 import { usePathname, useSearchParams } from "next/navigation";
-import { Suspense, useLayoutEffect, useRef, useState } from "react";
+import { Suspense, useEffect, useLayoutEffect, useRef, useState } from "react";
 import { MENU_MODE, FLAT, GROUPS, isOn, groupHas, type MenuItem } from "@/lib/menu";
 import { canAccess } from "@/lib/perm";
 import { useMenuGroups, useRole, useSideCss } from "./MenuCtx";
@@ -59,22 +59,34 @@ function UsGnb({ path, search, show }: { path: string; search: string; show: (m:
   const css = useSideCss();
   const cur = groups.find((g) => groupHas(g.items, path, search))
     || (path === "/" ? groups.find((g) => g.key === "이행현황") || groups[0] : undefined);
+  const [openKey, setOpenKey] = useState<string | null>(null);
+  useEffect(() => setOpenKey(null), [path, search]);
+  useEffect(() => {
+    const close = (event: KeyboardEvent) => event.key === "Escape" && setOpenKey(null);
+    document.addEventListener("keydown", close);
+    return () => document.removeEventListener("keydown", close);
+  }, []);
   return (
     <nav className="us-gnb">
       {/* 좌측 공용 메뉴의 권한 없는·숨긴 링크를 가린다(lib/menu.ts sideHideCss) */}
       {css && <style>{css}</style>}
-      {groups.map((g) => (
-        <div key={g.key || g.label} className={`us-gnb-g${g === cur ? " on" : ""}`}>
-          <Link href={(g.items.find((m) => m.href) as MenuItem).href} className="us-gnb-h">
+      {groups.map((g) => {
+        const key = g.key || g.label;
+        return (
+        <div key={key} className={`us-gnb-g${g === cur ? " on" : ""}${openKey === key ? " open" : ""}`}
+          onMouseEnter={() => setOpenKey(key)} onMouseLeave={() => setOpenKey(null)}
+          onFocusCapture={() => setOpenKey(key)}
+          onBlurCapture={(event) => { if (!event.currentTarget.contains(event.relatedTarget as Node | null)) setOpenKey(null); }}>
+          <Link href={(g.items.find((m) => m.href) as MenuItem).href} className="us-gnb-h" onClick={() => setOpenKey(null)}>
             {displayGnbLabel(g.key || g.label)}
           </Link>
           <div className="us-gnb-m">
             {g.items.map((m, i) => m.heading
               ? <div key={"h" + i} className="us-gnb-sub">{m.label}</div>
-              : <Link key={m.href} href={m.href} className={m.href === best(g.items) ? "on" : ""}><SubLabel text={m.label} /></Link>)}
+              : <Link key={m.href} href={m.href} className={m.href === best(g.items) ? "on" : ""} onClick={() => setOpenKey(null)}><SubLabel text={m.label} /></Link>)}
           </div>
         </div>
-      ))}
+      )})}
     </nav>
   );
   /** 한 묶음에서 켜질 항목은 하나 — 여럿이 맞으면(/ceo 와 /ceo/letter) 주소가 가장 긴 것. */

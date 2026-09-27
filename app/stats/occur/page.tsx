@@ -84,7 +84,7 @@ export default async function OccurPage({ searchParams }: { searchParams: Promis
         </div>
         <div className="usg-fright">
           <label className="usg-base">기준일자 <input type="date" name="base" defaultValue={base} /></label>
-          <a className="usg-btn-o" href={dl}>⤓다운로드</a>
+          <a className="usg-btn-o" href={dl}>다운로드</a>
           <Link className="usg-btn-o" href={`/stats/occur?${back}&modal=upload`}>업로드</Link>
         </div>
       </AutoForm>

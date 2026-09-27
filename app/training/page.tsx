@@ -309,7 +309,7 @@ export default async function TrainingPage({ searchParams }: { searchParams: Pro
       </div>
 
       <div className={s.foot}>
-        <a className="btn ghost sm" href={`/training/export?role=${role}`}>⬇ 엑셀</a>
+        <a className="btn ghost sm" href={`/training/export?role=${role}`}>엑셀 다운로드</a>
         <Link className="btn ghost sm" href={q("/budget")}>예산 →</Link>
       </div>
     </UsLayout>

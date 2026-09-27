@@ -161,9 +161,9 @@ export default async function CheckReview({ params, searchParams }: {
                         <div className="usf-evc">
                           <input type="text" className="usf-ro" value={c.evName} readOnly disabled aria-label="증빙자료" />
                           {c.evUrl
-                            ? <a className="usf-dl" href={c.evUrl} download title="다운로드">⤓</a>
-                            : <span className="usf-dl dim" title="내려받을 파일 없음">⤓</span>}
-                          <Link className="usf-view" href={`${base}&open=${it.key}&modal=view&k=${encodeURIComponent(k)}#${it.key}`}>🔍뷰어</Link>
+                            ? <a className="usf-dl" href={c.evUrl} download>다운로드</a>
+                            : <span className="usf-dl dim">-</span>}
+                          <Link className="usf-view" href={`${base}&open=${it.key}&modal=view&k=${encodeURIComponent(k)}#${it.key}`}>뷰어</Link>
                         </div>
                       </td>
                       <td><input type="text" className="usf-ro" value={c.basis} readOnly disabled aria-label="비고" /></td>

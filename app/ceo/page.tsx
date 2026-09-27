@@ -93,7 +93,7 @@ export default async function CeoLog({ searchParams }: { searchParams: Promise<R
         <form className="usf-srch" method="get">
           <input type="hidden" name="role" value={role} />
           <input type="text" name="q" defaultValue={q} placeholder="검색" aria-label="검색" />
-          <button className="usf-ic" type="submit" aria-label="검색">🔍</button>
+          <button className="usf-ic us-search-btn" type="submit">검색</button>
           <details open={Boolean(kind || per || sp.from || sp.to)}>
             <summary>상세 ▲</summary>
             <div className="usf-pop">
@@ -114,7 +114,7 @@ export default async function CeoLog({ searchParams }: { searchParams: Promise<R
                 </select>
                 <input type="date" name="from" defaultValue={sp.from || ""} aria-label="시작일" /> - <input type="date" name="to" defaultValue={sp.to || ""} aria-label="종료일" />
               </div>
-              <button className="us-btn" type="submit">검색</button>
+              <button className="us-btn us-search-btn" type="submit">검색</button>
             </div>
           </details>
         </form>
@@ -134,7 +134,7 @@ export default async function CeoLog({ searchParams }: { searchParams: Promise<R
             <tr key={r.id}>
               <td className="usf-at">{r.atText}</td>
               <td>{r.activity}</td>
-              <td><span className="usf-look"><Link className="us-btn-s" href={url({ p: String(page), modal: "view", id: r.id })}>내용보기</Link><span aria-hidden>🔍</span></span></td>
+              <td><span className="usf-look"><Link className="us-btn-s" href={url({ p: String(page), modal: "view", id: r.id })}>내용보기</Link></span></td>
             </tr>
           ))}
           {!shown.length && <tr><td colSpan={3}>찾는 활동기록이 없습니다.</td></tr>}

@@ -78,7 +78,7 @@ export async function BoardList({ kind, sp }: { kind: Kind; sp: Record<string, s
           </label>
         )}
         <label>검색어 <input type="text" name="q" defaultValue={q} placeholder="제목 또는 내용" /></label>
-        <button className="us-btn" type="submit">🔍 검색</button>
+        <button className="us-btn us-search-btn" type="submit">검색</button>
         <span className="us-muted">전체 {list.length}건</span>
       </form>
       <table className="us-tbl">
@@ -99,7 +99,7 @@ export async function BoardList({ kind, sp }: { kind: Kind; sp: Record<string, s
                 <td className="c">{r.pinned === "Y" ? <span className="usf-pin">공지</span> : list.length - ((page - 1) * PER + i)}</td>
                 {kind === "files" && <td className="c">{r.category}</td>}
                 <td className="usf-title"><Link href={`/board/${kind}/${encodeURIComponent(r[b.key])}?role=${role}`}>{r.title}</Link>{kind === "notice" && r.evidence_name ? " 📎" : ""}</td>
-                {kind === "files" && <td>{href ? <a href={href}>⤓ {r.evidence_name}</a> : r.evidence_name || "-"}</td>}
+                {kind === "files" && <td>{href ? <a href={href}>{r.evidence_name || "다운로드"}</a> : r.evidence_name || "-"}</td>}
                 <td className="c">{nm.get(r.written_by) || r.written_by}</td>
                 <td className="c">{fmtDay(r.created_at)}</td>
               </tr>
@@ -143,7 +143,7 @@ export async function BoardView({ kind, id, sp }: { kind: Kind; id: string; sp: 
       <div className="usf-view-body">{r.body}</div>
       <div className="usf-view-files">
         <b>첨부파일</b>
-        {r.evidence_name ? (href ? <a className="us-btn-s" href={href}>⤓ {r.evidence_name}</a> : <span>{r.evidence_name}</span>) : <span className="us-muted">없음</span>}
+        {r.evidence_name ? (href ? <a className="us-btn-s" href={href}>다운로드: {r.evidence_name}</a> : <span>{r.evidence_name}</span>) : <span className="us-muted">없음</span>}
       </div>
       <table className="us-tbl" style={{ marginTop: 14 }}>
         <tbody>

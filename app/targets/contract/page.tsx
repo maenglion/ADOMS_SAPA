@@ -37,7 +37,7 @@ export default async function ContractList({ searchParams }: { searchParams: Pro
         <div className="usb1-cs-b">
           <label>계약명</label>
           <input type="text" name="q" defaultValue={q} placeholder="계약명을 입력하세요" />
-          <button type="submit" className="usb1-btn-o">🔍 검색</button>
+          <button type="submit" className="usb1-btn-o us-search-btn">검색</button>
         </div>
       </form>
 

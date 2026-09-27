@@ -127,7 +127,6 @@ table.use-mtbl{font-size:.9rem}
 table.use-mtbl th.use-chk{width:2.4rem}
 .use-mfoot{display:flex;justify-content:flex-end;margin-top:12px}
 
-@media(max-width:1100px){.use-pcards{grid-template-columns:1fr}.use-dcard-h input[type=text]{min-width:0}}
 
 /* 관계 법령 표 — 8칸이 본문 폭에 들어가게 */
 table.use-law,table.use-edu{font-size:.92rem}

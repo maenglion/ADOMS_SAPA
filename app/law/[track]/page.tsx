@@ -115,7 +115,7 @@ function List({ track, list, recs, sp, label }: { track: TrackKey; list: Target[
               <option value="owner">담당자</option>
             </select>
             <input type="text" name="q" defaultValue={q} placeholder={`${nameLabel}을 입력하세요`} />
-            <button className="usb2-sbtn" type="submit">🔍 검색</button>
+            <button className="usb2-sbtn us-search-btn" type="submit">검색</button>
           </div>
         </div>
         <div className="usb2-prow">
@@ -205,7 +205,7 @@ async function Detail({ track, t, rec, sp, role }: { track: TrackKey; t: Target;
                 ? "이 사업장에 걸리는 관리대상 유형은 용인시 확인 뒤 정합니다. 필요한 법령은 「법령 검색」으로 추가할 수 있습니다."
                 : `이 대상의 관리대상 유형(${codeNames.join(" · ") || "없음"})에 걸리는 의무를 의무 목록에서 법령별로 묶었습니다.`}
           </span>
-          <Link className="us-btn w" href={qs(base, { target: t.id, modal: "law" })}>🔍 법령 검색</Link>
+          <Link className="us-btn w us-search-btn" href={qs(base, { target: t.id, modal: "law" })}>법령 검색</Link>
         </div>
         <input type="hidden" name="law_n" value={groups.length} />
         <table className="us-tbl usb2-laws">
@@ -329,7 +329,7 @@ async function LawSearch({ track, t, q, exclude, close, role }: { track: TrackKe
         <input type="hidden" name="target" value={t.id} />
         <input type="hidden" name="modal" value="law" />
         <input type="text" name="q" defaultValue={q} placeholder="법령 및 내용을 입력하세요" />
-        <button className="usb2-sbtn" type="submit">🔍 검색</button>
+        <button className="usb2-sbtn us-search-btn" type="submit">검색</button>
       </form>
       <p className="us-muted usb2-small">의무 목록({trackOf(track).disaster} · {trackOf(track).label})에 있는 법령 중 이 대상에 아직 없는 것입니다.</p>
       <table className="us-tbl">

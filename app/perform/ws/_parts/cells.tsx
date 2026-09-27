@@ -71,7 +71,7 @@ export function Ev({ v, view, off, locked }: { v: VRow; view: (id: string) => st
       {v.files.map((f, i) => (
         <div className="usc-ev-f" key={i}>
           <Link className="us-ev-name" href={view(`${v.rec_id}.${i}`)} scroll={false} title="이미지 뷰어에서 보기">{f.name}</Link>
-          {f.url ? <a className="us-ico" href={f.url} target="_blank" title="내려받기">⤓</a> : <span className="us-ico dim">⤓</span>}
+          {f.url ? <a className="us-ico" href={f.url} target="_blank">다운로드</a> : <span className="us-ico dim">-</span>}
           {!off && !locked && <button type="submit" name="op" value={`rmfile:${v.rec_id}:${i}`} className="usc-ico" title="파일 빼기">🗑</button>}
         </div>
       ))}

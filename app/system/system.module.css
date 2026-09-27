@@ -1,6 +1,4 @@
 .clauses{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:14px}
-@media(max-width:1100px){.clauses{grid-template-columns:repeat(2,1fr)}}
-@media(max-width:700px){.clauses{grid-template-columns:1fr}}
 .head{display:flex;justify-content:space-between;align-items:flex-start;gap:8px;margin-bottom:6px}
 .head h3{margin:0}
 .no{color:var(--mut);font-size:.86rem;font-weight:500;display:block}
@@ -16,12 +14,10 @@
 .na{color:#c3c9d3;font-size:.9rem}
 .sub{display:block;font-size:.74rem;color:var(--mut);margin-top:2px}
 .form{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;align-items:end}
-@media(max-width:900px){.form{grid-template-columns:1fr}}
 .form select,.form input{width:100%}
 .nextstep{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
 /* 재해 구분 탭 (2026-09-21) */
 .tabs{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:10px 0 14px}
-@media(max-width:800px){.tabs{grid-template-columns:1fr}}
 .tab{display:flex;flex-direction:column;gap:2px;border:1px solid var(--line);background:#fff;border-radius:8px;padding:10px 14px;color:var(--mut)}
 .tab b{font-size:1rem;color:inherit}
 .tab span{font-size:.84rem}

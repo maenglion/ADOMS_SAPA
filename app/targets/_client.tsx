@@ -71,7 +71,7 @@ function Search({ people, q, onPick }: { people: Person[]; q: string; onPick: (p
   const list = useMemo(() => people.filter((p) => !q || p.name.includes(q) || p.org.includes(q)).slice(0, 12), [people, q]);
   return (
     <span className="usb1-srch">
-      <button type="button" className="usb1-srch-b" onClick={() => setOpen(!open)}>🔍 검색</button>
+      <button type="button" className="usb1-srch-b us-search-btn" onClick={() => setOpen(!open)}>검색</button>
       {open && (
         <span className="usb1-srch-pop">
           {list.length ? list.map((p) => (

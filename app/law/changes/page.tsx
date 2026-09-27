@@ -79,7 +79,7 @@ export default async function LawChanges({ searchParams }: { searchParams: Promi
         <Count n={rows.length} unit="건" />
         <div className="us-flex">
           <input type="text" name="q" defaultValue={q} placeholder="법령명" className="lsx-q" />
-          <button className="usb2-sbtn" type="submit">🔍 검색</button>
+          <button className="usb2-sbtn us-search-btn" type="submit">검색</button>
         </div>
       </form>
       <table className="us-tbl usb2-click">

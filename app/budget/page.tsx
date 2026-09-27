@@ -436,7 +436,7 @@ export default async function BudgetPage({ searchParams }: { searchParams: Promi
 
       </>}
       <div className={s.foot}>
-        <a className="btn ghost sm" href={`/budget/export?role=${role}`}>⬇ 엑셀</a>
+        <a className="btn ghost sm" href={`/budget/export?role=${role}`}>엑셀 다운로드</a>
         <Link className="btn ghost sm" href={q("/training")}>안전·보건 교육 이수 →</Link>{/* 09-26 사용자: 메뉴 밖 화면 합치기 — 메뉴 이름 */}
         <Link className="btn ghost sm" href={q("/hazards")}>유해·위험요인 →</Link>
       </div>

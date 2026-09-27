@@ -92,7 +92,7 @@ export default async function AdminLaw({ searchParams }: { searchParams: Promise
           <div className="usb2-lrow">
             <span className="usb2-llab">법령 및 내용</span>
             <input type="text" name="q" defaultValue={q} placeholder="법령 및 내용을 입력하세요" className="usb2-wide" />
-            <button className="usb2-sbtn" type="submit">🔍 검색</button>
+            <button className="usb2-sbtn us-search-btn" type="submit">검색</button>
           </div>
         </div>
       </AutoForm>
@@ -196,7 +196,7 @@ async function LawNew({ d, q, close, role, keep }: { d: "ind" | "civ"; q: string
         {Object.entries(keep).map(([k, v]) => (v ? <input key={k} type="hidden" name={k} value={String(v)} /> : null))}
         <input type="hidden" name="modal" value="new" />
         <input type="text" name="mq" defaultValue={q} placeholder="법령 및 내용을 입력하세요" />
-        <button className="usb2-sbtn" type="submit">🔍 검색</button>
+        <button className="usb2-sbtn us-search-btn" type="submit">검색</button>
       </form>
       <p className="us-muted usb2-small">의무 목록에 있는 법령 문서에서 찾습니다(의무 수가 많은 순 25건).</p>
       <table className="us-tbl">

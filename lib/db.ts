@@ -191,7 +191,7 @@ export async function withDbReadTrace<T>(label: string, run: () => Promise<T>): 
         sort: item.sort,
         merge: item.merge,
       }]));
-      const compactSemantic = Object.entries(semantic).map(([name, item]) => [
+      const compactSemantic = Object.entries(semantic).filter(([, item]) => item.calls > 1).map(([name, item]) => [
         name, item.calls, item.uniqueArgs, item.cacheHits, item.returnedRows,
         item.wallMs, item.cloneMs, item.normalization, item.filter, item.sort, item.merge,
       ]);
@@ -217,7 +217,6 @@ export async function withDbReadTrace<T>(label: string, run: () => Promise<T>): 
         nonDbWall: roundMs(Math.max(0, renderMs - dbWallMs)),
         scope: Object.entries(scopes).map(([name, item]) => [name, item.logicalCalls, item.distinctTuples, item.sqlCalls, item.cacheHits, item.dbMs]),
         sem: compactSemantic,
-        tuple: tuples.map((item) => [item.relation, item.logicalCalls, item.sqlCalls, item.rawRows, item.dbMs, item.acquireMs, item.sqlMs]),
       }));
     }
   });

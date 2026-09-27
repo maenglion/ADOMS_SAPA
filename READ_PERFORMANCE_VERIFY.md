@@ -136,3 +136,47 @@ The full read-only regression was evaluated against the previously published gol
 Optimization pass 1 succeeds for `/actions`, but Production cutover remains blocked. PostgreSQL is still 1.54× to 3.07× slower than CSV at the warm median across the five routes. The next pass should address common PostgreSQL access overhead, cross-region placement, and oversized full-table row transfer without changing the published result contract. Production remains `csv`; Preview remains the PostgreSQL comparison environment.
 
 Detailed before/after measurements are in `db/read-shadow/read_performance_optimization.csv`.
+
+## PostgreSQL READ optimization pass 2 — explicit `/actions` request context
+
+The second pass replaces repeated round-by-round materialization with one explicit request context. At request start it loads the canonical task rows, approval source, evidence, staff, inspections, actions, rounds, judges, notifications, and the three performance-record tables. Independent reads run concurrently. Approval projection is built once from the already loaded task/round/judge rows, so `applyItemApproval()` does not issue another task materialization on this route.
+
+The context creates stable-order indexes for task area/dept/code, task inspections, inspection actions, department owners, latest task evidence, track/year/step/dept records, round judges, and inherited judges. Distinct rounds still receive their own cell and old-result calculation, but those calculations use the preloaded indexes instead of reading, normalizing, filtering, and sorting the full datasets again. Small linear scans in notification filtering, later-judge lookup, and owner lookup were also replaced with request-local Set/Map lookups.
+
+### Materialization and query result
+
+| Counter | Original profile | Semantic-cache pass | Explicit context |
+| --- | ---: | ---: | ---: |
+| SQL-result logical READ | 270 | 18 | **17** |
+| Physical SQL | 16 | 16 | **16** |
+| `tasks` calls/calculations | 9 calls | 2 calculations | **1 canonical materialization** |
+| `allTasks` calls/calculations | 9 calls | 1 calculation | **0 additional task join** |
+| Approval projection | repeated through READ graph | 1 semantic calculation | **1 merge from preloaded inputs** |
+| `cellsOfRound` | 9 | 9 | **9 distinct rounds** |
+| Base-cell calculations | 9 calls / 7 unique | 7 | **7** |
+| Old-result aggregates | 9 | 9 | **9 distinct parameter sets** |
+| Shared dataset normalization | repeated | semantic-result reuse | **1 request context** |
+
+The unchanged SQL count is intentional: the target was repeated server materialization, not an arbitrary reduction of the 16 independent relation queries.
+
+### `/actions` timing after pass 2
+
+All four published roles returned HTTP 200 for one cold and nine sequential warm requests each. Client warm medians were `gm` 4.650 s, `road` 4.265 s, `road_head` 4.210 s, and `ceo` 4.215 s; the pooled 36-request warm median was 4.300 s. For the directly comparable `gm` series, the request changed from 14.625 s originally to 5.477 s after semantic memoization and **4.650 s** after the explicit context.
+
+The nine warm `gm` server profiles have these medians:
+
+- DB interval-union wall time: 2.318 s
+- connection-acquisition interval union: 0.160 s
+- query interval union: 2.175 s
+- server render: 3.161 s
+- non-DB server interval: **0.843 s**
+
+Relative to the original 9.983-second non-DB estimate, request-local server calculation fell by about 91.6%. Relative to pass 1's 1.894 seconds it fell by about 55.5%. The remaining response time is dominated by the cross-region PostgreSQL query/row-transfer wall time rather than duplicate application materialization.
+
+### Intermediate contract gate
+
+The released comparison date remained `2026-09-26`; current-date output was not used to redefine the golden. The targeted Preview gate fetched only the 37 pages needed for the agreed 159 metrics, not the full 137-page regression. It passed HTTP 37/37, metrics 159/159 with value mismatch 0 and missing/extra 0/0, and calculation crosscheck 68/68.
+
+Five calculation JSON payloads (`01` through `05`) were regenerated from the same frozen inputs and were byte-identical to the published files. The sixth calculation check compared `CheckFlag[]` for `gm`, `road`, `road_head`, and `ceo`: every role returned 30 rows and the same canonical SHA-256 as its published CSV calculation. Direct old-versus-context comparison of all nine round cell maps also had mismatch 0. TypeScript checking and the Next.js production build passed.
+
+The verification-only branch clock was removed after the gate. Production remains `csv`; no WRITE, DB schema/data, golden, UI, role, or released data changes were made. This pass completes the `/actions` server-calculation target only. Common PostgreSQL overhead and the full five-route performance gate remain separate next steps before any Production READ cutover.

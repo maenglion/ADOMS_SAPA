@@ -345,3 +345,15 @@
 - 검증: 후속 반복 최적화는 동일 입력·동일 기준일에서 핵심 지표 159개와 계산 JSON 6개를 우선 gate로 사용한다. 대표 경로 성능 목표를 달성한 뒤 필요한 최종 전수 검증과 Production READ 전환 여부를 별도로 판정한다.
 - 관련 파일: `WORKLOG.md`
 - 관련 commit: `2c3bee1`
+
+### [32] `/actions` 명시적 READ context 적용 및 서버 계산 병목 축소
+- 상태: 완료
+- 배경: request-scoped semantic result 재사용으로 `/actions` PostgreSQL warm 중앙값을 14.625초에서 5.477초로 줄였지만, 동일 요청 안에서 회차별 task·approval·evidence·inspection·action·judge·이행기록의 조립과 선형 탐색이 남아 있었다. 시연판은 명시적으로 발행된 결과 계약을 유지하는 조건에서 내부 materialization 구조 변경이 허용된 상태다.
+- 결정: `/actions` 요청 시작 시 필요한 기초 자료를 한 번 병렬 preload하고, canonical task dataset과 approval projection, 공통 Map/Set 색인을 가진 명시적 request context를 회차 계산에 전달한다. 전역 cache는 만들지 않는다. `applyItemApproval`은 이 경로에서 이미 읽은 task·round·judge를 입력으로 받아 별도 task join을 만들지 않는다. 서로 다른 회차의 판정 계산은 유지하되 공통 전체자료 READ·정규화·선형 탐색은 반복하지 않는다.
+- 이유: 물리 SQL은 이미 16회로 축소돼 있었고 남은 개선 대상은 SQL fan-out이 아니라 같은 요청 안의 server materialization이었다. request-local context와 stable-order index는 freshness, role scope, 정렬, 필터, limit, 빈 값 의미를 바꾸지 않고 중복 계산만 제거한다.
+- 영향 범위: PostgreSQL `/actions` READ 내부 실행, request-local preload/index, task approval projection, 점검 회차 cell·old aggregate 계산, 알림·judge·owner lookup. Production backend, CSV READ, WRITE, DB schema/data/index, UI, role 의미, golden, frozen data 판에는 영향이 없다.
+- 실제 변경: task 원래 순서를 보존하는 base/approval task index, task별 inspection, inspection별 action, task별 최신 evidence, 부서별 owner, 회차별 judge, track·year·step·dept별 이행기록 index를 한 번 생성한다. 회차 9건은 이 context로 계산하며 base cell 7개 입력 조합과 old aggregate 9개 입력 조합만 계산한다. 알림의 task 포함 검사, 이후 judge 검색, 부서 owner 검색을 Set/Map lookup으로 교체했다. `allTasks`의 한도를 현재 canonical task dataset과 맞추고 raw approval rows를 분리해 preload 입력으로 사용했다.
+- 검증: TypeScript 검사와 production build를 통과했다. CSV에서 기존 `cellsOfRound`와 context 계산을 9회차 전부 직접 비교해 mismatch 0을 확인했다. `CheckFlag[]`는 `gm`, `road`, `road_head`, `ceo` 모두 30행이며 기존 role별 SHA-256과 일치했다. PostgreSQL Preview의 `/actions` 40/40 요청이 HTTP 200이었다. 발행 기준일 `2026-09-26`으로 제한한 중간 gate는 37화면 HTTP 37/37, metrics 159/159 mismatch 0, calculation crosscheck 68/68이다. 계산 JSON `01`~`05`는 byte-identical이고 role별 `CheckFlag[]`를 여섯 번째 계산 검증으로 포함해 모두 통과했다. 검증용 시각 설정은 완료 후 제거했다.
+- 성능: SQL-result logical READ는 최초 270회, 1차 18회에서 17회가 됐고 물리 SQL은 16회로 유지됐다. task 전체 materialization 1회, approval merge 1회, 공통 dataset normalization 1회다. `gm` warm 중앙값은 최초 14.625초, 1차 5.477초에서 4.650초로 감소했다. `gm` warm server 중앙값은 DB wall 2.318초, render 3.161초, 비DB server 0.843초다. 4역할 warm 36회 통합 중앙값은 4.300초다.
+- 관련 파일: `app/actions/page.tsx`, `app/check/_lib.ts`, `lib/check_merge.ts`, `lib/cycle.ts`, `lib/data.ts`, `READ_PERFORMANCE_VERIFY.md`, `WORKLOG.md`
+- 관련 commit: pending

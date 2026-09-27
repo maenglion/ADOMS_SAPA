@@ -8,9 +8,9 @@
 // [400 · 교육자료 버전] "us" = 참고 명세 GNB 8개(연녹색). v2 로 돌아가려면 v2 앱(3300)을 쓴다.
 export const MENU_MODE: "flat" | "group" | "bar" | "us" = "us";
 // 09-25 사용자: 권한 제어 — 역할별 메뉴는 아래 usGroupsFor()(규칙 = lib/perm.ts)
-import { canAccess, deniedPrefixes, PERM_ENFORCE } from "./perm";
+import { canAccess, deniedPrefixes, PERM_ENFORCE, type Role } from "./perm";
 
-export type MenuItem = { href: string; label: string; hideInDemo?: boolean; alias?: boolean; heading?: boolean };  // alias = 다른 묶음에도 있는 바로가기(밑줄 기준 아님)
+export type MenuItem = { href: string; label: string; hideInDemo?: boolean; alias?: boolean; heading?: boolean; roles?: Role[] };  // alias = 다른 묶음에도 있는 바로가기(밑줄 기준 아님)
 
 /** 평면 메뉴(지금까지 쓰던 순서 그대로). */
 export const FLAT: MenuItem[] = [
@@ -172,15 +172,15 @@ export const US_GROUPS: { label: string; items: MenuItem[] }[] = [
     { href: "/law/fc", label: "공중이용시설·공중교통수단" },
     { href: "/law/mt", label: "원료·제조물" },
     // 09-24: 우리 의무 목록(11,015건) 보기 — 교육자료 메뉴에는 없지만 빠지면 의무를 찾아볼 곳이 없다(사용자 「의무들 다 어디 갔어?」)
-    { href: "", label: "의무 목록", heading: true },
-    { href: "/duties?axis=code", label: "중처법 의무조항별" },
-    { href: "/duties?axis=target", label: "관리대상별" },
-    { href: "/duties?axis=law", label: "관계법령별" },
-    { href: "/duties/tree", label: "법령 계층표" },
-    { href: "/duties/list", label: "전체 의무 목록" },
+    { href: "", label: "의무 목록", heading: true, roles: ["gm"] },
+    { href: "/duties?axis=code", label: "중처법 의무조항별", roles: ["gm"] },
+    { href: "/duties?axis=target", label: "관리대상별", roles: ["gm"] },
+    { href: "/duties?axis=law", label: "관계법령별", roles: ["gm"] },
+    { href: "/duties/tree", label: "법령 계층표", roles: ["gm"] },
+    { href: "/duties/list", label: "전체 의무 목록", roles: ["gm"] },
     // 09-24: 매일 관계법령 개정 확인 → 우리 의무 반영(체크리스트 생성 작업 CoCo)
-    { href: "", label: "법령 개정", heading: true },
-    { href: "/law/changes", label: "법령 개정 현황" },
+    { href: "", label: "법령 개정", heading: true, roles: ["gm"] },
+    { href: "/law/changes", label: "법령 개정 현황", roles: ["gm"] },
   ] },
   { label: "의무이행\n(실적증빙)", items: [
     { href: "", label: "대상별 이행", heading: true },
@@ -285,7 +285,7 @@ export function usGroupsFor(role: string, set: MenuSettings = {}): MenuGroup[] {
         if (isLocked(m.href)) return canAccess(role, m.href);
         if (s.hide) return false;
         if (PERM_ENFORCE && (s.off || []).includes(role)) return false;
-        if (role !== "gm" && (m.href.startsWith("/duties") || m.href === "/law/changes")) return false;
+        if (m.roles && !m.roles.includes(role as Role)) return false;
         return m.heading || canAccess(role, m.href);
       })
       .sort((a, b) => (a.s.order ?? (a.i + 1) * 10) - (b.s.order ?? (b.i + 1) * 10) || a.i - b.i)

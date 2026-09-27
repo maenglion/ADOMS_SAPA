@@ -171,5 +171,10 @@ table.us-tbl select,table.us-tbl textarea{width:100%;border:1px solid #c9cfc6;bo
 .us-modal{background:#fff;border-radius:12px;min-width:560px;max-width:92vw;max-height:88vh;overflow:auto;box-shadow:0 20px 50px #0005}
 .us-modal-h{background:var(--us-g1);color:#fff;font-weight:800;padding:12px 18px;display:flex;justify-content:space-between}
 .us-modal-b{padding:16px 18px}
+.us-role-change-modal{width:440px;min-width:0}
+.us-role-change-body{text-align:center;padding:28px 24px 24px}
+.us-role-change-body p{margin:0 0 10px;font-size:1.05rem}
+.us-role-change-body .us-muted{margin-bottom:24px;font-size:.92rem}
+.us-role-change-body .us-btn{min-width:92px;justify-content:center}
 
 @media print{.us-banner,.us-header,.us-foot,.us-side{display:none !important}}

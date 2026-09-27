@@ -469,3 +469,14 @@
 - 검증: TypeScript 검사와 production build가 통과했다. Railway 배포 `d06db41`은 Singapore에서 활성화됐고 prewarm 8/8이 HTTP 200으로 끝난 뒤 `READY responses=8`을 기록했다. 최초 DB 생성은 dashboard 10.521초, `/actions` 총괄 2.004초, `/duties/list` 0.554초, `/evidence` 0.588초, `/tasks` 0.133초였으며 READY 이후 Railway cache hit는 0.95~1.58ms였다. Netlify Production을 포함한 warm 9회 중앙값은 dashboard 0.499초, `/actions` 0.316초, `/duties/list` 0.318초, `/evidence` 0.333초, `/tasks` 0.246초이고 전 요청이 HTTP 200 및 cache hit였다. 이전 Production 관측값 4.443초, 0.572~0.675초, 0.362초, 0.430초, 0.382초보다 모두 짧아졌으며 일반 화면 2초, `/actions` 2.5초 목표를 충족했다. 동일 기준일의 CSV 계약과 비교한 핵심 지표는 자동 추출 155개와 `/tasks` 4역할 지표 4개를 합쳐 159/159, mismatch 0이다. 계산 JSON 5개 SHA가 모두 동일하고 `CheckFlag[]` 4역할 SHA 및 9개 round cell 비교도 동일해 계산 검증 6/6을 통과했다. Production은 계속 실제 PostgreSQL READ server를 사용하며 CSV rollback 경로를 유지한다.
 - 관련 파일: `app/check/_lib.ts`, `lib/db.ts`, `services/read-server/start.mjs`, `services/read-server/README.md`, `WORKLOG.md`
 - 관련 commit: `3cc9717` (UI 분리), `d06db41` (성능), 최종 기록 commit은 pending
+
+### [43] 사용자 유형별 법 의무사항 메뉴 및 역할 변경 고지
+- 상태: 완료
+- 배경: 실무자 등 비총괄 역할에서도 `법 의무사항` 아래의 의무 목록과 법령 개정 항목이 노출될 수 있었고, 상단에서 사용자 유형을 바꿔도 권한 기준이 변경됐다는 안내가 없었다.
+- 결정: `법 의무사항` 자체와 대상별 의무사항 3개 화면은 모든 역할에 유지한다. 의무 목록 5개 화면과 법령 개정 현황은 총괄(`gm`) 전용 metadata로 정의하고 역할별 메뉴 생성 단계에서 제목과 링크를 함께 제외한다. 사용자 유형이 실제로 달라졌을 때만 `ROLE_LABEL`의 역할명으로 1회 안내 modal을 표시한다.
+- 이유: CSS 숨김이나 링크 문자열 추정이 아니라 단일 메뉴 원천에서 권한을 결정해야 빈 제목과 우회 노출을 막을 수 있다. 역할명도 기존 정본을 재사용해야 표시 문구가 서로 달라지지 않는다.
+- 영향 범위: 공통 GNB의 `법 의무사항` dropdown, 상단 사용자 유형 선택과 안내 modal. READ cache, PostgreSQL, READ server, WRITE, 고정 캔버스와 GNB 크기에는 영향이 없다.
+- 실제 변경: 메뉴 항목에 역할 metadata를 추가하고 의무 목록·법령 개정의 제목과 링크를 총괄 전용으로 지정했다. 역할 선택 직후 새 역할명과 권한 반영 안내를 표시하며 `확인`으로 닫도록 했다. 같은 역할 재선택과 페이지 새로고침에는 안내를 반복하지 않는다.
+- 검증: 총괄은 대상별 의무사항, 의무 목록, 법령 개정의 12개 제목·링크를 모두 받고, `ceo`, `mgr`, `road`, `water`, `road_head`, `water_head`는 대상별 의무사항 제목과 3개 링크만 받는 것을 확인했다. 7개 역할 전환 시 `ROLE_LABEL`과 동일한 이름이 표시되고 빈 제목이 남지 않았다. Next.js production build와 내장 TypeScript 검사를 통과했다. 직접 URL 권한은 기존 permission 구조의 query 구분 범위를 바꾸지 않고 별도 보강 대상으로 남겼다.
+- 관련 파일: `lib/menu.ts`, `components/UserBox.tsx`, `app/us.css`, `WORKLOG.md`
+- 관련 commit: pending

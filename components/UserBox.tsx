@@ -1,7 +1,8 @@
 "use client";
 import { useRouter, useSearchParams } from "next/navigation";
-import { Suspense } from "react";
+import { Suspense, useState } from "react";
 import { ROLES } from "./RoleSwitch";
+import { ROLE_LABEL } from "@/lib/roles";
 
 /**
  * 로그인 사용자 — 이용자 고르기.
@@ -16,23 +17,42 @@ function Inner({ who }: { who: Record<string, Who> }) {
   const sp = useSearchParams();
   const role = sp?.get("role") || "gm";
   const w = who[role];
+  const [changedRole, setChangedRole] = useState<string | null>(null);
+
   return (
-    <span className="userme">
-      <select
-        value={role}
-        aria-label="이용자 바꾸기"
-        title={w ? `${w.dept} ${w.name}${w.duty ? " " + w.duty : ""}` : ""}
-        onChange={(e) => {
-          const p = new URLSearchParams(Array.from(sp?.entries() || []));
-          p.set("role", e.target.value);
-          router.push(`?${p.toString()}`);
-        }}
-      >
-        {ROLES.map((r) => (
-          <option key={r.id} value={r.id}>{r.label}</option>
-        ))}
-      </select>
-    </span>
+    <>
+      <span className="userme">
+        <select
+          value={role}
+          aria-label="이용자 바꾸기"
+          title={w ? `${w.dept} ${w.name}${w.duty ? " " + w.duty : ""}` : ""}
+          onChange={(e) => {
+            const nextRole = e.target.value;
+            if (nextRole === role) return;
+            setChangedRole(nextRole);
+            const p = new URLSearchParams(Array.from(sp?.entries() || []));
+            p.set("role", nextRole);
+            router.push(`?${p.toString()}`);
+          }}
+        >
+          {ROLES.map((r) => (
+            <option key={r.id} value={r.id}>{r.label}</option>
+          ))}
+        </select>
+      </span>
+      {changedRole && (
+        <div className="us-modal-bg us-role-change-bg" role="presentation">
+          <section className="us-modal us-role-change-modal" role="dialog" aria-modal="true" aria-labelledby="role-change-title">
+            <div className="us-modal-h" id="role-change-title">사용자 유형 변경</div>
+            <div className="us-modal-b us-role-change-body">
+              <p>사용자가 <strong>{ROLE_LABEL[changedRole] || changedRole}</strong>으로 변경되었습니다.</p>
+              <p className="us-muted">해당 사용자 권한에 맞춰 메뉴와 화면이 표시됩니다.</p>
+              <button type="button" className="us-btn g" onClick={() => setChangedRole(null)}>확인</button>
+            </div>
+          </section>
+        </div>
+      )}
+    </>
   );
 }
 

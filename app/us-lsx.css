@@ -80,12 +80,13 @@
 .usa-d-law{font-size:.74rem;padding-left:10px;line-height:1.3}
 
 /* 대시보드 상단 — 시기도래 · 기한 초과 · 알림: 제목은 박스 밖 같은 줄, 박스는 같은 높이(09-24 사용자) */
-.usa-d-top{align-items:stretch}
+.usa-d-top{align-items:start}
 .usa-d-top > section{display:flex;flex-direction:column;min-width:0}
 .usa-d-top > section > .usa-d-h{min-height:40px;margin-bottom:10px}
-.usa-d-top > section > a,.usa-d-top > section > ul{flex:1}
+.usa-d-top > section > a,.usa-d-top > section > ul{flex:none;box-sizing:border-box}
 .usa-d-duebox{border-radius:18px;padding:16px 22px}
-.usa-d-overbox{height:auto;border:2px solid #f39a9a;box-shadow:none;border-radius:18px;padding:16px 20px;font-size:1rem;background:#fff}
+.usa-d-duebox,.usa-d-overbox,.usa-d-notebox:not(.all){height:250px}
+.usa-d-overbox{border:2px solid #f39a9a;box-shadow:none;border-radius:18px;padding:16px 20px;font-size:1rem;background:#fff}
 .usa-d-overcap{color:#6b6b6b;font-size:.95rem}
 .usa-d-overn b{font-size:2.6rem}
 .usa-d-notebox{border:1px solid var(--us-line);border-radius:18px;padding:10px;background:#fff;display:flex;flex-direction:column;gap:7px;max-height:none;overflow:visible}
@@ -93,6 +94,8 @@
 .usa-d-notebox li{border:1px solid #e3e8e0;border-radius:10px;padding:7px 10px;font-size:.95rem;line-height:1.45;align-items:flex-start;gap:12px;border-bottom:1px solid #e3e8e0}
 .usa-d-msg{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
 .usa-d-date{font-size:.85rem;color:#6b6b6b;white-space:nowrap}
+.usa-plus{width:24px;height:24px;min-width:24px;border:1px solid #b7bdb5;border-radius:4px;background:#e8ebe7;color:#30352f !important;font-size:1rem;font-weight:700;line-height:1;padding:0}
+.usa-plus:hover{background:#dfe4dd;border-color:#929a90}
 .usb1-sapa.c{background:#fff0c2;color:#8a6100}.usb1-cons{color:#8a6100;font-weight:700}
 
 /* 대시보드 「안전·보건 확보의무」 카드 — 줄바꿈·굵기 정리(09-24 사용자) */

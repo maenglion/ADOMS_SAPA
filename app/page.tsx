@@ -242,7 +242,7 @@ async function renderDashboard({ searchParams }: { searchParams: Promise<Record<
           </section>
           {/* 알림 */}
           <section className="usa-d-alarm">
-            <h2 className="usa-d-h">알림 <Link className="usa-plus" href={showAll ? `/?role=${role}` : `/?role=${role}&alarm=all`} title={showAll ? "접기" : "더 보기"}>{showAll ? "−" : "+"}</Link></h2>
+            <h2 className="usa-d-h">알림 <Link className="usa-plus" href={showAll ? `/?role=${role}` : `/?role=${role}&alarm=all`} title={showAll ? "접기" : "더 보기"} aria-label={showAll ? "알림 접기" : "알림 더 보기"} aria-expanded={showAll}>{showAll ? "−" : "+"}</Link></h2>
             <ul className={`usa-d-notes usa-d-notebox${showAll ? " all" : ""}`}>
               {noteList.map((n: Row) => (
                 <li key={n.notif_id} title={n.message}><span className="usa-d-msg">{n.message}</span><span className="usa-d-date">{dot(n.sent_at)}</span></li>

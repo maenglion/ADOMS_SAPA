@@ -80,6 +80,7 @@ export default function QaConsole() {
       <header className="qa-header">
         <button type="button" className="qa-brand-home" onClick={() => setTab("QA 현황")} aria-label="시연 관리자 첫 화면으로 이동"><b>ADOMS QA</b></button>
         <span>시연 운영 점검</span>
+        <a className="qa-app-home" href="/">ADOMS HOME으로 돌아가기</a>
       </header>
       <nav className="qa-tabs" aria-label="QA 메뉴">{TABS.map((name) => <button key={name} className={tab === name ? "on" : ""} onClick={() => setTab(name)}>{name}</button>)}</nav>
       <section className="qa-content">

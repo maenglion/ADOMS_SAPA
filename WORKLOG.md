@@ -689,3 +689,14 @@
 - 검증: 핵심 5화면 dashboard, actions, duties/list, evidence, tasks가 모두 HTTP 200이었다. warm 성능 점검은 5화면 모두 `HIT 3/3`, 실제 warm PostgreSQL Query 0, 화면별 및 전체 판정 `정상`이었다. 역할별 실제 노출 메뉴 기준 smoke는 287/287 PASS였고 HTTP 500/503/504, raw JSON·RSC·내부 오류 페이지, blank 또는 깨진 화면 노출은 각각 0건이었다. dev→main 최소 gate는 TypeScript PASS, production build PASS, READ health 200 및 redirect 0, prewarm READY, 핵심 5화면 200, warm cache HIT, warm DB Query 0, 역할별 메뉴 검증, visible menu smoke PASS, HTTP 500/503/504 0으로 고정한다.
 - 관련 파일: `middleware.ts`, `services/read-server/start.mjs`, `WORKLOG.md`
 - 관련 commit: pending
+
+### [63] 시연 관리자에서 일반 ADOMS 화면 복귀 경로 복원
+- 상태: 완료
+- 배경: 관리자 내부 첫 화면 이동은 `ADOMS QA` 브랜드로 유지하되, 관리자 로그인 화면과 로그인 이후 화면에서 일반 시연 앱으로 돌아갈 수 있는 명시적 경로가 다시 필요하다는 요청이 있었다.
+- 결정: 로그인 화면 하단에는 `ADOMS로 돌아가기`, 관리자 header 우측에는 `ADOMS HOME으로 돌아가기` 링크를 표시한다. 두 링크는 일반 앱의 루트 화면으로 이동하고, `ADOMS QA` 브랜드는 기존대로 관리자 QA 현황 첫 화면으로 이동한다.
+- 이유: 관리자 내부 navigation과 관리자에서 일반 시연 앱으로 나가는 navigation을 서로 다른 위치와 문구로 구분하기 위해서다.
+- 영향 범위: `/demo-admin` 로그인 및 관리자 header navigation. READ server, PostgreSQL, cache, 역할 권한과 일반 사용자 화면 결과에는 영향이 없다.
+- 실제 변경: 로그인 card 아래와 관리자 header 우측에 일반 ADOMS 루트로 이동하는 링크를 추가하고 캡처 기준의 색상·간격·정렬을 적용했다.
+- 검증: TypeScript 및 production build로 확인하고, 로그인 전후 화면에서 링크 표시와 목적지를 점검한다.
+- 관련 파일: `app/demo-admin/AdminLogin.tsx`, `app/demo-admin/QaConsole.tsx`, `app/demo-admin/demo-admin.css`, `WORKLOG.md`
+- 관련 commit: pending

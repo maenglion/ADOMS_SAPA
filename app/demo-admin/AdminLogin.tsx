@@ -49,6 +49,7 @@ export default function AdminLogin() {
         {error && <div className="qa-error" role="alert">{error}</div>}
         <button className="qa-primary" type="submit" disabled={busy}>{busy ? "확인 중..." : "로그인"}</button>
       </form>
+      <a className="qa-login-back" href="/">ADOMS로 돌아가기</a>
     </main>
   );
 }

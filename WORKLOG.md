@@ -645,3 +645,14 @@
 - 검증: Preview 양쪽 source가 `dev/admin-qa-performance-20260928@2c225a4`로 일치했고 Railway startup health/prewarm과 Netlify 핵심 화면 및 역할별 메뉴 smoke가 통과했다. Production은 검증 중 계속 `main@47a488a`를 유지했다.
 - 관련 파일: `WORKLOG.md`
 - 관련 commit: pending
+
+### [59] 관리자 성능 판정 변경 Production 반영
+- 상태: 완료
+- 배경: 개발 branch에서 관리자 navigation, warm 성능 판정과 내부 endpoint 경계를 검증한 뒤 정상 Production 기준선에 병합할 최종 gate를 통과했다.
+- 결정: 검증된 `dev/admin-qa-performance-20260928`을 `main`에 fast-forward 병합한다. Production Netlify와 Railway READ server가 같은 commit을 배포하고 startup prewarm 및 핵심 5화면을 모두 통과한 상태를 새 정상 기준선으로 삼는다.
+- 이유: Preview에서 결과와 운영 경계를 확인한 동일 revision만 Production에 반영하고, 한 환경의 서비스가 서로 다른 commit을 실행하는 상태를 방지하기 위해서다.
+- 영향 범위: Production 관리자 QA 화면과 성능 점검 판정, READ server response cache metric header, 배포 기준선. PostgreSQL schema/data와 WRITE에는 영향이 없다.
+- 실제 변경: PR #1의 검증된 두 commit을 `main`에 fast-forward 병합했다. Netlify Production과 Railway Production READ server가 `main@20495c8d4a88a93095164a1785e40311fd16a926`을 배포했다.
+- 검증: Railway Production은 8개 startup prewarm 요청이 모두 HTTP 200이고 `READY responses=8`이었다. Netlify Production은 dashboard 0.896초, `/actions` 0.230초, `/duties/list` 0.442초, `/evidence` 0.239초, `/tasks` 0.185초로 모두 HTTP 200이었다. 다섯 응답 모두 backend `read-server`, READ server `railway`였고 warming·internal error는 없었다. rollback은 Netlify `ADOMS_DATA_BACKEND=csv` 전환으로 유지된다.
+- 관련 파일: `WORKLOG.md`
+- 관련 commit: `20495c8d4a88a93095164a1785e40311fd16a926`, 최종 기록 commit은 pending

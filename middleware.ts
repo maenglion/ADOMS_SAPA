@@ -134,7 +134,13 @@ export async function middleware(req: NextRequest) {
       return NextResponse.next();
     }
     if (backend === "read-server" && (req.method === "GET" || req.method === "HEAD")) {
-      try { return await proxyReadServer(req); }
+      try {
+        const railwayAsset = await proxyReadServer(req);
+        // Non-core pages are rendered by Netlify and therefore reference the
+        // Netlify build's own chunk hashes. Fall back locally when the same
+        // asset does not exist in the Railway build.
+        return railwayAsset.status === 404 ? NextResponse.next() : railwayAsset;
+      }
       catch (error) {
         console.error("[adoms-read-server-asset]", error instanceof Error ? error.message : String(error));
         return new NextResponse("READ server asset failed.", { status: 502 });

@@ -32,3 +32,10 @@ Railway 설정:
 - `demo_qa_event`는 업무 `audit_log`와 분리된 시연 리뷰 전용 표다. 시연에 의미 있는 접근, 역할 변경, 오류, 성능 점검, cache/prewarm, WRITE 결과만 저장한다.
 - IP, browser fingerprint, password, token, request body와 raw stack은 기록하지 않는다.
 - READ server 시작 시 idempotent migration `db/migrations/0005_demo_qa_event.sql`을 적용한다. 이 운영 표는 frozen app baseline 91개 표의 데이터 정본에 포함하지 않는다.
+
+내부 endpoint 회귀 점검:
+
+- `npm run verify:read-server-endpoints -- --base=https://<read-server-domain>`
+- cache reset과 재예열까지 확인할 때만 `--reset-cache`를 추가한다.
+- token은 명령행 인자가 아니라 `ADOMS_READ_SERVER_TOKEN` 환경변수로만 전달한다.
+- health는 redirect 없이 200이어야 하며, control/QA는 인증 없는 요청을 거부하고 service 인증 요청만 허용해야 한다.

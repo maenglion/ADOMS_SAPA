@@ -240,8 +240,13 @@ async function prewarm() {
   let childReady = false;
   for (let attempt = 0; attempt < 120; attempt++) {
     try {
-      const response = await fetch(`${internal}${healthRoute}`, { headers: { authorization: `Bearer ${token}` } });
-      if (response.ok) { childReady = true; break; }
+      const response = await fetch(`${internal}${healthRoute}`, {
+        headers: { authorization: `Bearer ${token}` },
+        redirect: "manual",
+      });
+      const location = response.headers.get("location");
+      if (response.ok && !location && !response.url.includes("?role=")) { childReady = true; break; }
+      if (location) console.error(`[adoms-read-server-warm] health redirected to ${location}`);
     } catch {}
     await new Promise((resolve) => setTimeout(resolve, 500));
   }

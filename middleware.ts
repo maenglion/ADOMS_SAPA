@@ -31,6 +31,16 @@ function bearerToken(req: NextRequest) {
   return value.startsWith("Bearer ") ? value.slice(7) : "";
 }
 
+function isDocumentNavigation(req: NextRequest) {
+  if (req.method !== "GET") return false;
+  if (req.nextUrl.pathname.startsWith("/api/")) return false;
+  if (!(req.headers.get("accept") || "").toLowerCase().includes("text/html")) return false;
+  if (req.headers.get("rsc") === "1" || req.headers.has("next-router-state-tree")) return false;
+  const purpose = `${req.headers.get("purpose") || ""} ${req.headers.get("sec-purpose") || ""}`.toLowerCase();
+  if (req.headers.get("next-router-prefetch") === "1" || purpose.includes("prefetch")) return false;
+  return true;
+}
+
 function readServerBaseUrl() {
   const raw = (process.env.ADOMS_READ_SERVER_URL || "").trim();
   let url: URL;
@@ -149,25 +159,30 @@ export async function middleware(req: NextRequest) {
     return NextResponse.next();
   }
   if (readServerMode()) {
-    const allowed = isScreenRead || url.pathname === READ_SERVER_HEALTH
-      || url.pathname === READ_SERVER_CONTROL || url.pathname === READ_SERVER_QA;
+    const isHealth = url.pathname === READ_SERVER_HEALTH;
+    const isControl = url.pathname === READ_SERVER_CONTROL;
+    const isQa = url.pathname === READ_SERVER_QA;
+    const allowed = isScreenRead || isHealth || isControl || isQa;
     if (!allowed) return new NextResponse("Not found", { status: 404 });
-    if (req.method !== "GET" && req.method !== "HEAD") return new NextResponse("Method not allowed", { status: 405 });
     const expected = readServerToken();
     if (!expected || bearerToken(req) !== expected) return new NextResponse("Unauthorized", { status: 401 });
+    const methodAllowed = (isScreenRead || isHealth) ? (req.method === "GET" || req.method === "HEAD")
+      : isControl ? req.method === "POST"
+        : isQa && (req.method === "GET" || req.method === "POST");
+    if (!methodAllowed) return new NextResponse("Method not allowed", { status: 405 });
   }
   const role = url.searchParams.get("role");
   const saved = req.cookies.get(COOKIE)?.value;
 
-  const isQaPath = url.pathname === "/demo-admin" || url.pathname.startsWith("/demo-admin/") || url.pathname.startsWith("/api/demo-admin/");
-  const isApiPath = url.pathname.startsWith("/api/");
-  if (!role && saved && isRole(saved) && req.method === "GET" && !isQaPath && !isApiPath) {
+  const isQaPath = url.pathname === "/demo-admin" || url.pathname.startsWith("/demo-admin/");
+  const shouldRedirectRole = !isQaPath && isDocumentNavigation(req);
+  if (!role && saved && isRole(saved) && shouldRedirectRole) {
     const to = url.clone();
     to.searchParams.set("role", saved);
     return NextResponse.redirect(to);
   }
 
-  if (!role && req.method === "GET" && !isQaPath && !isApiPath) {
+  if (!role && shouldRedirectRole) {
     const to = url.clone();
     to.searchParams.set("role", DEFAULT_ROLE);
     return withRoleCookie(NextResponse.redirect(to), DEFAULT_ROLE, saved);

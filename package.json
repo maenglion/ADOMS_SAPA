@@ -13,7 +13,8 @@
     "start:read-server": "node services/read-server/start.mjs",
     "lint": "next lint",
     "verify:read-shadow": "node scripts/verify_read_shadow.mjs db/read-shadow",
-    "verify:menu-smoke": "node scripts/visible_menu_smoke.mjs"
+    "verify:menu-smoke": "node scripts/visible_menu_smoke.mjs",
+    "verify:read-server-endpoints": "node scripts/read_server_endpoint_smoke.mjs"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.45.4",

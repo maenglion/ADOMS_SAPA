@@ -567,4 +567,4 @@
 - 실제 변경: 관리자 content 아래 footer에 기존 로그아웃 endpoint를 사용하는 BACK 버튼을 추가했다. 버튼을 누르면 서비스 관리자 session을 종료하고 `/?role=gm`으로 이동한다.
 - 검증: TypeScript 정적 검사와 Next.js production build를 통과하고, 관리자 화면 하단에서 버튼이 표시되며 시연 홈으로 정상 복귀하는지 확인했다.
 - 관련 파일: `app/demo-admin/QaConsole.tsx`, `app/demo-admin/demo-admin.css`, `WORKLOG.md`
-- 관련 commit: pending
+- 관련 commit: `19f14a6`

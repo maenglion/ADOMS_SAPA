@@ -656,3 +656,14 @@
 - 검증: Railway Production은 8개 startup prewarm 요청이 모두 HTTP 200이고 `READY responses=8`이었다. Netlify Production은 dashboard 0.896초, `/actions` 0.230초, `/duties/list` 0.442초, `/evidence` 0.239초, `/tasks` 0.185초로 모두 HTTP 200이었다. 다섯 응답 모두 backend `read-server`, READ server `railway`였고 warming·internal error는 없었다. rollback은 Netlify `ADOMS_DATA_BACKEND=csv` 전환으로 유지된다.
 - 관련 파일: `WORKLOG.md`
 - 관련 commit: `20495c8d4a88a93095164a1785e40311fd16a926`, 최종 기록 commit은 pending
+
+### [60] Production 관리자 warm 성능 점검 및 첫 화면 이동 실측
+- 상태: 완료
+- 배경: 관리자 성능 판정 변경을 Production에 반영한 뒤 실제 화면에서 warm-up 제외, 3회 측정, cache 및 DB Query 표시가 의도대로 동작하는지 최종 확인할 필요가 있었다. 관리자 화면의 별도 홈 버튼을 제거한 뒤 `ADOMS QA` 브랜드가 내부 첫 화면 진입점으로 동작하는지도 함께 확인했다.
+- 결정: Production 관리자 성능 점검의 완료 기준은 5개 대표 화면 모두 HTTP 200, 측정 3회 `HIT 3/3`, 실제 warm DB Query 0, 화면별 시간 기준 충족 및 전체 판정 `정상`으로 한다. 관리자 내부 이동은 상·하단 별도 홈 버튼 없이 `ADOMS QA` 브랜드 클릭으로 QA 현황 첫 화면에 돌아가게 한다.
+- 이유: cold MISS를 warm 성능 실패로 오인하지 않고 실제 시연 상태의 cache 재사용과 DB 우회 여부를 확인하며, 관리자 화면의 이동 경로를 한 곳으로 단순화하기 위해서다.
+- 영향 범위: Production `/demo-admin` 성능 점검 결과와 관리자 내부 navigation 검증. 일반 사용자 화면, PostgreSQL schema/data, READ 결과와 WRITE에는 영향이 없다.
+- 실제 변경: 이 항목에서는 추가 코드 변경 없이 배포된 기능을 Production에서 직접 실행해 확인했다. 성능 점검 실행 기록은 `overallStatus`, `reasons`, `results` 구조로 저장하도록 구현된 기존 정책을 유지한다.
+- 검증: Production에서 화면별 1회 warm-up 후 3회 측정 결과가 모두 정상으로 판정됐다. dashboard는 0.025/0.027/0.031초, actions는 0.030/0.036/0.038초, duties/list는 0.019/0.026/0.033초, evidence는 0.034/0.039/0.054초, tasks는 0.060/0.080/0.082초의 Min/Median/Max를 기록했다. 전 화면 HTTP 200, `HIT 3/3`, DB Query 0, 화면별 판정 `정상`, 전체 상태 `정상`이었다. `ADOMS QA` 브랜드 클릭 시 URL 변경이나 시연 앱 이탈 없이 QA 현황 첫 화면으로 이동했으며, 상·하단 시연 홈 복귀 버튼은 표시되지 않았다. Netlify와 Railway Production은 모두 `main` 기준이며 최종 저장소 기준선은 `57d0f70b4616c82d409ef431e79460d416a429af`였다.
+- 관련 파일: `app/demo-admin/QaConsole.tsx`, `app/api/demo-admin/performance/route.ts`, `lib/demo-performance-status.ts`, `services/read-server/start.mjs`, `WORKLOG.md`
+- 관련 commit: pending

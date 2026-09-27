@@ -10,6 +10,8 @@ type QueryTupleMetric = {
   logicalCalls: number;
   sqlCalls: number;
   dbMs: number;
+  acquireMs: number;
+  sqlMs: number;
 };
 
 type DbReadTrace = {
@@ -19,6 +21,8 @@ type DbReadTrace = {
   sqlCalls: number;
   cacheHits: number;
   dbMs: number;
+  acquireMs: number;
+  sqlMs: number;
   cache: Map<string, Promise<DbRow[]>>;
   tuples: Map<string, QueryTupleMetric>;
   scopes: Map<string, { logicalCalls: number; sqlCalls: number; cacheHits: number; dbMs: number; tuples: Set<string> }>;
@@ -43,6 +47,8 @@ export async function withDbReadTrace<T>(label: string, run: () => Promise<T>): 
     sqlCalls: 0,
     cacheHits: 0,
     dbMs: 0,
+    acquireMs: 0,
+    sqlMs: 0,
     cache: new Map(),
     tuples: new Map(),
     scopes: new Map(),
@@ -54,6 +60,8 @@ export async function withDbReadTrace<T>(label: string, run: () => Promise<T>): 
       const tuples = [...trace.tuples.values()].map((item) => ({
         ...item,
         dbMs: roundMs(item.dbMs),
+        acquireMs: roundMs(item.acquireMs),
+        sqlMs: roundMs(item.sqlMs),
       }));
       const scopes = Object.fromEntries([...trace.scopes].map(([scope, item]) => [scope, {
         logicalCalls: item.logicalCalls,
@@ -71,7 +79,10 @@ export async function withDbReadTrace<T>(label: string, run: () => Promise<T>): 
         sqlCalls: trace.sqlCalls,
         cacheHits: trace.cacheHits,
         dbMs: roundMs(trace.dbMs),
+        acquireMs: roundMs(trace.acquireMs),
+        sqlMs: roundMs(trace.sqlMs),
         dataRenderMs: roundMs(performance.now() - trace.startedAt),
+        serverComputeMs: roundMs(performance.now() - trace.startedAt - trace.dbMs),
         scopes,
         tuples,
       }));
@@ -167,6 +178,8 @@ export async function queryRows(relation: string, queryString: string): Promise<
       logicalCalls: 0,
       sqlCalls: 0,
       dbMs: 0,
+      acquireMs: 0,
+      sqlMs: 0,
     };
     tuple.logicalCalls++;
     trace.tuples.set(tupleKey, tuple);
@@ -248,14 +261,28 @@ export async function queryRows(relation: string, queryString: string): Promise<
   if (!order && !VIEWS.has(relation)) order = " ORDER BY ctid";
   const sql = `SELECT ${select} FROM ${relationName(relation)}${where.length ? ` WHERE ${where.join(" AND ")}` : ""}${order}${limit}`;
     const startedAt = performance.now();
-    const result = await postgresPool().query(sql, values);
-    const elapsed = performance.now() - startedAt;
+    const client = await postgresPool().connect();
+    const acquiredAt = performance.now();
+    let result;
+    try {
+      result = await client.query(sql, values);
+    } finally {
+      client.release();
+    }
+    const finishedAt = performance.now();
+    const acquireElapsed = acquiredAt - startedAt;
+    const sqlElapsed = finishedAt - acquiredAt;
+    const elapsed = finishedAt - startedAt;
     if (trace) {
       trace.sqlCalls++;
       trace.dbMs += elapsed;
+      trace.acquireMs += acquireElapsed;
+      trace.sqlMs += sqlElapsed;
       const tuple = trace.tuples.get(tupleKey)!;
       tuple.sqlCalls++;
       tuple.dbMs += elapsed;
+      tuple.acquireMs += acquireElapsed;
+      tuple.sqlMs += sqlElapsed;
       if (scopeName) {
         const scope = trace.scopes.get(scopeName)!;
         scope.sqlCalls++;
@@ -278,17 +305,69 @@ export async function queryRows(relation: string, queryString: string): Promise<
 
 /** Frozen CSV audit-log contract: all overlay rows in stored order; aliases exist only here. */
 export async function queryAuditLog(): Promise<DbRow[]> {
-  const result = await postgresPool().query(`
-    SELECT changed_at AS at,
-           changed_by AS by,
-           action,
-           note,
-           target,
-           what
-      FROM adoms2."audit_log"
-     ORDER BY ctid
-  `);
-  return result.rows;
+  const trace = dbReadTrace.getStore();
+  const tupleKey = "audit_log\u0000compat-all-import-order";
+  if (trace) {
+    trace.logicalCalls++;
+    const tuple = trace.tuples.get(tupleKey) || {
+      relation: "audit_log", query: "compat-all-import-order", logicalCalls: 0,
+      sqlCalls: 0, dbMs: 0, acquireMs: 0, sqlMs: 0,
+    };
+    tuple.logicalCalls++;
+    trace.tuples.set(tupleKey, tuple);
+    const cached = trace.cache.get(tupleKey);
+    if (cached) {
+      trace.cacheHits++;
+      return cloneRows(await cached);
+    }
+  }
+
+  const execute = async () => {
+    const startedAt = performance.now();
+    const client = await postgresPool().connect();
+    const acquiredAt = performance.now();
+    let result;
+    try {
+      result = await client.query(`
+        SELECT changed_at AS at,
+               changed_by AS by,
+               action,
+               note,
+               target,
+               what
+          FROM adoms2."audit_log"
+         ORDER BY ctid
+      `);
+    } finally {
+      client.release();
+    }
+    const finishedAt = performance.now();
+    if (trace) {
+      const acquireElapsed = acquiredAt - startedAt;
+      const sqlElapsed = finishedAt - acquiredAt;
+      const elapsed = finishedAt - startedAt;
+      trace.sqlCalls++;
+      trace.dbMs += elapsed;
+      trace.acquireMs += acquireElapsed;
+      trace.sqlMs += sqlElapsed;
+      const tuple = trace.tuples.get(tupleKey)!;
+      tuple.sqlCalls++;
+      tuple.dbMs += elapsed;
+      tuple.acquireMs += acquireElapsed;
+      tuple.sqlMs += sqlElapsed;
+    }
+    return result.rows;
+  };
+
+  if (!trace) return execute();
+  const pending = execute();
+  trace.cache.set(tupleKey, pending);
+  try {
+    return cloneRows(await pending);
+  } catch (error) {
+    trace.cache.delete(tupleKey);
+    throw error;
+  }
 }
 
 export async function closePostgresPool(): Promise<void> {

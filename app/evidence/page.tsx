@@ -12,6 +12,7 @@ import Steps, { Facts, type Step } from "@/components/Steps";
 import LedgerView from "./LedgerView";
 import SlotsView from "./SlotsView";
 import { UsLayout, PerformSide } from "@/components/us/Parts";   // 09-26 사용자: 메뉴 밖 화면 합치기
+import { withDbReadTrace } from "@/lib/db";
 
 export const dynamic = "force-dynamic";
 
@@ -19,6 +20,10 @@ const KINDS = ["점검표", "일지·대장", "계획서", "결과보고서", "�
 
 /** S6 — 증빙 등록 · 결재. */
 export default async function Evidence({ searchParams }: { searchParams: Promise<Record<string, string>> }) {
+  return withDbReadTrace("/evidence", () => renderEvidence({ searchParams }));
+}
+
+async function renderEvidence({ searchParams }: { searchParams: Promise<Record<string, string>> }) {
   const sp = await searchParams;
   const role = sp.role || "gm";
   const dept = deptOf(role);

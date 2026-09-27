@@ -9,6 +9,7 @@ import { markRead } from "../status/actions";
 // 09-26 사용자: 메뉴 밖 화면 합치기 — 이행현황 레이아웃 + 좌측(StatusSide) · 옛 /qr 은 「휴대폰으로 열기」 칸으로
 import { UsLayout } from "@/components/us/Parts";
 import StatusSide from "../status/_parts/StatusSide";
+import { withDbReadTrace } from "@/lib/db";
 // 09-26 사용자: 「ADOMS는 점검을 실제로 하는 앱이 아니니 휴대폰 현장 등록 기능은 다 빼자」 — PhoneBox(QR) 뺌
 
 export const dynamic = "force-dynamic";
@@ -16,6 +17,10 @@ export const dynamic = "force-dynamic";
 const APPROVAL = ["작성중", "제출", "승인", "반려"];
 
 export default async function Tasks({ searchParams }: { searchParams: Promise<Record<string, string>> }) {
+  return withDbReadTrace("/tasks", () => renderTasks({ searchParams }));
+}
+
+async function renderTasks({ searchParams }: { searchParams: Promise<Record<string, string>> }) {
   const sp = await searchParams;
   const role = sp.role || "gm";
   const dept = sp.dept ?? deptOf(role);

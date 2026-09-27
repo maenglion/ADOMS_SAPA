@@ -8,6 +8,7 @@ import { AreaBadge, StatusBadge, Bar } from "@/components/bits";
 import { ViewSwitch, ChartSwitch, Donut, BarGroup } from "@/components/Chart";
 import { secureAxisOrUnset } from "@/lib/axes";
 import Steps, { type Step } from "@/components/Steps";
+import { withDbReadTrace } from "@/lib/db";
 
 export const dynamic = "force-dynamic";
 
@@ -20,6 +21,10 @@ const IMPL: [string, string, string][] = [
 ];
 
 export default async function DutyList({ searchParams }: { searchParams: Promise<Record<string, string>> }) {
+  return withDbReadTrace("/duties/list", () => renderDutyList({ searchParams }));
+}
+
+async function renderDutyList({ searchParams }: { searchParams: Promise<Record<string, string>> }) {
   const sp = await searchParams;
   const role = sp.role || "gm";
   const view = sp.v || "";

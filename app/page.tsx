@@ -17,6 +17,7 @@ import { ymd } from "@/lib/day";
 import { GradeBar } from "@/components/us/Parts";
 import ParamSelect from "./status/_parts/ParamSelect";
 import { scopeOf, inScope, taskRows, recordRows, yearsOf, thisYear, gradeClass, pct2, rateOf, type Mark } from "./status/_lib/calc";
+import { withDbReadTrace } from "@/lib/db";
 
 // 09-25 사용자: 좁은 칸에서는 법제처 공식 약칭으로(마우스를 올리면 정식 이름). 약칭은 법제처 법령약칭명 그대로만 쓴다.
 const LAW_ABBR: Record<string, string> = {
@@ -50,6 +51,10 @@ const dot = (d?: string) => String(d || "").slice(0, 10).replace(/-/g, ".");
 const plusDays = (d: string, n: number) => { const x = new Date(`${d}T00:00:00`); x.setDate(x.getDate() + n); return ymd(x); };
 
 export default async function Dashboard({ searchParams }: { searchParams: Promise<Record<string, string>> }) {
+  return withDbReadTrace("/", () => renderDashboard({ searchParams }));
+}
+
+async function renderDashboard({ searchParams }: { searchParams: Promise<Record<string, string>> }) {
   const sp = await searchParams;
   const role = sp.role || "gm";
   const year = sp.year || thisYear();

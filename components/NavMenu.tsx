@@ -111,7 +111,6 @@ function displayGnbLabel(label: string) {
     "이행점검및 조치": "이행점검·조치",
     "기관장예방활동": "기관장 예방활동",
     "통계 및 사례": "통계·사례",
-    "시연참고": "시연참고",
   };
   return fixed[normalized] || normalized;
 }

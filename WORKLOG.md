@@ -568,3 +568,14 @@
 - 검증: TypeScript 정적 검사와 Next.js production build를 통과하고, 관리자 화면 하단에서 버튼이 표시되며 시연 홈으로 정상 복귀하는지 확인했다.
 - 관련 파일: `app/demo-admin/QaConsole.tsx`, `app/demo-admin/demo-admin.css`, `WORKLOG.md`
 - 관련 commit: `19f14a6`
+
+### [52] 시연참고 메뉴 제거 및 GNB 우측 정렬
+- 상태: 완료
+- 배경: 클라이언트 요청으로 시연 보조 자료 진입점인 `시연참고`를 실제 사용자 메뉴에서 제거하고, 남은 업무 메뉴를 상단 오른쪽에 정돈할 필요가 생겼다.
+- 결정: `시연참고` GNB 그룹은 역할과 무관하게 메뉴 원천에서 제외한다. 나머지 8개 대메뉴는 현재 글자 크기와 한 줄 표시를 유지하면서 헤더 오른쪽 기준으로 정렬한다.
+- 이유: 시연 보조 화면을 고객 메뉴에 노출하지 않고, 빈 공간을 메뉴 사이에 과도하게 분산하지 않아 확정 시안과 같은 정돈된 상단 구조를 만들기 위해서다.
+- 영향 범위: 공통 상단 GNB의 표시 그룹과 정렬. `/demo-guide` route 자체, 역할 권한, 업무 데이터, READ server와 PostgreSQL에는 영향이 없다.
+- 실제 변경: `US_GROUPS`에서 `시연참고` 그룹을 제거하고 GNB를 `flex-end` 및 18px 고정 간격으로 배치했다. 마지막 메뉴를 시연참고 pill로 꾸미던 선택자도 제거해 `관리자`가 일반 대메뉴와 동일하게 표시되도록 했다.
+- 검증: 8개 업무 대메뉴만 한 줄로 표시되고 현재 글자 크기를 유지한 채 우측 정렬되는지 확인했다. TypeScript 정적 검사와 Next.js production build를 통과했다.
+- 관련 파일: `lib/menu.ts`, `components/NavMenu.tsx`, `app/us.css`, `WORKLOG.md`
+- 관련 commit: pending

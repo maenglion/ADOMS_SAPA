@@ -250,10 +250,6 @@ export const US_GROUPS: { label: string; items: MenuItem[] }[] = [
     { href: "/board/notice", label: "공지사항" },
     { href: "/board/files", label: "자료실" },
   ] },
-  // 09-24 사용자: 시연 참고 메뉴 — 시연 뒤 이 묶음과 app/demo-guide 를 함께 없앤다
-  { label: "시연\n참고", items: [
-    { href: "/demo-guide", label: "시연 시나리오" },
-  ] },
 ];
 
 /* ── 역할별 메뉴 · 메뉴 관리 설정 (09-25 사용자: 권한 제어 · 시스템 관리 › 메뉴 관리) ─────────────────

@@ -425,3 +425,14 @@
 - 검증: 1920px에서 앱 폭 1600px·좌우 바깥 영역 160px, 1200px에서 앱 폭 1200px, 1024px와 768px에서 앱 폭 1200px 및 문서 scrollWidth 1200px를 확인했다. 작은 화면에서도 헤더·본문 열은 축소되지 않고 하단 가로 스크롤이 표시되며 역할 보조 링크는 0개다. TypeScript 정적 검사와 Next.js production build를 통과했다.
 - 관련 파일: `app/us.css`, `components/Shell.tsx`, `components/NavMenu.tsx`, `components/UserBox.tsx`, `public/yongin_logo_header.png`, `WORKLOG.md`
 - 관련 commit: pending
+
+### [39] 상단 메뉴 가독성 조정 및 최신 배포 통합
+- 상태: 완료
+- 배경: 1440px 미만 화면에서 상단 GNB 글씨가 좌측 중대재해 통계 메뉴보다 작게 표시됐고, 최신 UI는 branch deploy에만 반영되어 Production과 배포 기준 commit이 달랐다.
+- 결정: 1440px 미만에서도 `시연참고`를 제외한 상단 GNB 글씨를 좌측 업무 메뉴와 같은 1.02rem 기준으로 표시한다. 최신 `remote-csv-baseline` 이력을 `main`에 fast-forward하고 Production 자동 배포 기준을 동일 commit으로 통합한다.
+- 이유: 주요 메뉴의 시인성을 확보하고 GitHub 기준 브랜치, Production 배포와 사용자 확인 화면이 서로 다른 상태를 해소하기 위해서다.
+- 영향 범위: 1440px 미만 공통 GNB 글자 크기, Git `main`, Netlify Production 배포. 메뉴 링크·권한·순서, DB/schema/data, READ server, WRITE에는 영향이 없다.
+- 실제 변경: 일반 GNB의 축소 구간 글자 크기를 0.96rem에서 1.02rem으로 변경했다. `시연참고` pill은 기존 0.88rem을 유지했다. 최신 UI commit을 원격 `remote-csv-baseline`과 `main`에 반영해 같은 소스 기준으로 배포했다.
+- 검증: TypeScript 정적 검사와 Next.js production build를 통과했다. branch deploy와 Production에서 일반 GNB 1.02rem, `시연참고` 0.88rem 및 최신 commit 반영을 확인했다.
+- 관련 파일: `app/us.css`, `WORKLOG.md`
+- 관련 commit: pending

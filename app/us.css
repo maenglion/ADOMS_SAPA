@@ -175,7 +175,7 @@ table.us-tbl select,table.us-tbl textarea{width:100%;border:1px solid #c9cfc6;bo
   .us-banner-user{width:285px;padding:0 14px;gap:14px}
   .us-banner-user .userme select{width:170px;font-size:.8rem}
   .us-header{gap:24px}
-  .us-gnb-h{padding:0 7px;font-size:.96rem}
+  .us-gnb-h{padding:0 7px;font-size:1.02rem}
   .us-gnb-g:last-child>.us-gnb-h{padding:0 15px;font-size:.88rem}
 }
 @media print{.us-banner,.us-header,.us-foot,.us-side{display:none !important}}

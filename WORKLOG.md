@@ -493,12 +493,23 @@
 - 관련 commit: pending
 
 ### [45] GNB 단일 상태 및 ADOMS 역할·서비스 관리자 분리
-- 상태: 진행
+- 상태: 완료
 - 배경: 현재 route 강조와 dropdown open 상태를 혼용하거나 메뉴 DOM을 동시에 유지하면 서로 다른 GNB가 함께 보일 수 있었다. 역할 변경 직후 selector, URL, 메뉴 context와 고지 modal이 서로 다른 역할을 가리킬 가능성도 있었고, QA 인증 cookie의 의미를 일반 ADOMS 역할과 더 명확히 분리할 필요가 있었다.
 - 결정: GNB 표시 상태는 request-local `openMenuKey` 하나만 사용하고 current route 강조와 분리한다. ADOMS 사용자 역할의 UI 정본은 URL `role` query로 유지하며 `adoms-role` cookie는 persistence/fallback에만 사용한다. QA 인증은 별도 `adoms-service-admin` HttpOnly session으로 관리하며 양방향 권한 승격을 두지 않는다.
 - 이유: 사용자 역할, QA 운영 권한, 현재 화면 강조와 열린 dropdown은 서로 다른 상태다. 각 상태의 원천을 분리해야 역할 변경이나 hover·click 전환 때 이전 상태가 남지 않고 QA 접근 권한이 일반 역할에 섞이지 않는다.
 - 영향 범위: 공통 GNB interaction과 표시선, 2-depth section label, 상단 역할 selector, 의무 목록·법령 개정 직접 접근 권한, QA session cookie. PostgreSQL, READ server, cache/prewarm, WRITE, 고정 캔버스와 데이터 결과에는 영향이 없다.
 - 실제 변경: 열려 있는 GNB만 dropdown DOM을 생성하고 hover·click·focus·Escape·메뉴 이탈·역할 변경을 모두 같은 `openMenuKey`에 연결했다. 대메뉴 active 하단선을 제거하고 dropdown 상단선만 4px로 유지했으며 section label은 `--us-mut`와 흰색의 80:20 혼합색으로 조정했다. 역할 전환은 새 역할에서 현재 경로가 허용될 때만 유지하고, 의무 목록·법령 개정처럼 숨겨지는 화면에서는 해당 역할 홈으로 이동한다. `service_admin` logout은 서비스 session만 제거한 뒤 시연 홈 `role=gm`으로 이동한다.
-- 검증: TypeScript 검사와 production build를 통과했다. 로컬 브라우저에서 기관장 예방활동 → 관리자 → 법 의무사항 순으로 전환할 때 visible dropdown은 항상 1개였고, `road` 전환 뒤 selector·URL·메뉴·modal이 동일 역할을 표시하며 기존 dropdown이 닫혔다. 코드의 `usGroupsFor(role)`에서 추출한 visible menu 294건을 순회해 HTTP·공통 Shell·blank/raw error 문자열을 검사한 결과 294/294 PASS였다. 역할별 수치는 `ceo` 39, `gm` 59, `mgr` 48, `road_head` 39, `road` 35, `water_head` 39, `water` 35건이다. Production 최종 순회 결과는 배포 뒤 추가한다.
+- 검증: TypeScript 검사와 production build를 통과했다. 로컬 브라우저에서 기관장 예방활동 → 관리자 → 법 의무사항 순으로 전환할 때 visible dropdown은 항상 1개였고, `road` 전환 뒤 selector·URL·메뉴·modal이 동일 역할을 표시하며 기존 dropdown이 닫혔다. 코드의 `usGroupsFor(role)`에서 추출한 visible menu 294건을 순회해 HTTP·공통 Shell·blank/raw error 문자열을 검사한 결과 294/294 PASS였다. 역할별 수치는 `ceo` 39, `gm` 59, `mgr` 48, `road_head` 39, `road` 35, `water_head` 39, `water` 35건이다. Production 최종 순회는 별도 배포 검증 기록에 남긴다.
 - 관련 파일: `components/NavMenu.tsx`, `components/UserBox.tsx`, `components/MenuCtx.tsx`, `lib/perm.ts`, `lib/demo-admin-auth.ts`, `app/us.css`, `scripts/visible_menu_smoke.mjs`, `MENU_SMOKE_VERIFY.md`, `WORKLOG.md`
+- 관련 commit: `a696971`
+
+### [46] Netlify 관리자 아이디 secret scan 오탐 처리
+- 상태: 진행
+- 배경: 역할·GNB·QA 콘솔 변경을 포함한 `main` 배포가 Netlify secret scan 단계에서 중단되어 Production에는 이전 배포가 계속 표시됐다. Production의 `ADOMS_DEMO_ADMIN_USER` 값이 일반 문자열과 일치해 소스와 빌드 산출물의 정상적인 `admin` 표기까지 secret으로 판정된 것이 원인이었다.
+- 결정: secret scan 전체를 끄지 않고 비밀값이 아닌 관리자 로그인 아이디 키 `ADOMS_DEMO_ADMIN_USER`만 검사 예외로 지정한다. 관리자 비밀번호, session secret, READ server token 및 DB 연결값은 계속 검사한다.
+- 이유: 사용자명은 인증 비밀값이 아니며, 일반 문자열 일치로 인한 배포 차단만 해소하면서 실제 credential에 대한 보호는 유지해야 한다.
+- 영향 범위: Netlify build secret scan의 단일 환경변수 키. 애플리케이션 인증 방식, credential 값, PostgreSQL, READ server, UI와 데이터에는 영향이 없다.
+- 실제 변경: 저장소 build 설정에 `SECRETS_SCAN_OMIT_KEYS=ADOMS_DEMO_ADMIN_USER`를 추가했다.
+- 검증: Production 재배포와 역할별 visible menu 최종 순회 후 결과를 추가한다.
+- 관련 파일: `netlify.toml`, `WORKLOG.md`
 - 관련 commit: pending

@@ -53,7 +53,11 @@ try {
     url.searchParams.set("role", target.role);
     const started = performance.now();
     try {
-      const response = await fetch(url, { redirect: "follow", headers: { accept: "text/html" } });
+      const response = await fetch(url, {
+        redirect: "follow",
+        headers: { accept: "text/html" },
+        signal: AbortSignal.timeout(45_000),
+      });
       const html = await response.text();
       const visibleText = html
         .replace(/<script[\s\S]*?<\/script>/gi, " ")

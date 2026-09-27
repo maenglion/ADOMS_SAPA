@@ -1,0 +1,4 @@
+[build.environment]
+  # This value is a login name, not a secret. Keep password, session, and
+  # READ-server credentials covered by Netlify's secret scanner.
+  SECRETS_SCAN_OMIT_KEYS = "ADOMS_DEMO_ADMIN_USER"

@@ -91,7 +91,8 @@ try {
         symptoms.push("ADOMS shell missing");
       }
       const scripts = [...html.matchAll(/<script[^>]+src="([^"]+)"/gi)].map((match) => match[1]);
-      const brokenAssets = (await Promise.all([...new Set(scripts)].map((src) => checkAsset(src, response.url))))
+      const styles = [...html.matchAll(/<link[^>]+rel="stylesheet"[^>]+href="([^"]+)"/gi)].map((match) => match[1]);
+      const brokenAssets = (await Promise.all([...new Set([...scripts, ...styles])].map((src) => checkAsset(src, response.url))))
         .filter((asset) => asset.status !== 200);
       for (const asset of brokenAssets) symptoms.push(`script asset HTTP ${asset.status}: ${new URL(asset.url).pathname}`);
       for (const token of forbidden) if (visibleText.includes(token)) symptoms.push(`internal token: ${token}`);

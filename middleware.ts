@@ -121,6 +121,27 @@ async function proxyReadServer(req: NextRequest): Promise<NextResponse> {
 export async function middleware(req: NextRequest) {
   const url = req.nextUrl;
   const isScreenRead = READ_SERVER_ROUTES.has(url.pathname);
+  const isReadServerAsset = url.pathname.startsWith("/_next/static/");
+  const backend = (process.env.ADOMS_DATA_BACKEND || "csv").trim().toLowerCase();
+
+  // Core screen HTML is rendered by the Railway build, so its immutable
+  // Next.js chunks must come from that same build. The browser still calls
+  // the Netlify origin; only this narrow static path is proxied server-side.
+  if (isReadServerAsset) {
+    if (readServerMode()) {
+      const expected = readServerToken();
+      if (!expected || bearerToken(req) !== expected) return new NextResponse("Unauthorized", { status: 401 });
+      return NextResponse.next();
+    }
+    if (backend === "read-server" && (req.method === "GET" || req.method === "HEAD")) {
+      try { return await proxyReadServer(req); }
+      catch (error) {
+        console.error("[adoms-read-server-asset]", error instanceof Error ? error.message : String(error));
+        return new NextResponse("READ server asset failed.", { status: 502 });
+      }
+    }
+    return NextResponse.next();
+  }
   if (readServerMode()) {
     const allowed = isScreenRead || url.pathname === READ_SERVER_HEALTH
       || url.pathname === READ_SERVER_CONTROL || url.pathname === READ_SERVER_QA;
@@ -158,7 +179,6 @@ export async function middleware(req: NextRequest) {
     to.searchParams.set("role", eff);
     res = NextResponse.rewrite(to, { request: { headers: h } });
   } else {
-    const backend = (process.env.ADOMS_DATA_BACKEND || "csv").trim().toLowerCase();
     if (!readServerMode() && backend === "read-server" && isScreenRead && (req.method === "GET" || req.method === "HEAD")) {
       try {
         res = await proxyReadServer(req);
@@ -174,4 +194,4 @@ export async function middleware(req: NextRequest) {
   return withRoleCookie(res, role, saved);
 }
 
-export const config = { matcher: ["/((?!_next|favicon.ico).*)"] };
+export const config = { matcher: ["/((?!_next|favicon.ico).*)", "/_next/static/:path*"] };

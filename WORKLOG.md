@@ -579,3 +579,14 @@
 - 검증: 8개 업무 대메뉴만 한 줄로 표시되고 현재 글자 크기를 유지한 채 우측 정렬되는지 확인했다. TypeScript 정적 검사와 Next.js production build를 통과했다.
 - 관련 파일: `lib/menu.ts`, `components/NavMenu.tsx`, `app/us.css`, `WORKLOG.md`
 - 관련 commit: `e0d3a5d`
+
+### [53] 기본 접속 역할 변경 및 Branch Deploy 비활성화
+- 상태: 완료
+- 배경: 클라이언트가 시연 앱의 최초 접속 사용자를 총괄이 아닌 `실무자(도로구조물과)`로 요청했다. 또한 같은 commit을 `main`과 작업 branch에 반영할 때 Production과 Branch Deploy가 중복 생성되고 있었다.
+- 결정: 역할 query와 유효한 역할 cookie가 없는 최초 접속은 `road`로 시작한다. Netlify Production branch는 `main`으로 유지하고 Branch Deploy는 비활성화한다.
+- 이유: 시연 시작 화면을 실제 실무자 권한에 맞추고, 사용하지 않는 branch 환경의 중복 build 시간과 사용량을 줄이기 위해서다.
+- 영향 범위: 역할이 지정되지 않은 최초 앱 접속과 Netlify의 branch 기반 자동 배포. 명시적인 `role` query, 사용자가 선택해 저장된 유효 역할, Production `main` 자동 배포 및 Deploy Preview 설정에는 영향이 없다.
+- 실제 변경: 공통 기본 역할을 `road`로 지정하고 역할이 전혀 없는 일반 GET 요청을 `?role=road`로 redirect하면서 역할 cookie를 설정한다. Netlify의 Branch deploys를 `None`으로 변경해 production branch만 자동 배포하도록 했다.
+- 검증: TypeScript 검사와 Next.js production build를 통과했다. Netlify 설정에서 Production branch가 `main`, Branch deploys가 `Deploy only the production branch`로 표시되는 것을 확인했다.
+- 관련 파일: `lib/perm.ts`, `middleware.ts`, `components/MenuCtx.tsx`, `WORKLOG.md`
+- 관련 commit: `71ad43c`

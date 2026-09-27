@@ -13,8 +13,100 @@ import { ruleFor, canAccess, isRole } from "@/lib/perm";
  */
 const COOKIE = "adoms-role";
 
-export function middleware(req: NextRequest) {
+const READ_SERVER_ROUTES = new Set(["/", "/actions", "/duties/list", "/evidence", "/tasks"]);
+const READ_SERVER_HEALTH = "/api/read-server/health";
+
+function readServerMode() {
+  return process.env.ADOMS_READ_SERVER_SERVICE === "1";
+}
+
+function readServerToken() {
+  return (process.env.ADOMS_READ_SERVER_TOKEN || "").trim();
+}
+
+function bearerToken(req: NextRequest) {
+  const value = req.headers.get("authorization") || "";
+  return value.startsWith("Bearer ") ? value.slice(7) : "";
+}
+
+function readServerBaseUrl() {
+  const raw = (process.env.ADOMS_READ_SERVER_URL || "").trim();
+  let url: URL;
+  try { url = new URL(raw); } catch { throw new Error("ADOMS_READ_SERVER_URL must be a complete HTTPS URL"); }
+  if (url.protocol !== "https:" || url.username || url.password) {
+    throw new Error("ADOMS_READ_SERVER_URL must be an HTTPS URL without credentials");
+  }
+  url.pathname = url.pathname.replace(/\/$/, "");
+  url.search = "";
+  url.hash = "";
+  return url;
+}
+
+function withRoleCookie(res: NextResponse, role: string | null, saved: string | undefined) {
+  if (role && isRole(role) && role !== saved) {
+    res.cookies.set(COOKIE, role, { path: "/", sameSite: "lax", maxAge: 60 * 60 * 24 * 30 });
+  }
+  return res;
+}
+
+async function proxyReadServer(req: NextRequest): Promise<NextResponse> {
+  const token = readServerToken();
+  if (!token) return new NextResponse("READ server token is not configured.", { status: 503 });
+
+  let base: URL;
+  try { base = readServerBaseUrl(); } catch (error) {
+    console.error("[adoms-read-server-proxy]", error instanceof Error ? error.message : String(error));
+    return new NextResponse("READ server URL is not configured.", { status: 503 });
+  }
+
+  const target = new URL(req.nextUrl.pathname + req.nextUrl.search, base);
+  const headers = new Headers();
+  for (const name of ["accept", "cookie", "next-router-prefetch", "next-router-state-tree", "next-url", "purpose", "rsc", "user-agent"]) {
+    const value = req.headers.get(name);
+    if (value) headers.set(name, value);
+  }
+  headers.set("authorization", `Bearer ${token}`);
+  headers.set("x-adoms-proxy-host", req.nextUrl.host);
+
+  const startedAt = performance.now();
+  const upstream = await fetch(target, { method: req.method, headers, redirect: "manual", cache: "no-store" });
+  const body = await upstream.arrayBuffer();
+  const elapsed = performance.now() - startedAt;
+  const outHeaders = new Headers();
+  upstream.headers.forEach((value, name) => {
+    if (!["connection", "content-encoding", "content-length", "set-cookie", "transfer-encoding"].includes(name.toLowerCase())) {
+      outHeaders.set(name, value);
+    }
+  });
+  const location = outHeaders.get("location");
+  if (location) {
+    try {
+      const redirected = new URL(location, target);
+      if (redirected.origin === base.origin) outHeaders.set("location", `${req.nextUrl.origin}${redirected.pathname}${redirected.search}`);
+    } catch { /* keep a valid relative Location unchanged */ }
+  }
+  outHeaders.set("content-length", String(body.byteLength));
+  outHeaders.set("x-adoms-data-backend", "read-server");
+  outHeaders.set("server-timing", `read-server;dur=${elapsed.toFixed(1)}`);
+  console.info("[adoms-read-server-proxy]", JSON.stringify({
+    path: req.nextUrl.pathname,
+    status: upstream.status,
+    upstreamMs: Math.round(elapsed * 100) / 100,
+    payloadBytes: body.byteLength,
+  }));
+  return new NextResponse(body, { status: upstream.status, headers: outHeaders });
+}
+
+export async function middleware(req: NextRequest) {
   const url = req.nextUrl;
+  const isScreenRead = READ_SERVER_ROUTES.has(url.pathname);
+  if (readServerMode()) {
+    const allowed = isScreenRead || url.pathname === READ_SERVER_HEALTH;
+    if (!allowed) return new NextResponse("Not found", { status: 404 });
+    if (req.method !== "GET" && req.method !== "HEAD") return new NextResponse("Method not allowed", { status: 405 });
+    const expected = readServerToken();
+    if (!expected || bearerToken(req) !== expected) return new NextResponse("Unauthorized", { status: 401 });
+  }
   const role = url.searchParams.get("role");
   const saved = req.cookies.get(COOKIE)?.value;
 
@@ -43,12 +135,15 @@ export function middleware(req: NextRequest) {
     to.searchParams.set("role", eff);
     res = NextResponse.rewrite(to, { request: { headers: h } });
   } else {
-    res = NextResponse.next({ request: { headers: h } });
+    const backend = (process.env.ADOMS_DATA_BACKEND || "csv").trim().toLowerCase();
+    if (!readServerMode() && backend === "read-server" && isScreenRead && (req.method === "GET" || req.method === "HEAD")) {
+      res = await proxyReadServer(req);
+    } else {
+      res = NextResponse.next({ request: { headers: h } });
+      if (readServerMode()) res.headers.set("x-adoms-read-server", "railway");
+    }
   }
-  if (role && isRole(role) && role !== saved) {
-    res.cookies.set(COOKIE, role, { path: "/", sameSite: "lax", maxAge: 60 * 60 * 24 * 30 });
-  }
-  return res;
+  return withRoleCookie(res, role, saved);
 }
 
-export const config = { matcher: ["/((?!_next|api|favicon.ico).*)"] };
+export const config = { matcher: ["/((?!_next|favicon.ico).*)"] };

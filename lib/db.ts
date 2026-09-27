@@ -449,12 +449,19 @@ export async function queryRows(relation: string, queryString: string): Promise<
   // immutable baseline tables. Views must always provide an explicit order.
   if (!order && !VIEWS.has(relation)) order = " ORDER BY ctid";
   const sql = `SELECT ${select} FROM ${relationName(relation)}${where.length ? ` WHERE ${where.join(" AND ")}` : ""}${order}${limit}`;
+  // Railway private networking showed extreme per-row transfer overhead for
+  // the frozen wide CSV-shaped tables.  Aggregate the unchanged result set in
+  // PostgreSQL and transfer it as one JSON value only in the read service.
+  const compactTransport = process.env.ADOMS_READ_SERVER_SERVICE === "1";
+  const transportSql = compactTransport
+    ? `SELECT COALESCE(json_agg(row_to_json(q)), '[]'::json) AS rows FROM (${sql}) q`
+    : sql;
     const startedAt = performance.now();
     const client = await postgresPool().connect();
     const acquiredAt = performance.now();
     let result;
     try {
-      result = await client.query(sql, values);
+      result = await client.query(transportSql, values);
     } finally {
       client.release();
     }
@@ -464,7 +471,8 @@ export async function queryRows(relation: string, queryString: string): Promise<
     const elapsed = finishedAt - startedAt;
     if (trace) {
       trace.sqlCalls++;
-      trace.rawRows += result.rows.length;
+      const rows = compactTransport ? (result.rows[0]?.rows || []) as DbRow[] : result.rows;
+      trace.rawRows += rows.length;
       trace.dbMs += elapsed;
       trace.acquireMs += acquireElapsed;
       trace.sqlMs += sqlElapsed;
@@ -473,7 +481,7 @@ export async function queryRows(relation: string, queryString: string): Promise<
       trace.queryIntervals.push([acquiredAt, finishedAt]);
       const tuple = trace.tuples.get(tupleKey)!;
       tuple.sqlCalls++;
-      tuple.rawRows += result.rows.length;
+      tuple.rawRows += rows.length;
       tuple.dbMs += elapsed;
       tuple.acquireMs += acquireElapsed;
       tuple.sqlMs += sqlElapsed;
@@ -483,7 +491,7 @@ export async function queryRows(relation: string, queryString: string): Promise<
         scope.dbMs += elapsed;
       }
     }
-    return result.rows;
+    return compactTransport ? (result.rows[0]?.rows || []) as DbRow[] : result.rows;
   };
 
   const pending = execute();
@@ -530,7 +538,7 @@ export async function queryAuditLog(): Promise<DbRow[]> {
     const acquiredAt = performance.now();
     let result;
     try {
-      result = await client.query(`
+      const auditSql = `
         SELECT changed_at AS at,
                changed_by AS by,
                action,
@@ -539,7 +547,10 @@ export async function queryAuditLog(): Promise<DbRow[]> {
                what
           FROM adoms2."audit_log"
          ORDER BY ctid
-      `);
+      `;
+      result = process.env.ADOMS_READ_SERVER_SERVICE === "1"
+        ? await client.query(`SELECT COALESCE(json_agg(row_to_json(q)), '[]'::json) AS rows FROM (${auditSql}) q`)
+        : await client.query(auditSql);
     } finally {
       client.release();
     }
@@ -549,7 +560,8 @@ export async function queryAuditLog(): Promise<DbRow[]> {
       const sqlElapsed = finishedAt - acquiredAt;
       const elapsed = finishedAt - startedAt;
       trace.sqlCalls++;
-      trace.rawRows += result.rows.length;
+      const rows = process.env.ADOMS_READ_SERVER_SERVICE === "1" ? (result.rows[0]?.rows || []) as DbRow[] : result.rows;
+      trace.rawRows += rows.length;
       trace.dbMs += elapsed;
       trace.acquireMs += acquireElapsed;
       trace.sqlMs += sqlElapsed;
@@ -558,12 +570,12 @@ export async function queryAuditLog(): Promise<DbRow[]> {
       trace.queryIntervals.push([acquiredAt, finishedAt]);
       const tuple = trace.tuples.get(tupleKey)!;
       tuple.sqlCalls++;
-      tuple.rawRows += result.rows.length;
+      tuple.rawRows += rows.length;
       tuple.dbMs += elapsed;
       tuple.acquireMs += acquireElapsed;
       tuple.sqlMs += sqlElapsed;
     }
-    return result.rows;
+    return process.env.ADOMS_READ_SERVER_SERVICE === "1" ? (result.rows[0]?.rows || []) as DbRow[] : result.rows;
   };
 
   const pending = execute();

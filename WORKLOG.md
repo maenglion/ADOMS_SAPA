@@ -667,3 +667,14 @@
 - 검증: Production에서 화면별 1회 warm-up 후 3회 측정 결과가 모두 정상으로 판정됐다. dashboard는 0.025/0.027/0.031초, actions는 0.030/0.036/0.038초, duties/list는 0.019/0.026/0.033초, evidence는 0.034/0.039/0.054초, tasks는 0.060/0.080/0.082초의 Min/Median/Max를 기록했다. 전 화면 HTTP 200, `HIT 3/3`, DB Query 0, 화면별 판정 `정상`, 전체 상태 `정상`이었다. `ADOMS QA` 브랜드 클릭 시 URL 변경이나 시연 앱 이탈 없이 QA 현황 첫 화면으로 이동했으며, 상·하단 시연 홈 복귀 버튼은 표시되지 않았다. Netlify와 Railway Production은 모두 `main` 기준이며 최종 저장소 기준선은 `57d0f70b4616c82d409ef431e79460d416a429af`였다.
 - 관련 파일: `app/demo-admin/QaConsole.tsx`, `app/api/demo-admin/performance/route.ts`, `lib/demo-performance-status.ts`, `services/read-server/start.mjs`, `WORKLOG.md`
 - 관련 commit: pending
+
+### [61] 2026-09-28 시연용 Production release 기준점 고정
+- 상태: 결정
+- 배경: Netlify와 Railway READ server가 동일한 Production revision을 실행하고 PostgreSQL READ, 핵심 5화면, warm 성능, 역할별 메뉴 및 내부 endpoint 경계를 모두 통과했다. 이후 기능 개발이 정상 시연판 기준선을 흔들지 않도록 명시적인 release 기준점과 개발 branch 분리가 필요하다.
+- 결정: 검증된 앱 revision `57d0f70b4616c82d409ef431e79460d416a429af`에 annotated tag `demo-prod-20260928`을 부여하고 이를 `2026-09-28 시연용 Production 검증 완료본`으로 사용한다. `main`은 현재 정상 Production 기준선으로 유지하며 Production 장애 hotfix 외 UI, 역할, WRITE, cache invalidation, QA 및 기타 기능 개발은 `dev/demo-next`에서 수행한다. Production의 Netlify와 Railway READ server는 `main`, Development/Preview는 동일 dev branch와 Preview 전용 Railway service를 사용하는 `한 환경 = 한 branch` 원칙을 유지한다.
+- 이유: 배포 가능한 정상 revision을 즉시 식별하고, 서로 다른 branch 또는 commit을 한 환경에서 함께 실행해 발생하는 health·cache·role contract 불일치를 방지하기 위해서다.
+- 영향 범위: Git release tag, branch 운영 및 배포 전 검증 절차. PostgreSQL schema/data, Production READ 결과와 WRITE 상태에는 영향이 없다.
+- 실제 변경: annotated release tag `demo-prod-20260928`을 지정 revision에 생성하고 정상 `main`을 기준으로 개발 branch `dev/demo-next`를 생성한다. 이후 dev→main 병합 전 TypeScript, production build, READ server health redirect 0, prewarm READY, 핵심 5화면, warm 성능, 역할별 메뉴, visible menu smoke, HTTP 오류 및 raw/internal 화면 노출 여부를 최소 gate로 확인한다.
+- 검증: 기준 revision에서 Production backend `read-server`, PostgreSQL READ 정상, 핵심 5화면 HTTP 200, 성능 점검 전 화면 `HIT 3/3`, warm DB Query 0, 메뉴 smoke 287/287 PASS, rollback `ADOMS_DATA_BACKEND=csv`가 확인됐다. role redirect는 실제 HTML document navigation에만 적용되고 `/api/read-server/**`, RSC와 prefetch에는 적용되지 않는다.
+- 관련 파일: `WORKLOG.md`
+- 관련 commit: pending

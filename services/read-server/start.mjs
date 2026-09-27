@@ -18,6 +18,35 @@ const child = spawn(nextBin, ["start", "-p", port, "-H", "0.0.0.0"], {
   shell: process.platform === "win32",
 });
 
+async function prewarm() {
+  if (process.env.ADOMS_READ_SERVER_SERVICE !== "1") return;
+  const token = process.env.ADOMS_READ_SERVER_TOKEN;
+  if (!token) return;
+  const base = `http://127.0.0.1:${port}`;
+  const headers = { authorization: `Bearer ${token}` };
+  for (let attempt = 0; attempt < 120; attempt++) {
+    try {
+      const response = await fetch(`${base}/api/read-server/health`, { headers });
+      if (response.ok) break;
+    } catch {}
+    await new Promise((resolve) => setTimeout(resolve, 500));
+  }
+  for (const path of ["/?role=gm", "/actions?role=gm", "/duties/list?role=gm", "/evidence?role=gm", "/tasks?role=gm"]) {
+    const started = Date.now();
+    try {
+      const response = await fetch(`${base}${path}`, { headers });
+      await response.arrayBuffer();
+      console.log(`[adoms-read-server-warm] ${path} status=${response.status} ms=${Date.now() - started}`);
+    } catch (error) {
+      console.error(`[adoms-read-server-warm] ${path} failed`, error);
+      return;
+    }
+  }
+  console.log("[adoms-read-server-warm] ready");
+}
+
+void prewarm();
+
 for (const signal of ["SIGINT", "SIGTERM"]) {
   process.on(signal, () => child.kill(signal));
 }

@@ -312,15 +312,23 @@ declare global {
   var __adomsPgPool: Pool | undefined;
   // eslint-disable-next-line no-var
   var __adomsPgPoolStats: { connections: number } | undefined;
+  // eslint-disable-next-line no-var
+  var __adomsReadServerQueryCache: Map<string, Promise<DbRow[]>> | undefined;
+}
+
+function readServerQueryCache(): Map<string, Promise<DbRow[]>> | undefined {
+  if (process.env.ADOMS_READ_SERVER_SERVICE !== "1") return undefined;
+  return globalThis.__adomsReadServerQueryCache ||= new Map();
 }
 
 export function postgresPool(): Pool {
   if (!globalThis.__adomsPgPool) {
+    const readServer = process.env.ADOMS_READ_SERVER_SERVICE === "1";
     const config: PoolConfig = {
       connectionString: databaseUrl(),
-      max: 5,
+      max: readServer ? 16 : 5,
       idleTimeoutMillis: 30_000,
-      connectionTimeoutMillis: 10_000,
+      connectionTimeoutMillis: readServer ? 180_000 : 10_000,
       keepAlive: true,
       keepAliveInitialDelayMillis: 10_000,
       application_name: "adoms-sapa-read",
@@ -375,6 +383,13 @@ export async function queryRows(relation: string, queryString: string): Promise<
       if (scopeName) trace.scopes.get(scopeName)!.cacheHits++;
       return cloneAdapterRows(await cached, trace);
     }
+  }
+
+  const serviceCache = readServerQueryCache();
+  const serviceCached = serviceCache?.get(tupleKey);
+  if (serviceCached) {
+    if (trace) trace.cacheHits++;
+    return cloneAdapterRows(await serviceCached, trace);
   }
 
   const execute = async (): Promise<DbRow[]> => {
@@ -471,13 +486,14 @@ export async function queryRows(relation: string, queryString: string): Promise<
     return result.rows;
   };
 
-  if (!trace) return execute();
   const pending = execute();
-  trace.cache.set(tupleKey, pending);
+  serviceCache?.set(tupleKey, pending);
+  trace?.cache.set(tupleKey, pending);
   try {
     return cloneAdapterRows(await pending, trace);
   } catch (error) {
-    trace.cache.delete(tupleKey);
+    serviceCache?.delete(tupleKey);
+    trace?.cache.delete(tupleKey);
     throw error;
   }
 }
@@ -499,6 +515,13 @@ export async function queryAuditLog(): Promise<DbRow[]> {
       trace.cacheHits++;
       return cloneAdapterRows(await cached, trace);
     }
+  }
+
+  const serviceCache = readServerQueryCache();
+  const serviceCached = serviceCache?.get(tupleKey);
+  if (serviceCached) {
+    if (trace) trace.cacheHits++;
+    return cloneAdapterRows(await serviceCached, trace);
   }
 
   const execute = async () => {
@@ -543,13 +566,14 @@ export async function queryAuditLog(): Promise<DbRow[]> {
     return result.rows;
   };
 
-  if (!trace) return execute();
   const pending = execute();
-  trace.cache.set(tupleKey, pending);
+  serviceCache?.set(tupleKey, pending);
+  trace?.cache.set(tupleKey, pending);
   try {
     return cloneAdapterRows(await pending, trace);
   } catch (error) {
-    trace.cache.delete(tupleKey);
+    serviceCache?.delete(tupleKey);
+    trace?.cache.delete(tupleKey);
     throw error;
   }
 }

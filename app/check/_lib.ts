@@ -251,6 +251,56 @@ export async function oldAggOf(t: TrackKey, deptIds: string[], itemKeys: string[
   return out;
   }, { memo: true, work: { filter: 2 + itemKeys.length * deptIds.length, sort: itemKeys.length * deptIds.length, merge: 3 } });
 }
+
+async function oldAggFromContext(
+  t: TrackKey, deptIds: string[], itemKeys: string[], year: string, half: string, ctx: ActionCheckReadContext,
+): Promise<Map<string, OldAgg>> {
+  const cacheKey = actionContextKey(t, deptIds, itemKeys, year, half);
+  const cached = ctx.oldAggCache.get(cacheKey);
+  if (cached) return cached;
+  ctx.stats.oldAggCalculations++;
+
+  const area = trackOf(t).area;
+  const today = ymd();
+  const items = itemsOf(t).filter((i) => itemKeys.includes(i.key));
+  const out = new Map<string, OldAgg>();
+  for (const it of items) {
+    for (const d of deptIds) {
+      const ts = taskRowsFromContext(ctx, area, d, it.codes, true)
+        .filter((x) => x.applicability !== "비해당" && taskInPeriod(x, year, half));
+      const rows: OldRow[] = [];
+      let ok = 0, fix = 0, bad = 0, wait = 0, dueUnjudged = 0;
+      for (const x of ts) {
+        const h = ctx.inspectionsByTask.get(String(x.task_id)) || [];
+        const state = stateOf(x, h);
+        if (state === "판정대기") wait++;
+        if (!h.length) {
+          const due = x.status === "이행완료" || x.status === "점검완료" || String(x.due_date || "") <= today || x.status === "기간초과" || x.status === "조치필요";
+          if (due) dueUnjudged++;
+          continue;
+        }
+        const last = h[0];
+        if (last.result === "부적합") bad++; else if (last.result === "보완필요") fix++; else ok++;
+        rows.push({
+          task_id: x.task_id, dept_id: x.dept_id, code: firstCode(x.code36),
+          duty: String(x.duty_name || x.article_title || x.code36_name || ""), target: String(x.asset_name || x.target_name || ""),
+          result: String(last.result || ""), round_no: Number(last.round_no || h.length), date: String(last.insp_date || ""),
+          finding: String(last.finding || ""), inspector: ctx.staffName.get(String(last.inspector_staff_id)) || String(last.inspector_staff_id || ""),
+          state, actionState: String(actionStateOf(x, last, ctx.actionsByInspection.get(String(last.insp_id)), state) || ""),
+        });
+      }
+      if (!rows.length) continue;
+      rows.sort((a, b) => b.date.localeCompare(a.date));
+      const value: St | null = bad ? "미이행" : fix ? "보완필요" : ok && !dueUnjudged ? "이행완료" : null;
+      out.set(`${it.key}|${d}`, {
+        judged: rows.length, ok, fix, bad, wait, dueUnjudged, value, rows,
+        text: `적합 ${ok} · 보완필요 ${fix} · 부적합 ${bad}${dueUnjudged ? ` · 판정 전 ${dueUnjudged}` : ""}`,
+      });
+    }
+  }
+  ctx.oldAggCache.set(cacheKey, out);
+  return out;
+}
 export const oldResultSt = OLD_RESULT_ST;
 
 // 의무이행 기록 표(묶음 C·D·E) — rec_id · dept_id · year · step · status · deleted · data(JSON, date 등) · files(JSON [{name,url,at}]) · updated_at.
@@ -269,6 +319,210 @@ const recFiles = (r: Row): Row[] => {
 const recDate = (r: Row) => String(recData(r).date || r.done_date || r.date || r.updated_at || "").slice(0, 10);
 const recEvName = (r: Row) => String(recFiles(r)[0]?.name || r.evidence_name || r.file_name || "");
 const recEvUrl = (r: Row) => String(recFiles(r)[0]?.url || r.evidence_url || r.file_url || "");
+
+/** `/actions` 한 요청에서 이행점검 계산이 공유하는 정규화·색인 결과. */
+export type ActionCheckReadContext = {
+  baseTasks: Row[];
+  allTasks: Row[];
+  inspectionsByTask: Map<string, Row[]>;
+  actionsByInspection: Map<string, Row>;
+  staffRows: Row[];
+  staffName: Map<string, string>;
+  staffDept: Map<string, string>;
+  evidenceByTask: Map<string, Row>;
+  baseTasksByAreaDeptCode: Map<string, Row[]>;
+  approvedTasksByAreaDeptCode: Map<string, Row[]>;
+  baseTaskOrder: Map<Row, number>;
+  approvedTaskOrder: Map<Row, number>;
+  recordsByTrackYearStepDept: Map<string, Row[]>;
+  roundsByTrack: Map<TrackKey, Row[]>;
+  judgesByRound: Map<string, Map<string, Row>>;
+  judgesNewest: Row[];
+  notifications: Row[];
+  buildCellsCache: Map<string, { items: Item[]; cells: Map<string, Cell> }>;
+  oldAggCache: Map<string, Map<string, OldAgg>>;
+  cellsCache: Map<string, Awaited<ReturnType<typeof cellsOfRound>>>;
+  stats: {
+    taskMaterializations: number;
+    approvalMaterializations: number;
+    datasetNormalizations: number;
+    buildCellsCalculations: number;
+    oldAggCalculations: number;
+    cellsCalculations: number;
+  };
+};
+
+export type ActionCheckTaskSources = {
+  baseTasks: Row[];
+  allTasks: Row[];
+  roundRows: Row[];
+  judgeRows: Row[];
+};
+
+const actionContextKey = (...parts: unknown[]) => parts.map((v) => Array.isArray(v) ? v.join(";") : String(v ?? "")).join("|");
+
+/**
+ * `/actions` 전용 preload. 서로 독립적인 기초 READ를 병렬로 끝낸 뒤 이후 회차 계산은
+ * 이 context의 Map/Set만 사용한다. context는 호출 request를 벗어나 저장되지 않는다.
+ */
+export async function createActionCheckReadContext(
+  preloaded?: Promise<ActionCheckTaskSources>,
+): Promise<ActionCheckReadContext> {
+  return withReadOperation("actionCheckContext", {}, async () => {
+    const taskSources = preloaded || (async () => {
+      const [baseTasks, mergedTasks, roundRows, judgeRows] = await Promise.all([
+        tasks({ limit: 100000 }), allTasks(), readTable("usf_round", "round_id"), readTable("usf_judge", "judge_id"),
+      ]);
+      return { baseTasks, allTasks: mergedTasks, roundRows, judgeRows };
+    })();
+    const [{ baseTasks, allTasks: all, roundRows, judgeRows }, [hist, acts, staffRows, evidenceRows, notifications, ws, fc, mt]] = await Promise.all([
+      taskSources,
+      Promise.all([
+        inspectionsByTask(), actionsByInsp(), staff(), evidences(), readTable("notification", "notif_id"),
+        readTable(REC_TABLE.ws, "rec_id"), readTable(REC_TABLE.fc, "rec_id"), readTable(REC_TABLE.mt, "rec_id"),
+      ]),
+    ]);
+
+    const staffName = new Map<string, string>();
+    const staffDept = new Map<string, string>();
+    for (const s of staffRows) {
+      staffName.set(String(s.staff_id), String(s.display_name || ""));
+      staffDept.set(String(s.staff_id), String(s.dept_id || ""));
+    }
+
+    const evidenceByTask = new Map<string, Row>();
+    for (const e of evidenceRows) {
+      const cur = evidenceByTask.get(String(e.task_id));
+      if (!cur || String(e.uploaded_at) > String(cur.uploaded_at)) evidenceByTask.set(String(e.task_id), e);
+    }
+
+    const indexTasks = (rows: Row[]) => {
+      const index = new Map<string, Row[]>();
+      for (const task of rows) {
+        const key = actionContextKey(task.area, task.dept_id, firstCode(task.code36));
+        const list = index.get(key);
+        if (list) list.push(task); else index.set(key, [task]);
+      }
+      return index;
+    };
+    const baseTasksByAreaDeptCode = indexTasks(baseTasks);
+    const approvedTasksByAreaDeptCode = indexTasks(all);
+    const baseTaskOrder = new Map(baseTasks.map((task, index) => [task, index]));
+    const approvedTaskOrder = new Map(all.map((task, index) => [task, index]));
+
+    const recordsByTrackYearStepDept = new Map<string, Row[]>();
+    const addRecords = (track: TrackKey, rows: Row[]) => {
+      for (const r of rows) {
+        if (r.deleted === "Y") continue;
+        const dept = String(r.dept_id || r.dept || (r.role ? deptOf(r.role) : "")
+          || staffDept.get(String(r.by || r.created_by || r.saved_by || r.written_by)) || "");
+        const normalized = { ...r, _dept: dept };
+        const key = actionContextKey(track, r.year || "", recStep(r), dept);
+        const list = recordsByTrackYearStepDept.get(key);
+        if (list) list.push(normalized); else recordsByTrackYearStepDept.set(key, [normalized]);
+      }
+    };
+    addRecords("ws", ws); addRecords("fc", fc); addRecords("mt", mt);
+
+    const roundsByTrack = new Map<TrackKey, Row[]>();
+    for (const track of ["ws", "fc", "mt"] as TrackKey[]) {
+      roundsByTrack.set(track, roundRows.filter((r) => r.track === track)
+        .sort((a, b) => String(b.created_at).localeCompare(String(a.created_at))));
+    }
+
+    const judgesNewest = [...judgeRows].sort((a, b) => String(b.judged_at).localeCompare(String(a.judged_at)));
+    const judgesByRound = new Map<string, Map<string, Row>>();
+    for (const j of judgesNewest) {
+      const roundId = String(j.round_id);
+      let byCell = judgesByRound.get(roundId);
+      if (!byCell) { byCell = new Map(); judgesByRound.set(roundId, byCell); }
+      const key = `${j.item_key}|${j.dept_id}`;
+      if (!byCell.has(key)) byCell.set(key, j);
+    }
+
+    return {
+      baseTasks, allTasks: all, inspectionsByTask: hist, actionsByInspection: acts, staffRows, staffName, staffDept,
+      evidenceByTask, baseTasksByAreaDeptCode, approvedTasksByAreaDeptCode, baseTaskOrder, approvedTaskOrder,
+      recordsByTrackYearStepDept, roundsByTrack, judgesByRound,
+      judgesNewest, notifications,
+      buildCellsCache: new Map(), oldAggCache: new Map(), cellsCache: new Map(),
+      stats: {
+        taskMaterializations: 1, approvalMaterializations: 1, datasetNormalizations: 1,
+        buildCellsCalculations: 0, oldAggCalculations: 0, cellsCalculations: 0,
+      },
+    };
+  }, { work: { normalization: 1, merge: 9 } });
+}
+
+function taskRowsFromContext(
+  ctx: ActionCheckReadContext, area: string, dept: string, codes: string[], approved: boolean,
+): Row[] {
+  const out: Row[] = [];
+  const index = approved ? ctx.approvedTasksByAreaDeptCode : ctx.baseTasksByAreaDeptCode;
+  for (const code of codes) out.push(...(index.get(actionContextKey(area, dept, code)) || []));
+  const order = approved ? ctx.approvedTaskOrder : ctx.baseTaskOrder;
+  return out.sort((a, b) => (order.get(a) ?? 0) - (order.get(b) ?? 0));
+}
+
+async function buildCellsFromContext(
+  t: TrackKey, deptIds: string[], itemKeys: string[], year: string, ctx: ActionCheckReadContext,
+): Promise<{ items: Item[]; cells: Map<string, Cell> }> {
+  const cacheKey = actionContextKey(t, deptIds, itemKeys, year);
+  const cached = ctx.buildCellsCache.get(cacheKey);
+  if (cached) return cached;
+  ctx.stats.buildCellsCalculations++;
+
+  const area = trackOf(t).area;
+  const today = ymd();
+  const items = itemsOf(t).filter((i) => itemKeys.includes(i.key));
+  const cells = new Map<string, Cell>();
+  for (const it of items) {
+    for (const d of deptIds) {
+      let proposed: St = "해당없음", basis = "", date = "", evName = "", evUrl = "";
+      let src: Src = "none";
+      const rs = [
+        ...(ctx.recordsByTrackYearStepDept.get(actionContextKey(t, year, it.key, d)) || []),
+        ...(ctx.recordsByTrackYearStepDept.get(actionContextKey(t, "", it.key, d)) || []),
+      ].sort((a, b) => recDate(b).localeCompare(recDate(a)));
+      if (rs.length) {
+        const withEv = rs.filter((r) => recEvName(r) || recEvUrl(r));
+        const allDone = rs.every((r) => !r.status || r.status === "이행완료");
+        const allNot = rs.every((r) => r.status === "미이행");
+        const top = withEv[0] || rs[0];
+        proposed = allNot ? "미이행" : allDone && withEv.length === rs.length ? "이행완료" : "보완필요";
+        basis = `의무이행 기록 ${rs.length}건${withEv.length < rs.length ? ` · 증빙 없음 ${rs.length - withEv.length}` : ""}`;
+        src = "record";
+        date = recDate(top); evName = recEvName(top); evUrl = recEvUrl(top);
+        const more = recFiles(top).length - 1;
+        if (more > 0) evName = `${evName} 외 ${more}`;
+      } else {
+        const ts = taskRowsFromContext(ctx, area, d, it.codes, false);
+        const isDone = (x: Row) => x.status === "이행완료" || x.status === "점검완료";
+        const due = ts.filter((x) => isDone(x) || String(x.due_date || "") <= today || x.status === "기간초과" || x.status === "조치필요");
+        const done = due.filter(isDone);
+        if (!ts.length) basis = "배정된 과제 없음";
+        else if (!due.length) basis = `기한 도래 전 과제 ${ts.length}건`;
+        else {
+          const fix = due.some((x) => x.status === "조치필요");
+          proposed = done.length === due.length && !fix ? "이행완료" : done.length > 0 || fix ? "보완필요" : "미이행";
+          basis = `과제 이행 ${done.length}/${due.length}건`;
+          src = "task";
+        }
+        date = done.map((x) => String(x.done_at || "")).filter(Boolean).sort().pop() || "";
+        const e = ts.map((x) => ctx.evidenceByTask.get(String(x.task_id))).filter(Boolean)
+          .sort((a, b) => String(b!.uploaded_at).localeCompare(String(a!.uploaded_at)))[0];
+        if (e) { evName = String(e.file_name || ""); evUrl = String(e.file_url || ""); }
+      }
+      cells.set(`${it.key}|${d}`, {
+        item: it.key, dept: d, proposed, basis, date, evName, evUrl,
+        judged: null, status: proposed, comment: "", src, old: null, inherited: null,
+      });
+    }
+  }
+  const result = { items, cells };
+  ctx.buildCellsCache.set(cacheKey, result);
+  return result;
+}
 
 export async function buildCells(t: TrackKey, deptIds: string[], itemKeys: string[], year = ymd().slice(0, 4)) {
   return withReadOperation("buildCells", { t, deptIds, itemKeys, year }, async () => {
@@ -373,6 +627,44 @@ export async function cellsOfRound(t: TrackKey, round: Row) {
   }, { memo: true, work: { merge: 4 } });
 }
 
+/** `/actions` request context를 사용하는 회차 계산. 기초 dataset은 다시 읽거나 정규화하지 않는다. */
+export async function cellsOfRoundFromContext(t: TrackKey, round: Row, ctx: ActionCheckReadContext) {
+  const cached = ctx.cellsCache.get(String(round.round_id));
+  if (cached) return cached;
+  ctx.stats.cellsCalculations++;
+
+  const deptIds = splitIds(round.dept_ids), itemKeys = splitIds(round.item_keys);
+  const year = String(round.created_at || "").slice(0, 4) || ymd().slice(0, 4);
+  const base = await buildCellsFromContext(t, deptIds, itemKeys, year, ctx);
+  const cells = new Map<string, Cell>([...base.cells].map(([key, cell]) => [key, { ...cell }]));
+  const per = periodOfRound(round);
+  const olds = await oldAggFromContext(t, deptIds, itemKeys, per.year, per.half, ctx);
+  for (const [k, c] of cells) {
+    const o = olds.get(k) || null;
+    c.old = o;
+    if (o && o.value) {
+      c.proposed = o.value; c.status = o.value; c.src = "old";
+      c.basis = `과제 결재 기록 ${o.text}`;
+      if (!c.date) c.date = o.rows[0]?.date || "";
+    }
+  }
+  const jm = ctx.judgesByRound.get(String(round.round_id)) || new Map<string, Row>();
+  const inh = INHERIT_ON ? inheritedJudgesFromContext(t, round, ctx) : new Map<string, { j: Row; r: Row }>();
+  for (const [k, c] of cells) {
+    const own = jm.get(k);
+    const hit = own ? null : inh.get(k);
+    const j = own || hit?.j;
+    if (j) {
+      c.judged = j; c.status = (ST_LIST as readonly string[]).includes(j.status) ? (j.status as St) : c.proposed;
+      c.comment = String(j.comment || ""); c.src = "judge";
+      if (hit) c.inherited = { round_id: String(hit.r.round_id), title: String(hit.r.title || ""), at: String(j.judged_at || "") };
+    }
+  }
+  const result = { items: base.items, deptIds, cells, period: per };
+  ctx.cellsCache.set(String(round.round_id), result);
+  return result;
+}
+
 /* ── 09-26 사용자: 옛 점검 화면 합치기 2차 — 지난 회차 판정 물려받기 ─────────────────────
  * 새 회차를 열면 같은 대상·항목·부서의 **가장 최근 회차 판정**이 초깃값으로 보인다(「지난 회차에서 물려받음」 표시).
  * 사람이 이 회차에서 판정을 저장하면 그 판정이 이긴다(이 회차 판정이 먼저).
@@ -395,6 +687,22 @@ async function inheritedJudges(t: TrackKey, round: Row): Promise<Map<string, { j
   const m = new Map<string, { j: Row; r: Row }>();
   for (const j of rows) { const k = `${j.item_key}|${j.dept_id}`; if (!m.has(k)) m.set(k, { j, r: byId.get(j.round_id)! }); }
   return m;
+}
+
+function inheritedJudgesFromContext(t: TrackKey, round: Row, ctx: ActionCheckReadContext): Map<string, { j: Row; r: Row }> {
+  const per = periodOfRound(round);
+  const at = String(round.created_at || "");
+  const prev = (ctx.roundsByTrack.get(t) || []).filter((r) => r.round_id !== round.round_id && String(r.created_at || "") < at
+    && (!INHERIT_SAME_PERIOD || (periodOfRound(r).year === per.year && periodOfRound(r).half === per.half)));
+  const byId = new Map(prev.map((r) => [String(r.round_id), r]));
+  const out = new Map<string, { j: Row; r: Row }>();
+  for (const j of ctx.judgesNewest) {
+    const prior = byId.get(String(j.round_id));
+    if (!prior) continue;
+    const key = `${j.item_key}|${j.dept_id}`;
+    if (!out.has(key)) out.set(key, { j, r: prior });
+  }
+  return out;
 }
 
 /* ── 09-26 사용자: 옛 점검 화면 합치기 2차 — 과제 단위 이행률(이행현황표와 같은 계산) ─────────

@@ -14,12 +14,13 @@
  */
 import "server-only";
 import { createHash } from "node:crypto";
-import { readTable, staff, tasks, approvals, type Row } from "@/lib/data";   // 09-26 사용자: 옛 점검 화면 합치기 2차 — tasks(항목 판정으로 승인)
+import { readTable, tasks, approvals, approvalRows, type Row } from "@/lib/data";   // 09-26 사용자: 옛 점검 화면 합치기 2차 — tasks(항목 판정으로 승인)
 import { withDbReadScope, withReadOperation } from "@/lib/db";
 import type { TrackKey } from "@/lib/us/tracks";
 import { batchList } from "@/lib/cycle";
 import {
-  itemsOf, itemOfCode, roundsOf, cellsOfRound, periodOfRound, splitIds, NAME, type Item, type Cell, type St,
+  itemsOf, itemOfCode, roundsOf, periodOfRound, splitIds, NAME, createActionCheckReadContext,
+  cellsOfRoundFromContext, type Item, type Cell, type St,
 } from "@/app/check/_lib";
 
 /** 되돌리기 스위치 — true = 합침(옛 주소는 새 자리로 넘긴다). */
@@ -92,16 +93,32 @@ export function checkFlaggedDigest(rows: CheckFlag[]): string {
 }
 
 async function checkFlaggedInner(year: string, role: string): Promise<CheckFlag[]> {
-  const notif = (await readTable("notification", "notif_id")).filter((n) => n.note === "이행점검" && n.notif_type === "조치요구");
-  const st = await staff();
-  const owner = (d: string) => (st.find((s: Row) => s.dept_id === d && s.duty_role === "정담당") || st.find((s: Row) => s.dept_id === d))?.staff_id || "";
+  const taskSources = (async () => {
+    const [baseTasks, rawApprovals, roundRows, judgeRows] = await Promise.all([
+      tasks({ limit: 100000 }), approvalRows(), readTable("usf_round", "round_id"), readTable("usf_judge", "judge_id"),
+    ]);
+    const mergedApprovals = applyItemApprovalWithSources(rawApprovals, baseTasks, judgeRows, roundRows);
+    const approvalByTask = new Map(mergedApprovals.map((row) => [String(row.task_id), row]));
+    const allTasks = baseTasks.map((task) => ({ ...task, ...(approvalByTask.get(String(task.task_id)) || {}) }));
+    return { baseTasks, allTasks, roundRows, judgeRows };
+  })();
+  const ctx = await createActionCheckReadContext(taskSources);
+  const notif = ctx.notifications.filter((n) => n.note === "이행점검" && n.notif_type === "조치요구");
+  const firstOwner = new Map<string, string>();
+  const primaryOwner = new Map<string, string>();
+  for (const s of ctx.staffRows) {
+    const dept = String(s.dept_id || "");
+    if (!firstOwner.has(dept)) firstOwner.set(dept, String(s.staff_id || ""));
+    if (s.duty_role === "정담당" && !primaryOwner.has(dept)) primaryOwner.set(dept, String(s.staff_id || ""));
+  }
+  const owner = (dept: string) => primaryOwner.get(dept) || firstOwner.get(dept) || "";
   const out: CheckFlag[] = [];
   for (const t of ["ws", "fc", "mt"] as TrackKey[]) {
-    const rounds = (await roundsOf(t)).filter((r) => periodOfRound(r).year === year);   // 최근 것이 앞
+    const rounds = (ctx.roundsByTrack.get(t) || []).filter((r) => periodOfRound(r).year === year);   // 최근 것이 앞
     const judged = new Map<string, { r: Row; c: Cell; items: Item[] }>();
     const approved = new Map<string, { r: Row; c: Cell; items: Item[] }>();
     for (const r of rounds) {
-      const { items, cells } = await cellsOfRound(t, r);
+      const { items, cells } = await cellsOfRoundFromContext(t, r, ctx);
       for (const [k, c] of cells) {
         if (c.judged) {
           const cur = judged.get(k);
@@ -125,6 +142,9 @@ async function checkFlaggedInner(year: string, role: string): Promise<CheckFlag[
       });
     }
   }
+  if (process.env.ADOMS_DATA_BACKEND === "postgres" || process.env.ADOMS_READ_VERIFY === "1") {
+    console.info("[adoms-action-context]", JSON.stringify(ctx.stats));
+  }
   return out;
 }
 
@@ -134,11 +154,18 @@ async function checkFlaggedInner(year: string, role: string): Promise<CheckFlag[
  */
 export async function laterJudgeIndex() {
   const judges = (await readTable("usf_judge", "judge_id")).sort((a, b) => String(b.judged_at).localeCompare(String(a.judged_at)));
+  const byCell = new Map<string, Row[]>();
+  for (const j of judges) {
+    const key = `${j.track}|${j.item_key}|${j.dept_id}`;
+    const list = byCell.get(key);
+    if (list) list.push(j); else byCell.set(key, [j]);
+  }
   return (dept: string, code: string, after: string): Row | null => {
     const t = trackOfCode(code);
     const it = itemOfCode(t, code);
     if (!it) return null;
-    return judges.find((j) => j.track === t && j.item_key === it.key && j.dept_id === dept && String(j.judged_at || "").slice(0, 10) >= String(after || "").slice(0, 10)) || null;
+    return byCell.get(`${t}|${it.key}|${dept}`)?.find((j) =>
+      String(j.judged_at || "").slice(0, 10) >= String(after || "").slice(0, 10)) || null;
   };
 }
 
@@ -200,11 +227,8 @@ export async function batchListWithRounds(): Promise<Row[]> {
 export const ITEM_APPROVAL_ON = true;
 export const ITEM_APPROVAL_LABEL = "항목 판정으로 승인";
 
-export async function applyItemApproval(rows: Row[]): Promise<Row[]> {
+export function applyItemApprovalWithSources(rows: Row[], tk: Row[], judges: Row[], rounds: Row[]): Row[] {
   if (!ITEM_APPROVAL_ON || !rows.some((r) => r.approval_status === "제출")) return rows;
-  const [tk, judges, rounds] = await Promise.all([
-    tasks({ limit: 100000 }), readTable("usf_judge", "judge_id"), readTable("usf_round", "round_id"),
-  ]);
   const info = new Map(tk.map((t) => [t.task_id, t]));
   const per = new Map(rounds.map((r) => [r.round_id, { ...periodOfRound(r), title: String(r.title || "") }]));
   const latest = new Map<string, Row>();   // 대상|항목|부서|연도|반기 → 가장 최근 판정
@@ -236,6 +260,14 @@ export async function applyItemApproval(rows: Row[]): Promise<Row[]> {
       approved_via: ITEM_APPROVAL_LABEL, approved_round: per.get(j.round_id)?.title || j.round_id,
     };
   });
+}
+
+export async function applyItemApproval(rows: Row[]): Promise<Row[]> {
+  if (!ITEM_APPROVAL_ON || !rows.some((r) => r.approval_status === "제출")) return rows;
+  const [tk, judges, rounds] = await Promise.all([
+    tasks({ limit: 100000 }), readTable("usf_judge", "judge_id"), readTable("usf_round", "round_id"),
+  ]);
+  return applyItemApprovalWithSources(rows, tk, judges, rounds);
 }
 
 /** 09-26 사용자: 옛 점검 화면 합치기 2차 — 이 대상·기간에서 「항목 판정으로 승인」으로 읽힌 과제 수(부서별). 항목별 점검 화면 표시용. */

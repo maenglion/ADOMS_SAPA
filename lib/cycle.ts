@@ -56,7 +56,9 @@ export function nextBatchId(batches: Row[]): string {
 /** 모든 과제(결재 층까지 붙인 것). */
 export async function allTasks(): Promise<Row[]> {
   return withReadOperation("allTasks", {}, async () => {
-    const all = await tasks({ limit: 5000 });
+    // 점검 화면의 canonical task dataset. applyItemApproval()과 같은 한도여야
+    // 한 요청 안에서 무거운 task join을 한 번만 materialize할 수 있다.
+    const all = await tasks({ limit: 100000 });
     const ap = new Map((await approvals()).map((a: any) => [a.task_id, a]));
     return all.map((t: any) => ({ ...t, ...(ap.get(t.task_id) || {}) }));
   }, { memo: true, work: { merge: 2 } });

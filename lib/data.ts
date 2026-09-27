@@ -298,15 +298,19 @@ export async function inspectionBatches() {
 }
 
 /** 결재 층(승인 상태·제출일·승인일) — 과제 id 로 붙인다. */
+export async function approvalRows() {
+  return withReadOperation("approvalRows", {}, async (): Promise<Row[]> => useDb
+    ? liveTable("compliance_task")
+    : (() => {
+        const patch = new Map(seed("task_approval_patch").map((r) => [r.task_id, r]));
+        const ov = readOverlay().taskPatch;
+        return seed("compliance_task").map((t) => ({ ...t, ...(patch.get(t.task_id) || {}), ...(ov[t.task_id] || {}) }));
+      })(), { memo: true, work: { normalization: 1, merge: 1 } });
+}
+
 export async function approvals() {
   return withReadOperation("approvals", {}, async () => {
-    const rows: Row[] = useDb
-      ? await liveTable("compliance_task")
-      : (() => {
-          const patch = new Map(seed("task_approval_patch").map((r) => [r.task_id, r]));
-          const ov = readOverlay().taskPatch;
-          return seed("compliance_task").map((t) => ({ ...t, ...(patch.get(t.task_id) || {}), ...(ov[t.task_id] || {}) }));
-        })();
+    const rows = await approvalRows();
     // 09-26 사용자: 옛 점검 화면 합치기 2차 — 제출 뒤 과제 판정 전인 과제는 그 항목의 이행점검 판정이 「이행완료」면 승인으로 읽는다(쓰지 않음).
     //   규칙·스위치는 lib/check_merge.ts(applyItemApproval · ITEM_APPROVAL_ON). 순환 참조를 피하려고 부를 때 불러온다.
     const { applyItemApproval } = await import("./check_merge");

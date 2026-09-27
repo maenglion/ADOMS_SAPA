@@ -90,11 +90,13 @@ async function renderActions({ searchParams }: { searchParams: Promise<Record<st
   // 09-26 사용자: 옛 점검 화면 합치기 — 이행점검(항목 단위)이 보낸 조치 요구 알림도 함께(올해 회차 · 부서 역할은 자기 부서 줄 것만)
   const chkRounds = new Set(checks.map((f) => f.round.round_id));
   const staffDept = new Map((await staff()).map((s: any) => [String(s.staff_id), String(s.dept_id || "")]));
+  const cycleTaskIds = new Set(cy.rows.map((t) => String(t.task_id)));
+  const shownTaskIds = new Set(rows.map((t) => String(t.task_id)));
   const isChkNotif = (x: any) => OLD_CHECK_MERGED && x.note === "이행점검" && x.notif_type === "조치요구" && chkRounds.has(x.batch_id);
   const sent = fixNotifText(await readTable("notification", "notif_id"))
     .filter((x) => isChkNotif(x) || ((x.notif_type === "조치요구" || x.notif_type === "재점검요청")
-      && (x.batch_id ? x.batch_id === bid : cy.rows.some((t) => t.task_id === x.task_id))))
-    .filter((x) => !isDept || staffName.has(x.to_staff_id) && (isChkNotif(x) ? staffDept.get(x.to_staff_id) === myDept : rows.some((t) => t.task_id === x.task_id)))
+      && (x.batch_id ? x.batch_id === bid : cycleTaskIds.has(String(x.task_id)))))
+    .filter((x) => !isDept || staffName.has(x.to_staff_id) && (isChkNotif(x) ? staffDept.get(x.to_staff_id) === myDept : shownTaskIds.has(String(x.task_id))))
     .sort((a, b) => String(b.sent_at || "").localeCompare(String(a.sent_at || "")));
 
   const q = (o: Record<string, string | undefined>) => {

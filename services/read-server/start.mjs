@@ -1,6 +1,8 @@
 import { spawn } from "node:child_process";
 
-const port = process.env.PORT || "3100";
+// This service's Railway public domain is explicitly bound to port 3100.
+// Keep that stable instead of following the platform's generic PORT value.
+const port = process.env.ADOMS_READ_SERVER_PORT || "3100";
 const nextBin = process.platform === "win32" ? "next.cmd" : "next";
 const dnsOrderOption = "--dns-result-order=ipv4first";
 const nodeOptions = process.env.NODE_OPTIONS || "";

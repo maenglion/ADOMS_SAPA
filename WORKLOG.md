@@ -392,3 +392,14 @@
 - 검증: Railway 사전 로드에서 dashboard, `/actions`, `/duties/list`, `/evidence`, `/tasks`가 모두 HTTP 200이었다. Netlify Preview는 핵심 5화면과 `/actions` 4역할 8/8 HTTP 200, backend `read-server`였고 응답시간은 dashboard 2.725초, `/actions` 0.498~0.629초, `/duties/list` 0.369초, `/evidence` 0.427초, `/tasks` 0.381초였다. Production 게시 후 동일 8개 요청이 8/8 HTTP 200 및 backend `read-server`였으며 Preview와 경로별 응답 크기가 모두 일치했다. Production 응답시간은 최초 dashboard 4.443초, `/actions` 0.572~0.675초, `/duties/list` 0.362초, `/evidence` 0.430초, `/tasks` 0.382초였다. 실제 PostgreSQL은 Railway private `DATABASE_URL`로만 읽고 Netlify browser/client는 READ server를 직접 호출하지 않는다.
 - 관련 파일: `lib/db.ts`, `middleware.ts`, `services/read-server/start.mjs`, `WORKLOG.md`
 - 관련 commit: `e70896a`, `1c71943`, `7264b4d`, `0d961ad`, `2a8ea0b`, `bef8a44`, `f10dfa1` (최종 상태 기록 commit은 pending)
+
+### [36] 긴급 시연판 READ server 프로세스 메모리 재사용 정책
+- 상태: 결정
+- 배경: Production 시연에서 Railway READ server가 실제 PostgreSQL 데이터를 읽어 핵심 5화면을 제공한다. WRITE 경로는 아직 비활성 상태이며, 동일 조회를 반복할 때 발생하는 DB 조회·전송 비용을 줄여 시연 가능한 응답속도를 확보해야 한다.
+- 결정: dashboard, `/actions`, `/duties/list`, `/evidence`, `/tasks`에 필요한 PostgreSQL 조회 결과를 Railway READ server 프로세스 메모리에서 재사용한다. 현재 WRITE가 비활성 상태이므로 시연 중 데이터 변경에 따른 cache invalidation은 이번 범위에서 제외한다. WRITE 전환 시 별도의 캐시 무효화 정책을 설계하고 적용한다.
+- 이유: 현재 시연판은 읽기 전용 baseline 데이터를 사용하므로 프로세스 수명 동안 조회 결과를 재사용해도 사용자 가시 결과가 변하지 않는다. 이 방식은 반복 DB 조회와 raw row 전송을 줄여 긴급 납품에 필요한 응답속도를 확보한다.
+- 영향 범위: Railway `sapa-read-server`의 핵심 5화면 READ 성능과 프로세스 재시작 후 사전 로드. PostgreSQL schema/data, Netlify browser/client, WRITE 경로에는 영향이 없다.
+- 실제 변경: 기존에 구현된 process-global query result cache와 핵심 5경로 자동 사전 로드를 시연판의 임시 운영 정책으로 확정했다. 프로세스 재시작 시 PostgreSQL에서 다시 조회해 메모리를 구성한다.
+- 검증: Production 핵심 5화면과 `/actions` 4역할이 모두 HTTP 200이며 backend `read-server`로 확인됐다. 반복 요청은 예열된 메모리 결과를 사용하며 CSV rollback 경로는 유지된다.
+- 관련 파일: `lib/db.ts`, `services/read-server/start.mjs`, `WORKLOG.md`
+- 관련 commit: pending

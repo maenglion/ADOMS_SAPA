@@ -403,3 +403,14 @@
 - 검증: Production 핵심 5화면과 `/actions` 4역할이 모두 HTTP 200이며 backend `read-server`로 확인됐다. 반복 요청은 예열된 메모리 결과를 사용하며 CSV rollback 경로는 유지된다.
 - 관련 파일: `lib/db.ts`, `services/read-server/start.mjs`, `WORKLOG.md`
 - 관련 commit: pending
+
+### [37] ADOMS 시연판 공통 UI 1차 최적화
+- 상태: 완료
+- 배경: 실 DB READ 전환 이후 시연 첫인상을 정리하기 위해 공통 metadata, 상단 배너, 로고, GNB와 지원 화면 범위를 일관되게 정비할 필요가 있었다. 이번 범위는 공통 Shell과 표시 자산에 한정하며 DB, READ server, WRITE 및 개별 업무 화면의 의미는 변경하지 않는다.
+- 결정: 서비스 표기는 `ADOMS`, 문서 제목은 `중대재해처벌법의무이행관리시스템`, 설명은 `용인특례시 시연용`으로 통일한다. 상단 배너는 `경영목표 | 사용자·역할 | 경영방침` 3영역으로 구성한다. 최소 지원 폭은 768px로 고정하고 768px 미만에서는 앱을 축소·재배치하지 않은 채 지원 안내 overlay로 덮는다. 768px 이상은 기존 앱을 표시하며 768~1023px 구간에서만 공통 GNB를 4열로 배치한다.
+- 이유: 시연판의 제품명과 공유 metadata를 명확히 하고, 역할 변경 위치와 메뉴 구조를 한눈에 보이게 하면서 지원하지 않는 모바일 폭에서 앱이 비정상적으로 압축되는 것을 방지하기 위해서다.
+- 영향 범위: 공통 HTML metadata, Open Graph 이미지, 공통 Shell 상단 배너·로고·GNB, 768px 지원 경계와 안내 overlay. DB/schema/data, READ server, WRITE, role 동작, 개별 화면 데이터와 계산 결과에는 영향이 없다.
+- 실제 변경: Open Graph와 Twitter metadata 및 1200×630 `ADOMS` 이미지를 추가했다. 역할 선택 영역을 상단 배너 중앙으로 옮기고 기존 역할 동작은 유지했다. 로고 배경 상자를 제거하고 시스템명을 `ADOMS`로 변경했다. GNB를 왼쪽 정렬과 좁은 간격으로 정리하고 `(실적증빙)` 보조 줄만 작게 표시했다. `.us-app` 최소 폭을 768px로 고정하고 767px 이하에서 정확한 지원 안내문을 표시하는 전체 화면 overlay를 추가했다.
+- 검증: 1920×1080, 1440×900, 1280×800, 1024×768, 768×1024, 390×844 뷰포트에서 공통 Shell을 확인했다. 768px 이상에서 역할 선택과 GNB 9개가 표시되고, 390px에서는 앱 폭이 768px로 유지된 상태에서 안내 overlay가 화면 안에 표시된다. TypeScript 정적 검사와 Next.js production build를 통과했다.
+- 관련 파일: `app/layout.tsx`, `app/us.css`, `components/Shell.tsx`, `components/NavMenu.tsx`, `public/adoms-og.png`, `WORKLOG.md`
+- 관련 commit: pending

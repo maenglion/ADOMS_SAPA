@@ -15,8 +15,21 @@ import { headers } from "next/headers";
 import Shell from "@/components/Shell";
 
 export const metadata: Metadata = {
-  title: "ADOMS | 용인특례시 중대재해처벌법 의무이행관리시스템",
-  description: "중대재해처벌법 안전보건 확보의무 이행 통합관리",
+  metadataBase: new URL("https://adoms-runtime.netlify.app"),
+  title: "중대재해처벌법의무이행관리시스템",
+  description: "용인특례시 시연용",
+  applicationName: "ADOMS",
+  openGraph: {
+    title: "중대재해처벌법의무이행관리시스템",
+    description: "용인특례시 시연용",
+    images: [{ url: "/adoms-og.png", width: 1200, height: 630, alt: "ADOMS" }],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "중대재해처벌법의무이행관리시스템",
+    description: "용인특례시 시연용",
+    images: ["/adoms-og.png"],
+  },
 };
 
 export const viewport = {

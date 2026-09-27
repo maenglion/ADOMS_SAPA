@@ -39,20 +39,20 @@ export default async function Shell({ children }: { children: React.ReactNode })
         <div className="us-banner">
           {/* 용인시청 누리집 「용인시 안전보건 목표」(비전·목표) · 「용인시 안전보건 경영방침」(2025년 1월) 원문에서 */}
           <div className="us-banner-l"><b>경영목표</b><span>생명과 안전을 최우선으로 하는 용인특례시 · 중대재해 ZERO화</span></div>
+          <div className="us-banner-user" aria-label="사용자 및 역할 선택"><UserBox who={who} /></div>
           <div className="us-banner-r"><b>경영방침</b><PolicyTicker /></div>
         </div>
         <header className="us-header">
           <Link href="/" className="us-logo">
             <img src="/yongin_logo.png" alt="용인특례시" className="us-logo-img" /><span className="us-logo-bar" />
-            <span className="us-logo-sys">중처법 의무이행<br />관리시스템</span>
+            <span className="us-logo-sys">ADOMS</span>
           </Link>
           <NavMenu demo={demo} />
-          <div className="us-user">
-            <UserBox who={who} />
+          {!demo && <div className="us-user">
             <div className="us-user-tools">
-              {!demo && <ModeSwitch />}
+              <ModeSwitch />
             </div>
-          </div>
+          </div>}
         </header>
         {/* 09-24 사용자: 방금 본 화면 기록(작은 둥근 네모 · ✕ 로 지움) + 이전 화면 */}
         <Suspense fallback={<div className="usr-bar usr-empty" />}><RecentBar /></Suspense>
@@ -61,6 +61,12 @@ export default async function Shell({ children }: { children: React.ReactNode })
           <span>용인특례시청 : (우 17019) 경기도 용인시 처인구 중부대로 1199 / 전화번호 : 031-324-2114</span>
           <span>Copyright ⓒ YONGIN SPECIAL CITY ALL RIGHTS RESERVED.</span>
         </footer>
+        <div className="device-support-overlay" role="dialog" aria-modal="true" aria-label="지원 화면 안내">
+          <div className="device-support-card">
+            <strong>ADOMS는 태블릿·노트북·PC 환경에 최적화되어 있습니다.</strong>
+            <span>768px 이상의 화면에서 이용해 주세요.</span>
+          </div>
+        </div>
       </div>
       </MenuProvider>
     );

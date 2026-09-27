@@ -66,7 +66,9 @@ function UsGnb({ path, search, show }: { path: string; search: string; show: (m:
       {groups.map((g) => (
         <div key={g.key || g.label} className={`us-gnb-g${g === cur ? " on" : ""}`}>
           <Link href={(g.items.find((m) => m.href) as MenuItem).href} className="us-gnb-h">
-            {g.label.split("\n").map((x, i) => <span key={i}>{x}</span>)}
+            {g.label.split("\n").map((x, i) => (
+              <span key={i} className={i > 0 && x.trim().startsWith("(") ? "us-gnb-minor" : undefined}>{x}</span>
+            ))}
           </Link>
           <div className="us-gnb-m">
             {g.items.map((m, i) => m.heading

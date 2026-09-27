@@ -578,4 +578,4 @@
 - 실제 변경: `US_GROUPS`에서 `시연참고` 그룹을 제거하고 GNB를 `flex-end` 및 18px 고정 간격으로 배치했다. 마지막 메뉴를 시연참고 pill로 꾸미던 선택자도 제거해 `관리자`가 일반 대메뉴와 동일하게 표시되도록 했다.
 - 검증: 8개 업무 대메뉴만 한 줄로 표시되고 현재 글자 크기를 유지한 채 우측 정렬되는지 확인했다. TypeScript 정적 검사와 Next.js production build를 통과했다.
 - 관련 파일: `lib/menu.ts`, `components/NavMenu.tsx`, `app/us.css`, `WORKLOG.md`
-- 관련 commit: pending
+- 관련 commit: `e0d3a5d`

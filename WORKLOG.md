@@ -535,3 +535,14 @@
 - 검증: TypeScript 검사와 Next.js production build를 통과했다. 로컬 production server와 Netlify Production에서 `/demo-admin`은 HTTP 200, title·description·OG title·OG description이 지정값과 일치했고 OG image URL은 `/demo-admin/opengraph-image`를 가리켰다. Production 이미지 endpoint도 HTTP 200, `image/png`로 응답했으며 1200×630 규격으로 생성됐다.
 - 관련 파일: `app/demo-admin/page.tsx`, `app/demo-admin/opengraph-image.tsx`, `WORKLOG.md`
 - 관련 commit: `b05fe10`
+
+### [49] 역할 변경 고지 표시시간 연장 및 작업 기록 마감
+- 상태: 완료
+- 배경: 사용자 유형 변경 직후 표시되는 안내 modal이 route 전환 과정에서 다시 렌더링될 때 예상보다 빨리 사라질 수 있어, 선택한 역할과 권한 변경 내용을 읽을 시간을 늘릴 필요가 있었다.
+- 결정: 역할 변경 고지는 약 4초간 유지해 기존 체감 표시시간의 약 2배를 확보한다. 사용자가 `확인`을 누르면 즉시 닫히며, 같은 역할 재선택과 새로고침 이후에는 불필요하게 다시 표시하지 않는다.
+- 이유: 역할 변경 직후 메뉴와 화면도 함께 바뀌므로 새 역할명과 권한 반영 안내를 충분히 확인할 수 있어야 한다.
+- 영향 범위: 상단 사용자 유형 선택 후 표시되는 고지 modal. 역할 권한, 메뉴 구성, READ server, PostgreSQL, WRITE와 업무 데이터에는 영향이 없다.
+- 실제 변경: 역할과 만료 시각을 같은 브라우저 탭의 session storage에 4초간 보존해 route 재렌더링 뒤에도 남은 시간 동안 modal을 복원한다. 4초가 지나면 자동으로 닫고 저장값을 제거하며, `확인`을 누른 경우에도 즉시 저장값과 modal을 함께 제거한다.
+- 검증: TypeScript 정적 검사와 Next.js production build를 수행하고, 역할 변경 시 modal의 4초 유지·자동 종료·확인 버튼 즉시 종료 및 route 전환 뒤 복원 동작을 확인했다.
+- 관련 파일: `components/UserBox.tsx`, `WORKLOG.md`
+- 관련 commit: pending

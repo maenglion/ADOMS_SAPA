@@ -1,6 +1,6 @@
 "use client";
 import { useRouter, useSearchParams } from "next/navigation";
-import { Suspense, useState } from "react";
+import { Suspense, useEffect, useState } from "react";
 import { ROLES } from "./RoleSwitch";
 import { ROLE_LABEL } from "@/lib/roles";
 import { canAccess, normRole } from "@/lib/perm";
@@ -13,12 +13,65 @@ import { canAccess, normRole } from "@/lib/perm";
  */
 export type Who = { dept: string; name: string; duty: string };
 
+const ROLE_CHANGE_NOTICE_KEY = "adoms-role-change-notice";
+const ROLE_CHANGE_NOTICE_MS = 4_000;
+
+type RoleChangeNotice = {
+  role: string;
+  expiresAt: number;
+};
+
 function Inner({ who }: { who: Record<string, Who> }) {
   const router = useRouter();
   const sp = useSearchParams();
   const adomsRole = normRole(sp?.get("role"));
   const w = who[adomsRole];
   const [changedRole, setChangedRole] = useState<string | null>(null);
+
+  useEffect(() => {
+    const raw = window.sessionStorage.getItem(ROLE_CHANGE_NOTICE_KEY);
+    if (!raw) return;
+
+    try {
+      const notice = JSON.parse(raw) as RoleChangeNotice;
+      if (!notice.role || notice.expiresAt <= Date.now()) {
+        window.sessionStorage.removeItem(ROLE_CHANGE_NOTICE_KEY);
+        return;
+      }
+      setChangedRole(notice.role);
+    } catch {
+      window.sessionStorage.removeItem(ROLE_CHANGE_NOTICE_KEY);
+    }
+  }, []);
+
+  useEffect(() => {
+    if (!changedRole) return;
+
+    const raw = window.sessionStorage.getItem(ROLE_CHANGE_NOTICE_KEY);
+    let expiresAt = Date.now() + ROLE_CHANGE_NOTICE_MS;
+    if (raw) {
+      try {
+        const notice = JSON.parse(raw) as RoleChangeNotice;
+        if (notice.role === changedRole && notice.expiresAt > Date.now()) {
+          expiresAt = notice.expiresAt;
+        }
+      } catch {
+        // 아래에서 현재 역할 기준의 새 만료 시각으로 대체한다.
+      }
+    }
+
+    const timeout = window.setTimeout(() => {
+      window.sessionStorage.removeItem(ROLE_CHANGE_NOTICE_KEY);
+      setChangedRole(null);
+    }, Math.max(0, expiresAt - Date.now()));
+
+    return () => window.clearTimeout(timeout);
+  }, [changedRole]);
+
+  const closeRoleNotice = () => {
+    window.sessionStorage.removeItem(ROLE_CHANGE_NOTICE_KEY);
+    setChangedRole(null);
+  };
 
   return (
     <>
@@ -31,6 +84,10 @@ function Inner({ who }: { who: Record<string, Who> }) {
             const nextRole = e.target.value;
             if (nextRole === adomsRole) return;
             window.dispatchEvent(new Event("adoms-role-change"));
+            window.sessionStorage.setItem(ROLE_CHANGE_NOTICE_KEY, JSON.stringify({
+              role: nextRole,
+              expiresAt: Date.now() + ROLE_CHANGE_NOTICE_MS,
+            } satisfies RoleChangeNotice));
             setChangedRole(nextRole);
             void fetch("/api/demo-admin/event", {
               method: "POST",
@@ -58,7 +115,7 @@ function Inner({ who }: { who: Record<string, Who> }) {
             <div className="us-modal-b us-role-change-body">
               <p>사용자 유형이 <strong>{ROLE_LABEL[changedRole] || changedRole}</strong>로 변경되었습니다.</p>
               <p className="us-muted">해당 사용자 권한에 맞춰 메뉴와 화면이 표시됩니다.</p>
-              <button type="button" className="us-btn g" onClick={() => setChangedRole(null)}>확인</button>
+              <button type="button" className="us-btn g" onClick={closeRoleNotice}>확인</button>
             </div>
           </section>
         </div>

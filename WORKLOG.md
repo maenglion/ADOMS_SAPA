@@ -370,3 +370,14 @@
 - 검증: 배포 metadata에서 site와 새 함수 runtime이 `ap-southeast-1`임을 확인했다. CSV 50/50 및 PostgreSQL 50/50 요청은 모두 HTTP 200이었다. CSV/PG warm 중앙값은 dashboard 1.808/6.795초, `/actions` 1.480/7.297초, `/duties/list` 1.433/4.512초, `/evidence` 1.279/4.641초, `/tasks` 0.887/4.190초다. 발행 기준일 targeted gate는 HTTP 37/37, metrics 159/159 mismatch 0, crosscheck 68/68, 계산 JSON 6/6 SHA 동일이다. TypeScript와 production build도 통과했다. 성능이 통과 후보가 아니므로 조건부 전체 137회귀는 생략했고 Production cutover는 보류한다. 검증용 시각 설정은 제거했다.
 - 관련 파일: `lib/db.ts`, `app/page.tsx`, `app/tasks/page.tsx`, `app/evidence/page.tsx`, `app/duties/list/page.tsx`, `READ_PERFORMANCE_VERIFY.md`, `db/read-shadow/read_performance_singapore.csv`, `WORKLOG.md`
 - 관련 commit: pending
+
+### [34] 2026-09-27 Railway READ server 도입 결정
+- 상태: 결정
+- 배경: Netlify Functions와 Railway PostgreSQL을 동일 Singapore region으로 정렬하고, PostgreSQL Pool 재사용, TCP keep-alive, 독립 READ 병렬화 및 `/actions` 서버 계산 최적화를 적용했다. 그 뒤에도 Netlify Function이 Railway PostgreSQL 외부 접속 URL을 직접 사용하는 READ는 CSV 대비 약 3.15~4.93배 느렸다. `/actions` 비DB 계산은 약 0.792초까지 감소해 애플리케이션 계산 병목은 대부분 해소됐고, 잔여 병목은 외부 DB 접속의 query completion 및 raw row transfer 경로로 좁혀졌다.
+- 결정: Netlify가 PostgreSQL을 직접 읽는 구조를 Production 목표에서 제외하고, Railway 내부망에서 PostgreSQL을 읽는 경량 READ server를 추가한다. READ server는 private `DATABASE_URL`을 사용해 조회·집계·materialization을 수행하고 화면에 필요한 결과만 Netlify에 반환한다. Production READ cutover는 READ server의 결과 동등성과 성능 검증이 모두 통과한 뒤 진행한다.
+- 이유: 리전 정렬과 애플리케이션 내부 최적화만으로는 외부 DB 접속 및 대량 raw row 전송 비용을 제거하지 못했다. PostgreSQL과 같은 Railway 내부망에서 필요한 결과만 구성해 전달하면 Netlify↔DB 간 반복 왕복과 불필요한 원시 행 전송을 줄일 수 있다.
+- 영향 범위: PostgreSQL READ 배포 구조, Netlify server-side READ 경로, Railway 내부 서비스 구성, 이후 Production READ cutover 검증. PostgreSQL 정본 데이터, schema, WRITE 경로, CSV fallback, 사용자 가시 결과 계약에는 현재 변경이 없다.
+- 실제 변경: 이번 항목에서는 구조 결정만 기록했다. Railway READ server 구현·배포, Netlify 연결, Production backend 전환은 아직 수행하지 않았다.
+- 검증: 기존 Singapore A/B에서 PostgreSQL warm 중앙값이 CSV 대비 3.15~4.93배였고 `/actions` 비DB server 시간은 약 0.792초였다. READ server 구현 후 동일 입력·동일 기준일 결과 동등성과 대표 경로 성능을 별도 검증한다.
+- 관련 파일: `READ_PERFORMANCE_VERIFY.md`, `db/read-shadow/read_performance_singapore.csv`, `WORKLOG.md`
+- 관련 commit: pending

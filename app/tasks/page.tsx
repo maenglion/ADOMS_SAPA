@@ -28,13 +28,14 @@ async function renderTasks({ searchParams }: { searchParams: Promise<Record<stri
   const side = <StatusSide on="tasks" role={role} />; // 09-26 사용자: 메뉴 밖 화면 합치기 — 좌측 = 머리 메뉴 이행현황
 
 
-  const all = await tasks({ limit: 5000 });
-  const ap = new Map((await approvals()).map((a: any) => [a.task_id, a]));
-  const deptName = new Map((await depts()).map((d: any) => [d.dept_id, d.dept_name]));
-  const staffName = new Map((await staff()).map((s: any) => [s.staff_id, s.display_name]));
   // 알림 — 나에게 온 안 읽은 조치 지시를 맨 앞에(「읽음 확인」을 누르면 이행현황 메시지 발신 목록의 읽음 수가 오른다, 09-24)
   const me = ROLE_STAFF[role] || "";
-  const notis0 = await notifications(mine ? me : undefined);
+  const [all, approvalRows, deptRows, staffRows, notis0] = await Promise.all([
+    tasks({ limit: 5000 }), approvals(), depts(), staff(), notifications(mine ? me : undefined),
+  ]);
+  const ap = new Map(approvalRows.map((a: any) => [a.task_id, a]));
+  const deptName = new Map(deptRows.map((d: any) => [d.dept_id, d.dept_name]));
+  const staffName = new Map(staffRows.map((s: any) => [s.staff_id, s.display_name]));
   const needRead = (n: any) => n.to_staff_id === me && n.notif_type === "조치 지시" && !n.read_at;
   const notis = [...notis0.filter(needRead), ...notis0.filter((n: any) => !needRead(n))];
   const here = `/tasks?${new URLSearchParams(Object.entries(sp).filter(([, v]) => typeof v === "string") as [string, string][]).toString()}`;

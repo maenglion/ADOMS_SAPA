@@ -61,13 +61,17 @@ async function renderDashboard({ searchParams }: { searchParams: Promise<Record<
   const tgt = TGT.some((t) => t.v === sp.tgt) ? sp.tgt : "F";
   const today = ymd();
   const sc = await scopeOf(role);
+  const TRK: Record<string, "ws" | "fc" | "mt"> = { I: "ws", F: "fc", M: "mt" };
 
-  const [allTasks, years, mats, st, notes] = await Promise.all([
+  const [allTasks, years, mats, st, notes, transports, workplaces, judgeMaps] = await Promise.all([
     taskRows(), yearsOf(), readTable("material_item", "item_id"), staff(), notifications(),
+    readTable("usb1_transport", "tr_id").catch(() => [] as Row[]),
+    readTable("usb1_workplace", "wp_id").catch(() => [] as Row[]),
+    Promise.all([judgeMap("ws", year), judgeMap("fc", year), judgeMap("mt", year)]),
   ]);
   // 화면 사이 연결(lib/us/links): 점검 판정은 의무이행 기록·이행률에 반영(과제는 과제 상태 그대로), 이행 시기는 시기도래·기한 초과에
   // 세 트랙 판정을 한데(의무조항 코드가 트랙마다 달라 겹치지 않는다)
-  const jm = new Map([...(await judgeMap("ws", year)), ...(await judgeMap("fc", year)), ...(await judgeMap("mt", year))]);
+  const jm = new Map([...judgeMaps[0], ...judgeMaps[1], ...judgeMaps[2]]);
   const mine = allTasks.filter((t) => inScope(sc, t.dept_id));
 
   /* ── 중대재해 관리대상 ── */
@@ -86,12 +90,12 @@ async function renderDashboard({ searchParams }: { searchParams: Promise<Record<
   const byGbn = new Map<string, number>();
   facs.forEach((a) => byGbn.set(a.asset_gbn || "기타", (byGbn.get(a.asset_gbn || "기타") || 0) + 1));
   const facRows = [...byGbn.entries()].sort((a, b) => b[1] - a[1]);
-  const trIn = (await readTable("usb1_transport", "tr_id").catch(() => [] as Row[])).filter((t: Row) => inScope(sc, t.dept_id) && t.deleted !== "Y");
+  const trIn = transports.filter((t: Row) => inScope(sc, t.dept_id) && t.deleted !== "Y");
   const matIn = mats.filter((m) => inScope(sc, m.dept_id) && m.verdict !== "비해당" && m.deleted !== "Y");
   const byMat = new Map<string, number>();
   matIn.forEach((m) => { const k = String(m.item_name || "").split("(")[0].trim(); byMat.set(k, (byMat.get(k) || 0) + 1); });
   // 사업장 — 20곳(09-24 사용자 지시 · 전부 확인 필요)을 구분별로 센다. 부서 범위가 있는 역할은 자기 부서가 속한 본청 한 곳.
-  const wpAll = (await readTable("usb1_workplace", "wp_id").catch(() => [] as Row[])).filter((w: Row) => w.deleted !== "Y");
+  const wpAll = workplaces.filter((w: Row) => w.deleted !== "Y");
   const wpIn = sc ? wpAll.filter((w: Row) => w.wp_id === "WP-01") : wpAll;
   const wpByKind = new Map<string, number>();
   wpIn.forEach((w: Row) => wpByKind.set(w.wp_kind || "사업장", (wpByKind.get(w.wp_kind || "사업장") || 0) + 1));
@@ -112,11 +116,14 @@ async function renderDashboard({ searchParams }: { searchParams: Promise<Record<
   // 법 의무사항에서 정한 이행 시기 중 아직 이행 기록이 없는 것도 함께 센다
   const deptOfAsset = new Map(assetSeed().map((a) => [a.asset_id, a.dept_id]));
   const deptOfMat = new Map(mats.map((m: Row) => [m.item_id, m.dept_id]));
-  const trs = await readTable("usb1_transport", "tr_id").catch(() => [] as Row[]);
-  const deptOfTr = new Map(trs.map((t: Row) => [t.tr_id, t.dept_id]));
-  const dues = (await openDues(year, (t, id) => t === "ws" ? (id === "HQ" ? "D01" : "") :   // 09-25: 사업장 20곳 — 본청(HQ)만 안전총괄과 몫, 나머지 사업장은 사업장 단위 확정 전이라 세지 않음
- t === "mt" ? String(deptOfMat.get(id) || "") : String(deptOfAsset.get(id) || deptOfTr.get(id) || "")))
-    .filter((d) => inScope(sc, d.dept_id));
+  const deptOfTr = new Map(transports.map((t: Row) => [t.tr_id, t.dept_id]));
+  const [dueRows, recordResult] = await Promise.all([
+    openDues(year, (t, id) => t === "ws" ? (id === "HQ" ? "D01" : "") :   // 09-25: 사업장 20곳 — 본청(HQ)만 안전총괄과 몫, 나머지 사업장은 사업장 단위 확정 전이라 세지 않음
+ t === "mt" ? String(deptOfMat.get(id) || "") : String(deptOfAsset.get(id) || deptOfTr.get(id) || ""))
+      .then((rows) => rows.filter((d) => inScope(sc, d.dept_id))),
+    recordRows(TRK[tgt] || "fc", year),
+  ]);
+  const dues = dueRows;
   const duesUp = dues.filter((d) => d.due >= today);
   const pending = mine.filter((t) => t.status === "이행대기" || t.status === "조치필요");
   const upcoming = pending.filter((t) => String(t.due_date) >= today);
@@ -132,8 +139,7 @@ async function renderDashboard({ searchParams }: { searchParams: Promise<Record<
 
   /* ── 의무이행(실적증빙) ── 년도 × 대상 × 반기 */
   // 이행현황 표와 같은 원천 — 과제 + 의무이행(실적증빙) 화면에 직접 적은 기록(09-24 사용자: 이행률은 대시보드 기준으로 하나)
-  const TRK: Record<string, "ws" | "fc" | "mt"> = { I: "ws", F: "fc", M: "mt" };
-  const recs = (await recordRows(TRK[tgt] || "fc", year)).filter((r) => inScope(sc, r.dept_id));
+  const recs = recordResult.filter((r) => inScope(sc, r.dept_id));
   const perf = withJudges([...mine.filter((t) => t.year === year && t.area === tgt), ...recs], new Map([...jm].filter(([k]) => k.split("|")[1]?.startsWith(tgt)))).filter((r) => inScope(sc, r.dept_id));
   type C = { O: number; T: number; X: number; N: number; W: number };
   const tally = (rows: Row[]): C => {

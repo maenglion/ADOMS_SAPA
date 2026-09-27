@@ -50,13 +50,12 @@ async function renderEvidence({ searchParams }: { searchParams: Promise<Record<s
     );
   }
 
-  const all = await tasks({ limit: 5000 });
-  const ap = new Map((await approvals()).map((a: any) => [a.task_id, a]));
-  const evs = await evidences();
-  const fs = await forms();
-  const logs = await activityLog();
-  const deptName = new Map((await depts()).map((d: any) => [d.dept_id, d.dept_name]));
-  const staffName = new Map((await staff()).map((p: any) => [p.staff_id, p.display_name]));
+  const [all, approvalRows, evs, fs, logs, deptRows, staffRows] = await Promise.all([
+    tasks({ limit: 5000 }), approvals(), evidences(), forms(), activityLog(), depts(), staff(),
+  ]);
+  const ap = new Map(approvalRows.map((a: any) => [a.task_id, a]));
+  const deptName = new Map(deptRows.map((d: any) => [d.dept_id, d.dept_name]));
+  const staffName = new Map(staffRows.map((p: any) => [p.staff_id, p.display_name]));
   const head = isHead(role);
 
   const approver = canApprove(role);

@@ -25,6 +25,8 @@ type DbReadTrace = {
   acquireMs: number;
   sqlMs: number;
   rawRows: number;
+  normalizeMs: number;
+  normalizeIntervals: Array<[number, number]>;
   dbIntervals: Array<[number, number]>;
   acquireIntervals: Array<[number, number]>;
   queryIntervals: Array<[number, number]>;
@@ -44,6 +46,8 @@ type DbReadTrace = {
     merge: number;
   }>;
   semanticCache: Map<string, Promise<unknown>>;
+  poolExistedAtStart: boolean;
+  physicalConnectionsAtStart: number;
 };
 
 const dbReadTrace = new AsyncLocalStorage<DbReadTrace>();
@@ -52,6 +56,16 @@ const semanticMemoEnabled = process.env.ADOMS_READ_SEMANTIC_CACHE !== "0";
 
 const roundMs = (value: number) => Math.round(value * 100) / 100;
 const cloneRows = (rows: DbRow[]) => rows.map((row) => ({ ...row }));
+
+function cloneAdapterRows(rows: DbRow[], trace?: DbReadTrace): DbRow[] {
+  if (!trace) return cloneRows(rows);
+  const startedAt = performance.now();
+  const cloned = cloneRows(rows);
+  const finishedAt = performance.now();
+  trace.normalizeMs += finishedAt - startedAt;
+  trace.normalizeIntervals.push([startedAt, finishedAt]);
+  return cloned;
+}
 
 function intervalWallMs(intervals: Array<[number, number]>): number {
   if (!intervals.length) return 0;
@@ -153,6 +167,8 @@ export async function withDbReadTrace<T>(label: string, run: () => Promise<T>): 
     acquireMs: 0,
     sqlMs: 0,
     rawRows: 0,
+    normalizeMs: 0,
+    normalizeIntervals: [],
     dbIntervals: [],
     acquireIntervals: [],
     queryIntervals: [],
@@ -161,6 +177,8 @@ export async function withDbReadTrace<T>(label: string, run: () => Promise<T>): 
     scopes: new Map(),
     semantic: new Map(),
     semanticCache: new Map(),
+    poolExistedAtStart: Boolean(globalThis.__adomsPgPool),
+    physicalConnectionsAtStart: globalThis.__adomsPgPoolStats?.connections || 0,
   };
   return dbReadTrace.run(trace, async () => {
     try {
@@ -200,6 +218,9 @@ export async function withDbReadTrace<T>(label: string, run: () => Promise<T>): 
       const dbWallMs = intervalWallMs(trace.dbIntervals);
       const acquireWallMs = intervalWallMs(trace.acquireIntervals);
       const queryWallMs = intervalWallMs(trace.queryIntervals);
+      const normalizeWallMs = intervalWallMs(trace.normalizeIntervals);
+      const pool = globalThis.__adomsPgPool;
+      const poolStats = globalThis.__adomsPgPoolStats;
       const summary: Record<string, unknown> = {
         l: trace.label,
         lc: trace.logicalCalls,
@@ -214,8 +235,19 @@ export async function withDbReadTrace<T>(label: string, run: () => Promise<T>): 
         dbWall: roundMs(dbWallMs),
         acqWall: roundMs(acquireWallMs),
         qWall: roundMs(queryWallMs),
+        norm: roundMs(trace.normalizeMs),
+        normWall: roundMs(normalizeWallMs),
         render: roundMs(renderMs),
-        nonDbWall: roundMs(Math.max(0, renderMs - dbWallMs)),
+        nonDbWall: roundMs(Math.max(0, renderMs - dbWallMs - normalizeWallMs)),
+        pool: {
+          reused: trace.poolExistedAtStart,
+          newConnections: (poolStats?.connections || 0) - trace.physicalConnectionsAtStart,
+          total: pool?.totalCount || 0,
+          idle: pool?.idleCount || 0,
+          waiting: pool?.waitingCount || 0,
+          max: 5,
+          keepAlive: true,
+        },
         scope: Object.entries(scopes).map(([name, item]) => [name, item.logicalCalls, item.distinctTuples, item.sqlCalls, item.cacheHits, item.dbMs]),
       };
       if (process.env.ADOMS_READ_SEMANTIC_DETAILS === "1") summary.sem = compactSemantic;
@@ -278,6 +310,8 @@ function databaseUrl(): string {
 declare global {
   // eslint-disable-next-line no-var
   var __adomsPgPool: Pool | undefined;
+  // eslint-disable-next-line no-var
+  var __adomsPgPoolStats: { connections: number } | undefined;
 }
 
 export function postgresPool(): Pool {
@@ -287,9 +321,14 @@ export function postgresPool(): Pool {
       max: 5,
       idleTimeoutMillis: 30_000,
       connectionTimeoutMillis: 10_000,
+      keepAlive: true,
+      keepAliveInitialDelayMillis: 10_000,
       application_name: "adoms-sapa-read",
     };
-    globalThis.__adomsPgPool = new Pool(config);
+    const pool = new Pool(config);
+    const stats = globalThis.__adomsPgPoolStats ||= { connections: 0 };
+    pool.on("connect", () => { stats.connections++; });
+    globalThis.__adomsPgPool = pool;
   }
   return globalThis.__adomsPgPool;
 }
@@ -334,7 +373,7 @@ export async function queryRows(relation: string, queryString: string): Promise<
     if (cached) {
       trace.cacheHits++;
       if (scopeName) trace.scopes.get(scopeName)!.cacheHits++;
-      return cloneRows(await cached);
+      return cloneAdapterRows(await cached, trace);
     }
   }
 
@@ -436,7 +475,7 @@ export async function queryRows(relation: string, queryString: string): Promise<
   const pending = execute();
   trace.cache.set(tupleKey, pending);
   try {
-    return cloneRows(await pending);
+    return cloneAdapterRows(await pending, trace);
   } catch (error) {
     trace.cache.delete(tupleKey);
     throw error;
@@ -458,7 +497,7 @@ export async function queryAuditLog(): Promise<DbRow[]> {
     const cached = trace.cache.get(tupleKey);
     if (cached) {
       trace.cacheHits++;
-      return cloneRows(await cached);
+      return cloneAdapterRows(await cached, trace);
     }
   }
 
@@ -508,7 +547,7 @@ export async function queryAuditLog(): Promise<DbRow[]> {
   const pending = execute();
   trace.cache.set(tupleKey, pending);
   try {
-    return cloneRows(await pending);
+    return cloneAdapterRows(await pending, trace);
   } catch (error) {
     trace.cache.delete(tupleKey);
     throw error;

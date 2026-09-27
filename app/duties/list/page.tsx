@@ -31,19 +31,24 @@ async function renderDutyList({ searchParams }: { searchParams: Promise<Record<s
   const graph = sp.g || "";
   const showAll = sp.n === "all";
 
-  const raw = await duties({
+  const dutyFilter = {
     code36: sp.code, target: sp.target, law: sp.law, group: sp.group,
     area: sp.area, impl: sp.impl, mark: sp.mark, q: sp.q, limit: 100000,
-  });
-  const rows = foldByUnit(raw);
-  // 이행 유형 칩 숫자 — 「관계법령 의무이행」 같은 우산 조항 안을 유형별로 몇 건씩 묶었는지(유형 필터는 뺀 기준)
-  const base = sp.impl ? foldByUnit(await duties({
+  };
+  const baseFilter = {
     code36: sp.code, target: sp.target, law: sp.law, group: sp.group,
     area: sp.area, mark: sp.mark, q: sp.q, limit: 100000,
-  })) : rows;
+  };
+  const [raw, unfilteredImpl, tk] = await Promise.all([
+    duties(dutyFilter),
+    sp.impl ? duties(baseFilter) : Promise.resolve(null),
+    tasks({ limit: 5000 }),
+  ]);
+  const rows = foldByUnit(raw);
+  // 이행 유형 칩 숫자 — 「관계법령 의무이행」 같은 우산 조항 안을 유형별로 몇 건씩 묶었는지(유형 필터는 뺀 기준)
+  const base = unfilteredImpl ? foldByUnit(unfilteredImpl) : rows;
   const implN = new Map<string, number>();
   base.forEach((r: any) => implN.set(r.impl_type, (implN.get(r.impl_type) || 0) + 1));
-  const tk = await tasks({ limit: 5000 });
   const byDuty = new Map<string, any>();
   tk.forEach((t: any) => { if (!byDuty.has(t.duty_key)) byDuty.set(t.duty_key, t); });
 

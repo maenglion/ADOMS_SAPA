@@ -504,12 +504,23 @@
 - 관련 commit: `a696971`
 
 ### [46] Netlify 관리자 아이디 secret scan 오탐 처리
-- 상태: 진행
+- 상태: 완료
 - 배경: 역할·GNB·QA 콘솔 변경을 포함한 `main` 배포가 Netlify secret scan 단계에서 중단되어 Production에는 이전 배포가 계속 표시됐다. Production의 `ADOMS_DEMO_ADMIN_USER` 값이 일반 문자열과 일치해 소스와 빌드 산출물의 정상적인 `admin` 표기까지 secret으로 판정된 것이 원인이었다.
 - 결정: secret scan 전체를 끄지 않고 비밀값이 아닌 관리자 로그인 아이디 키 `ADOMS_DEMO_ADMIN_USER`만 검사 예외로 지정한다. 관리자 비밀번호, session secret, READ server token 및 DB 연결값은 계속 검사한다.
 - 이유: 사용자명은 인증 비밀값이 아니며, 일반 문자열 일치로 인한 배포 차단만 해소하면서 실제 credential에 대한 보호는 유지해야 한다.
 - 영향 범위: Netlify build secret scan의 단일 환경변수 키. 애플리케이션 인증 방식, credential 값, PostgreSQL, READ server, UI와 데이터에는 영향이 없다.
 - 실제 변경: 저장소 build 설정에 `SECRETS_SCAN_OMIT_KEYS=ADOMS_DEMO_ADMIN_USER`를 추가했다.
-- 검증: Production 재배포와 역할별 visible menu 최종 순회 후 결과를 추가한다.
+- 검증: 검사 예외 적용 뒤 Netlify Production build가 정상 게시됐으며 비밀번호·session·READ server token·DB 연결값은 예외에 포함하지 않았다.
 - 관련 파일: `netlify.toml`, `WORKLOG.md`
-- 관련 commit: pending
+- 관련 commit: `3c89fc2`
+
+### [47] READ server HTML과 Next.js 정적 asset 배포 일치
+- 상태: 완료
+- 배경: Production에 최신 UI HTML은 반영됐지만 GNB와 역할 selector가 동작하지 않았다. 실제 브라우저 검사에서 Railway process memory가 반환한 HTML이 참조하는 Next.js JavaScript chunk 4개가 Netlify origin에서 404였고, 화면이 hydrate되지 않은 상태임을 확인했다. 단순 HTTP·Shell 검사만으로는 이 결함이 PASS로 보일 수 있었다.
+- 결정: READ server 완성 응답 cache key에 Netlify source revision을 포함한다. Railway에서 렌더링한 핵심 5화면이 참조하는 `/_next/static/*`는 Netlify server-side proxy가 동일 Railway build에서 가져온다. Railway build에 없는 asset은 Netlify가 렌더링한 일반 화면의 asset이므로 Netlify 자체 정적 파일로 fallback한다. Bearer token은 서버 사이에서만 사용한다.
+- 이유: 같은 commit이라도 Netlify와 Railway의 독립 Next.js build는 immutable chunk 이름이 다를 수 있다. HTML과 asset을 같은 build 단위로 맞춰야 client hydration과 메뉴 상호작용을 보장할 수 있으며, 일반 화면까지 일괄 Railway asset으로 바꾸면 반대로 Netlify 화면이 깨진다.
+- 영향 범위: READ server 핵심 화면의 HTML/RSC response cache key, Netlify middleware의 `/_next/static/*` 전달과 fallback, visible menu smoke의 asset 확인. PostgreSQL schema/data, WRITE, 역할·화면 결과 계약에는 영향이 없다.
+- 실제 변경: Netlify가 Railway에 source revision header를 전달하고 READ server cache key가 이를 포함하도록 했다. 정적 asset 요청은 Railway 우선·404 시 Netlify fallback으로 처리했다. smoke test는 모든 HTML의 JavaScript/CSS asset을 중복 제거해 검사하도록 보강했다.
+- 검증: TypeScript 검사와 Next.js production build를 통과했다. Production 핵심 화면에서 GNB open과 실제 `법 의무사항 → 사업장` 이동, 일반 `/law/ws` 화면의 GNB open, `ceo → road` 역할 변경 modal·URL·selector 일치, road 법 메뉴 3개 제한, 연속 GNB 전환 시 열린 dropdown 1개를 확인했다. `usGroupsFor(role)` 기반 Production visible menu 294건과 JavaScript/CSS asset 66개를 검사해 294/294 PASS, asset 실패 0, HTTP 500/502/503/504·raw internal/error·blank·잘못된 role menu·동시 dropdown 각 0건이었다.
+- 관련 파일: `middleware.ts`, `services/read-server/start.mjs`, `scripts/visible_menu_smoke.mjs`, `MENU_SMOKE_VERIFY.md`, `WORKLOG.md`
+- 관련 commit: `fed17b8`, `22dad58`, `9fc6b33`, 최종 기록 commit은 pending

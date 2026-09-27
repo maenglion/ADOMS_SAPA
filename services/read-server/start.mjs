@@ -136,6 +136,9 @@ function send(res, cached, cacheStatus, elapsedMs) {
   res.statusCode = cached.status;
   for (const [name, value] of Object.entries(cached.headers)) res.setHeader(name, value);
   res.setHeader("x-adoms-response-cache", cacheStatus);
+  // A response-cache HIT never enters Next.js or the PostgreSQL adapter, so
+  // this is an observed zero rather than an estimate from application data.
+  res.setHeader("x-adoms-db-query-count", cacheStatus === "hit" ? "0" : "unmeasured");
   res.setHeader("server-timing", `railway-cache;desc=${cacheStatus};dur=${elapsedMs.toFixed(1)}`);
   res.end(cached.body);
 }

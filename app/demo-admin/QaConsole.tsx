@@ -5,7 +5,11 @@ type EventRow = {
   id: string; occurred_at: string; event_type: string; route?: string; role?: string;
   http_status?: number; duration_ms?: number; cache_state?: string; success: boolean; detail?: Record<string, unknown>;
 };
-type PerfRow = { screen: string; http: number; cache: string; dbQueryCount: number | null; minMs: number; medianMs: number; maxMs: number };
+type PerfStatus = "NORMAL" | "REWARM" | "CHECK";
+type PerfRow = {
+  screen: string; http: number; cache: string; dbQueryCount: number | null;
+  minMs: number; medianMs: number; maxMs: number; status: PerfStatus; reasons?: string[];
+};
 type Snapshot = {
   ok: boolean;
   health?: { ready?: boolean; postgres?: boolean; cacheState?: string; responseCacheEntries?: number; warmTargetCount?: number; backend?: string };
@@ -32,7 +36,7 @@ export default function QaConsole() {
   const [resetBusy, setResetBusy] = useState(false);
   const [resetMessage, setResetMessage] = useState("");
   const [perfBusy, setPerfBusy] = useState(false);
-  const [perf, setPerf] = useState<{ ok: boolean; results: PerfRow[] } | null>(null);
+  const [perf, setPerf] = useState<{ ok: boolean; overallStatus: PerfStatus; reasons: string[]; results: PerfRow[] } | null>(null);
 
   const refresh = useCallback(async () => {
     const response = await fetch("/api/demo-admin/qa", { cache: "no-store" });
@@ -67,12 +71,15 @@ export default function QaConsole() {
 
   const latestPerf = (snapshot?.performance?.[0]?.detail?.results || []) as PerfRow[];
   const shownPerf = perf?.results || latestPerf;
+  const latestOverall = snapshot?.performance?.[0]?.detail?.overallStatus as PerfStatus | undefined;
+  const shownOverall = perf?.overallStatus || latestOverall;
+  const shownReasons = perf?.reasons || (snapshot?.performance?.[0]?.detail?.reasons as string[] | undefined) || [];
   const status = snapshot?.health;
   return (
     <main className="qa-shell">
       <header className="qa-header">
-        <div><b>ADOMS QA</b><span>시연 운영 점검</span></div>
-        <form action="/api/demo-admin/logout" method="post"><button type="submit">시연용 화면으로 돌아가기</button></form>
+        <button type="button" className="qa-brand-home" onClick={() => setTab("QA 현황")} aria-label="시연 관리자 첫 화면으로 이동"><b>ADOMS QA</b></button>
+        <span>시연 운영 점검</span>
       </header>
       <nav className="qa-tabs" aria-label="QA 메뉴">{TABS.map((name) => <button key={name} className={tab === name ? "on" : ""} onClick={() => setTab(name)}>{name}</button>)}</nav>
       <section className="qa-content">
@@ -105,24 +112,32 @@ export default function QaConsole() {
         </>}
         {!loading && tab === "성능 점검" && <>
           <div className="qa-title-row"><h1>성능 점검</h1><button className="qa-primary" disabled={perfBusy} onClick={runPerformance}>{perfBusy ? "점검 중..." : "성능 점검 실행"}</button></div>
-          <div className="qa-card"><b className={`qa-state ${perf?.ok ? "ok" : perf ? "warn" : ""}`}>상태: {perf ? (perf.ok ? "정상" : "점검 필요") : "최근 결과"}</b><PerformanceTable rows={shownPerf} /></div>
+          <div className="qa-card">
+            <b className={`qa-state ${shownOverall === "NORMAL" ? "ok" : shownOverall === "REWARM" ? "rewarm" : shownOverall === "CHECK" ? "bad" : ""}`}>상태: {statusLabel(shownOverall)}</b>
+            {shownOverall === "REWARM" && <p className="qa-state-note">일부 화면의 캐시가 준비되지 않았습니다. 캐시 재예열 후 다시 점검해 주세요.</p>}
+            {shownReasons.length > 0 && <ul className="qa-reasons">{shownReasons.map((reason) => <li key={reason}>{reason}</li>)}</ul>}
+            <details className="qa-criteria"><summary>판정 기준</summary><div><b>정상</b><p>HTTP 200 · Cache HIT 3/3 · DB Query 0 · 일반 화면 Median ≤ 2.0초 · actions Median ≤ 2.5초</p><b>재예열 필요</b><p>HTTP와 속도는 정상이나 일부 Cache MISS 또는 Cache가 READY가 아닌 상태</p><b>점검 필요</b><p>HTTP 오류 · 기준시간 초과 · warm DB query 발생 · cache/prewarm 또는 측정 실패</p></div></details>
+            <PerformanceTable rows={shownPerf} />
+          </div>
         </>}
         {!loading && tab === "시연 리뷰" && <>
           <h1>시연 리뷰</h1><div className="qa-card"><h2>시간순 이벤트</h2><EventTable rows={snapshot?.recent || []} /></div><div className="qa-card"><h2>오류</h2><ErrorTable rows={snapshot?.errors || []} /></div>
         </>}
       </section>
-      <footer className="qa-footer">
-        <form action="/api/demo-admin/logout" method="post">
-          <button type="submit" className="qa-back-home"><span aria-hidden="true">←</span> 시연용 홈으로 가기</button>
-        </form>
-      </footer>
       {resetConfirm && <div className="qa-modal-bg"><div className="qa-modal" role="dialog" aria-modal="true" aria-labelledby="qa-reset-title"><h2 id="qa-reset-title">캐시 초기화</h2><p>READ cache를 초기화하고 PostgreSQL 기준으로 다시 생성합니다.</p><div><button disabled={resetBusy} onClick={() => setResetConfirm(false)}>취소</button><button className="qa-primary" disabled={resetBusy} onClick={resetCache}>{resetBusy ? "처리 중..." : "초기화 및 재예열"}</button></div></div></div>}
     </main>
   );
 }
 
+function statusLabel(value?: PerfStatus) {
+  if (value === "NORMAL") return "정상";
+  if (value === "REWARM") return "재예열 필요";
+  if (value === "CHECK") return "점검 필요";
+  return "최근 결과";
+}
+
 function StatusCard({ title, value, ok }: { title: string; value: string; ok?: boolean }) { return <div className="qa-card qa-stat"><span>{title}</span><b className={ok ? "ok" : "bad"}>{value}</b></div>; }
 function NumberCard({ title, value = 0, danger }: { title: string; value?: number; danger?: boolean }) { return <div className="qa-card qa-stat"><span>{title}</span><b className={danger ? "bad" : ""}>{value.toLocaleString()}회</b></div>; }
-function PerformanceTable({ rows }: { rows: PerfRow[] }) { return rows.length ? <div className="qa-table-wrap"><table><thead><tr><th>화면</th><th>HTTP</th><th>Cache</th><th>DB Query</th><th>Min</th><th>Median</th><th>Max</th></tr></thead><tbody>{rows.map((row) => <tr key={row.screen}><td>{row.screen}</td><td>{row.http}</td><td>{row.cache}</td><td>{row.dbQueryCount ?? "-"}</td><td>{seconds(row.minMs)}</td><td>{seconds(row.medianMs)}</td><td>{seconds(row.maxMs)}</td></tr>)}</tbody></table></div> : <p className="qa-muted">성능 점검 기록이 없습니다.</p>; }
+function PerformanceTable({ rows }: { rows: PerfRow[] }) { return rows.length ? <div className="qa-table-wrap"><table><thead><tr><th>화면</th><th>HTTP</th><th>Cache</th><th>DB Query</th><th>Min</th><th>Median</th><th>Max</th><th>판정</th></tr></thead><tbody>{rows.map((row) => <tr key={row.screen}><td>{row.screen}</td><td>{row.http}</td><td>{row.cache}</td><td>{row.dbQueryCount ?? "미측정"}</td><td>{seconds(row.minMs)}</td><td>{seconds(row.medianMs)}</td><td>{seconds(row.maxMs)}</td><td className={`qa-verdict ${row.status?.toLowerCase() || ""}`}>{statusLabel(row.status)}</td></tr>)}</tbody></table></div> : <p className="qa-muted">성능 점검 기록이 없습니다.</p>; }
 function EventTable({ rows }: { rows: EventRow[] }) { return rows.length ? <div className="qa-table-wrap"><table><thead><tr><th>시각</th><th>이벤트</th><th>역할</th><th>화면</th><th>결과</th></tr></thead><tbody>{rows.map((row) => <tr key={row.id}><td>{time(row.occurred_at)}</td><td>{eventName[row.event_type] || row.event_type}</td><td>{row.role || "-"}</td><td>{row.route || "-"}</td><td>{row.success ? "성공" : "실패"}</td></tr>)}</tbody></table></div> : <p className="qa-muted">기록이 없습니다.</p>; }
 function ErrorTable({ rows }: { rows: EventRow[] }) { return rows.length ? <div className="qa-table-wrap"><table><thead><tr><th>시각</th><th>화면</th><th>HTTP</th><th>종류</th><th>내용</th></tr></thead><tbody>{rows.map((row) => <tr key={row.id}><td>{time(row.occurred_at)}</td><td>{row.route || "-"}</td><td>{row.http_status || "-"}</td><td>{String(row.detail?.kind || row.event_type)}</td><td>{String(row.detail?.message || "확인 필요")}</td></tr>)}</tbody></table></div> : <p className="qa-muted">최근 오류가 없습니다.</p>; }

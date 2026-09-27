@@ -34,7 +34,7 @@ export default function AdminLogin() {
   return (
     <main className="qa-login-shell">
       <form className="qa-login-card" onSubmit={submit}>
-        <div className="qa-brand">ADOMS</div>
+        <a className="qa-brand" href="/demo-admin" aria-label="시연 관리자 첫 화면으로 이동">ADOMS</a>
         <h1>시연 QA 로그인</h1>
         <p>시연 상태와 오류 기록을 확인하는 내부 점검 화면입니다.</p>
         <label>아이디<input autoComplete="username" value={user} onChange={(event) => setUser(event.target.value)} required /></label>

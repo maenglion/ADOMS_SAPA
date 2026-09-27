@@ -26,6 +26,18 @@ type DbReadTrace = {
   cache: Map<string, Promise<DbRow[]>>;
   tuples: Map<string, QueryTupleMetric>;
   scopes: Map<string, { logicalCalls: number; sqlCalls: number; cacheHits: number; dbMs: number; tuples: Set<string> }>;
+  semantic: Map<string, {
+    calls: number;
+    cacheHits: number;
+    wallMs: number;
+    returnedRows: number;
+    args: Set<string>;
+    normalization: number;
+    filter: number;
+    sort: number;
+    merge: number;
+  }>;
+  semanticCache: Map<string, Promise<unknown>>;
 };
 
 const dbReadTrace = new AsyncLocalStorage<DbReadTrace>();
@@ -33,6 +45,68 @@ const dbReadScope = new AsyncLocalStorage<string>();
 
 const roundMs = (value: number) => Math.round(value * 100) / 100;
 const cloneRows = (rows: DbRow[]) => rows.map((row) => ({ ...row }));
+
+type ReadWork = Partial<Record<"normalization" | "filter" | "sort" | "merge", number>>;
+
+function resultSize(value: unknown): number {
+  if (Array.isArray(value)) return value.length;
+  if (value instanceof Map || value instanceof Set) return value.size;
+  return value == null ? 0 : 1;
+}
+
+function cloneSemantic<T>(value: T): T {
+  return structuredClone(value);
+}
+
+/**
+ * Profile one semantic READ boundary. `memo` is deliberately opt-in so the
+ * same instrumentation can capture the before profile and then prove which
+ * exact function/argument results are reused after optimization.
+ */
+export async function withReadOperation<T>(
+  name: string,
+  args: unknown,
+  run: () => Promise<T>,
+  options: { memo?: boolean; work?: ReadWork } = {},
+): Promise<T> {
+  const trace = dbReadTrace.getStore();
+  if (!trace) return run();
+  const argKey = JSON.stringify(args);
+  const cacheKey = `${name}\u0000${argKey}`;
+  const metric = trace.semantic.get(name) || {
+    calls: 0, cacheHits: 0, wallMs: 0, returnedRows: 0, args: new Set<string>(),
+    normalization: 0, filter: 0, sort: 0, merge: 0,
+  };
+  metric.calls++;
+  metric.args.add(argKey);
+  for (const key of ["normalization", "filter", "sort", "merge"] as const) {
+    metric[key] += options.work?.[key] || 0;
+  }
+  trace.semantic.set(name, metric);
+
+  if (options.memo) {
+    const cached = trace.semanticCache.get(cacheKey);
+    if (cached) {
+      metric.cacheHits++;
+      const value = await cached as T;
+      metric.returnedRows += resultSize(value);
+      return cloneSemantic(value);
+    }
+  }
+
+  const startedAt = performance.now();
+  const pending = run();
+  if (options.memo) trace.semanticCache.set(cacheKey, pending);
+  try {
+    const value = await pending;
+    metric.wallMs += performance.now() - startedAt;
+    metric.returnedRows += resultSize(value);
+    return options.memo ? cloneSemantic(value) : value;
+  } catch (error) {
+    if (options.memo) trace.semanticCache.delete(cacheKey);
+    throw error;
+  }
+}
 
 /**
  * Request-local PostgreSQL read cache and measurement boundary. Only callers
@@ -52,6 +126,8 @@ export async function withDbReadTrace<T>(label: string, run: () => Promise<T>): 
     cache: new Map(),
     tuples: new Map(),
     scopes: new Map(),
+    semantic: new Map(),
+    semanticCache: new Map(),
   };
   return dbReadTrace.run(trace, async () => {
     try {
@@ -71,6 +147,17 @@ export async function withDbReadTrace<T>(label: string, run: () => Promise<T>): 
         cacheHits: item.cacheHits,
         dbMs: roundMs(item.dbMs),
       }]));
+      const semantic = Object.fromEntries([...trace.semantic].map(([name, item]) => [name, {
+        calls: item.calls,
+        uniqueArgs: item.args.size,
+        cacheHits: item.cacheHits,
+        returnedRows: item.returnedRows,
+        wallMs: roundMs(item.wallMs),
+        normalization: item.normalization,
+        filter: item.filter,
+        sort: item.sort,
+        merge: item.merge,
+      }]));
       console.info("[adoms-read-metrics]", JSON.stringify({
         label: trace.label,
         logicalCalls: trace.logicalCalls,
@@ -84,6 +171,7 @@ export async function withDbReadTrace<T>(label: string, run: () => Promise<T>): 
         dataRenderMs: roundMs(performance.now() - trace.startedAt),
         serverComputeMs: roundMs(performance.now() - trace.startedAt - trace.dbMs),
         scopes,
+        semantic,
         tuples,
       }));
     }

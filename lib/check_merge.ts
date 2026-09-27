@@ -15,7 +15,7 @@
 import "server-only";
 import { createHash } from "node:crypto";
 import { readTable, staff, tasks, approvals, type Row } from "@/lib/data";   // 09-26 사용자: 옛 점검 화면 합치기 2차 — tasks(항목 판정으로 승인)
-import { withDbReadScope } from "@/lib/db";
+import { withDbReadScope, withReadOperation } from "@/lib/db";
 import type { TrackKey } from "@/lib/us/tracks";
 import { batchList } from "@/lib/cycle";
 import {
@@ -71,7 +71,10 @@ export type CheckFlag = {
  * 과제 판정(②)이 이긴 칸은 옛 목록에 과제 줄로 이미 있으므로 넣지 않는다(두 번 세지 않게).
  */
 export async function checkFlagged(year: string, role: string): Promise<CheckFlag[]> {
-  const rows = await withDbReadScope("checkFlagged", () => checkFlaggedInner(year, role));
+  const rows = await withReadOperation("checkFlagged", { year, role }, () =>
+    withDbReadScope("checkFlagged", () => checkFlaggedInner(year, role)),
+    { work: { filter: 8, merge: 7 } },
+  );
   if (process.env.ADOMS_DATA_BACKEND === "postgres" || process.env.ADOMS_READ_VERIFY === "1") {
     console.info("[adoms-check-flagged]", JSON.stringify({ year, role, rows: rows.length, sha256: checkFlaggedDigest(rows) }));
   }

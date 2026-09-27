@@ -11,6 +11,7 @@
 import { floor1 } from "@/lib/num";   // 09-26 사용자: 이행률 소수점은 모두 버림(lib/num.ts)
 import "server-only";
 import { tasks, evidences, readTable, depts, staff, type Row } from "@/lib/data";
+import { withReadOperation } from "@/lib/db";
 import { STEPS, trackOf, type TrackKey } from "@/lib/us/tracks";
 import { deptOf } from "@/lib/roles";
 import { ymd } from "@/lib/day";
@@ -115,8 +116,10 @@ export async function deptsOf(t: TrackKey): Promise<Dept[]> {
 export const splitIds = (s: any) => String(s || "").split(";").map((x) => x.trim()).filter(Boolean);
 
 export async function roundsOf(t: TrackKey): Promise<Row[]> {
-  const rows = await readTable("usf_round", "round_id");
-  return rows.filter((r) => r.track === t).sort((a, b) => String(b.created_at).localeCompare(String(a.created_at)));
+  return withReadOperation("roundsOf", { t }, async () => {
+    const rows = await readTable("usf_round", "round_id");
+    return rows.filter((r) => r.track === t).sort((a, b) => String(b.created_at).localeCompare(String(a.created_at)));
+  }, { work: { filter: 1, sort: 1 } });
 }
 export async function roundOf(t: TrackKey, id?: string): Promise<Row | null> {
   const rs = await roundsOf(t);
@@ -125,11 +128,13 @@ export async function roundOf(t: TrackKey, id?: string): Promise<Row | null> {
 
 /** 점검자 판정 — (항목|부서) 마다 가장 최근 줄. */
 export async function judgesOf(roundId: string): Promise<Map<string, Row>> {
-  const rows = (await readTable("usf_judge", "judge_id")).filter((r) => r.round_id === roundId)
-    .sort((a, b) => String(b.judged_at).localeCompare(String(a.judged_at)));
-  const m = new Map<string, Row>();
-  for (const r of rows) { const k = `${r.item_key}|${r.dept_id}`; if (!m.has(k)) m.set(k, r); }
-  return m;
+  return withReadOperation("judgesOf", { roundId }, async () => {
+    const rows = (await readTable("usf_judge", "judge_id")).filter((r) => r.round_id === roundId)
+      .sort((a, b) => String(b.judged_at).localeCompare(String(a.judged_at)));
+    const m = new Map<string, Row>();
+    for (const r of rows) { const k = `${r.item_key}|${r.dept_id}`; if (!m.has(k)) m.set(k, r); }
+    return m;
+  }, { work: { filter: 1, sort: 1, merge: 1 } });
 }
 
 /* ── 칸 계산 ───────────────────────────────────────────── */
@@ -202,6 +207,7 @@ const OLD_RESULT_ST = (r: string): St => (r === "부적합" ? "미이행" : r ==
 
 /** ② 과제 판정 모음 — (항목|부서) → OldAgg. 판정 받은 과제가 없는 칸은 넣지 않는다. */
 export async function oldAggOf(t: TrackKey, deptIds: string[], itemKeys: string[], year: string, half: string): Promise<Map<string, OldAgg>> {
+  return withReadOperation("oldAggOf", { t, deptIds, itemKeys, year, half }, async () => {
   const area = trackOf(t).area;
   const today = ymd();
   const items = itemsOf(t).filter((i) => itemKeys.includes(i.key));
@@ -243,6 +249,7 @@ export async function oldAggOf(t: TrackKey, deptIds: string[], itemKeys: string[
     }
   }
   return out;
+  }, { work: { filter: 2 + itemKeys.length * deptIds.length, sort: itemKeys.length * deptIds.length, merge: 3 } });
 }
 export const oldResultSt = OLD_RESULT_ST;
 
@@ -264,6 +271,7 @@ const recEvName = (r: Row) => String(recFiles(r)[0]?.name || r.evidence_name || 
 const recEvUrl = (r: Row) => String(recFiles(r)[0]?.url || r.evidence_url || r.file_url || "");
 
 export async function buildCells(t: TrackKey, deptIds: string[], itemKeys: string[], year = ymd().slice(0, 4)) {
+  return withReadOperation("buildCells", { t, deptIds, itemKeys, year }, async () => {
   const area = trackOf(t).area;
   const today = ymd();
   const items = itemsOf(t).filter((i) => itemKeys.includes(i.key));
@@ -328,11 +336,13 @@ export async function buildCells(t: TrackKey, deptIds: string[], itemKeys: strin
     }
   }
   return { items, cells };
+  }, { work: { normalization: 1, filter: 4 + itemKeys.length * deptIds.length * 4, sort: itemKeys.length * deptIds.length * 3, merge: 3 } });
 }
 
 /** 판정을 겹친 칸. */
 // 09-26 사용자: 옛 점검 화면 합치기 — ① 이행점검 판정 > ② 과제 판정 모음 > ③·④ 자료 기준(위 규칙). 칸마다 판정 하나.
 export async function cellsOfRound(t: TrackKey, round: Row) {
+  return withReadOperation("cellsOfRound", { t, roundId: round.round_id }, async () => {
   const deptIds = splitIds(round.dept_ids), itemKeys = splitIds(round.item_keys);
   const { items, cells } = await buildCells(t, deptIds, itemKeys, String(round.created_at || "").slice(0, 4) || undefined);
   const per = periodOfRound(round);
@@ -360,6 +370,7 @@ export async function cellsOfRound(t: TrackKey, round: Row) {
     }
   }
   return { items, deptIds, cells, period: per };
+  }, { work: { merge: 4 } });
 }
 
 /* ── 09-26 사용자: 옛 점검 화면 합치기 2차 — 지난 회차 판정 물려받기 ─────────────────────

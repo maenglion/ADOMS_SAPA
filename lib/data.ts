@@ -14,7 +14,7 @@ import "server-only";
 import fs from "node:fs";
 import { readOverlay } from "./write";
 import path from "node:path";
-import { queryAuditLog, queryRows } from "./db";
+import { queryAuditLog, queryRows, withReadOperation } from "./db";
 import { applyReadOrder } from "./read-order";
 import { dataBackend, usesPostgresReads } from "./data-backend";
 import { seedDirectories } from "./data-root";
@@ -218,7 +218,7 @@ export async function assetTargets(id: string): Promise<string[]> {
 }
 
 /** 과제(내 업무·이행 현황). */
-export async function tasks(filter: { dept?: string; staff?: string; status?: string; limit?: number } = {}): Promise<Row[]> {
+async function tasksInner(filter: { dept?: string; staff?: string; status?: string; limit?: number } = {}): Promise<Row[]> {
   const lim = filter.limit ?? 400;
   // CSV 대체 — 과제 × 배정 × 의무를 이어 붙인다(뷰와 같은 모양).
   const asg = new Map((await assignments()).map((a) => [a.assign_id, a]));
@@ -256,6 +256,12 @@ export async function tasks(filter: { dept?: string; staff?: string; status?: st
   return rows.slice(0, lim);
 }
 
+export async function tasks(filter: { dept?: string; staff?: string; status?: string; limit?: number } = {}): Promise<Row[]> {
+  return withReadOperation("tasks", filter, () => tasksInner(filter), {
+    work: { normalization: 1, filter: 4, merge: 5 },
+  });
+}
+
 export async function depts() {
   if (useDb) return readTable("org_dept", "dept_id");
   return seed("org_dept");
@@ -263,8 +269,10 @@ export async function depts() {
 /** 경영책임자 — 직원 명부 밖이지만 결재·보고받음 기록의 주체다(ROLE_STAFF.ceo). */
 const CEO_ROW = { staff_id: "CEO-1", display_name: "경영책임자(시장)", dept_id: "", duty_role: "경영책임자", note: "기록 주체 표시용" };
 export async function staff() {
-  const rows = useDb ? await readTable("staff", "staff_id") : seed("staff");
-  return rows.some((r: Row) => r.staff_id === CEO_ROW.staff_id) ? rows : [...rows, CEO_ROW];
+  return withReadOperation("staff", {}, async () => {
+    const rows = useDb ? await readTable("staff", "staff_id") : seed("staff");
+    return rows.some((r: Row) => r.staff_id === CEO_ROW.staff_id) ? rows : [...rows, CEO_ROW];
+  }, { work: { filter: 1, merge: 1 } });
 }
 export async function forms() {
   if (useDb) return readTable("form_template", "form_id");
@@ -290,17 +298,19 @@ export async function inspectionBatches() {
 
 /** 결재 층(승인 상태·제출일·승인일) — 과제 id 로 붙인다. */
 export async function approvals() {
-  const rows: Row[] = useDb
-    ? await liveTable("compliance_task")
-    : (() => {
-        const patch = new Map(seed("task_approval_patch").map((r) => [r.task_id, r]));
-        const ov = readOverlay().taskPatch;
-        return seed("compliance_task").map((t) => ({ ...t, ...(patch.get(t.task_id) || {}), ...(ov[t.task_id] || {}) }));
-      })();
-  // 09-26 사용자: 옛 점검 화면 합치기 2차 — 제출 뒤 과제 판정 전인 과제는 그 항목의 이행점검 판정이 「이행완료」면 승인으로 읽는다(쓰지 않음).
-  //   규칙·스위치는 lib/check_merge.ts(applyItemApproval · ITEM_APPROVAL_ON). 순환 참조를 피하려고 부를 때 불러온다.
-  const { applyItemApproval } = await import("./check_merge");
-  return applyItemApproval(rows);
+  return withReadOperation("approvals", {}, async () => {
+    const rows: Row[] = useDb
+      ? await liveTable("compliance_task")
+      : (() => {
+          const patch = new Map(seed("task_approval_patch").map((r) => [r.task_id, r]));
+          const ov = readOverlay().taskPatch;
+          return seed("compliance_task").map((t) => ({ ...t, ...(patch.get(t.task_id) || {}), ...(ov[t.task_id] || {}) }));
+        })();
+    // 09-26 사용자: 옛 점검 화면 합치기 2차 — 제출 뒤 과제 판정 전인 과제는 그 항목의 이행점검 판정이 「이행완료」면 승인으로 읽는다(쓰지 않음).
+    //   규칙·스위치는 lib/check_merge.ts(applyItemApproval · ITEM_APPROVAL_ON). 순환 참조를 피하려고 부를 때 불러온다.
+    const { applyItemApproval } = await import("./check_merge");
+    return applyItemApproval(rows);
+  }, { work: { normalization: 1, merge: 2 } });
 }
 export async function contractDuties() {
   if (useDb) return readTable("contract_duty", "cduty_id");
@@ -328,8 +338,10 @@ export async function orders() {
   return readTable("order_received", "order_id");
 }
 export async function evidences() {
-  if (useDb) return liveTable("evidence");
-  return [...readOverlay().evidence, ...seed("evidence")];
+  return withReadOperation("evidences", {}, async () => {
+    if (useDb) return liveTable("evidence");
+    return [...readOverlay().evidence, ...seed("evidence")];
+  }, { work: { merge: 1 } });
 }
 /** 시연 중 일어난 일(덮개 기록) — 감사로그 자리. */
 export async function activityLog() {
@@ -337,8 +349,10 @@ export async function activityLog() {
   return readOverlay().log;
 }
 export async function inspections() {
-  if (useDb) return liveTable("inspection");
-  return [...readOverlay().inspection, ...seed("inspection")];
+  return withReadOperation("inspections", {}, async () => {
+    if (useDb) return liveTable("inspection");
+    return [...readOverlay().inspection, ...seed("inspection")];
+  }, { work: { merge: 1 } });
 }
 
 /**
@@ -435,15 +449,17 @@ export async function mappingFor(assetId: string, targetCode: string) {
  * `keyCol` 을 주면 덮개의 수정분(patchRow)을 그 칸 기준으로 덮어쓴다.
  */
 export async function readTable(table: string, keyCol?: string): Promise<Row[]> {
-  if (useDb) return applyReadOrder(table, await fromDb(table, "select=*&limit=100000"), keyCol ? "live" : "raw");
-  const o: any = readOverlay();
-  const added: Row[] = (o.tables && o.tables[table]) || [];
-  const patches: Record<string, Row> = (o.patches && o.patches[table]) || {};
-  let rows = [...added, ...seed(table)];
-  if (keyCol && Object.keys(patches).length) {
-    rows = rows.map((r) => (patches[r[keyCol]] ? { ...r, ...patches[r[keyCol]] } : r));
-  }
-  return rows;
+  return withReadOperation(`readTable:${table}`, { keyCol: keyCol || "" }, async () => {
+    if (useDb) return applyReadOrder(table, await fromDb(table, "select=*&limit=100000"), keyCol ? "live" : "raw");
+    const o: any = readOverlay();
+    const added: Row[] = (o.tables && o.tables[table]) || [];
+    const patches: Record<string, Row> = (o.patches && o.patches[table]) || {};
+    let rows = [...added, ...seed(table)];
+    if (keyCol && Object.keys(patches).length) {
+      rows = rows.map((r) => (patches[r[keyCol]] ? { ...r, ...patches[r[keyCol]] } : r));
+    }
+    return rows;
+  }, { work: { normalization: 1, merge: 1 } });
 }
 
 /** 원천 표시 — 화면 하단에 PostgreSQL인지 예시 자료 파일(CSV)인지 밝힌다. 화면 말에 「판」을 쓰지 않는다. */

@@ -22,6 +22,7 @@ import { readOverlay } from "./write";
 import { idKo } from "./labels";
 import { SECURE_AXES, secureAxisOf } from "./axes";
 import { ymd } from "@/lib/day";
+import { withReadOperation } from "@/lib/db";
 
 export type CycleState = "적합" | "조치중" | "판정대기" | "미제출";
 export const FLAGGED = (r?: string) => r === "보완필요" || r === "부적합";
@@ -54,9 +55,11 @@ export function nextBatchId(batches: Row[]): string {
 
 /** 모든 과제(결재 층까지 붙인 것). */
 export async function allTasks(): Promise<Row[]> {
-  const all = await tasks({ limit: 5000 });
-  const ap = new Map((await approvals()).map((a: any) => [a.task_id, a]));
-  return all.map((t: any) => ({ ...t, ...(ap.get(t.task_id) || {}) }));
+  return withReadOperation("allTasks", {}, async () => {
+    const all = await tasks({ limit: 5000 });
+    const ap = new Map((await approvals()).map((a: any) => [a.task_id, a]));
+    return all.map((t: any) => ({ ...t, ...(ap.get(t.task_id) || {}) }));
+  }, { work: { merge: 2 } });
 }
 
 /** 과제가 이 점검의 대상인가 — 대상 산정은 여기 하나뿐이다. */
@@ -76,6 +79,7 @@ export function inScope(b: Row | undefined, t: Row): boolean {
 
 /** 판정 기록 — 과제별로 최신이 앞. 차수(round_no)를 채운다. */
 export async function inspectionsByTask(): Promise<Map<string, Row[]>> {
+  return withReadOperation("inspectionsByTask", {}, async () => {
   const patches: Record<string, Row> = (readOverlay() as any).patches?.inspection || {};
   const rows = (await inspections()).map((x: any) => ({ ...x, ...(patches[x.insp_id] || {}) }));
   const m = new Map<string, Row[]>();
@@ -86,13 +90,16 @@ export async function inspectionsByTask(): Promise<Map<string, Row[]>> {
     list.forEach((x, i) => { if (!x.round_no) x.round_no = n - i; });
   }
   return m;
+  }, { work: { normalization: 1, merge: 2 } });
 }
 
 /** 조치 기록 — 판정 번호(insp_id)로 찾는다. 화면에서 만든 것과 상태 변경까지 겹친다. */
 export async function actionsByInsp(): Promise<Map<string, Row>> {
-  const m = new Map<string, Row>();
-  (await readTable("action", "action_id")).forEach((a) => { if (!m.has(a.insp_id)) m.set(a.insp_id, a); });
-  return m;
+  return withReadOperation("actionsByInsp", {}, async () => {
+    const m = new Map<string, Row>();
+    (await readTable("action", "action_id")).forEach((a) => { if (!m.has(a.insp_id)) m.set(a.insp_id, a); });
+    return m;
+  }, { work: { merge: 1 } });
 }
 
 export type CycleRow = Row & {

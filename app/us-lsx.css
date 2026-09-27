@@ -150,7 +150,7 @@
 /* 미이행률(09-24) */
 .usa-d-miss{display:flex;justify-content:space-between;align-items:baseline;margin:4px 0 8px;color:#b3261e;font-weight:700}
 .usa-d-miss b{font-size:1.5rem;font-weight:800}.usa-d-miss small{font-size:.9rem}
-.usa-d-mrow th,.usa-d-mrow td{color:#b3261e;font-weight:700;background:#fdf1ef}
+.usa-d-mrow th,.usa-d-mrow td{color:#b3261e;font-weight:700;background:#fdf1ef;border-bottom:1px solid #aeb4ba !important}
 
 /* ── 체크박스 · 꺾쇠 다듬기(09-24 사용자: 「품격 있게」) ─────────────────────────────
    글자(✔ ⌄ ︾)로 그리던 것을 숨기고 선으로 그린다. 화면 코드는 그대로 — 되돌리려면 이 묶음만 지운다.

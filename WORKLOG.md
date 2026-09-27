@@ -381,3 +381,14 @@
 - 검증: 기존 Singapore A/B에서 PostgreSQL warm 중앙값이 CSV 대비 3.15~4.93배였고 `/actions` 비DB server 시간은 약 0.792초였다. READ server 구현 후 동일 입력·동일 기준일 결과 동등성과 대표 경로 성능을 별도 검증한다.
 - 관련 파일: `READ_PERFORMANCE_VERIFY.md`, `db/read-shadow/read_performance_singapore.csv`, `WORKLOG.md`
 - 관련 commit: pending
+
+### [35] 긴급 시연판 납품 모드 전환
+- 상태: 완료
+- 배경: 클라이언트가 진행 지연과 기한 준수에 강한 불만을 제기했고, 2026-09-28 02:00까지 실 DB를 사용하는 Production 시연 상태가 최우선 납품 조건이 됐다.
+- 결정: 기존 시연판의 단계별 세부 검증과 내부 구조 보존 규칙을 폐기한다. 사용자 가시 결과 동등성, 핵심 5화면의 정상 표시, 시연 가능한 응답속도, 즉시 CSV rollback 가능 여부만 완료조건으로 둔다. READ server를 통한 Production 전환을 우선하며 전체 회귀, 구조 개선, 정본·GraphDB 작업은 마감 후로 이관한다.
+- 이유: 남은 시간에는 실제 Railway PostgreSQL READ를 Production 화면에 안정적으로 연결하는 작업이 문서 완성도나 전수 검증보다 우선한다.
+- 영향 범위: Railway `sapa-read-server`, Netlify server-side READ 연결, 핵심 5화면 smoke test, Production backend와 CSV rollback 경로. WRITE, DB schema/data, GraphDB에는 영향이 없다.
+- 실제 변경: Railway READ server public HTTPS domain과 Bearer 인증 기반 Netlify server-side proxy를 구성했다. private `DATABASE_URL`의 대량 조회 지연을 줄이기 위해 READ server가 실제 DB에서 읽은 동일 query 결과를 프로세스 메모리에서 재사용하고 시작 시 핵심 5경로를 자동 사전 로드하도록 변경했다. DB 조회 결과는 서버 내부에서 JSON으로 묶어 전송량을 줄였고 health 확인은 DB 전체 검사를 기다리지 않도록 분리했다. 검증된 branch deploy를 그대로 Production에 게시해 `ADOMS_DATA_BACKEND=read-server` 상태로 전환했다. CSV backend 설정은 즉시 rollback 경로로 유지한다.
+- 검증: Railway 사전 로드에서 dashboard, `/actions`, `/duties/list`, `/evidence`, `/tasks`가 모두 HTTP 200이었다. Netlify Preview는 핵심 5화면과 `/actions` 4역할 8/8 HTTP 200, backend `read-server`였고 응답시간은 dashboard 2.725초, `/actions` 0.498~0.629초, `/duties/list` 0.369초, `/evidence` 0.427초, `/tasks` 0.381초였다. Production 게시 후 동일 8개 요청이 8/8 HTTP 200 및 backend `read-server`였으며 Preview와 경로별 응답 크기가 모두 일치했다. Production 응답시간은 최초 dashboard 4.443초, `/actions` 0.572~0.675초, `/duties/list` 0.362초, `/evidence` 0.430초, `/tasks` 0.382초였다. 실제 PostgreSQL은 Railway private `DATABASE_URL`로만 읽고 Netlify browser/client는 READ server를 직접 호출하지 않는다.
+- 관련 파일: `lib/db.ts`, `middleware.ts`, `services/read-server/start.mjs`, `WORKLOG.md`
+- 관련 commit: `e70896a`, `1c71943`, `7264b4d`, `0d961ad`, `2a8ea0b`, `bef8a44`, `f10dfa1` (최종 상태 기록 commit은 pending)

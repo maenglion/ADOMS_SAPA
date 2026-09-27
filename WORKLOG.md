@@ -601,3 +601,14 @@
 - 검증: TypeScript 검사와 Next.js production build를 통과하고 로컬 production 화면에서 필터 라벨 축소 및 기존 배치 유지 상태를 확인했다.
 - 관련 파일: `app/us-a.css`, `app/us-lsx.css`, `WORKLOG.md`
 - 관련 commit: `d090a74`
+
+### [55] READ server 예열 health redirect 장애 복구
+- 상태: 완료
+- 배경: 기본 접속 역할을 `road`로 변경한 배포 이후 Production이 `READ server is warming.`과 HTTP 503을 반환했다. Railway 프로세스와 PostgreSQL은 실행 중이었으나 새 revision의 사전 예열이 완료되지 못했다.
+- 결정: 역할 query가 없는 요청을 기본 역할로 보내는 redirect는 일반 화면 GET에만 적용하고 `/api/*` 내부 요청에는 적용하지 않는다.
+- 이유: READ server 예열 절차가 확인하는 `/api/read-server/health`는 역할 화면이 아니며, 여기에 `?role=road` redirect가 개입하면 health 응답을 정상 판정할 수 없어 준비 상태가 계속 차단된다.
+- 영향 범위: 역할 query가 없는 API 요청의 middleware 처리와 READ server 새 revision 예열. 일반 앱 최초 접속의 `road` 기본 역할, 명시적 역할 query, PostgreSQL 데이터와 WRITE에는 영향이 없다.
+- 실제 변경: middleware에 API 경로 판정을 추가하고 역할 cookie 복원 및 기본 `road` redirect 대상에서 모든 `/api/*` 요청을 제외했다.
+- 검증: TypeScript 검사와 Next.js production build를 통과했다. Railway 배포 로그에서 핵심 8개 예열 요청이 모두 HTTP 200으로 완료되고 `READY responses=8`이 기록됐다. Netlify Production `/?role=road`는 HTTP 200, `X-Adoms-Data-Backend: read-server`, `X-Adoms-Read-Server: railway`로 응답했다.
+- 관련 파일: `middleware.ts`, `WORKLOG.md`
+- 관련 commit: `142c73e`, 최종 기록 commit은 pending

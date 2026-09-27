@@ -532,6 +532,6 @@
 - 이유: 일반 사용자 화면과 QA 운영 점검 링크의 용도를 공유 단계에서 명확히 구분하면서 브랜드 표현은 동일하게 유지하기 위해서다.
 - 영향 범위: `/demo-admin` 문서 metadata와 외부 링크 미리보기. 일반 앱 metadata, 인증, READ server, PostgreSQL, WRITE와 화면 데이터에는 영향이 없다.
 - 실제 변경: title을 `시연용 관리자 시스템`, description을 `시연리뷰, 캐시관리, 성능점검, 시연데이터`로 지정했다. 1200×630 초록색 배경에 기존과 같은 흰색 `ADOMS` 워드마크를 배치한 관리자 전용 OG/Twitter 이미지를 추가했다.
-- 검증: TypeScript 검사와 Next.js production build를 통과했다. 로컬 production server에서 `/demo-admin`은 HTTP 200, title·description·OG title·OG description이 지정값과 일치했고 OG image URL은 `/demo-admin/opengraph-image`를 가리켰다. 이미지 endpoint는 HTTP 200, `image/png`, 1200×630 규격으로 생성됐다. Production 배포 후 동일 항목을 재확인한다.
+- 검증: TypeScript 검사와 Next.js production build를 통과했다. 로컬 production server와 Netlify Production에서 `/demo-admin`은 HTTP 200, title·description·OG title·OG description이 지정값과 일치했고 OG image URL은 `/demo-admin/opengraph-image`를 가리켰다. Production 이미지 endpoint도 HTTP 200, `image/png`로 응답했으며 1200×630 규격으로 생성됐다.
 - 관련 파일: `app/demo-admin/page.tsx`, `app/demo-admin/opengraph-image.tsx`, `WORKLOG.md`
-- 관련 commit: pending
+- 관련 commit: `b05fe10`

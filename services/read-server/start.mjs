@@ -90,7 +90,8 @@ function cacheKey(req, url) {
   // Date-dependent calculations get a fresh process entry after midnight.
   const basisDate = new Intl.DateTimeFormat("en-CA", { timeZone: "Asia/Seoul" }).format(new Date());
   const roleCookie = url.searchParams.has("role") ? "" : digest(String(req.headers.cookie || ""));
-  return `${basisDate}|${req.method}|${url.pathname}${url.search}|${representationKey(req, url)}|${roleCookie}`;
+  const deployVersion = String(req.headers["x-adoms-deploy-version"] || "unknown");
+  return `${deployVersion}|${basisDate}|${req.method}|${url.pathname}${url.search}|${representationKey(req, url)}|${roleCookie}`;
 }
 
 function trimCache() {
@@ -233,6 +234,7 @@ async function prewarm() {
   const headers = {
     authorization: `Bearer ${token}`,
     accept: "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
+    "x-adoms-deploy-version": process.env.RAILWAY_GIT_COMMIT_SHA || "unknown",
     "x-adoms-prewarm": "1",
   };
   let childReady = false;

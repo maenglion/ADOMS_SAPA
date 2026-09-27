@@ -69,6 +69,10 @@ async function proxyReadServer(req: NextRequest): Promise<NextResponse> {
   }
   headers.set("authorization", `Bearer ${token}`);
   headers.set("x-adoms-proxy-host", req.nextUrl.host);
+  // Railway keeps rendered HTML/RSC in process memory. Include the Netlify
+  // source revision so a new deploy never receives HTML that points at the
+  // previous deploy's immutable Next.js chunks.
+  headers.set("x-adoms-deploy-version", process.env.COMMIT_REF || process.env.DEPLOY_ID || "unknown");
 
   const startedAt = performance.now();
   const upstream = await fetch(target, { method: req.method, headers, redirect: "manual", cache: "no-store" });

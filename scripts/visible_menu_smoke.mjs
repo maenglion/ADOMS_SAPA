@@ -38,6 +38,22 @@ try {
     "SQLSTATE", "ECONN", "DATABASE_URL", "ADOMS_READ_SERVER_TOKEN",
     "undefined is not", "Cannot read properties", "Unexpected token",
   ];
+  const assetChecks = new Map();
+
+  function checkAsset(src, pageUrl) {
+    const assetUrl = new URL(src, pageUrl).toString();
+    let pending = assetChecks.get(assetUrl);
+    if (!pending) {
+      pending = fetch(assetUrl, {
+        method: "HEAD",
+        redirect: "follow",
+        signal: AbortSignal.timeout(45_000),
+      }).then((response) => ({ url: assetUrl, status: response.status }))
+        .catch((error) => ({ url: assetUrl, status: 0, error: error instanceof Error ? error.message : String(error) }));
+      assetChecks.set(assetUrl, pending);
+    }
+    return pending;
+  }
 
   const targets = ALL_ROLES.flatMap((role) => usGroupsFor(role).flatMap((group) =>
     group.items.filter((item) => item.href && !item.heading).map((item) => ({
@@ -74,6 +90,10 @@ try {
       if (!html.includes('class="us-app') || !html.includes('class="us-header') || !html.includes('class="us-page')) {
         symptoms.push("ADOMS shell missing");
       }
+      const scripts = [...html.matchAll(/<script[^>]+src="([^"]+)"/gi)].map((match) => match[1]);
+      const brokenAssets = (await Promise.all([...new Set(scripts)].map((src) => checkAsset(src, response.url))))
+        .filter((asset) => asset.status !== 200);
+      for (const asset of brokenAssets) symptoms.push(`script asset HTTP ${asset.status}: ${new URL(asset.url).pathname}`);
       for (const token of forbidden) if (visibleText.includes(token)) symptoms.push(`internal token: ${token}`);
       return {
         ...target,
@@ -120,6 +140,7 @@ try {
       return [role, { total: rows.length, pass: rows.filter((row) => row.pass).length, fail: rows.filter((row) => !row.pass).length }];
     })),
     failures: results.filter((row) => !row.pass),
+    scriptAssets: [...assetChecks.values()].length,
     results,
   };
   const json = `${JSON.stringify(report, null, 2)}\n`;

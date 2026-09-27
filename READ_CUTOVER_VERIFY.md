@@ -201,3 +201,11 @@ Targeted verification passed for 16/16 affected route-role pages, 1,117/1,117 ex
 The complete PostgreSQL Preview regression then passed 137/137 HTTP 200, golden values 7,373/7,373, expected-only 0, extra 0, stable mismatch 0, key metrics 159/159 with mismatch 0, and calculation crosscheck 68/68. Four `/exec` elapsed-hours cells remain raw time-dependent differences and are kept separate from stable compatibility results. Golden files were not changed.
 
 Production remains `ADOMS_DATA_BACKEND=csv`. No database data/schema, WRITE path, UI, role logic, frozen CSV/overlay, or golden file was changed. The five-route cold/warm performance gate remains separate and must pass before Production cutover.
+
+## PostgreSQL READ performance gate — 2026-09-27
+
+After compatibility reached stable mismatch 0, five representative routes were measured on the same Netlify branch and instrumented commit with only `ADOMS_DATA_BACKEND` changed. Each route received one cold request and nine sequential warm requests for both CSV and PostgreSQL. All 100 requests returned HTTP 200.
+
+PostgreSQL warm medians were slower on every route: dashboard 2.46×, `/actions` 4.11×, `/duties/list` 2.47×, `/evidence` 3.13×, and `/tasks` 3.03×. `/actions` measured 14.625 seconds at the warm median versus 3.555 seconds on CSV. Its 16 SQL calls accounted for 3.514 seconds of cumulative DB work while server data rendering took 13.481 seconds, leaving approximately 9.983 seconds in non-DB server construction and calculation. The SQL calls are partly concurrent, so cumulative DB timings are not an exact wall-clock partition.
+
+The performance gate failed and Production READ cutover remains blocked. The Preview branch was restored to `postgres` after A/B measurement; Production was independently confirmed as `csv`. No compatibility contract, database/schema/data, WRITE path, UI, seed, or golden file changed. Full measurements and interpretation are recorded in `READ_PERFORMANCE_VERIFY.md` and `db/read-shadow/read_performance_compare.csv`.

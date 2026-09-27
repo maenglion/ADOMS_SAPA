@@ -301,3 +301,14 @@
 - 검증: 네 영향 경로×4역할의 대상 검증은 HTTP 16/16, 추출값 1,117/1,117, mismatch 0, expected-only/extra 0/0이었다. CSV와 PostgreSQL `CheckFlag[]`는 4역할 모두 30행 및 SHA-256이 일치했다. 전체 Preview 회귀는 HTTP 137/137, golden 7,373/7,373, expected-only/extra 0/0, 안정값 mismatch 0, metrics 159/159 mismatch 0, calculation crosscheck 68/68이다. `/exec` 경과시간 4건은 raw 시각 의존 차이로 별도 유지했다. TypeScript, production build, 로컬 READ shadow 77 case도 통과했다. Production은 계속 `csv`이며 5경로 cold/warm 성능 gate와 READ cutover는 별도 후속 작업이다.
 - 관련 파일: `lib/data.ts`, `lib/db.ts`, `lib/read-order.ts`, `lib/check_merge.ts`, `db/read-shadow/read_order_contract.json`, `db/read-shadow/remote_csv_pg_ab.csv`, `READ_COMPATIBILITY_VERIFY.md`, `READ_CUTOVER_VERIFY.md`, `WORKLOG.md`
 - 관련 commit: `453d469` (최종 기록 commit은 pending)
+
+### [28] PostgreSQL READ 성능 준공점검 및 Production 전환 보류
+- 상태: 완료
+- 배경: PostgreSQL READ 기능 준공검사는 HTTP 137/137, golden 7,373/7,373, 안정값 mismatch 0, expected-only/extra 0/0, metrics 159/159, crosscheck 68/68로 통과했다. Production cutover 전 마지막 gate로 실제 사용자 한 화면의 CSV·PostgreSQL 응답시간을 같은 Netlify branch 조건에서 비교해야 했다.
+- 결정: dashboard, `/actions`, `/duties/list`, `/evidence`, `/tasks`를 대표 경로로 선정해 backend별로 cold 1회와 순차 warm 9회를 측정한다. warm 중앙값을 주 판정값으로 사용한다. PostgreSQL이 전 경로에서 현저히 느리므로 Production READ cutover를 계속 보류하고, 후속 작업은 contract를 유지한 채 PostgreSQL mode의 server 계산·materialization 비용을 줄이는 데 한정한다.
+- 이유: PostgreSQL warm 중앙값은 CSV 대비 dashboard 2.46배, `/actions` 4.11배, `/duties/list` 2.47배, `/evidence` 3.13배, `/tasks` 3.03배였다. 가장 느린 `/actions`는 PostgreSQL 14.625초, CSV 3.555초였다. `/actions`의 물리 SQL 16회는 누적 connection acquisition 0.619초, SQL 2.895초, DB 합계 3.514초였지만 server data render는 13.481초여서 약 9.983초의 비DB server 구성·계산이 주 병목으로 확인됐다.
+- 영향 범위: PostgreSQL READ Production cutover 판정, 후속 성능 최적화 우선순위, Netlify Preview branch 환경. 기능·데이터 contract, WRITE, DB schema/data, UI, seed, golden에는 영향이 없다.
+- 실제 변경: 5개 page에 read 성능 trace 경계를 추가하고 PostgreSQL 계측을 connection acquisition, SQL, 누적 DB work, server data render로 분리했다. 동일 branch와 commit에서 backend 값만 바꿔 총 100회 읽기 요청을 측정했다. A/B 후 Preview branch는 `postgres`로 복구했고 Production은 `csv`를 유지했다. 기능·데이터 로직은 변경하지 않았다.
+- 검증: CSV 50/50, PostgreSQL 50/50 HTTP 200이다. 기능 준공 수치는 기존 통과 상태를 유지한다. Production 환경값은 `csv`로 독립 확인했다. Preview 복구 배포는 별도 branch deploy로 실행했다. 상세 raw·요약 수치는 `READ_PERFORMANCE_VERIFY.md`와 `db/read-shadow/read_performance_compare.csv`에 기록했다.
+- 관련 파일: `app/page.tsx`, `app/actions/page.tsx`, `app/duties/list/page.tsx`, `app/evidence/page.tsx`, `app/tasks/page.tsx`, `lib/db.ts`, `READ_PERFORMANCE_VERIFY.md`, `READ_CUTOVER_VERIFY.md`, `db/read-shadow/read_performance_compare.csv`, `WORKLOG.md`
+- 관련 commit: pending

@@ -1,0 +1,11 @@
+route,path,backend,http_ok,cold_ms,warm_min_ms,warm_median_ms,warm_max_ms,warm_p95_ms,pg_to_csv_warm_median_ratio,logical_read_count,physical_sql_count,db_acquire_ms,sql_ms,db_total_ms,server_data_render_ms,server_metric_sample
+dashboard,/?role=gm,csv,10,9699.46,1235.23,1730.89,2338.10,2338.10,1.00,0,0,0,0,0,418.23,representative
+dashboard,/?role=gm,postgres,10,9084.51,3641.91,4260.94,4754.53,4754.53,2.46,49,16,3226.33,3694.08,6920.41,4371.19,representative
+actions,/actions?role=gm,csv,10,3952.03,3123.37,3555.35,4277.96,4277.96,1.00,0,0,0,0,0,2064.95,representative
+actions,/actions?role=gm,postgres,10,14245.52,14146.79,14624.82,16509.92,16509.92,4.11,270,16,618.54,2895.46,3514.00,13481.30,median
+duties_list,/duties/list?role=gm,csv,10,1747.59,1140.05,1164.52,2616.76,2616.76,1.00,0,0,0,0,0,348.60,representative
+duties_list,/duties/list?role=gm,postgres,10,3228.74,2421.34,2879.43,3384.58,3384.58,2.47,6,5,0.81,1240.00,1261.23,1832.35,median
+evidence,/evidence?role=gm,csv,10,1252.22,916.45,1150.65,1554.66,1554.66,1.00,0,0,0,0,0,147.13,median
+evidence,/evidence?role=gm,postgres,10,4814.31,3336.71,3600.28,3931.05,3931.05,3.13,18,11,634.30,1796.29,2459.94,2500.38,median
+tasks,/tasks?role=gm,csv,10,1366.35,923.44,1130.93,1421.69,1421.69,1.00,0,0,0,0,0,146.41,median
+tasks,/tasks?role=gm,postgres,10,3220.06,2911.96,3424.74,3723.93,3723.93,3.03,16,9,599.09,1634.26,2281.61,2324.44,median

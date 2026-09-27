@@ -180,3 +180,51 @@ The released comparison date remained `2026-09-26`; current-date output was not 
 Five calculation JSON payloads (`01` through `05`) were regenerated from the same frozen inputs and were byte-identical to the published files. The sixth calculation check compared `CheckFlag[]` for `gm`, `road`, `road_head`, and `ceo`: every role returned 30 rows and the same canonical SHA-256 as its published CSV calculation. Direct old-versus-context comparison of all nine round cell maps also had mismatch 0. TypeScript checking and the Next.js production build passed.
 
 The verification-only branch clock was removed after the gate. Production remains `csv`; no WRITE, DB schema/data, golden, UI, role, or released data changes were made. This pass completes the `/actions` server-calculation target only. Common PostgreSQL overhead and the full five-route performance gate remain separate next steps before any Production READ cutover.
+
+## Common PostgreSQL overhead and Singapore region gate — 2026-09-28
+
+### Runtime placement and connection reuse
+
+The Netlify site Functions region was changed from Ohio to `sin`, and both the PostgreSQL Preview and the unchanged CSV Production deployment were rebuilt. Deployment metadata confirms `ap-southeast-1` for both new function bundles; Railway PostgreSQL remains in Singapore. Production kept commit `7d1a7568847a1f53c5b429e2211ae209deb9cb6f` and `ADOMS_DATA_BACKEND=csv`. The comparison branch kept `ADOMS_DATA_BACKEND=postgres` after the temporary CSV measurement.
+
+The PostgreSQL pool is a `globalThis` singleton per warm function instance. It does not create a Pool per request or force a new physical connection for each query. TCP keep-alive is now explicit, with pool maximum 5, 30-second idle timeout, and 10-second connection timeout. Warm traces normally reported `reused=true`, 4–5 pooled clients, zero waiters, and zero new connections. Therefore repeated Pool construction is not the common warm-path blocker.
+
+The adapter now measures row-clone normalization separately and records whether a request reused an existing pool. `queryWall` ends only when the driver has received and decoded all rows; it therefore includes database execution, external network transfer, and driver decoding. Those three components cannot be split further at the current `pg` query boundary. Cumulative query work is not used as route elapsed time; interval-union wall time is used when concurrent SQL overlaps.
+
+### Route changes
+
+Only independent reads were parallelized. `/tasks` and `/evidence` now start their task, approval, organization, staff, notification/evidence/form/audit reads together. `/duties/list` starts duty and task reads together. The dashboard reuses its transport/workplace reads, runs the three judge maps concurrently, and overlaps due-date and performance-record reads. No filter, sort, role scope, limit, empty-string/NULL handling, UI, schema, data, WRITE path, or golden value changed.
+
+### Singapore A/B client result
+
+Each route was requested sequentially ten times on a Netlify Singapore branch deployment. The first request is cold and the following nine are warm. All 100 requests returned HTTP 200.
+
+| Route | CSV cold | CSV warm min / median / max | PostgreSQL cold | PostgreSQL warm min / median / max | PG / CSV median |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| dashboard | 9.328 s | 1.560 / **1.808** / 2.617 s | 13.623 s | 5.342 / **6.795** / 16.584 s | **3.76×** |
+| `/actions` | 1.936 s | 1.405 / **1.480** / 2.510 s | 8.494 s | 6.805 / **7.297** / 9.082 s | **4.93×** |
+| `/duties/list` | 1.422 s | 1.119 / **1.433** / 1.849 s | 4.731 s | 3.848 / **4.512** / 5.179 s | **3.15×** |
+| `/evidence` | 1.351 s | 1.010 / **1.279** / 2.029 s | 4.668 s | 4.096 / **4.641** / 5.119 s | **3.63×** |
+| `/tasks` | 0.966 s | 0.858 / **0.887** / 1.598 s | 3.907 s | 3.740 / **4.190** / 4.562 s | **4.72×** |
+
+Moving Functions to Singapore did not produce a performance-pass result. Compared with the immediately preceding PostgreSQL medians after `/actions` context optimization, the observed medians were also higher in this sample. This does not prove that Singapore compute itself is slower. It shows that co-locating the named regions did not remove the measured path cost while Netlify still reaches Railway through the externally routable `DATABASE_URL` and transfers large full-table results.
+
+### Warm server decomposition
+
+| Route | Logical / SQL / unique tuples | DB wall | Acquire wall | Query + transfer wall | Adapter normalization | Render | Non-DB |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
+| dashboard | 48 / 16 / 16 | 4.407 s | 0.470 s | 4.406 s | 0.245 s | 5.600 s | 1.026 s |
+| `/actions` | 17 / 16 / 16 | 5.058 s | 0.174 s | 4.884 s | 0.088 s | 5.986 s | 0.792 s |
+| `/duties/list` | 6 / 5 / 5 | 3.077 s | 0.001 s | 3.076 s | 0.119 s | 3.558 s | 0.396 s |
+| `/evidence` | 18 / 11 / 11 | 2.640 s | 0.433 s | 2.640 s | 0.121 s | 3.202 s | 0.424 s |
+| `/tasks` | 16 / 9 / 9 | 2.572 s | 0.034 s | 2.571 s | 0.122 s | 3.124 s | 0.421 s |
+
+The dominant common cost is query completion/row transfer, not adapter normalization or route calculation. `/actions` non-DB processing remains below one second, so its explicit request context is not reopened as the blocker. Warm pool acquisition is small on duties/tasks and modest on the other routes; pool reuse was observed. Large full-table reads and the external Netlify-to-Railway connection path remain the next investigation targets.
+
+### Functional gate and decision
+
+At the published comparison instant `2026-09-26`, the PostgreSQL Preview passed HTTP 37/37 for the targeted pages, metrics 159/159 with mismatch/missing/extra all zero, and crosscheck 68/68. Calculation JSON `00` through `05` retained identical SHA-256 values. TypeScript and the production build passed before deployment. The temporary verification clock was removed afterward.
+
+The performance result is not a cutover candidate, so the conditional full 137-page regression was not rerun in this pass. The previously completed full compatibility result remains unchanged, but it is not used to waive this failed performance gate. Production READ remains `csv`; WRITE remains unchanged. The next performance work should reduce rows transferred and query payload per route or validate a connection path that avoids the current external proxy behavior before another cutover decision.
+
+Raw summary values are in `db/read-shadow/read_performance_singapore.csv`.

@@ -1,0 +1,11 @@
+route,backend,cold_seconds,warm_min_seconds,warm_median_seconds,warm_max_seconds,pg_over_csv,logical_reads,physical_sql,unique_query_tuples,db_wall_median_seconds,acquire_wall_median_seconds,query_and_transfer_wall_median_seconds,adapter_normalization_median_seconds,server_render_median_seconds,non_db_median_seconds,server_warm_log_samples
+dashboard,csv,9.328,1.560,1.808,2.617,1.00,0,0,0,0,0,0,0,,,9
+dashboard,postgres,13.623,5.342,6.795,16.584,3.76,48,16,16,4.407,0.470,4.406,0.245,5.600,1.026,9
+/actions,csv,1.936,1.405,1.480,2.510,1.00,0,0,0,0,0,0,0,,,9
+/actions,postgres,8.494,6.805,7.297,9.082,4.93,17,16,16,5.058,0.174,4.884,0.088,5.986,0.792,9
+/duties/list,csv,1.422,1.119,1.433,1.849,1.00,0,0,0,0,0,0,0,,,9
+/duties/list,postgres,4.731,3.848,4.512,5.179,3.15,6,5,5,3.077,0.001,3.076,0.119,3.558,0.396,9
+/evidence,csv,1.351,1.010,1.279,2.029,1.00,0,0,0,0,0,0,0,,,9
+/evidence,postgres,4.668,4.096,4.641,5.119,3.63,18,11,11,2.640,0.433,2.640,0.121,3.202,0.424,9
+/tasks,csv,0.966,0.858,0.887,1.598,1.00,0,0,0,0,0,0,0,,,9
+/tasks,postgres,3.907,3.740,4.190,4.562,4.72,16,9,9,2.572,0.034,2.571,0.122,3.124,0.421,7

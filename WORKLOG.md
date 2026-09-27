@@ -357,3 +357,16 @@
 - 성능: SQL-result logical READ는 최초 270회, 1차 18회에서 17회가 됐고 물리 SQL은 16회로 유지됐다. task 전체 materialization 1회, approval merge 1회, 공통 dataset normalization 1회다. `gm` warm 중앙값은 최초 14.625초, 1차 5.477초에서 4.650초로 감소했다. `gm` warm server 중앙값은 DB wall 2.318초, render 3.161초, 비DB server 0.843초다. 4역할 warm 36회 통합 중앙값은 4.300초다.
 - 관련 파일: `app/actions/page.tsx`, `app/check/_lib.ts`, `lib/check_merge.ts`, `lib/cycle.ts`, `lib/data.ts`, `READ_PERFORMANCE_VERIFY.md`, `WORKLOG.md`
 - 관련 commit: pending
+
+## 2026-09-28
+
+### [33] PostgreSQL 공통 READ 비용 계측, Singapore 리전 정렬 및 최종 성능 gate 보류
+- 상태: 완료
+- 배경: `/actions` request context 적용으로 비DB 계산을 9.983초에서 0.843초까지 줄였지만 dashboard, `/duties/list`, `/evidence`, `/tasks`에도 공통 PostgreSQL 지연이 남아 있었다. 함수와 PostgreSQL이 서로 다른 리전에 있던 상태를 먼저 제거하고 같은 실행 조건에서 CSV와 PostgreSQL을 다시 비교해야 했다.
+- 결정: Railway PostgreSQL은 Singapore를 유지하고 Netlify Functions site region을 `sin`으로 변경한다. Preview와 기존 CSV Production을 재배포해 실제 runtime region `ap-southeast-1`을 확인한다. 독립 READ만 병렬화하고 Pool 재사용과 adapter normalization을 계측한다. 성능 gate가 실패했으므로 Production READ source는 `csv`로 유지하며 전체 137화면 회귀는 이번 반복에서 실행하지 않는다.
+- 이유: warm 요청에서 Pool은 재사용됐고 대부분 새 physical connection이 0이었으며 adapter normalization과 비DB 계산은 수백 ms 수준이었다. 반면 query completion/row-transfer wall time은 2.571~4.884초, dashboard 변동 구간은 그 이상이었다. 리전 이름을 일치시킨 것만으로 외부 `DATABASE_URL` 경로와 대량 full-table 전송 비용이 제거되지 않았고 PostgreSQL warm 중앙값은 CSV 대비 3.15~4.93배였다.
+- 영향 범위: Netlify Functions site region, PostgreSQL READ connection reuse, 대표 5경로의 독립 READ 실행 순서, 성능 계측 및 Production cutover 판정. Railway schema/data, WRITE, UI, role logic, filter/sort/limit, golden, frozen data에는 영향이 없다.
+- 실제 변경: Netlify Functions region을 `sin`으로 변경하고 Preview와 Production을 재배포했다. Production은 기존 main commit과 `csv` backend를 유지한다. `pg` Pool에 TCP keep-alive를 명시하고 warm pool/physical connection 상태와 adapter row-clone 시간을 기록하도록 했다. `/tasks`, `/evidence`, `/duties/list`, dashboard의 실제 독립 READ를 병렬화하고 dashboard의 중복 transport READ를 제거했다.
+- 검증: 배포 metadata에서 site와 새 함수 runtime이 `ap-southeast-1`임을 확인했다. CSV 50/50 및 PostgreSQL 50/50 요청은 모두 HTTP 200이었다. CSV/PG warm 중앙값은 dashboard 1.808/6.795초, `/actions` 1.480/7.297초, `/duties/list` 1.433/4.512초, `/evidence` 1.279/4.641초, `/tasks` 0.887/4.190초다. 발행 기준일 targeted gate는 HTTP 37/37, metrics 159/159 mismatch 0, crosscheck 68/68, 계산 JSON 6/6 SHA 동일이다. TypeScript와 production build도 통과했다. 성능이 통과 후보가 아니므로 조건부 전체 137회귀는 생략했고 Production cutover는 보류한다. 검증용 시각 설정은 제거했다.
+- 관련 파일: `lib/db.ts`, `app/page.tsx`, `app/tasks/page.tsx`, `app/evidence/page.tsx`, `app/duties/list/page.tsx`, `READ_PERFORMANCE_VERIFY.md`, `db/read-shadow/read_performance_singapore.csv`, `WORKLOG.md`
+- 관련 commit: pending

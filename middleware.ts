@@ -15,6 +15,8 @@ const COOKIE = "adoms-role";
 
 const READ_SERVER_ROUTES = new Set(["/", "/actions", "/duties/list", "/evidence", "/tasks"]);
 const READ_SERVER_HEALTH = "/api/read-server/health";
+const READ_SERVER_CONTROL = "/api/read-server/control/cache-reset";
+const READ_SERVER_QA = "/api/read-server/qa/events";
 
 function readServerMode() {
   return process.env.ADOMS_READ_SERVER_SERVICE === "1";
@@ -72,6 +74,21 @@ async function proxyReadServer(req: NextRequest): Promise<NextResponse> {
   const upstream = await fetch(target, { method: req.method, headers, redirect: "manual", cache: "no-store" });
   const body = await upstream.arrayBuffer();
   const elapsed = performance.now() - startedAt;
+  if (upstream.status >= 500) {
+    try {
+      await fetch(new URL("/api/read-server/qa/events", base), {
+        method: "POST",
+        headers: { authorization: `Bearer ${token}`, "content-type": "application/json" },
+        body: JSON.stringify({
+          eventType: "read_error", route: req.nextUrl.pathname, role: req.nextUrl.searchParams.get("role") || "gm",
+          success: false, httpStatus: upstream.status, durationMs: elapsed,
+          cacheState: upstream.headers.get("x-adoms-response-cache") || undefined,
+          detail: { kind: "READ server response", message: `HTTP ${upstream.status}` },
+        }),
+        cache: "no-store",
+      });
+    } catch { /* 원래 READ 오류 응답을 QA 기록 장애로 바꾸지 않는다. */ }
+  }
   const outHeaders = new Headers();
   upstream.headers.forEach((value, name) => {
     if (!["connection", "content-encoding", "content-length", "set-cookie", "transfer-encoding"].includes(name.toLowerCase())) {
@@ -101,7 +118,8 @@ export async function middleware(req: NextRequest) {
   const url = req.nextUrl;
   const isScreenRead = READ_SERVER_ROUTES.has(url.pathname);
   if (readServerMode()) {
-    const allowed = isScreenRead || url.pathname === READ_SERVER_HEALTH;
+    const allowed = isScreenRead || url.pathname === READ_SERVER_HEALTH
+      || url.pathname === READ_SERVER_CONTROL || url.pathname === READ_SERVER_QA;
     if (!allowed) return new NextResponse("Not found", { status: 404 });
     if (req.method !== "GET" && req.method !== "HEAD") return new NextResponse("Method not allowed", { status: 405 });
     const expected = readServerToken();
@@ -110,7 +128,8 @@ export async function middleware(req: NextRequest) {
   const role = url.searchParams.get("role");
   const saved = req.cookies.get(COOKIE)?.value;
 
-  if (!role && saved && isRole(saved) && req.method === "GET") {
+  const isQaPath = url.pathname === "/demo-admin" || url.pathname.startsWith("/demo-admin/") || url.pathname.startsWith("/api/demo-admin/");
+  if (!role && saved && isRole(saved) && req.method === "GET" && !isQaPath) {
     const to = url.clone();
     to.searchParams.set("role", saved);
     return NextResponse.redirect(to);
@@ -137,7 +156,12 @@ export async function middleware(req: NextRequest) {
   } else {
     const backend = (process.env.ADOMS_DATA_BACKEND || "csv").trim().toLowerCase();
     if (!readServerMode() && backend === "read-server" && isScreenRead && (req.method === "GET" || req.method === "HEAD")) {
-      res = await proxyReadServer(req);
+      try {
+        res = await proxyReadServer(req);
+      } catch (error) {
+        console.error("[adoms-read-server-proxy]", error instanceof Error ? error.message : String(error));
+        res = new NextResponse("READ server request failed.", { status: 502 });
+      }
     } else {
       res = NextResponse.next({ request: { headers: h } });
       if (readServerMode()) res.headers.set("x-adoms-read-server", "railway");

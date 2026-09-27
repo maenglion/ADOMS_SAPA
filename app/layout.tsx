@@ -42,7 +42,7 @@ export const viewport = {
 export default async function RootLayout({ children }: { children: React.ReactNode }) {
   // 휴대폰 현장 등록 화면(/m)은 데스크톱 머리띠·메뉴 없이 본문만 보여 준다.
   const path = (await headers()).get("x-pathname") || "";
-  const bare = path === "/m" || path.startsWith("/m/");
+  const bare = path === "/m" || path.startsWith("/m/") || path === "/demo-admin" || path.startsWith("/demo-admin/");
 
   return (
     <html lang="ko">

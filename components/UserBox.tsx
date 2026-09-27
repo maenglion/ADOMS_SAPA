@@ -30,6 +30,12 @@ function Inner({ who }: { who: Record<string, Who> }) {
             const nextRole = e.target.value;
             if (nextRole === role) return;
             setChangedRole(nextRole);
+            void fetch("/api/demo-admin/event", {
+              method: "POST",
+              headers: { "content-type": "application/json" },
+              body: JSON.stringify({ eventType: "role_change", from: role, to: nextRole, role: nextRole, route: location.pathname }),
+              keepalive: true,
+            });
             const p = new URLSearchParams(Array.from(sp?.entries() || []));
             p.set("role", nextRole);
             router.push(`?${p.toString()}`);

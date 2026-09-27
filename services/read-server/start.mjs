@@ -1,7 +1,9 @@
 import { createHash, timingSafeEqual } from "node:crypto";
 import { spawn } from "node:child_process";
+import fs from "node:fs/promises";
 import http from "node:http";
 import path from "node:path";
+import pg from "pg";
 
 // Railway exposes the public cache/proxy on 3100. Next.js stays private to the
 // same process group so a warm response can skip both PostgreSQL and rendering.
@@ -13,9 +15,41 @@ const nodeOptions = process.env.NODE_OPTIONS || "";
 const token = process.env.ADOMS_READ_SERVER_TOKEN || "";
 const screenRoutes = new Set(["/", "/actions", "/duties/list", "/evidence", "/tasks"]);
 const healthRoute = "/api/read-server/health";
+const controlRoute = "/api/read-server/control/cache-reset";
+const qaEventRoute = "/api/read-server/qa/events";
+const warmPaths = [
+  "/?role=gm",
+  "/actions?role=gm",
+  "/actions?role=road",
+  "/actions?role=road_head",
+  "/actions?role=ceo",
+  "/duties/list?role=gm",
+  "/evidence?role=gm",
+  "/tasks?role=gm",
+];
 const responseCache = new Map();
 const MAX_CACHE_ENTRIES = 256;
 let ready = false;
+let resetInFlight = null;
+
+async function applyQaSchema() {
+  if (process.env.ADOMS_READ_SERVER_SERVICE !== "1") return;
+  const sql = await fs.readFile(path.join(process.cwd(), "db", "migrations", "0005_demo_qa_event.sql"), "utf8");
+  const client = new pg.Client({
+    connectionString: process.env.DATABASE_URL,
+    application_name: "adoms-sapa-qa-migration",
+    keepAlive: true,
+  });
+  await client.connect();
+  try {
+    await client.query(sql);
+    console.log("[adoms-qa-schema] 0005_demo_qa_event applied");
+  } finally {
+    await client.end();
+  }
+}
+
+await applyQaSchema();
 
 const child = spawn(process.execPath, [nextBin, "start", "-p", String(nextPort), "-H", "127.0.0.1"], {
   cwd: process.cwd(),
@@ -105,12 +139,56 @@ function send(res, cached, cacheStatus, elapsedMs) {
   res.end(cached.body);
 }
 
+function sendJson(res, status, value) {
+  const body = Buffer.from(JSON.stringify(value));
+  res.writeHead(status, { "content-type": "application/json; charset=utf-8", "content-length": String(body.byteLength) });
+  res.end(body);
+}
+
+async function childJson(route, init = {}) {
+  const headers = new Headers(init.headers);
+  headers.set("authorization", `Bearer ${token}`);
+  headers.set("content-type", "application/json");
+  const response = await fetch(`http://127.0.0.1:${nextPort}${route}`, { ...init, headers, cache: "no-store" });
+  const result = await response.json().catch(() => ({}));
+  if (!response.ok) throw new Error(result.error || `${route} failed (${response.status})`);
+  return result;
+}
+
+async function recordQa(event) {
+  try { await childJson(qaEventRoute, { method: "POST", body: JSON.stringify(event) }); }
+  catch (error) { console.error("[adoms-qa-event] persist failed", error instanceof Error ? error.message : String(error)); }
+}
+
 const server = http.createServer(async (req, res) => {
   const startedAt = performance.now();
   try {
     const url = new URL(req.url || "/", `http://${req.headers.host || "127.0.0.1"}`);
     const isScreen = screenRoutes.has(url.pathname);
     const isHealth = url.pathname === healthRoute;
+
+    if (url.pathname === controlRoute) {
+      if (req.method !== "POST") return sendJson(res, 405, { ok: false, error: "Method not allowed" });
+      if (!authorized(req)) return sendJson(res, 401, { ok: false, error: "Unauthorized" });
+      if (!resetInFlight) resetInFlight = resetCachesAndPrewarm().finally(() => { resetInFlight = null; });
+      const result = await resetInFlight;
+      return sendJson(res, result.ok ? 200 : 503, result);
+    }
+
+    if (isHealth) {
+      if (!authorized(req)) return sendJson(res, 401, { ok: false });
+      if (!ready) return sendJson(res, 503, { ok: false, ready: false, cacheState: "PREWARMING" });
+      const childHealth = await childJson(healthRoute);
+      return sendJson(res, 200, {
+        ...childHealth,
+        ready: true,
+        cacheState: "READY",
+        responseCacheEntries: responseCache.size,
+        warmTargetCount: warmPaths.length,
+        backend: "read-server",
+      });
+    }
+
     if ((isScreen || isHealth) && !ready && req.headers["x-adoms-prewarm"] !== "1") {
       res.writeHead(503, { "content-type": "text/plain; charset=utf-8", "retry-after": "1" });
       res.end("READ server is warming.");
@@ -148,7 +226,8 @@ server.listen(publicPort, "0.0.0.0", () => {
 });
 
 async function prewarm() {
-  if (process.env.ADOMS_READ_SERVER_SERVICE !== "1" || !token) return;
+  const startedAt = Date.now();
+  if (process.env.ADOMS_READ_SERVER_SERVICE !== "1" || !token) return { ok: false, elapsedMs: 0, paths: [] };
   const internal = `http://127.0.0.1:${nextPort}`;
   const external = `http://127.0.0.1:${publicPort}`;
   const headers = {
@@ -166,33 +245,53 @@ async function prewarm() {
   }
   if (!childReady) {
     console.error("[adoms-read-server-warm] health timeout");
-    return;
+    return { ok: false, elapsedMs: Date.now() - startedAt, paths: [] };
   }
 
-  const paths = [
-    "/?role=gm",
-    "/actions?role=gm",
-    "/actions?role=road",
-    "/actions?role=road_head",
-    "/actions?role=ceo",
-    "/duties/list?role=gm",
-    "/evidence?role=gm",
-    "/tasks?role=gm",
-  ];
-  for (const path of paths) {
+  const results = [];
+  for (const path of warmPaths) {
     const started = Date.now();
     try {
       const response = await fetch(`${external}${path}`, { headers });
       await response.arrayBuffer();
       console.log(`[adoms-read-server-warm] ${path} status=${response.status} cache=${response.headers.get("x-adoms-response-cache")} ms=${Date.now() - started}`);
-      if (!response.ok) return;
+      results.push({ path, status: response.status, elapsedMs: Date.now() - started });
+      if (!response.ok) return { ok: false, elapsedMs: Date.now() - startedAt, paths: results };
     } catch (error) {
       console.error(`[adoms-read-server-warm] ${path} failed`, error);
-      return;
+      return { ok: false, elapsedMs: Date.now() - startedAt, paths: results };
     }
   }
   ready = true;
   console.log(`[adoms-read-server-warm] READY responses=${responseCache.size}`);
+  return { ok: true, elapsedMs: Date.now() - startedAt, paths: results };
+}
+
+async function resetCachesAndPrewarm() {
+  const startedAt = Date.now();
+  ready = false;
+  const responseEntries = responseCache.size;
+  responseCache.clear();
+  let dataCaches = { query: 0, semantic: 0 };
+  try {
+    const cleared = await childJson(controlRoute, { method: "POST", body: "{}" });
+    dataCaches = cleared.cleared || dataCaches;
+    await recordQa({ eventType: "cache_reset", success: true, admin: true, detail: { ...dataCaches, response: responseEntries } });
+    await recordQa({ eventType: "prewarm_start", success: true, admin: true, detail: { targets: warmPaths.length } });
+    const warmed = await prewarm();
+    await recordQa({
+      eventType: warmed.ok ? "prewarm_complete" : "prewarm_failure",
+      success: warmed.ok,
+      admin: true,
+      durationMs: warmed.elapsedMs,
+      detail: { targets: warmed.paths.length },
+    });
+    return { ok: warmed.ok, elapsedMs: Date.now() - startedAt, cleared: { ...dataCaches, response: responseEntries }, prewarm: warmed };
+  } catch (error) {
+    const message = error instanceof Error ? error.message : String(error);
+    await recordQa({ eventType: "prewarm_failure", success: false, admin: true, durationMs: Date.now() - startedAt, detail: { message } });
+    return { ok: false, elapsedMs: Date.now() - startedAt, error: "캐시 초기화 및 재예열에 실패했습니다." };
+  }
 }
 
 void prewarm();

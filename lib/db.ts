@@ -359,6 +359,24 @@ function readServerSemanticCache(): Map<string, Promise<unknown>> | undefined {
   return globalThis.__adomsReadServerSemanticCache ||= new Map();
 }
 
+/** READ server 운영 제어용. 브라우저에서는 호출하지 않고 인증된 내부 route에서만 사용한다. */
+export function clearReadServerDataCaches() {
+  const query = readServerQueryCache();
+  const semantic = readServerSemanticCache();
+  const cleared = { query: query?.size || 0, semantic: semantic?.size || 0 };
+  query?.clear();
+  semantic?.clear();
+  globalThis.__adomsReadServerSemanticStats = { hits: 0, misses: 0 };
+  return cleared;
+}
+
+export function readServerDataCacheStatus() {
+  return {
+    query: readServerQueryCache()?.size || 0,
+    semantic: readServerSemanticCache()?.size || 0,
+  };
+}
+
 export function postgresPool(): Pool {
   if (!globalThis.__adomsPgPool) {
     const readServer = process.env.ADOMS_READ_SERVER_SERVICE === "1";

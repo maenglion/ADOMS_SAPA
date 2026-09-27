@@ -12,6 +12,7 @@ import RecentBar from "./us/RecentBar";
 import { ROLE_STAFF, ROLE_LABEL } from "@/lib/roles";
 import { MenuProvider } from "./MenuCtx";
 import { menusForAllRoles } from "@/lib/menu_store";
+import QaEventBeacon from "./QaEventBeacon";
 
 // 메뉴 목록·모드는 lib/menu.ts 한 곳(평면 ↔ 2계층).
 
@@ -36,6 +37,7 @@ export default async function Shell({ children }: { children: React.ReactNode })
     return (
       <MenuProvider menus={menus} css={css}>
       <div className="us-app">
+        <Suspense fallback={null}><QaEventBeacon /></Suspense>
         <div className="us-banner">
           {/* 용인시청 누리집 「용인시 안전보건 목표」(비전·목표) · 「용인시 안전보건 경영방침」(2025년 1월) 원문에서 */}
           <div className="us-banner-l"><b>경영목표</b><span>생명과 안전을 최우선으로 하는 용인특례시 · 중대재해 ZERO화</span></div>
@@ -43,9 +45,9 @@ export default async function Shell({ children }: { children: React.ReactNode })
           <div className="us-banner-r"><b>경영방침</b><PolicyTicker /></div>
         </div>
         <header className="us-header">
-          <Link href="/" className="us-logo">
+          <a href="/demo-admin" className="us-logo">
             <img src="/yongin_logo_header.png" alt="용인특례시" className="us-logo-img" />
-          </Link>
+          </a>
           <NavMenu demo={demo} />
           {!demo && <div className="us-user">
             <div className="us-user-tools">

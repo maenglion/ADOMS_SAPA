@@ -24,3 +24,11 @@ Railway 설정:
 - 시작 시 dashboard, `/duties/list`, `/evidence`, `/tasks`의 총괄 화면과 `/actions`의 `gm`, `road`, `road_head`, `ceo` 역할을 prewarm한다.
 - prewarm이 모두 성공해 `READY`가 기록되기 전에는 외부 화면 요청에 503 warming 응답을 반환한다.
 - process restart 시 PostgreSQL에서 cache를 다시 생성한다. WRITE가 비활성인 현재 시연 범위에서는 별도 invalidation을 수행하지 않는다.
+
+시연 QA 제어와 기록:
+
+- `/api/read-server/control/cache-reset`과 `/api/read-server/qa/events`는 일반 화면 endpoint가 아니며 동일한 server-to-server Bearer 인증을 요구한다.
+- cache reset은 query cache, semantic result cache, HTML/RSC response cache를 모두 지운 뒤 8개 대표 화면을 즉시 재예열한다.
+- `demo_qa_event`는 업무 `audit_log`와 분리된 시연 리뷰 전용 표다. 시연에 의미 있는 접근, 역할 변경, 오류, 성능 점검, cache/prewarm, WRITE 결과만 저장한다.
+- IP, browser fingerprint, password, token, request body와 raw stack은 기록하지 않는다.
+- READ server 시작 시 idempotent migration `db/migrations/0005_demo_qa_event.sql`을 적용한다. 이 운영 표는 frozen app baseline 91개 표의 데이터 정본에 포함하지 않는다.

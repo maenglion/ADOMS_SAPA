@@ -480,3 +480,14 @@
 - 검증: 총괄은 대상별 의무사항, 의무 목록, 법령 개정의 12개 제목·링크를 모두 받고, `ceo`, `mgr`, `road`, `water`, `road_head`, `water_head`는 대상별 의무사항 제목과 3개 링크만 받는 것을 확인했다. 7개 역할 전환 시 `ROLE_LABEL`과 동일한 이름이 표시되고 빈 제목이 남지 않았다. Next.js production build와 내장 TypeScript 검사를 통과했다. 직접 URL 권한은 기존 permission 구조의 query 구분 범위를 바꾸지 않고 별도 보강 대상으로 남겼다.
 - 관련 파일: `lib/menu.ts`, `components/UserBox.tsx`, `app/us.css`, `WORKLOG.md`
 - 관련 commit: pending
+
+### [44] 시연 QA 콘솔 및 운영 점검 기능
+- 상태: 완료
+- 배경: 시연 참여자가 Railway 프로젝트 권한을 받지 않고도 실제 시연 중의 접근, 역할 변경, 오류, READ 성능, cache/prewarm 및 WRITE 결과를 시간순으로 확인할 내부 리뷰 화면이 필요했다. 이 화면은 Railway raw log viewer나 일반 운영 관리자 화면이 아니다.
+- 결정: 용인특례시 로고를 `/demo-admin` 진입점으로 사용하고, 일반 역할과 완전히 분리된 HttpOnly 서명 session으로 QA 인증을 처리한다. QA 콘솔은 `QA 현황`, `시연 리뷰`, `시연 데이터`, `캐시 관리`, `성능 점검` 5개 메뉴만 둔다. Railway credential과 READ server token은 Netlify server-side에서만 사용한다.
+- 이유: 시연 리뷰에 필요한 의미 있는 사건과 운영 상태만 제공하면 참여자에게 Railway 계정이나 프로젝트 접근 권한을 부여할 필요가 없다. 일반 역할 `gm`과 QA 인증을 분리해야 메뉴 역할 변경만으로 운영 제어 기능에 접근하는 것을 막을 수 있다.
+- 영향 범위: 일반 화면 로고 링크, QA 로그인/session, Netlify QA API, Railway READ server의 인증된 cache control과 구조화 QA event, PostgreSQL의 시연 리뷰 전용 운영 표. 기존 3단 READ cache 구조와 업무 데이터·권한·WRITE 로직은 변경하지 않는다.
+- 실제 변경: `demo_qa_event` 단일 표와 시간·유형 index를 추가하는 idempotent migration을 작성하고 READ server 시작 시 private `DATABASE_URL`로 적용하도록 했다. 공통 server-only 기록 함수는 같은 사건을 구조화 console JSON과 전용 표에 남긴다. 기록 대상은 시연 시작, 핵심 화면 접근, 역할 변경, QA 로그인·로그아웃, READ/server 오류, cache reset, prewarm 시작·완료·실패, 성능 점검, 향후 WRITE 성공·실패다. IP, fingerprint, secret, request body와 raw stack은 저장하지 않는다. cache 제어는 query, semantic, HTML/RSC 세 계층을 모두 초기화한 뒤 8개 대표 화면을 즉시 재예열한다. 성능 점검은 실제 Production 5개 경로를 각 3회 순차 측정하고 최근 결과를 리뷰 event로 보존한다. QA 종료는 session cookie를 만료시키고 `/?role=gm`으로 이동한다.
+- 검증: 일반 역할만으로 QA API를 호출하면 401을 반환하도록 모든 Netlify QA endpoint에서 session을 검증한다. READ server의 QA event·cache control endpoint도 Bearer 인증 없이는 거부한다. 로그인 비밀번호는 기본 masking이며 표시/숨김 전환만 client에서 수행하고 평문 credential은 source·HTML·bundle·로그·문서에 기록하지 않는다. TypeScript 검사와 production build를 통과했다. Production 적용, 실제 migration·cache reset·prewarm·5화면 성능 및 로그 표 검증 수치는 배포 후 이 항목에 추가한다.
+- 관련 파일: `app/demo-admin/*`, `app/api/demo-admin/*`, `app/api/read-server/control/*`, `app/api/read-server/qa/*`, `components/QaEventBeacon.tsx`, `lib/demo-admin-auth.ts`, `lib/demo-qa-store.ts`, `db/migrations/0005_demo_qa_event.sql`, `services/read-server/start.mjs`, `WORKLOG.md`
+- 관련 commit: pending

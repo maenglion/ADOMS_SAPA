@@ -590,3 +590,14 @@
 - 검증: TypeScript 검사와 Next.js production build를 통과했다. Netlify 설정에서 Production branch가 `main`, Branch deploys가 `Deploy only the production branch`로 표시되는 것을 확인했다.
 - 관련 파일: `lib/perm.ts`, `middleware.ts`, `components/MenuCtx.tsx`, `WORKLOG.md`
 - 관련 commit: `71ad43c`
+
+### [54] 대시보드 의무이행 표 가독성 보정
+- 상태: 완료
+- 배경: 대시보드 의무이행 표에서 `미이행률` 행 아래 구분선이 약해 다음 상세 행과의 경계가 불명확했고, 표 머리글이 초록색으로 표시됐다. `년도`와 `대상` 필터 라벨도 선택값보다 과도하게 강조돼 있었다.
+- 결정: 미이행률 행의 아래 구분선을 명시하고 표 머리글 `의무이행·전체·상반기·하반기`는 검정색으로 통일한다. 필터의 `년도·대상` 라벨은 1rem으로 줄인다.
+- 이유: 비율 요약 영역과 건수 상세 영역의 경계를 명확히 하고, 머리글과 필터의 시각적 위계를 단정하게 맞추기 위해서다.
+- 영향 범위: 대시보드 의무이행 표와 바로 위 필터의 표현. 계산값, 데이터, 역할, READ server와 PostgreSQL에는 영향이 없다.
+- 실제 변경: 표 머리글에 검정색을 지정하고 미이행률 행 모든 cell에 회색 아래 border를 적용했다. 필터 라벨 글자 크기와 굵기를 축소했다.
+- 검증: TypeScript 검사와 Next.js production build를 통과하고 로컬 production 화면에서 필터 라벨 축소 및 기존 배치 유지 상태를 확인했다.
+- 관련 파일: `app/us-a.css`, `app/us-lsx.css`, `WORKLOG.md`
+- 관련 commit: `d090a74`

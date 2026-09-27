@@ -678,3 +678,14 @@
 - 검증: 기준 revision에서 Production backend `read-server`, PostgreSQL READ 정상, 핵심 5화면 HTTP 200, 성능 점검 전 화면 `HIT 3/3`, warm DB Query 0, 메뉴 smoke 287/287 PASS, rollback `ADOMS_DATA_BACKEND=csv`가 확인됐다. role redirect는 실제 HTML document navigation에만 적용되고 `/api/read-server/**`, RSC와 prefetch에는 적용되지 않는다.
 - 관련 파일: `WORKLOG.md`
 - 관련 commit: pending
+
+### [62] 2026-09-28 시연판 Production 기준점 고정 보강
+- 상태: 완료
+- 배경: 2026-09-28 기준 ADOMS 시연판의 PostgreSQL READ 전환, READ server 성능 안정화, 사용자 역할·UI 보정과 전체 메뉴 smoke 검증을 완료했다. 검증된 Production과 이후 개발 작업을 명확하게 분리하고, 최신 작업본이 아닌 명시적으로 발행된 판을 운영 기준으로 삼아야 한다.
+- 결정: Git SHA `57d0f70b4616c82d409ef431e79460d416a429af`와 annotated tag `demo-prod-20260928`을 시연판의 명시적 Production 기준점으로 고정한다. `main`은 정상 Production, `dev/demo-next`는 다음 변경 작업의 기준 branch로 운영한다. Netlify Production과 Railway READ server는 모두 `main`을 사용하고 동일 branch·동일 SHA 원칙을 적용한다. Production backend는 `read-server`이며 rollback은 `ADOMS_DATA_BACKEND=csv`로 유지한다.
+- 이유: 기존 Netlify Production `main`과 Railway READ server `remote-csv-baseline`의 source branch 불일치로 한 시스템이 서로 다른 revision을 실행할 수 있었고, 사용자 화면의 기본 role redirect가 내부 READ server health 요청에 적용돼 startup이 `READ server is warming`에서 끝나지 않는 장애도 발생했다. Production 안정성과 신규 개발을 분리하고 발행 기준을 명확히 하기 위해서다.
+- 영향 범위: Git release와 branch 운영, Netlify·Railway 배포 기준, dev→main 병합 gate. PostgreSQL schema/data, 검증된 Production READ 결과와 WRITE 상태에는 영향이 없다.
+- 실제 변경: Netlify Production과 Railway READ server source를 `main`으로 통일하고 Production backend를 `read-server`로 유지했다. middleware의 role redirect를 실제 HTML document navigation에만 적용하도록 경계를 분리해 `/api/read-server/**`, RSC, prefetch와 내부 server-to-server 요청에는 적용하지 않는다. 이후 UI, WRITE, cache invalidation, QA 확장과 기타 시연 기능은 `dev/demo-next`에서 작업하고 Preview 검증 후에만 `main`으로 병합한다.
+- 검증: 핵심 5화면 dashboard, actions, duties/list, evidence, tasks가 모두 HTTP 200이었다. warm 성능 점검은 5화면 모두 `HIT 3/3`, 실제 warm PostgreSQL Query 0, 화면별 및 전체 판정 `정상`이었다. 역할별 실제 노출 메뉴 기준 smoke는 287/287 PASS였고 HTTP 500/503/504, raw JSON·RSC·내부 오류 페이지, blank 또는 깨진 화면 노출은 각각 0건이었다. dev→main 최소 gate는 TypeScript PASS, production build PASS, READ health 200 및 redirect 0, prewarm READY, 핵심 5화면 200, warm cache HIT, warm DB Query 0, 역할별 메뉴 검증, visible menu smoke PASS, HTTP 500/503/504 0으로 고정한다.
+- 관련 파일: `middleware.ts`, `services/read-server/start.mjs`, `WORKLOG.md`
+- 관련 commit: pending

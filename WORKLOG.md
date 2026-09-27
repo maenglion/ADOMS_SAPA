@@ -344,4 +344,4 @@
 - 실제 변경: 검증 및 최적화 운영 원칙만 확정했다. 앱 코드, DB schema/data, 배포 환경, golden 자료는 변경하지 않았다.
 - 검증: 후속 반복 최적화는 동일 입력·동일 기준일에서 핵심 지표 159개와 계산 JSON 6개를 우선 gate로 사용한다. 대표 경로 성능 목표를 달성한 뒤 필요한 최종 전수 검증과 Production READ 전환 여부를 별도로 판정한다.
 - 관련 파일: `WORKLOG.md`
-- 관련 commit: pending
+- 관련 commit: `2c3bee1`

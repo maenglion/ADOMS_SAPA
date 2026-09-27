@@ -66,9 +66,7 @@ function UsGnb({ path, search, show }: { path: string; search: string; show: (m:
       {groups.map((g) => (
         <div key={g.key || g.label} className={`us-gnb-g${g === cur ? " on" : ""}`}>
           <Link href={(g.items.find((m) => m.href) as MenuItem).href} className="us-gnb-h">
-            {g.label.split("\n").map((x, i) => (
-              <span key={i} className={i > 0 && x.trim().startsWith("(") ? "us-gnb-minor" : undefined}>{x}</span>
-            ))}
+            {displayGnbLabel(g.key || g.label)}
           </Link>
           <div className="us-gnb-m">
             {g.items.map((m, i) => m.heading
@@ -83,6 +81,19 @@ function UsGnb({ path, search, show }: { path: string; search: string; show: (m:
   function best(items: MenuItem[]) {
     return items.filter((m) => m.href && isOn(path, m.href, search)).sort((x, y) => y.href.length - x.href.length)[0]?.href;
   }
+}
+
+/** Figma에 확정된 상단 제목만 표시용으로 적용한다. 메뉴 설정의 영속 key는 기존 label로 유지한다. */
+function displayGnbLabel(label: string) {
+  const normalized = label.replace(/\n/g, "");
+  const fixed: Record<string, string> = {
+    "의무이행(실적증빙)": "의무이행·증빙",
+    "이행점검및 조치": "이행점검·조치",
+    "기관장예방활동": "기관장 예방활동",
+    "통계 및 사례": "통계·사례",
+    "시연참고": "시연참고",
+  };
+  return fixed[normalized] || normalized;
 }
 
 /**

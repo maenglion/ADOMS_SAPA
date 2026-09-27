@@ -160,13 +160,14 @@ export async function middleware(req: NextRequest) {
   const saved = req.cookies.get(COOKIE)?.value;
 
   const isQaPath = url.pathname === "/demo-admin" || url.pathname.startsWith("/demo-admin/") || url.pathname.startsWith("/api/demo-admin/");
-  if (!role && saved && isRole(saved) && req.method === "GET" && !isQaPath) {
+  const isApiPath = url.pathname.startsWith("/api/");
+  if (!role && saved && isRole(saved) && req.method === "GET" && !isQaPath && !isApiPath) {
     const to = url.clone();
     to.searchParams.set("role", saved);
     return NextResponse.redirect(to);
   }
 
-  if (!role && req.method === "GET" && !isQaPath) {
+  if (!role && req.method === "GET" && !isQaPath && !isApiPath) {
     const to = url.clone();
     to.searchParams.set("role", DEFAULT_ROLE);
     return withRoleCookie(NextResponse.redirect(to), DEFAULT_ROLE, saved);

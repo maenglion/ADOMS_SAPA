@@ -19,7 +19,7 @@ export function MenuProvider({ menus, css, children }: { menus: Record<string, M
   return <C.Provider value={{ menus, css }}>{children}</C.Provider>;
 }
 
-/** ADOMS 사용자 역할의 단일 UI 원천 — 주소의 role(없거나 잘못되면 총괄). */
+/** ADOMS 사용자 역할의 단일 UI 원천 — 주소의 role(없거나 잘못되면 기본 실무자). */
 export function useRole(): string {
   const sp = useSearchParams();
   return normRole(sp?.get("role"));

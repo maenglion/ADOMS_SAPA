@@ -29,10 +29,11 @@ export const PERM_ENFORCE = true;
 
 export type Role = "ceo" | "gm" | "mgr" | "road" | "water" | "road_head" | "water_head";
 export const ALL_ROLES: Role[] = ["ceo", "gm", "mgr", "road_head", "road", "water_head", "water"];
+export const DEFAULT_ROLE: Role = "road";
 const ROLE_SET = new Set<string>(ALL_ROLES);
 export const isRole = (v: any): v is Role => ROLE_SET.has(String(v || ""));
-/** 알 수 없는 값은 총괄(gm) — 화면들이 쓰던 기본값(sp.role || "gm")과 같다. */
-export const normRole = (v: any): Role => (isRole(v) ? v : "gm");
+/** 역할을 지정하지 않은 첫 접속은 실무자(도로구조물과)로 시작한다. */
+export const normRole = (v: any): Role => (isRole(v) ? v : DEFAULT_ROLE);
 
 /** 화면설계서 사용자 유형(SCR-003 머리) */
 export const USER_KIND: Record<Role, string> = {

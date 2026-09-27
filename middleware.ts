@@ -1,5 +1,5 @@
 import { NextResponse, type NextRequest } from "next/server";
-import { ruleFor, canAccess, isRole } from "@/lib/perm";
+import { ruleFor, canAccess, isRole, DEFAULT_ROLE } from "@/lib/perm";
 
 /**
  * 1) 지금 주소를 헤더에 실어 준다.
@@ -166,7 +166,13 @@ export async function middleware(req: NextRequest) {
     return NextResponse.redirect(to);
   }
 
-  const eff = isRole(role) ? role : isRole(saved) ? saved : "gm";
+  if (!role && req.method === "GET" && !isQaPath) {
+    const to = url.clone();
+    to.searchParams.set("role", DEFAULT_ROLE);
+    return withRoleCookie(NextResponse.redirect(to), DEFAULT_ROLE, saved);
+  }
+
+  const eff = isRole(role) ? role : isRole(saved) ? saved : DEFAULT_ROLE;
   const h = new Headers(req.headers);
   h.set("x-pathname", url.pathname);
   h.set("x-adoms-role", eff);

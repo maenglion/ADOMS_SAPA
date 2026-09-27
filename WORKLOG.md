@@ -612,3 +612,36 @@
 - 검증: TypeScript 검사와 Next.js production build를 통과했다. Railway 배포 로그에서 핵심 8개 예열 요청이 모두 HTTP 200으로 완료되고 `READY responses=8`이 기록됐다. Netlify Production `/?role=road`는 HTTP 200, `X-Adoms-Data-Backend: read-server`, `X-Adoms-Read-Server: railway`로 응답했다.
 - 관련 파일: `middleware.ts`, `WORKLOG.md`
 - 관련 commit: `142c73e`, 최종 기록 commit은 pending
+
+### [56] 내부 API와 사용자 role redirect 경계 분리 및 Production 복구
+- 상태: 완료
+- 배경: 기본 역할 redirect가 사용자 문서 화면뿐 아니라 `/api/read-server/health`에도 적용돼 Railway 새 revision의 startup health 검사가 redirect를 받고 prewarm이 완료되지 않았다. Netlify Production은 `main`, Railway READ server는 과거 `remote-csv-baseline` branch를 바라보는 배포 기준 불일치도 함께 확인됐다.
+- 결정: 기본 역할 URL redirect는 `GET` 문서 navigation 중 `Accept: text/html`이고 `/api/*`, RSC, prefetch가 아닌 요청에만 적용한다. role context 계산과 브라우저 URL redirect를 분리한다. Production의 Netlify와 Railway READ server source는 모두 `main`으로 고정하고, 개발 검증은 같은 개발 branch의 Netlify Deploy Preview와 별도 Railway Preview service를 사용한다.
+- 이유: health·control·QA 같은 내부 endpoint는 service 인증과 endpoint별 method gate만 적용받아야 하며, 사용자 역할 URL 정책이 infrastructure readiness를 깨뜨려서는 안 된다. 또한 한 환경을 구성하는 두 서비스가 서로 다른 commit을 실행하면 health contract와 cache·role 동작이 어긋날 수 있다.
+- 영향 범위: `middleware.ts`의 기본 역할 redirect 경계, READ server startup health 검사, Production/Preview 배포 branch 운영 절차. PostgreSQL schema/data와 WRITE에는 영향이 없다.
+- 실제 변경: `isDocumentNavigation()`을 추가해 API·RSC·prefetch·비문서 요청을 redirect 대상에서 제외했다. READ server 시작 시 authenticated health 요청이 redirect 없이 성공하고 Location 또는 `?role=`이 붙지 않는지 검사하도록 했다. endpoint smoke script를 추가했다. Railway Production READ server source를 `main`으로 변경했고, 개발 branch 전용 `sapa-read-server-preview`를 Singapore에 구성해 private PostgreSQL과 Bearer 인증을 사용하도록 했다.
+- 검증: Production Netlify와 Railway가 모두 `47a488a43d8ca5806c1d443d997a272ec4ba6331`을 기준으로 동작했다. Railway Production prewarm은 8/8 HTTP 200 및 `READY responses=8`, Netlify Production 핵심 5화면은 모두 HTTP 200이었다. Railway Preview의 unauthenticated public health는 redirect 없이 인증 거부되고, authenticated startup health를 통과한 뒤 8개 prewarm 대상이 모두 HTTP 200으로 완료됐다.
+- 관련 파일: `middleware.ts`, `services/read-server/start.mjs`, `scripts/read_server_endpoint_smoke.mjs`, `services/read-server/README.md`, `package.json`, `WORKLOG.md`
+- 관련 commit: `47a488a43d8ca5806c1d443d997a272ec4ba6331`
+
+### [57] 시연 관리자 첫 화면 navigation 및 warm 성능 판정 재정의
+- 상태: 완료
+- 배경: 관리자 화면의 상·하단 시연 홈 복귀 버튼이 내부 QA 작업 흐름과 맞지 않았고, 성능 점검은 첫 요청 MISS와 실제 측정되지 않은 DB Query를 단순 문자열로 판정해 매우 빠른 응답도 `점검 필요`로 표시할 수 있었다.
+- 결정: 로그인 화면과 관리자 header의 `ADOMS QA` 브랜드를 QA 첫 화면 진입점으로 사용하고 상·하단 시연 홈 복귀 버튼은 제거한다. 성능 점검은 화면마다 통계에서 제외되는 warm-up 1회 후 measurement 3회를 수행한다. 화면 판정은 `정상`, `재예열`, `점검 필요`로 구분하고 전체 상태는 가장 나쁜 판정을 따른다.
+- 이유: 관리자 화면은 시연용 리뷰 로그와 QA 운영 점검판이므로 내부 메뉴 이동은 관리자 첫 화면을 기준으로 단순해야 한다. warm 성능 점검은 cold MISS를 장애로 오인하지 않고 실제 warm cache·DB query·응답시간을 기준으로 판정해야 한다.
+- 영향 범위: `/demo-admin` navigation, performance check API와 표시·QA event detail. 일반 사용자 화면 결과, PostgreSQL 데이터, cache contents와 WRITE에는 영향이 없다.
+- 실제 변경: 관리자 브랜드를 QA 현황 탭으로 이동하는 버튼으로 만들고 로그인 브랜드는 `/demo-admin`을 가리키게 했다. 기존 복귀 버튼과 footer를 제거했다. 성능 측정은 warm-up 1회와 측정 3회를 분리하고 `HIT 3/3`, `MISS n / HIT n`, 실제 `sqlCalls` 또는 `미측정`, 화면별 판정과 판정 기준을 표시한다. response cache HIT는 child Next/PostgreSQL을 호출하지 않은 실제 경로이므로 `x-adoms-db-query-count: 0`을 반환하고 MISS는 임의 추정하지 않는다. QA event detail에는 `overallStatus`, `reasons`, `results`를 저장한다.
+- 검증: NORMAL, REWARM, HTTP 503, median 초과와 worst-status 집계를 정적 검증했고 TypeScript 검사와 production build를 통과했다. 개발 branch의 Railway Preview는 Singapore에서 8개 prewarm 요청을 모두 HTTP 200으로 완료하고 `READY responses=8`을 기록했으며, 대상 요청시간 합계는 약 6.5초였다. Netlify Deploy Preview 핵심 5화면은 정상 렌더링됐고 `/actions` 0.456초, `/duties/list` 0.572초, `/evidence` 1.502초, `/tasks` 0.190초로 확인됐다. `usGroupsFor(role)` 기반 visible menu 287건과 asset 66개는 287/287 PASS, 실패 0이었다. 실제 GNB에서 dropdown 동시-open 0, road 역할의 법 의무사항이 대상별 3개만 표시되고 submenu 이동 후 road 역할이 유지되는 것을 확인했다.
+- 관련 파일: `app/demo-admin/AdminLogin.tsx`, `app/demo-admin/QaConsole.tsx`, `app/demo-admin/demo-admin.css`, `app/api/demo-admin/performance/route.ts`, `lib/demo-performance-status.ts`, `services/read-server/start.mjs`, `scripts/verify_demo_performance_status.mjs`, `package.json`, `WORKLOG.md`
+- 관련 commit: `2c225a41a9e55a078172d44b24ec313a2cf17d83`, 최종 기록 commit은 pending
+
+### [58] Production/Preview branch alignment 배포 기준 고정
+- 상태: 결정
+- 배경: 동일 시스템의 Netlify와 Railway가 서로 다른 branch 또는 commit을 실행하면 수정이 한쪽에만 반영돼 배포 성공처럼 보이면서도 health·cache·role contract가 어긋나는 문제가 발생했다.
+- 결정: Production 배포 전에는 Netlify source branch `main`, Railway READ server source branch `main`, 양쪽 deployed commit SHA 일치, health HTTP 200, prewarm READY, 핵심 5화면 HTTP 200, warm cache 정상 여부를 확인한다. 개발 변경은 정상 `main`에서 분기한 동일 개발 branch를 Netlify Deploy Preview와 Railway Preview service에 연결하고 전체 역할/menu smoke 및 health/prewarm 검증 후에만 `main`으로 병합한다.
+- 이유: branch 이름만 같아도 배포 시점 차이로 revision이 다를 수 있으므로 실제 deployed SHA와 readiness를 함께 확인해야 한다.
+- 영향 범위: Netlify·Railway 배포 운영 절차. 앱 기능, DB schema/data와 WRITE에는 영향이 없다.
+- 실제 변경: 개발 branch `dev/admin-qa-performance-20260928`과 PR #1을 만들고 Netlify Deploy Preview 및 Railway `sapa-read-server-preview`를 같은 commit에 연결했다. Preview service는 Production token을 server environment에서만 사용하며 browser에 노출하지 않고 private PostgreSQL을 사용한다.
+- 검증: Preview 양쪽 source가 `dev/admin-qa-performance-20260928@2c225a4`로 일치했고 Railway startup health/prewarm과 Netlify 핵심 화면 및 역할별 메뉴 smoke가 통과했다. Production은 검증 중 계속 `main@47a488a`를 유지했다.
+- 관련 파일: `WORKLOG.md`
+- 관련 commit: pending

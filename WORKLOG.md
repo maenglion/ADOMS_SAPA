@@ -524,3 +524,14 @@
 - 검증: TypeScript 검사와 Next.js production build를 통과했다. Production 핵심 화면에서 GNB open과 실제 `법 의무사항 → 사업장` 이동, 일반 `/law/ws` 화면의 GNB open, `ceo → road` 역할 변경 modal·URL·selector 일치, road 법 메뉴 3개 제한, 연속 GNB 전환 시 열린 dropdown 1개를 확인했다. `usGroupsFor(role)` 기반 Production visible menu 294건과 JavaScript/CSS asset 66개를 검사해 294/294 PASS, asset 실패 0, HTTP 500/502/503/504·raw internal/error·blank·잘못된 role menu·동시 dropdown 각 0건이었다.
 - 관련 파일: `middleware.ts`, `services/read-server/start.mjs`, `scripts/visible_menu_smoke.mjs`, `MENU_SMOKE_VERIFY.md`, `WORKLOG.md`
 - 관련 commit: `fed17b8`, `22dad58`, `9fc6b33`, 최종 기록 commit은 pending
+
+### [48] 시연용 관리자 링크 공유 메타데이터 분리
+- 상태: 완료
+- 배경: 일반 앱 링크와 `/demo-admin` 링크가 동일한 제목·설명·공유 이미지를 사용해 시연 리뷰용 관리자 화면임을 링크 미리보기에서 구분할 수 없었다.
+- 결정: `/demo-admin`은 전용 title·description과 OG/Twitter 이미지를 사용한다. 이미지는 기존 ADOMS 공유 이미지의 중앙 흰색 워드마크 구성을 유지하고 배경색만 앱의 메인 초록색으로 변경한다.
+- 이유: 일반 사용자 화면과 QA 운영 점검 링크의 용도를 공유 단계에서 명확히 구분하면서 브랜드 표현은 동일하게 유지하기 위해서다.
+- 영향 범위: `/demo-admin` 문서 metadata와 외부 링크 미리보기. 일반 앱 metadata, 인증, READ server, PostgreSQL, WRITE와 화면 데이터에는 영향이 없다.
+- 실제 변경: title을 `시연용 관리자 시스템`, description을 `시연리뷰, 캐시관리, 성능점검, 시연데이터`로 지정했다. 1200×630 초록색 배경에 기존과 같은 흰색 `ADOMS` 워드마크를 배치한 관리자 전용 OG/Twitter 이미지를 추가했다.
+- 검증: TypeScript 검사와 Next.js production build를 통과했다. 로컬 production server에서 `/demo-admin`은 HTTP 200, title·description·OG title·OG description이 지정값과 일치했고 OG image URL은 `/demo-admin/opengraph-image`를 가리켰다. 이미지 endpoint는 HTTP 200, `image/png`, 1200×630 규격으로 생성됐다. Production 배포 후 동일 항목을 재확인한다.
+- 관련 파일: `app/demo-admin/page.tsx`, `app/demo-admin/opengraph-image.tsx`, `WORKLOG.md`
+- 관련 commit: pending

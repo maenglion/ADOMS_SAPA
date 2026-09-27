@@ -557,3 +557,14 @@
 - 검증: 접힘과 펼침 상태에서 시기도래·기한 초과 카드의 높이와 기한 초과 건수 위치가 동일하며, 알림 목록만 아래로 확장되는지 확인했다. TypeScript 정적 검사와 Next.js production build를 통과했다.
 - 관련 파일: `app/page.tsx`, `app/us-lsx.css`, `WORKLOG.md`
 - 관련 commit: `8748006`
+
+### [51] 시연 관리자 하단 홈 복귀 버튼 추가
+- 상태: 완료
+- 배경: 시연용 관리자 화면을 끝까지 확인한 뒤 일반 시연 화면으로 돌아가는 동작이 상단에만 있어, 긴 리뷰·오류 목록 하단에서는 다시 위로 이동해야 했다.
+- 결정: 관리자 화면 하단 중앙에 `← 시연용 홈으로 가기` BACK 버튼을 상시 표시한다.
+- 이유: 관리자 점검을 마친 위치에서 바로 시연 홈으로 복귀할 수 있게 해 시연 진행 흐름을 단순화하기 위해서다.
+- 영향 범위: 인증된 `/demo-admin` 화면 하단 navigation. QA 데이터, cache, READ server, PostgreSQL과 일반 앱 화면에는 영향이 없다.
+- 실제 변경: 관리자 content 아래 footer에 기존 로그아웃 endpoint를 사용하는 BACK 버튼을 추가했다. 버튼을 누르면 서비스 관리자 session을 종료하고 `/?role=gm`으로 이동한다.
+- 검증: TypeScript 정적 검사와 Next.js production build를 통과하고, 관리자 화면 하단에서 버튼이 표시되며 시연 홈으로 정상 복귀하는지 확인했다.
+- 관련 파일: `app/demo-admin/QaConsole.tsx`, `app/demo-admin/demo-admin.css`, `WORKLOG.md`
+- 관련 commit: pending

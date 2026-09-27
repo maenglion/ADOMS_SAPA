@@ -111,6 +111,11 @@ export default function QaConsole() {
           <h1>시연 리뷰</h1><div className="qa-card"><h2>시간순 이벤트</h2><EventTable rows={snapshot?.recent || []} /></div><div className="qa-card"><h2>오류</h2><ErrorTable rows={snapshot?.errors || []} /></div>
         </>}
       </section>
+      <footer className="qa-footer">
+        <form action="/api/demo-admin/logout" method="post">
+          <button type="submit" className="qa-back-home"><span aria-hidden="true">←</span> 시연용 홈으로 가기</button>
+        </form>
+      </footer>
       {resetConfirm && <div className="qa-modal-bg"><div className="qa-modal" role="dialog" aria-modal="true" aria-labelledby="qa-reset-title"><h2 id="qa-reset-title">캐시 초기화</h2><p>READ cache를 초기화하고 PostgreSQL 기준으로 다시 생성합니다.</p><div><button disabled={resetBusy} onClick={() => setResetConfirm(false)}>취소</button><button className="qa-primary" disabled={resetBusy} onClick={resetCache}>{resetBusy ? "처리 중..." : "초기화 및 재예열"}</button></div></div></div>}
     </main>
   );

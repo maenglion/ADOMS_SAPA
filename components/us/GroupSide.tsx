@@ -6,6 +6,7 @@
  */
 import Link from "next/link";
 import SubLabel from "./SubLabel";
+import { withAdomsRole } from "@/lib/adoms-role";
 
 export const FOLD_SIDES = true;
 
@@ -19,10 +20,10 @@ export function Chev() {
   );
 }
 
-export default function GroupSide({ groups, className = "us-side" }: { groups: SideGroup[]; className?: string }) {
+export default function GroupSide({ groups, className = "us-side", role }: { groups: SideGroup[]; className?: string; role?: string }) {
   const any = groups.some((g) => g.items.some((i) => i.on));
   const body = (g: SideGroup) => g.items.map((m) => (
-    <Link key={m.href} href={m.href} className={m.on ? "on" : ""}>{m.on ? "◉ " : ""}<SubLabel text={m.label} /></Link>
+    <Link key={m.href} href={role ? withAdomsRole(m.href, role) : m.href} className={m.on ? "on" : ""}>{m.on ? "◉ " : ""}<SubLabel text={m.label} /></Link>
   ));
   if (!FOLD_SIDES) {
     return (

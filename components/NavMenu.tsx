@@ -6,6 +6,7 @@ import { Suspense, useEffect, useLayoutEffect, useRef, useState } from "react";
 import { MENU_MODE, FLAT, GROUPS, isOn, groupHas, type MenuItem } from "@/lib/menu";
 import { canAccess } from "@/lib/perm";
 import { useMenuGroups, useRole, useSideCss } from "./MenuCtx";
+import { withAdomsRole } from "@/lib/adoms-role";
 
 /**
  * 머리 메뉴 — 주소가 바뀔 때마다 다시 그린다(2026-09-22).
@@ -18,13 +19,13 @@ function Inner({ demo }: { demo: boolean }) {
   // 09-25 사용자: 권한 제어 — 권한이 없는 메뉴는 보이지 않는다(규칙 lib/perm.ts · us 모양은 usGroupsFor 가 이미 거른다)
   const role = useRole();
   const show = (m: MenuItem) => !(demo && m.hideInDemo) && (m.heading || !m.href || canAccess(role, m.href));
-  if (MENU_MODE === "us") return <UsGnb path={path} search={search} show={show} />;
-  if (MENU_MODE === "bar") return <Bar path={path} search={search} show={show} />;
+  if (MENU_MODE === "us") return <UsGnb path={path} search={search} show={show} role={role} />;
+  if (MENU_MODE === "bar") return <Bar path={path} search={search} show={show} role={role} />;
   if (MENU_MODE === "flat") {
     return (
       <nav className="gnb">
         {FLAT.filter(show).map((m) => (
-          <Link key={m.href} href={m.href} className={isOn(path, m.href, search) ? "on" : ""}>{m.label}</Link>
+          <Link key={m.href} href={withAdomsRole(m.href, role)} className={isOn(path, m.href, search) ? "on" : ""}>{m.label}</Link>
         ))}
       </nav>
     );
@@ -37,12 +38,12 @@ function Inner({ demo }: { demo: boolean }) {
         const on = items.some((m) => !m.alias && isOn(path, m.href, search));
         return (
           <div key={g.label} className={`grp${on ? " on" : ""}`}>
-            <Link href={(items.find((m) => m.href) || items[0]).href} className="grp-h">{g.label}{items.length > 1 && <span className="caret">▾</span>}</Link>
+            <Link href={withAdomsRole((items.find((m) => m.href) || items[0]).href, role)} className="grp-h">{g.label}{items.length > 1 && <span className="caret">▾</span>}</Link>
             {items.length > 1 && (
               <div className="grp-m">
                 {items.map((m, i) => m.heading
                   ? <div key={"h" + i} className="grp-sub">{m.label}</div>
-                  : <Link key={m.href} href={m.href} className={isOn(path, m.href, search) ? "on" : ""}>{m.label}</Link>)}
+                  : <Link key={m.href} href={withAdomsRole(m.href, role)} className={isOn(path, m.href, search) ? "on" : ""}>{m.label}</Link>)}
               </div>
             )}
           </div>
@@ -53,7 +54,7 @@ function Inner({ demo }: { demo: boolean }) {
 }
 
 /** [400 · 교육자료 버전] GNB 8개 — 가로 한 줄, 두 줄 글자, 올리면 하위 메뉴 카드. 켜진 묶음은 녹색. */
-function UsGnb({ path, search, show }: { path: string; search: string; show: (m: MenuItem) => boolean }) {
+function UsGnb({ path, search, show, role }: { path: string; search: string; show: (m: MenuItem) => boolean; role: string }) {
   // 09-25 사용자: 역할별 메뉴 + 메뉴 관리 설정(이름 · 숨김 · 순서) — 셸이 실어 준 것(components/MenuCtx)
   const groups = useMenuGroups().map((g) => ({ ...g, items: g.items.filter(show) })).filter((g) => g.items.some((m) => m.href));
   const css = useSideCss();
@@ -91,7 +92,7 @@ function UsGnb({ path, search, show }: { path: string; search: string; show: (m:
           {openMenuKey === key && <div className="us-gnb-m">
             {g.items.map((m, i) => m.heading
               ? <div key={"h" + i} className="us-gnb-sub">{m.label}</div>
-              : <Link key={m.href} href={m.href} className={m.href === best(g.items) ? "on" : ""} onClick={() => setOpenMenuKey(null)}><SubLabel text={m.label} /></Link>)}
+              : <Link key={m.href} href={withAdomsRole(m.href, role)} className={m.href === best(g.items) ? "on" : ""} onClick={() => setOpenMenuKey(null)}><SubLabel text={m.label} /></Link>)}
           </div>}
         </div>
       )})}
@@ -119,7 +120,7 @@ function displayGnbLabel(label: string) {
  * 「bar」 모양(09-24 참고 그림) — 짙은 남색 대메뉴 줄 · (소제목이 있으면) 구분 줄 · 파란 하위 줄.
  * 하위 줄은 켜진 대메뉴 글자 밑에서 시작한다(오른쪽 끝을 넘으면 넘지 않는 만큼 당긴다).
  */
-function Bar({ path, search, show }: { path: string; search: string; show: (m: MenuItem) => boolean }) {
+function Bar({ path, search, show, role }: { path: string; search: string; show: (m: MenuItem) => boolean; role: string }) {
   const groups = GROUPS.map((g) => ({ ...g, items: g.items.filter(show) })).filter((g) => g.items.some((m) => m.href));
   const cur = groups.find((g) => groupHas(g.items, path, search));
   // 소제목으로 나눈 칸
@@ -146,18 +147,18 @@ function Bar({ path, search, show }: { path: string; search: string; show: (m: M
       <div className="nb-top"><div className="nb-in">
         {groups.map((g) => {
           const on = g === cur;
-          return <Link key={g.label} ref={on ? topRef : undefined} href={(g.items.find((m) => m.href) as MenuItem).href}
+          return <Link key={g.label} ref={on ? topRef : undefined} href={withAdomsRole((g.items.find((m) => m.href) as MenuItem).href, role)}
             className={on ? "on" : ""}>{g.label}</Link>;
         })}
       </div></div>
       {cur && hasHead && (
         <div className="nb-sec"><div className="nb-in"><div className="nb-row" style={{ marginLeft: off }}>
-          {secs.map((x) => <Link key={x.head} href={x.items[0]?.href || "#"} className={x === onSec ? "on" : ""}>{x.head}</Link>)}
+          {secs.map((x) => <Link key={x.head} href={withAdomsRole(x.items[0]?.href || "#", role)} className={x === onSec ? "on" : ""}>{x.head}</Link>)}
         </div></div></div>
       )}
       {cur && (
         <div className="nb-sub"><div className="nb-in"><div className="nb-row" ref={rowRef} style={{ marginLeft: off }}>
-          {(onSec?.items || []).map((m) => <Link key={m.href} href={m.href} className={isOn(path, m.href, search) ? "on" : ""}><SubLabel text={m.label} /></Link>)}
+          {(onSec?.items || []).map((m) => <Link key={m.href} href={withAdomsRole(m.href, role)} className={isOn(path, m.href, search) ? "on" : ""}><SubLabel text={m.label} /></Link>)}
         </div></div></div>
       )}
     </nav>

@@ -844,3 +844,25 @@
 - Production 최종 검증 SHA: `57d0f70b4616c82d409ef431e79460d416a429af`, release tag `demo-prod-20260928`.
 - 관련 파일: `middleware.ts`, `services/read-server/start.mjs`, `components/NavMenu.tsx`, `components/UserBox.tsx`, `components/MenuCtx.tsx`, `lib/menu.ts`, `lib/perm.ts`, `app/api/demo-admin/performance/route.ts`, `app/demo-admin/QaConsole.tsx`, `scripts/read_server_endpoint_smoke.mjs`, `scripts/visible_menu_smoke.mjs`, `scripts/verify_demo_performance_status.mjs`, `WORKLOG.md`
 - 관련 commit: pending
+
+### [65] ADOMS 사용자 역할 브라우저 단위 유지
+- 상태: 완료
+- 배경: 사용자 유형을 변경한 직후에는 메뉴가 바뀌지만 role query가 없는 다른 내부 메뉴를 누르면 이전 역할 또는 기본 역할의 메뉴로 돌아가는 결함이 있었다. middleware 응답에 뒤늦게 cookie 저장을 맡기고 내부 링크가 현재 role을 전달하지 않은 것이 원인이었다.
+- 결정: ADOMS 사용자 역할은 IP가 아닌 브라우저의 `adoms-role` cookie로 24시간 유지한다. 현재 화면의 우선순위는 URL `?role=` → browser cookie → `DEFAULT_ROLE`이며 URL role을 UI source of truth로 유지한다. QA 인증 cookie인 `adoms-service-admin`과는 완전히 분리한다.
+- 이유: NAT, VPN, proxy와 같은 공용 IP 환경에서 시연자별 역할이 서로 덮어써지지 않게 하고 client navigation, refresh, 새 탭에서도 같은 브라우저의 선택 역할을 일관되게 유지하기 위해서다.
+- 영향 범위: 역할 선택, 공통 내부 navigation, GNB, dropdown submenu, 좌측 메뉴, 최근 본 화면, refresh와 back/forward. READ server, cache, PostgreSQL data와 service_admin 인증에는 영향이 없다.
+- 실제 변경: 역할 선택 시 `/api/adoms-role`에서 role 유효성 검사와 cookie 저장을 먼저 완료한 뒤 role-change event와 navigation을 수행한다. cookie는 Path `/`, SameSite `Lax`, Production Secure, max-age 24시간을 사용한다. `withAdomsRole()` 공통 helper와 공통 client navigation 경계를 추가해 기존 query와 hash를 보존하면서 내부 링크에 현재 role을 합친다. 명시 role URL을 방문하면 browser history의 역할을 우선하고 cookie도 같은 값으로 동기화한다. middleware의 API/RSC/prefetch redirect 제외 경계는 유지한다.
+- 검증: TypeScript와 production build를 통과했다. 7개 role 모두 cookie 저장 후 role query가 없는 `/actions` document navigation에서 해당 role로 1회 redirect됐고 visible menu smoke는 287/287 PASS였다. 실제 browser에서 gm→road 변경 직후 modal과 selector·URL·메뉴가 일치했고 `/tasks?role=road` 이동 및 refresh 후에도 road를 유지했다. ceo와 road_head가 명시된 history의 back/forward는 각 URL role을 우선했으며 이후 role query 없는 `/calendar`는 cookie에 동기화된 road_head로 복원됐다. 서로 다른 browser context에서 Browser A는 road_head, Browser B는 water를 유지해 서로 영향을 주지 않았다.
+- 관련 파일: `lib/adoms-role.ts`, `app/api/adoms-role/route.ts`, `middleware.ts`, `components/AdomsRoleNavigation.tsx`, `components/UserBox.tsx`, `components/NavMenu.tsx`, `components/us/MenuSide.tsx`, `components/us/GroupSide.tsx`, `components/us/RecentBar.tsx`, `components/Shell.tsx`, `WORKLOG.md`
+- 관련 commit: pending
+
+### [66] ADOMS 역할 24시간 유지 및 시연 초기화 정책
+- 상태: 결정
+- 배경: 반복 시연 시 현재 브라우저에 남은 사용자 역할과 임시 UI 상태를 기본값으로 되돌리는 기능이 필요하지만 READ cache 초기화나 향후 WRITE data 복원과 혼동해서는 안 된다.
+- 결정: QA 관리자에 별도 `시연 초기화` 영역과 확인 modal을 둔다. 현재 단계에서는 현재 브라우저의 `adoms-role` cookie와 role-change 임시 notice를 제거하고 `DEFAULT_ROLE`이 포함된 시연 기본 진입점으로 이동한다. service_admin session, PostgreSQL data와 READ cache는 유지한다. 실행 결과는 `demo_reset` QA event에 `roleReset: true`, `dataReset: false`, `cacheReset: false`로 기록한다.
+- 이유: QA 관리자 로그인을 유지한 채 시연 → 점검 → 사용자 상태 초기화 → 재시연 흐름을 반복하고, cache 성능 관리와 사용자 시연 상태 복귀의 책임을 명확히 나누기 위해서다.
+- 영향 범위: `/demo-admin` 관리 UI, 현재 browser의 ADOMS role 및 임시 notice, QA review log. 다른 browser/profile, service_admin session, DB와 cache에는 영향이 없다.
+- 실제 변경: 관리자 인증이 필요한 `/api/demo-admin/demo-reset`을 추가해 QA event 기록 성공 후 role cookie만 만료시킨다. 관리자 UI에 `시연 초기화` 탭, 설명과 확인 modal을 추가한다. `ADOMS HOME으로 돌아가기`는 service_admin logout 후 일반 시연 화면으로 이동하고, `시연 초기화`는 관리자 session을 삭제하지 않는다. 향후 WRITE 전환 후에는 검증된 demo baseline 복원, audit event, 3단 cache invalidate, prewarm과 READY 확인을 같은 절차에 확장하되 현재는 미확정 데이터를 변경하지 않는다.
+- 검증: TypeScript와 production build를 통과했고 미인증 reset 요청은 HTTP 401로 차단됐다. 별도 browser context의 role cookie가 서로 독립임을 확인했다. 관리자 인증 상태의 `demo_reset` 저장, service_admin 유지와 `DEFAULT_ROLE` 이동은 동일 dev branch Preview 배포 후 최종 확인한다.
+- 관련 파일: `app/api/demo-admin/demo-reset/route.ts`, `app/demo-admin/QaConsole.tsx`, `app/demo-admin/demo-admin.css`, `lib/demo-qa-store.ts`, `WORKLOG.md`
+- 관련 commit: pending

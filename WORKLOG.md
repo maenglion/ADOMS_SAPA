@@ -866,3 +866,14 @@
 - 검증: TypeScript와 production build를 통과했고 미인증 reset 요청은 HTTP 401로 차단됐다. 별도 browser context의 role cookie가 서로 독립임을 확인했다. 관리자 인증 상태의 `demo_reset` 저장, service_admin 유지와 `DEFAULT_ROLE` 이동은 동일 dev branch Preview 배포 후 최종 확인한다.
 - 관련 파일: `app/api/demo-admin/demo-reset/route.ts`, `app/demo-admin/QaConsole.tsx`, `app/demo-admin/demo-admin.css`, `lib/demo-qa-store.ts`, `WORKLOG.md`
 - 관련 commit: pending
+
+### [67] dev/demo-next 관리자 통합 Preview 최종 검증
+- 상태: 완료
+- 배경: ADOMS 역할 24시간 유지와 시연 초기화 기능을 Production 병합 전에 Preview에서 실제 관리자 흐름으로 통합 검증해야 했다. 검증 시작 시 Netlify Preview는 `dev/demo-next`였으나 Preview READ server는 과거 개발 branch를 바라보고 있어 동일 환경·동일 branch 원칙도 함께 바로잡았다.
+- 결정: Preview용 Netlify와 READ server의 source를 `dev/demo-next`로 정렬한다. QA event POST를 포함한 proxy 요청은 원본 body를 보존하고, startup prewarm과 관리자가 실행하는 cache reset/prewarm은 동시에 실행하지 않고 하나씩 직렬화한다. Production `main`과 Production service 설정은 변경하지 않는다.
+- 이유: branch가 다른 두 revision을 하나의 Preview처럼 검증하면 결과를 신뢰할 수 없다. 또한 proxy가 POST body를 누락하면 `demo_reset` 감사 기록이 유실되고, 두 prewarm이 겹치면 동일한 무거운 render가 중복되어 일시적인 503과 timeout을 만들 수 있기 때문이다.
+- 영향 범위: Preview READ server source 설정, READ server의 인증된 POST proxy와 prewarm 실행 경계, QA 시연 초기화·cache 관리·성능 점검. PostgreSQL schema/data, WRITE, Production backend와 `main`에는 영향이 없다.
+- 실제 변경: READ server proxy가 GET/HEAD 이외 요청의 body를 최대 1 MiB까지 읽어 upstream에 전달하도록 수정했다. startup prewarm 진행 중 cache reset 요청이 오면 기존 prewarm 종료를 기다린 뒤 reset/prewarm을 시작하도록 단일 in-flight 경계를 추가했다. Preview READ server source를 `dev/demo-next`로 맞췄다.
+- 검증: 기본값이 아닌 gm 역할에서 시연 초기화를 실행했고 `adoms-role`이 삭제되어 role 없는 새 document navigation이 `DEFAULT_ROLE`인 `road`로 복귀했다. `demo_reset` event는 시연 리뷰에 정확히 1회 기록됐고 service_admin session은 유지됐다. cache 초기화 및 재예열은 PREWARMING 상태를 거쳐 9.531초에 READY로 복귀했다. 성능 점검은 dashboard, actions, duties/list, evidence와 tasks 모두 HTTP 200, Cache HIT 3/3, 실제 warm DB Query 0, 화면별 판정 `정상`, 전체 판정 `정상`이었다. QA 로그아웃 후 service_admin session이 삭제되어 `/demo-admin`이 로그인 화면을 표시했고 일반 시연 화면은 `road` 역할로 정상 렌더링됐다. 최종 visible menu smoke는 7개 역할 합계 287/287 PASS였으며 500/502/503/504, raw internal response, white/blank 화면과 browser console error는 최종 gate에서 모두 0건이었다. 배포 중 구 revision과 새 revision의 prewarm이 겹친 시점에 발생한 일시적 503은 기록을 보존하며 직렬화 수정 후 최종 검증에서는 재현되지 않았다.
+- 관련 파일: `services/read-server/start.mjs`, `WORKLOG.md`
+- 관련 commit: `da2f09a`, `b6b0dc9`, 최종 기록 commit pending

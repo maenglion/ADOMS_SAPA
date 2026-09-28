@@ -31,6 +31,7 @@ const responseCache = new Map();
 const MAX_CACHE_ENTRIES = 256;
 let ready = false;
 let resetInFlight = null;
+let prewarmInFlight = null;
 
 async function applyQaSchema() {
   if (process.env.ADOMS_READ_SERVER_SERVICE !== "1") return;
@@ -189,7 +190,12 @@ const server = http.createServer(async (req, res) => {
     if (url.pathname === controlRoute) {
       if (req.method !== "POST") return sendJson(res, 405, { ok: false, error: "Method not allowed" });
       if (!authorized(req)) return sendJson(res, 401, { ok: false, error: "Unauthorized" });
-      if (!resetInFlight) resetInFlight = resetCachesAndPrewarm().finally(() => { resetInFlight = null; });
+      if (!resetInFlight) {
+        resetInFlight = (async () => {
+          if (prewarmInFlight) await prewarmInFlight;
+          return resetCachesAndPrewarm();
+        })().finally(() => { resetInFlight = null; });
+      }
       const result = await resetInFlight;
       return sendJson(res, result.ok ? 200 : 503, result);
     }
@@ -319,7 +325,7 @@ async function resetCachesAndPrewarm() {
   }
 }
 
-void prewarm();
+prewarmInFlight = prewarm().finally(() => { prewarmInFlight = null; });
 
 for (const signal of ["SIGINT", "SIGTERM"]) {
   process.on(signal, () => {

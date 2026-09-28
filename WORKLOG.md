@@ -831,9 +831,13 @@
 - 현재 검증: deploy-version 및 representation cache 분리와 static asset fallback 반영 후 Production visible menu 287/287, asset 66건, HTTP 500/503/504 0, raw JSON/RSC/internal error page 0, blank/깨진 화면 0이었다.
 
 #### 최종 결론
-- 실제 확인·추적 오류: 9건.
-- 심각도: P0 2건, P1 4건, P2 3건.
-- 수정 완료: 9건. 미해결: 0건. 단, 과거 white/blank screen 제보 원본은 증거 미확보로 원인 확정하지 못했으며 현재 release에서는 재현되지 않았다.
+- 실제 확인·재현된 결함: 7건.
+- 예방적으로 확인한 구조적 위험 및 경계 보강: 2건.
+- 과거 사용자 제보이나 증거 미확보·현재 미재현: white/blank screen 1건.
+- 확인된 결함 7건은 모두 수정 및 재검증을 완료했다.
+- 구조적 위험 2건은 재발 방지 목적으로 경계를 보강하고 관련 smoke test를 추가했다.
+- white/blank screen은 현재 release의 전수검사에서 재현되지 않았으며 당시 console, network, route와 deploy SHA 증거가 없어 현재 결함으로 확정하지 않는다.
+- 따라서 현재 검증 release 기준 P0/P1의 재현 가능한 미해결 결함은 0건이다.
 - 배포 정합성: 검증 release에서 Netlify와 Railway는 `main` 및 동일 SHA를 사용했다.
 - 메뉴·역할: visible menu smoke 287/287 PASS, 7개 role의 selector·URL·menu·modal 일치 확인.
 - QA·성능: 내부 endpoint 경계 정상, 핵심 5화면 HTTP 200, `HIT 3/3`, warm DB Query 0, 화면별·전체 성능 판정 `정상`.

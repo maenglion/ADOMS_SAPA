@@ -700,3 +700,143 @@
 - 검증: TypeScript 및 production build로 확인하고, 로그인 전후 화면에서 링크 표시와 목적지를 점검한다.
 - 관련 파일: `app/demo-admin/AdminLogin.tsx`, `app/demo-admin/QaConsole.tsx`, `app/demo-admin/demo-admin.css`, `WORKLOG.md`
 - 관련 commit: pending
+
+### [64] 시연 전 Production 경계 전수 디버깅
+- 상태: 완료
+- 배경: 시연 준비 중 READ server readiness, Netlify·Railway revision 정렬, 인증 환경변수, HTML/RSC cache, 역할 상태, 메뉴 권한과 성능 판정에서 서로 다른 종류의 오류 또는 장애 위험이 확인됐다. 단순 완료 문구 대신 증상부터 검증까지 오류별로 추적 가능한 기록을 남긴다.
+- 결정: 각 오류는 증상, 발생 조건, 실제 원인, 영향 범위, 수정 내용, 해결 근거, 재현 여부, 수정 후 검증, 관련 파일·commit 및 Production 반영 여부를 구분해 보존한다. white/blank 화면은 P0 후보로 별도 추적하며 실제 증거가 없는 부분은 재현 완료로 간주하지 않는다.
+- 이유: 같은 화면 장애라도 인증 누락, branch 불일치, middleware 경계, stale representation 등 원인과 복구 방법이 다르므로 재발 시 즉시 분류하고 정상 release와 비교할 수 있어야 한다.
+- 영향 범위: Production 장애 이력, 배포 및 회귀검증 기준. 이 기록 자체는 앱 결과, PostgreSQL schema/data와 WRITE를 변경하지 않는다.
+
+#### 오류 1. READ server가 PREWARMING에서 READY로 전환되지 않음 — P0
+- 증상: Production에서 `READ server is warming.`과 HTTP 503이 지속됐고 Railway revision은 기동됐지만 READY에 도달하지 못했다.
+- 발생 조건: 새 Railway revision 배포 직후 startup health와 prewarm을 수행할 때 발생했다.
+- 실제 원인: 사용자 화면용 default role redirect가 `/api/read-server/health` 내부 요청에도 적용돼 health 응답이 정상 200 대신 role redirect 흐름에 들어갔다.
+- 영향 범위: READ server startup, 핵심 사용자 화면 전체와 Production 가용성.
+- 수정 내용: default role redirect를 실제 HTML document GET navigation으로 한정하고 `/api/**`, RSC, prefetch와 내부 요청을 제외했다. startup health가 redirect, Location 또는 `?role=`을 받으면 실패하도록 검증도 추가했다.
+- 해결 근거: health 요청과 사용자 화면 역할 URL 정책이 분리돼 내부 readiness 요청이 역할 redirect에 개입되지 않는다.
+- 재현 여부: 수정 전 Production에서 재현됐고 수정 후 동일 startup 흐름에서는 재현되지 않았다.
+- 수정 후 검증: authenticated health HTTP 200, redirect 0, `?role=` 부착 0, prewarm 8/8 HTTP 200, `READY responses=8`, 핵심 5화면 HTTP 200을 확인했다.
+- 관련 파일: `middleware.ts`, `services/read-server/start.mjs`, `scripts/read_server_endpoint_smoke.mjs`
+- 관련 commit: `142c73e`, `47a488a43d8ca5806c1d443d997a272ec4ba6331`
+- Production 반영 여부: 반영 완료.
+
+#### 오류 2. Netlify와 Railway Production source branch 불일치 — P1
+- 증상: `main`에 hotfix를 push해도 Railway READ server에 같은 revision이 생성되지 않아 Netlify에는 새 동작, Railway에는 과거 동작이 남을 수 있었다.
+- 발생 조건: Netlify Production은 `main`, Railway READ server는 `remote-csv-baseline`을 추적하던 상태에서 main 변경을 배포할 때 확인됐다.
+- 실제 원인: 한 Production 환경을 구성하는 두 서비스의 source branch가 서로 달랐다.
+- 영향 범위: middleware, health, RSC, cache, role 및 endpoint contract 전체의 revision 정합성.
+- 수정 내용: Railway READ server source를 `main`으로 변경하고 Production은 `Netlify main = Railway main`, Preview는 동일 dev branch와 별도 Preview service를 사용하는 원칙으로 고정했다.
+- 해결 근거: 두 서비스가 같은 branch와 검증된 SHA를 배포하므로 한쪽에만 수정이 남는 상태를 배포 gate에서 차단한다.
+- 재현 여부: 배포 설정에서 불일치를 확인했으며 정렬 후에는 재현되지 않았다.
+- 수정 후 검증: 양쪽 동일 SHA, Railway revision 생성, health 200, prewarm READY와 핵심 5화면 200을 확인했다.
+- 관련 파일: `WORKLOG.md`, Railway 및 Netlify Production source 설정
+- 관련 commit: `47a488a43d8ca5806c1d443d997a272ec4ba6331`
+- Production 반영 여부: 반영 완료.
+
+#### 오류 3. Netlify Production READ server token 누락 — P0
+- 증상: Production에서 `READ server token is not configured`가 표시되고 핵심 화면이 HTTP 503을 반환했다.
+- 발생 조건: READ backend를 Production에 연결했지만 Netlify Production scope에 service token이 없을 때 발생했다.
+- 실제 원인: `ADOMS_READ_SERVER_TOKEN`이 Preview 또는 다른 scope에는 있었지만 Netlify Production server environment에는 누락돼 있었다.
+- 영향 범위: Netlify에서 Railway READ server로 가는 모든 인증된 server-side READ.
+- 수정 내용: Railway READ server와 일치하는 token을 Netlify Production server environment에 설정하고 재배포했다. 비밀값은 코드, 화면, 로그와 WORKLOG에 기록하지 않았다.
+- 해결 근거: Netlify server-side 요청이 Railway의 Bearer 인증을 통과할 수 있게 됐다.
+- 재현 여부: Production에서 재현됐고 환경변수 설정 및 재배포 후 재현되지 않았다.
+- 수정 후 검증: 핵심 5화면 HTTP 200, `x-adoms-data-backend: read-server`, `x-adoms-read-server: railway`와 PostgreSQL 실제 READ를 확인했다.
+- 관련 파일: Netlify Production environment, Railway service environment, `WORKLOG.md`
+- 관련 commit: `613ade4` 기록 commit. 비밀값 변경은 저장소 commit 대상이 아니다.
+- Production 반영 여부: 반영 완료.
+
+#### 오류 4. 배포 간 HTML·RSC·static chunk version 혼합 위험 — P1
+- 증상: 새 Netlify deploy와 이전 Railway process cache가 섞이면 HTML이 과거 build의 immutable Next.js chunk를 참조해 white screen, `ChunkLoadError` 또는 static 404가 날 수 있는 위험이 확인됐다.
+- 발생 조건: Netlify와 Railway deploy lifecycle이 독립적인 상태에서 Railway가 이전 HTML/RSC response를 process memory에서 재사용할 때 발생할 수 있었다.
+- 실제 원인: response cache key에 Netlify deploy revision이 없었고 HTML과 RSC/prefetch representation 및 static asset 처리 경계가 충분히 분리되지 않았다.
+- 영향 범위: 배포 직후 document load, client navigation, RSC hydration과 정적 JS/CSS 로딩.
+- 수정 내용: Netlify가 `x-adoms-deploy-version`을 전달하고 READ server cache key에 deploy revision과 representation을 포함했다. static chunk 요청은 Netlify page asset fallback을 사용하도록 보정했다.
+- 해결 근거: 서로 다른 deploy와 representation은 같은 memory cache entry를 공유하지 않으며 page가 요구하는 정적 asset은 해당 Netlify build에서 제공된다.
+- 재현 여부: 사용자 white 화면 제보 당시 route·console·failed resource 증거는 확보하지 못해 원본 현상은 확정 재현하지 못했다. 수정 후 전체 메뉴 smoke에서는 재현되지 않았다.
+- 수정 후 검증: 새 deploy 후 핵심 화면 정상, visible menu 287/287 PASS, asset 66건 정상, static chunk 404와 raw RSC 노출 0을 확인했다.
+- 관련 파일: `middleware.ts`, `services/read-server/start.mjs`, `scripts/visible_menu_smoke.mjs`
+- 관련 commit: `fed17b8`, `9fc6b33`
+- Production 반영 여부: 반영 완료.
+
+#### 오류 5. 사용자 role redirect가 API·RSC·prefetch와 충돌할 가능성 — P1
+- 증상: 직접 document navigation은 정상이어도 API, client navigation과 prefetch가 role redirect를 받으면 blank 화면, 잘못된 내부 response 또는 redirect loop가 발생할 수 있었다.
+- 발생 조건: role query가 없는 비문서 요청이 middleware의 default role redirect 조건을 통과할 때다.
+- 실제 원인: role context 계산과 브라우저 URL redirect를 같은 처리로 보고 요청 종류를 명시적으로 구분하지 않았다.
+- 영향 범위: API, RSC, prefetch, server-to-server와 client navigation.
+- 수정 내용: `isDocumentNavigation()`을 추가해 GET, `Accept: text/html`, 비-API, 비-RSC, 비-prefetch 요청만 URL redirect 대상으로 삼았다. 내부 endpoint는 endpoint별 service 인증과 method gate만 적용한다.
+- 해결 근거: role header/context는 필요한 곳에서 계속 계산하지만 브라우저 URL 변경은 실제 사람의 document navigation에만 한정된다.
+- 재현 여부: health 요청에서 실제 충돌이 재현됐으며 일반 API/RSC 위험은 경계 수정 후 smoke에서 재현되지 않았다.
+- 수정 후 검증: document direct navigation, submenu client navigation, 역할 유지, hard request, health no-redirect와 visible menu 전수 render를 확인했다.
+- 관련 파일: `middleware.ts`, `scripts/read_server_endpoint_smoke.mjs`, `scripts/visible_menu_smoke.mjs`
+- 관련 commit: `47a488a43d8ca5806c1d443d997a272ec4ba6331`
+- Production 반영 여부: 반영 완료.
+
+#### 오류 6. GNB dropdown 상태 중첩 — P2
+- 증상: 클릭으로 열린 dropdown이 남은 상태에서 다른 GNB에 hover하면 두 dropdown이 동시에 노출될 수 있었다.
+- 발생 조건: React open state와 CSS `:hover` 표시가 동시에 다른 메뉴의 dropdown을 제어할 때 발생했다.
+- 실제 원인: dropdown visibility의 source가 하나가 아니었다.
+- 영향 범위: 상단 GNB navigation의 표시와 메뉴 클릭 가능성. 데이터와 권한 판정에는 영향이 없었다.
+- 수정 내용: `openMenuKey` 단일 state만 dropdown을 render하도록 하고 hover/focus 시 기존 key를 즉시 교체하며 GNB 밖으로 나가면 닫도록 했다. 역할 변경 event에서도 open state를 초기화한다.
+- 해결 근거: 한 시점에 하나의 key만 열릴 수 있고 CSS가 별도 dropdown을 강제 표시하지 않는다.
+- 재현 여부: 수정 전 UI 흐름에서 확인됐고 수정 후에는 재현되지 않았다.
+- 수정 후 검증: 실제 GNB에서 visible dropdown 최대 1개, GNB 이탈 시 0개, submenu click 정상 navigation을 확인했다.
+- 관련 파일: `components/NavMenu.tsx`, `app/us.css`
+- 관련 commit: `a696971`
+- Production 반영 여부: 반영 완료.
+
+#### 오류 7. ADOMS role UI와 실제 role 상태 불일치 — P1
+- 증상: 상단 role selector 값, 메뉴 권한, 현재 URL과 역할 변경 modal이 서로 다른 역할을 나타낼 수 있었다.
+- 발생 조건: URL query, cookie, UI local state와 menu context가 각자 role fallback을 처리할 때 발생했다.
+- 실제 원인: ADOMS 사용자 role과 관리자 service 인증 개념이 분리되지 않았고 UI role source가 여러 곳에 흩어져 있었다.
+- 영향 범위: 역할 selector, 메뉴 노출, 직접 URL 접근, modal 문구와 역할별 화면.
+- 수정 내용: ADOMS UI role은 `normRole()`로 정규화한 URL `?role=`을 source of truth로 사용하고 selector, `MenuCtx`, navigation과 modal이 같은 값을 사용하게 했다. QA service admin 인증은 별도 `/demo-admin` session으로 유지했다.
+- 해결 근거: 역할 변경이 URL을 갱신하고 동일 query를 읽는 모든 UI와 메뉴가 함께 갱신되며 service admin은 업무 role과 섞이지 않는다.
+- 재현 여부: 수정 전 역할 변경 흐름에서 확인됐고 수정 후 7개 role smoke에서는 재현되지 않았다.
+- 수정 후 검증: 7개 역할의 selector, URL, role별 menu와 modal label 일치, 권한 없는 현재 route에서 안전한 기본 화면 이동을 확인했다.
+- 관련 파일: `components/UserBox.tsx`, `components/MenuCtx.tsx`, `components/NavMenu.tsx`, `lib/perm.ts`, `lib/demo-admin-auth.ts`
+- 관련 commit: `a696971`
+- Production 반영 여부: 반영 완료.
+
+#### 오류 8. 역할별 법 의무사항 메뉴 UI 권한 누락 — P2
+- 증상: 실무자 역할에서도 법 의무사항의 `의무 목록`과 `법령 개정` section 및 item이 노출됐다.
+- 발생 조건: gm 이외 ceo, mgr, road, road_head, water와 water_head가 법 의무사항 GNB를 열 때 발생했다.
+- 실제 원인: 경로 접근 권한만 있었고 heading과 section을 포함한 menu definition에 역할 visibility metadata가 없었다.
+- 영향 범위: 역할별 메뉴 노출. PostgreSQL 데이터와 READ 결과에는 영향이 없었다.
+- 수정 내용: menu item에 role metadata를 적용하고 `usGroupsFor(role)`에서 gm 전용 heading과 item을 함께 필터링했다. 빈 heading과 구분선이 남지 않게 했다.
+- 해결 근거: 화면 render 이전의 역할별 menu 생성 단계에서 section 전체가 제외된다.
+- 재현 여부: 수정 전 road에서 확인됐고 수정 후에는 재현되지 않았다.
+- 수정 후 검증: gm에는 대상별 의무사항, 의무 목록과 법령 개정이 모두 보이고 나머지 6개 역할에는 대상별 의무사항 3개만 표시됐다. 역할별 visible menu smoke 287/287를 통과했다.
+- 관련 파일: `lib/menu.ts`, `components/NavMenu.tsx`, `components/UserBox.tsx`
+- 관련 commit: `b56a075`
+- Production 반영 여부: 반영 완료.
+
+#### 오류 9. 관리자 성능 상태 플래그 오판정 — P2
+- 증상: 실제 median이 매우 빠르고 HTTP 200이어도 첫 요청의 `MISS/HIT` 문자열 때문에 전체 상태가 `점검 필요`로 표시됐다. DB Query도 실제 측정이 아닌 `allHit ? 0 : null` 추정이었다.
+- 발생 조건: cache cold 상태에서 성능 점검을 최초 실행할 때 발생했다.
+- 실제 원인: cold warm-up과 warm measurement가 분리되지 않았고 cache 문자열 exact match 및 추정 query count에 판정이 과도하게 의존했다.
+- 영향 범위: `/demo-admin` 성능 진단과 운영자의 장애 판단. 실제 사용자 READ 결과에는 영향이 없었다.
+- 수정 내용: 화면마다 통계 제외 warm-up 1회 후 3회를 측정하고 `정상`, `재예열 필요`, `점검 필요`로 분리했다. READ server response header의 실제 warm DB query count를 사용하며 측정 불가능하면 `미측정`으로 표시한다. 화면별 판정과 전체 worst-status 및 판정 이유를 QA event detail에 저장한다.
+- 해결 근거: cold MISS는 통계에서 제외되고 warm cache, 실제 query count, HTTP 및 route별 median 기준이 독립적으로 평가된다.
+- 재현 여부: 기존 화면에서 재현됐고 새 판정 적용 후 정상 warm 상태에서는 재현되지 않았다.
+- 수정 후 검증: Production 5화면 모두 HTTP 200, `HIT 3/3`, warm DB Query 0, 화면별 및 전체 `정상`을 확인했다. NORMAL, REWARM, 503, median 초과와 worst-status 정적 검증도 통과했다.
+- 관련 파일: `app/api/demo-admin/performance/route.ts`, `lib/demo-performance-status.ts`, `app/demo-admin/QaConsole.tsx`, `services/read-server/start.mjs`, `scripts/verify_demo_performance_status.mjs`
+- 관련 commit: `2c225a41a9e55a078172d44b24ec313a2cf17d83`
+- Production 반영 여부: 반영 완료.
+
+#### White/blank screen 별도 추적
+- 상태: 미재현. 사용자 제보는 있었으나 당시 route, navigation 방식, console error, network failure, failed resource URL, HTTP status와 deploy SHA가 확보되지 않아 단일 원인으로 확정하지 않았다.
+- 처리 원칙: 다시 발생하면 P0로 분류하고 route, GNB click·hard refresh·back/forward 여부, console, network, failed resource와 deploy SHA를 먼저 확보한다. 수정 후 동일 route 직접 진입, GNB client navigation, hard refresh, back/forward와 fresh browser session을 모두 재검증한다.
+- 현재 검증: deploy-version 및 representation cache 분리와 static asset fallback 반영 후 Production visible menu 287/287, asset 66건, HTTP 500/503/504 0, raw JSON/RSC/internal error page 0, blank/깨진 화면 0이었다.
+
+#### 최종 결론
+- 실제 확인·추적 오류: 9건.
+- 심각도: P0 2건, P1 4건, P2 3건.
+- 수정 완료: 9건. 미해결: 0건. 단, 과거 white/blank screen 제보 원본은 증거 미확보로 원인 확정하지 못했으며 현재 release에서는 재현되지 않았다.
+- 배포 정합성: 검증 release에서 Netlify와 Railway는 `main` 및 동일 SHA를 사용했다.
+- 메뉴·역할: visible menu smoke 287/287 PASS, 7개 role의 selector·URL·menu·modal 일치 확인.
+- QA·성능: 내부 endpoint 경계 정상, 핵심 5화면 HTTP 200, `HIT 3/3`, warm DB Query 0, 화면별·전체 성능 판정 `정상`.
+- Production 최종 검증 SHA: `57d0f70b4616c82d409ef431e79460d416a429af`, release tag `demo-prod-20260928`.
+- 관련 파일: `middleware.ts`, `services/read-server/start.mjs`, `components/NavMenu.tsx`, `components/UserBox.tsx`, `components/MenuCtx.tsx`, `lib/menu.ts`, `lib/perm.ts`, `app/api/demo-admin/performance/route.ts`, `app/demo-admin/QaConsole.tsx`, `scripts/read_server_endpoint_smoke.mjs`, `scripts/visible_menu_smoke.mjs`, `scripts/verify_demo_performance_status.mjs`, `WORKLOG.md`
+- 관련 commit: pending

@@ -31,6 +31,7 @@ const responseCache = new Map();
 const MAX_CACHE_ENTRIES = 256;
 let ready = false;
 let resetInFlight = null;
+let prewarmInFlight = null;
 
 async function applyQaSchema() {
   if (process.env.ADOMS_READ_SERVER_SERVICE !== "1") return;
@@ -115,10 +116,25 @@ function requestHeaders(req) {
   return headers;
 }
 
+async function requestBody(req) {
+  if (req.method === "GET" || req.method === "HEAD") return undefined;
+  const chunks = [];
+  let size = 0;
+  for await (const chunk of req) {
+    const buffer = Buffer.isBuffer(chunk) ? chunk : Buffer.from(chunk);
+    size += buffer.byteLength;
+    if (size > 1024 * 1024) throw new Error("READ server request body is too large.");
+    chunks.push(buffer);
+  }
+  return chunks.length ? Buffer.concat(chunks) : undefined;
+}
+
 async function forward(req, url) {
+  const incomingBody = await requestBody(req);
   const upstream = await fetch(`http://127.0.0.1:${nextPort}${url.pathname}${url.search}`, {
     method: req.method,
     headers: requestHeaders(req),
+    body: incomingBody,
     redirect: "manual",
   });
   const body = Buffer.from(await upstream.arrayBuffer());
@@ -174,7 +190,12 @@ const server = http.createServer(async (req, res) => {
     if (url.pathname === controlRoute) {
       if (req.method !== "POST") return sendJson(res, 405, { ok: false, error: "Method not allowed" });
       if (!authorized(req)) return sendJson(res, 401, { ok: false, error: "Unauthorized" });
-      if (!resetInFlight) resetInFlight = resetCachesAndPrewarm().finally(() => { resetInFlight = null; });
+      if (!resetInFlight) {
+        resetInFlight = (async () => {
+          if (prewarmInFlight) await prewarmInFlight;
+          return resetCachesAndPrewarm();
+        })().finally(() => { resetInFlight = null; });
+      }
       const result = await resetInFlight;
       return sendJson(res, result.ok ? 200 : 503, result);
     }
@@ -304,7 +325,7 @@ async function resetCachesAndPrewarm() {
   }
 }
 
-void prewarm();
+prewarmInFlight = prewarm().finally(() => { prewarmInFlight = null; });
 
 for (const signal of ["SIGINT", "SIGTERM"]) {
   process.on(signal, () => {

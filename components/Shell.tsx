@@ -13,6 +13,7 @@ import { ROLE_STAFF, ROLE_LABEL } from "@/lib/roles";
 import { MenuProvider } from "./MenuCtx";
 import { menusForAllRoles } from "@/lib/menu_store";
 import QaEventBeacon from "./QaEventBeacon";
+import AdomsRoleNavigation from "./AdomsRoleNavigation";
 
 // 메뉴 목록·모드는 lib/menu.ts 한 곳(평면 ↔ 2계층).
 
@@ -37,6 +38,7 @@ export default async function Shell({ children }: { children: React.ReactNode })
     return (
       <MenuProvider menus={menus} css={css}>
       <div className="us-app">
+        <Suspense fallback={null}><AdomsRoleNavigation /></Suspense>
         <Suspense fallback={null}><QaEventBeacon /></Suspense>
         <div className="us-banner">
           {/* 용인시청 누리집 「용인시 안전보건 목표」(비전·목표) · 「용인시 안전보건 경영방침」(2025년 1월) 원문에서 */}

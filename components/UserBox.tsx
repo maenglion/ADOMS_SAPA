@@ -3,7 +3,8 @@ import { useRouter, useSearchParams } from "next/navigation";
 import { Suspense, useEffect, useState } from "react";
 import { ROLES } from "./RoleSwitch";
 import { ROLE_LABEL } from "@/lib/roles";
-import { canAccess, normRole } from "@/lib/perm";
+import { canAccess, isRole, normRole } from "@/lib/perm";
+import { withAdomsRole } from "@/lib/adoms-role";
 
 /**
  * 로그인 사용자 — 이용자 고르기.
@@ -27,6 +28,11 @@ function Inner({ who }: { who: Record<string, Who> }) {
   const adomsRole = normRole(sp?.get("role"));
   const w = who[adomsRole];
   const [changedRole, setChangedRole] = useState<string | null>(null);
+  const [pendingRole, setPendingRole] = useState<string | null>(null);
+
+  useEffect(() => {
+    if (pendingRole === adomsRole) setPendingRole(null);
+  }, [adomsRole, pendingRole]);
 
   useEffect(() => {
     const raw = window.sessionStorage.getItem(ROLE_CHANGE_NOTICE_KEY);
@@ -73,35 +79,45 @@ function Inner({ who }: { who: Record<string, Who> }) {
     setChangedRole(null);
   };
 
+  async function changeRole(nextRole: string) {
+    if (!isRole(nextRole) || nextRole === adomsRole || pendingRole) return;
+    setPendingRole(nextRole);
+    window.dispatchEvent(new Event("adoms-role-change"));
+    const saved = await fetch("/api/adoms-role", {
+      method: "POST",
+      headers: { "content-type": "application/json" },
+      body: JSON.stringify({ role: nextRole }),
+    }).catch(() => null);
+    if (!saved?.ok) {
+      setPendingRole(null);
+      window.alert("사용자 유형을 저장하지 못했습니다. 다시 시도해 주세요.");
+      return;
+    }
+    window.sessionStorage.setItem(ROLE_CHANGE_NOTICE_KEY, JSON.stringify({
+      role: nextRole,
+      expiresAt: Date.now() + ROLE_CHANGE_NOTICE_MS,
+    } satisfies RoleChangeNotice));
+    setChangedRole(nextRole);
+    void fetch("/api/demo-admin/event", {
+      method: "POST",
+      headers: { "content-type": "application/json" },
+      body: JSON.stringify({ eventType: "role_change", from: adomsRole, to: nextRole, role: nextRole, route: location.pathname }),
+      keepalive: true,
+    });
+    const keepCurrentPath = canAccess(nextRole, location.pathname);
+    const href = keepCurrentPath ? `${location.pathname}${location.search}${location.hash}` : "/";
+    router.push(withAdomsRole(href, nextRole));
+  }
+
   return (
     <>
       <span className="userme">
         <select
-          value={adomsRole}
+          value={pendingRole || adomsRole}
+          disabled={Boolean(pendingRole)}
           aria-label="이용자 바꾸기"
           title={w ? `${w.dept} ${w.name}${w.duty ? " " + w.duty : ""}` : ""}
-          onChange={(e) => {
-            const nextRole = e.target.value;
-            if (nextRole === adomsRole) return;
-            window.dispatchEvent(new Event("adoms-role-change"));
-            window.sessionStorage.setItem(ROLE_CHANGE_NOTICE_KEY, JSON.stringify({
-              role: nextRole,
-              expiresAt: Date.now() + ROLE_CHANGE_NOTICE_MS,
-            } satisfies RoleChangeNotice));
-            setChangedRole(nextRole);
-            void fetch("/api/demo-admin/event", {
-              method: "POST",
-              headers: { "content-type": "application/json" },
-              body: JSON.stringify({ eventType: "role_change", from: adomsRole, to: nextRole, role: nextRole, route: location.pathname }),
-              keepalive: true,
-            });
-            const keepCurrentPath = canAccess(nextRole, location.pathname);
-            const p = keepCurrentPath
-              ? new URLSearchParams(Array.from(sp?.entries() || []))
-              : new URLSearchParams();
-            p.set("role", nextRole);
-            router.push(`${keepCurrentPath ? location.pathname : "/"}?${p.toString()}`);
-          }}
+          onChange={(e) => { void changeRole(e.target.value); }}
         >
           {ROLES.map((r) => (
             <option key={r.id} value={r.id}>{r.label}</option>

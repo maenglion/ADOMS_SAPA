@@ -1,5 +1,6 @@
 import { NextResponse, type NextRequest } from "next/server";
 import { ruleFor, canAccess, isRole, DEFAULT_ROLE } from "@/lib/perm";
+import { ADOMS_ROLE_COOKIE, ADOMS_ROLE_MAX_AGE } from "@/lib/adoms-role";
 
 /**
  * 1) 지금 주소를 헤더에 실어 준다.
@@ -11,8 +12,6 @@ import { ruleFor, canAccess, isRole, DEFAULT_ROLE } from "@/lib/perm";
  *    쓰기(POST · 서버 액션)는 받지 않는다. 규칙은 lib/perm.ts 한 곳(되돌리기 = PERM_ENFORCE=false).
  *    지금 역할은 x-adoms-role 헤더로 서버 화면·액션에 넘긴다(lib/perm_server.ts currentRole).
  */
-const COOKIE = "adoms-role";
-
 const READ_SERVER_ROUTES = new Set(["/", "/actions", "/duties/list", "/evidence", "/tasks"]);
 const READ_SERVER_HEALTH = "/api/read-server/health";
 const READ_SERVER_CONTROL = "/api/read-server/control/cache-reset";
@@ -56,7 +55,9 @@ function readServerBaseUrl() {
 
 function withRoleCookie(res: NextResponse, role: string | null, saved: string | undefined) {
   if (role && isRole(role) && role !== saved) {
-    res.cookies.set(COOKIE, role, { path: "/", sameSite: "lax", maxAge: 60 * 60 * 24 * 30 });
+    res.cookies.set(ADOMS_ROLE_COOKIE, role, {
+      path: "/", sameSite: "lax", secure: process.env.NODE_ENV === "production", maxAge: ADOMS_ROLE_MAX_AGE,
+    });
   }
   return res;
 }
@@ -172,7 +173,7 @@ export async function middleware(req: NextRequest) {
     if (!methodAllowed) return new NextResponse("Method not allowed", { status: 405 });
   }
   const role = url.searchParams.get("role");
-  const saved = req.cookies.get(COOKIE)?.value;
+  const saved = req.cookies.get(ADOMS_ROLE_COOKIE)?.value;
 
   const isQaPath = url.pathname === "/demo-admin" || url.pathname.startsWith("/demo-admin/");
   const shouldRedirectRole = !isQaPath && isDocumentNavigation(req);

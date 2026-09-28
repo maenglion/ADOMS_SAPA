@@ -8,12 +8,13 @@
 import { Suspense } from "react";
 import { usePathname, useSearchParams } from "next/navigation";
 import { isOn, gKey, type MenuItem } from "@/lib/menu";
-import { useMenuGroups } from "@/components/MenuCtx";
+import { useMenuGroups, useRole } from "@/components/MenuCtx";
 import GroupSide from "./GroupSide";
 
 function Inner({ group }: { group: string }) {
   const path = usePathname();
   const search = useSearchParams().toString();
+  const role = useRole();
   // 09-25 사용자(메뉴 관리): 역할별 메뉴(이름 바꾸기·숨김·순서 반영)에서 꺼낸다 — 묶음은 정의 이름(key)으로 찾는다
   const g = useMenuGroups().find((x) => (x.key || gKey(x.label)) === group);
   if (!g) return <aside className="us-side" />;
@@ -30,7 +31,7 @@ function Inner({ group }: { group: string }) {
   const anyOn = g.items.some((m) => isOn(path, m.href, search));
   const on = (m: MenuItem) => isOn(path, m.href, search) || (!anyOn && !!tk && m.href.split("?")[0].endsWith("/" + tk));
   return (
-    <GroupSide groups={secs.map((s) => ({ head: s.head, items: s.items.map((m) => ({ href: m.href, label: m.label, on: on(m) })) }))} />
+    <GroupSide role={role} groups={secs.map((s) => ({ head: s.head, items: s.items.map((m) => ({ href: m.href, label: m.label, on: on(m) })) }))} />
   );
 }
 

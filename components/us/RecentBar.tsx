@@ -10,6 +10,8 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import { usePathname, useSearchParams } from "next/navigation";
 import { US_GROUPS, isOn, groupHas } from "@/lib/menu";
+import { useRole } from "@/components/MenuCtx";
+import { withAdomsRole } from "@/lib/adoms-role";
 
 type Item = { href: string; title: string; group: string; at: number };
 const KEY = "adoms400.recent";
@@ -37,6 +39,7 @@ function nameOf(path: string, search: string): { group: string; title: string } 
 export default function RecentBar() {
   const path = usePathname();
   const sp = useSearchParams();
+  const role = useRole();
   const [items, setItems] = useState<Item[]>([]);
   const [ready, setReady] = useState(false);
 
@@ -75,7 +78,7 @@ export default function RecentBar() {
         {others.length === 0 && <span className="usr-none">아직 없습니다</span>}
         {others.map((x) => (
           <span key={x.href} className="usr-chip">
-            <Link href={x.href} title={x.title}>{x.group || x.title}</Link>
+            <Link href={withAdomsRole(x.href, role)} title={x.title}>{x.group || x.title}</Link>
             <button type="button" className="usr-x" aria-label={`${x.title} 기록 지우기`} onClick={() => remove(x.href)}>
               <svg width="8" height="8" viewBox="0 0 8 8" aria-hidden="true"><path d="M1 1l6 6M7 1 1 7" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" /></svg>
             </button>

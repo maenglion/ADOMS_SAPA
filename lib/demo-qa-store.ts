@@ -5,6 +5,7 @@ export const QA_EVENT_TYPES = new Set([
   "demo_session_start", "page_visit", "role_change", "write_success", "write_failure",
   "cache_reset", "prewarm_start", "prewarm_complete", "prewarm_failure",
   "performance_check", "read_error", "server_error", "qa_login", "qa_logout",
+  "demo_reset",
 ]);
 
 export type QaEventInput = {

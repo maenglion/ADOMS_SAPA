@@ -115,10 +115,25 @@ function requestHeaders(req) {
   return headers;
 }
 
+async function requestBody(req) {
+  if (req.method === "GET" || req.method === "HEAD") return undefined;
+  const chunks = [];
+  let size = 0;
+  for await (const chunk of req) {
+    const buffer = Buffer.isBuffer(chunk) ? chunk : Buffer.from(chunk);
+    size += buffer.byteLength;
+    if (size > 1024 * 1024) throw new Error("READ server request body is too large.");
+    chunks.push(buffer);
+  }
+  return chunks.length ? Buffer.concat(chunks) : undefined;
+}
+
 async function forward(req, url) {
+  const incomingBody = await requestBody(req);
   const upstream = await fetch(`http://127.0.0.1:${nextPort}${url.pathname}${url.search}`, {
     method: req.method,
     headers: requestHeaders(req),
+    body: incomingBody,
     redirect: "manual",
   });
   const body = Buffer.from(await upstream.arrayBuffer());

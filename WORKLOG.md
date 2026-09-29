@@ -888,3 +888,14 @@
 - 검증: Netlify와 Railway는 모두 `main` 및 병합 SHA `795b0133e1ee72381550e939cf8e841637b873e1`를 배포했고 Railway는 BOOT, health HTTP 200·redirect 0, prewarm 후 READY에 도달했다. 핵심 5화면 dashboard, actions, duties/list, evidence, tasks는 모두 HTTP 200이었다. road→road_head→gm 변경은 즉시 반영됐고 메뉴 이동과 새로고침 후에도 선택 역할을 유지했다. Production QA에서 시연 초기화를 실행해 `DEFAULT_ROLE`인 road로 복귀했으며 `demo_reset` 이벤트가 2026-09-29 00:16:47에 정확히 1회 기록되고 service_admin session은 유지됐다. cache 초기화와 재예열은 2026-09-29 00:17:24에 시작해 00:17:33에 8.685초로 READY에 복귀했고 실패 또는 중복 prewarm은 없었다. 성능 점검은 dashboard 0.040/0.041/0.044초, actions 0.098/0.130/0.240초, duties/list 0.023/0.024/0.038초, evidence 0.023/0.031/0.037초, tasks 0.022/0.042/0.057초의 Min/Median/Max를 기록했으며 전 화면 HTTP 200, `HIT 3/3`, warm DB Query 0, 화면별 및 전체 판정 `정상`이었다. 관리자 로그아웃 후 service_admin session은 삭제됐고 `/demo-admin`은 로그인 화면, 일반 앱은 road 기본 화면을 정상 표시했다. Production visible menu smoke는 287/287 PASS를 유지했고 browser console error, HTTP 500/502/503/504, white/blank, raw JSON·RSC·internal error, warming 잔류는 모두 0건이었다.
 - 관련 파일: `services/read-server/start.mjs`, `lib/adoms-role.ts`, `app/api/adoms-role/route.ts`, `app/api/demo-admin/demo-reset/route.ts`, `app/demo-admin/QaConsole.tsx`, `WORKLOG.md`
 - 관련 commit: Preview `589e3a176e47b9b9410b9561e116ae8a6bc1c73e`, merge `795b0133e1ee72381550e939cf8e841637b873e1`, Production 최종 기록 commit pending
+
+### [69] 법령 checklist 생성 실행 Production 보류 및 오류 차단
+- 상태: 완료
+- 배경: `법 의무사항 > 법령 개정 현황`의 `오늘 개정 확인`은 로컬 파일시스템과 로컬 실행 자산을 전제로 구현되어 있었다. 이 실행 경로가 Production 화면에 그대로 노출되어 버튼 실행 시 서버 예외 화면이 표시되는 배포 경계 결함이 확인됐다. 별도 작업 서비스로 실제 실행 경로를 구성하는 방안과 검증된 실행을 재생하는 시연 방안을 검토했으나, 시연이 임박한 상태에서 기능 확장을 보류하라는 요청이 확정됐다.
+- 결정: checklist 생성 실행 기능은 별도 실행 서비스와 상태 API가 검증될 때까지 보류한다. 현재 시연판에서는 기존 법령 개정 결과와 확인 이력만 조회하며 신규 실행은 시작하지 않는다. 검증된 실행 재생이나 실제 작업 서비스 구축도 이번 시연 범위에서 진행하지 않는다.
+- 이유: 로컬 전용 프로세스 실행을 Production 웹 실행환경에서 시도하는 것은 재현 가능한 서버 예외를 만들며, 시연 직전 별도 실행 인프라를 추가하는 것은 배포 위험을 확대한다. 조회 화면을 유지하면서 실행 진입점만 닫는 것이 현재 검증된 Production 기능을 가장 적게 변경한다.
+- 영향 범위: 법령 개정 현황의 `오늘 개정 확인`, 관리자 자동 확인 작업 기록의 신규 실행 버튼, 직접 남아 있는 실행 요청. 기존 법령 개정 이력 조회, PostgreSQL READ, READ server, 역할·메뉴, cache와 데이터에는 영향이 없다.
+- 실제 변경: 사용자 화면과 관리자 화면의 신규 실행 버튼을 비활성화하고 보류 상태와 사유를 표시했다. 과거 화면이나 직접 요청으로 서버 실행 함수가 호출되더라도 로컬 프로세스를 시작하지 않고 보류 상태로 안전하게 복귀하도록 서버 경계를 추가했다.
+- 검증: TypeScript 검사와 Next.js Production build를 통과했다. 로컬 실행에서 `/law/changes?role=gm`과 `/admin/runs?role=gm`은 모두 HTTP 200이었고, 두 화면 모두 보류 버튼과 사유를 표시하면서 `startCheck` 실행 form을 렌더링하지 않았다. 신규 실행 함수에는 로컬 프로세스 시작 전 보류 경계가 적용됐다.
+- 관련 파일: `lib/law-agent-policy.ts`, `app/law/changes/page.tsx`, `app/law/changes/actions.ts`, `app/admin/runs/page.tsx`, `app/us-lsx.css`, `WORKLOG.md`
+- 관련 commit: `1848865`

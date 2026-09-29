@@ -7,9 +7,9 @@ import { lawChanges } from "@/lib/data";
 import { listRuns, runItems, decisions, appliedRuns } from "@/lib/lawsync";
 import LawChangeSide from "./_parts/Side";
 import AutoRefresh from "./_parts/AutoRefresh";
-import { startCheck } from "./actions";
 import { Count, Note } from "../../admin/_ui";
 import { ACTION_LABEL } from "./_parts/labels";
+import { LAW_AGENT_EXECUTION_HELD, LAW_AGENT_HOLD_MESSAGE } from "@/lib/law-agent-policy";
 
 export const dynamic = "force-dynamic";
 
@@ -46,6 +46,7 @@ export default async function LawChanges({ searchParams }: { searchParams: Promi
         <h1 className="us-h1">법령 개정 현황 · 이력</h1>
       </div>
       {sp.ok === "start" && <Note>개정 확인을 시작했습니다. 끝나면 이 화면에 결과가 반영됩니다.</Note>}
+      {sp.agent === "held" && <Note>{LAW_AGENT_HOLD_MESSAGE}</Note>}
 
       <div className="lsx-box">
         <div className="lsx-box-l">
@@ -56,10 +57,12 @@ export default async function LawChanges({ searchParams }: { searchParams: Promi
           </div>
         </div>
         {can && (
-          <form action={startCheck}>
-            <input type="hidden" name="role" value={role} />
-            <button className="usb2-obtn lsx-go" disabled={!!running}>{running ? "확인 중…" : "오늘 개정 확인"}</button>
-          </form>
+          <div className="lsx-held-action">
+            <button className="usb2-obtn lsx-go" type="button" disabled>
+              {running ? "확인 중…" : "오늘 개정 확인 (보류)"}
+            </button>
+            {LAW_AGENT_EXECUTION_HELD && <span className="us-muted">{LAW_AGENT_HOLD_MESSAGE}</span>}
+          </div>
         )}
       </div>
 

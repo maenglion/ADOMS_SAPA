@@ -3,6 +3,10 @@
 .lsx-t{font-weight:700;font-size:1.1rem;color:var(--us-g1);margin-bottom:4px}
 .lsx-go{font-size:1.05rem;padding:10px 22px}
 .lsx-go:disabled,.lsx-runlist button:disabled{opacity:.55;cursor:default}
+.lsx-held-action{display:flex;align-items:center;justify-content:flex-end;gap:10px;max-width:540px;text-align:right}
+.lsx-held-action .us-muted{font-size:.86rem;line-height:1.35}
+.lsx-held-admin{display:grid;gap:6px;margin-bottom:10px}
+.lsx-held-admin .us-muted{font-size:.78rem;line-height:1.35}
 .lsx-prog{display:flex;gap:8px;flex-wrap:wrap;margin:6px 0 14px}
 .lsx-step{flex:1;min-width:150px;border:1px solid var(--us-line);border-radius:8px;padding:8px 10px;background:#fff;display:flex;flex-direction:column;gap:2px}
 .lsx-step.on{border-color:var(--us-orange);background:#fff6ee}

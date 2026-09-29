@@ -8,8 +8,9 @@ import { listRuns, runStatus, runLog, runItems, decisions, appliedRuns } from "@
 import AdminSide from "../_side";
 import AutoRefresh from "../../law/changes/_parts/AutoRefresh";
 import { ACTION_LABEL } from "../../law/changes/_parts/labels";
-import { applyNow, decide, startCheck } from "../../law/changes/actions";
+import { applyNow, decide } from "../../law/changes/actions";
 import { Note, qs } from "../_ui";
+import { LAW_AGENT_HOLD_MESSAGE } from "@/lib/law-agent-policy";
 
 export const dynamic = "force-dynamic";
 
@@ -48,10 +49,10 @@ export default async function Runs({ searchParams }: { searchParams: Promise<Rec
         <div className="lsx-runlist">
           <div className="lsx-sub">실행 목록</div>
           {can && (
-            <form action={startCheck}>
-              <input type="hidden" name="role" value={role} />
-              <button className="usb2-obtn" disabled={runs.some((r) => r.state === "진행 중")}>지금 확인 실행</button>
-            </form>
+            <div className="lsx-held-admin">
+              <button className="usb2-obtn" type="button" disabled>지금 확인 실행 (보류)</button>
+              <span className="us-muted">{LAW_AGENT_HOLD_MESSAGE}</span>
+            </div>
           )}
           {runs.map((r) => (
             <Link key={r.run_id} href={qs("/admin/runs", { role, run: r.run_id })} className={`lsx-run ${r.run_id === id ? "on" : ""}`}>

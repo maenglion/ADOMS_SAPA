@@ -898,4 +898,4 @@
 - 실제 변경: 사용자 화면과 관리자 화면의 신규 실행 버튼을 비활성화하고 보류 상태와 사유를 표시했다. 과거 화면이나 직접 요청으로 서버 실행 함수가 호출되더라도 로컬 프로세스를 시작하지 않고 보류 상태로 안전하게 복귀하도록 서버 경계를 추가했다.
 - 검증: TypeScript 검사와 Next.js Production build를 통과했다. 로컬 실행에서 `/law/changes?role=gm`과 `/admin/runs?role=gm`은 모두 HTTP 200이었고, 두 화면 모두 보류 버튼과 사유를 표시하면서 `startCheck` 실행 form을 렌더링하지 않았다. 신규 실행 함수에는 로컬 프로세스 시작 전 보류 경계가 적용됐다.
 - 관련 파일: `lib/law-agent-policy.ts`, `app/law/changes/page.tsx`, `app/law/changes/actions.ts`, `app/admin/runs/page.tsx`, `app/us-lsx.css`, `WORKLOG.md`
-- 관련 commit: pending
+- 관련 commit: `1848865`

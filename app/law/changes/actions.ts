@@ -4,6 +4,7 @@ import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { ROLE_STAFF } from "@/lib/roles";
 import { startRun, applyRun, decideItem } from "@/lib/lawsync";
+import { LAW_AGENT_EXECUTION_HELD } from "@/lib/law-agent-policy";
 
 const CAN = new Set(["gm", "mgr"]);
 
@@ -11,6 +12,12 @@ export async function startCheck(fd: FormData) {
   const role = String(fd.get("role") || "gm");
   const back = String(fd.get("back") || "/law/changes");
   if (!CAN.has(role)) redirect(back);
+  if (LAW_AGENT_EXECUTION_HELD) {
+    const target = new URL(back, "http://adoms.local");
+    target.searchParams.set("role", role);
+    target.searchParams.set("agent", "held");
+    redirect(`${target.pathname}${target.search}`);
+  }
   const id = startRun(ROLE_STAFF[role] || "SD01-1");
   redirect(`/law/changes?role=${role}&run=${id}`);
 }
